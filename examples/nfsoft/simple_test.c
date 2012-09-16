@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: simple_test.c 3355 2009-09-29 12:30:48Z vollrath $ */
 
 /* Include standard C headers. */
 #include <stdio.h>
@@ -154,7 +154,6 @@ static void simple_test_nfsoft(int bw, int M)
 
   printf("\n---------------------------------------------\n");
 
-
   /**destroy the plans*/
   nfsoft_finalize(&plan_ndsoft);
   nfsoft_finalize(&plan_nfsoft);
@@ -198,6 +197,8 @@ int main(int argc, char **argv)
       "computing an NDSOFT, an NFSOFT, an adjoint NDSOFT, and an adjoint NFSOFT\n\n");
 
   simple_test_nfsoft(N, M);
+
+
 
   /* Exit the program. */
   return EXIT_SUCCESS;

@@ -1,4 +1,4 @@
-# $Id: Makefile.am 3258 2009-07-05 09:50:06Z keiner $
+# $Id: Makefile.am 3411 2009-12-23 10:55:00Z keiner $
 
 LIBTOOL_DEPS = @LIBTOOL_DEPS@
 
@@ -23,15 +23,10 @@ endif
 SUBDIRS= 3rdparty include util kernel . examples applications $(EXTRA_DIRS) $(MATLAB_DIRS)
 
 lib_LTLIBRARIES = libnfft3.la
-noinst_LTLIBRARIES = libnfft3noinst.la
 
 libnfft3_la_SOURCES =
 libnfft3_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @fftw3_LIBS@ -lm
 libnfft3_la_LDFLAGS = -version-info @SHARED_VERSION_INFO@ @fftw3_LDFLAGS@
-
-libnfft3noinst_la_SOURCES =
-libnfft3noinst_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @fftw3_LIBS@ -lm
-libnfft3noinst_la_LDFLAGS = @fftw3_LDFLAGS@
 
 EXTRA_DIST = bootstrap.sh VERSION doxygen.c
 
@@ -39,7 +34,7 @@ install-data-hook:
 	mkdir -p $(pkgdatadir)
 	cp -R doc $(pkgdatadir)
 
-clean-local:
+maintainer-clean-local:
 	rm -f doc/api/html/*.html
 	rm -f doc/api/html/*.png
 	rm -f doc/api/html/*.gif

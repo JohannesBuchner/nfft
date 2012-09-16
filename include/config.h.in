@@ -113,6 +113,18 @@
    */
 #undef HAVE_DECL_EXPL
 
+/* Define to 1 if you have the declaration of `fmax', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMAX
+
+/* Define to 1 if you have the declaration of `fmaxf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMAXF
+
+/* Define to 1 if you have the declaration of `fmaxl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMAXL
+
 /* Define to 1 if you have the declaration of `lgamma', and to 0 if you don't.
    */
 #undef HAVE_DECL_LGAMMA
@@ -270,6 +282,15 @@
 
 /* Define to 1 if you have the `expl' function. */
 #undef HAVE_EXPL
+
+/* Define to 1 if you have the `fmax' function. */
+#undef HAVE_FMAX
+
+/* Define to 1 if you have the `fmaxf' function. */
+#undef HAVE_FMAXF
+
+/* Define to 1 if you have the `fmaxl' function. */
+#undef HAVE_FMAXL
 
 /* Define to 1 if you have the `gethrtime' function. */
 #undef HAVE_GETHRTIME
@@ -589,9 +610,18 @@
 #undef inline
 #endif
 
-/* Define to equivalent of C99 restrict keyword, or to nothing if this is not
-   supported. Do not define if restrict is supported directly. */
+/* Define to the equivalent of the C99 'restrict' keyword, or to
+   nothing if this is not supported.  Do not define if restrict is
+   supported directly.  */
 #undef restrict
+/* Work around a bug in Sun C++: it does not support _Restrict, even
+   though the corresponding Sun C compiler does, which causes
+   "#define restrict _Restrict" in the previous line.  Perhaps some future
+   version of Sun C++ will work with _Restrict; if so, it'll probably
+   define __RESTRICT, just as Sun C does.  */
+#if defined __SUNPRO_CC && !defined __RESTRICT
+# define _Restrict
+#endif
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 #undef size_t

@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft3.h 3319 2009-09-08 15:08:05Z kunis $ */
+/* $Id: nfft3.h 3360 2009-10-12 14:23:59Z keiner $ */
 
 /*! \file nfft3.h
  *  \brief Header file for the nfft3 library.
@@ -29,6 +29,11 @@
 
 /* config header */
 #include "nfft3conf.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif /* __cplusplus */
 
 /* Malloc and free functions */
 extern void *nfft_malloc(size_t n);
@@ -2510,8 +2515,7 @@ typedef struct nfsoft_plan_
   int t;                               /**< the logaritm of NPT with          *
                                           respect to the basis 2              */
   unsigned int flags;                  /**< the planner flags                 */
-  nfft_plan nfft_plan;                /**< the internal NFFT plan             */
-  fftw_plan fftw_plan;                /**< the optional internal FFTW plan    */
+  nfft_plan p_nfft;                /**< the internal NFFT plan             */
   fpt_set fpt_set;                    /**< the internal FPT plan */
 
   int fpt_kappa;       /**a parameter controlling the accuracy of the FPT*/
@@ -2763,6 +2767,10 @@ void solver_init_double(solver_plan_double* ths, mv_plan_double *mv);
 void solver_before_loop_double(solver_plan_double* ths);
 void solver_loop_one_step_double(solver_plan_double *ths);
 void solver_finalize_double(solver_plan_double *ths);
+
+#ifdef __cplusplus
+}  /* extern "C" */
+#endif /* __cplusplus */
 
 /** @}
  */

@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: util.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: util.c 3355 2009-09-29 12:30:48Z vollrath $ */
 
 /** Sources for utilities.
  *  functions for vectors, window functions, ...
@@ -2185,7 +2185,7 @@ R nfft_lambda(const R z, const R eps)
     * (csump(z-d)/csump(z));
 }
 
-/* Computes lambda2(mu, nu) = Sqrt(2^(mu+nu)Gamma(mu+nu+1)/(Gamma(mu+1)Gamma(nu+1)))
+/* Computes lambda2(mu, nu) = Sqrt(Gamma(mu+nu+1)/(Gamma(mu+1)Gamma(nu+1)))
  * using Lanczos' approximation. */
 R nfft_lambda2(const R mu, const R nu)
 {
