@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - nfsft.c File Reference
+      NFFT 3.2.1 API Reference - nfsft.c File Reference
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -56,7 +56,6 @@
 <code>#include &lt;math.h&gt;</code><br/>
 <code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;string.h&gt;</code><br/>
-<code>#include &quot;<a class="el" href="nfft3util_8h_source.html">nfft3util.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="nfft3_8h_source.html">nfft3.h</a>&quot;</code><br/>
 <code>#include &quot;infft.h&quot;</code><br/>
 <code>#include &quot;legendre.h&quot;</code><br/>
@@ -71,19 +70,19 @@ Macros</h2></td></tr>
 <tr class="memitem:gab7d25b80464387893b3c773f92e5c4f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfsft.html#gab7d25b80464387893b3c773f92e5c4f3">NFSFT_DEFAULT_THRESHOLD</a>&#160;&#160;&#160;1000</td></tr>
 <tr class="memdesc:gab7d25b80464387893b3c773f92e5c4f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default threshold for the FPT.  <a href="group__nfsft.html#gab7d25b80464387893b3c773f92e5c4f3"></a><br/></td></tr>
 <tr class="memitem:ga54b840898df97bcd14af4cb004650ed3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfsft.html#ga54b840898df97bcd14af4cb004650ed3">NFSFT_BREAK_EVEN</a>&#160;&#160;&#160;5</td></tr>
-<tr class="memdesc:ga54b840898df97bcd14af4cb004650ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The break-even bandwidth <img class="formulaInl" alt="$N \in \mathbb{N}_0$" src="form_49.png"/>.  <a href="group__nfsft.html#ga54b840898df97bcd14af4cb004650ed3"></a><br/></td></tr>
+<tr class="memdesc:ga54b840898df97bcd14af4cb004650ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The break-even bandwidth <img class="formulaInl" alt="$N \in \mathbb{N}_0$" src="form_43.png"/>.  <a href="group__nfsft.html#ga54b840898df97bcd14af4cb004650ed3"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga47209b28b6561fca7349ed8afa5f9656"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfsft.html#ga47209b28b6561fca7349ed8afa5f9656">c2e</a> (<a class="el" href="structnfsft__plan.html">nfsft_plan</a> *plan)</td></tr>
-<tr class="memdesc:ga47209b28b6561fca7349ed8afa5f9656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts coefficients <img class="formulaInl" alt="$\left(b_k^n\right)_{k=0}^M$" src="form_50.png"/> with <img class="formulaInl" alt="$M \in \mathbb{N}_0$" src="form_36.png"/>, <img class="formulaInl" alt="$-M \le n \le M$" src="form_51.png"/> from a linear combination of Chebyshev polynomials </p>
+<tr class="memdesc:ga47209b28b6561fca7349ed8afa5f9656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts coefficients <img class="formulaInl" alt="$\left(b_k^n\right)_{k=0}^M$" src="form_44.png"/> with <img class="formulaInl" alt="$M \in \mathbb{N}_0$" src="form_30.png"/>, <img class="formulaInl" alt="$-M \le n \le M$" src="form_45.png"/> from a linear combination of Chebyshev polynomials </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ f(\cos\vartheta) = \sum_{k=0}^{2\lfloor\frac{M}{2}\rfloor} a_k (\sin\vartheta)^{n\;\mathrm{mod}\;2} T_k(\cos\vartheta) \]" src="form_52.png"/>
+<img class="formulaDsp" alt="\[ f(\cos\vartheta) = \sum_{k=0}^{2\lfloor\frac{M}{2}\rfloor} a_k (\sin\vartheta)^{n\;\mathrm{mod}\;2} T_k(\cos\vartheta) \]" src="form_46.png"/>
 </p>
-<p> to coefficients <img class="formulaInl" alt="$\left(c_k^n\right)_{k=0}^M$" src="form_53.png"/> matching the representation by complex exponentials </p>
+<p> to coefficients <img class="formulaInl" alt="$\left(c_k^n\right)_{k=0}^M$" src="form_47.png"/> matching the representation by complex exponentials </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ f(\cos\vartheta) = \sum_{k=-M}^{M} c_k \mathrm{e}^{\mathrm{i}k\vartheta} \]" src="form_54.png"/>
+<img class="formulaDsp" alt="\[ f(\cos\vartheta) = \sum_{k=-M}^{M} c_k \mathrm{e}^{\mathrm{i}k\vartheta} \]" src="form_48.png"/>
 </p>
-<p> for each order <img class="formulaInl" alt="$n=-M,\ldots,M$" src="form_55.png"/>.  <a href="group__nfsft.html#ga47209b28b6561fca7349ed8afa5f9656"></a><br/></td></tr>
+<p> for each order <img class="formulaInl" alt="$n=-M,\ldots,M$" src="form_49.png"/>.  <a href="group__nfsft.html#ga47209b28b6561fca7349ed8afa5f9656"></a><br/></td></tr>
 <tr class="memitem:ga0e033457136bc0ecb18bb57d3ee5aa37"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfsft.html#ga0e033457136bc0ecb18bb57d3ee5aa37">c2e_transposed</a> (<a class="el" href="structnfsft__plan.html">nfsft_plan</a> *plan)</td></tr>
 <tr class="memdesc:ga0e033457136bc0ecb18bb57d3ee5aa37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposed version of the function <a class="el" href="group__nfsft.html#ga47209b28b6561fca7349ed8afa5f9656">c2e</a>.  <a href="group__nfsft.html#ga0e033457136bc0ecb18bb57d3ee5aa37"></a><br/></td></tr>
 <tr class="memitem:ga65cda3f4a3edc5eb39c697cf34b1f0b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga65cda3f4a3edc5eb39c697cf34b1f0b9"></a>
@@ -120,6 +119,6 @@ Variables</h2></td></tr>
 <p>Definition in file <a class="el" href="nfsft_8c_source.html">nfsft.c</a>.</p>
 </div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

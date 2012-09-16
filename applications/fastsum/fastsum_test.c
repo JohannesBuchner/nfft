@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastsum_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: fastsum_test.c 3855 2012-07-24 20:29:03Z keiner $ */
 
 /*! \file fastsum_test.c
  *  \brief Simple test program for the fast NFFT-based summation algorithm.
@@ -180,7 +180,7 @@ int main(int argc, char **argv)
     my_fastsum_plan.x[k*d+0] = r;
     for (j=1; j<d; j++)
     {
-      double phi=2.0*PI*(double)rand()/(double)RAND_MAX;
+      double phi=2.0*KPI*(double)rand()/(double)RAND_MAX;
       my_fastsum_plan.x[k*d+j] = r;
       for (t=0; t<j; t++)
       {
@@ -216,7 +216,7 @@ int main(int argc, char **argv)
     my_fastsum_plan.y[k*d+0] = r;
     for (j=1; j<d; j++)
     {
-      double phi=2.0*PI*(double)rand()/(double)RAND_MAX;
+      double phi=2.0*KPI*(double)rand()/(double)RAND_MAX;
       my_fastsum_plan.y[k*d+j] = r;
       for (t=0; t<j; t++)
       {

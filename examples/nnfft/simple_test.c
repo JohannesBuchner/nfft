@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: simple_test.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #include <stdlib.h>
@@ -25,7 +25,6 @@
 #include <complex.h>
 #endif
 
-#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 
@@ -250,10 +249,10 @@ static void simple_test_innfft_1d(void)
     nfft_vpr_complex(my_iplan.f_hat_iter,my_plan.N_total,
           "approximate solution, vector f_hat_iter");
 
-    NFFT_SWAP_complex(my_iplan.f_hat_iter,my_plan.f_hat);
+    CSWAP(my_iplan.f_hat_iter,my_plan.f_hat);
     nnfft_trafo(&my_plan);
     nfft_vpr_complex(my_plan.f,my_plan.M_total,"fitting the data, vector f");
-    NFFT_SWAP_complex(my_iplan.f_hat_iter,my_plan.f_hat);
+    CSWAP(my_iplan.f_hat_iter,my_plan.f_hat);
   }
 
   solver_finalize_complex(&my_iplan);

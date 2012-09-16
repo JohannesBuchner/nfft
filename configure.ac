@@ -1,4 +1,4 @@
-# $Id: configure.ac 3802 2012-06-12 13:36:58Z tovo $
+# $Id: configure.ac 3858 2012-07-25 20:17:55Z keiner $
 #
 # Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 #
@@ -21,10 +21,10 @@
 ################################################################################
 
 # autoconf initialization
-AC_INIT([NFFT],[3.2.0],[bugs@nfft.org])
+AC_INIT([NFFT],[3.2.1],[bugs@nfft.org])
 
 # revision id from svn
-AC_REVISION([$Id: configure.ac 3802 2012-06-12 13:36:58Z tovo $])
+AC_REVISION([$Id: configure.ac 3858 2012-07-25 20:17:55Z keiner $])
 
 # copyright notice
 AC_COPYRIGHT([2003, 2012, Jens Keiner, Stefan Kunis, Daniel Potts])
@@ -48,7 +48,7 @@ AC_CANONICAL_HOST
 #AX_COUNT_CPUS
 #AC_DEFINE_UNQUOTED(NFFT_NUM_CORES,$cpu_count,[Define to number of cores.])
 
-# substitute abs_srcdir in generated Makefiles
+# substitute abs_srcdir in generated Makefiles.
 AC_SUBST([abs_srcdir])
 
 # minimum required libtool version
@@ -437,6 +437,10 @@ AC_CHECK_DECLS([copysignf, nextafterf, nanf, ceilf, floorf, nearbyintf, rintf, r
 #include <complex.h>])
 fi
 
+# CUnit
+AX_CUNIT
+AM_CONDITIONAL(HAVE_CUNIT, test "x$ax_cv_cunit" = "xyes" )
+
 # The output files to be generated
 AC_CONFIG_FILES(Makefile \
                 nfft3.pc \
@@ -446,7 +450,6 @@ AC_CONFIG_FILES(Makefile \
                 include/ticks.h \
                 3rdparty/Makefile \
                 3rdparty/cstripack/Makefile \
-                util/Makefile \
                 kernel/Makefile \
                 kernel/fpt/Makefile \
                 kernel/mri/Makefile \
@@ -460,6 +463,7 @@ AC_CONFIG_FILES(Makefile \
                 kernel/solver/Makefile \
                 kernel/util/Makefile \
                 tests/Makefile \
+                tests/data/Makefile \
                 examples/Makefile \
                 examples/fpt/Makefile \
                 examples/mri/Makefile \

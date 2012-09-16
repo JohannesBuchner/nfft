@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fpt.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: fpt.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 /**
  * \file fpt.c
@@ -35,16 +35,15 @@
 #endif
 
 #include "nfft3.h"
-#include "nfft3util.h"
 #include "infft.h"
 
 /* Macros for index calculation. */
 
 /** Minimum degree at top of a cascade */
-#define K_START_TILDE(x,y) (NFFT_MAX(NFFT_MIN(x,y-2),0))
+#define K_START_TILDE(x,y) (MAX(MIN(x,y-2),0))
 
 /** Maximum degree at top of a cascade */
-#define K_END_TILDE(x,y) NFFT_MIN(x,y-1)
+#define K_END_TILDE(x,y) MIN(x,y-1)
 
 /** Index of first block of four functions at level */
 #define FIRST_L(x,y) (LRINT(floor((x)/(double)y)))
@@ -765,7 +764,7 @@ fpt_set fpt_init(const int M, const int t, const unsigned int flags)
   int m;
   int k;
 #ifdef _OPENMP
-  int nthreads = nfft_get_omp_num_threads();
+  int nthreads = X(get_num_threads)();
 #endif
 
   /* Allocate memory for new DPT set. */
@@ -803,7 +802,7 @@ fpt_set fpt_init(const int M, const int t, const unsigned int flags)
     set->xcvecs[tau-1] = (double*) nfft_malloc(plength*sizeof(double));
     for (k = 0; k < plength; k++)
     {
-      set->xcvecs[tau-1][k] = cos(((k+0.5)*PI)/plength);
+      set->xcvecs[tau-1][k] = cos(((k+0.5)*KPI)/plength);
     }
     plength = plength << 1;
   }
@@ -1195,7 +1194,7 @@ void fpt_trafo_direct(fpt_set set, const int m, const double _Complex *x, double
     /* Fill array with Chebyshev nodes. */
     for (j = 0; j <= k_end; j++)
     {
-      set->xc_slow[j] = cos((PI*(j+0.5))/(k_end+1));
+      set->xc_slow[j] = cos((KPI*(j+0.5))/(k_end+1));
         //fprintf(stderr, "x[%4d] = %e.\n", j, set->xc_slow[j]);  
     }
 
@@ -1289,7 +1288,7 @@ void fpt_trafo(fpt_set set, const int m, const double _Complex *x, double _Compl
   if (flags & FPT_FUNCTION_VALUES)
   {
 #ifdef _OPENMP
-    int nthreads = nfft_get_omp_num_threads();
+    int nthreads = X(get_num_threads)();
 #pragma omp critical (nfft_omp_critical_fftw_plan)
 {
     fftw_plan_with_nthreads(nthreads);
@@ -1533,7 +1532,7 @@ void fpt_transposed_direct(fpt_set set, const int m, double _Complex *x,
   {
     for (j = 0; j <= k_end; j++)
     {
-      set->xc_slow[j] = cos((PI*(j+0.5))/(k_end+1));
+      set->xc_slow[j] = cos((KPI*(j+0.5))/(k_end+1));
     }
 
     eval_sum_clenshaw_transposed(k_end, k_end, set->result, set->xc_slow,
@@ -1621,7 +1620,7 @@ void fpt_transposed(fpt_set set, const int m, double _Complex *x,
   if (flags & FPT_FUNCTION_VALUES)
   {
 #ifdef _OPENMP
-    int nthreads = nfft_get_omp_num_threads();
+    int nthreads = X(get_num_threads)();
 #pragma omp critical (nfft_omp_critical_fftw_plan)
 {
     fftw_plan_with_nthreads(nthreads);

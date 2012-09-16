@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - fastsum_matlab.c Source File
+      NFFT 3.2.1 API Reference - fastsum_matlab.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -191,7 +191,7 @@
 <a name="l00160"></a>00160   t0 = getticks();
 <a name="l00161"></a>00161   <a class="code" href="group__applications__fastsum.html#gaaee3dd954ffc99e4330fabe16ccad0fd" title="direct computation of sums">fastsum_exact</a>(&amp;my_fastsum_plan);
 <a name="l00162"></a>00162   t1 = getticks();
-<a name="l00163"></a>00163   time=nfft_elapsed_seconds(t1,t0);
+<a name="l00163"></a>00163   time=<a class="code" href="group__nfftutil.html#ga6991b7df7efdecc93da6e4426e106d67" title="Return number of elapsed seconds between two time points.">nfft_elapsed_seconds</a>(t1,t0);
 <a name="l00164"></a>00164   printf(<span class="stringliteral">&quot;%fsec\n&quot;</span>,time);
 <a name="l00165"></a>00165 
 <a name="l00167"></a>00167   direct = (<span class="keywordtype">double</span> _Complex *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(my_fastsum_plan.<a class="code" href="structfastsum__plan__.html#a1e80d12f6ed1d6a310dbd4fc429e6a2f" title="number of target knots">M_total</a>*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span> _Complex)));
@@ -202,14 +202,14 @@
 <a name="l00173"></a>00173   t0 = getticks();
 <a name="l00174"></a>00174   <a class="code" href="group__applications__fastsum.html#ga197c16fcec7935886fc97d140f2b20ff" title="precomputation for fastsum">fastsum_precompute</a>(&amp;my_fastsum_plan);
 <a name="l00175"></a>00175   t1 = getticks();
-<a name="l00176"></a>00176   time=nfft_elapsed_seconds(t1,t0);
+<a name="l00176"></a>00176   time=<a class="code" href="group__nfftutil.html#ga6991b7df7efdecc93da6e4426e106d67" title="Return number of elapsed seconds between two time points.">nfft_elapsed_seconds</a>(t1,t0);
 <a name="l00177"></a>00177   printf(<span class="stringliteral">&quot;%fsec\n&quot;</span>,time);
 <a name="l00178"></a>00178 
 <a name="l00180"></a>00180   printf(<span class="stringliteral">&quot;fast computation:   &quot;</span>); fflush(NULL);
 <a name="l00181"></a>00181   t0 = getticks();
 <a name="l00182"></a>00182   <a class="code" href="group__applications__fastsum.html#gaab2cc691ba59064c18d439c9fd2185e8" title="fast NFFT-based summation">fastsum_trafo</a>(&amp;my_fastsum_plan);
 <a name="l00183"></a>00183   t1 = getticks();
-<a name="l00184"></a>00184   time=nfft_elapsed_seconds(t1,t0);
+<a name="l00184"></a>00184   time=<a class="code" href="group__nfftutil.html#ga6991b7df7efdecc93da6e4426e106d67" title="Return number of elapsed seconds between two time points.">nfft_elapsed_seconds</a>(t1,t0);
 <a name="l00185"></a>00185   printf(<span class="stringliteral">&quot;%fsec\n&quot;</span>,time);
 <a name="l00186"></a>00186 
 <a name="l00188"></a>00188   error=0.0;
@@ -249,6 +249,6 @@
 <a name="l00224"></a>00224 <span class="comment">/* \} */</span>
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastsum.h 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: fastsum.h 3858 2012-07-25 20:17:55Z keiner $ */
 
 /*! \file fastsum.h
  *  \brief Header file for the fast NFFT-based summation algorithm.
@@ -45,9 +45,9 @@
 #include <complex.h>
 #endif
 /** Include header for utils from NFFT3 library. */
-#include "nfft3util.h"
 /** Include header for NFFT3 library. */
 #include "nfft3.h"
+#include "infft.h"
 
 #if !(defined(NF_LIN) || defined(NF_QUADR) || defined(NF_KUB))
   #define NF_KUB

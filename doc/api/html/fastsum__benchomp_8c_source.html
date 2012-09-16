@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - fastsum_benchomp.c Source File
+      NFFT 3.2.1 API Reference - fastsum_benchomp.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -69,8 +69,8 @@
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="preprocessor">#include &quot;config.h&quot;</span>
 <a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="preprocessor">#include &lt;<a class="code" href="nfft3_8h.html">nfft3.h</a>&gt;</span>
-<a name="l00026"></a>00026 <span class="preprocessor">#include &lt;<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>&gt;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;infft.h&quot;</span>
 <a name="l00027"></a>00027 
 <a name="l00028"></a>00028 <span class="preprocessor">#define NREPEAT 5</span>
 <a name="l00029"></a>00029 <span class="preprocessor"></span>
@@ -78,7 +78,7 @@
 <a name="l00031"></a>00031 
 <a name="l00032"></a>00032 <span class="keywordtype">int</span> get_nthreads_array(<span class="keywordtype">int</span> **arr)
 <a name="l00033"></a>00033 {
-<a name="l00034"></a>00034   <span class="keywordtype">int</span> max_threads = nfft_get_omp_num_threads();
+<a name="l00034"></a>00034   <span class="keywordtype">int</span> max_threads = X(get_num_threads)();
 <a name="l00035"></a>00035   <span class="keywordtype">int</span> alloc_num = 2;
 <a name="l00036"></a>00036   <span class="keywordtype">int</span> k;
 <a name="l00037"></a>00037   <span class="keywordtype">int</span> ret_number = 0;
@@ -698,6 +698,6 @@
 <a name="l00651"></a>00651 
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

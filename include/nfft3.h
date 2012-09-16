@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft3.h 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: nfft3.h 3860 2012-07-26 21:36:56Z keiner $ */
 
 #ifndef __NFFT3_H__
 #define __NFFT3_H__
@@ -182,18 +182,18 @@ NFFT_DEFINE_API(NFFT_MANGLE_DOUBLE,FFTW_MANGLE_DOUBLE,double,fftw_complex)
 NFFT_DEFINE_API(NFFT_MANGLE_LONG_DOUBLE,FFTW_MANGLE_LONG_DOUBLE,long double,fftwl_complex)
 
 /* flags for init */
-#define PRE_PHI_HUT      (1U<< 0)
-#define FG_PSI           (1U<< 1)
-#define PRE_LIN_PSI      (1U<< 2)
-#define PRE_FG_PSI       (1U<< 3)
-#define PRE_PSI          (1U<< 4)
-#define PRE_FULL_PSI     (1U<< 5)
-#define MALLOC_X         (1U<< 6)
-#define MALLOC_F_HAT     (1U<< 7)
-#define MALLOC_F         (1U<< 8)
-#define FFT_OUT_OF_PLACE (1U<< 9)
-#define FFTW_INIT        (1U<< 10)
-#define NFFT_SORT_NODES  (1U<< 11)
+#define PRE_PHI_HUT                (1U<<0)
+#define FG_PSI                     (1U<<1)
+#define PRE_LIN_PSI                (1U<<2)
+#define PRE_FG_PSI                 (1U<<3)
+#define PRE_PSI                    (1U<<4)
+#define PRE_FULL_PSI               (1U<<5)
+#define MALLOC_X                   (1U<<6)
+#define MALLOC_F_HAT               (1U<<7)
+#define MALLOC_F                   (1U<<8)
+#define FFT_OUT_OF_PLACE           (1U<<9)
+#define FFTW_INIT                  (1U<<10)
+#define NFFT_SORT_NODES            (1U<<11)
 #define NFFT_OMP_BLOCKWISE_ADJOINT (1U<<12)
 #define PRE_ONE_PSI (PRE_LIN_PSI| PRE_FG_PSI| PRE_PSI| PRE_FULL_PSI)
 

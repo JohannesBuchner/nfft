@@ -23,14 +23,14 @@ PROJECT_NAME = NFFT
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
-PROJECT_NUMBER = 3.2.0
+PROJECT_NUMBER = 3.2.1
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute)
 # base path where the generated documentation will be put.
 # If a relative path is entered, it will be relative to the location
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY = /LOCAL/tovo/dist-nfft-3.2.0/nfft-3.2/doxygen/../doc/api
+OUTPUT_DIRECTORY = /LOCAL/tovo/nfft-3.2.1/svn/nfft-3.2/doxygen/../doc/api
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create
 # 2 levels of 10 sub-directories under the output directory of each output
@@ -579,13 +579,13 @@ HTML_FILE_EXTENSION = .html
 # each generated HTML page. If it is left blank doxygen will generate a
 # standard header.
 
-HTML_HEADER = /LOCAL/tovo/dist-nfft-3.2.0/nfft-3.2/doxygen/header.html
+HTML_HEADER = /LOCAL/tovo/nfft-3.2.1/svn/nfft-3.2/doxygen/header.html
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for
 # each generated HTML page. If it is left blank doxygen will generate a
 # standard footer.
 
-HTML_FOOTER = /LOCAL/tovo/dist-nfft-3.2.0/nfft-3.2/doxygen/footer.html
+HTML_FOOTER = /LOCAL/tovo/nfft-3.2.1/svn/nfft-3.2/doxygen/footer.html
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading
 # style sheet that is used by each HTML page. It can be used to
@@ -594,7 +594,7 @@ HTML_FOOTER = /LOCAL/tovo/dist-nfft-3.2.0/nfft-3.2/doxygen/footer.html
 # the style sheet file to the HTML output directory, so don't put your own
 # stylesheet in the HTML output directory as well, or it will be erased!
 
-HTML_STYLESHEET = /LOCAL/tovo/dist-nfft-3.2.0/nfft-3.2/doxygen/doxygen.css
+HTML_STYLESHEET = /LOCAL/tovo/nfft-3.2.1/svn/nfft-3.2/doxygen/doxygen.css
 
 # If the HTML_ALIGN_MEMBERS tag is set to YES, the members of classes,
 # files or namespaces will be aligned in HTML using tables. If set to

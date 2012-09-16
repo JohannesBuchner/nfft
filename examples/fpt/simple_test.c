@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: simple_test.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 #include "config.h"
 
@@ -34,10 +34,7 @@
 
 /* NFFT3 header */
 #include "nfft3.h"
-#include "nfft3util.h"
-
-/* Two times Pi */
-#define KPI2 6.2831853071795864769252867665590057683943387987502
+#include "infft.h"
 
 int main(void)
 {
@@ -116,7 +113,7 @@ int main(void)
       printf("\n2) Random Fourier coefficients a_k, k=0,1,...,N:\n");
       for (k = 0; k <= N; k++)
       {
-        a[k] = 2.0*nfft_drand48() - 1.0; /* for debugging: use k+1 */
+        a[k] = 2.0*X(drand48)() - 1.0; /* for debugging: use k+1 */
         printf("   a_%-2d = %+5.3lE\n",k,creal(a[k]));
       }
     }

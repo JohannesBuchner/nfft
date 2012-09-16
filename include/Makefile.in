@@ -44,6 +44,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_apple_gcc_archflag.m4 \
 	$(top_srcdir)/m4/ax_check_compiler_flags.m4 \
 	$(top_srcdir)/m4/ax_check_dir.m4 \
 	$(top_srcdir)/m4/ax_compiler_vendor.m4 \
+	$(top_srcdir)/m4/ax_cunit.m4 \
 	$(top_srcdir)/m4/ax_gcc_archflag.m4 \
 	$(top_srcdir)/m4/ax_gcc_x86_cpuid.m4 \
 	$(top_srcdir)/m4/ax_lib_fftw3.m4 \
@@ -180,6 +181,7 @@ am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
+ax_cv_cunit = @ax_cv_cunit@
 bindir = @bindir@
 build = @build@
 build_alias = @build_alias@
@@ -230,7 +232,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-include_HEADERS = nfft3.h nfft3util.h nfft3conf.h
+include_HEADERS = nfft3.h nfft3conf.h
 EXTRA_DIST = infft.h cycle.h api.h
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am

@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - fpt.c File Reference
+      NFFT 3.2.1 API Reference - fpt.c File Reference
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -59,7 +59,6 @@
 <code>#include &lt;stdbool.h&gt;</code><br/>
 <code>#include &lt;math.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="nfft3_8h_source.html">nfft3.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="nfft3util_8h_source.html">nfft3util.h</a>&quot;</code><br/>
 <code>#include &quot;infft.h&quot;</code><br/>
 </div>
 <p><a href="fpt_8c_source.html">Go to the source code of this file.</a></p>
@@ -75,10 +74,10 @@ Data Structures</h2></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a58f899926cc6e95ea54dd68d131979b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58f899926cc6e95ea54dd68d131979b8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fpt_8c.html#a58f899926cc6e95ea54dd68d131979b8">K_START_TILDE</a>(x, y)&#160;&#160;&#160;(<a class="el" href="group__nfftutil.html#gad2e3f0e1983de6d70f003545cc556ed3">NFFT_MAX</a>(<a class="el" href="group__nfftutil.html#ga9087991411f723f26723b2b26dbf3308">NFFT_MIN</a>(x,y-2),0))</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fpt_8c.html#a58f899926cc6e95ea54dd68d131979b8">K_START_TILDE</a>(x, y)&#160;&#160;&#160;(MAX(MIN(x,y-2),0))</td></tr>
 <tr class="memdesc:a58f899926cc6e95ea54dd68d131979b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum degree at top of a cascade. <br/></td></tr>
 <tr class="memitem:a769119c8ae45f2a30a62ba802d83139f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a769119c8ae45f2a30a62ba802d83139f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fpt_8c.html#a769119c8ae45f2a30a62ba802d83139f">K_END_TILDE</a>(x, y)&#160;&#160;&#160;<a class="el" href="group__nfftutil.html#ga9087991411f723f26723b2b26dbf3308">NFFT_MIN</a>(x,y-1)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fpt_8c.html#a769119c8ae45f2a30a62ba802d83139f">K_END_TILDE</a>(x, y)&#160;&#160;&#160;MIN(x,y-1)</td></tr>
 <tr class="memdesc:a769119c8ae45f2a30a62ba802d83139f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum degree at top of a cascade. <br/></td></tr>
 <tr class="memitem:ac81f7eac1a01b06e91817857f47b9804"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac81f7eac1a01b06e91817857f47b9804"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fpt_8c.html#ac81f7eac1a01b06e91817857f47b9804">FIRST_L</a>(x, y)&#160;&#160;&#160;(LRINT(floor((x)/(double)y)))</td></tr>
@@ -222,7 +221,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fpt_finalize</b> (<a 
     *u_ptr++ = a * (b * S1 * (*v_ptr--) * (*x_ptr++) + S2 * (*w_ptr--) * (*y_ptr++)); \
 }
 </pre></div>
-<p>Definition at line <a class="el" href="fpt_8c_source.html#l00139">139</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
+<p>Definition at line <a class="el" href="fpt_8c_source.html#l00138">138</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
 
 </div>
 </div>
@@ -262,7 +261,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fpt_finalize</b> (<a 
     *u_ptr++ = a * (b * S1 * (*v_ptr) * (*x_ptr++) + (S1 * (*v_ptr) * (1.0+*xx_ptr++)) * (*y_ptr++)); \
 }
 </pre></div>
-<p>Definition at line <a class="el" href="fpt_8c_source.html#l00156">156</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
+<p>Definition at line <a class="el" href="fpt_8c_source.html#l00155">155</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
 
 </div>
 </div>
@@ -302,7 +301,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fpt_finalize</b> (<a 
     *u_ptr++ = a * (b * (S1 * (*w_ptr)/(1.0+*xx_ptr++) ) * (*x_ptr++) + S1 * (*w_ptr) * (*y_ptr++)); \
 }
 </pre></div>
-<p>Definition at line <a class="el" href="fpt_8c_source.html#l00173">173</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
+<p>Definition at line <a class="el" href="fpt_8c_source.html#l00172">172</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
 
 </div>
 </div>
@@ -355,7 +354,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fpt_finalize</b> (<a 
   fftw_execute_r2r(<a class="code" href="structnfsft__wisdom.html#a18de3dcf9ca2e2e577fccfcca712bfd2" title="Structure for discrete polynomial transform (DPT)">set</a>-&gt;<a class="code" href="structfpt__set__s__.html#aead22ae71c82ad37da07f6166bf53fbc" title="Transform plans for the fftw library.">plans_dct2</a>[tau-1],(<span class="keywordtype">double</span>*)b,(<span class="keywordtype">double</span>*)b); \
 }
 </pre></div>
-<p>Definition at line <a class="el" href="fpt_8c_source.html#l00397">397</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
+<p>Definition at line <a class="el" href="fpt_8c_source.html#l00396">396</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
 
 </div>
 </div>
@@ -441,22 +440,22 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fpt_finalize</b> (<a 
 </div><div class="memdoc">
 
 <p>Clenshaw algorithm. </p>
-<p>Evaluates a sum of real-valued functions <img class="formulaInl" alt="$P_k : \mathbb{R} \rightarrow \mathbb{R}$" src="form_29.png"/> </p>
+<p>Evaluates a sum of real-valued functions <img class="formulaInl" alt="$P_k : \mathbb{R} \rightarrow \mathbb{R}$" src="form_23.png"/> </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ f(x) = \sum_{k=0}^N a_k P_k(x) \quad (N \in \mathbb{N}_0) \]" src="form_30.png"/>
+<img class="formulaDsp" alt="\[ f(x) = \sum_{k=0}^N a_k P_k(x) \quad (N \in \mathbb{N}_0) \]" src="form_24.png"/>
 </p>
 <p> obeying a three-term recurrence relation </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ P_{k+1}(x) = (alpha_k * x + beta_k)*P_{k}(x) + gamma_k P_{k-1}(x) \quad (alpha_k, beta_k, gamma_k \in \mathbb{R},\; k \ge 0) \]" src="form_31.png"/>
+<img class="formulaDsp" alt="\[ P_{k+1}(x) = (alpha_k * x + beta_k)*P_{k}(x) + gamma_k P_{k-1}(x) \quad (alpha_k, beta_k, gamma_k \in \mathbb{R},\; k \ge 0) \]" src="form_25.png"/>
 </p>
-<p> with initial conditions <img class="formulaInl" alt="$P_{-1}(x) := 0$" src="form_32.png"/>, <img class="formulaInl" alt="$P_0(x) := \lambda$" src="form_33.png"/> for given double _Complex coefficients <img class="formulaInl" alt="$\left(a_k\right)_{k=0}^N \in \mathbb{C}^{N+1}$" src="form_34.png"/> at given nodes <img class="formulaInl" alt="$\left(x_j\right)_{j=0}^M \in \mathbb{R}^{M+1}$" src="form_35.png"/>, <img class="formulaInl" alt="$M \in \mathbb{N}_0$" src="form_36.png"/>. </p>
+<p> with initial conditions <img class="formulaInl" alt="$P_{-1}(x) := 0$" src="form_26.png"/>, <img class="formulaInl" alt="$P_0(x) := \lambda$" src="form_27.png"/> for given double _Complex coefficients <img class="formulaInl" alt="$\left(a_k\right)_{k=0}^N \in \mathbb{C}^{N+1}$" src="form_28.png"/> at given nodes <img class="formulaInl" alt="$\left(x_j\right)_{j=0}^M \in \mathbb{R}^{M+1}$" src="form_29.png"/>, <img class="formulaInl" alt="$M \in \mathbb{N}_0$" src="form_30.png"/>. </p>
 
-<p>Definition at line <a class="el" href="fpt_8c_source.html#l00715">715</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
+<p>Definition at line <a class="el" href="fpt_8c_source.html#l00714">714</a> of file <a class="el" href="fpt_8c_source.html">fpt.c</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

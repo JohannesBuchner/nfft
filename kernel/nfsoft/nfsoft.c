@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfsoft.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: nfsoft.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 #include "config.h"
 
@@ -28,7 +28,6 @@
 #include <complex.h>
 #endif
 #include "nfft3.h"
-#include "nfft3util.h"
 #include "infft.h"
 #include "wigner.h"
 
@@ -444,7 +443,7 @@ void nfsoft_precompute(nfsoft_plan *plan3D)
 
   for (j = 0; j < 3* plan3D ->p_nfft.M_total; j++)
   {
-    plan3D->p_nfft.x[j] = plan3D->p_nfft.x[j] * (1 / (2* PI ));
+    plan3D->p_nfft.x[j] = plan3D->p_nfft.x[j] * (1 / (2* KPI ));
   }
 
   if ((plan3D->p_nfft).nfft_flags & FG_PSI)
@@ -501,7 +500,7 @@ void nfsoft_trafo(nfsoft_plan *plan3D)
 
         if ((plan3D->flags & NFSOFT_NORMALIZED))
         {
-          plan3D->wig_coeffs[j] = plan3D->wig_coeffs[j] * (1. / (2. * PI))
+          plan3D->wig_coeffs[j] = plan3D->wig_coeffs[j] * (1. / (2. * KPI))
               * SQRT(0.5 * (2. * (max + j) + 1.));
         }
 
@@ -677,7 +676,7 @@ void nfsoft_adjoint(nfsoft_plan *plan3D)
 
         if ((plan3D->flags & NFSOFT_NORMALIZED))
         {
-          plan3D->f_hat[glo1] = plan3D->f_hat[glo1] * (1 / (2. * PI)) * SQRT(
+          plan3D->f_hat[glo1] = plan3D->f_hat[glo1] * (1 / (2. * KPI)) * SQRT(
               0.5 * (2. * (j) + 1.));
         }
 

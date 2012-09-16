@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - nfftl_plan Struct Reference
+      NFFT 3.2.1 API Reference - nfftl_plan Struct Reference
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -83,7 +83,7 @@ long double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <tr class="memdesc:a149fdaed10fafdb3bf414110ad233b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">oversampling-factor <br/></td></tr>
 <tr class="memitem:a58140f5f6ea4ca1c0305cbcec55437bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58140f5f6ea4ca1c0305cbcec55437bd"></a>
 int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnfftl__plan.html#a58140f5f6ea4ca1c0305cbcec55437bd">n</a></td></tr>
-<tr class="memdesc:a58140f5f6ea4ca1c0305cbcec55437bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFTW length, equal to sigma*N, default is the power of 2 such that <img class="formulaInl" alt="$2\le\sigma<4$" src="form_0.png"/>. <br/></td></tr>
+<tr class="memdesc:a58140f5f6ea4ca1c0305cbcec55437bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">FFTW length, equal to sigma*N, default is the power of 2 such that <img class="formulaInl" alt="$2\le\sigma<4$" src="form_14.png"/>. <br/></td></tr>
 <tr class="memitem:a58ea89cc9b78b32c8c1775e8b1277ad8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58ea89cc9b78b32c8c1775e8b1277ad8"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnfftl__plan.html#a58ea89cc9b78b32c8c1775e8b1277ad8">n_total</a></td></tr>
 <tr class="memdesc:a58ea89cc9b78b32c8c1775e8b1277ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total size of FFTW. <br/></td></tr>
@@ -104,16 +104,16 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="memdesc:a4e0df1f491a4aa8f7373d776d705095f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags for the FFTW, default is FFTW_ESTIMATE | FFTW_DESTROY_INPUT. <br/></td></tr>
 <tr class="memitem:ad5695c30a05c03573082a1aac0394700"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5695c30a05c03573082a1aac0394700"></a>
 long double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnfftl__plan.html#ad5695c30a05c03573082a1aac0394700">x</a></td></tr>
-<tr class="memdesc:ad5695c30a05c03573082a1aac0394700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nodes in time/spatial domain, size is <img class="formulaInl" alt="$dM$" src="form_1.png"/> doubles. <br/></td></tr>
+<tr class="memdesc:ad5695c30a05c03573082a1aac0394700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nodes in time/spatial domain, size is <img class="formulaInl" alt="$dM$" src="form_15.png"/> doubles. <br/></td></tr>
 <tr class="memitem:ae8cf45feec672cd7e6f42a1b6a091a5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8cf45feec672cd7e6f42a1b6a091a5c"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnfftl__plan.html#ae8cf45feec672cd7e6f42a1b6a091a5c">MEASURE_TIME_t</a> [3]</td></tr>
 <tr class="memdesc:ae8cf45feec672cd7e6f42a1b6a091a5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measured time for each step if MEASURE_TIME is set. <br/></td></tr>
 <tr class="memitem:afdcd5a1259a4fb7e7271efe30a207265"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afdcd5a1259a4fb7e7271efe30a207265"></a>
 long double **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnfftl__plan.html#afdcd5a1259a4fb7e7271efe30a207265">c_phi_inv</a></td></tr>
-<tr class="memdesc:afdcd5a1259a4fb7e7271efe30a207265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Precomputed data for the diagonal matrix <img class="formulaInl" alt="$D$" src="form_2.png"/>, size \ is <img class="formulaInl" alt="$N_0+\hdots+N_{d-1}$" src="form_3.png"/> doubles. <br/></td></tr>
+<tr class="memdesc:afdcd5a1259a4fb7e7271efe30a207265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Precomputed data for the diagonal matrix <img class="formulaInl" alt="$D$" src="form_16.png"/>, size \ is <img class="formulaInl" alt="$N_0+\hdots+N_{d-1}$" src="form_17.png"/> doubles. <br/></td></tr>
 <tr class="memitem:a33955562ecf9b48f4283f869c77f96ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33955562ecf9b48f4283f869c77f96ff"></a>
 long double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnfftl__plan.html#a33955562ecf9b48f4283f869c77f96ff">psi</a></td></tr>
-<tr class="memdesc:a33955562ecf9b48f4283f869c77f96ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Precomputed data for the sparse matrix <img class="formulaInl" alt="$B$" src="form_4.png"/>, size depends on precomputation scheme. <br/></td></tr>
+<tr class="memdesc:a33955562ecf9b48f4283f869c77f96ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Precomputed data for the sparse matrix <img class="formulaInl" alt="$B$" src="form_18.png"/>, size depends on precomputation scheme. <br/></td></tr>
 <tr class="memitem:ad3ff1d5c721f0ec4e81aa341b29abc15"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3ff1d5c721f0ec4e81aa341b29abc15"></a>
 int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnfftl__plan.html#ad3ff1d5c721f0ec4e81aa341b29abc15">psi_index_g</a></td></tr>
 <tr class="memdesc:ad3ff1d5c721f0ec4e81aa341b29abc15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indices in source/target vector for PRE_FULL_PSI. <br/></td></tr>
@@ -147,6 +147,6 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str
 </ul>
 </div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

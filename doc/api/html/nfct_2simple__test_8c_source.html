@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - simple_test.c Source File
+      NFFT 3.2.1 API Reference - simple_test.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -63,15 +63,15 @@
 <a name="l00016"></a>00016 <span class="comment"> * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */</span>
+<a name="l00019"></a>00019 <span class="comment">/* $Id: simple_test.c 3858 2012-07-25 20:17:55Z keiner $ */</span>
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &lt;math.h&gt;</span>
 <a name="l00023"></a>00023 <span class="preprocessor">#include &lt;string.h&gt;</span>
 <a name="l00024"></a>00024 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
 <a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>&quot;</span>
-<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;infft.h&quot;</span>
 <a name="l00028"></a>00028 
 <a name="l00029"></a>00029 <span class="keyword">static</span> <span class="keywordtype">void</span> simple_test_nfct_1d(<span class="keywordtype">void</span>)
 <a name="l00030"></a>00030 {
@@ -92,19 +92,19 @@
 <a name="l00049"></a>00049   <span class="keywordflow">for</span>(k = 0; k &lt; p.<a class="code" href="structnfct__plan.html#abc66ae61c54a049868c62288623d4a6b" title="Total number of Fourier coefficients.">N_total</a>; k++)
 <a name="l00050"></a>00050     p.<a class="code" href="structnfct__plan.html#af289164b09e85f75e8ed0eb3ded40d9c" title="Vector of Fourier coefficients, size is N_total * sizeof( double )">f_hat</a>[k] = (<span class="keywordtype">double</span>)rand() / RAND_MAX;
 <a name="l00051"></a>00051 
-<a name="l00052"></a>00052   <a class="code" href="group__nfftutil.html#ga5021b4c5ea2a24b0014786deb81cca91" title="Prints a vector of doubles numbers.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#af289164b09e85f75e8ed0eb3ded40d9c" title="Vector of Fourier coefficients, size is N_total * sizeof( double )">f_hat</a>,p.<a class="code" href="structnfct__plan.html#abc66ae61c54a049868c62288623d4a6b" title="Total number of Fourier coefficients.">N_total</a>,<span class="stringliteral">&quot;given Fourier coefficients, vector f_hat&quot;</span>);
+<a name="l00052"></a>00052   <a class="code" href="group__nfftutil.html#gae23808a00775c8ba9b4505c6dfb85f12" title="Print real vector to standard output.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#af289164b09e85f75e8ed0eb3ded40d9c" title="Vector of Fourier coefficients, size is N_total * sizeof( double )">f_hat</a>,p.<a class="code" href="structnfct__plan.html#abc66ae61c54a049868c62288623d4a6b" title="Total number of Fourier coefficients.">N_total</a>,<span class="stringliteral">&quot;given Fourier coefficients, vector f_hat&quot;</span>);
 <a name="l00053"></a>00053 
 <a name="l00055"></a>00055   nfct_trafo_direct(&amp;p);
-<a name="l00056"></a>00056   <a class="code" href="group__nfftutil.html#ga5021b4c5ea2a24b0014786deb81cca91" title="Prints a vector of doubles numbers.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#acca00284f93bd33c00a1b099a6eec8cd" title="Vector of samples, size is M_total * sizeof( double )">f</a>,p.<a class="code" href="structnfct__plan.html#ab201c4e89753b167954e7cb5f34a321d" title="Total number of samples.">M_total</a>,<span class="stringliteral">&quot;ndct, vector f&quot;</span>);
+<a name="l00056"></a>00056   <a class="code" href="group__nfftutil.html#gae23808a00775c8ba9b4505c6dfb85f12" title="Print real vector to standard output.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#acca00284f93bd33c00a1b099a6eec8cd" title="Vector of samples, size is M_total * sizeof( double )">f</a>,p.<a class="code" href="structnfct__plan.html#ab201c4e89753b167954e7cb5f34a321d" title="Total number of samples.">M_total</a>,<span class="stringliteral">&quot;ndct, vector f&quot;</span>);
 <a name="l00057"></a>00057 
 <a name="l00059"></a>00059   nfct_trafo(&amp;p);
-<a name="l00060"></a>00060   <a class="code" href="group__nfftutil.html#ga5021b4c5ea2a24b0014786deb81cca91" title="Prints a vector of doubles numbers.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#acca00284f93bd33c00a1b099a6eec8cd" title="Vector of samples, size is M_total * sizeof( double )">f</a>,p.<a class="code" href="structnfct__plan.html#ab201c4e89753b167954e7cb5f34a321d" title="Total number of samples.">M_total</a>,<span class="stringliteral">&quot;nfct, vector f&quot;</span>);
+<a name="l00060"></a>00060   <a class="code" href="group__nfftutil.html#gae23808a00775c8ba9b4505c6dfb85f12" title="Print real vector to standard output.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#acca00284f93bd33c00a1b099a6eec8cd" title="Vector of samples, size is M_total * sizeof( double )">f</a>,p.<a class="code" href="structnfct__plan.html#ab201c4e89753b167954e7cb5f34a321d" title="Total number of samples.">M_total</a>,<span class="stringliteral">&quot;nfct, vector f&quot;</span>);
 <a name="l00061"></a>00061 
 <a name="l00063"></a>00063   nfct_adjoint(&amp;p);
-<a name="l00064"></a>00064   <a class="code" href="group__nfftutil.html#ga5021b4c5ea2a24b0014786deb81cca91" title="Prints a vector of doubles numbers.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#af289164b09e85f75e8ed0eb3ded40d9c" title="Vector of Fourier coefficients, size is N_total * sizeof( double )">f_hat</a>,p.<a class="code" href="structnfct__plan.html#abc66ae61c54a049868c62288623d4a6b" title="Total number of Fourier coefficients.">N_total</a>,<span class="stringliteral">&quot;adjoint ndct, vector f_hat&quot;</span>);
+<a name="l00064"></a>00064   <a class="code" href="group__nfftutil.html#gae23808a00775c8ba9b4505c6dfb85f12" title="Print real vector to standard output.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#af289164b09e85f75e8ed0eb3ded40d9c" title="Vector of Fourier coefficients, size is N_total * sizeof( double )">f_hat</a>,p.<a class="code" href="structnfct__plan.html#abc66ae61c54a049868c62288623d4a6b" title="Total number of Fourier coefficients.">N_total</a>,<span class="stringliteral">&quot;adjoint ndct, vector f_hat&quot;</span>);
 <a name="l00065"></a>00065 
 <a name="l00067"></a>00067   nfct_adjoint_direct(&amp;p);
-<a name="l00068"></a>00068   <a class="code" href="group__nfftutil.html#ga5021b4c5ea2a24b0014786deb81cca91" title="Prints a vector of doubles numbers.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#af289164b09e85f75e8ed0eb3ded40d9c" title="Vector of Fourier coefficients, size is N_total * sizeof( double )">f_hat</a>,p.<a class="code" href="structnfct__plan.html#abc66ae61c54a049868c62288623d4a6b" title="Total number of Fourier coefficients.">N_total</a>,<span class="stringliteral">&quot;adjoint nfct, vector f_hat&quot;</span>);
+<a name="l00068"></a>00068   <a class="code" href="group__nfftutil.html#gae23808a00775c8ba9b4505c6dfb85f12" title="Print real vector to standard output.">nfft_vpr_double</a>(p.<a class="code" href="structnfct__plan.html#af289164b09e85f75e8ed0eb3ded40d9c" title="Vector of Fourier coefficients, size is N_total * sizeof( double )">f_hat</a>,p.<a class="code" href="structnfct__plan.html#abc66ae61c54a049868c62288623d4a6b" title="Total number of Fourier coefficients.">N_total</a>,<span class="stringliteral">&quot;adjoint nfct, vector f_hat&quot;</span>);
 <a name="l00069"></a>00069 
 <a name="l00071"></a>00071   nfct_finalize(&amp;p);
 <a name="l00072"></a>00072 }
@@ -120,6 +120,6 @@
 <a name="l00082"></a>00082 }
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

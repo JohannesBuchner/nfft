@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - iterS2.c Source File
+      NFFT 3.2.1 API Reference - iterS2.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -63,7 +63,7 @@
 <a name="l00016"></a>00016 <span class="comment"> * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/* $Id: iterS2.c 3775 2012-06-02 16:39:48Z keiner $ */</span>
+<a name="l00019"></a>00019 <span class="comment">/* $Id: iterS2.c 3858 2012-07-25 20:17:55Z keiner $ */</span>
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021 <span class="comment">/* iterS2 - Iterative reconstruction on the sphere S2 */</span>
 <a name="l00022"></a>00022 
@@ -78,9 +78,9 @@
 <a name="l00036"></a>00036 <span class="preprocessor">#endif</span>
 <a name="l00037"></a>00037 <span class="preprocessor"></span>
 <a name="l00038"></a>00038 <span class="comment">/* Include NFFT 3 utilities headers. */</span>
-<a name="l00039"></a>00039 <span class="preprocessor">#include &quot;<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>&quot;</span>
-<a name="l00040"></a>00040 <span class="comment">/* Include NFFT3 library header. */</span>
-<a name="l00041"></a>00041 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00039"></a>00039 <span class="comment">/* Include NFFT3 library header. */</span>
+<a name="l00040"></a>00040 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00041"></a>00041 <span class="preprocessor">#include &quot;infft.h&quot;</span>
 <a name="l00042"></a>00042 
 <a name="l00043"></a>00043 <span class="preprocessor">#include &quot;legendre.h&quot;</span>
 <a name="l00044"></a>00044 
@@ -201,7 +201,7 @@
 <a name="l00170"></a>00170       <span class="keywordflow">for</span> (j = 0; j &lt;= N; j++)
 <a name="l00171"></a>00171       {
 <a name="l00172"></a>00172         xs = 2.0 + (2.0*j)/(N+1);
-<a name="l00173"></a>00173         ys[j] = (2.0-((j == 0)?(1.0):(0.0)))*4.0*<a class="code" href="group__nfftutil.html#ga2fd48f1f700153c050d27691c4b2a6cc" title="Computes the B-spline , scratch is used for de Boor&#39;s scheme.">nfft_bspline</a>(4,xs,scratch);
+<a name="l00173"></a>00173         ys[j] = (2.0-((j == 0)?(1.0):(0.0)))*4.0*nfft_bspline(4,xs,scratch);
 <a name="l00174"></a>00174         <span class="comment">//fprintf(stdout,&quot;%3d: g(%le) = %le\n&quot;,j,xs,ys[j]);</span>
 <a name="l00175"></a>00175         a += ys[j];
 <a name="l00176"></a>00176       }
@@ -305,8 +305,8 @@
 <a name="l00274"></a>00274     <span class="keywordflow">for</span> (j = 0; j &lt; M; j++)
 <a name="l00275"></a>00275     {
 <a name="l00276"></a>00276       fscanf(stdin,<span class="stringliteral">&quot;%le %le %le %le\n&quot;</span>,&amp;plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1],&amp;plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j],&amp;re,&amp;im);
-<a name="l00277"></a>00277       plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1] = plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1]/(2.0*<a class="code" href="group__nfftutil.html#ga598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>);
-<a name="l00278"></a>00278       plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] = plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j]/(2.0*<a class="code" href="group__nfftutil.html#ga598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>);
+<a name="l00277"></a>00277       plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1] = plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1]/(2.0*KPI);
+<a name="l00278"></a>00278       plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] = plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j]/(2.0*KPI);
 <a name="l00279"></a>00279       <span class="keywordflow">if</span> (plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] &gt;= 0.5)
 <a name="l00280"></a>00280       {
 <a name="l00281"></a>00281         plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] = plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] - 1;
@@ -333,8 +333,8 @@
 <a name="l00302"></a>00302     <span class="keywordflow">for</span> (j = 0; j &lt; M2; j++)
 <a name="l00303"></a>00303     {
 <a name="l00304"></a>00304       fscanf(stdin,<span class="stringliteral">&quot;%le %le\n&quot;</span>,&amp;plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1],&amp;plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j]);
-<a name="l00305"></a>00305       plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1] = plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1]/(2.0*<a class="code" href="group__nfftutil.html#ga598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>);
-<a name="l00306"></a>00306       plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] = plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j]/(2.0*<a class="code" href="group__nfftutil.html#ga598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>);
+<a name="l00305"></a>00305       plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1] = plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j+1]/(2.0*KPI);
+<a name="l00306"></a>00306       plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] = plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j]/(2.0*KPI);
 <a name="l00307"></a>00307       <span class="keywordflow">if</span> (plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] &gt;= 0.5)
 <a name="l00308"></a>00308       {
 <a name="l00309"></a>00309         plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] = plan2.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>[2*j] - 1;
@@ -390,7 +390,7 @@
 <a name="l00359"></a>00359       }
 <a name="l00360"></a>00360 
 <a name="l00361"></a>00361       <span class="comment">/* Compute Voronoi weights. */</span>
-<a name="l00362"></a>00362       <a class="code" href="group__nfftutil.html#ga26a4ed487a23e99e01f111113be9f994" title="Computes voronoi weights for nodes on the sphere S^2.">nfft_voronoi_weights_S2</a>(iplan.<a class="code" href="structsolver__plan__complex.html#a3bb04f250f17c2a4ab5d0b813b7ccf2c" title="weighting factors">w</a>, plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>, M);
+<a name="l00362"></a>00362       nfft_voronoi_weights_S2(iplan.<a class="code" href="structsolver__plan__complex.html#a3bb04f250f17c2a4ab5d0b813b7ccf2c" title="weighting factors">w</a>, plan.<a class="code" href="structnfsft__plan.html#af361cee5b4f7dabae68e53674861df90" title="the nodes  for , ">x</a>, M);
 <a name="l00363"></a>00363 
 <a name="l00364"></a>00364       <span class="comment">/* Print out Voronoi weights. */</span>
 <a name="l00365"></a>00365       a = 0.0;
@@ -425,9 +425,9 @@
 <a name="l00394"></a>00394       <a class="code" href="nfft3_8h.html#a3b80b04ee3429b04c310992fb0a12420" title="void solver_loop_one_step">solver_loop_one_step_complex</a>(&amp;iplan);
 <a name="l00395"></a>00395     }
 <a name="l00396"></a>00396 
-<a name="l00397"></a>00397     <span class="comment">/*NFFT_SWAP_complex(iplan.f_hat_iter, plan.f_hat);</span>
+<a name="l00397"></a>00397     <span class="comment">/*CSWAP(iplan.f_hat_iter, plan.f_hat);</span>
 <a name="l00398"></a>00398 <span class="comment">    nfsft_trafo(&amp;plan);</span>
-<a name="l00399"></a>00399 <span class="comment">    NFFT_SWAP_complex(iplan.f_hat_iter, plan.f_hat);</span>
+<a name="l00399"></a>00399 <span class="comment">    CSWAP(iplan.f_hat_iter, plan.f_hat);</span>
 <a name="l00400"></a>00400 <span class="comment"></span>
 <a name="l00401"></a>00401 <span class="comment">    a = 0.0;</span>
 <a name="l00402"></a>00402 <span class="comment">    b = 0.0;</span>
@@ -441,9 +441,9 @@
 <a name="l00410"></a>00410 <span class="comment"></span>
 <a name="l00411"></a>00411 <span class="comment">    fprintf(stderr,&quot;relative error in 2-norm: %le\n&quot;,a/b);*/</span>
 <a name="l00412"></a>00412 
-<a name="l00413"></a>00413     <a class="code" href="group__nfftutil.html#ga4df074728562efbb458f6662e649d1d5" title="Swapping of two vectors.">NFFT_SWAP_complex</a>(iplan.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>, plan2.<a class="code" href="structnfsft__plan.html#af3f147694cf5d7ac7b658288bf2cfb42" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>);
+<a name="l00413"></a>00413     <a class="code" href="group__nfftutil.html#ga18cf66b4ff69fd69cf3b8291c629e80b" title="Swap two vectors.">CSWAP</a>(iplan.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>, plan2.<a class="code" href="structnfsft__plan.html#af3f147694cf5d7ac7b658288bf2cfb42" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>);
 <a name="l00414"></a>00414     nfsft_trafo(&amp;plan2);
-<a name="l00415"></a>00415     <a class="code" href="group__nfftutil.html#ga4df074728562efbb458f6662e649d1d5" title="Swapping of two vectors.">NFFT_SWAP_complex</a>(iplan.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>, plan2.<a class="code" href="structnfsft__plan.html#af3f147694cf5d7ac7b658288bf2cfb42" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>);
+<a name="l00415"></a>00415     <a class="code" href="group__nfftutil.html#ga18cf66b4ff69fd69cf3b8291c629e80b" title="Swap two vectors.">CSWAP</a>(iplan.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>, plan2.<a class="code" href="structnfsft__plan.html#af3f147694cf5d7ac7b658288bf2cfb42" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>);
 <a name="l00416"></a>00416     <span class="keywordflow">for</span> (k = 0; k &lt; plan2.<a class="code" href="structnfsft__plan.html#ae83b4ef24662500a1c0374f9e0bf73ed" title="Total number of samples.">M_total</a>; k++)
 <a name="l00417"></a>00417     {
 <a name="l00418"></a>00418       fprintf(stdout,<span class="stringliteral">&quot;%le\n&quot;</span>,cabs(plan2.<a class="code" href="structnfsft__plan.html#aebedb76f2df25603c548ae9672e970df" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>[k]));
@@ -471,6 +471,6 @@
 <a name="l00440"></a>00440 <span class="comment">/* \} */</span>
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

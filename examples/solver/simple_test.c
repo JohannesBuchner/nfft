@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: simple_test.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #include <stdio.h>
@@ -27,8 +27,8 @@
 #include <complex.h>
 #endif
 
-#include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 /* void simple_test_infft_1d(int N, int M, int iter) */
 /* { */
@@ -59,10 +59,10 @@
 
 /*   nfft_vpr_complex(ip.f_hat_iter,p.N_total,"Initial guess, vector f_hat_iter"); */
 
-/*   NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat); */
+/*   CSWAP(ip.f_hat_iter,p.f_hat); */
 /*   nfft_trafo(&p); */
 /*   nfft_vpr_complex(p.f,p.M_total,"Data fit, vector f"); */
-/*   NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat); */
+/*   CSWAP(ip.f_hat_iter,p.f_hat); */
 
 /*   infft_before_loop(&ip); */
 /*   printf("\n Residual r=%e\n",ip.dot_r_iter); */
@@ -74,10 +74,10 @@
 /*       nfft_vpr_complex(ip.f_hat_iter,p.N_total, */
 /* 		  "Approximate solution, vector f_hat_iter"); */
 
-/*       NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat); */
+/*       CSWAP(ip.f_hat_iter,p.f_hat); */
 /*       nfft_trafo(&p); */
 /*       nfft_vpr_complex(p.f,p.M_total,"Data fit, vector f"); */
-/*       NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat); */
+/*       CSWAP(ip.f_hat_iter,p.f_hat); */
 
 /*       printf("\n Residual r=%e\n",ip.dot_r_iter); */
 /*     } */
@@ -116,10 +116,10 @@ static void simple_test_solver_nfft_1d(int N, int M, int iter)
 
   nfft_vpr_complex(ip.f_hat_iter,p.N_total,"Initial guess, vector f_hat_iter");
 
-  NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat);
+  CSWAP(ip.f_hat_iter,p.f_hat);
   nfft_trafo(&p);
   nfft_vpr_complex(p.f,p.M_total,"Data fit, vector f");
-  NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat);
+  CSWAP(ip.f_hat_iter,p.f_hat);
 
   solver_before_loop_complex(&ip);
   printf("\n Residual r=%e\n",ip.dot_r_iter);
@@ -131,10 +131,10 @@ static void simple_test_solver_nfft_1d(int N, int M, int iter)
       nfft_vpr_complex(ip.f_hat_iter,p.N_total,
 		  "Approximate solution, vector f_hat_iter");
 
-      NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat);
+      CSWAP(ip.f_hat_iter,p.f_hat);
       nfft_trafo(&p);
       nfft_vpr_complex(p.f,p.M_total,"Data fit, vector f");
-      NFFT_SWAP_complex(ip.f_hat_iter,p.f_hat);
+      CSWAP(ip.f_hat_iter,p.f_hat);
 
       printf("\n Residual r=%e\n",ip.dot_r_iter);
     }

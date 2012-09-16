@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft.c 3795 2012-06-12 08:40:27Z tovo $ */
+/* $Id: nfft.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 /* Nonequispaced FFT */
 
@@ -31,7 +31,6 @@
 #endif
 
 /* NFFT headers */
-#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 
@@ -84,7 +83,7 @@ static void nfft_sort_nodes_for_better_cache_handle(int d,
   rhigh = (int) ceil(log2(nprod)) - 1;
 
   ar_x_temp = (int *) nfft_malloc(2*local_x_num*sizeof(int));
-  nfft_sort_node_indices_radix_lsdf(local_x_num, ar_x, ar_x_temp, rhigh);
+  X(sort_node_indices_radix_lsdf)(local_x_num, ar_x, ar_x_temp, rhigh);
 #ifdef OMP_ASSERT
   for (i = 1; i < local_x_num; i++)
     assert(ar_x[2*(i-1)] <= ar_x[2*i]);
@@ -5676,7 +5675,7 @@ static void nfft_init_help(nfft_plan *ths)
   if(ths->nfft_flags & FFTW_INIT)
   {
 #ifdef _OPENMP
-    int nthreads = nfft_get_omp_num_threads();
+    int nthreads = X(get_num_threads)();
 #endif
 
     ths->g1=(fftw_complex*)nfft_malloc(ths->n_total*sizeof(C));

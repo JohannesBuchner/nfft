@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfftmex.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: nfftmex.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #ifdef HAVE_COMPLEX_H
@@ -27,7 +27,6 @@
 #include <stdint.h>
 #include "nfft3.h"
 #include "infft.h"
-#include "nfft3util.h"
 #include "imex.h"
 
 #ifdef HAVE_MEXVERSION_C
@@ -468,7 +467,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   }
   else if(strcmp(cmd,"get_num_threads") == 0)
   {
-    int32_t nthreads = nfft_get_num_threads();
+    int32_t nthreads = X(get_num_threads)();
     plhs[0] = mxCreateNumericMatrix(1, 1, mxINT32_CLASS, mxREAL);
     *((int32_t *)mxGetData(plhs[0])) = nthreads;
 

@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - float.c Source File
+      NFFT 3.2.1 API Reference - float.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -135,8 +135,20 @@
 <a name="l00088"></a>00088 
 <a name="l00089"></a>00089   <span class="keywordflow">return</span> K(-1.0);
 <a name="l00090"></a>00090 } <span class="comment">/* dlamch_ */</span>
+<a name="l00091"></a>00091 
+<a name="l00093"></a>00093 R X(prod_real)(R *vec, INT d)
+<a name="l00094"></a>00094 {
+<a name="l00095"></a>00095   INT t;
+<a name="l00096"></a>00096   R prod;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098   prod = K(1.0);
+<a name="l00099"></a>00099   <span class="keywordflow">for</span> (t = 0; t &lt; d; t++)
+<a name="l00100"></a>00100     prod *= vec[t];
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102   <span class="keywordflow">return</span> prod;
+<a name="l00103"></a>00103 }
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

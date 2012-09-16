@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - nfft3.h File Reference
+      NFFT 3.2.1 API Reference - nfft3.h File Reference
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -113,29 +113,29 @@ Macros</h2></td></tr>
 <tr class="memitem:a038f615fdd7fd2ef683924657745121a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a038f615fdd7fd2ef683924657745121a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>NFFT_DEFINE_API</b>(X, Y, R, C)</td></tr>
 <tr class="memitem:ada3a356fdaf5840f98374a0a7aaf3e9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada3a356fdaf5840f98374a0a7aaf3e9c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_PHI_HUT</b>&#160;&#160;&#160;(1U&lt;&lt; 0)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_PHI_HUT</b>&#160;&#160;&#160;(1U&lt;&lt;0)</td></tr>
 <tr class="memitem:a01ebac2d2071639df189f083fc9f24eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01ebac2d2071639df189f083fc9f24eb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>FG_PSI</b>&#160;&#160;&#160;(1U&lt;&lt; 1)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FG_PSI</b>&#160;&#160;&#160;(1U&lt;&lt;1)</td></tr>
 <tr class="memitem:abb1ad048b695cb806baf010c5d1b2caf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb1ad048b695cb806baf010c5d1b2caf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_LIN_PSI</b>&#160;&#160;&#160;(1U&lt;&lt; 2)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_LIN_PSI</b>&#160;&#160;&#160;(1U&lt;&lt;2)</td></tr>
 <tr class="memitem:a9c5a5ab61009a801082897ca40a1658c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c5a5ab61009a801082897ca40a1658c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_FG_PSI</b>&#160;&#160;&#160;(1U&lt;&lt; 3)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_FG_PSI</b>&#160;&#160;&#160;(1U&lt;&lt;3)</td></tr>
 <tr class="memitem:a959463a5c7723ccef5057ddcb784b40c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a959463a5c7723ccef5057ddcb784b40c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_PSI</b>&#160;&#160;&#160;(1U&lt;&lt; 4)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_PSI</b>&#160;&#160;&#160;(1U&lt;&lt;4)</td></tr>
 <tr class="memitem:a7ad8a7e19519b16340dabec48899c6a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ad8a7e19519b16340dabec48899c6a4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_FULL_PSI</b>&#160;&#160;&#160;(1U&lt;&lt; 5)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRE_FULL_PSI</b>&#160;&#160;&#160;(1U&lt;&lt;5)</td></tr>
 <tr class="memitem:a353185384f87de0dc4320a82652ef724"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a353185384f87de0dc4320a82652ef724"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MALLOC_X</b>&#160;&#160;&#160;(1U&lt;&lt; 6)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MALLOC_X</b>&#160;&#160;&#160;(1U&lt;&lt;6)</td></tr>
 <tr class="memitem:a02d52cb02b6cfdbc3e4d5fd4de1aef9e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02d52cb02b6cfdbc3e4d5fd4de1aef9e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MALLOC_F_HAT</b>&#160;&#160;&#160;(1U&lt;&lt; 7)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MALLOC_F_HAT</b>&#160;&#160;&#160;(1U&lt;&lt;7)</td></tr>
 <tr class="memitem:aa7b5098f4136080bbe0dd989973e2a69"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7b5098f4136080bbe0dd989973e2a69"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MALLOC_F</b>&#160;&#160;&#160;(1U&lt;&lt; 8)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MALLOC_F</b>&#160;&#160;&#160;(1U&lt;&lt;8)</td></tr>
 <tr class="memitem:a9193f768d5839892d0e303080c370eaf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9193f768d5839892d0e303080c370eaf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>FFT_OUT_OF_PLACE</b>&#160;&#160;&#160;(1U&lt;&lt; 9)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FFT_OUT_OF_PLACE</b>&#160;&#160;&#160;(1U&lt;&lt;9)</td></tr>
 <tr class="memitem:ad3fe6867a3351441c6f44dd5a3746f5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3fe6867a3351441c6f44dd5a3746f5b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>FFTW_INIT</b>&#160;&#160;&#160;(1U&lt;&lt; 10)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FFTW_INIT</b>&#160;&#160;&#160;(1U&lt;&lt;10)</td></tr>
 <tr class="memitem:a4915d42afc8200ce7e0bf3c60f5a5164"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4915d42afc8200ce7e0bf3c60f5a5164"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NFFT_SORT_NODES</b>&#160;&#160;&#160;(1U&lt;&lt; 11)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NFFT_SORT_NODES</b>&#160;&#160;&#160;(1U&lt;&lt;11)</td></tr>
 <tr class="memitem:a0dc58c2f9ab115527fce4553e523fe65"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0dc58c2f9ab115527fce4553e523fe65"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>NFFT_OMP_BLOCKWISE_ADJOINT</b>&#160;&#160;&#160;(1U&lt;&lt;12)</td></tr>
 <tr class="memitem:a44c85197c6bdcf4b632aeff5e94d5329"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44c85197c6bdcf4b632aeff5e94d5329"></a>
@@ -1457,7 +1457,7 @@ NFFT_EXTERN <span class="keywordtype">int</span> X(posN)(<span class="keywordtyp
   </dd>
 </dl>
 
-<p>Referenced by <a class="el" href="linogram__fft__test_8c_source.html#l00309">comparison_fft()</a>, <a class="el" href="fastsum_8c_source.html#l00600">fastsum_init_guru()</a>, <a class="el" href="fastgauss_8c_source.html#l00170">fgt_init_guru()</a>, <a class="el" href="fastgauss_8c_source.html#l00263">fgt_init_node_dependent()</a>, <a class="el" href="fastgauss_8c_source.html#l00410">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c_source.html#l00481">fgt_test_error()</a>, <a class="el" href="fastgauss_8c_source.html#l00532">fgt_test_error_p()</a>, <a class="el" href="fastgauss_8c_source.html#l00375">fgt_test_simple()</a>, <a class="el" href="glacier_8c_source.html#l00110">glacier_cv()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00209">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00237">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00218">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c_source.html#l00116">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00082">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00141">linogram_fft()</a>, <a class="el" href="fastsumS2_8c_source.html#l00164">main()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00106">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00166">mpolar_fft()</a>, <a class="el" href="util_8c_source.html#l00581">nfft_voronoi_weights_S2()</a>, <a class="el" href="nfst_8c_source.html#l00788">nfst_full_psi()</a>, <a class="el" href="nnfft_8c_source.html#l00348">nnfft_precompute_phi_hut()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00100">polar_dft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00154">polar_fft()</a>, <a class="el" href="radon_8c_source.html#l00116">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c_source.html#l00042">reconstruct()</a>, <a class="el" href="solver_8c_source.html#l00384">solver_init_advanced_double()</a>, <a class="el" href="taylor__nfft_8c_source.html#l00064">taylor_init()</a>, and <a class="el" href="taylor__nfft_8c_source.html#l00179">taylor_time_accuracy()</a>.</p>
+<p>Referenced by <a class="el" href="linogram__fft__test_8c_source.html#l00308">comparison_fft()</a>, <a class="el" href="fastsum_8c_source.html#l00599">fastsum_init_guru()</a>, <a class="el" href="fastgauss_8c_source.html#l00169">fgt_init_guru()</a>, <a class="el" href="fastgauss_8c_source.html#l00262">fgt_init_node_dependent()</a>, <a class="el" href="fastgauss_8c_source.html#l00409">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c_source.html#l00480">fgt_test_error()</a>, <a class="el" href="fastgauss_8c_source.html#l00531">fgt_test_error_p()</a>, <a class="el" href="fastgauss_8c_source.html#l00374">fgt_test_simple()</a>, <a class="el" href="glacier_8c_source.html#l00109">glacier_cv()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00208">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00236">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00217">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c_source.html#l00116">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00081">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00140">linogram_fft()</a>, <a class="el" href="fastsumS2_8c_source.html#l00537">main()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00105">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00165">mpolar_fft()</a>, <a class="el" href="nfst_8c_source.html#l00787">nfst_full_psi()</a>, <a class="el" href="nnfft_8c_source.html#l00347">nnfft_precompute_phi_hut()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00099">polar_dft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00153">polar_fft()</a>, <a class="el" href="radon_8c_source.html#l00116">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c_source.html#l00041">reconstruct()</a>, <a class="el" href="solver_8c_source.html#l00384">solver_init_advanced_double()</a>, <a class="el" href="taylor__nfft_8c_source.html#l00063">taylor_init()</a>, and <a class="el" href="taylor__nfft_8c_source.html#l00178">taylor_time_accuracy()</a>.</p>
 
 </div>
 </div>
@@ -1482,7 +1482,7 @@ NFFT_EXTERN <span class="keywordtype">int</span> X(posN)(<span class="keywordtyp
   </dd>
 </dl>
 
-<p>Referenced by <a class="el" href="linogram__fft__test_8c_source.html#l00309">comparison_fft()</a>, <a class="el" href="fastsum_8c_source.html#l00742">fastsum_finalize()</a>, <a class="el" href="fastgauss_8c_source.html#l00295">fgt_finalize()</a>, <a class="el" href="fastgauss_8c_source.html#l00410">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c_source.html#l00481">fgt_test_error()</a>, <a class="el" href="fastgauss_8c_source.html#l00375">fgt_test_simple()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00209">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00237">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00218">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c_source.html#l00116">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00082">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00141">linogram_fft()</a>, <a class="el" href="fastsumS2_8c_source.html#l00164">main()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00106">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00166">mpolar_fft()</a>, <a class="el" href="util_8c_source.html#l00581">nfft_voronoi_weights_S2()</a>, <a class="el" href="nfst_8c_source.html#l00788">nfst_full_psi()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00100">polar_dft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00154">polar_fft()</a>, <a class="el" href="radon_8c_source.html#l00116">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c_source.html#l00042">reconstruct()</a>, <a class="el" href="solver_8c_source.html#l00355">solver_finalize_complex()</a>, <a class="el" href="solver_8c_source.html#l00706">solver_finalize_double()</a>, <a class="el" href="taylor__nfft_8c_source.html#l00105">taylor_finalize()</a>, and <a class="el" href="taylor__nfft_8c_source.html#l00179">taylor_time_accuracy()</a>.</p>
+<p>Referenced by <a class="el" href="linogram__fft__test_8c_source.html#l00308">comparison_fft()</a>, <a class="el" href="fastsum_8c_source.html#l00741">fastsum_finalize()</a>, <a class="el" href="fastgauss_8c_source.html#l00294">fgt_finalize()</a>, <a class="el" href="fastgauss_8c_source.html#l00409">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c_source.html#l00480">fgt_test_error()</a>, <a class="el" href="fastgauss_8c_source.html#l00374">fgt_test_simple()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00208">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00236">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00217">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c_source.html#l00116">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00081">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c_source.html#l00140">linogram_fft()</a>, <a class="el" href="fastsumS2_8c_source.html#l00537">main()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00105">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c_source.html#l00165">mpolar_fft()</a>, <a class="el" href="nfst_8c_source.html#l00787">nfst_full_psi()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00099">polar_dft()</a>, <a class="el" href="polar__fft__test_8c_source.html#l00153">polar_fft()</a>, <a class="el" href="radon_8c_source.html#l00116">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c_source.html#l00041">reconstruct()</a>, <a class="el" href="solver_8c_source.html#l00355">solver_finalize_complex()</a>, <a class="el" href="solver_8c_source.html#l00706">solver_finalize_double()</a>, <a class="el" href="taylor__nfft_8c_source.html#l00104">taylor_finalize()</a>, and <a class="el" href="taylor__nfft_8c_source.html#l00178">taylor_time_accuracy()</a>.</p>
 
 </div>
 </div>
@@ -1502,7 +1502,9 @@ NFFT_EXTERN <span class="keywordtype">int</span> X(posN)(<span class="keywordtyp
 
 <p>user routines </p>
 
-<p>Definition at line <a class="el" href="nfst_8c_source.html#l00647">647</a> of file <a class="el" href="nfst_8c_source.html">nfst.c</a>.</p>
+<p>Definition at line <a class="el" href="nfst_8c_source.html#l00646">646</a> of file <a class="el" href="nfst_8c_source.html">nfst.c</a>.</p>
+
+<p>References <a class="el" href="infft_8h_source.html#l01346">TIC</a>.</p>
 
 </div>
 </div>
@@ -1535,6 +1537,6 @@ NFFT_EXTERN <span class="keywordtype">int</span> X(posN)(<span class="keywordtyp
 </div>
 </div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

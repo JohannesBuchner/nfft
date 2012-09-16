@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: glacier.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: glacier.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #include <stdio.h>
@@ -27,7 +27,6 @@
 #include <complex.h>
 #endif
 
-#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 
@@ -185,17 +184,17 @@ static void glacier_cv(int N,int M,int M_cv,unsigned solver_flags)
 
   //fprintf(stderr,"r=%1.2e, ",sqrt(ip.dot_r_iter)/M_re);
 
-  NFFT_SWAP_complex(p.f_hat,ip.f_hat_iter);
+  CSWAP(p.f_hat,ip.f_hat_iter);
   nfft_trafo(&p);
-  NFFT_SWAP_complex(p.f_hat,ip.f_hat_iter);
+  CSWAP(p.f_hat,ip.f_hat_iter);
   nfft_upd_axpy_complex(p.f,-1,ip.y,M_re);
-  r=sqrt(nfft_dot_complex(p.f,M_re)/nfft_dot_complex(cp_y,M));
+  r=sqrt(X(dot_complex)(p.f,M_re)/X(dot_complex)(cp_y,M));
   fprintf(stderr,"r=%1.2e, ",r);
   printf("$%1.1e$ & ",r);
 
   nfft_trafo(&cp);
   nfft_upd_axpy_complex(&cp.f[M_re],-1,&cp_y[M_re],M_cv);
-  r=sqrt(nfft_dot_complex(&cp.f[M_re],M_cv)/nfft_dot_complex(cp_y,M));
+  r=sqrt(X(dot_complex)(&cp.f[M_re],M_cv)/X(dot_complex)(cp_y,M));
   fprintf(stderr,"r_1=%1.2e\t",r);
   printf("$%1.1e$ & ",r);
 

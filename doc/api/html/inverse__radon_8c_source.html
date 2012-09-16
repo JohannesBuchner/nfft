@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - inverse_radon.c Source File
+      NFFT 3.2.1 API Reference - inverse_radon.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -63,7 +63,7 @@
 <a name="l00016"></a>00016 <span class="comment"> * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/* $Id: inverse_radon.c 3775 2012-06-02 16:39:48Z keiner $ */</span>
+<a name="l00019"></a>00019 <span class="comment">/* $Id: inverse_radon.c 3858 2012-07-25 20:17:55Z keiner $ */</span>
 <a name="l00020"></a>00020 
 <a name="l00039"></a>00039 <span class="preprocessor">#include &quot;config.h&quot;</span>
 <a name="l00040"></a>00040 
@@ -75,63 +75,63 @@
 <a name="l00046"></a>00046 <span class="preprocessor"></span><span class="preprocessor">#include &lt;complex.h&gt;</span>
 <a name="l00047"></a>00047 <span class="preprocessor">#endif</span>
 <a name="l00048"></a>00048 <span class="preprocessor"></span>
-<a name="l00049"></a>00049 <span class="preprocessor">#include &quot;<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>&quot;</span>
-<a name="l00050"></a>00050 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00049"></a>00049 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00050"></a>00050 <span class="preprocessor">#include &quot;infft.h&quot;</span>
 <a name="l00051"></a>00051 
 <a name="l00053"></a>00053 <span class="comment">/*#define KERNEL(r) 1.0 */</span>
-<a name="l00054"></a><a class="code" href="inverse__radon_8c.html#a0091bbc07c9570a2ab0dac372c2104f1">00054</a> <span class="preprocessor">#define KERNEL(r) (1.0-fabs((double)(r))/((double)R/2))</span>
+<a name="l00054"></a><a class="code" href="inverse__radon_8c.html#a0091bbc07c9570a2ab0dac372c2104f1">00054</a> <span class="preprocessor">#define KERNEL(r) (1.0-fabs((double)(r))/((double)S/2))</span>
 <a name="l00055"></a>00055 <span class="preprocessor"></span>
-<a name="l00059"></a><a class="code" href="inverse__radon_8c.html#a307b67b4c00a1c756f140c7fa831cdae">00059</a> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="inverse__radon_8c.html#a307b67b4c00a1c756f140c7fa831cdae" title="generates the points x with weights w for the polar grid with T angles and R offsets">polar_grid</a>(<span class="keywordtype">int</span> T, <span class="keywordtype">int</span> R, <span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *w)
+<a name="l00059"></a><a class="code" href="inverse__radon_8c.html#a20860410cddb79ea6c6c538294ec38d7">00059</a> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="inverse__radon_8c.html#a20860410cddb79ea6c6c538294ec38d7" title="generates the points x with weights w for the polar grid with T angles and R offsets">polar_grid</a>(<span class="keywordtype">int</span> T, <span class="keywordtype">int</span> S, <span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *w)
 <a name="l00060"></a>00060 {
 <a name="l00061"></a>00061   <span class="keywordtype">int</span> t, r;
-<a name="l00062"></a>00062   <span class="keywordtype">double</span> W=(double)T*(((<span class="keywordtype">double</span>)R/2.0)*((double)R/2.0)+1.0/4.0);
+<a name="l00062"></a>00062   <span class="keywordtype">double</span> W=(double)T*(((<span class="keywordtype">double</span>)S/2.0)*((double)S/2.0)+1.0/4.0);
 <a name="l00063"></a>00063 
 <a name="l00064"></a>00064   <span class="keywordflow">for</span>(t=-T/2; t&lt;T/2; t++)
 <a name="l00065"></a>00065   {
-<a name="l00066"></a>00066     <span class="keywordflow">for</span>(r=-R/2; r&lt;R/2; r++)
+<a name="l00066"></a>00066     <span class="keywordflow">for</span>(r=-S/2; r&lt;S/2; r++)
 <a name="l00067"></a>00067     {
-<a name="l00068"></a>00068       x[2*((t+T/2)*R+(r+R/2))+0] = (<span class="keywordtype">double</span>)r/R*cos(<a class="code" href="group__nfftutil.html#ga598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>*t/T);
-<a name="l00069"></a>00069       x[2*((t+T/2)*R+(r+R/2))+1] = (<span class="keywordtype">double</span>)r/R*sin(<a class="code" href="group__nfftutil.html#ga598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>*t/T);
+<a name="l00068"></a>00068       x[2*((t+T/2)*S+(r+S/2))+0] = (<span class="keywordtype">double</span>)r/S*cos(KPI*t/T);
+<a name="l00069"></a>00069       x[2*((t+T/2)*S+(r+S/2))+1] = (<span class="keywordtype">double</span>)r/S*sin(KPI*t/T);
 <a name="l00070"></a>00070       <span class="keywordflow">if</span> (r==0)
-<a name="l00071"></a>00071         w[(t+T/2)*R+(r+R/2)] = 1.0/4.0/W;
+<a name="l00071"></a>00071         w[(t+T/2)*S+(r+S/2)] = 1.0/4.0/W;
 <a name="l00072"></a>00072       <span class="keywordflow">else</span>
-<a name="l00073"></a>00073         w[(t+T/2)*R+(r+R/2)] = fabs((<span class="keywordtype">double</span>)r)/W;
+<a name="l00073"></a>00073         w[(t+T/2)*S+(r+S/2)] = fabs((<span class="keywordtype">double</span>)r)/W;
 <a name="l00074"></a>00074     }
 <a name="l00075"></a>00075   }
 <a name="l00076"></a>00076 
 <a name="l00077"></a>00077   <span class="keywordflow">return</span> 0;
 <a name="l00078"></a>00078 }
 <a name="l00079"></a>00079 
-<a name="l00083"></a><a class="code" href="inverse__radon_8c.html#a9a5ff165ab1e23af77ab6f6108bb6310">00083</a> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="inverse__radon_8c.html#a9a5ff165ab1e23af77ab6f6108bb6310" title="generates the points x with weights w for the linogram grid with T slopes and R offsets">linogram_grid</a>(<span class="keywordtype">int</span> T, <span class="keywordtype">int</span> R, <span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *w)
+<a name="l00083"></a><a class="code" href="inverse__radon_8c.html#a9c956269fceda1ca772ccee96d17d495">00083</a> <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="inverse__radon_8c.html#a9c956269fceda1ca772ccee96d17d495" title="generates the points x with weights w for the linogram grid with T slopes and R offsets">linogram_grid</a>(<span class="keywordtype">int</span> T, <span class="keywordtype">int</span> S, <span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *w)
 <a name="l00084"></a>00084 {
 <a name="l00085"></a>00085   <span class="keywordtype">int</span> t, r;
-<a name="l00086"></a>00086   <span class="keywordtype">double</span> W=(double)T*(((<span class="keywordtype">double</span>)R/2.0)*((double)R/2.0)+1.0/4.0);
+<a name="l00086"></a>00086   <span class="keywordtype">double</span> W=(double)T*(((<span class="keywordtype">double</span>)S/2.0)*((double)S/2.0)+1.0/4.0);
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088   <span class="keywordflow">for</span>(t=-T/2; t&lt;T/2; t++)
 <a name="l00089"></a>00089   {
-<a name="l00090"></a>00090     <span class="keywordflow">for</span>(r=-R/2; r&lt;R/2; r++)
+<a name="l00090"></a>00090     <span class="keywordflow">for</span>(r=-S/2; r&lt;S/2; r++)
 <a name="l00091"></a>00091     {
 <a name="l00092"></a>00092       <span class="keywordflow">if</span>(t&lt;0)
 <a name="l00093"></a>00093       {
-<a name="l00094"></a>00094         x[2*((t+T/2)*R+(r+R/2))+0] = (<span class="keywordtype">double</span>)r/R;
-<a name="l00095"></a>00095         x[2*((t+T/2)*R+(r+R/2))+1] = (<span class="keywordtype">double</span>)4*(t+T/4)/T*r/R;
+<a name="l00094"></a>00094         x[2*((t+T/2)*S+(r+S/2))+0] = (<span class="keywordtype">double</span>)r/S;
+<a name="l00095"></a>00095         x[2*((t+T/2)*S+(r+S/2))+1] = (<span class="keywordtype">double</span>)4*(t+T/4)/T*r/S;
 <a name="l00096"></a>00096       }
 <a name="l00097"></a>00097       <span class="keywordflow">else</span>
 <a name="l00098"></a>00098       {
-<a name="l00099"></a>00099         x[2*((t+T/2)*R+(r+R/2))+0] = -(<span class="keywordtype">double</span>)4*(t-T/4)/T*r/R;
-<a name="l00100"></a>00100         x[2*((t+T/2)*R+(r+R/2))+1] = (<span class="keywordtype">double</span>)r/R;
+<a name="l00099"></a>00099         x[2*((t+T/2)*S+(r+S/2))+0] = -(<span class="keywordtype">double</span>)4*(t-T/4)/T*r/S;
+<a name="l00100"></a>00100         x[2*((t+T/2)*S+(r+S/2))+1] = (<span class="keywordtype">double</span>)r/S;
 <a name="l00101"></a>00101       }
 <a name="l00102"></a>00102       <span class="keywordflow">if</span> (r==0)
-<a name="l00103"></a>00103         w[(t+T/2)*R+(r+R/2)] = 1.0/4.0/W;
+<a name="l00103"></a>00103         w[(t+T/2)*S+(r+S/2)] = 1.0/4.0/W;
 <a name="l00104"></a>00104       <span class="keywordflow">else</span>
-<a name="l00105"></a>00105         w[(t+T/2)*R+(r+R/2)] = fabs((<span class="keywordtype">double</span>)r)/W;
+<a name="l00105"></a>00105         w[(t+T/2)*S+(r+S/2)] = fabs((<span class="keywordtype">double</span>)r)/W;
 <a name="l00106"></a>00106     }
 <a name="l00107"></a>00107   }
 <a name="l00108"></a>00108 
 <a name="l00109"></a>00109   <span class="keywordflow">return</span> 0;
 <a name="l00110"></a>00110 }
 <a name="l00111"></a>00111 
-<a name="l00116"></a><a class="code" href="inverse__radon_8c.html#a298e52a05aeac043f9b35e8ae60a13e4">00116</a> <span class="keywordtype">int</span> <a class="code" href="inverse__radon_8c.html#a298e52a05aeac043f9b35e8ae60a13e4" title="computes the inverse discrete Radon transform of Rf on the grid given by gridfcn() with T angles and ...">Inverse_Radon_trafo</a>(<span class="keywordtype">int</span> (*gridfcn)(), <span class="keywordtype">int</span> T, <span class="keywordtype">int</span> R, <span class="keywordtype">double</span> *Rf, <span class="keywordtype">int</span> NN, <span class="keywordtype">double</span> *f, <span class="keywordtype">int</span> <a class="code" href="group__applications__fastsum.html#ga37a2a7cb4fb162d6e6e46ea614318a4e" title="max">max_i</a>)
+<a name="l00116"></a><a class="code" href="inverse__radon_8c.html#af514faadfd017120db2db89bfbc46b7f">00116</a> <span class="keywordtype">int</span> <a class="code" href="inverse__radon_8c.html#af514faadfd017120db2db89bfbc46b7f" title="computes the inverse discrete Radon transform of Rf on the grid given by gridfcn() with T angles and ...">Inverse_Radon_trafo</a>(<span class="keywordtype">int</span> (*gridfcn)(), <span class="keywordtype">int</span> T, <span class="keywordtype">int</span> S, <span class="keywordtype">double</span> *Rf, <span class="keywordtype">int</span> NN, <span class="keywordtype">double</span> *f, <span class="keywordtype">int</span> <a class="code" href="group__applications__fastsum.html#ga37a2a7cb4fb162d6e6e46ea614318a4e" title="max">max_i</a>)
 <a name="l00117"></a>00117 {
 <a name="l00118"></a>00118   <span class="keywordtype">int</span> j,k;                              
 <a name="l00119"></a>00119   <a class="code" href="structnfft__plan.html">nfft_plan</a> my_nfft_plan;               
@@ -142,19 +142,19 @@
 <a name="l00126"></a>00126   <span class="keywordtype">double</span> *x, *w;                        
 <a name="l00127"></a>00127   <span class="keywordtype">int</span> l;                                
 <a name="l00129"></a>00129   <span class="keywordtype">int</span> N[2],n[2];
-<a name="l00130"></a>00130   <span class="keywordtype">int</span> M=T*R;
+<a name="l00130"></a>00130   <span class="keywordtype">int</span> M=T*S;
 <a name="l00131"></a>00131 
 <a name="l00132"></a>00132   N[0]=NN; n[0]=2*N[0];
 <a name="l00133"></a>00133   N[1]=NN; n[1]=2*N[1];
 <a name="l00134"></a>00134 
-<a name="l00135"></a>00135   fft = (fftw_complex *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(R*<span class="keyword">sizeof</span>(fftw_complex));
-<a name="l00136"></a>00136   my_fftw_plan = fftw_plan_dft_1d(R,fft,fft,FFTW_FORWARD,FFTW_MEASURE);
+<a name="l00135"></a>00135   fft = (fftw_complex *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(S*<span class="keyword">sizeof</span>(fftw_complex));
+<a name="l00136"></a>00136   my_fftw_plan = fftw_plan_dft_1d(S,fft,fft,FFTW_FORWARD,FFTW_MEASURE);
 <a name="l00137"></a>00137 
-<a name="l00138"></a>00138   x = (<span class="keywordtype">double</span> *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(2*T*R*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)));
+<a name="l00138"></a>00138   x = (<span class="keywordtype">double</span> *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(2*T*S*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)));
 <a name="l00139"></a>00139   <span class="keywordflow">if</span> (x==NULL)
 <a name="l00140"></a>00140     <span class="keywordflow">return</span> -1;
 <a name="l00141"></a>00141 
-<a name="l00142"></a>00142   w = (<span class="keywordtype">double</span> *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(T*R*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)));
+<a name="l00142"></a>00142   w = (<span class="keywordtype">double</span> *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(T*S*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)));
 <a name="l00143"></a>00143   <span class="keywordflow">if</span> (w==NULL)
 <a name="l00144"></a>00144     <span class="keywordflow">return</span> -1;
 <a name="l00145"></a>00145 
@@ -164,12 +164,12 @@
 <a name="l00150"></a>00150 
 <a name="l00152"></a>00152   solver_init_advanced_complex(&amp;my_infft_plan,(<a class="code" href="structnfft__mv__plan__complex.html">nfft_mv_plan_complex</a>*)(&amp;my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT);
 <a name="l00153"></a>00153 
-<a name="l00155"></a>00155   gridfcn(T,R,x,w);
+<a name="l00155"></a>00155   gridfcn(T,S,x,w);
 <a name="l00156"></a>00156   <span class="keywordflow">for</span>(j=0;j&lt;my_nfft_plan.<a class="code" href="structnfft__plan.html#adf33ce87c35b396c50d214d9bdeeefe6" title="Total number of samples.">M_total</a>;j++)
 <a name="l00157"></a>00157   {
 <a name="l00158"></a>00158     my_nfft_plan.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0] = x[2*j+0];
 <a name="l00159"></a>00159     my_nfft_plan.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1] = x[2*j+1];
-<a name="l00160"></a>00160     <span class="keywordflow">if</span> (j%R)
+<a name="l00160"></a>00160     <span class="keywordflow">if</span> (j%S)
 <a name="l00161"></a>00161       my_infft_plan.<a class="code" href="structsolver__plan__complex.html#a3bb04f250f17c2a4ab5d0b813b7ccf2c" title="weighting factors">w</a>[j]    = w[j];
 <a name="l00162"></a>00162     <span class="keywordflow">else</span>
 <a name="l00163"></a>00163       my_infft_plan.<a class="code" href="structsolver__plan__complex.html#a3bb04f250f17c2a4ab5d0b813b7ccf2c" title="weighting factors">w</a>[j]    = 0.0;
@@ -187,21 +187,21 @@
 <a name="l00177"></a>00177   <span class="keywordflow">for</span>(t=0; t&lt;T; t++)
 <a name="l00178"></a>00178   {
 <a name="l00179"></a>00179 <span class="comment">/*    for(r=0; r&lt;R/2; r++)</span>
-<a name="l00180"></a>00180 <span class="comment">       fft[r] = cexp(I*PI*r)*Rf[t*R+(r+R/2)];</span>
+<a name="l00180"></a>00180 <span class="comment">       fft[r] = cexp(I*KPI*r)*Rf[t*R+(r+R/2)];</span>
 <a name="l00181"></a>00181 <span class="comment">      for(r=0; r&lt;R/2; r++)</span>
-<a name="l00182"></a>00182 <span class="comment">       fft[r+R/2] = cexp(I*PI*r)*Rf[t*R+r];</span>
+<a name="l00182"></a>00182 <span class="comment">       fft[r+R/2] = cexp(I*KPI*r)*Rf[t*R+r];</span>
 <a name="l00183"></a>00183 <span class="comment"> */</span>
 <a name="l00184"></a>00184 
-<a name="l00185"></a>00185     <span class="keywordflow">for</span>(r=0; r&lt;R; r++)
-<a name="l00186"></a>00186       fft[r] = Rf[t*R+r] + _Complex_I*0.0;
+<a name="l00185"></a>00185     <span class="keywordflow">for</span>(r=0; r&lt;S; r++)
+<a name="l00186"></a>00186       fft[r] = Rf[t*S+r] + _Complex_I*0.0;
 <a name="l00187"></a>00187 
-<a name="l00188"></a>00188     <a class="code" href="group__nfftutil.html#gaa388b5ec231e02ac45e37b60fd62e770" title="Swaps each half over N[d]/2.">nfft_fftshift_complex</a>(fft, 1, &amp;R);
+<a name="l00188"></a>00188     <a class="code" href="group__nfftutil.html#gac404a3ded8d143c0ea73133a19a1333a" title="Swaps each half over N[d]/2.">nfft_fftshift_complex</a>(fft, 1, &amp;S);
 <a name="l00189"></a>00189     fftw_execute(my_fftw_plan);
-<a name="l00190"></a>00190     <a class="code" href="group__nfftutil.html#gaa388b5ec231e02ac45e37b60fd62e770" title="Swaps each half over N[d]/2.">nfft_fftshift_complex</a>(fft, 1, &amp;R);
+<a name="l00190"></a>00190     <a class="code" href="group__nfftutil.html#gac404a3ded8d143c0ea73133a19a1333a" title="Swaps each half over N[d]/2.">nfft_fftshift_complex</a>(fft, 1, &amp;S);
 <a name="l00191"></a>00191 
-<a name="l00192"></a>00192     my_infft_plan.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[t*R] = 0.0;
-<a name="l00193"></a>00193     <span class="keywordflow">for</span>(r=-R/2+1; r&lt;R/2; r++)
-<a name="l00194"></a>00194       my_infft_plan.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[t*R+(r+R/2)] = fft[r+R/2]/<a class="code" href="inverse__radon_8c.html#a0091bbc07c9570a2ab0dac372c2104f1" title="define weights of kernel function for discrete Radon transform">KERNEL</a>(r);
+<a name="l00192"></a>00192     my_infft_plan.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[t*S] = 0.0;
+<a name="l00193"></a>00193     <span class="keywordflow">for</span>(r=-S/2+1; r&lt;S/2; r++)
+<a name="l00194"></a>00194       my_infft_plan.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[t*S+(r+S/2)] = fft[r+S/2]/<a class="code" href="inverse__radon_8c.html#a0091bbc07c9570a2ab0dac372c2104f1" title="define weights of kernel function for discrete Radon transform">KERNEL</a>(r);
 <a name="l00195"></a>00195   }
 <a name="l00196"></a>00196 
 <a name="l00198"></a>00198   <span class="keywordflow">for</span>(k=0;k&lt;my_nfft_plan.<a class="code" href="structnfft__plan.html#ad33daddf76670c8731c759bf74ad0d22" title="Total number of Fourier coefficients.">N_total</a>;k++)
@@ -240,7 +240,7 @@
 <a name="l00236"></a><a class="code" href="inverse__radon_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">00236</a> <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc,<span class="keywordtype">char</span> **argv)
 <a name="l00237"></a>00237 {
 <a name="l00238"></a>00238   int (*gridfcn)();                     
-<a name="l00239"></a>00239   <span class="keywordtype">int</span> T, R;                             
+<a name="l00239"></a>00239   <span class="keywordtype">int</span> T, S;                             
 <a name="l00240"></a>00240   FILE *fp;
 <a name="l00241"></a>00241   <span class="keywordtype">int</span> N;                                
 <a name="l00242"></a>00242   <span class="keywordtype">double</span> *Rf, *iRf;
@@ -258,26 +258,26 @@
 <a name="l00255"></a>00255   }
 <a name="l00256"></a>00256 
 <a name="l00257"></a>00257   <span class="keywordflow">if</span> (strcmp(argv[1],<span class="stringliteral">&quot;polar&quot;</span>) == 0)
-<a name="l00258"></a>00258     gridfcn = <a class="code" href="inverse__radon_8c.html#a307b67b4c00a1c756f140c7fa831cdae" title="generates the points x with weights w for the polar grid with T angles and R offsets">polar_grid</a>;
+<a name="l00258"></a>00258     gridfcn = <a class="code" href="inverse__radon_8c.html#a20860410cddb79ea6c6c538294ec38d7" title="generates the points x with weights w for the polar grid with T angles and R offsets">polar_grid</a>;
 <a name="l00259"></a>00259   <span class="keywordflow">else</span>
-<a name="l00260"></a>00260     gridfcn = <a class="code" href="inverse__radon_8c.html#a9a5ff165ab1e23af77ab6f6108bb6310" title="generates the points x with weights w for the linogram grid with T slopes and R offsets">linogram_grid</a>;
+<a name="l00260"></a>00260     gridfcn = <a class="code" href="inverse__radon_8c.html#a9c956269fceda1ca772ccee96d17d495" title="generates the points x with weights w for the linogram grid with T slopes and R offsets">linogram_grid</a>;
 <a name="l00261"></a>00261 
 <a name="l00262"></a>00262   N = atoi(argv[2]);
 <a name="l00263"></a>00263   T = atoi(argv[3]);
-<a name="l00264"></a>00264   R = atoi(argv[4]);
+<a name="l00264"></a>00264   S = atoi(argv[4]);
 <a name="l00265"></a>00265   <span class="comment">/*printf(&quot;N=%d, %s grid with T=%d, R=%d. \n&quot;,N,argv[1],T,R);*/</span>
 <a name="l00266"></a>00266   max_i = atoi(argv[5]);
 <a name="l00267"></a>00267 
-<a name="l00268"></a>00268   Rf  = (<span class="keywordtype">double</span> *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(T*R*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)));
+<a name="l00268"></a>00268   Rf  = (<span class="keywordtype">double</span> *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(T*S*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)));
 <a name="l00269"></a>00269   iRf = (<span class="keywordtype">double</span> *)<a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(N*N*(<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)));
 <a name="l00270"></a>00270 
 <a name="l00272"></a>00272   fp=fopen(<span class="stringliteral">&quot;sinogram_data.bin&quot;</span>,<span class="stringliteral">&quot;rb&quot;</span>);
 <a name="l00273"></a>00273   <span class="keywordflow">if</span> (fp==NULL)
 <a name="l00274"></a>00274     <span class="keywordflow">return</span>(-1);
-<a name="l00275"></a>00275   fread(Rf,<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>),T*R,fp);
+<a name="l00275"></a>00275   fread(Rf,<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>),T*S,fp);
 <a name="l00276"></a>00276   fclose(fp);
 <a name="l00277"></a>00277 
-<a name="l00279"></a>00279   <a class="code" href="inverse__radon_8c.html#a298e52a05aeac043f9b35e8ae60a13e4" title="computes the inverse discrete Radon transform of Rf on the grid given by gridfcn() with T angles and ...">Inverse_Radon_trafo</a>(gridfcn,T,R,Rf,N,iRf,max_i);
+<a name="l00279"></a>00279   <a class="code" href="inverse__radon_8c.html#af514faadfd017120db2db89bfbc46b7f" title="computes the inverse discrete Radon transform of Rf on the grid given by gridfcn() with T angles and ...">Inverse_Radon_trafo</a>(gridfcn,T,S,Rf,N,iRf,max_i);
 <a name="l00280"></a>00280 
 <a name="l00282"></a>00282   fp=fopen(<span class="stringliteral">&quot;output_data.bin&quot;</span>,<span class="stringliteral">&quot;wb+&quot;</span>);
 <a name="l00283"></a>00283   <span class="keywordflow">if</span> (fp==NULL)
@@ -292,6 +292,6 @@
 <a name="l00293"></a>00293 }
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

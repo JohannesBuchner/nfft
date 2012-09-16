@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: construct_data_3d.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: construct_data_3d.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #include <stdlib.h>
@@ -25,8 +25,8 @@
 #include <complex.h>
 #endif
 
-#include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 /**
  * \defgroup applications_mri3d_construct_data_3d construct_data_3d

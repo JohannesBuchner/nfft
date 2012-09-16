@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - glacier.c Source File
+      NFFT 3.2.1 API Reference - glacier.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -63,7 +63,7 @@
 <a name="l00016"></a>00016 <span class="comment"> * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/* $Id: glacier.c 3775 2012-06-02 16:39:48Z keiner $ */</span>
+<a name="l00019"></a>00019 <span class="comment">/* $Id: glacier.c 3858 2012-07-25 20:17:55Z keiner $ */</span>
 <a name="l00020"></a>00020 <span class="preprocessor">#include &quot;config.h&quot;</span>
 <a name="l00021"></a>00021 
 <a name="l00022"></a>00022 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
@@ -74,209 +74,208 @@
 <a name="l00027"></a>00027 <span class="preprocessor"></span><span class="preprocessor">#include &lt;complex.h&gt;</span>
 <a name="l00028"></a>00028 <span class="preprocessor">#endif</span>
 <a name="l00029"></a>00029 <span class="preprocessor"></span>
-<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>&quot;</span>
-<a name="l00031"></a>00031 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
-<a name="l00032"></a>00032 <span class="preprocessor">#include &quot;infft.h&quot;</span>
-<a name="l00033"></a>00033 
-<a name="l00042"></a><a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208">00042</a> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(<span class="keywordtype">double</span> z,<span class="keywordtype">double</span> a,<span class="keywordtype">double</span> b,<span class="keywordtype">double</span> c)
-<a name="l00043"></a>00043 {
-<a name="l00044"></a>00044     <span class="keywordflow">return</span> pow(0.25-z*z,b)/(c+pow(fabs(z),2*a));
-<a name="l00045"></a>00045 }
-<a name="l00046"></a>00046 
-<a name="l00048"></a><a class="code" href="group__examples__solver__glacier.html#gae32b7b49ac3d92c70301b2f96ab31e7a">00048</a> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="group__examples__solver__glacier.html#gae32b7b49ac3d92c70301b2f96ab31e7a" title="Reconstruction routine.">glacier</a>(<span class="keywordtype">int</span> N,<span class="keywordtype">int</span> M)
-<a name="l00049"></a>00049 {
-<a name="l00050"></a>00050   <span class="keywordtype">int</span> j,k,k0,k1,l,my_N[2],my_n[2];
-<a name="l00051"></a>00051   <span class="keywordtype">double</span> tmp_y;
-<a name="l00052"></a>00052   <a class="code" href="structnfft__plan.html">nfft_plan</a> p;
-<a name="l00053"></a>00053   <a class="code" href="structsolver__plan__complex.html">solver_plan_complex</a> ip;
-<a name="l00054"></a>00054   FILE* fp;
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056   <span class="comment">/* initialise p */</span>
-<a name="l00057"></a>00057   my_N[0]=N; my_n[0]=X(next_power_of_2)(N);
-<a name="l00058"></a>00058   my_N[1]=N; my_n[1]=X(next_power_of_2)(N);
-<a name="l00059"></a>00059   nfft_init_guru(&amp;p, 2, my_N, M, my_n, 6,
-<a name="l00060"></a>00060      PRE_PHI_HUT| PRE_FULL_PSI|
-<a name="l00061"></a>00061      MALLOC_X| MALLOC_F_HAT| MALLOC_F|
-<a name="l00062"></a>00062      FFTW_INIT| FFT_OUT_OF_PLACE,
-<a name="l00063"></a>00063      FFTW_MEASURE| FFTW_DESTROY_INPUT);
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065   <span class="comment">/* initialise ip, specific */</span>
-<a name="l00066"></a>00066   solver_init_advanced_complex(&amp;ip,(<a class="code" href="structnfft__mv__plan__complex.html">nfft_mv_plan_complex</a>*)(&amp;p), CGNE| PRECOMPUTE_DAMP);
-<a name="l00067"></a>00067   fprintf(stderr,<span class="stringliteral">&quot;Using the generic solver!&quot;</span>);
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069   <span class="comment">/* init nodes */</span>
-<a name="l00070"></a>00070   fp=fopen(<span class="stringliteral">&quot;input_data.dat&quot;</span>,<span class="stringliteral">&quot;r&quot;</span>);
-<a name="l00071"></a>00071   <span class="keywordflow">for</span>(j=0;j&lt;p.<a class="code" href="structnfft__plan.html#adf33ce87c35b396c50d214d9bdeeefe6" title="Total number of samples.">M_total</a>;j++)
-<a name="l00072"></a>00072   {
-<a name="l00073"></a>00073       fscanf(fp,<span class="stringliteral">&quot;%le %le %le&quot;</span>,&amp;p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0],&amp;p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1],&amp;tmp_y);
-<a name="l00074"></a>00074       ip.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[j]=tmp_y;
-<a name="l00075"></a>00075   }
-<a name="l00076"></a>00076   fclose(fp);
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078   <span class="comment">/* precompute psi */</span>
-<a name="l00079"></a>00079   <span class="keywordflow">if</span>(p.<a class="code" href="structnfft__plan.html#a2721da68a3a5b1846ecca8395d76bb1d" title="Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE_PHI_HUT | PRE_PSI | ...">nfft_flags</a> &amp; PRE_ONE_PSI)
-<a name="l00080"></a>00080       nfft_precompute_one_psi(&amp;p);
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082   <span class="comment">/* initialise damping factors */</span>
-<a name="l00083"></a>00083   <span class="keywordflow">if</span>(ip.<a class="code" href="structsolver__plan__complex.html#a5423b6885c0bd94b563c8cfd9370c942" title="iteration type">flags</a> &amp; PRECOMPUTE_DAMP)
-<a name="l00084"></a>00084     <span class="keywordflow">for</span>(k0=0;k0&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0];k0++)
-<a name="l00085"></a>00085       <span class="keywordflow">for</span>(k1=0;k1&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1];k1++)
-<a name="l00086"></a>00086         ip.<a class="code" href="structsolver__plan__complex.html#a80a69f8b5ddbd33be7041e6c6b0758ce" title="damping factors">w_hat</a>[k0*p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]+k1]=
-<a name="l00087"></a>00087       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k0-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0],0.5,3,0.001)*
-<a name="l00088"></a>00088       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k1-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1],0.5,3,0.001);
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090   <span class="comment">/* init some guess */</span>
-<a name="l00091"></a>00091   <span class="keywordflow">for</span>(k=0;k&lt;p.<a class="code" href="structnfft__plan.html#ad33daddf76670c8731c759bf74ad0d22" title="Total number of Fourier coefficients.">N_total</a>;k++)
-<a name="l00092"></a>00092       ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]=0;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094   <span class="comment">/* inverse trafo */</span>
-<a name="l00095"></a>00095   solver_before_loop_complex(&amp;ip);
-<a name="l00096"></a>00096   <span class="keywordflow">for</span>(l=0;l&lt;40;l++)
-<a name="l00097"></a>00097     {
-<a name="l00098"></a>00098       fprintf(stderr,<span class="stringliteral">&quot;Residual ||r||=%e,\n&quot;</span>,sqrt(ip.<a class="code" href="structsolver__plan__complex.html#a88b5453ab0159bede71240fb32828abe" title="weighted dotproduct of r_iter">dot_r_iter</a>));
-<a name="l00099"></a>00099       <a class="code" href="nfft3_8h.html#a3b80b04ee3429b04c310992fb0a12420" title="void solver_loop_one_step">solver_loop_one_step_complex</a>(&amp;ip);
-<a name="l00100"></a>00100     }
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102   <span class="keywordflow">for</span>(k=0;k&lt;p.<a class="code" href="structnfft__plan.html#ad33daddf76670c8731c759bf74ad0d22" title="Total number of Fourier coefficients.">N_total</a>;k++)
-<a name="l00103"></a>00103     printf(<span class="stringliteral">&quot;%le %le\n&quot;</span>,creal(ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]),cimag(ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]));
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105   <a class="code" href="nfft3_8h.html#a2f44c78734390e47d72578f4c9cbe709" title="void solver_finalize">solver_finalize_complex</a>(&amp;ip);
-<a name="l00106"></a>00106   nfft_finalize(&amp;p);
-<a name="l00107"></a>00107 }
-<a name="l00108"></a>00108 
-<a name="l00110"></a><a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f">00110</a> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(<span class="keywordtype">int</span> N,<span class="keywordtype">int</span> M,<span class="keywordtype">int</span> M_cv,<span class="keywordtype">unsigned</span> solver_flags)
-<a name="l00111"></a>00111 {
-<a name="l00112"></a>00112   <span class="keywordtype">int</span> j,k,k0,k1,l,my_N[2],my_n[2];
-<a name="l00113"></a>00113   <span class="keywordtype">double</span> tmp_y,r;
-<a name="l00114"></a>00114   <a class="code" href="structnfft__plan.html">nfft_plan</a> p,cp;
-<a name="l00115"></a>00115   <a class="code" href="structsolver__plan__complex.html">solver_plan_complex</a> ip;
-<a name="l00116"></a>00116   <span class="keywordtype">double</span> _Complex* cp_y;
-<a name="l00117"></a>00117   FILE* fp;
-<a name="l00118"></a>00118   <span class="keywordtype">int</span> M_re=M-M_cv;
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120   <span class="comment">/* initialise p for reconstruction */</span>
-<a name="l00121"></a>00121   my_N[0]=N; my_n[0]=X(next_power_of_2)(N);
-<a name="l00122"></a>00122   my_N[1]=N; my_n[1]=X(next_power_of_2)(N);
-<a name="l00123"></a>00123   nfft_init_guru(&amp;p, 2, my_N, M_re, my_n, 6,
-<a name="l00124"></a>00124      PRE_PHI_HUT| PRE_FULL_PSI|
-<a name="l00125"></a>00125      MALLOC_X| MALLOC_F_HAT| MALLOC_F|
-<a name="l00126"></a>00126      FFTW_INIT| FFT_OUT_OF_PLACE,
-<a name="l00127"></a>00127      FFTW_MEASURE| FFTW_DESTROY_INPUT);
+<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
+<a name="l00031"></a>00031 <span class="preprocessor">#include &quot;infft.h&quot;</span>
+<a name="l00032"></a>00032 
+<a name="l00041"></a><a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208">00041</a> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(<span class="keywordtype">double</span> z,<span class="keywordtype">double</span> a,<span class="keywordtype">double</span> b,<span class="keywordtype">double</span> c)
+<a name="l00042"></a>00042 {
+<a name="l00043"></a>00043     <span class="keywordflow">return</span> pow(0.25-z*z,b)/(c+pow(fabs(z),2*a));
+<a name="l00044"></a>00044 }
+<a name="l00045"></a>00045 
+<a name="l00047"></a><a class="code" href="group__examples__solver__glacier.html#gae32b7b49ac3d92c70301b2f96ab31e7a">00047</a> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="group__examples__solver__glacier.html#gae32b7b49ac3d92c70301b2f96ab31e7a" title="Reconstruction routine.">glacier</a>(<span class="keywordtype">int</span> N,<span class="keywordtype">int</span> M)
+<a name="l00048"></a>00048 {
+<a name="l00049"></a>00049   <span class="keywordtype">int</span> j,k,k0,k1,l,my_N[2],my_n[2];
+<a name="l00050"></a>00050   <span class="keywordtype">double</span> tmp_y;
+<a name="l00051"></a>00051   <a class="code" href="structnfft__plan.html">nfft_plan</a> p;
+<a name="l00052"></a>00052   <a class="code" href="structsolver__plan__complex.html">solver_plan_complex</a> ip;
+<a name="l00053"></a>00053   FILE* fp;
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055   <span class="comment">/* initialise p */</span>
+<a name="l00056"></a>00056   my_N[0]=N; my_n[0]=X(next_power_of_2)(N);
+<a name="l00057"></a>00057   my_N[1]=N; my_n[1]=X(next_power_of_2)(N);
+<a name="l00058"></a>00058   nfft_init_guru(&amp;p, 2, my_N, M, my_n, 6,
+<a name="l00059"></a>00059      PRE_PHI_HUT| PRE_FULL_PSI|
+<a name="l00060"></a>00060      MALLOC_X| MALLOC_F_HAT| MALLOC_F|
+<a name="l00061"></a>00061      FFTW_INIT| FFT_OUT_OF_PLACE,
+<a name="l00062"></a>00062      FFTW_MEASURE| FFTW_DESTROY_INPUT);
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064   <span class="comment">/* initialise ip, specific */</span>
+<a name="l00065"></a>00065   solver_init_advanced_complex(&amp;ip,(<a class="code" href="structnfft__mv__plan__complex.html">nfft_mv_plan_complex</a>*)(&amp;p), CGNE| PRECOMPUTE_DAMP);
+<a name="l00066"></a>00066   fprintf(stderr,<span class="stringliteral">&quot;Using the generic solver!&quot;</span>);
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068   <span class="comment">/* init nodes */</span>
+<a name="l00069"></a>00069   fp=fopen(<span class="stringliteral">&quot;input_data.dat&quot;</span>,<span class="stringliteral">&quot;r&quot;</span>);
+<a name="l00070"></a>00070   <span class="keywordflow">for</span>(j=0;j&lt;p.<a class="code" href="structnfft__plan.html#adf33ce87c35b396c50d214d9bdeeefe6" title="Total number of samples.">M_total</a>;j++)
+<a name="l00071"></a>00071   {
+<a name="l00072"></a>00072       fscanf(fp,<span class="stringliteral">&quot;%le %le %le&quot;</span>,&amp;p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0],&amp;p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1],&amp;tmp_y);
+<a name="l00073"></a>00073       ip.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[j]=tmp_y;
+<a name="l00074"></a>00074   }
+<a name="l00075"></a>00075   fclose(fp);
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077   <span class="comment">/* precompute psi */</span>
+<a name="l00078"></a>00078   <span class="keywordflow">if</span>(p.<a class="code" href="structnfft__plan.html#a2721da68a3a5b1846ecca8395d76bb1d" title="Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE_PHI_HUT | PRE_PSI | ...">nfft_flags</a> &amp; PRE_ONE_PSI)
+<a name="l00079"></a>00079       nfft_precompute_one_psi(&amp;p);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081   <span class="comment">/* initialise damping factors */</span>
+<a name="l00082"></a>00082   <span class="keywordflow">if</span>(ip.<a class="code" href="structsolver__plan__complex.html#a5423b6885c0bd94b563c8cfd9370c942" title="iteration type">flags</a> &amp; PRECOMPUTE_DAMP)
+<a name="l00083"></a>00083     <span class="keywordflow">for</span>(k0=0;k0&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0];k0++)
+<a name="l00084"></a>00084       <span class="keywordflow">for</span>(k1=0;k1&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1];k1++)
+<a name="l00085"></a>00085         ip.<a class="code" href="structsolver__plan__complex.html#a80a69f8b5ddbd33be7041e6c6b0758ce" title="damping factors">w_hat</a>[k0*p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]+k1]=
+<a name="l00086"></a>00086       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k0-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0],0.5,3,0.001)*
+<a name="l00087"></a>00087       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k1-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1],0.5,3,0.001);
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089   <span class="comment">/* init some guess */</span>
+<a name="l00090"></a>00090   <span class="keywordflow">for</span>(k=0;k&lt;p.<a class="code" href="structnfft__plan.html#ad33daddf76670c8731c759bf74ad0d22" title="Total number of Fourier coefficients.">N_total</a>;k++)
+<a name="l00091"></a>00091       ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]=0;
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093   <span class="comment">/* inverse trafo */</span>
+<a name="l00094"></a>00094   solver_before_loop_complex(&amp;ip);
+<a name="l00095"></a>00095   <span class="keywordflow">for</span>(l=0;l&lt;40;l++)
+<a name="l00096"></a>00096     {
+<a name="l00097"></a>00097       fprintf(stderr,<span class="stringliteral">&quot;Residual ||r||=%e,\n&quot;</span>,sqrt(ip.<a class="code" href="structsolver__plan__complex.html#a88b5453ab0159bede71240fb32828abe" title="weighted dotproduct of r_iter">dot_r_iter</a>));
+<a name="l00098"></a>00098       <a class="code" href="nfft3_8h.html#a3b80b04ee3429b04c310992fb0a12420" title="void solver_loop_one_step">solver_loop_one_step_complex</a>(&amp;ip);
+<a name="l00099"></a>00099     }
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101   <span class="keywordflow">for</span>(k=0;k&lt;p.<a class="code" href="structnfft__plan.html#ad33daddf76670c8731c759bf74ad0d22" title="Total number of Fourier coefficients.">N_total</a>;k++)
+<a name="l00102"></a>00102     printf(<span class="stringliteral">&quot;%le %le\n&quot;</span>,creal(ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]),cimag(ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]));
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104   <a class="code" href="nfft3_8h.html#a2f44c78734390e47d72578f4c9cbe709" title="void solver_finalize">solver_finalize_complex</a>(&amp;ip);
+<a name="l00105"></a>00105   nfft_finalize(&amp;p);
+<a name="l00106"></a>00106 }
+<a name="l00107"></a>00107 
+<a name="l00109"></a><a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f">00109</a> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(<span class="keywordtype">int</span> N,<span class="keywordtype">int</span> M,<span class="keywordtype">int</span> M_cv,<span class="keywordtype">unsigned</span> solver_flags)
+<a name="l00110"></a>00110 {
+<a name="l00111"></a>00111   <span class="keywordtype">int</span> j,k,k0,k1,l,my_N[2],my_n[2];
+<a name="l00112"></a>00112   <span class="keywordtype">double</span> tmp_y,r;
+<a name="l00113"></a>00113   <a class="code" href="structnfft__plan.html">nfft_plan</a> p,cp;
+<a name="l00114"></a>00114   <a class="code" href="structsolver__plan__complex.html">solver_plan_complex</a> ip;
+<a name="l00115"></a>00115   <span class="keywordtype">double</span> _Complex* cp_y;
+<a name="l00116"></a>00116   FILE* fp;
+<a name="l00117"></a>00117   <span class="keywordtype">int</span> M_re=M-M_cv;
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119   <span class="comment">/* initialise p for reconstruction */</span>
+<a name="l00120"></a>00120   my_N[0]=N; my_n[0]=X(next_power_of_2)(N);
+<a name="l00121"></a>00121   my_N[1]=N; my_n[1]=X(next_power_of_2)(N);
+<a name="l00122"></a>00122   nfft_init_guru(&amp;p, 2, my_N, M_re, my_n, 6,
+<a name="l00123"></a>00123      PRE_PHI_HUT| PRE_FULL_PSI|
+<a name="l00124"></a>00124      MALLOC_X| MALLOC_F_HAT| MALLOC_F|
+<a name="l00125"></a>00125      FFTW_INIT| FFT_OUT_OF_PLACE,
+<a name="l00126"></a>00126      FFTW_MEASURE| FFTW_DESTROY_INPUT);
+<a name="l00127"></a>00127 
 <a name="l00128"></a>00128 
-<a name="l00129"></a>00129 
-<a name="l00130"></a>00130   <span class="comment">/* initialise ip, specific */</span>
-<a name="l00131"></a>00131   solver_init_advanced_complex(&amp;ip,(<a class="code" href="structnfft__mv__plan__complex.html">nfft_mv_plan_complex</a>*)(&amp;p), solver_flags);
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133   <span class="comment">/* initialise cp for validation */</span>
-<a name="l00134"></a>00134   cp_y = (<span class="keywordtype">double</span> _Complex*) <a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(M*<span class="keyword">sizeof</span>(<span class="keywordtype">double</span> _Complex));
-<a name="l00135"></a>00135   nfft_init_guru(&amp;cp, 2, my_N, M, my_n, 6,
-<a name="l00136"></a>00136      PRE_PHI_HUT| PRE_FULL_PSI|
-<a name="l00137"></a>00137      MALLOC_X| MALLOC_F|
-<a name="l00138"></a>00138      FFTW_INIT| FFT_OUT_OF_PLACE,
-<a name="l00139"></a>00139      FFTW_MEASURE| FFTW_DESTROY_INPUT);
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141   cp.<a class="code" href="structnfft__plan.html#a23409aec68871e9a56f11711e2891691" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>=ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>;
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143   <span class="comment">/* set up data in cp and cp_y */</span>
-<a name="l00144"></a>00144   fp=fopen(<span class="stringliteral">&quot;input_data.dat&quot;</span>,<span class="stringliteral">&quot;r&quot;</span>);
-<a name="l00145"></a>00145   <span class="keywordflow">for</span>(j=0;j&lt;cp.<a class="code" href="structnfft__plan.html#adf33ce87c35b396c50d214d9bdeeefe6" title="Total number of samples.">M_total</a>;j++)
-<a name="l00146"></a>00146     {
-<a name="l00147"></a>00147       fscanf(fp,<span class="stringliteral">&quot;%le %le %le&quot;</span>,&amp;cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0],&amp;cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1],&amp;tmp_y);
-<a name="l00148"></a>00148       cp_y[j]=tmp_y;
-<a name="l00149"></a>00149     }
-<a name="l00150"></a>00150   fclose(fp);
-<a name="l00151"></a>00151 
-<a name="l00152"></a>00152   <span class="comment">/* copy part of the data to p and ip */</span>
-<a name="l00153"></a>00153   <span class="keywordflow">for</span>(j=0;j&lt;p.<a class="code" href="structnfft__plan.html#adf33ce87c35b396c50d214d9bdeeefe6" title="Total number of samples.">M_total</a>;j++)
-<a name="l00154"></a>00154   {
-<a name="l00155"></a>00155       p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0]=cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0];
-<a name="l00156"></a>00156       p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1]=cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1];
-<a name="l00157"></a>00157       ip.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[j]=tmp_y;
-<a name="l00158"></a>00158   }
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160   <span class="comment">/* precompute psi */</span>
-<a name="l00161"></a>00161   <span class="keywordflow">if</span>(p.<a class="code" href="structnfft__plan.html#a2721da68a3a5b1846ecca8395d76bb1d" title="Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE_PHI_HUT | PRE_PSI | ...">nfft_flags</a> &amp; PRE_ONE_PSI)
-<a name="l00162"></a>00162     nfft_precompute_one_psi(&amp;p);
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164   <span class="comment">/* precompute psi */</span>
-<a name="l00165"></a>00165   <span class="keywordflow">if</span>(cp.<a class="code" href="structnfft__plan.html#a2721da68a3a5b1846ecca8395d76bb1d" title="Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE_PHI_HUT | PRE_PSI | ...">nfft_flags</a> &amp; PRE_ONE_PSI)
-<a name="l00166"></a>00166     nfft_precompute_one_psi(&amp;cp);
-<a name="l00167"></a>00167 
-<a name="l00168"></a>00168   <span class="comment">/* initialise damping factors */</span>
-<a name="l00169"></a>00169   <span class="keywordflow">if</span>(ip.<a class="code" href="structsolver__plan__complex.html#a5423b6885c0bd94b563c8cfd9370c942" title="iteration type">flags</a> &amp; PRECOMPUTE_DAMP)
-<a name="l00170"></a>00170     <span class="keywordflow">for</span>(k0=0;k0&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0];k0++)
-<a name="l00171"></a>00171       <span class="keywordflow">for</span>(k1=0;k1&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1];k1++)
-<a name="l00172"></a>00172         ip.<a class="code" href="structsolver__plan__complex.html#a80a69f8b5ddbd33be7041e6c6b0758ce" title="damping factors">w_hat</a>[k0*p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]+k1]=
-<a name="l00173"></a>00173       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k0-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0],0.5,3,0.001)*
-<a name="l00174"></a>00174       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k1-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1],0.5,3,0.001);
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176   <span class="comment">/* init some guess */</span>
-<a name="l00177"></a>00177   <span class="keywordflow">for</span>(k=0;k&lt;p.<a class="code" href="structnfft__plan.html#ad33daddf76670c8731c759bf74ad0d22" title="Total number of Fourier coefficients.">N_total</a>;k++)
-<a name="l00178"></a>00178       ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]=0;
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180   <span class="comment">/* inverse trafo */</span>
-<a name="l00181"></a>00181   solver_before_loop_complex(&amp;ip);
-<a name="l00182"></a>00182   <span class="comment">//  fprintf(stderr,&quot;iteration starts,\t&quot;);</span>
-<a name="l00183"></a>00183   <span class="keywordflow">for</span>(l=0;l&lt;40;l++)
-<a name="l00184"></a>00184     <a class="code" href="nfft3_8h.html#a3b80b04ee3429b04c310992fb0a12420" title="void solver_loop_one_step">solver_loop_one_step_complex</a>(&amp;ip);
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186   <span class="comment">//fprintf(stderr,&quot;r=%1.2e, &quot;,sqrt(ip.dot_r_iter)/M_re);</span>
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188   <a class="code" href="group__nfftutil.html#ga4df074728562efbb458f6662e649d1d5" title="Swapping of two vectors.">NFFT_SWAP_complex</a>(p.<a class="code" href="structnfft__plan.html#a23409aec68871e9a56f11711e2891691" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>,ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>);
-<a name="l00189"></a>00189   <a class="code" href="nfft3_8h.html#a9f1e6bd9f7f956a8679e6b413c97b421" title="user routines">nfft_trafo</a>(&amp;p);
-<a name="l00190"></a>00190   <a class="code" href="group__nfftutil.html#ga4df074728562efbb458f6662e649d1d5" title="Swapping of two vectors.">NFFT_SWAP_complex</a>(p.<a class="code" href="structnfft__plan.html#a23409aec68871e9a56f11711e2891691" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>,ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>);
-<a name="l00191"></a>00191   <a class="code" href="group__nfftutil.html#ga676395f56bbf1c444d074a21753de8d5" title="Updates .">nfft_upd_axpy_complex</a>(p.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>,-1,ip.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>,M_re);
-<a name="l00192"></a>00192   r=sqrt(<a class="code" href="group__nfftutil.html#ga135eb6c5a8ae1a84ea64c9099caac004" title="Computes the inner/dot product .">nfft_dot_complex</a>(p.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>,M_re)/<a class="code" href="group__nfftutil.html#ga135eb6c5a8ae1a84ea64c9099caac004" title="Computes the inner/dot product .">nfft_dot_complex</a>(cp_y,M));
-<a name="l00193"></a>00193   fprintf(stderr,<span class="stringliteral">&quot;r=%1.2e, &quot;</span>,r);
-<a name="l00194"></a>00194   printf(<span class="stringliteral">&quot;$%1.1e$ &amp; &quot;</span>,r);
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196   <a class="code" href="nfft3_8h.html#a9f1e6bd9f7f956a8679e6b413c97b421" title="user routines">nfft_trafo</a>(&amp;cp);
-<a name="l00197"></a>00197   <a class="code" href="group__nfftutil.html#ga676395f56bbf1c444d074a21753de8d5" title="Updates .">nfft_upd_axpy_complex</a>(&amp;cp.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>[M_re],-1,&amp;cp_y[M_re],M_cv);
-<a name="l00198"></a>00198   r=sqrt(<a class="code" href="group__nfftutil.html#ga135eb6c5a8ae1a84ea64c9099caac004" title="Computes the inner/dot product .">nfft_dot_complex</a>(&amp;cp.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>[M_re],M_cv)/<a class="code" href="group__nfftutil.html#ga135eb6c5a8ae1a84ea64c9099caac004" title="Computes the inner/dot product .">nfft_dot_complex</a>(cp_y,M));
-<a name="l00199"></a>00199   fprintf(stderr,<span class="stringliteral">&quot;r_1=%1.2e\t&quot;</span>,r);
-<a name="l00200"></a>00200   printf(<span class="stringliteral">&quot;$%1.1e$ &amp; &quot;</span>,r);
-<a name="l00201"></a>00201 
-<a name="l00202"></a>00202   nfft_finalize(&amp;cp);
-<a name="l00203"></a>00203   <a class="code" href="nfft3_8h.html#a2f44c78734390e47d72578f4c9cbe709" title="void solver_finalize">solver_finalize_complex</a>(&amp;ip);
-<a name="l00204"></a>00204   nfft_finalize(&amp;p);
-<a name="l00205"></a>00205 }
+<a name="l00129"></a>00129   <span class="comment">/* initialise ip, specific */</span>
+<a name="l00130"></a>00130   solver_init_advanced_complex(&amp;ip,(<a class="code" href="structnfft__mv__plan__complex.html">nfft_mv_plan_complex</a>*)(&amp;p), solver_flags);
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132   <span class="comment">/* initialise cp for validation */</span>
+<a name="l00133"></a>00133   cp_y = (<span class="keywordtype">double</span> _Complex*) <a class="code" href="nfft3_8h.html#aafe6167438c5de4d3d4c509f66a6694e">nfft_malloc</a>(M*<span class="keyword">sizeof</span>(<span class="keywordtype">double</span> _Complex));
+<a name="l00134"></a>00134   nfft_init_guru(&amp;cp, 2, my_N, M, my_n, 6,
+<a name="l00135"></a>00135      PRE_PHI_HUT| PRE_FULL_PSI|
+<a name="l00136"></a>00136      MALLOC_X| MALLOC_F|
+<a name="l00137"></a>00137      FFTW_INIT| FFT_OUT_OF_PLACE,
+<a name="l00138"></a>00138      FFTW_MEASURE| FFTW_DESTROY_INPUT);
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140   cp.<a class="code" href="structnfft__plan.html#a23409aec68871e9a56f11711e2891691" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>=ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>;
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142   <span class="comment">/* set up data in cp and cp_y */</span>
+<a name="l00143"></a>00143   fp=fopen(<span class="stringliteral">&quot;input_data.dat&quot;</span>,<span class="stringliteral">&quot;r&quot;</span>);
+<a name="l00144"></a>00144   <span class="keywordflow">for</span>(j=0;j&lt;cp.<a class="code" href="structnfft__plan.html#adf33ce87c35b396c50d214d9bdeeefe6" title="Total number of samples.">M_total</a>;j++)
+<a name="l00145"></a>00145     {
+<a name="l00146"></a>00146       fscanf(fp,<span class="stringliteral">&quot;%le %le %le&quot;</span>,&amp;cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0],&amp;cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1],&amp;tmp_y);
+<a name="l00147"></a>00147       cp_y[j]=tmp_y;
+<a name="l00148"></a>00148     }
+<a name="l00149"></a>00149   fclose(fp);
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151   <span class="comment">/* copy part of the data to p and ip */</span>
+<a name="l00152"></a>00152   <span class="keywordflow">for</span>(j=0;j&lt;p.<a class="code" href="structnfft__plan.html#adf33ce87c35b396c50d214d9bdeeefe6" title="Total number of samples.">M_total</a>;j++)
+<a name="l00153"></a>00153   {
+<a name="l00154"></a>00154       p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0]=cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+0];
+<a name="l00155"></a>00155       p.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1]=cp.<a class="code" href="structnfft__plan.html#a7eb64fb5fedfba0ec75261e777e020c0" title="Nodes in time/spatial domain, size is  doubles.">x</a>[2*j+1];
+<a name="l00156"></a>00156       ip.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>[j]=tmp_y;
+<a name="l00157"></a>00157   }
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159   <span class="comment">/* precompute psi */</span>
+<a name="l00160"></a>00160   <span class="keywordflow">if</span>(p.<a class="code" href="structnfft__plan.html#a2721da68a3a5b1846ecca8395d76bb1d" title="Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE_PHI_HUT | PRE_PSI | ...">nfft_flags</a> &amp; PRE_ONE_PSI)
+<a name="l00161"></a>00161     nfft_precompute_one_psi(&amp;p);
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163   <span class="comment">/* precompute psi */</span>
+<a name="l00164"></a>00164   <span class="keywordflow">if</span>(cp.<a class="code" href="structnfft__plan.html#a2721da68a3a5b1846ecca8395d76bb1d" title="Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE_PHI_HUT | PRE_PSI | ...">nfft_flags</a> &amp; PRE_ONE_PSI)
+<a name="l00165"></a>00165     nfft_precompute_one_psi(&amp;cp);
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167   <span class="comment">/* initialise damping factors */</span>
+<a name="l00168"></a>00168   <span class="keywordflow">if</span>(ip.<a class="code" href="structsolver__plan__complex.html#a5423b6885c0bd94b563c8cfd9370c942" title="iteration type">flags</a> &amp; PRECOMPUTE_DAMP)
+<a name="l00169"></a>00169     <span class="keywordflow">for</span>(k0=0;k0&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0];k0++)
+<a name="l00170"></a>00170       <span class="keywordflow">for</span>(k1=0;k1&lt;p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1];k1++)
+<a name="l00171"></a>00171         ip.<a class="code" href="structsolver__plan__complex.html#a80a69f8b5ddbd33be7041e6c6b0758ce" title="damping factors">w_hat</a>[k0*p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]+k1]=
+<a name="l00172"></a>00172       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k0-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[0],0.5,3,0.001)*
+<a name="l00173"></a>00173       <a class="code" href="group__examples__solver__glacier.html#gab4da467610b4e791d41de5b7501fe208" title="Generalised Sobolev weight.">my_weight</a>(((<span class="keywordtype">double</span>)(k1-p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1]/2))/p.<a class="code" href="structnfft__plan.html#a307fb9647dee8b4a6acbd1ab26f67fa9" title="multi-bandwidth">N</a>[1],0.5,3,0.001);
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175   <span class="comment">/* init some guess */</span>
+<a name="l00176"></a>00176   <span class="keywordflow">for</span>(k=0;k&lt;p.<a class="code" href="structnfft__plan.html#ad33daddf76670c8731c759bf74ad0d22" title="Total number of Fourier coefficients.">N_total</a>;k++)
+<a name="l00177"></a>00177       ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>[k]=0;
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179   <span class="comment">/* inverse trafo */</span>
+<a name="l00180"></a>00180   solver_before_loop_complex(&amp;ip);
+<a name="l00181"></a>00181   <span class="comment">//  fprintf(stderr,&quot;iteration starts,\t&quot;);</span>
+<a name="l00182"></a>00182   <span class="keywordflow">for</span>(l=0;l&lt;40;l++)
+<a name="l00183"></a>00183     <a class="code" href="nfft3_8h.html#a3b80b04ee3429b04c310992fb0a12420" title="void solver_loop_one_step">solver_loop_one_step_complex</a>(&amp;ip);
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185   <span class="comment">//fprintf(stderr,&quot;r=%1.2e, &quot;,sqrt(ip.dot_r_iter)/M_re);</span>
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187   <a class="code" href="group__nfftutil.html#ga18cf66b4ff69fd69cf3b8291c629e80b" title="Swap two vectors.">CSWAP</a>(p.<a class="code" href="structnfft__plan.html#a23409aec68871e9a56f11711e2891691" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>,ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>);
+<a name="l00188"></a>00188   <a class="code" href="nfft3_8h.html#a9f1e6bd9f7f956a8679e6b413c97b421" title="user routines">nfft_trafo</a>(&amp;p);
+<a name="l00189"></a>00189   <a class="code" href="group__nfftutil.html#ga18cf66b4ff69fd69cf3b8291c629e80b" title="Swap two vectors.">CSWAP</a>(p.<a class="code" href="structnfft__plan.html#a23409aec68871e9a56f11711e2891691" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>,ip.<a class="code" href="structsolver__plan__complex.html#afac00cb681323619324be8787ff04f75" title="iterative solution">f_hat_iter</a>);
+<a name="l00190"></a>00190   <a class="code" href="group__nfftutil.html#ga8b647ed87674cbb41485b860bcde37f1" title="Updates .">nfft_upd_axpy_complex</a>(p.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>,-1,ip.<a class="code" href="structsolver__plan__complex.html#ae05e9da3d96651d6a5d6456004791bde" title="right hand side, samples">y</a>,M_re);
+<a name="l00191"></a>00191   r=sqrt(X(dot_complex)(p.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>,M_re)/X(dot_complex)(cp_y,M));
+<a name="l00192"></a>00192   fprintf(stderr,<span class="stringliteral">&quot;r=%1.2e, &quot;</span>,r);
+<a name="l00193"></a>00193   printf(<span class="stringliteral">&quot;$%1.1e$ &amp; &quot;</span>,r);
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195   <a class="code" href="nfft3_8h.html#a9f1e6bd9f7f956a8679e6b413c97b421" title="user routines">nfft_trafo</a>(&amp;cp);
+<a name="l00196"></a>00196   <a class="code" href="group__nfftutil.html#ga8b647ed87674cbb41485b860bcde37f1" title="Updates .">nfft_upd_axpy_complex</a>(&amp;cp.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>[M_re],-1,&amp;cp_y[M_re],M_cv);
+<a name="l00197"></a>00197   r=sqrt(X(dot_complex)(&amp;cp.<a class="code" href="structnfft__plan.html#afa27a166f809acf70ae27e5e6f28daa5" title="Vector of samples, size is M_total * sizeof( fftw_complex )">f</a>[M_re],M_cv)/X(dot_complex)(cp_y,M));
+<a name="l00198"></a>00198   fprintf(stderr,<span class="stringliteral">&quot;r_1=%1.2e\t&quot;</span>,r);
+<a name="l00199"></a>00199   printf(<span class="stringliteral">&quot;$%1.1e$ &amp; &quot;</span>,r);
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201   nfft_finalize(&amp;cp);
+<a name="l00202"></a>00202   <a class="code" href="nfft3_8h.html#a2f44c78734390e47d72578f4c9cbe709" title="void solver_finalize">solver_finalize_complex</a>(&amp;ip);
+<a name="l00203"></a>00203   nfft_finalize(&amp;p);
+<a name="l00204"></a>00204 }
+<a name="l00205"></a>00205 
 <a name="l00206"></a>00206 
-<a name="l00207"></a>00207 
-<a name="l00209"></a><a class="code" href="group__examples__solver__glacier.html#ga3c04138a5bfe5d72780bb7e82a18e627">00209</a> <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)
-<a name="l00210"></a>00210 {
-<a name="l00211"></a>00211   <span class="keywordtype">int</span> M_cv;
-<a name="l00212"></a>00212 
-<a name="l00213"></a>00213   <span class="keywordflow">if</span>(argc&lt;3)
-<a name="l00214"></a>00214     {
-<a name="l00215"></a>00215       fprintf(stderr,<span class="stringliteral">&quot;Call this program from the Matlab script glacier.m!&quot;</span>);
-<a name="l00216"></a>00216       exit(-1);
-<a name="l00217"></a>00217     }
-<a name="l00218"></a>00218 
-<a name="l00219"></a>00219   <span class="keywordflow">if</span>(argc==3)
-<a name="l00220"></a>00220     <a class="code" href="group__examples__solver__glacier.html#gae32b7b49ac3d92c70301b2f96ab31e7a" title="Reconstruction routine.">glacier</a>(atoi(argv[1]),atoi(argv[2]));
-<a name="l00221"></a>00221   <span class="keywordflow">else</span>
-<a name="l00222"></a>00222     <span class="keywordflow">for</span>(M_cv=atoi(argv[3]);M_cv&lt;=atoi(argv[5]);M_cv+=atoi(argv[4]))
-<a name="l00223"></a>00223       {
-<a name="l00224"></a>00224   fprintf(stderr,<span class="stringliteral">&quot;\nM_cv=%d,\t&quot;</span>,M_cv);
-<a name="l00225"></a>00225   printf(<span class="stringliteral">&quot;$%d$ &amp; &quot;</span>,M_cv);
-<a name="l00226"></a>00226   fprintf(stderr,<span class="stringliteral">&quot;cgne+damp: &quot;</span>);
-<a name="l00227"></a>00227   <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(atoi(argv[1]),atoi(argv[2]),M_cv,CGNE| PRECOMPUTE_DAMP);
-<a name="l00228"></a>00228   <span class="comment">//fprintf(stderr,&quot;cgne: &quot;);</span>
-<a name="l00229"></a>00229   <span class="comment">//glacier_cv(atoi(argv[1]),atoi(argv[2]),M_cv,CGNE);</span>
-<a name="l00230"></a>00230   fprintf(stderr,<span class="stringliteral">&quot;cgnr: &quot;</span>);
-<a name="l00231"></a>00231   <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(atoi(argv[1]),atoi(argv[2]),M_cv,CGNR);
-<a name="l00232"></a>00232   fprintf(stderr,<span class="stringliteral">&quot;cgnr: &quot;</span>);
-<a name="l00233"></a>00233   <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(atoi(argv[1])/4,atoi(argv[2]),M_cv,CGNR);
-<a name="l00234"></a>00234   printf(<span class="stringliteral">&quot;XXX \\\\\n&quot;</span>);
-<a name="l00235"></a>00235       }
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237   fprintf(stderr,<span class="stringliteral">&quot;\n&quot;</span>);
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239   <span class="keywordflow">return</span> 1;
-<a name="l00240"></a>00240 }
-<a name="l00241"></a>00241 <span class="comment">/* \} */</span>
+<a name="l00208"></a><a class="code" href="group__examples__solver__glacier.html#ga3c04138a5bfe5d72780bb7e82a18e627">00208</a> <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)
+<a name="l00209"></a>00209 {
+<a name="l00210"></a>00210   <span class="keywordtype">int</span> M_cv;
+<a name="l00211"></a>00211 
+<a name="l00212"></a>00212   <span class="keywordflow">if</span>(argc&lt;3)
+<a name="l00213"></a>00213     {
+<a name="l00214"></a>00214       fprintf(stderr,<span class="stringliteral">&quot;Call this program from the Matlab script glacier.m!&quot;</span>);
+<a name="l00215"></a>00215       exit(-1);
+<a name="l00216"></a>00216     }
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218   <span class="keywordflow">if</span>(argc==3)
+<a name="l00219"></a>00219     <a class="code" href="group__examples__solver__glacier.html#gae32b7b49ac3d92c70301b2f96ab31e7a" title="Reconstruction routine.">glacier</a>(atoi(argv[1]),atoi(argv[2]));
+<a name="l00220"></a>00220   <span class="keywordflow">else</span>
+<a name="l00221"></a>00221     <span class="keywordflow">for</span>(M_cv=atoi(argv[3]);M_cv&lt;=atoi(argv[5]);M_cv+=atoi(argv[4]))
+<a name="l00222"></a>00222       {
+<a name="l00223"></a>00223   fprintf(stderr,<span class="stringliteral">&quot;\nM_cv=%d,\t&quot;</span>,M_cv);
+<a name="l00224"></a>00224   printf(<span class="stringliteral">&quot;$%d$ &amp; &quot;</span>,M_cv);
+<a name="l00225"></a>00225   fprintf(stderr,<span class="stringliteral">&quot;cgne+damp: &quot;</span>);
+<a name="l00226"></a>00226   <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(atoi(argv[1]),atoi(argv[2]),M_cv,CGNE| PRECOMPUTE_DAMP);
+<a name="l00227"></a>00227   <span class="comment">//fprintf(stderr,&quot;cgne: &quot;);</span>
+<a name="l00228"></a>00228   <span class="comment">//glacier_cv(atoi(argv[1]),atoi(argv[2]),M_cv,CGNE);</span>
+<a name="l00229"></a>00229   fprintf(stderr,<span class="stringliteral">&quot;cgnr: &quot;</span>);
+<a name="l00230"></a>00230   <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(atoi(argv[1]),atoi(argv[2]),M_cv,CGNR);
+<a name="l00231"></a>00231   fprintf(stderr,<span class="stringliteral">&quot;cgnr: &quot;</span>);
+<a name="l00232"></a>00232   <a class="code" href="group__examples__solver__glacier.html#ga1503d05480f3e910ffae52b2e6aef34f" title="Reconstruction routine with cross validation.">glacier_cv</a>(atoi(argv[1])/4,atoi(argv[2]),M_cv,CGNR);
+<a name="l00233"></a>00233   printf(<span class="stringliteral">&quot;XXX \\\\\n&quot;</span>);
+<a name="l00234"></a>00234       }
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236   fprintf(stderr,<span class="stringliteral">&quot;\n&quot;</span>);
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238   <span class="keywordflow">return</span> 1;
+<a name="l00239"></a>00239 }
+<a name="l00240"></a>00240 <span class="comment">/* \} */</span>
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

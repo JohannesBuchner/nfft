@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nnfft.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: nnfft.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 #include "config.h"
 
@@ -27,7 +27,6 @@
 #ifdef HAVE_COMPLEX_H
 #include <complex.h>
 #endif
-#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 
@@ -37,10 +36,10 @@
 #define MACRO_nndft_init_result_adjoint memset(f_hat,0,ths->N_total*sizeof(double _Complex));
 #define MACRO_nndft_init_result_transposed MACRO_nndft_init_result_adjoint
 
-#define MACRO_nndft_sign_trafo      (-2.0*PI)
-#define MACRO_nndft_sign_conjugated (+2.0*PI)
-#define MACRO_nndft_sign_adjoint    (+2.0*PI)
-#define MACRO_nndft_sign_transposed (-2.0*PI)
+#define MACRO_nndft_sign_trafo      (-2.0*KPI)
+#define MACRO_nndft_sign_conjugated (+2.0*KPI)
+#define MACRO_nndft_sign_adjoint    (+2.0*KPI)
+#define MACRO_nndft_sign_transposed (-2.0*KPI)
 
 #define MACRO_nndft_compute_trafo (*fj) += (*f_hat_k)*cexp(+ _Complex_I*omega);
 

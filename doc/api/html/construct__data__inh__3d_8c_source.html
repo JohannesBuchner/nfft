@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - construct_data_inh_3d.c Source File
+      NFFT 3.2.1 API Reference - construct_data_inh_3d.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -64,7 +64,7 @@
 <a name="l00016"></a>00016 <span class="comment"> * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/* $Id: construct_data_inh_3d.c 3775 2012-06-02 16:39:48Z keiner $ */</span>
+<a name="l00019"></a>00019 <span class="comment">/* $Id: construct_data_inh_3d.c 3858 2012-07-25 20:17:55Z keiner $ */</span>
 <a name="l00020"></a>00020 <span class="preprocessor">#include &quot;config.h&quot;</span>
 <a name="l00021"></a>00021 
 <a name="l00022"></a>00022 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
@@ -75,7 +75,7 @@
 <a name="l00027"></a>00027 <span class="preprocessor">#endif</span>
 <a name="l00028"></a>00028 <span class="preprocessor"></span>
 <a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="nfft3_8h.html">nfft3.h</a>&quot;</span>
-<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>&quot;</span>
+<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;infft.h&quot;</span>
 <a name="l00031"></a>00031 
 <a name="l00041"></a><a class="code" href="group__applications__mri2d__construct__data__inh__3d.html#ga7cad9b408cf07cdd4fa31da9c325dac5">00041</a> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="group__applications__mri2d__construct__data__inh__3d.html#ga7cad9b408cf07cdd4fa31da9c325dac5" title="construct">construct</a>(<span class="keywordtype">char</span> * file, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> M)
 <a name="l00042"></a>00042 {
@@ -124,9 +124,9 @@
 <a name="l00085"></a>00085   }
 <a name="l00086"></a>00086   fclose(finh);
 <a name="l00087"></a>00087 
-<a name="l00088"></a>00088   N3=ceil((<a class="code" href="group__nfftutil.html#gad2e3f0e1983de6d70f003545cc556ed3" title="Maximum of its two arguments.">NFFT_MAX</a>(fabs(min_inh),fabs(max_inh))*(max_time-min_time)/2.0+m/(2*sigma))*4*sigma);
+<a name="l00088"></a>00088   N3=ceil((MAX(fabs(min_inh),fabs(max_inh))*(max_time-min_time)/2.0+m/(2*sigma))*4*sigma);
 <a name="l00089"></a>00089 
-<a name="l00090"></a>00090   W= <a class="code" href="group__nfftutil.html#gad2e3f0e1983de6d70f003545cc556ed3" title="Maximum of its two arguments.">NFFT_MAX</a>(fabs(min_inh),fabs(max_inh))/(0.5-((double)m)/N3);
+<a name="l00090"></a>00090   W= MAX(fabs(min_inh),fabs(max_inh))/(0.5-((double)m)/N3);
 <a name="l00091"></a>00091 
 <a name="l00092"></a>00092   my_N[0]=N; my_n[0]=ceil(N*sigma);
 <a name="l00093"></a>00093   my_N[1]=N; my_n[1]=ceil(N*sigma);
@@ -161,7 +161,7 @@
 <a name="l00122"></a>00122   <span class="keywordflow">for</span>(j=0;j&lt;N*N;j++)
 <a name="l00123"></a>00123   {
 <a name="l00124"></a>00124     fscanf(fi,<span class="stringliteral">&quot;%le &quot;</span>,&amp;real);
-<a name="l00125"></a>00125     my_plan.<a class="code" href="structmri__inh__3d__plan.html#a91ed30b213dea4954d2d27c4d1334a50" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>[j] = real*cexp(2.0*_Complex_I*<a class="code" href="group__nfftutil.html#ga598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>*Ts*my_plan.w[j]*W);
+<a name="l00125"></a>00125     my_plan.<a class="code" href="structmri__inh__3d__plan.html#a91ed30b213dea4954d2d27c4d1334a50" title="Vector of Fourier coefficients, size is N_total * sizeof( fftw_complex )">f_hat</a>[j] = real*cexp(2.0*_Complex_I*KPI*Ts*my_plan.w[j]*W);
 <a name="l00126"></a>00126   }
 <a name="l00127"></a>00127 
 <a name="l00128"></a>00128   <span class="keywordflow">if</span>(my_plan.plan.<a class="code" href="structnfft__plan.html#a2721da68a3a5b1846ecca8395d76bb1d" title="Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE_PHI_HUT | PRE_PSI | ...">nfft_flags</a> &amp; PRE_PSI)
@@ -195,6 +195,6 @@
 <a name="l00156"></a>00156 <span class="comment">/* \} */</span>
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

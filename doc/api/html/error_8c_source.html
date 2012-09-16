@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.2.0 API Reference - error.c Source File
+      NFFT 3.2.1 API Reference - error.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo" style="frame-width:0px;margin:0px;padding-top:11px">
         </td>
         <td align="left" valign="top" width="100%" style="frame-width:0px;margin:0px;padding:0px;font-size:55px">
-          3.2.0
+          3.2.1
         </td>
       </tr>
     </table>  
@@ -80,7 +80,7 @@
 <a name="l00033"></a>00033 
 <a name="l00034"></a>00034 <span class="keyword">static</span> R nrm1(<span class="keyword">const</span> R *x, <span class="keyword">const</span> INT n)
 <a name="l00035"></a>00035 {
-<a name="l00036"></a>00036   <span class="keywordtype">int</span> k;
+<a name="l00036"></a>00036   INT k;
 <a name="l00037"></a>00037   R nrm = K(0.0);
 <a name="l00038"></a>00038 
 <a name="l00039"></a>00039   <span class="keywordflow">for</span> (k = 0; k &lt; n; k++)
@@ -91,7 +91,7 @@
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 <span class="keyword">static</span> R cerr2(<span class="keyword">const</span> C *x, <span class="keyword">const</span> C *y, <span class="keyword">const</span> INT n)
 <a name="l00046"></a>00046 {
-<a name="l00047"></a>00047   <span class="keywordtype">int</span> k;
+<a name="l00047"></a>00047   INT k;
 <a name="l00048"></a>00048   R err = K(0.0);
 <a name="l00049"></a>00049 
 <a name="l00050"></a>00050   <span class="keywordflow">if</span> (!y)
@@ -110,7 +110,7 @@
 <a name="l00063"></a>00063 
 <a name="l00064"></a>00064 <span class="keyword">static</span> R err2(<span class="keyword">const</span> R *x, <span class="keyword">const</span> R *y, <span class="keyword">const</span> INT n)
 <a name="l00065"></a>00065 {
-<a name="l00066"></a>00066   <span class="keywordtype">int</span> k;
+<a name="l00066"></a>00066   INT k;
 <a name="l00067"></a>00067   R err = K(0.0);
 <a name="l00068"></a>00068 
 <a name="l00069"></a>00069   <span class="keywordflow">if</span> (!y)
@@ -129,7 +129,7 @@
 <a name="l00082"></a>00082 
 <a name="l00083"></a>00083 <span class="keyword">static</span> R cerri(<span class="keyword">const</span> C *x, <span class="keyword">const</span> C *y, <span class="keyword">const</span> INT n)
 <a name="l00084"></a>00084 {
-<a name="l00085"></a>00085   <span class="keywordtype">int</span> k;
+<a name="l00085"></a>00085   INT k;
 <a name="l00086"></a>00086   R err = K(0.0), t;
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088   <span class="keywordflow">if</span> (!y)
@@ -154,7 +154,7 @@
 <a name="l00107"></a>00107 
 <a name="l00108"></a>00108 <span class="keyword">static</span> R erri(<span class="keyword">const</span> R *x, <span class="keyword">const</span> R *y, <span class="keyword">const</span> INT n)
 <a name="l00109"></a>00109 {
-<a name="l00110"></a>00110   <span class="keywordtype">int</span> k;
+<a name="l00110"></a>00110   INT k;
 <a name="l00111"></a>00111   R err = K(0.0), t;
 <a name="l00112"></a>00112 
 <a name="l00113"></a>00113   <span class="keywordflow">if</span> (!y)
@@ -210,6 +210,6 @@
 <a name="l00175"></a>00175 }
 </pre></div></div><!-- contents -->
     <hr size="1"/>
-    Generated on Tue Jun 12 2012 by Doxygen 1.8.0-20120409
+    Generated on Tue Aug 28 2012 by Doxygen 1.8.0-20120409
   </body>
 </html>

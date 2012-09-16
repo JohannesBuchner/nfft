@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastgauss.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: fastgauss.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 /**
  * \defgroup applications_fastgauss Fast Gauss transfrom with complex parameter
@@ -34,7 +34,6 @@
 #endif
 
 #include "nfft3.h"
-#include "nfft3util.h"
 #include "infft.h"
 
 /**
@@ -220,8 +219,8 @@ void fgt_init_guru(fgt_plan *ths, int N, int M, double _Complex sigma, int n,
   else
     {
       for(j=0; j<ths->n; j++)
-	ths->b[j] = 1.0/ths->p * csqrt(PI/ths->sigma)*
-	  cexp(-PI*PI*(j-ths->n/2)*(j-ths->n/2)/
+	ths->b[j] = 1.0/ths->p * csqrt(KPI/ths->sigma)*
+	  cexp(-KPI*KPI*(j-ths->n/2)*(j-ths->n/2)/
 	       (ths->p*ths->p*ths->sigma));
     }
 }
@@ -246,7 +245,7 @@ void fgt_init(fgt_plan *ths, int N, int M, double _Complex sigma, double eps)
   if(p<1)
     p=1;
 
-  n=2*((int)ceil(p*cabs(sigma)/PI * sqrt(-log(eps)/creal(sigma))));
+  n=2*((int)ceil(p*cabs(sigma)/KPI * sqrt(-log(eps)/creal(sigma))));
 
   if(N*M<=((int)(1U<<20)))
     fgt_init_guru(ths, N, M, sigma, n, p, 7, DGT_PRE_CEXP);
@@ -383,10 +382,10 @@ void fgt_test_simple(int N, int M, double _Complex sigma, double eps)
   fgt_test_init_rand(&my_plan);
   fgt_init_node_dependent(&my_plan);
 
-  NFFT_SWAP_complex(swap_dgt,my_plan.f);
+  CSWAP(swap_dgt,my_plan.f);
   dgt_trafo(&my_plan);
   nfft_vpr_complex(my_plan.f,my_plan.M,"discrete gauss transform");
-  NFFT_SWAP_complex(swap_dgt,my_plan.f);
+  CSWAP(swap_dgt,my_plan.f);
 
   fgt_trafo(&my_plan);
   nfft_vpr_complex(my_plan.f,my_plan.M,"fast gauss transform");
@@ -438,14 +437,14 @@ void fgt_test_andersson(void)
 
       if(N<N_dgt)
 	{
-          NFFT_SWAP_complex(swap_dgt,my_plan.f);
+          CSWAP(swap_dgt,my_plan.f);
           if(N<N_dgt_pre_exp)
             my_plan.flags^=DGT_PRE_CEXP;
 
 	  printf("$%1.1e$\t & ",fgt_test_measure_time(&my_plan, 1));
           if(N<N_dgt_pre_exp)
             my_plan.flags^=DGT_PRE_CEXP;
-          NFFT_SWAP_complex(swap_dgt,my_plan.f);
+          CSWAP(swap_dgt,my_plan.f);
 	}
       else
 	printf("\t\t & ");
@@ -503,9 +502,9 @@ void fgt_test_error(void)
           fgt_test_init_rand(&my_plan);
           fgt_init_node_dependent(&my_plan);
 
-          NFFT_SWAP_complex(swap_dgt,my_plan.f);
+          CSWAP(swap_dgt,my_plan.f);
           dgt_trafo(&my_plan);
-          NFFT_SWAP_complex(swap_dgt,my_plan.f);
+          CSWAP(swap_dgt,my_plan.f);
 
           fgt_trafo(&my_plan);
 
@@ -554,9 +553,9 @@ void fgt_test_error_p(void)
           fgt_test_init_rand(&my_plan);
           fgt_init_node_dependent(&my_plan);
 
-          NFFT_SWAP_complex(swap_dgt,my_plan.f);
+          CSWAP(swap_dgt,my_plan.f);
           dgt_trafo(&my_plan);
-          NFFT_SWAP_complex(swap_dgt,my_plan.f);
+          CSWAP(swap_dgt,my_plan.f);
 
           fgt_trafo(&my_plan);
 

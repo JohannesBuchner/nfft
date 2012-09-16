@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: reconstruct_data_inh_nnfft.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: reconstruct_data_inh_nnfft.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #include <stdlib.h>
@@ -26,7 +26,6 @@
 #include <complex.h>
 #endif
 
-#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 
@@ -94,10 +93,10 @@ static void reconstruct(char* filename,int N,int M,int iteration, int weight)
   }
   fclose(finh);
 
-  N3=ceil((NFFT_MAX(fabs(min_inh),fabs(max_inh))*(max_time-min_time)/2.0)*4);
+  N3=ceil((MAX(fabs(min_inh),fabs(max_inh))*(max_time-min_time)/2.0)*4);
 
 
-  W=NFFT_MAX(fabs(min_inh),fabs(max_inh))*2.0;
+  W=MAX(fabs(min_inh),fabs(max_inh))*2.0;
 
   fprintf(stderr,"3:  %i %e %e %e %e %e %e\n",N3,W,min_inh,max_inh,min_time,max_time,Ts);
 
@@ -207,7 +206,7 @@ static void reconstruct(char* filename,int N,int M,int iteration, int weight)
 
   for(k=0;k<my_plan.N_total;k++) {
 
-    my_iplan.f_hat_iter[k]*=cexp(2.0*_Complex_I*PI*Ts*w[k]);
+    my_iplan.f_hat_iter[k]*=cexp(2.0*_Complex_I*KPI*Ts*w[k]);
 
     fprintf(fout_real,"%le ", creal(my_iplan.f_hat_iter[k]));
     fprintf(fout_imag,"%le ", cimag(my_iplan.f_hat_iter[k]));

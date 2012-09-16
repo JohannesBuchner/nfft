@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: construct_data_inh_3d.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: construct_data_inh_3d.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #include <stdlib.h>
@@ -27,7 +27,7 @@
 #endif
 
 #include "nfft3.h"
-#include "nfft3util.h"
+#include "infft.h"
 
 /**
  * \defgroup applications_mri2d_construct_data_inh_3d construct_data_inh_3d
@@ -85,9 +85,9 @@ static void construct(char * file, int N, int M)
   }
   fclose(finh);
 
-  N3=ceil((NFFT_MAX(fabs(min_inh),fabs(max_inh))*(max_time-min_time)/2.0+m/(2*sigma))*4*sigma);
+  N3=ceil((MAX(fabs(min_inh),fabs(max_inh))*(max_time-min_time)/2.0+m/(2*sigma))*4*sigma);
 
-  W= NFFT_MAX(fabs(min_inh),fabs(max_inh))/(0.5-((double)m)/N3);
+  W= MAX(fabs(min_inh),fabs(max_inh))/(0.5-((double)m)/N3);
 
   my_N[0]=N; my_n[0]=ceil(N*sigma);
   my_N[1]=N; my_n[1]=ceil(N*sigma);
@@ -122,7 +122,7 @@ static void construct(char * file, int N, int M)
   for(j=0;j<N*N;j++)
   {
     fscanf(fi,"%le ",&real);
-    my_plan.f_hat[j] = real*cexp(2.0*_Complex_I*PI*Ts*my_plan.w[j]*W);
+    my_plan.f_hat[j] = real*cexp(2.0*_Complex_I*KPI*Ts*my_plan.w[j]*W);
   }
 
   if(my_plan.plan.nfft_flags & PRE_PSI)

@@ -16,13 +16,13 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: legendre.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: legendre.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 #include <math.h>
 #include <stdio.h>
 #include "infft.h"
-#include "nfft3util.h"
 #include "legendre.h"
+#include "infft.h"
 
 /* One over sqrt(pi) */
 DK(KSQRTPII,0.56418958354775628694807945156077258584405062932900);

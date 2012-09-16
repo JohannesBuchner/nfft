@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nsfft_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: nsfft_test.c 3858 2012-07-25 20:17:55Z keiner $ */
 #include "config.h"
 
 #include <stdio.h>
@@ -27,7 +27,6 @@
 #include <complex.h>
 #endif
 
-#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 
@@ -48,7 +47,7 @@ static void accuracy_nsfft(int d, int J, int M, int m)
   /** direct trafo */
   nsfft_trafo_direct(&p);
 
-  NFFT_SWAP_complex(swap_sndft_trafo,p.f);
+  CSWAP(swap_sndft_trafo,p.f);
 
   /** approx. trafo */
   nsfft_trafo(&p);
@@ -63,7 +62,7 @@ static void accuracy_nsfft(int d, int J, int M, int m)
   /** direct adjoint */
   nsfft_adjoint_direct(&p);
 
-  NFFT_SWAP_complex(swap_sndft_adjoint,p.f_hat);
+  CSWAP(swap_sndft_adjoint,p.f_hat);
 
   /** approx. adjoint */
   nsfft_adjoint(&p);

@@ -16,13 +16,13 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: wigner.c 3775 2012-06-02 16:39:48Z keiner $ */
+/* $Id: wigner.c 3858 2012-07-25 20:17:55Z keiner $ */
 
 #include <math.h>
 #include <stdio.h>
 #include "infft.h"
 #include "wigner.h"
-#include "nfft3util.h"
+#include "infft.h"
 
 double SO3_alpha(const int m1, const int m2, const int j)
 {

@@ -15,7 +15,7 @@
 
 @SET_MAKE@
 
-# $Id: Makefile.am 3774 2012-06-01 07:41:57Z tovo $
+# $Id: Makefile.am 3858 2012-07-25 20:17:55Z keiner $
 
 
 VPATH = @srcdir@
@@ -50,6 +50,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_apple_gcc_archflag.m4 \
 	$(top_srcdir)/m4/ax_check_compiler_flags.m4 \
 	$(top_srcdir)/m4/ax_check_dir.m4 \
 	$(top_srcdir)/m4/ax_compiler_vendor.m4 \
+	$(top_srcdir)/m4/ax_cunit.m4 \
 	$(top_srcdir)/m4/ax_gcc_archflag.m4 \
 	$(top_srcdir)/m4/ax_gcc_x86_cpuid.m4 \
 	$(top_srcdir)/m4/ax_lib_fftw3.m4 \
@@ -90,18 +91,15 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgconfigdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
-libnfft3_la_DEPENDENCIES = 3rdparty/lib3rdparty.la util/libutil.la \
-	kernel/libkernel.la
+libnfft3_la_DEPENDENCIES = 3rdparty/lib3rdparty.la kernel/libkernel.la
 am_libnfft3_la_OBJECTS =
 libnfft3_la_OBJECTS = $(am_libnfft3_la_OBJECTS)
 libnfft3_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libnfft3_la_LDFLAGS) $(LDFLAGS) -o $@
 @HAVE_MATLAB_THREADS_FALSE@@HAVE_MATLAB_TRUE@libnfft3_matlab_la_DEPENDENCIES = 3rdparty/lib3rdparty.la \
-@HAVE_MATLAB_THREADS_FALSE@@HAVE_MATLAB_TRUE@	util/libutil.la \
 @HAVE_MATLAB_THREADS_FALSE@@HAVE_MATLAB_TRUE@	kernel/libkernel.la
 @HAVE_MATLAB_THREADS_TRUE@@HAVE_MATLAB_TRUE@libnfft3_matlab_la_DEPENDENCIES = 3rdparty/lib3rdparty.la \
-@HAVE_MATLAB_THREADS_TRUE@@HAVE_MATLAB_TRUE@	util/libutil_threads.la \
 @HAVE_MATLAB_THREADS_TRUE@@HAVE_MATLAB_TRUE@	kernel/libkernel_threads.la
 am_libnfft3_matlab_la_OBJECTS =
 libnfft3_matlab_la_OBJECTS = $(am_libnfft3_matlab_la_OBJECTS)
@@ -111,7 +109,6 @@ libnfft3_matlab_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 @HAVE_MATLAB_TRUE@am_libnfft3_matlab_la_rpath =
 @HAVE_THREADS_TRUE@libnfft3_threads_la_DEPENDENCIES =  \
 @HAVE_THREADS_TRUE@	3rdparty/lib3rdparty.la \
-@HAVE_THREADS_TRUE@	util/libutil_threads.la \
 @HAVE_THREADS_TRUE@	kernel/libkernel_threads.la
 am_libnfft3_threads_la_OBJECTS =
 libnfft3_threads_la_OBJECTS = $(am_libnfft3_threads_la_OBJECTS)
@@ -278,6 +275,7 @@ am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
+ax_cv_cunit = @ax_cv_cunit@
 bindir = @bindir@
 build = @build@
 build_alias = @build_alias@
@@ -330,26 +328,26 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 
 # Subdirectories
-DIST_SUBDIRS = 3rdparty include util kernel . tests examples applications matlab support doxygen
+DIST_SUBDIRS = 3rdparty include kernel . tests examples applications matlab support doxygen
 @HAVE_MATLAB_FALSE@MATLAB_DIRS = 
 @HAVE_MATLAB_TRUE@MATLAB_DIRS = matlab
 @HAVE_MATLAB_FALSE@LIBNFFT3_MATLAB_LA = 
 @HAVE_MATLAB_TRUE@LIBNFFT3_MATLAB_LA = libnfft3_matlab.la
 @HAVE_THREADS_FALSE@LIBNFFT3_THREADS_LA = 
 @HAVE_THREADS_TRUE@LIBNFFT3_THREADS_LA = libnfft3_threads.la
-SUBDIRS = 3rdparty include util kernel . tests examples applications $(MATLAB_DIRS)
+SUBDIRS = 3rdparty include kernel . tests examples applications $(MATLAB_DIRS)
 lib_LTLIBRARIES = libnfft3.la $(LIBNFFT3_THREADS_LA)
 noinst_LTLIBRARIES = $(LIBNFFT3_MATLAB_LA)
 libnfft3_la_SOURCES = 
-libnfft3_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @fftw3_LIBS@ -lm
+libnfft3_la_LIBADD = 3rdparty/lib3rdparty.la kernel/libkernel.la @fftw3_LIBS@ -lm
 libnfft3_la_LDFLAGS = -no-undefined -version-info @SHARED_VERSION_INFO@ @fftw3_LDFLAGS@
 @HAVE_THREADS_TRUE@libnfft3_threads_la_SOURCES = 
-@HAVE_THREADS_TRUE@libnfft3_threads_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil_threads.la kernel/libkernel_threads.la @fftw3_threads_LIBS@ -lm
+@HAVE_THREADS_TRUE@libnfft3_threads_la_LIBADD = 3rdparty/lib3rdparty.la kernel/libkernel_threads.la @fftw3_threads_LIBS@ -lm
 @HAVE_THREADS_TRUE@libnfft3_threads_la_LDFLAGS = -no-undefined -version-info @SHARED_VERSION_INFO@ @fftw3_LDFLAGS@
 @HAVE_OPENMP_TRUE@@HAVE_THREADS_TRUE@libnfft3_threads_la_CFLAGS = $(OPENMP_CFLAGS)
 @HAVE_MATLAB_TRUE@libnfft3_matlab_la_SOURCES = 
-@HAVE_MATLAB_THREADS_FALSE@@HAVE_MATLAB_TRUE@libnfft3_matlab_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @matlab_fftw3_LIBS@ -lm
-@HAVE_MATLAB_THREADS_TRUE@@HAVE_MATLAB_TRUE@libnfft3_matlab_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil_threads.la kernel/libkernel_threads.la @matlab_fftw3_LIBS@ -lm
+@HAVE_MATLAB_THREADS_FALSE@@HAVE_MATLAB_TRUE@libnfft3_matlab_la_LIBADD = 3rdparty/lib3rdparty.la kernel/libkernel.la @matlab_fftw3_LIBS@ -lm
+@HAVE_MATLAB_THREADS_TRUE@@HAVE_MATLAB_TRUE@libnfft3_matlab_la_LIBADD = 3rdparty/lib3rdparty.la kernel/libkernel_threads.la @matlab_fftw3_LIBS@ -lm
 @HAVE_MATLAB_TRUE@libnfft3_matlab_la_LDFLAGS = @matlab_fftw3_LDFLAGS@
 EXTRA_DIST = bootstrap.sh doxygen.dox nfft3.pc.in
 pkgconfigdir = $(libdir)/pkgconfig
