@@ -1,0 +1,201 @@
+\hypertarget{solver__adjoint_8h}{
+\section{solver\_\-adjoint.h File Reference}
+\label{solver__adjoint_8h}\index{solver_adjoint.h@{solver\_\-adjoint.h}}
+}
+Header file for adjoint solver. 
+
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{solver__adjoint_8h_a0}{
+\#define \hyperlink{solver__adjoint_8h_a0}{MACRO\_\-SOLVER\_\-ADJOINT\_\-PLAN}(MV, FLT, FLT\_\-TYPE)}
+\label{solver__adjoint_8h_a0}
+
+\begin{CompactList}\small\item\em Include NFFT3 header. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{solver__adjoint_8h_a1}{
+void \hyperlink{solver__adjoint_8h_a1}{infsft\_\-adjoint\_\-init} (adjointnfsft\_\-plan $\ast$ths, \hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$mv)}
+\label{solver__adjoint_8h_a1}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a2}{
+void \hyperlink{solver__adjoint_8h_a2}{infsft\_\-adjoint\_\-init\_\-advanced} (adjointnfsft\_\-plan $\ast$ths, \hyperlink{structnfsft__plan}{nfsft\_\-plan},$\ast$mv, unsigned adjointnfsft\_\-flags)}
+\label{solver__adjoint_8h_a2}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a3}{
+void \hyperlink{solver__adjoint_8h_a3}{infsft\_\-adjoint\_\-before\_\-loop} (adjointnfsft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a3}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a4}{
+void \hyperlink{solver__adjoint_8h_a4}{infsft\_\-adjoint\_\-loop\_\-one\_\-step} (adjointnfsft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a4}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a5}{
+void \hyperlink{solver__adjoint_8h_a5}{infsft\_\-adjoint\_\-finalize} (adjointnfsft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a5}
+
+\begin{CompactList}\small\item\em Destroys the plan for the adjoint transform. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a6}{
+void \hyperlink{solver__adjoint_8h_a6}{infft\_\-adjoint\_\-init} (adjointnfft\_\-plan $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$mv)}
+\label{solver__adjoint_8h_a6}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a7}{
+void \hyperlink{solver__adjoint_8h_a7}{infft\_\-adjoint\_\-init\_\-advanced} (adjointnfft\_\-plan $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan},$\ast$mv, unsigned adjointnfft\_\-flags)}
+\label{solver__adjoint_8h_a7}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a8}{
+void \hyperlink{solver__adjoint_8h_a8}{infft\_\-adjoint\_\-before\_\-loop} (adjointnfft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a8}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a9}{
+void \hyperlink{solver__adjoint_8h_a9}{infft\_\-adjoint\_\-loop\_\-one\_\-step} (adjointnfft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a9}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a10}{
+void \hyperlink{solver__adjoint_8h_a10}{infft\_\-adjoint\_\-finalize} (adjointnfft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a10}
+
+\begin{CompactList}\small\item\em Destroys the plan for the adjoint transform. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a11}{
+void \hyperlink{solver__adjoint_8h_a11}{infct\_\-adjoint\_\-init} (adjointnfct\_\-plan $\ast$ths, \hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$mv)}
+\label{solver__adjoint_8h_a11}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a12}{
+void \hyperlink{solver__adjoint_8h_a12}{infct\_\-adjoint\_\-init\_\-advanced} (adjointnfct\_\-plan $\ast$ths, \hyperlink{structnfct__plan}{nfct\_\-plan},$\ast$mv, unsigned adjointnfct\_\-flags)}
+\label{solver__adjoint_8h_a12}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a13}{
+void \hyperlink{solver__adjoint_8h_a13}{infct\_\-adjoint\_\-before\_\-loop} (adjointnfct\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a13}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a14}{
+void \hyperlink{solver__adjoint_8h_a14}{infct\_\-adjoint\_\-loop\_\-one\_\-step} (adjointnfct\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a14}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a15}{
+void \hyperlink{solver__adjoint_8h_a15}{infct\_\-adjoint\_\-finalize} (adjointnfct\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a15}
+
+\begin{CompactList}\small\item\em Destroys the plan for the adjoint transform. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a16}{
+void \hyperlink{solver__adjoint_8h_a16}{infst\_\-adjoint\_\-init} (adjointnfst\_\-plan $\ast$ths, \hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$mv)}
+\label{solver__adjoint_8h_a16}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a17}{
+void \hyperlink{solver__adjoint_8h_a17}{infst\_\-adjoint\_\-init\_\-advanced} (adjointnfst\_\-plan $\ast$ths, \hyperlink{structnfst__plan}{nfst\_\-plan},$\ast$mv, unsigned adjointnfst\_\-flags)}
+\label{solver__adjoint_8h_a17}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a18}{
+void \hyperlink{solver__adjoint_8h_a18}{infst\_\-adjoint\_\-before\_\-loop} (adjointnfst\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a18}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a19}{
+void \hyperlink{solver__adjoint_8h_a19}{infst\_\-adjoint\_\-loop\_\-one\_\-step} (adjointnfst\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a19}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a20}{
+void \hyperlink{solver__adjoint_8h_a20}{infst\_\-adjoint\_\-finalize} (adjointnfst\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a20}
+
+\begin{CompactList}\small\item\em Destroys the plan for the adjoint transform. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a21}{
+void \hyperlink{solver__adjoint_8h_a21}{innfft\_\-adjoint\_\-init} (adjointnnfft\_\-plan $\ast$ths, \hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$mv)}
+\label{solver__adjoint_8h_a21}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a22}{
+void \hyperlink{solver__adjoint_8h_a22}{innfft\_\-adjoint\_\-init\_\-advanced} (adjointnnfft\_\-plan $\ast$ths, \hyperlink{structnnfft__plan}{nnfft\_\-plan},$\ast$mv, unsigned adjointnnfft\_\-flags)}
+\label{solver__adjoint_8h_a22}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a23}{
+void \hyperlink{solver__adjoint_8h_a23}{innfft\_\-adjoint\_\-before\_\-loop} (adjointnnfft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a23}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a24}{
+void \hyperlink{solver__adjoint_8h_a24}{innfft\_\-adjoint\_\-loop\_\-one\_\-step} (adjointnnfft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a24}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a25}{
+void \hyperlink{solver__adjoint_8h_a25}{innfft\_\-adjoint\_\-finalize} (adjointnnfft\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a25}
+
+\begin{CompactList}\small\item\em Destroys the plan for the adjoint transform. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a26}{
+void \hyperlink{solver__adjoint_8h_a26}{imri\_\-inh\_\-2d1d\_\-adjoint\_\-init} (adjointmri\_\-inh\_\-2d1d\_\-plan $\ast$ths, \hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$mv)}
+\label{solver__adjoint_8h_a26}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a27}{
+void \hyperlink{solver__adjoint_8h_a27}{imri\_\-inh\_\-2d1d\_\-adjoint\_\-init\_\-advanced} (adjointmri\_\-inh\_\-2d1d\_\-plan $\ast$ths, \hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan},$\ast$mv, unsigned adjointmri\_\-inh\_\-2d1d\_\-flags)}
+\label{solver__adjoint_8h_a27}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a28}{
+void \hyperlink{solver__adjoint_8h_a28}{imri\_\-inh\_\-2d1d\_\-adjoint\_\-before\_\-loop} (adjointmri\_\-inh\_\-2d1d\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a28}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a29}{
+void \hyperlink{solver__adjoint_8h_a29}{imri\_\-inh\_\-2d1d\_\-adjoint\_\-loop\_\-one\_\-step} (adjointmri\_\-inh\_\-2d1d\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a29}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a30}{
+void \hyperlink{solver__adjoint_8h_a30}{imri\_\-inh\_\-2d1d\_\-adjoint\_\-finalize} (adjointmri\_\-inh\_\-2d1d\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a30}
+
+\begin{CompactList}\small\item\em Destroys the plan for the adjoint transform. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a31}{
+void \hyperlink{solver__adjoint_8h_a31}{imri\_\-inh\_\-3d\_\-adjoint\_\-init} (adjointmri\_\-inh\_\-3d\_\-plan $\ast$ths, \hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$mv)}
+\label{solver__adjoint_8h_a31}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a32}{
+void \hyperlink{solver__adjoint_8h_a32}{imri\_\-inh\_\-3d\_\-adjoint\_\-init\_\-advanced} (adjointmri\_\-inh\_\-3d\_\-plan $\ast$ths, \hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan},$\ast$mv, unsigned adjointmri\_\-inh\_\-3d\_\-flags)}
+\label{solver__adjoint_8h_a32}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a33}{
+void \hyperlink{solver__adjoint_8h_a33}{imri\_\-inh\_\-3d\_\-adjoint\_\-before\_\-loop} (adjointmri\_\-inh\_\-3d\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a33}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a34}{
+void \hyperlink{solver__adjoint_8h_a34}{imri\_\-inh\_\-3d\_\-adjoint\_\-loop\_\-one\_\-step} (adjointmri\_\-inh\_\-3d\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a34}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{solver__adjoint_8h_a35}{
+void \hyperlink{solver__adjoint_8h_a35}{imri\_\-inh\_\-3d\_\-adjoint\_\-finalize} (adjointmri\_\-inh\_\-3d\_\-plan $\ast$ths)}
+\label{solver__adjoint_8h_a35}
+
+\begin{CompactList}\small\item\em Destroys the plan for the adjoint transform. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for adjoint solver. 
+
+
+
+Definition in file \hyperlink{solver__adjoint_8h-source}{solver\_\-adjoint.h}.

@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-SOURCES = $(libsolver_la_SOURCES)
+SOURCES = $(libsolver_la_SOURCES) $(nodist_libsolver_la_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -50,7 +50,9 @@ CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libsolver_la_LIBADD =
 am_libsolver_la_OBJECTS = solver.lo
-libsolver_la_OBJECTS = $(am_libsolver_la_OBJECTS)
+@WITH_DEVCODE_TRUE@nodist_libsolver_la_OBJECTS = solver_adjoint.lo
+libsolver_la_OBJECTS = $(am_libsolver_la_OBJECTS) \
+	$(nodist_libsolver_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -62,7 +64,7 @@ LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(libsolver_la_SOURCES)
+SOURCES = $(libsolver_la_SOURCES) $(nodist_libsolver_la_SOURCES)
 DIST_SOURCES = $(libsolver_la_SOURCES)
 ETAGS = etags
 CTAGS = ctags
@@ -177,9 +179,10 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-AM_CFLAGS = -I$(top_srcdir)/include 
+AM_CFLAGS = -I$(top_srcdir)/include
 noinst_LTLIBRARIES = libsolver.la
-libsolver_la_SOURCES = solver.c 
+libsolver_la_SOURCES = solver.c
+@WITH_DEVCODE_TRUE@nodist_libsolver_la_SOURCES = solver_adjoint.c
 all: all-am
 
 .SUFFIXES:
@@ -232,6 +235,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/solver.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/solver_adjoint.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
