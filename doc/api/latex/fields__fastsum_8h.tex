@@ -1,0 +1,166 @@
+\hypertarget{fields__fastsum_8h}{
+\section{fields\_\-fastsum.h File Reference}
+\label{fields__fastsum_8h}\index{fields_fastsum.h@{fields\_\-fastsum.h}}
+}
+Header file for calculation of 3d space-charge fields of bunches of charged particles by fast summation. 
+
+{\tt \#include $<$complex.h$>$}\par
+{\tt \#include \char`\"{}util.h\char`\"{}}\par
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+{\tt \#include \char`\"{}fastsum.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{fields__fastsum_8h_a0}{
+\#define \hyperlink{fields__fastsum_8h_a0}{EPSILON\_\-0}~8.8541878176E-12}
+\label{fields__fastsum_8h_a0}
+
+\begin{CompactList}\small\item\em Include header for NFFT3 library. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+\hypertarget{fields__fastsum_8h_a1}{
+typedef \hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan\_\-} \hyperlink{fields__fastsum_8h_a1}{fields\_\-fastsum\_\-plan}}
+\label{fields__fastsum_8h_a1}
+
+\begin{CompactList}\small\item\em plan for fast calculation of 3D space-charge fields of bunches of charged particles. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{fields__fastsum_8h_a2}{fields\_\-fastsum\_\-init} (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$plan, int N\_\-total, unsigned flags, int nn, int m, int p, double eps\_\-I, double eps\_\-B)
+\begin{CompactList}\small\item\em initialize fast calculation plan \item\end{CompactList}\item 
+void \hyperlink{fields__fastsum_8h_a3}{fields\_\-fastsum\_\-finalize} (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em finalize plan \item\end{CompactList}\item 
+void \hyperlink{fields__fastsum_8h_a4}{fields\_\-fastsum\_\-exact} (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em direct calculation \item\end{CompactList}\item 
+void \hyperlink{fields__fastsum_8h_a5}{fields\_\-fastsum\_\-simple} (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em simple NFFT-based summation algorithm \item\end{CompactList}\item 
+void \hyperlink{fields__fastsum_8h_a6}{fields\_\-fastsum\_\-precompute} (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em fast NFFT-based summation, precomputation \item\end{CompactList}\item 
+void \hyperlink{fields__fastsum_8h_a7}{fields\_\-fastsum\_\-trafo} (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em fast NFFT-based summation algorithm \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for calculation of 3d space-charge fields of bunches of charged particles by fast summation. 
+
+reference: G. P\"{o}plau, D. Potts and U. van Rienen. Calculation of 3D Space-Charge Fields of Charged Particles by Fast Summation. Scientific Computing in Electrical Engineering, A.M. Anile, G. Ali and G. Mascaly (Eds.), Springer-Verlag, Berlin, pages 241-246, 2005.
+
+\begin{Desc}
+\item[Author:]Toni Volkmer \end{Desc}
+\begin{Desc}
+\item[Date:]2006\end{Desc}
+
+
+Definition in file \hyperlink{fields__fastsum_8h-source}{fields\_\-fastsum.h}.
+
+\subsection{Function Documentation}
+\hypertarget{fields__fastsum_8h_a2}{
+\index{fields_fastsum.h@{fields\_\-fastsum.h}!fields_fastsum_init@{fields\_\-fastsum\_\-init}}
+\index{fields_fastsum_init@{fields\_\-fastsum\_\-init}!fields_fastsum.h@{fields\_\-fastsum.h}}
+\subsubsection[fields\_\-fastsum\_\-init]{\setlength{\rightskip}{0pt plus 5cm}void fields\_\-fastsum\_\-init (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$ {\em plan}, int {\em N\_\-total}, unsigned {\em flags}, int {\em nn}, int {\em m}, int {\em p}, double {\em eps\_\-I}, double {\em eps\_\-B})}}
+\label{fields__fastsum_8h_a2}
+
+
+initialize fast calculation plan 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em plan}]The pointer to a fields fastsum plan. \item[{\em N\_\-total}]The number of source knots r. \item[{\em flags}]Fastsum flags. \item[{\em nn}]The expansion degree. \item[{\em m}]The cut-off parameter for the NFFT. \item[{\em p}]The degree of smoothness. \item[{\em eps\_\-I}]The inner boundary. \item[{\em eps\_\-B}]the outer boundary. \end{description}
+\end{Desc}
+
+
+Definition at line 19 of file fields\_\-fastsum.c.
+
+References fastsum\_\-init\_\-guru().\hypertarget{fields__fastsum_8h_a3}{
+\index{fields_fastsum.h@{fields\_\-fastsum.h}!fields_fastsum_finalize@{fields\_\-fastsum\_\-finalize}}
+\index{fields_fastsum_finalize@{fields\_\-fastsum\_\-finalize}!fields_fastsum.h@{fields\_\-fastsum.h}}
+\subsubsection[fields\_\-fastsum\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void fields\_\-fastsum\_\-finalize (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$ {\em plan})}}
+\label{fields__fastsum_8h_a3}
+
+
+finalize plan 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em plan}]The pointer to a fields fastsum plan. \end{description}
+\end{Desc}
+
+
+Definition at line 33 of file fields\_\-fastsum.c.
+
+References fastsum\_\-finalize().\hypertarget{fields__fastsum_8h_a4}{
+\index{fields_fastsum.h@{fields\_\-fastsum.h}!fields_fastsum_exact@{fields\_\-fastsum\_\-exact}}
+\index{fields_fastsum_exact@{fields\_\-fastsum\_\-exact}!fields_fastsum.h@{fields\_\-fastsum.h}}
+\subsubsection[fields\_\-fastsum\_\-exact]{\setlength{\rightskip}{0pt plus 5cm}void fields\_\-fastsum\_\-exact (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$ {\em plan})}}
+\label{fields__fastsum_8h_a4}
+
+
+direct calculation 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em plan}]The pointer to a fields fastsum plan. \end{description}
+\end{Desc}
+
+
+Definition at line 43 of file fields\_\-fastsum.c.
+
+References EPSILON\_\-0, and PI.\hypertarget{fields__fastsum_8h_a5}{
+\index{fields_fastsum.h@{fields\_\-fastsum.h}!fields_fastsum_simple@{fields\_\-fastsum\_\-simple}}
+\index{fields_fastsum_simple@{fields\_\-fastsum\_\-simple}!fields_fastsum.h@{fields\_\-fastsum.h}}
+\subsubsection[fields\_\-fastsum\_\-simple]{\setlength{\rightskip}{0pt plus 5cm}void fields\_\-fastsum\_\-simple (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$ {\em plan})}}
+\label{fields__fastsum_8h_a5}
+
+
+simple NFFT-based summation algorithm 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em plan}]The pointer to a fields fastsum plan. \end{description}
+\end{Desc}
+
+
+Definition at line 75 of file fields\_\-fastsum.c.
+
+References EPSILON\_\-0, fastsum\_\-precompute(), fastsum\_\-trafo(), and PI.\hypertarget{fields__fastsum_8h_a6}{
+\index{fields_fastsum.h@{fields\_\-fastsum.h}!fields_fastsum_precompute@{fields\_\-fastsum\_\-precompute}}
+\index{fields_fastsum_precompute@{fields\_\-fastsum\_\-precompute}!fields_fastsum.h@{fields\_\-fastsum.h}}
+\subsubsection[fields\_\-fastsum\_\-precompute]{\setlength{\rightskip}{0pt plus 5cm}void fields\_\-fastsum\_\-precompute (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$ {\em plan})}}
+\label{fields__fastsum_8h_a6}
+
+
+fast NFFT-based summation, precomputation 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em plan}]The pointer to a fields fastsum plan. \end{description}
+\end{Desc}
+
+
+Definition at line 165 of file fields\_\-fastsum.c.
+
+References fastsum\_\-precompute(), and nfft\_\-second().\hypertarget{fields__fastsum_8h_a7}{
+\index{fields_fastsum.h@{fields\_\-fastsum.h}!fields_fastsum_trafo@{fields\_\-fastsum\_\-trafo}}
+\index{fields_fastsum_trafo@{fields\_\-fastsum\_\-trafo}!fields_fastsum.h@{fields\_\-fastsum.h}}
+\subsubsection[fields\_\-fastsum\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void fields\_\-fastsum\_\-trafo (\hyperlink{structfields__fastsum__plan__}{fields\_\-fastsum\_\-plan} $\ast$ {\em plan})}}
+\label{fields__fastsum_8h_a7}
+
+
+fast NFFT-based summation algorithm 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em plan}]The pointer to a fields fastsum plan. \end{description}
+\end{Desc}
+
+
+Definition at line 185 of file fields\_\-fastsum.c.
+
+References EPSILON\_\-0, Fields\-Search\-Tree(), nfft\_\-adjoint(), nfft\_\-trafo(), and PI.

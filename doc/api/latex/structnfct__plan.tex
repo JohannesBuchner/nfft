@@ -1,0 +1,159 @@
+\hypertarget{structnfct__plan}{
+\section{nfct\_\-plan Struct Reference}
+\label{structnfct__plan}\index{nfct_plan@{nfct\_\-plan}}
+}
+Structure for a transform plan.  
+
+
+{\tt \#include $<$nfft3.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structnfct__plan_o0}{
+int \hyperlink{structnfct__plan_o0}{N\_\-total}}
+\label{structnfct__plan_o0}
+
+\begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o1}{
+int \hyperlink{structnfct__plan_o1}{M\_\-total}}
+\label{structnfct__plan_o1}
+
+\begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o2}{
+double $\ast$ \hyperlink{structnfct__plan_o2}{f\_\-hat}}
+\label{structnfct__plan_o2}
+
+\begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o3}{
+double $\ast$ \hyperlink{structnfct__plan_o3}{f}}
+\label{structnfct__plan_o3}
+
+\begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o4}{
+int \hyperlink{structnfct__plan_o4}{d}}
+\label{structnfct__plan_o4}
+
+\begin{CompactList}\small\item\em dimension, rank \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o5}{
+int $\ast$ \hyperlink{structnfct__plan_o5}{N}}
+\label{structnfct__plan_o5}
+
+\begin{CompactList}\small\item\em cut-off-frequencies (kernel) \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o6}{
+int $\ast$ \hyperlink{structnfct__plan_o6}{n}}
+\label{structnfct__plan_o6}
+
+\begin{CompactList}\small\item\em length of dct-i \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o7}{
+double $\ast$ \hyperlink{structnfct__plan_o7}{sigma}}
+\label{structnfct__plan_o7}
+
+\begin{CompactList}\small\item\em oversampling-factor \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o8}{
+int \hyperlink{structnfct__plan_o8}{m}}
+\label{structnfct__plan_o8}
+
+\begin{CompactList}\small\item\em cut-off parameter in time-domain \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o9}{
+double {\bf nfct\_\-full\_\-psi\_\-eps}}
+\label{structnfct__plan_o9}
+
+\item 
+\hypertarget{structnfct__plan_o10}{
+double $\ast$ \hyperlink{structnfct__plan_o10}{b}}
+\label{structnfct__plan_o10}
+
+\begin{CompactList}\small\item\em shape parameters \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o11}{
+unsigned \hyperlink{structnfct__plan_o11}{nfct\_\-flags}}
+\label{structnfct__plan_o11}
+
+\begin{CompactList}\small\item\em flags for precomputation, malloc \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o12}{
+unsigned \hyperlink{structnfct__plan_o12}{fftw\_\-flags}}
+\label{structnfct__plan_o12}
+
+\begin{CompactList}\small\item\em flags for the fftw \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o13}{
+double $\ast$ \hyperlink{structnfct__plan_o13}{x}}
+\label{structnfct__plan_o13}
+
+\begin{CompactList}\small\item\em nodes (in time/spatial domain) \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o14}{
+double \hyperlink{structnfct__plan_o14}{MEASURE\_\-TIME\_\-t} \mbox{[}3\mbox{]}}
+\label{structnfct__plan_o14}
+
+\begin{CompactList}\small\item\em measured time for each step \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o15}{
+fftw\_\-plan \hyperlink{structnfct__plan_o15}{my\_\-fftw\_\-r2r\_\-plan}}
+\label{structnfct__plan_o15}
+
+\begin{CompactList}\small\item\em fftw\_\-plan \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o16}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structnfct__plan_o16}{r2r\_\-kind}}
+\label{structnfct__plan_o16}
+
+\begin{CompactList}\small\item\em r2r transform type (dct-i) \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o17}{
+double $\ast$$\ast$ \hyperlink{structnfct__plan_o17}{c\_\-phi\_\-inv}}
+\label{structnfct__plan_o17}
+
+\begin{CompactList}\small\item\em precomputed data, matrix D \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o18}{
+double $\ast$ \hyperlink{structnfct__plan_o18}{psi}}
+\label{structnfct__plan_o18}
+
+\begin{CompactList}\small\item\em precomputed data, matrix B \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o19}{
+int \hyperlink{structnfct__plan_o19}{size\_\-psi}}
+\label{structnfct__plan_o19}
+
+\begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o20}{
+int $\ast$ \hyperlink{structnfct__plan_o20}{psi\_\-index\_\-g}}
+\label{structnfct__plan_o20}
+
+\begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o21}{
+int $\ast$ \hyperlink{structnfct__plan_o21}{psi\_\-index\_\-f}}
+\label{structnfct__plan_o21}
+
+\begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o22}{
+double $\ast$ {\bf g}}
+\label{structnfct__plan_o22}
+
+\item 
+\hypertarget{structnfct__plan_o23}{
+double $\ast$ {\bf g\_\-hat}}
+\label{structnfct__plan_o23}
+
+\item 
+\hypertarget{structnfct__plan_o24}{
+double $\ast$ \hyperlink{structnfct__plan_o24}{g1}}
+\label{structnfct__plan_o24}
+
+\begin{CompactList}\small\item\em input of fftw \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o25}{
+double $\ast$ \hyperlink{structnfct__plan_o25}{g2}}
+\label{structnfct__plan_o25}
+
+\begin{CompactList}\small\item\em output of fftw \item\end{CompactList}\item 
+\hypertarget{structnfct__plan_o26}{
+double $\ast$ \hyperlink{structnfct__plan_o26}{spline\_\-coeffs}}
+\label{structnfct__plan_o26}
+
+\begin{CompactList}\small\item\em input for de Boor algorithm, if B\_\-SPLINE or SINC\_\-2m is defined \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for a transform plan. 
+
+
+
+Definition at line 490 of file nfft3.h.
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{nfft3_8h}{nfft3.h}\end{CompactItemize}

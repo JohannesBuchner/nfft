@@ -1,0 +1,192 @@
+\hypertarget{group__fpt}{
+\section{FPT - Fast polynomial transform}
+\label{group__fpt}\index{FPT - Fast polynomial transform@{FPT - Fast polynomial transform}}
+}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__fpt_ga8}{
+\#define \hyperlink{group__fpt_ga8}{FPT\_\-NO\_\-FAST\_\-ALGORITHM}~(1U $<$$<$ 2)}
+\label{group__fpt_ga8}
+
+\begin{CompactList}\small\item\em If set, TODO complete comment. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga9}{
+\#define \hyperlink{group__fpt_ga9}{FPT\_\-NO\_\-DIRECT\_\-ALGORITHM}~(1U $<$$<$ 3)}
+\label{group__fpt_ga9}
+
+\begin{CompactList}\small\item\em If set, TODO complete comment. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga10}{
+\#define \hyperlink{group__fpt_ga10}{FPT\_\-NO\_\-STABILIZATION}~(1U $<$$<$ 0)}
+\label{group__fpt_ga10}
+
+\begin{CompactList}\small\item\em If set, no stabilization will be used. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga11}{
+\#define \hyperlink{group__fpt_ga11}{FPT\_\-PERSISTENT\_\-DATA}~(1U $<$$<$ 4)}
+\label{group__fpt_ga11}
+
+\begin{CompactList}\small\item\em If set, TODO complete comment. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga12}{
+\#define \hyperlink{group__fpt_ga12}{FPT\_\-FUNCTION\_\-VALUES}~(1U $<$$<$ 5)}
+\label{group__fpt_ga12}
+
+\begin{CompactList}\small\item\em If set, the output are function values at Chebyshev nodes rather than Chebyshev coefficients. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga13}{
+\#define \hyperlink{group__fpt_ga13}{FPT\_\-AL\_\-SYMMETRY}~(1U $<$$<$ 6)}
+\label{group__fpt_ga13}
+
+\begin{CompactList}\small\item\em TODO Don't use this flag! \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__fpt_ga0}{
+typedef \hyperlink{structfpt__set__s__}{fpt\_\-set\_\-s\_\-} $\ast$ \hyperlink{group__fpt_ga0}{fpt\_\-set}}
+\label{group__fpt_ga0}
+
+\begin{CompactList}\small\item\em A set of precomputed data for a set of DPT transforms of equal maximum length. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{structfpt__set__s__}{fpt\_\-set} \hyperlink{group__fpt_ga1}{fpt\_\-init} (const int M, const int t, const unsigned int flags)
+\begin{CompactList}\small\item\em Initializes a set of precomputed data for DPT transforms of equal length. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga2}{fpt\_\-precompute} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, int k\_\-start, const double threshold)
+\begin{CompactList}\small\item\em Computes the data required for a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga3}{dpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga4}{fpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga5}{dpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga6}{fpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, const double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga7}{
+void \hyperlink{group__fpt_ga7}{fpt\_\-finalize} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{group__fpt_ga7}
+
+\begin{CompactList}\small\item\em Save copy of inpute data for stabilization steps. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+This module implements fast polynomial transforms. In the following, we abbreviate the term \char`\"{}fast polynomial transforms\char`\"{} by FPT. 
+
+\subsection{Function Documentation}
+\hypertarget{group__fpt_ga1}{
+\index{fpt@{fpt}!fpt_init@{fpt\_\-init}}
+\index{fpt_init@{fpt\_\-init}!fpt@{fpt}}
+\subsubsection[fpt\_\-init]{\setlength{\rightskip}{0pt plus 5cm}\hyperlink{structfpt__set__s__}{fpt\_\-set} fpt\_\-init (const int {\em M}, const int {\em t}, const unsigned int {\em flags})}}
+\label{group__fpt_ga1}
+
+
+Initializes a set of precomputed data for DPT transforms of equal length. 
+
+\begin{itemize}
+\item M The maximum DPT transform index $M \in \mathbb{N}_0$. The individual transforms are addressed by and index number $m \in \mathbb{N}_0$ with range $m = 0,\ldots,M$. The total number of transforms is therefore $M+1$. \item t The exponent $t \in \mathbb{N}, t \ge 2$ of the transform length $N = 2^t \in \mathbb{N}, N \ge 4$ \item flags A bitwise combination of the flags FPT\_\-NO\_\-STABILIZATION,\end{itemize}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 588 of file fpt.c.
+
+References fpt\_\-set\_\-s\_\-::dpt, fpt\_\-set\_\-s\_\-::flags, FPT\_\-NO\_\-DIRECT\_\-ALGORITHM, FPT\_\-NO\_\-FAST\_\-ALGORITHM, fpt\_\-set\_\-s\_\-::kinds, fpt\_\-set\_\-s\_\-::kindsr, fpt\_\-set\_\-s\_\-::lengths, fpt\_\-set\_\-s\_\-::M, fpt\_\-set\_\-s\_\-::N, PI, fpt\_\-set\_\-s\_\-::plans\_\-dct2, fpt\_\-set\_\-s\_\-::plans\_\-dct3, fpt\_\-set\_\-s\_\-::result, fpt\_\-data\_\-::steps, fpt\_\-set\_\-s\_\-::t, fpt\_\-set\_\-s\_\-::temp, fpt\_\-set\_\-s\_\-::vec3, fpt\_\-set\_\-s\_\-::vec4, fpt\_\-set\_\-s\_\-::work, fpt\_\-set\_\-s\_\-::xc\_\-slow, fpt\_\-set\_\-s\_\-::xcvecs, and fpt\_\-set\_\-s\_\-::z.
+
+Referenced by main(), and nfsft\_\-precompute().\hypertarget{group__fpt_ga2}{
+\index{fpt@{fpt}!fpt_precompute@{fpt\_\-precompute}}
+\index{fpt_precompute@{fpt\_\-precompute}!fpt@{fpt}}
+\subsubsection[fpt\_\-precompute]{\setlength{\rightskip}{0pt plus 5cm}void fpt\_\-precompute (\hyperlink{structfpt__set__s__}{fpt\_\-set} {\em set}, const int {\em m}, const double $\ast$ {\em alpha}, const double $\ast$ {\em beta}, const double $\ast$ {\em gamma}, int {\em k\_\-start}, const double {\em threshold})}}
+\label{group__fpt_ga2}
+
+
+Computes the data required for a single DPT transform. 
+
+\begin{itemize}
+\item set The set of DPT transform data where the computed data will be stored. \item m The transform index $m \in \mathbb{N}, 0 \le m \le M$. \item alpha The three-term recurrence coefficients $\alpha_k \in \mathbb{R}$ for $k=0,\ldots,N$ such that 
+
+\footnotesize\begin{verbatim} alpha[k]
+ *      \end{verbatim}
+\normalsize
+ $=\alpha_k$. \item beta The three-term recurrence coefficients $\beta_k \in \mathbb{R}$ for $k=0,\ldots,N$ such that 
+
+\footnotesize\begin{verbatim} beta[k] \end{verbatim}
+\normalsize
+ $=\beta_k$. \item gamma The three-term recurrence coefficients $\gamma_k \in \mathbb{R}$ for $k=0,\ldots,N$ such that 
+
+\footnotesize\begin{verbatim} gamma[k]
+ *            \end{verbatim}
+\normalsize
+ $=\gamma_k$. \item k\_\-start The index $k_{\text{start}} \in \mathbb{N}_0, 0 \le k_{\text{start}} \le N$ \item threshold The treshold $\kappa \in \mathbb{R}, \kappa > 0$.\end{itemize}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 700 of file fpt.c.
+
+References fpt\_\-step\_\-::a11, fpt\_\-step\_\-::a12, fpt\_\-step\_\-::a21, fpt\_\-step\_\-::a22, fpt\_\-data\_\-::alpha, fpt\_\-data\_\-::alpha\_\-0, fpt\_\-data\_\-::alpha\-N, fpt\_\-data\_\-::beta, fpt\_\-data\_\-::beta\_\-0, fpt\_\-data\_\-::beta\-N, fpt\_\-set\_\-s\_\-::dpt, eval\_\-clenshaw(), FIRST\_\-L, fpt\_\-set\_\-s\_\-::flags, FPT\_\-AL\_\-SYMMETRY, FPT\_\-NO\_\-DIRECT\_\-ALGORITHM, FPT\_\-NO\_\-FAST\_\-ALGORITHM, FPT\_\-NO\_\-STABILIZATION, FPT\_\-PERSISTENT\_\-DATA, fpt\_\-step\_\-::gamma, fpt\_\-data\_\-::gamma, fpt\_\-data\_\-::gamma\_\-m1, fpt\_\-data\_\-::gamma\-N, fpt\_\-data\_\-::k\_\-start, K\_\-START\_\-TILDE, LAST\_\-L, fpt\_\-set\_\-s\_\-::N, fpt\_\-step\_\-::N\_\-stab, nfft\_\-next\_\-power\_\-of\_\-2(), nfft\_\-next\_\-power\_\-of\_\-2\_\-exp(), fpt\_\-step\_\-::stable, fpt\_\-data\_\-::steps, fpt\_\-set\_\-s\_\-::t, fpt\_\-step\_\-::t\_\-stab, and fpt\_\-set\_\-s\_\-::xcvecs.
+
+Referenced by main(), and nfsft\_\-precompute().\hypertarget{group__fpt_ga3}{
+\index{fpt@{fpt}!dpt_trafo@{dpt\_\-trafo}}
+\index{dpt_trafo@{dpt\_\-trafo}!fpt@{fpt}}
+\subsubsection[dpt\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void dpt\_\-trafo (\hyperlink{structfpt__set__s__}{fpt\_\-set} {\em set}, const int {\em m}, const double complex $\ast$ {\em x}, double complex $\ast$ {\em y}, const int {\em k\_\-end}, const unsigned int {\em flags})}}
+\label{group__fpt_ga3}
+
+
+Computes a single DPT transform. 
+
+\begin{itemize}
+\item set \item m \item x \item y \item k\_\-end \item flags \end{itemize}
+
+
+Definition at line 1003 of file fpt.c.
+
+References fpt\_\-data\_\-::alpha, fpt\_\-data\_\-::beta, fpt\_\-set\_\-s\_\-::dpt, eval\_\-sum\_\-clenshaw(), fpt\_\-set\_\-s\_\-::flags, FPT\_\-FUNCTION\_\-VALUES, FPT\_\-NO\_\-DIRECT\_\-ALGORITHM, fpt\_\-data\_\-::gamma, fpt\_\-data\_\-::gamma\_\-m1, fpt\_\-data\_\-::k\_\-start, nfft\_\-next\_\-power\_\-of\_\-2\_\-exp(), PI, fpt\_\-set\_\-s\_\-::plans\_\-dct2, fpt\_\-set\_\-s\_\-::result, fpt\_\-set\_\-s\_\-::temp, fpt\_\-set\_\-s\_\-::work, fpt\_\-set\_\-s\_\-::xc\_\-slow, and fpt\_\-set\_\-s\_\-::xcvecs.
+
+Referenced by fpt\_\-trafo(), and nfsft\_\-trafo().\hypertarget{group__fpt_ga4}{
+\index{fpt@{fpt}!fpt_trafo@{fpt\_\-trafo}}
+\index{fpt_trafo@{fpt\_\-trafo}!fpt@{fpt}}
+\subsubsection[fpt\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void fpt\_\-trafo (\hyperlink{structfpt__set__s__}{fpt\_\-set} {\em set}, const int {\em m}, const double complex $\ast$ {\em x}, double complex $\ast$ {\em y}, const int {\em k\_\-end}, const unsigned int {\em flags})}}
+\label{group__fpt_ga4}
+
+
+Computes a single DPT transform. 
+
+\begin{itemize}
+\item set \item m \item x \item y \item k\_\-end \item flags \end{itemize}
+
+
+Definition at line 1057 of file fpt.c.
+
+References fpt\_\-step\_\-::a11, fpt\_\-step\_\-::a12, fpt\_\-step\_\-::a21, fpt\_\-step\_\-::a22, fpt\_\-data\_\-::alpha\_\-0, fpt\_\-data\_\-::alpha\-N, fpt\_\-data\_\-::beta\_\-0, fpt\_\-data\_\-::beta\-N, fpt\_\-set\_\-s\_\-::dpt, dpt\_\-trafo(), FIRST\_\-L, fpt\_\-set\_\-s\_\-::flags, FPT\_\-AL\_\-SYMMETRY, fpt\_\-do\_\-step\_\-symmetric(), fpt\_\-do\_\-step\_\-symmetric\_\-l(), fpt\_\-do\_\-step\_\-symmetric\_\-u(), FPT\_\-FUNCTION\_\-VALUES, FPT\_\-NO\_\-FAST\_\-ALGORITHM, fpt\_\-step\_\-::gamma, fpt\_\-data\_\-::gamma\_\-m1, fpt\_\-data\_\-::gamma\-N, K\_\-END\_\-TILDE, fpt\_\-data\_\-::k\_\-start, K\_\-START\_\-TILDE, LAST\_\-L, fpt\_\-step\_\-::N\_\-stab, nfft\_\-next\_\-power\_\-of\_\-2\_\-exp(), fpt\_\-set\_\-s\_\-::result, fpt\_\-step\_\-::stable, fpt\_\-data\_\-::steps, fpt\_\-step\_\-::t\_\-stab, fpt\_\-set\_\-s\_\-::vec3, fpt\_\-set\_\-s\_\-::vec4, and fpt\_\-set\_\-s\_\-::work.
+
+Referenced by nfsft\_\-trafo().\hypertarget{group__fpt_ga5}{
+\index{fpt@{fpt}!dpt_transposed@{dpt\_\-transposed}}
+\index{dpt_transposed@{dpt\_\-transposed}!fpt@{fpt}}
+\subsubsection[dpt\_\-transposed]{\setlength{\rightskip}{0pt plus 5cm}void dpt\_\-transposed (\hyperlink{structfpt__set__s__}{fpt\_\-set} {\em set}, const int {\em m}, double complex $\ast$ {\em x}, double complex $\ast$ {\em y}, const int {\em k\_\-end}, const unsigned int {\em flags})}}
+\label{group__fpt_ga5}
+
+
+Computes a single DPT transform. 
+
+\begin{itemize}
+\item set \item m \item x \item y \item k\_\-end \item flags \end{itemize}
+
+
+Definition at line 1328 of file fpt.c.
+
+References fpt\_\-data\_\-::alpha, fpt\_\-data\_\-::beta, fpt\_\-set\_\-s\_\-::dpt, eval\_\-sum\_\-clenshaw\_\-transposed(), fpt\_\-set\_\-s\_\-::flags, FPT\_\-FUNCTION\_\-VALUES, FPT\_\-NO\_\-DIRECT\_\-ALGORITHM, fpt\_\-data\_\-::gamma, fpt\_\-data\_\-::gamma\_\-m1, fpt\_\-data\_\-::k\_\-start, nfft\_\-next\_\-power\_\-of\_\-2\_\-exp(), PI, fpt\_\-set\_\-s\_\-::plans\_\-dct3, fpt\_\-set\_\-s\_\-::result, fpt\_\-set\_\-s\_\-::temp, fpt\_\-set\_\-s\_\-::work, fpt\_\-set\_\-s\_\-::xc\_\-slow, and fpt\_\-set\_\-s\_\-::xcvecs.
+
+Referenced by fpt\_\-transposed(), and nfsft\_\-adjoint().\hypertarget{group__fpt_ga6}{
+\index{fpt@{fpt}!fpt_transposed@{fpt\_\-transposed}}
+\index{fpt_transposed@{fpt\_\-transposed}!fpt@{fpt}}
+\subsubsection[fpt\_\-transposed]{\setlength{\rightskip}{0pt plus 5cm}void fpt\_\-transposed (\hyperlink{structfpt__set__s__}{fpt\_\-set} {\em set}, const int {\em m}, double complex $\ast$ {\em x}, const double complex $\ast$ {\em y}, const int {\em k\_\-end}, const unsigned int {\em flags})}}
+\label{group__fpt_ga6}
+
+
+Computes a single DPT transform. 
+
+\begin{itemize}
+\item set \item m \item x \item y \item k\_\-end \item flags \end{itemize}
+
+
+Definition at line 1380 of file fpt.c.
+
+References fpt\_\-step\_\-::a11, fpt\_\-step\_\-::a12, fpt\_\-step\_\-::a21, fpt\_\-step\_\-::a22, fpt\_\-data\_\-::alpha\_\-0, fpt\_\-data\_\-::alpha\-N, fpt\_\-data\_\-::beta\_\-0, fpt\_\-data\_\-::beta\-N, fpt\_\-set\_\-s\_\-::dpt, dpt\_\-transposed(), FIRST\_\-L, fpt\_\-set\_\-s\_\-::flags, FPT\_\-AL\_\-SYMMETRY, fpt\_\-do\_\-step\_\-transposed\_\-symmetric(), fpt\_\-do\_\-step\_\-transposed\_\-symmetric\_\-l(), fpt\_\-do\_\-step\_\-transposed\_\-symmetric\_\-u(), FPT\_\-FUNCTION\_\-VALUES, FPT\_\-NO\_\-FAST\_\-ALGORITHM, fpt\_\-step\_\-::gamma, fpt\_\-data\_\-::gamma\_\-m1, fpt\_\-data\_\-::gamma\-N, K\_\-END\_\-TILDE, fpt\_\-data\_\-::k\_\-start, K\_\-START\_\-TILDE, LAST\_\-L, fpt\_\-step\_\-::N\_\-stab, nfft\_\-next\_\-power\_\-of\_\-2\_\-exp(), fpt\_\-set\_\-s\_\-::result, fpt\_\-step\_\-::stable, fpt\_\-data\_\-::steps, fpt\_\-step\_\-::t\_\-stab, fpt\_\-set\_\-s\_\-::vec3, fpt\_\-set\_\-s\_\-::vec4, and fpt\_\-set\_\-s\_\-::work.
+
+Referenced by main(), and nfsft\_\-adjoint().

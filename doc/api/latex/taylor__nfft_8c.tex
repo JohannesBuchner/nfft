@@ -1,0 +1,138 @@
+\hypertarget{taylor__nfft_8c}{
+\section{taylor\_\-nfft.c File Reference}
+\label{taylor__nfft_8c}\index{taylor_nfft.c@{taylor\_\-nfft.c}}
+}
+Testing the nfft againt a Taylor expansion based version. 
+
+{\tt \#include $<$stdio.h$>$}\par
+{\tt \#include $<$math.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include \char`\"{}util.h\char`\"{}}\par
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{taylor__nfft_8c_a0}{taylor\_\-init} (taylor\_\-plan $\ast$ths, int N, int M, int n, int m)
+\begin{CompactList}\small\item\em Initialisation of a transform plan. \item\end{CompactList}\item 
+void \hyperlink{taylor__nfft_8c_a1}{taylor\_\-precompute} (taylor\_\-plan $\ast$ths)
+\begin{CompactList}\small\item\em Precomputation of weights and indices in Taylor expansion. \item\end{CompactList}\item 
+void \hyperlink{taylor__nfft_8c_a2}{taylor\_\-finalize} (taylor\_\-plan $\ast$ths)
+\begin{CompactList}\small\item\em Destroys a transform plan. \item\end{CompactList}\item 
+void \hyperlink{taylor__nfft_8c_a3}{taylor\_\-trafo} (taylor\_\-plan $\ast$ths)
+\begin{CompactList}\small\item\em Executes a Taylor-NFFT, see equation (1.1) in \mbox{[}Guide\mbox{]}, computes fast and approximate by means of a Taylor expansion for j=0,...,M-1 f\mbox{[}j\mbox{]} = sum\_\-\{k in I\_\-N$^\wedge$d\} f\_\-hat\mbox{[}k\mbox{]} $\ast$ exp(-2 (pi) k x\mbox{[}j\mbox{]}). \item\end{CompactList}\item 
+void \hyperlink{taylor__nfft_8c_a4}{taylor\_\-time\_\-accuracy} (int N, int M, int n, int m, int n\_\-taylor, int m\_\-taylor, unsigned test\_\-accuracy)
+\begin{CompactList}\small\item\em Compares NDFT, NFFT, and Taylor-NFFT. \item\end{CompactList}\item 
+\hypertarget{taylor__nfft_8c_a5}{
+int \hyperlink{taylor__nfft_8c_a5}{main} (int argc, char $\ast$$\ast$argv)}
+\label{taylor__nfft_8c_a5}
+
+\begin{CompactList}\small\item\em finalise \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Testing the nfft againt a Taylor expansion based version. 
+
+\begin{Desc}
+\item[Author:]Stefan Kunis\end{Desc}
+References: Time and memory requirements of the Nonequispaced FFT
+
+Definition in file \hyperlink{taylor__nfft_8c-source}{taylor\_\-nfft.c}.
+
+\subsection{Function Documentation}
+\hypertarget{taylor__nfft_8c_a0}{
+\index{taylor_nfft.c@{taylor\_\-nfft.c}!taylor_init@{taylor\_\-init}}
+\index{taylor_init@{taylor\_\-init}!taylor_nfft.c@{taylor\_\-nfft.c}}
+\subsubsection[taylor\_\-init]{\setlength{\rightskip}{0pt plus 5cm}void taylor\_\-init (taylor\_\-plan $\ast$ {\em ths}, int {\em N}, int {\em M}, int {\em n}, int {\em m})}}
+\label{taylor__nfft_8c_a0}
+
+
+Initialisation of a transform plan. 
+
+\begin{itemize}
+\item ths The pointer to a taylor plan \item N The multi bandwidth \item M The number of nodes \item n The fft length \item m The order of the Taylor expansion\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 37 of file taylor\_\-nfft.c.
+
+References FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, MALLOC\_\-F, MALLOC\_\-F\_\-HAT, MALLOC\_\-X, and nfft\_\-init\_\-guru().
+
+Referenced by taylor\_\-time\_\-accuracy().\hypertarget{taylor__nfft_8c_a1}{
+\index{taylor_nfft.c@{taylor\_\-nfft.c}!taylor_precompute@{taylor\_\-precompute}}
+\index{taylor_precompute@{taylor\_\-precompute}!taylor_nfft.c@{taylor\_\-nfft.c}}
+\subsubsection[taylor\_\-precompute]{\setlength{\rightskip}{0pt plus 5cm}void taylor\_\-precompute (taylor\_\-plan $\ast$ {\em ths})}}
+\label{taylor__nfft_8c_a1}
+
+
+Precomputation of weights and indices in Taylor expansion. 
+
+\begin{itemize}
+\item ths The pointer to a taylor plan\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 56 of file taylor\_\-nfft.c.
+
+References nfft\_\-plan::M\_\-total, nfft\_\-plan::n, and nfft\_\-plan::x.
+
+Referenced by taylor\_\-time\_\-accuracy().\hypertarget{taylor__nfft_8c_a2}{
+\index{taylor_nfft.c@{taylor\_\-nfft.c}!taylor_finalize@{taylor\_\-finalize}}
+\index{taylor_finalize@{taylor\_\-finalize}!taylor_nfft.c@{taylor\_\-nfft.c}}
+\subsubsection[taylor\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void taylor\_\-finalize (taylor\_\-plan $\ast$ {\em ths})}}
+\label{taylor__nfft_8c_a2}
+
+
+Destroys a transform plan. 
+
+\begin{itemize}
+\item ths The pointer to a taylor plan\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
+
+
+Definition at line 78 of file taylor\_\-nfft.c.
+
+References nfft\_\-finalize().
+
+Referenced by taylor\_\-time\_\-accuracy().\hypertarget{taylor__nfft_8c_a3}{
+\index{taylor_nfft.c@{taylor\_\-nfft.c}!taylor_trafo@{taylor\_\-trafo}}
+\index{taylor_trafo@{taylor\_\-trafo}!taylor_nfft.c@{taylor\_\-nfft.c}}
+\subsubsection[taylor\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void taylor\_\-trafo (taylor\_\-plan $\ast$ {\em ths})}}
+\label{taylor__nfft_8c_a3}
+
+
+Executes a Taylor-NFFT, see equation (1.1) in \mbox{[}Guide\mbox{]}, computes fast and approximate by means of a Taylor expansion for j=0,...,M-1 f\mbox{[}j\mbox{]} = sum\_\-\{k in I\_\-N$^\wedge$d\} f\_\-hat\mbox{[}k\mbox{]} $\ast$ exp(-2 (pi) k x\mbox{[}j\mbox{]}). 
+
+\begin{itemize}
+\item ths The pointer to a taylor plan\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 96 of file taylor\_\-nfft.c.
+
+References nfft\_\-plan::f, nfft\_\-plan::f\_\-hat, nfft\_\-plan::g1, nfft\_\-plan::g2, nfft\_\-plan::m, nfft\_\-plan::M\_\-total, nfft\_\-plan::my\_\-fftw\_\-plan1, nfft\_\-plan::N\_\-total, nfft\_\-plan::n\_\-total, and PI.
+
+Referenced by taylor\_\-time\_\-accuracy().\hypertarget{taylor__nfft_8c_a4}{
+\index{taylor_nfft.c@{taylor\_\-nfft.c}!taylor_time_accuracy@{taylor\_\-time\_\-accuracy}}
+\index{taylor_time_accuracy@{taylor\_\-time\_\-accuracy}!taylor_nfft.c@{taylor\_\-nfft.c}}
+\subsubsection[taylor\_\-time\_\-accuracy]{\setlength{\rightskip}{0pt plus 5cm}void taylor\_\-time\_\-accuracy (int {\em N}, int {\em M}, int {\em n}, int {\em m}, int {\em n\_\-taylor}, int {\em m\_\-taylor}, unsigned {\em test\_\-accuracy})}}
+\label{taylor__nfft_8c_a4}
+
+
+Compares NDFT, NFFT, and Taylor-NFFT. 
+
+\begin{itemize}
+\item N The bandwidth \item N The number of nodes \item n The FFT-size for the NFFT \item m The cut-off for window function \item n\_\-taylor The FFT-size for the Taylor-NFFT \item m\_\-taylor The order of the Taylor approximation \item test\_\-accuracy Flag for NDFT computation\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 152 of file taylor\_\-nfft.c.
+
+References nfft\_\-plan::f, nfft\_\-plan::f\_\-hat, FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, nfft\_\-plan::M\_\-total, nfft\_\-plan::N\_\-total, ndft\_\-trafo(), nfft\_\-error\_\-l\_\-infty\_\-complex(), nfft\_\-finalize(), nfft\_\-plan::nfft\_\-flags, nfft\_\-init\_\-guru(), nfft\_\-precompute\_\-one\_\-psi(), nfft\_\-second(), NFFT\_\-SWAP\_\-complex, nfft\_\-trafo(), nfft\_\-vrand\_\-shifted\_\-unit\_\-double(), nfft\_\-vrand\_\-unit\_\-complex(), PRE\_\-FG\_\-PSI, PRE\_\-ONE\_\-PSI, PRE\_\-PHI\_\-HUT, taylor\_\-finalize(), taylor\_\-init(), taylor\_\-precompute(), taylor\_\-trafo(), and nfft\_\-plan::x.
+
+Referenced by main().

@@ -1,0 +1,51 @@
+\hypertarget{ndft__fast_8c}{
+\section{ndft\_\-fast.c File Reference}
+\label{ndft__fast_8c}\index{ndft_fast.c@{ndft\_\-fast.c}}
+}
+Testing ndft, Horner-like ndft, and fully precomputed ndft. 
+
+{\tt \#include $<$stdio.h$>$}\par
+{\tt \#include $<$math.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$complex.h$>$}\par
+{\tt \#include \char`\"{}util.h\char`\"{}}\par
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{ndft__fast_8c_a0}{
+void {\bf ndft\_\-horner\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)}
+\label{ndft__fast_8c_a0}
+
+\item 
+\hypertarget{ndft__fast_8c_a1}{
+void {\bf ndft\_\-pre\_\-full\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, double complex $\ast$A)}
+\label{ndft__fast_8c_a1}
+
+\item 
+\hypertarget{ndft__fast_8c_a2}{
+void {\bf ndft\_\-pre\_\-full\_\-init} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, double complex $\ast$A)}
+\label{ndft__fast_8c_a2}
+
+\item 
+\hypertarget{ndft__fast_8c_a3}{
+void {\bf ndft\_\-time} (int N, int M, unsigned test\_\-ndft, unsigned test\_\-pre\_\-full)}
+\label{ndft__fast_8c_a3}
+
+\item 
+\hypertarget{ndft__fast_8c_a4}{
+int \hyperlink{ndft__fast_8c_a4}{main} (int argc, char $\ast$$\ast$argv)}
+\label{ndft__fast_8c_a4}
+
+\begin{CompactList}\small\item\em Fully precomputed NDFT. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Testing ndft, Horner-like ndft, and fully precomputed ndft. 
+
+\begin{Desc}
+\item[Author:]Stefan Kunis\end{Desc}
+
+
+Definition in file \hyperlink{ndft__fast_8c-source}{ndft\_\-fast.c}.

@@ -1,0 +1,49 @@
+\hypertarget{api_8h}{
+\section{api.h File Reference}
+\label{api_8h}\index{api.h@{api.h}}
+}
+Header file with internal API of the NFSFT module. 
+
+{\tt \#include \char`\"{}config.h\char`\"{}}\par
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+{\tt \#include $<$fftw3.h$>$}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__nfsft_ga42}{
+\#define {\bf BWEXP\_\-MAX}~10}
+\label{group__nfsft_ga42}
+
+\item 
+\hypertarget{group__nfsft_ga43}{
+\#define {\bf BW\_\-MAX}~1024}
+\label{group__nfsft_ga43}
+
+\item 
+\hypertarget{group__nfsft_ga44}{
+\#define {\bf ROW}(k)~(k$\ast$(wisdom.N\_\-MAX+2))}
+\label{group__nfsft_ga44}
+
+\item 
+\hypertarget{group__nfsft_ga45}{
+\#define {\bf ROWK}(k)~(k$\ast$(wisdom.N\_\-MAX+2)+k)}
+\label{group__nfsft_ga45}
+
+\end{CompactItemize}
+\subsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum {\bf bool} \{ {\bf false} =  0, 
+{\bf true} =  1
+ \}
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Header file with internal API of the NFSFT module. 
+
+\begin{Desc}
+\item[Author:]Jens Keiner\end{Desc}
+
+
+Definition in file \hyperlink{api_8h-source}{api.h}.

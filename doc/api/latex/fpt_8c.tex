@@ -1,0 +1,388 @@
+\hypertarget{fpt_8c}{
+\section{fpt.c File Reference}
+\label{fpt_8c}\index{fpt.c@{fpt.c}}
+}
+Implementation file for the FPT module. 
+
+{\tt \#include $<$math.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$stdbool.h$>$}\par
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+{\tt \#include \char`\"{}util.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{fpt_8c_a0}{
+\#define \hyperlink{fpt_8c_a0}{K\_\-START\_\-TILDE}(x, y)~(NFFT\_\-MAX(NFFT\_\-MIN(x,y-2),0))}
+\label{fpt_8c_a0}
+
+\begin{CompactList}\small\item\em Computes the minimum degree at the top of a cascade. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a1}{
+\#define \hyperlink{fpt_8c_a1}{K\_\-END\_\-TILDE}(x, y)~NFFT\_\-MIN(x,y-1)}
+\label{fpt_8c_a1}
+
+\begin{CompactList}\small\item\em Computes the maximum degree at the top of a cascade. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a2}{
+\#define \hyperlink{fpt_8c_a2}{FIRST\_\-L}(x, y)~((int)floor((x)/(double)y))}
+\label{fpt_8c_a2}
+
+\begin{CompactList}\small\item\em Computes the index of the first block of four functions in a cascade level. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a3}{
+\#define \hyperlink{fpt_8c_a3}{LAST\_\-L}(x, y)~((int)ceil(((x)+1)/(double)y)-1)}
+\label{fpt_8c_a3}
+
+\begin{CompactList}\small\item\em Computes the index of the last block of four functions in a cascade level. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a4}{
+\#define {\bf N\_\-TILDE}(y)~(y-1)}
+\label{fpt_8c_a4}
+
+\item 
+\hypertarget{fpt_8c_a5}{
+\#define {\bf IS\_\-SYMMETRIC}(x, y, z)~(x $>$= ((y-1.0)/z))}
+\label{fpt_8c_a5}
+
+\item 
+\hypertarget{fpt_8c_a6}{
+\#define {\bf FPT\_\-BREAK\_\-EVEN}~4}
+\label{fpt_8c_a6}
+
+\item 
+\#define {\bf ABUVXPWY\_\-SYMMETRIC}(NAME, S1, S2)
+\item 
+\#define {\bf ABUVXPWY\_\-SYMMETRIC\_\-1}(NAME, S1)
+\item 
+\#define {\bf ABUVXPWY\_\-SYMMETRIC\_\-2}(NAME, S1)
+\item 
+\hypertarget{fpt_8c_a10}{
+\#define {\bf AUVXPWY\_\-SYMMETRIC}(NAME, S1, S2)}
+\label{fpt_8c_a10}
+
+\item 
+\hypertarget{fpt_8c_a11}{
+\#define {\bf FPT\_\-DO\_\-STEP}(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)}
+\label{fpt_8c_a11}
+
+\item 
+\#define \hyperlink{fpt_8c_a12}{FPT\_\-DO\_\-STEP\_\-TRANSPOSED}(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+\hypertarget{fpt_8c_a13}{
+typedef \hyperlink{structfpt__step__}{fpt\_\-step\_\-} \hyperlink{fpt_8c_a13}{fpt\_\-step}}
+\label{fpt_8c_a13}
+
+\begin{CompactList}\small\item\em Holds data for a single multiplication step in the cascade summation. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a14}{
+typedef \hyperlink{structfpt__data__}{fpt\_\-data\_\-} \hyperlink{fpt_8c_a14}{fpt\_\-data}}
+\label{fpt_8c_a14}
+
+\begin{CompactList}\small\item\em Holds data for a single cascade summation. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a15}{
+typedef \hyperlink{structfpt__set__s__}{fpt\_\-set\_\-s\_\-} \hyperlink{fpt_8c_a15}{fpt\_\-set\_\-s}}
+\label{fpt_8c_a15}
+
+\begin{CompactList}\small\item\em Holds data for a set of cascade summations. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{fpt_8c_a16}{
+void {\bf abuvxpwy} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a16}
+
+\item 
+\hypertarget{fpt_8c_a17}{
+void {\bf abuvxpwy\_\-symmetric1} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a17}
+
+\item 
+\hypertarget{fpt_8c_a18}{
+void {\bf abuvxpwy\_\-symmetric2} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a18}
+
+\item 
+\hypertarget{fpt_8c_a19}{
+void {\bf abuvxpwy\_\-symmetric1\_\-1} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a19}
+
+\item 
+\hypertarget{fpt_8c_a20}{
+void {\bf abuvxpwy\_\-symmetric1\_\-2} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a20}
+
+\item 
+\hypertarget{fpt_8c_a21}{
+void {\bf abuvxpwy\_\-symmetric2\_\-1} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a21}
+
+\item 
+\hypertarget{fpt_8c_a22}{
+void {\bf abuvxpwy\_\-symmetric2\_\-2} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a22}
+
+\item 
+\hypertarget{fpt_8c_a23}{
+void {\bf auvxpwy} (double a, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a23}
+
+\item 
+\hypertarget{fpt_8c_a24}{
+void {\bf auvxpwy\_\-symmetric} (double a, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_a24}
+
+\item 
+\hypertarget{fpt_8c_a25}{
+void {\bf fpt\_\-do\_\-step} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a25}
+
+\item 
+\hypertarget{fpt_8c_a26}{
+void \hyperlink{fpt_8c_a26}{fpt\_\-do\_\-step\_\-symmetric} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a26}
+
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a27}{
+void \hyperlink{fpt_8c_a27}{fpt\_\-do\_\-step\_\-symmetric\_\-u} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a27}
+
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a28}{
+void \hyperlink{fpt_8c_a28}{fpt\_\-do\_\-step\_\-symmetric\_\-l} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a28}
+
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a29}{
+void {\bf fpt\_\-do\_\-step\_\-transposed} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a29}
+
+\item 
+\hypertarget{fpt_8c_a30}{
+void \hyperlink{fpt_8c_a30}{fpt\_\-do\_\-step\_\-transposed\_\-symmetric} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a30}
+
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a31}{
+void \hyperlink{fpt_8c_a31}{fpt\_\-do\_\-step\_\-transposed\_\-symmetric\_\-u} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a31}
+
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a32}{
+void \hyperlink{fpt_8c_a32}{fpt\_\-do\_\-step\_\-transposed\_\-symmetric\_\-l} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{fpt_8c_a32}
+
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a33}{
+void \hyperlink{fpt_8c_a33}{eval\_\-clenshaw} (const double $\ast$x, double $\ast$y, int size, int k, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma)}
+\label{fpt_8c_a33}
+
+\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_a34}{
+int {\bf eval\_\-clenshaw\_\-thresh} (const double $\ast$x, double $\ast$y, int size, int k, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, const double threshold)}
+\label{fpt_8c_a34}
+
+\item 
+void \hyperlink{fpt_8c_a35}{eval\_\-sum\_\-clenshaw} (int N, int M, double complex $\ast$a, double $\ast$x, double complex $\ast$y, double complex $\ast$temp, double $\ast$alpha, double $\ast$beta, double $\ast$gamma, double lambda)
+\begin{CompactList}\small\item\em Clenshaw algorithm. \item\end{CompactList}\item 
+void \hyperlink{fpt_8c_a36}{eval\_\-sum\_\-clenshaw\_\-transposed} (int N, int M, double complex $\ast$a, double $\ast$x, double complex $\ast$y, double complex $\ast$temp, double $\ast$alpha, double $\ast$beta, double $\ast$gamma, double lambda)
+\begin{CompactList}\small\item\em Clenshaw algorithm. \item\end{CompactList}\item 
+\hyperlink{structfpt__set__s__}{fpt\_\-set} \hyperlink{group__fpt_ga1}{fpt\_\-init} (const int M, const int t, const unsigned int flags)
+\begin{CompactList}\small\item\em Initializes a set of precomputed data for DPT transforms of equal length. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga2}{fpt\_\-precompute} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, int k\_\-start, const double threshold)
+\begin{CompactList}\small\item\em Computes the data required for a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga3}{dpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga4}{fpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga5}{dpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga6}{fpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, const double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga7}{
+void \hyperlink{group__fpt_ga7}{fpt\_\-finalize} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{group__fpt_ga7}
+
+\begin{CompactList}\small\item\em Save copy of inpute data for stabilization steps. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation file for the FPT module. 
+
+\begin{Desc}
+\item[Author:]Jens Keiner\end{Desc}
+
+
+Definition in file \hyperlink{fpt_8c-source}{fpt.c}.
+
+\subsection{Define Documentation}
+\hypertarget{fpt_8c_a7}{
+\index{fpt.c@{fpt.c}!ABUVXPWY_SYMMETRIC@{ABUVXPWY\_\-SYMMETRIC}}
+\index{ABUVXPWY_SYMMETRIC@{ABUVXPWY\_\-SYMMETRIC}!fpt.c@{fpt.c}}
+\subsubsection[ABUVXPWY\_\-SYMMETRIC]{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC(NAME, S1, S2)}}
+\label{fpt_8c_a7}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}inline void NAME(double a, double b, double complex* u, double complex* x, double* v, \
+  double complex* y, double* w, int n) \
+{ \
+  int l; \
+  double complex *u_ptr, *x_ptr, *y_ptr; \
+  double *v_ptr, *w_ptr; \
+  \
+  u_ptr = u; \
+  x_ptr = x; \
+  v_ptr = v; \
+  y_ptr = y; \
+  w_ptr = w; \
+  \
+  for (l = 0; l < n/2; l++) \
+  { \
+    *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
+  } \
+  v_ptr--; \
+  w_ptr--; \
+  for (l = 0; l < n/2; l++) \
+  { \
+    *u_ptr++ = a * (b * S1 * (*v_ptr--) * (*x_ptr++) + S2 * (*w_ptr--) * (*y_ptr++)); \
+  } \
+}
+\end{verbatim}\normalsize 
+
+
+Definition at line 135 of file fpt.c.\hypertarget{fpt_8c_a8}{
+\index{fpt.c@{fpt.c}!ABUVXPWY_SYMMETRIC_1@{ABUVXPWY\_\-SYMMETRIC\_\-1}}
+\index{ABUVXPWY_SYMMETRIC_1@{ABUVXPWY\_\-SYMMETRIC\_\-1}!fpt.c@{fpt.c}}
+\subsubsection[ABUVXPWY\_\-SYMMETRIC\_\-1]{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC\_\-1(NAME, S1)}}
+\label{fpt_8c_a8}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}inline void NAME(double a, double b, double complex* u, double complex* x, double* v, \
+  double complex* y, double* w, int n) \
+{ \
+  int l; \
+  double complex *u_ptr, *x_ptr, *y_ptr; \
+  double *v_ptr, *w_ptr; \
+  \
+  u_ptr = u; \
+  x_ptr = x; \
+  v_ptr = v; \
+  y_ptr = y; \
+  w_ptr = w; \
+  \
+  for (l = 0; l < n/2; l++) \
+  { \
+    *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
+  } \
+  v_ptr--; \
+  /*w_ptr--;*/ \
+  for (l = 0; l < n/2; l++) \
+  { \
+    *u_ptr++ = a * (b * S1 * (*v_ptr--) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
+  } \
+}
+\end{verbatim}\normalsize 
+
+
+Definition at line 164 of file fpt.c.\hypertarget{fpt_8c_a9}{
+\index{fpt.c@{fpt.c}!ABUVXPWY_SYMMETRIC_2@{ABUVXPWY\_\-SYMMETRIC\_\-2}}
+\index{ABUVXPWY_SYMMETRIC_2@{ABUVXPWY\_\-SYMMETRIC\_\-2}!fpt.c@{fpt.c}}
+\subsubsection[ABUVXPWY\_\-SYMMETRIC\_\-2]{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC\_\-2(NAME, S1)}}
+\label{fpt_8c_a9}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}inline void NAME(double a, double b, double complex* u, double complex* x, double* v, \
+  double complex* y, double* w, int n) \
+{ \
+  int l; \
+  double complex *u_ptr, *x_ptr, *y_ptr; \
+  double *v_ptr, *w_ptr; \
+  \
+  u_ptr = u; \
+  x_ptr = x; \
+  v_ptr = v; \
+  y_ptr = y; \
+  w_ptr = w; \
+  \
+  for (l = 0; l < n/2; l++) \
+  { \
+    *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
+  } \
+  /*v_ptr--;*/ \
+  w_ptr--; \
+  for (l = 0; l < n/2; l++) \
+  { \
+    *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + S1 * (*w_ptr--) * (*y_ptr++)); \
+  } \
+}
+\end{verbatim}\normalsize 
+
+
+Definition at line 193 of file fpt.c.\hypertarget{fpt_8c_a12}{
+\index{fpt.c@{fpt.c}!FPT_DO_STEP_TRANSPOSED@{FPT\_\-DO\_\-STEP\_\-TRANSPOSED}}
+\index{FPT_DO_STEP_TRANSPOSED@{FPT\_\-DO\_\-STEP\_\-TRANSPOSED}!fpt.c@{fpt.c}}
+\subsubsection[FPT\_\-DO\_\-STEP\_\-TRANSPOSED]{\setlength{\rightskip}{0pt plus 5cm}\#define FPT\_\-DO\_\-STEP\_\-TRANSPOSED(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)}}
+\label{fpt_8c_a12}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}inline void NAME(double complex  *a, double complex *b, double *a11, \
+  double *a12, double *a21, double *a22, double gamma, int tau, fpt_set set) \
+{ \ \
+  int length = 1<<(tau+1); \ \
+  double norm = 1.0/(length<<1); \
+  \
+  /* Compute function values from Chebyshev-coefficients using a DCT-III. */ \
+  fftw_execute_r2r(set->plans_dct3[tau-1],(double*)a,(double*)a); \
+  fftw_execute_r2r(set->plans_dct3[tau-1],(double*)b,(double*)b); \
+  \
+  /* Perform matrix multiplication. */ \
+  M1_FUNCTION(norm,gamma,set->z,a,a11,b,a21,length); \
+  M2_FUNCTION(norm,gamma,b,a,a12,b,a22,length); \
+  memcpy(a,set->z,length*sizeof(double complex)); \
+  \
+  /* Compute Chebyshev-coefficients using a DCT-II. */ \
+  fftw_execute_r2r(set->plans_dct2[tau-1],(double*)a,(double*)a); \
+  fftw_execute_r2r(set->plans_dct2[tau-1],(double*)b,(double*)b); \
+}
+\end{verbatim}\normalsize 
+Twice the length of the coefficient arrays. 
+
+
+
+Definition at line 335 of file fpt.c.
+
+\subsection{Function Documentation}
+\hypertarget{fpt_8c_a35}{
+\index{fpt.c@{fpt.c}!eval_sum_clenshaw@{eval\_\-sum\_\-clenshaw}}
+\index{eval_sum_clenshaw@{eval\_\-sum\_\-clenshaw}!fpt.c@{fpt.c}}
+\subsubsection[eval\_\-sum\_\-clenshaw]{\setlength{\rightskip}{0pt plus 5cm}void eval\_\-sum\_\-clenshaw (int {\em N}, int {\em M}, double complex $\ast$ {\em a}, double $\ast$ {\em x}, double complex $\ast$ {\em y}, double complex $\ast$ {\em temp}, double $\ast$ {\em alpha}, double $\ast$ {\em beta}, double $\ast$ {\em gamma}, double {\em lambda})}}
+\label{fpt_8c_a35}
+
+
+Clenshaw algorithm. 
+
+Evaluates a sum of real-valued functions $P_k : \mathbb{R} \rightarrow \mathbb{R}$ \[ f(x) = \sum_{k=0}^N a_k P_k(x) \quad (N \in \mathbb{N}_0) \] obeying a three-term recurrence relation \[ P_{k+1}(x) = (alpha_k * x + beta_k)*P_{k}(x) + gamma_k P_{k-1}(x) \quad (alpha_k, beta_k, gamma_k \in \mathbb{R},\; k \ge 0) \] with initial conditions $P_{-1}(x) := 0$, $P_0(x) := \lambda$ for given double complex coefficients $\left(a_k\right)_{k=0}^N \in \mathbb{C}^{N+1}$ at given nodes $\left(x_j\right)_{j=0}^M \in \mathbb{R}^{M+1}$, $M \in \mathbb{N}_0$. 
+
+Definition at line 479 of file fpt.c.
+
+Referenced by dpt\_\-trafo().\hypertarget{fpt_8c_a36}{
+\index{fpt.c@{fpt.c}!eval_sum_clenshaw_transposed@{eval\_\-sum\_\-clenshaw\_\-transposed}}
+\index{eval_sum_clenshaw_transposed@{eval\_\-sum\_\-clenshaw\_\-transposed}!fpt.c@{fpt.c}}
+\subsubsection[eval\_\-sum\_\-clenshaw\_\-transposed]{\setlength{\rightskip}{0pt plus 5cm}void eval\_\-sum\_\-clenshaw\_\-transposed (int {\em N}, int {\em M}, double complex $\ast$ {\em a}, double $\ast$ {\em x}, double complex $\ast$ {\em y}, double complex $\ast$ {\em temp}, double $\ast$ {\em alpha}, double $\ast$ {\em beta}, double $\ast$ {\em gamma}, double {\em lambda})}}
+\label{fpt_8c_a36}
+
+
+Clenshaw algorithm. 
+
+Evaluates a sum of real-valued functions $P_k : \mathbb{R} \rightarrow \mathbb{R}$ \[ f(x) = \sum_{k=0}^N a_k P_k(x) \quad (N \in \mathbb{N}_0) \] obeying a three-term recurrence relation \[ P_{k+1}(x) = (alpha_k * x + beta_k)*P_{k}(x) + gamma_k P_{k-1}(x) \quad (alpha_k, beta_k, gamma_k \in \mathbb{R},\; k \ge 0) \] with initial conditions $P_{-1}(x) := 0$, $P_0(x) := \lambda$ for given double complex coefficients $\left(a_k\right)_{k=0}^N \in \mathbb{C}^{N+1}$ at given nodes $\left(x_j\right)_{j=0}^M \in \mathbb{R}^{M+1}$, $M \in \mathbb{N}_0$. 
+
+Definition at line 545 of file fpt.c.
+
+Referenced by dpt\_\-transposed().

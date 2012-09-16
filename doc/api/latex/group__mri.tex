@@ -1,0 +1,174 @@
+\hypertarget{group__mri}{
+\section{MRI - Transforms in magnetic resonance imaging}
+\label{group__mri}\index{MRI - Transforms in magnetic resonance imaging@{MRI - Transforms in magnetic resonance imaging}}
+}
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct \hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan}
+\begin{CompactList}\small\item\em The structure for the transform plan. \item\end{CompactList}\item 
+struct \hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan}
+\begin{CompactList}\small\item\em The structure for the transform plan. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{group__mri_ga0}{mri\_\-inh\_\-2d1d\_\-trafo} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes a mri transformation considering the field inhomogeneity with the 2d1d method, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga1}{mri\_\-inh\_\-2d1d\_\-adjoint} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an adjoint mri transformation considering the field inhomogeneity with the 2d1d method, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga2}{mri\_\-inh\_\-2d1d\_\-init\_\-guru} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths, int $\ast$N, int M, int $\ast$n, int m, double sigma, unsigned nfft\_\-flags, unsigned fftw\_\-flags)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga3}{mri\_\-inh\_\-2d1d\_\-finalize} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga4}{mri\_\-inh\_\-3d\_\-trafo} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes a mri transformation considering the field inhomogeneity with the 3d method, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga5}{mri\_\-inh\_\-3d\_\-adjoint} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an adjoint mri transformation considering the field inhomogeneity with the 3d method, i.e. \item\end{CompactList}\item 
+\hypertarget{group__mri_ga6}{
+void {\bf mri\_\-inh\_\-3d\_\-init\_\-guru} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths, int $\ast$N, int M, int $\ast$n, int m, double sigma, unsigned nfft\_\-flags, unsigned fftw\_\-flags)}
+\label{group__mri_ga6}
+
+\item 
+void \hyperlink{group__mri_ga7}{mri\_\-inh\_\-3d\_\-finalize} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__mri_ga0}{
+\index{mri@{mri}!mri_inh_2d1d_trafo@{mri\_\-inh\_\-2d1d\_\-trafo}}
+\index{mri_inh_2d1d_trafo@{mri\_\-inh\_\-2d1d\_\-trafo}!mri@{mri}}
+\subsubsection[mri\_\-inh\_\-2d1d\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void mri\_\-inh\_\-2d1d\_\-trafo (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ {\em ths})}}
+\label{group__mri_ga0}
+
+
+Executes a mri transformation considering the field inhomogeneity with the 2d1d method, i.e. 
+
+computes for $j=0,...,M_{total}-1$ \[ f(x_j) = \sum_{k \in I_N^2} \hat{f}(k) {\rm e}^{\mbox{\rm\scriptsize i} t_j \omega(k)} {\rm e}^{-2 \pi \mbox{\rm\scriptsize i} k x_j} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 40 of file mri.c.
+
+References window\_\-funct\_\-plan\_\-::m, window\_\-funct\_\-plan\_\-::n, nfft\_\-trafo(), and PI.
+
+Referenced by construct().\hypertarget{group__mri_ga1}{
+\index{mri@{mri}!mri_inh_2d1d_adjoint@{mri\_\-inh\_\-2d1d\_\-adjoint}}
+\index{mri_inh_2d1d_adjoint@{mri\_\-inh\_\-2d1d\_\-adjoint}!mri@{mri}}
+\subsubsection[mri\_\-inh\_\-2d1d\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void mri\_\-inh\_\-2d1d\_\-adjoint (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ {\em ths})}}
+\label{group__mri_ga1}
+
+
+Executes an adjoint mri transformation considering the field inhomogeneity with the 2d1d method, i.e. 
+
+computes for $k \in I_N^2$ \[ \hat{f}(k) = \sum_{j=0}^{M_{total}-1} f(x_j) {\rm e}^{\mbox{\rm\scriptsize i} t_j \omega(k)} {\rm e}^{-2 \pi \mbox{\rm\scriptsize i} k x_j} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 82 of file mri.c.
+
+References window\_\-funct\_\-plan\_\-::m, window\_\-funct\_\-plan\_\-::n, nfft\_\-adjoint(), and PI.\hypertarget{group__mri_ga2}{
+\index{mri@{mri}!mri_inh_2d1d_init_guru@{mri\_\-inh\_\-2d1d\_\-init\_\-guru}}
+\index{mri_inh_2d1d_init_guru@{mri\_\-inh\_\-2d1d\_\-init\_\-guru}!mri@{mri}}
+\subsubsection[mri\_\-inh\_\-2d1d\_\-init\_\-guru]{\setlength{\rightskip}{0pt plus 5cm}void mri\_\-inh\_\-2d1d\_\-init\_\-guru (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ {\em ths}, int $\ast$ {\em N}, int {\em M}, int $\ast$ {\em n}, int {\em m}, double {\em sigma}, unsigned {\em nfft\_\-flags}, unsigned {\em fftw\_\-flags})}}
+\label{group__mri_ga2}
+
+
+Creates a transform plan. 
+
+\begin{itemize}
+\item ths\_\-plan The plan for the transform \item N The bandwidth $N$ \item M\_\-total The number of nodes $x$ \item n The oversampled bandwidth $N$ \item m The cut-off parameter \item sigma The oversampling factor \item nnfft\_\-flags The flags\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 134 of file mri.c.
+
+References nfft\_\-init\_\-guru().
+
+Referenced by construct().\hypertarget{group__mri_ga3}{
+\index{mri@{mri}!mri_inh_2d1d_finalize@{mri\_\-inh\_\-2d1d\_\-finalize}}
+\index{mri_inh_2d1d_finalize@{mri\_\-inh\_\-2d1d\_\-finalize}!mri@{mri}}
+\subsubsection[mri\_\-inh\_\-2d1d\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void mri\_\-inh\_\-2d1d\_\-finalize (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ {\em ths})}}
+\label{group__mri_ga3}
+
+
+Destroys a plan. 
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 149 of file mri.c.
+
+References nfft\_\-finalize().
+
+Referenced by construct().\hypertarget{group__mri_ga4}{
+\index{mri@{mri}!mri_inh_3d_trafo@{mri\_\-inh\_\-3d\_\-trafo}}
+\index{mri_inh_3d_trafo@{mri\_\-inh\_\-3d\_\-trafo}!mri@{mri}}
+\subsubsection[mri\_\-inh\_\-3d\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void mri\_\-inh\_\-3d\_\-trafo (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ {\em ths})}}
+\label{group__mri_ga4}
+
+
+Executes a mri transformation considering the field inhomogeneity with the 3d method, i.e. 
+
+computes for $j=0,...,M_{total}-1$ \[ f(x_j) = \sum_{k \in I_N^2} \hat{f}(k) {\rm e}^{\mbox{\rm\scriptsize i} t_j \omega(k)} {\rm e}^{-2 \pi \mbox{\rm\scriptsize i} k x_j} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 164 of file mri.c.
+
+References window\_\-funct\_\-plan\_\-::m, window\_\-funct\_\-plan\_\-::n, and nfft\_\-trafo().
+
+Referenced by construct().\hypertarget{group__mri_ga5}{
+\index{mri@{mri}!mri_inh_3d_adjoint@{mri\_\-inh\_\-3d\_\-adjoint}}
+\index{mri_inh_3d_adjoint@{mri\_\-inh\_\-3d\_\-adjoint}!mri@{mri}}
+\subsubsection[mri\_\-inh\_\-3d\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void mri\_\-inh\_\-3d\_\-adjoint (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ {\em ths})}}
+\label{group__mri_ga5}
+
+
+Executes an adjoint mri transformation considering the field inhomogeneity with the 3d method, i.e. 
+
+computes for $k \in I_N^2$ \[ \hat{f}(k) = \sum_{j=0}^{M_{total}-1} f(x_j) {\rm e}^{\mbox{\rm\scriptsize i} t_j \omega(k)} {\rm e}^{-2 \pi \mbox{\rm\scriptsize i} k x_j} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 196 of file mri.c.
+
+References window\_\-funct\_\-plan\_\-::m, window\_\-funct\_\-plan\_\-::n, and nfft\_\-adjoint().\hypertarget{group__mri_ga7}{
+\index{mri@{mri}!mri_inh_3d_finalize@{mri\_\-inh\_\-3d\_\-finalize}}
+\index{mri_inh_3d_finalize@{mri\_\-inh\_\-3d\_\-finalize}!mri@{mri}}
+\subsubsection[mri\_\-inh\_\-3d\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void mri\_\-inh\_\-3d\_\-finalize (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ {\em ths})}}
+\label{group__mri_ga7}
+
+
+Destroys a plan. 
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 238 of file mri.c.
+
+References nfft\_\-finalize().
+
+Referenced by construct().

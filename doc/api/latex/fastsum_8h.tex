@@ -1,0 +1,52 @@
+\hypertarget{fastsum_8h}{
+\section{fastsum.h File Reference}
+\label{fastsum_8h}\index{fastsum.h@{fastsum.h}}
+}
+Header file for the fast NFFT-based summation algorithm. 
+
+{\tt \#include $<$complex.h$>$}\par
+{\tt \#include \char`\"{}util.h\char`\"{}}\par
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__applications__fastsum_ga31}{
+\#define \hyperlink{group__applications__fastsum_ga31}{EXACT\_\-NEARFIELD}~(1U$<$$<$ 0)}
+\label{group__applications__fastsum_ga31}
+
+\begin{CompactList}\small\item\em Constant symbols. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__applications__fastsum_ga0}{
+typedef \hyperlink{structfastsum__plan__}{fastsum\_\-plan\_\-} \hyperlink{group__applications__fastsum_ga0}{fastsum\_\-plan}}
+\label{group__applications__fastsum_ga0}
+
+\begin{CompactList}\small\item\em plan for fast summation algorithm \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{fastsum_8h_a2}{
+double {\bf regkern} (complex($\ast$kernel)(), double xx, int p, const double $\ast$param, double a, double b)}
+\label{fastsum_8h_a2}
+
+\item 
+\hypertarget{group__applications__fastsum_ga8}{
+double \hyperlink{group__applications__fastsum_ga8}{kubintkern} (double x, double $\ast$Add, int Ad, double a)}
+\label{group__applications__fastsum_ga8}
+
+\begin{CompactList}\small\item\em cubic spline interpolation in near field with even kernels \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for the fast NFFT-based summation algorithm. 
+
+reference: M. Fenn, G. Steidl, Fast NFFT based summation of radial functions. Sampl. Theory Signal Image Process., 3, 1-28, 2004.
+
+\begin{Desc}
+\item[Author:]Markus Fenn \end{Desc}
+\begin{Desc}
+\item[Date:]2003-2006\end{Desc}
+
+
+Definition in file \hyperlink{fastsum_8h-source}{fastsum.h}.

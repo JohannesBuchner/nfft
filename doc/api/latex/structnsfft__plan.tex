@@ -1,0 +1,129 @@
+\hypertarget{structnsfft__plan}{
+\section{nsfft\_\-plan Struct Reference}
+\label{structnsfft__plan}\index{nsfft_plan@{nsfft\_\-plan}}
+}
+Structure for a NFFT plan.  
+
+
+{\tt \#include $<$nfft3.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structnsfft__plan_o0}{
+int \hyperlink{structnsfft__plan_o0}{N\_\-total}}
+\label{structnsfft__plan_o0}
+
+\begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o1}{
+int \hyperlink{structnsfft__plan_o1}{M\_\-total}}
+\label{structnsfft__plan_o1}
+
+\begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o2}{
+double complex $\ast$ \hyperlink{structnsfft__plan_o2}{f\_\-hat}}
+\label{structnsfft__plan_o2}
+
+\begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o3}{
+double complex $\ast$ \hyperlink{structnsfft__plan_o3}{f}}
+\label{structnsfft__plan_o3}
+
+\begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o4}{
+int \hyperlink{structnsfft__plan_o4}{d}}
+\label{structnsfft__plan_o4}
+
+\begin{CompactList}\small\item\em dimension, rank; d=2,3 \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o5}{
+int \hyperlink{structnsfft__plan_o5}{J}}
+\label{structnsfft__plan_o5}
+
+\begin{CompactList}\small\item\em problem size, i.e., d=2: N\_\-total=(J+4) 2$^\wedge$(J+1) d=3: N\_\-total=2$^\wedge$J 6(2$^\wedge$((J+1)/2+1) -1)+2$^\wedge$(3(J/2+1)) \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o6}{
+int \hyperlink{structnsfft__plan_o6}{sigma}}
+\label{structnsfft__plan_o6}
+
+\begin{CompactList}\small\item\em oversampling-factor \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o7}{
+unsigned \hyperlink{structnsfft__plan_o7}{flags}}
+\label{structnsfft__plan_o7}
+
+\begin{CompactList}\small\item\em flags for precomputation, malloc \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o8}{
+int $\ast$ \hyperlink{structnsfft__plan_o8}{index\_\-sparse\_\-to\_\-full}}
+\label{structnsfft__plan_o8}
+
+\begin{CompactList}\small\item\em index conversation, overflow for d=3, J=9! \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o9}{
+int \hyperlink{structnsfft__plan_o9}{r\_\-act\_\-nfft\_\-plan}}
+\label{structnsfft__plan_o9}
+
+\begin{CompactList}\small\item\em index of current nfft block \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o10}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o10}{act\_\-nfft\_\-plan}}
+\label{structnsfft__plan_o10}
+
+\begin{CompactList}\small\item\em current nfft block \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o11}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o11}{center\_\-nfft\_\-plan}}
+\label{structnsfft__plan_o11}
+
+\begin{CompactList}\small\item\em central nfft block \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o12}{
+fftw\_\-plan $\ast$ \hyperlink{structnsfft__plan_o12}{set\_\-fftw\_\-plan1}}
+\label{structnsfft__plan_o12}
+
+\begin{CompactList}\small\item\em fftw plan for the nfft blocks \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o13}{
+fftw\_\-plan $\ast$ \hyperlink{structnsfft__plan_o13}{set\_\-fftw\_\-plan2}}
+\label{structnsfft__plan_o13}
+
+\begin{CompactList}\small\item\em fftw plan for the nfft blocks \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o14}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o14}{set\_\-nfft\_\-plan\_\-1d}}
+\label{structnsfft__plan_o14}
+
+\begin{CompactList}\small\item\em nfft plans for short nffts \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o15}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o15}{set\_\-nfft\_\-plan\_\-2d}}
+\label{structnsfft__plan_o15}
+
+\begin{CompactList}\small\item\em nfft plans for short nffts \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o16}{
+double $\ast$ \hyperlink{structnsfft__plan_o16}{x\_\-transposed}}
+\label{structnsfft__plan_o16}
+
+\begin{CompactList}\small\item\em coordinate exchanged nodes, d=2 \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_o17}{
+double $\ast$ {\bf x\_\-102}}
+\label{structnsfft__plan_o17}
+
+\item 
+\hypertarget{structnsfft__plan_o18}{
+double $\ast$ {\bf x\_\-201}}
+\label{structnsfft__plan_o18}
+
+\item 
+\hypertarget{structnsfft__plan_o19}{
+double $\ast$ {\bf x\_\-120}}
+\label{structnsfft__plan_o19}
+
+\item 
+\hypertarget{structnsfft__plan_o20}{
+double $\ast$ \hyperlink{structnsfft__plan_o20}{x\_\-021}}
+\label{structnsfft__plan_o20}
+
+\begin{CompactList}\small\item\em coordinate exchanged nodes, d=3 \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for a NFFT plan. 
+
+
+
+Definition at line 1171 of file nfft3.h.
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{nfft3_8h}{nfft3.h}\end{CompactItemize}

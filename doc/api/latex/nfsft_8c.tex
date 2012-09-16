@@ -1,0 +1,44 @@
+\hypertarget{nfsft_8c}{
+\section{nfsft.c File Reference}
+\label{nfsft_8c}\index{nfsft.c@{nfsft.c}}
+}
+Implementation file for the NFSFT module. 
+
+{\tt \#include $<$math.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+{\tt \#include \char`\"{}legendre.h\char`\"{}}\par
+{\tt \#include \char`\"{}api.h\char`\"{}}\par
+{\tt \#include \char`\"{}util.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define \hyperlink{group__nfsft_ga46}{NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF}~6
+\begin{CompactList}\small\item\em The default NFFT cutoff parameter. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga47}{NFSFT\_\-DEFAULT\_\-THRESHOLD}~1000
+\begin{CompactList}\small\item\em The default threshold for the FPT. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga48}{NFSFT\_\-BREAK\_\-EVEN}~5
+\begin{CompactList}\small\item\em The break-even bandwidth $N \in \mathbb{N}_0$. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{group__nfsft_ga23}{c2e} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Converts coefficients $\left(b_k^n\right)_{k=0}^M$ with $M \in \mathbb{N}_0$, $-M \le n \le M$ from a linear combination of Chebyshev polynomials \[ f(\cos\vartheta) = \sum_{k=0}^{2\lfloor\frac{M}{2}\rfloor} a_k (\sin\vartheta)^{n\;\mathrm{mod}\;2} T_k(\cos\vartheta) \] to coefficients $\left(c_k^n\right)_{k=0}^M$ matching the representation by complex exponentials \[ f(\cos\vartheta) = \sum_{k=-M}^{M} c_k \mathrm{e}^{\mathrm{i}k\vartheta} \] for each order $n=-M,\ldots,M$. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga24}{c2e\_\-transposed} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Transposed version of the function \hyperlink{group__nfsft_ga23}{c2e}. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+static struct \hyperlink{structnfsft__wisdom}{nfsft\_\-wisdom} \hyperlink{group__nfsft_ga0}{wisdom} = \{false,0U\}
+\begin{CompactList}\small\item\em The global wisdom structure for precomputed data. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation file for the NFSFT module. 
+
+\begin{Desc}
+\item[Author:]Jens Keiner\end{Desc}
+
+
+Definition in file \hyperlink{nfsft_8c-source}{nfsft.c}.

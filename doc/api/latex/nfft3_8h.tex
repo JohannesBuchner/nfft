@@ -1,0 +1,543 @@
+\hypertarget{nfft3_8h}{
+\section{nfft3.h File Reference}
+\label{nfft3_8h}\index{nfft3.h@{nfft3.h}}
+}
+Header file for the nfft3 library. 
+
+{\tt \#include $<$complex.h$>$}\par
+{\tt \#include $<$fftw3.h$>$}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define \hyperlink{nfft3_8h_a0}{MACRO\_\-MV\_\-PLAN}(float\_\-type)
+\begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga16}{PRE\_\-PHI\_\-HUT}~(1U$<$$<$ 0)
+\begin{CompactList}\small\item\em If this flag is set, the deconvolution step (the multiplication with the diagonal matrix $\mathbf{D}$) uses precomputed values of the Fourier transformed window function. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga17}{FG\_\-PSI}~(1U$<$$<$ 1)
+\begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses particular properties of the Gaussian window function to trade multiplications for direct calls to exponential function. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga18}{PRE\_\-LIN\_\-PSI}~(1U$<$$<$ 2)
+\begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses linear interpolation from a lookup table of equispaced samples of the window function instead of exact values of the window function. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga19}{PRE\_\-FG\_\-PSI}~(1U$<$$<$ 3)
+\begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses particular properties of the Gaussian window function to trade multiplications for direct calls to exponential function (the remaining $2dM$ direct calls are precomputed). \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga20}{PRE\_\-PSI}~(1U$<$$<$ 4)
+\begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses $(2m+2)dM$ precomputed values of the window function. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga21}{PRE\_\-FULL\_\-PSI}~(1U$<$$<$ 5)
+\begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses $(2m+2)^dM$ precomputed values of the window function, in addition indices of source and target vectors are stored. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga22}{MALLOC\_\-X}~(1U$<$$<$ 6)
+\begin{CompactList}\small\item\em If this flag is set, (de)allocation of the node vector is done. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga23}{MALLOC\_\-F\_\-HAT}~(1U$<$$<$ 7)
+\begin{CompactList}\small\item\em If this flag is set, (de)allocation of the vector of Fourier coefficients is done. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga24}{MALLOC\_\-F}~(1U$<$$<$ 8)
+\begin{CompactList}\small\item\em If this flag is set, (de)allocation of the vector of samples is done. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga25}{FFT\_\-OUT\_\-OF\_\-PLACE}~(1U$<$$<$ 9)
+\begin{CompactList}\small\item\em If this flag is set, FFTW uses disjoint input/output vectors. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga26}{FFTW\_\-INIT}~(1U$<$$<$ 10)
+\begin{CompactList}\small\item\em If this flag is set, fftw\_\-init/fftw\_\-finalize is called. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfft_ga27}{PRE\_\-ONE\_\-PSI}~(PRE\_\-LIN\_\-PSI$|$ PRE\_\-FG\_\-PSI$|$ PRE\_\-PSI$|$ PRE\_\-FULL\_\-PSI)
+\begin{CompactList}\small\item\em Summarises if precomputation is used within the convolution step (the multiplication with the sparse matrix $\mathbf{B}$). \item\end{CompactList}\item 
+\#define \hyperlink{group__nnfft_ga11}{MALLOC\_\-V}~(1U$<$$<$ 11)
+\begin{CompactList}\small\item\em If this flag is set, (de)allocation of the frequency node vector is done. \item\end{CompactList}\item 
+\#define \hyperlink{group__nsfft_ga8}{NSDFT}~(1U$<$$<$ 12)
+\begin{CompactList}\small\item\em If this flag is set, the member index\_\-sparse\_\-to\_\-full is (de)allocated and initialised for the use in the routine \hyperlink{group__nsfft_ga0}{nsdft\_\-trafo} and \hyperlink{group__nsfft_ga1}{nsdft\_\-adjoint}. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga25}{NFSFT\_\-NORMALIZED}~(1U $<$$<$ 0)
+\begin{CompactList}\small\item\em By default, all computations are performed with respect to the unnormalized basis functions \[ \tilde{Y}_k^n(\vartheta,\varphi) = P_k^{|n|}(\cos\vartheta) \mathrm{e}^{\mathrm{i} n \varphi}. \] If this flag is set, all computations are carried out using the $L_2$- normalized basis functions \[ Y_k^n(\vartheta,\varphi) = \sqrt{\frac{2k+1}{4\pi}} P_k^{|n|}(\cos\vartheta) \mathrm{e}^{\mathrm{i} n \varphi}. \]. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga26}{NFSFT\_\-USE\_\-NDFT}~(1U $<$$<$ 1)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint}) will use internally the exact but usually slower direct NDFT algorithm in favor of fast but approximative NFFT algorithm. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga27}{NFSFT\_\-USE\_\-DPT}~(1U $<$$<$ 2)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint}) will use internally the usually slower direct DPT algorithm in favor of the fast FPT algorithm. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga28}{NFSFT\_\-MALLOC\_\-X}~(1U $<$$<$ 3)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt x} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga29}{NFSFT\_\-MALLOC\_\-F\_\-HAT}~(1U $<$$<$ 5)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt f\_\-hat} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga30}{NFSFT\_\-MALLOC\_\-F}~(1U $<$$<$ 6)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt f} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga31}{NFSFT\_\-PRESERVE\_\-F\_\-HAT}~(1U $<$$<$ 7)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} or \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} the content of {\tt f\_\-hat} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga32}{NFSFT\_\-PRESERVE\_\-X}~(1U $<$$<$ 8)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo}, \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} or \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt x} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga33}{NFSFT\_\-PRESERVE\_\-F}~(1U $<$$<$ 9)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt f} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga34}{NFSFT\_\-DESTROY\_\-F\_\-HAT}~(1U $<$$<$ 10)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} or \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} the content of {\tt f\_\-hat} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga35}{NFSFT\_\-DESTROY\_\-X}~(1U $<$$<$ 11)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo}, \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} or \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt x} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga36}{NFSFT\_\-DESTROY\_\-F}~(1U $<$$<$ 12)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt f} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga37}{NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM}~(1U $<$$<$ 13)
+\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} and \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} do not work. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga38}{NFSFT\_\-NO\_\-FAST\_\-ALGORITHM}~(1U $<$$<$ 14)
+\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} and \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} do not work. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga39}{NFSFT\_\-ZERO\_\-F\_\-HAT}~(1U $<$$<$ 16)
+\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} and \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} set all unused entries in {\tt f\_\-hat} not corresponding to spherical Fourier coefficients to zero. \item\end{CompactList}\item 
+\hypertarget{group__nfsft_ga40}{
+\#define \hyperlink{group__nfsft_ga40}{NFSFT\_\-INDEX}(k, n, plan)~((2$\ast$(plan) $\rightarrow$ N+2)$\ast$((plan) $\rightarrow$ N-n+1)+(plan) $\rightarrow$ N+k+1)}
+\label{group__nfsft_ga40}
+
+\begin{CompactList}\small\item\em This helper macro expands to the index $i$ corresponding to the spherical Fourier coefficient $f_hat(k,n)$ for $0 \le k \le N$, $-k \le n \le k$ with \[ (N+2)(N-n+1)+N+k+1 \]. \item\end{CompactList}\item 
+\hypertarget{group__nfsft_ga41}{
+\#define \hyperlink{group__nfsft_ga41}{NFSFT\_\-F\_\-HAT\_\-SIZE}(N)~((2$\ast$N+2)$\ast$(2$\ast$N+2))}
+\label{group__nfsft_ga41}
+
+\begin{CompactList}\small\item\em This helper macro expands to the logical size of a spherical Fourier coefficients array for a bandwidth N. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga8}{
+\#define \hyperlink{group__fpt_ga8}{FPT\_\-NO\_\-FAST\_\-ALGORITHM}~(1U $<$$<$ 2)}
+\label{group__fpt_ga8}
+
+\begin{CompactList}\small\item\em If set, TODO complete comment. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga9}{
+\#define \hyperlink{group__fpt_ga9}{FPT\_\-NO\_\-DIRECT\_\-ALGORITHM}~(1U $<$$<$ 3)}
+\label{group__fpt_ga9}
+
+\begin{CompactList}\small\item\em If set, TODO complete comment. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga10}{
+\#define \hyperlink{group__fpt_ga10}{FPT\_\-NO\_\-STABILIZATION}~(1U $<$$<$ 0)}
+\label{group__fpt_ga10}
+
+\begin{CompactList}\small\item\em If set, no stabilization will be used. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga11}{
+\#define \hyperlink{group__fpt_ga11}{FPT\_\-PERSISTENT\_\-DATA}~(1U $<$$<$ 4)}
+\label{group__fpt_ga11}
+
+\begin{CompactList}\small\item\em If set, TODO complete comment. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga12}{
+\#define \hyperlink{group__fpt_ga12}{FPT\_\-FUNCTION\_\-VALUES}~(1U $<$$<$ 5)}
+\label{group__fpt_ga12}
+
+\begin{CompactList}\small\item\em If set, the output are function values at Chebyshev nodes rather than Chebyshev coefficients. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga13}{
+\#define \hyperlink{group__fpt_ga13}{FPT\_\-AL\_\-SYMMETRY}~(1U $<$$<$ 6)}
+\label{group__fpt_ga13}
+
+\begin{CompactList}\small\item\em TODO Don't use this flag! \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga35}{LANDWEBER}~(1U$<$$<$ 0)
+\begin{CompactList}\small\item\em If this flag is set, the Landweber (Richardson) iteration is used to compute an inverse transform. \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga36}{STEEPEST\_\-DESCENT}~(1U$<$$<$ 1)
+\begin{CompactList}\small\item\em If this flag is set, the method of steepest descent (gradient) is used to compute an inverse transform. \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga37}{CGNR}~(1U$<$$<$ 2)
+\begin{CompactList}\small\item\em If this flag is set, the conjugate gradient method for the normal equation of first kind is used to compute an inverse transform. \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga38}{CGNE}~(1U$<$$<$ 3)
+\begin{CompactList}\small\item\em If this flag is set, the conjugate gradient method for the normal equation of second kind is used to compute an inverse transform. \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga39}{NORMS\_\-FOR\_\-LANDWEBER}~(1U$<$$<$ 4)
+\begin{CompactList}\small\item\em If this flag is set, the Landweber iteration updates the member dot\_\-r\_\-iter. \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga40}{PRECOMPUTE\_\-WEIGHT}~(1U$<$$<$ 5)
+\begin{CompactList}\small\item\em If this flag is set, the samples are weighted, eg to cope with varying sampling density. \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga41}{PRECOMPUTE\_\-DAMP}~(1U$<$$<$ 6)
+\begin{CompactList}\small\item\em If this flag is set, the Fourier coefficients are damped, eg to favour fast decaying coefficients. \item\end{CompactList}\item 
+\#define \hyperlink{group__solver_ga42}{MACRO\_\-SOLVER\_\-PLAN}(MV, FLT, FLT\_\-TYPE)
+\begin{CompactList}\small\item\em Complete macro for mangling an inverse transform. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__fpt_ga0}{
+typedef \hyperlink{structfpt__set__s__}{fpt\_\-set\_\-s\_\-} $\ast$ \hyperlink{group__fpt_ga0}{fpt\_\-set}}
+\label{group__fpt_ga0}
+
+\begin{CompactList}\small\item\em A set of precomputed data for a set of DPT transforms of equal maximum length. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{group__nfft_ga0}{ndft\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Computes a NDFT, see the \hyperlink{group__nfft_ndft_formula}{definition}. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga1}{ndft\_\-adjoint} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Computes an adjoint NDFT, see the definition. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga2}{nfft\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Computes a NFFT, see the \hyperlink{group__nfft_ndft_formula}{definition}. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga3}{nfft\_\-adjoint} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Computes an adjoint NFFT, see the definition. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga4}{nfft\_\-init\_\-1d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int M)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, wrapper d=1. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga5}{nfft\_\-init\_\-2d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int N2, int M)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, wrapper d=2. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga6}{nfft\_\-init\_\-3d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int N2, int N3, int M)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, wrapper d=3. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga7}{nfft\_\-init} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, simple. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M, unsigned nfft\_\-flags\_\-on, unsigned nfft\_\-flags\_\-off)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, advanced. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M, int $\ast$n, int m, unsigned nfft\_\-flags, unsigned fftw\_\-flags)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, guru. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga10}{nfft\_\-precompute\_\-one\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga11}{nfft\_\-precompute\_\-full\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Superceded by nfft\_\-precompute\_\-one\_\-psi. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga12}{nfft\_\-precompute\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Superceded by nfft\_\-precompute\_\-one\_\-psi. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga13}{nfft\_\-precompute\_\-lin\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Superceded by nfft\_\-precompute\_\-one\_\-psi. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga14}{nfft\_\-check} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Checks a transform plan for frequently used bad parameter. \item\end{CompactList}\item 
+void \hyperlink{group__nfft_ga15}{nfft\_\-finalize} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Destroys a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga0}{nfct\_\-init\_\-1d} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan, int N0, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a 1-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga1}{nfct\_\-init\_\-2d} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan, int N0, int N1, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a 3-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga2}{nfct\_\-init\_\-3d} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan, int N0, int N1, int N2, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a 3-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga3}{nfct\_\-init} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan, int d, int $\ast$N, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a d-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga4}{nfct\_\-init\_\-guru} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan, int d, int $\ast$N, int M\_\-total, int $\ast$n, int m, unsigned nfct\_\-flags, unsigned fftw\_\-flags)
+\begin{CompactList}\small\item\em Creates a d-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga5}{nfct\_\-precompute\_\-psi} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em precomputes the values psi if the PRE\_\-PSI is set the application program has to call this routine after setting the nodes this\_\-plan-$>$x \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga6}{nfct\_\-trafo} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a NFCT (approximate,fast), computes for $j=0,...,M\_total-1$ $f_j^C(x_j) = \sum_{k \in I_0^{N,d}} \hat{f}_k^C * cos(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga7}{ndct\_\-trafo} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a NDCT (exact,slow), computes for $j=0,...,M\_total-1$ $f_j^C(x_j) = \sum_{k \in I_0^{N,d}} \hat{f}_k^C * cos(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga8}{nfct\_\-adjoint} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a transposed NFCT (approximate,fast), computes for $k \in I_0^{N,d}$ $h^C(k) = \sum_{j \in I_0^{(M\_total,1)}} f_j^C * cos(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga9}{ndct\_\-adjoint} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a direct transposed NDCT (exact,slow), computes for $k \in I_0^{N,d}$ $h^C(k) = \sum_{j \in I_0^{(M\_total,1)}} f_j^C * cos(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga10}{nfct\_\-finalize} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+double \hyperlink{group__nfsct_ga11}{nfct\_\-phi\_\-hut} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan, int k, int d)
+\begin{CompactList}\small\item\em do some adjustments (N,n) then compute PHI\_\-HUT \item\end{CompactList}\item 
+double \hyperlink{group__nfsct_ga12}{nfct\_\-phi} (\hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$ths\_\-plan, double x, int d)
+\begin{CompactList}\small\item\em do some adjustments (N,n) then compute PHI \item\end{CompactList}\item 
+int \hyperlink{group__nfsct_ga13}{nfct\_\-fftw\_\-2N} (int n)
+\begin{CompactList}\small\item\em returns 2(n-1), fftw related issue \item\end{CompactList}\item 
+int \hyperlink{group__nfsct_ga14}{nfct\_\-fftw\_\-2N\_\-rev} (int n)
+\begin{CompactList}\small\item\em returns 0.5n+1, fftw related issue \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga15}{nfst\_\-init\_\-1d} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, int N0, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a 1-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga16}{nfst\_\-init\_\-2d} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, int N0, int N1, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a 3-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga17}{nfst\_\-init\_\-3d} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, int N0, int N1, int N2, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a 3-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga18}{nfst\_\-init} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, int d, int $\ast$N, int M\_\-total)
+\begin{CompactList}\small\item\em Creates a d-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga19}{nfst\_\-init\_\-m} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, int d, int $\ast$N, int M\_\-total, int m)
+\begin{CompactList}\small\item\em Creates a d-dimensional transform plan with pcific m. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga20}{nfst\_\-init\_\-guru} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, int d, int $\ast$N, int M\_\-total, int $\ast$n, int m, unsigned nfst\_\-flags, unsigned fftw\_\-flags)
+\begin{CompactList}\small\item\em Creates a d-dimensional transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga21}{nfst\_\-precompute\_\-psi} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em precomputes the values psi if the PRE\_\-PSI is set the application program has to call this routine after setting the nodes this\_\-plan-$>$x \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga22}{nfst\_\-trafo} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a NFST (approximate,fast), computes for $j=0,...,M\_total-1$ $f_j^S(x_j) = \sum_{k \in I_1^{N,d}} \hat{f}_k^S * sin(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga23}{ndst\_\-trafo} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a NDST (exact,slow), computes for $j=0,...,M\_total-1$ $f_j^S(x_j) = \sum_{k \in I_1^{N,d}} \hat{f}_k^S * sin(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga24}{nfst\_\-adjoint} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a transposed NFST (approximate,fast), computes for $k \in I_1^{N,d}$ $h^S(k) = \sum_{j \in I_0^{M\_total,1}} f_j^S * cos(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga25}{ndst\_\-adjoint} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em executes a direct transposed NDST (exact,slow), computes for $k \in I_1^{N,d}$ $h^S(k) = \sum_{j \in I_0^{M\_total,1}} f_j^S * cos(2 \pi k x_j)$ \item\end{CompactList}\item 
+void \hyperlink{group__nfsct_ga26}{nfst\_\-finalize} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+\hypertarget{group__nfsct_ga27}{
+void \hyperlink{group__nfsct_ga27}{nfst\_\-full\_\-psi} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, double eps)}
+\label{group__nfsct_ga27}
+
+\begin{CompactList}\small\item\em \begin{itemize}
+\item ths\_\-plan The plan for the transform \end{itemize}
+\item\end{CompactList}\item 
+double \hyperlink{group__nfsct_ga28}{nfst\_\-phi\_\-hut} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, int k, int d)
+\begin{CompactList}\small\item\em do some adjustments (N,n) then compute PHI\_\-HUT \item\end{CompactList}\item 
+double \hyperlink{group__nfsct_ga29}{nfst\_\-phi} (\hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$ths\_\-plan, double x, int d)
+\begin{CompactList}\small\item\em do some adjustments (N,n) then compute PHI \item\end{CompactList}\item 
+int \hyperlink{group__nfsct_ga30}{nfst\_\-fftw\_\-2N} (int n)
+\begin{CompactList}\small\item\em returns 2(n+1), fftw related issue \item\end{CompactList}\item 
+int \hyperlink{group__nfsct_ga31}{nfst\_\-fftw\_\-2N\_\-rev} (int n)
+\begin{CompactList}\small\item\em returns 0.5n-1, fftw related issue \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga0}{nnfft\_\-init} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan, int d, int N\_\-total, int M\_\-total, int $\ast$N)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga1}{nnfft\_\-init\_\-guru} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan, int d, int N\_\-total, int M\_\-total, int $\ast$N, int $\ast$N1, int m, unsigned nnfft\_\-flags)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga2}{nndft\_\-trafo} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a direct NNDFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga3}{nndft\_\-adjoint} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a direct adjoint NNDFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga4}{nnfft\_\-trafo} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a NNFFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga5}{nnfft\_\-adjoint} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a adjoint NNFFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga6}{nnfft\_\-precompute\_\-lin\_\-psi} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga7}{nnfft\_\-precompute\_\-psi} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga8}{nnfft\_\-precompute\_\-full\_\-psi} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga9}{nnfft\_\-precompute\_\-phi\_\-hut} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga10}{nnfft\_\-finalize} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga0}{nsdft\_\-trafo} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an NSDFT, computes for $j=0,\hdots,M-1$: \[ f_j = \sum_{k\in H_N^d}\hat f_k {\rm e}^{-2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga1}{nsdft\_\-adjoint} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an adjoint NSFFT, computes for $k\in H_N^d$: \[ \hat f_k = \sum_{j=0,\hdots,M-1} f_j {\rm e}^{+2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga2}{nsfft\_\-trafo} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an NSFFT, computes {\bf fast} and {\bf approximate} for $j=0,\hdots,M-1$: \[ f_j = \sum_{k\in H_N^d}\hat f_k {\rm e}^{-2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga3}{nsfft\_\-adjoint} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an adjoint NSFFT, computes {\bf fast} and {\bf approximate} for $k\in H_N^d$: \[ \hat f_k = \sum_{j=0,\hdots,M-1} f_j {\rm e}^{+2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga4}{nsfft\_\-cp} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths\_\-nfft)
+\begin{CompactList}\small\item\em Copy coefficients from nsfft plan to a nfft plan. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga5}{nsfft\_\-init\_\-random\_\-nodes\_\-coeffs} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Initialisation of pseudo random nodes and coefficients. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga6}{nsfft\_\-init} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths, int d, int J, int M, int m, unsigned flags)
+\begin{CompactList}\small\item\em Initialisation of a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nsfft_ga7}{nsfft\_\-finalize} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Destroys a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga0}{mri\_\-inh\_\-2d1d\_\-trafo} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes a mri transformation considering the field inhomogeneity with the 2d1d method, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga1}{mri\_\-inh\_\-2d1d\_\-adjoint} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an adjoint mri transformation considering the field inhomogeneity with the 2d1d method, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga2}{mri\_\-inh\_\-2d1d\_\-init\_\-guru} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths, int $\ast$N, int M, int $\ast$n, int m, double sigma, unsigned nfft\_\-flags, unsigned fftw\_\-flags)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga3}{mri\_\-inh\_\-2d1d\_\-finalize} (\hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga4}{mri\_\-inh\_\-3d\_\-trafo} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes a mri transformation considering the field inhomogeneity with the 3d method, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__mri_ga5}{mri\_\-inh\_\-3d\_\-adjoint} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes an adjoint mri transformation considering the field inhomogeneity with the 3d method, i.e. \item\end{CompactList}\item 
+\hypertarget{group__mri_ga6}{
+void {\bf mri\_\-inh\_\-3d\_\-init\_\-guru} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths, int $\ast$N, int M, int $\ast$n, int m, double sigma, unsigned nfft\_\-flags, unsigned fftw\_\-flags)}
+\label{group__mri_ga6}
+
+\item 
+void \hyperlink{group__mri_ga7}{mri\_\-inh\_\-3d\_\-finalize} (\hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga1}{nfsft\_\-init} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags, int nfft\_\-flags, int nfft\_\-cutoff)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga4}{nfsft\_\-precompute} (int N, double kappa, unsigned int nfsft\_\-flags, unsigned int fpt\_\-flags)
+\begin{CompactList}\small\item\em Performes precomputation up to the next power of two with respect to a given bandwidth $N \in \mathbb{N}_2$. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga5}{nfsft\_\-forget} ()
+\begin{CompactList}\small\item\em Forgets all precomputed data. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes a direct NDSFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes a direct adjoint NDSFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes a NFSFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes an adjoint NFSFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+\hypertarget{group__nfsft_ga11}{
+void {\bf nfsft\_\-precompute\_\-x} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)}
+\label{group__nfsft_ga11}
+
+\item 
+\hyperlink{structfpt__set__s__}{fpt\_\-set} \hyperlink{group__fpt_ga1}{fpt\_\-init} (const int M, const int t, const unsigned int flags)
+\begin{CompactList}\small\item\em Initializes a set of precomputed data for DPT transforms of equal length. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga2}{fpt\_\-precompute} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, int k\_\-start, const double threshold)
+\begin{CompactList}\small\item\em Computes the data required for a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga3}{dpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga4}{fpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga5}{dpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+void \hyperlink{group__fpt_ga6}{fpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, const double complex $\ast$y, const int k\_\-end, const unsigned int flags)
+\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
+\hypertarget{group__fpt_ga7}{
+void \hyperlink{group__fpt_ga7}{fpt\_\-finalize} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
+\label{group__fpt_ga7}
+
+\begin{CompactList}\small\item\em Save copy of inpute data for stabilization steps. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga0}{
+void \hyperlink{group__solver_ga0}{infft\_\-init} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$mv)}
+\label{group__solver_ga0}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga1}{
+void \hyperlink{group__solver_ga1}{infft\_\-init\_\-advanced} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$mv, unsigned infft\_\-flags)}
+\label{group__solver_ga1}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga2}{
+void \hyperlink{group__solver_ga2}{infft\_\-before\_\-loop} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths)}
+\label{group__solver_ga2}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga3}{
+void \hyperlink{group__solver_ga3}{infft\_\-loop\_\-one\_\-step} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths)}
+\label{group__solver_ga3}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga4}{
+void \hyperlink{group__solver_ga4}{infft\_\-finalize} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths)}
+\label{group__solver_ga4}
+
+\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga5}{
+void \hyperlink{group__solver_ga5}{infct\_\-init} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths, \hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$mv)}
+\label{group__solver_ga5}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga6}{
+void \hyperlink{group__solver_ga6}{infct\_\-init\_\-advanced} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths, \hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$mv, unsigned infct\_\-flags)}
+\label{group__solver_ga6}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga7}{
+void \hyperlink{group__solver_ga7}{infct\_\-before\_\-loop} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths)}
+\label{group__solver_ga7}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga8}{
+void \hyperlink{group__solver_ga8}{infct\_\-loop\_\-one\_\-step} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths)}
+\label{group__solver_ga8}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga9}{
+void \hyperlink{group__solver_ga9}{infct\_\-finalize} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths)}
+\label{group__solver_ga9}
+
+\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga10}{
+void \hyperlink{group__solver_ga10}{infst\_\-init} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths, \hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$mv)}
+\label{group__solver_ga10}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga11}{
+void \hyperlink{group__solver_ga11}{infst\_\-init\_\-advanced} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths, \hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$mv, unsigned infst\_\-flags)}
+\label{group__solver_ga11}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga12}{
+void \hyperlink{group__solver_ga12}{infst\_\-before\_\-loop} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths)}
+\label{group__solver_ga12}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga13}{
+void \hyperlink{group__solver_ga13}{infst\_\-loop\_\-one\_\-step} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths)}
+\label{group__solver_ga13}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga14}{
+void \hyperlink{group__solver_ga14}{infst\_\-finalize} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths)}
+\label{group__solver_ga14}
+
+\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga15}{
+void \hyperlink{group__solver_ga15}{innfft\_\-init} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths, \hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$mv)}
+\label{group__solver_ga15}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga16}{
+void \hyperlink{group__solver_ga16}{innfft\_\-init\_\-advanced} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths, \hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$mv, unsigned innfft\_\-flags)}
+\label{group__solver_ga16}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga17}{
+void \hyperlink{group__solver_ga17}{innfft\_\-before\_\-loop} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths)}
+\label{group__solver_ga17}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga18}{
+void \hyperlink{group__solver_ga18}{innfft\_\-loop\_\-one\_\-step} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths)}
+\label{group__solver_ga18}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga19}{
+void \hyperlink{group__solver_ga19}{innfft\_\-finalize} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths)}
+\label{group__solver_ga19}
+
+\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga20}{
+void \hyperlink{group__solver_ga20}{imri\_\-inh\_\-2d1d\_\-init} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$mv)}
+\label{group__solver_ga20}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga21}{
+void \hyperlink{group__solver_ga21}{imri\_\-inh\_\-2d1d\_\-init\_\-advanced} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$mv, unsigned imri\_\-inh\_\-2d1d\_\-flags)}
+\label{group__solver_ga21}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga22}{
+void \hyperlink{group__solver_ga22}{imri\_\-inh\_\-2d1d\_\-before\_\-loop} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)}
+\label{group__solver_ga22}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga23}{
+void \hyperlink{group__solver_ga23}{imri\_\-inh\_\-2d1d\_\-loop\_\-one\_\-step} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)}
+\label{group__solver_ga23}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga24}{
+void \hyperlink{group__solver_ga24}{imri\_\-inh\_\-2d1d\_\-finalize} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)}
+\label{group__solver_ga24}
+
+\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga25}{
+void \hyperlink{group__solver_ga25}{imri\_\-inh\_\-3d\_\-init} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$mv)}
+\label{group__solver_ga25}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga26}{
+void \hyperlink{group__solver_ga26}{imri\_\-inh\_\-3d\_\-init\_\-advanced} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$mv, unsigned imri\_\-inh\_\-3d\_\-flags)}
+\label{group__solver_ga26}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga27}{
+void \hyperlink{group__solver_ga27}{imri\_\-inh\_\-3d\_\-before\_\-loop} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths)}
+\label{group__solver_ga27}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga28}{
+void \hyperlink{group__solver_ga28}{imri\_\-inh\_\-3d\_\-loop\_\-one\_\-step} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths)}
+\label{group__solver_ga28}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga29}{
+void \hyperlink{group__solver_ga29}{imri\_\-inh\_\-3d\_\-finalize} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths)}
+\label{group__solver_ga29}
+
+\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga30}{
+void \hyperlink{group__solver_ga30}{infsft\_\-init} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths, \hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$mv)}
+\label{group__solver_ga30}
+
+\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga31}{
+void \hyperlink{group__solver_ga31}{infsft\_\-init\_\-advanced} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths, \hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$mv, unsigned infsft\_\-flags)}
+\label{group__solver_ga31}
+
+\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga32}{
+void \hyperlink{group__solver_ga32}{infsft\_\-before\_\-loop} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths)}
+\label{group__solver_ga32}
+
+\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga33}{
+void \hyperlink{group__solver_ga33}{infsft\_\-loop\_\-one\_\-step} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths)}
+\label{group__solver_ga33}
+
+\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
+\hypertarget{group__solver_ga34}{
+void \hyperlink{group__solver_ga34}{infsft\_\-finalize} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths)}
+\label{group__solver_ga34}
+
+\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for the nfft3 library. 
+
+
+
+Definition in file \hyperlink{nfft3_8h-source}{nfft3.h}.
+
+\subsection{Define Documentation}
+\hypertarget{nfft3_8h_a0}{
+\index{nfft3.h@{nfft3.h}!MACRO_MV_PLAN@{MACRO\_\-MV\_\-PLAN}}
+\index{MACRO_MV_PLAN@{MACRO\_\-MV\_\-PLAN}!nfft3.h@{nfft3.h}}
+\subsubsection[MACRO\_\-MV\_\-PLAN]{\setlength{\rightskip}{0pt plus 5cm}\#define MACRO\_\-MV\_\-PLAN(float\_\-type)}}
+\label{nfft3_8h_a0}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}int N_total;                          \
+  int M_total;                          \
+                                                                              \
+  float_type *f_hat;                    \
+  float_type *f;
+\end{verbatim}\normalsize 
+Vector of samples, $\backslash$ size is M\_\-total float types. 
+
+
+
+Definition at line 14 of file nfft3.h.

@@ -1,0 +1,74 @@
+\hypertarget{structnfsft__plan}{
+\section{nfsft\_\-plan Struct Reference}
+\label{structnfsft__plan}\index{nfsft_plan@{nfsft\_\-plan}}
+}
+Structure for a NFSFT transform plan.  
+
+
+{\tt \#include $<$nfft3.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structnfsft__plan_o0}{
+int \hyperlink{structnfsft__plan_o0}{N\_\-total}}
+\label{structnfsft__plan_o0}
+
+\begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o1}{
+int \hyperlink{structnfsft__plan_o1}{M\_\-total}}
+\label{structnfsft__plan_o1}
+
+\begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o2}{
+double complex $\ast$ \hyperlink{structnfsft__plan_o2}{f\_\-hat}}
+\label{structnfsft__plan_o2}
+
+\begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o3}{
+double complex $\ast$ \hyperlink{structnfsft__plan_o3}{f}}
+\label{structnfsft__plan_o3}
+
+\begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o4}{
+int \hyperlink{structnfsft__plan_o4}{N}}
+\label{structnfsft__plan_o4}
+
+\begin{CompactList}\small\item\em the bandwidth $N$ \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o5}{
+double $\ast$ \hyperlink{structnfsft__plan_o5}{x}}
+\label{structnfsft__plan_o5}
+
+\begin{CompactList}\small\item\em the nodes $\mathbf{x}(m) = * \left(x_1,x_2\right) \in * [-\frac{1}{2},\frac{1}{2}) \times * [0,\frac{1}{2}]$ for $\ast$ $m=0,\ldots,M-1$,$M \in * \mathbb{N},$ \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o6}{
+int \hyperlink{structnfsft__plan_o6}{t}}
+\label{structnfsft__plan_o6}
+
+\begin{CompactList}\small\item\em the logaritm of NPT with $\ast$ respect to the basis 2 \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o7}{
+unsigned int \hyperlink{structnfsft__plan_o7}{flags}}
+\label{structnfsft__plan_o7}
+
+\begin{CompactList}\small\item\em the planner flags \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o8}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} \hyperlink{structnfsft__plan_o8}{plan\_\-nfft}}
+\label{structnfsft__plan_o8}
+
+\begin{CompactList}\small\item\em the internal NFFT plan \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_o9}{
+double complex $\ast$ \hyperlink{structnfsft__plan_o9}{f\_\-hat\_\-intern}}
+\label{structnfsft__plan_o9}
+
+\begin{CompactList}\small\item\em Internally used pointer to $\ast$ spherical Fourier coefficients. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for a NFSFT transform plan. 
+
+
+
+Definition at line 1913 of file nfft3.h.
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{nfft3_8h}{nfft3.h}\end{CompactItemize}

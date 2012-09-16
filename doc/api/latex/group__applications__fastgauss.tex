@@ -1,0 +1,348 @@
+\hypertarget{group__applications__fastgauss}{
+\section{Fast Gauss transfrom with complex parameter}
+\label{group__applications__fastgauss}\index{Fast Gauss transfrom with complex parameter@{Fast Gauss transfrom with complex parameter}}
+}
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct \hyperlink{structfgt__plan}{fgt\_\-plan}
+\begin{CompactList}\small\item\em Structure for the Gauss transform. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define \hyperlink{group__applications__fastgauss_ga13}{DGT\_\-PRE\_\-CEXP}~(1U$<$$<$ 0)
+\begin{CompactList}\small\item\em If this flag is set, the whole matrix is precomputed and stored for the discrete Gauss transfrom. \item\end{CompactList}\item 
+\#define \hyperlink{group__applications__fastgauss_ga14}{FGT\_\-NDFT}~(1U$<$$<$ 1)
+\begin{CompactList}\small\item\em If this flag is set, the fast Gauss transform uses the discrete instead of the fast Fourier transform. \item\end{CompactList}\item 
+\#define \hyperlink{group__applications__fastgauss_ga15}{FGT\_\-APPROX\_\-B}~(1U$<$$<$ 2)
+\begin{CompactList}\small\item\em If this flag is set, the discrete Fourier coefficients of the uniformly sampled Gaussian are used instead of the sampled continuous Fourier transform. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{group__applications__fastgauss_ga0}{dgt\_\-trafo} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes the discrete Gauss transform. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga1}{fgt\_\-trafo} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Executes the fast Gauss transform. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga2}{fgt\_\-init\_\-guru} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths, int N, int M, double complex sigma, int n, double p, int m, unsigned flags)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, guru. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga3}{fgt\_\-init} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths, int N, int M, double complex sigma, double eps)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, simple. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga4}{fgt\_\-init\_\-node\_\-dependent} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Initialisation of a transform plan, depends on source and target nodes. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga5}{fgt\_\-finalize} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Destroys the transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga6}{fgt\_\-test\_\-init\_\-rand} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em Random initialisation of a fgt plan. \item\end{CompactList}\item 
+double \hyperlink{group__applications__fastgauss_ga7}{fgt\_\-test\_\-measure\_\-time} (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ths, unsigned dgt)
+\begin{CompactList}\small\item\em Compares execution times for the fast and discrete Gauss transform. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga8}{fgt\_\-test\_\-simple} (int N, int M, double complex sigma, double eps)
+\begin{CompactList}\small\item\em Simple example that computes fast and discrete Gauss transforms. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga9}{fgt\_\-test\_\-andersson} ()
+\begin{CompactList}\small\item\em Compares accuracy and execution time of the fast Gauss transform with increasing expansion degree. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga10}{fgt\_\-test\_\-error} ()
+\begin{CompactList}\small\item\em Compares accuracy of the fast Gauss transform with increasing expansion degree. \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastgauss_ga11}{fgt\_\-test\_\-error\_\-p} ()
+\begin{CompactList}\small\item\em Compares accuracy of the fast Gauss transform with increasing expansion degree and different periodisation lengths. \item\end{CompactList}\item 
+int \hyperlink{group__applications__fastgauss_ga12}{main} (int argc, char $\ast$$\ast$argv)
+\begin{CompactList}\small\item\em Different tests of the fast Gauss transform. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{group__applications__fastgauss_ga13}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!DGT_PRE_CEXP@{DGT\_\-PRE\_\-CEXP}}
+\index{DGT_PRE_CEXP@{DGT\_\-PRE\_\-CEXP}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[DGT\_\-PRE\_\-CEXP]{\setlength{\rightskip}{0pt plus 5cm}\#define DGT\_\-PRE\_\-CEXP~(1U$<$$<$ 0)}}
+\label{group__applications__fastgauss_ga13}
+
+
+If this flag is set, the whole matrix is precomputed and stored for the discrete Gauss transfrom. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__applications__fastgauss_ga4}{fgt\_\-init\_\-node\_\-dependent} 
+
+\hyperlink{group__applications__fastgauss_ga3}{fgt\_\-init} \end{Desc}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 27 of file fastgauss.c.
+
+Referenced by dgt\_\-trafo(), fgt\_\-init(), fgt\_\-init\_\-node\_\-dependent(), and fgt\_\-test\_\-andersson().\hypertarget{group__applications__fastgauss_ga14}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!FGT_NDFT@{FGT\_\-NDFT}}
+\index{FGT_NDFT@{FGT\_\-NDFT}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[FGT\_\-NDFT]{\setlength{\rightskip}{0pt plus 5cm}\#define FGT\_\-NDFT~(1U$<$$<$ 1)}}
+\label{group__applications__fastgauss_ga14}
+
+
+If this flag is set, the fast Gauss transform uses the discrete instead of the fast Fourier transform. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__applications__fastgauss_ga3}{fgt\_\-init} 
+
+\hyperlink{group__nfft_ga0}{ndft\_\-trafo} 
+
+\hyperlink{group__nfft_ga2}{nfft\_\-trafo} \end{Desc}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 38 of file fastgauss.c.
+
+Referenced by fgt\_\-test\_\-andersson(), and fgt\_\-trafo().\hypertarget{group__applications__fastgauss_ga15}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!FGT_APPROX_B@{FGT\_\-APPROX\_\-B}}
+\index{FGT_APPROX_B@{FGT\_\-APPROX\_\-B}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[FGT\_\-APPROX\_\-B]{\setlength{\rightskip}{0pt plus 5cm}\#define FGT\_\-APPROX\_\-B~(1U$<$$<$ 2)}}
+\label{group__applications__fastgauss_ga15}
+
+
+If this flag is set, the discrete Fourier coefficients of the uniformly sampled Gaussian are used instead of the sampled continuous Fourier transform. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__applications__fastgauss_ga3}{fgt\_\-init} \end{Desc}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 48 of file fastgauss.c.
+
+Referenced by fgt\_\-init\_\-guru().
+
+\subsection{Function Documentation}
+\hypertarget{group__applications__fastgauss_ga0}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!dgt_trafo@{dgt\_\-trafo}}
+\index{dgt_trafo@{dgt\_\-trafo}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[dgt\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void dgt\_\-trafo (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastgauss_ga0}
+
+
+Executes the discrete Gauss transform. 
+
+\begin{itemize}
+\item ths The pointer to a fgt plan\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 86 of file fastgauss.c.
+
+References DGT\_\-PRE\_\-CEXP.
+
+Referenced by fgt\_\-test\_\-error(), fgt\_\-test\_\-error\_\-p(), fgt\_\-test\_\-measure\_\-time(), and fgt\_\-test\_\-simple().\hypertarget{group__applications__fastgauss_ga1}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_trafo@{fgt\_\-trafo}}
+\index{fgt_trafo@{fgt\_\-trafo}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-trafo (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastgauss_ga1}
+
+
+Executes the fast Gauss transform. 
+
+\begin{itemize}
+\item ths The pointer to a fgt plan\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 111 of file fastgauss.c.
+
+References FGT\_\-NDFT, ndft\_\-adjoint(), ndft\_\-trafo(), nfft\_\-adjoint(), and nfft\_\-trafo().
+
+Referenced by fgt\_\-test\_\-error(), fgt\_\-test\_\-error\_\-p(), fgt\_\-test\_\-measure\_\-time(), and fgt\_\-test\_\-simple().\hypertarget{group__applications__fastgauss_ga2}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_init_guru@{fgt\_\-init\_\-guru}}
+\index{fgt_init_guru@{fgt\_\-init\_\-guru}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-init\_\-guru]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-init\_\-guru (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths}, int {\em N}, int {\em M}, double complex {\em sigma}, int {\em n}, double {\em p}, int {\em m}, unsigned {\em flags})}}
+\label{group__applications__fastgauss_ga2}
+
+
+Initialisation of a transform plan, guru. 
+
+\begin{itemize}
+\item ths The pointer to a fpt plan \item N The number of source nodes \item M The number of target nodes \item sigma The parameter of the Gaussian \item n The polynomial expansion degree \item p the periodisation length, at least 1 \item m The spatial cut-off of the nfft \item flags FGT flags to use\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 149 of file fastgauss.c.
+
+References FFTW\_\-INIT, FGT\_\-APPROX\_\-B, MALLOC\_\-F\_\-HAT, MALLOC\_\-X, nfft\_\-fftshift\_\-complex(), nfft\_\-init\_\-guru(), nfft\_\-next\_\-power\_\-of\_\-2(), PI, PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.
+
+Referenced by fgt\_\-init(), fgt\_\-test\_\-andersson(), fgt\_\-test\_\-error(), and fgt\_\-test\_\-error\_\-p().\hypertarget{group__applications__fastgauss_ga3}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_init@{fgt\_\-init}}
+\index{fgt_init@{fgt\_\-init}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-init]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-init (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths}, int {\em N}, int {\em M}, double complex {\em sigma}, double {\em eps})}}
+\label{group__applications__fastgauss_ga3}
+
+
+Initialisation of a transform plan, simple. 
+
+\begin{itemize}
+\item ths The pointer to a fpt plan \item N The number of source nodes \item M The number of target nodes \item sigma The parameter of the Gaussian \item eps The target accuracy\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 219 of file fastgauss.c.
+
+References DGT\_\-PRE\_\-CEXP, fgt\_\-init\_\-guru(), and PI.
+
+Referenced by fgt\_\-test\_\-simple().\hypertarget{group__applications__fastgauss_ga4}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_init_node_dependent@{fgt\_\-init\_\-node\_\-dependent}}
+\index{fgt_init_node_dependent@{fgt\_\-init\_\-node\_\-dependent}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-init\_\-node\_\-dependent]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-init\_\-node\_\-dependent (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastgauss_ga4}
+
+
+Initialisation of a transform plan, depends on source and target nodes. 
+
+\begin{itemize}
+\item ths The pointer to a fpt plan \begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+\end{itemize}
+
+
+Definition at line 242 of file fastgauss.c.
+
+References DGT\_\-PRE\_\-CEXP, nfft\_\-precompute\_\-psi(), and PRE\_\-PSI.
+
+Referenced by fgt\_\-test\_\-andersson(), fgt\_\-test\_\-error(), fgt\_\-test\_\-error\_\-p(), and fgt\_\-test\_\-simple().\hypertarget{group__applications__fastgauss_ga5}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_finalize@{fgt\_\-finalize}}
+\index{fgt_finalize@{fgt\_\-finalize}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-finalize (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastgauss_ga5}
+
+
+Destroys the transform plan. 
+
+\begin{itemize}
+\item ths The pointer to the fgt plan \begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+\end{itemize}
+
+
+Definition at line 274 of file fastgauss.c.
+
+References nfft\_\-finalize().
+
+Referenced by fgt\_\-test\_\-andersson(), fgt\_\-test\_\-error(), fgt\_\-test\_\-error\_\-p(), and fgt\_\-test\_\-simple().\hypertarget{group__applications__fastgauss_ga6}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_test_init_rand@{fgt\_\-test\_\-init\_\-rand}}
+\index{fgt_test_init_rand@{fgt\_\-test\_\-init\_\-rand}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-test\_\-init\_\-rand]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-test\_\-init\_\-rand (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastgauss_ga6}
+
+
+Random initialisation of a fgt plan. 
+
+\begin{itemize}
+\item ths The pointer to the fgt plan \begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+\end{itemize}
+
+
+Definition at line 297 of file fastgauss.c.
+
+Referenced by fgt\_\-test\_\-andersson(), fgt\_\-test\_\-error(), fgt\_\-test\_\-error\_\-p(), and fgt\_\-test\_\-simple().\hypertarget{group__applications__fastgauss_ga7}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_test_measure_time@{fgt\_\-test\_\-measure\_\-time}}
+\index{fgt_test_measure_time@{fgt\_\-test\_\-measure\_\-time}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-test\_\-measure\_\-time]{\setlength{\rightskip}{0pt plus 5cm}double fgt\_\-test\_\-measure\_\-time (\hyperlink{structfgt__plan}{fgt\_\-plan} $\ast$ {\em ths}, unsigned {\em dgt})}}
+\label{group__applications__fastgauss_ga7}
+
+
+Compares execution times for the fast and discrete Gauss transform. 
+
+\begin{itemize}
+\item ths The pointer to the fgt plan \item dgt If this parameter is set \hyperlink{group__applications__fastgauss_ga0}{dgt\_\-trafo} is called as well\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 320 of file fastgauss.c.
+
+References dgt\_\-trafo(), fgt\_\-trafo(), and nfft\_\-second().
+
+Referenced by fgt\_\-test\_\-andersson().\hypertarget{group__applications__fastgauss_ga8}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_test_simple@{fgt\_\-test\_\-simple}}
+\index{fgt_test_simple@{fgt\_\-test\_\-simple}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-test\_\-simple]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-test\_\-simple (int {\em N}, int {\em M}, double complex {\em sigma}, double {\em eps})}}
+\label{group__applications__fastgauss_ga8}
+
+
+Simple example that computes fast and discrete Gauss transforms. 
+
+\begin{itemize}
+\item ths The pointer to the fgt plan \item sigma The parameter of the Gaussian \item eps The target accuracy\end{itemize}
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 357 of file fastgauss.c.
+
+References fgt\_\-plan::alpha, dgt\_\-trafo(), fgt\_\-plan::f, fgt\_\-finalize(), fgt\_\-init(), fgt\_\-init\_\-node\_\-dependent(), fgt\_\-test\_\-init\_\-rand(), fgt\_\-trafo(), fgt\_\-plan::M, fgt\_\-plan::N, nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex(), NFFT\_\-SWAP\_\-complex, and nfft\_\-vpr\_\-complex().
+
+Referenced by main().\hypertarget{group__applications__fastgauss_ga9}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_test_andersson@{fgt\_\-test\_\-andersson}}
+\index{fgt_test_andersson@{fgt\_\-test\_\-andersson}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-test\_\-andersson]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-test\_\-andersson ()}}
+\label{group__applications__fastgauss_ga9}
+
+
+Compares accuracy and execution time of the fast Gauss transform with increasing expansion degree. 
+
+Similar to the test in F. Andersson and G. Beylkin. The fast Gauss transform with double complex parameters. J. Comput. Physics 203 (2005) 274-286
+
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 392 of file fastgauss.c.
+
+References fgt\_\-plan::alpha, DGT\_\-PRE\_\-CEXP, fgt\_\-plan::f, fgt\_\-finalize(), fgt\_\-init\_\-guru(), fgt\_\-init\_\-node\_\-dependent(), FGT\_\-NDFT, fgt\_\-test\_\-init\_\-rand(), fgt\_\-test\_\-measure\_\-time(), fgt\_\-plan::flags, fgt\_\-plan::M, fgt\_\-plan::N, nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex(), and NFFT\_\-SWAP\_\-complex.
+
+Referenced by main().\hypertarget{group__applications__fastgauss_ga10}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_test_error@{fgt\_\-test\_\-error}}
+\index{fgt_test_error@{fgt\_\-test\_\-error}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-test\_\-error]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-test\_\-error ()}}
+\label{group__applications__fastgauss_ga10}
+
+
+Compares accuracy of the fast Gauss transform with increasing expansion degree. 
+
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 463 of file fastgauss.c.
+
+References fgt\_\-plan::alpha, dgt\_\-trafo(), fgt\_\-plan::f, fgt\_\-finalize(), fgt\_\-init\_\-guru(), fgt\_\-init\_\-node\_\-dependent(), fgt\_\-test\_\-init\_\-rand(), fgt\_\-trafo(), fgt\_\-plan::M, fgt\_\-plan::N, nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex(), and NFFT\_\-SWAP\_\-complex.
+
+Referenced by main().\hypertarget{group__applications__fastgauss_ga11}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!fgt_test_error_p@{fgt\_\-test\_\-error\_\-p}}
+\index{fgt_test_error_p@{fgt\_\-test\_\-error\_\-p}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[fgt\_\-test\_\-error\_\-p]{\setlength{\rightskip}{0pt plus 5cm}void fgt\_\-test\_\-error\_\-p ()}}
+\label{group__applications__fastgauss_ga11}
+
+
+Compares accuracy of the fast Gauss transform with increasing expansion degree and different periodisation lengths. 
+
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 514 of file fastgauss.c.
+
+References fgt\_\-plan::alpha, dgt\_\-trafo(), fgt\_\-plan::f, fgt\_\-finalize(), fgt\_\-init\_\-guru(), fgt\_\-init\_\-node\_\-dependent(), fgt\_\-test\_\-init\_\-rand(), fgt\_\-trafo(), fgt\_\-plan::M, fgt\_\-plan::N, nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex(), and NFFT\_\-SWAP\_\-complex.
+
+Referenced by main().\hypertarget{group__applications__fastgauss_ga12}{
+\index{applications_fastgauss@{applications\_\-fastgauss}!main@{main}}
+\index{main@{main}!applications_fastgauss@{applications\_\-fastgauss}}
+\subsubsection[main]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, char $\ast$$\ast$ {\em argv})}}
+\label{group__applications__fastgauss_ga12}
+
+
+Different tests of the fast Gauss transform. 
+
+\begin{Desc}
+\item[Author:]Stefan Kunis \end{Desc}
+
+
+Definition at line 562 of file fastgauss.c.
+
+References fgt\_\-test\_\-andersson(), fgt\_\-test\_\-error(), fgt\_\-test\_\-error\_\-p(), and fgt\_\-test\_\-simple().

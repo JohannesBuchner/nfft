@@ -1,0 +1,130 @@
+\hypertarget{structfpt__set__s__}{
+\section{fpt\_\-set\_\-s\_\- Struct Reference}
+\label{structfpt__set__s__}\index{fpt_set_s_@{fpt\_\-set\_\-s\_\-}}
+}
+Holds data for a set of cascade summations.  
+
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structfpt__set__s___o0}{
+int \hyperlink{structfpt__set__s___o0}{flags}}
+\label{structfpt__set__s___o0}
+
+\begin{CompactList}\small\item\em The flags. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o1}{
+int \hyperlink{structfpt__set__s___o1}{M}}
+\label{structfpt__set__s___o1}
+
+\begin{CompactList}\small\item\em The number of DPT transforms. \item\end{CompactList}\item 
+int \hyperlink{structfpt__set__s___o2}{N}
+\begin{CompactList}\small\item\em The transform length. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o3}{
+int \hyperlink{structfpt__set__s___o3}{t}}
+\label{structfpt__set__s___o3}
+
+\begin{CompactList}\small\item\em The exponent of N. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o4}{
+\hyperlink{structfpt__data__}{fpt\_\-data} $\ast$ \hyperlink{structfpt__set__s___o4}{dpt}}
+\label{structfpt__set__s___o4}
+
+\begin{CompactList}\small\item\em The DPT transform data. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o5}{
+double $\ast$$\ast$ \hyperlink{structfpt__set__s___o5}{xcvecs}}
+\label{structfpt__set__s___o5}
+
+\begin{CompactList}\small\item\em Array of pointers to arrays containing the Chebyshev nodes. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o6}{
+double $\ast$ \hyperlink{structfpt__set__s___o6}{xc}}
+\label{structfpt__set__s___o6}
+
+\begin{CompactList}\small\item\em Array for Chebychev-nodes. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o7}{
+double complex $\ast$ {\bf temp}}
+\label{structfpt__set__s___o7}
+
+\item 
+\hypertarget{structfpt__set__s___o8}{
+double complex $\ast$ {\bf work}}
+\label{structfpt__set__s___o8}
+
+\item 
+\hypertarget{structfpt__set__s___o9}{
+double complex $\ast$ {\bf result}}
+\label{structfpt__set__s___o9}
+
+\item 
+\hypertarget{structfpt__set__s___o10}{
+double complex $\ast$ {\bf vec3}}
+\label{structfpt__set__s___o10}
+
+\item 
+\hypertarget{structfpt__set__s___o11}{
+double complex $\ast$ {\bf vec4}}
+\label{structfpt__set__s___o11}
+
+\item 
+\hypertarget{structfpt__set__s___o12}{
+double complex $\ast$ {\bf z}}
+\label{structfpt__set__s___o12}
+
+\item 
+\hypertarget{structfpt__set__s___o13}{
+fftw\_\-plan $\ast$ \hyperlink{structfpt__set__s___o13}{plans\_\-dct3}}
+\label{structfpt__set__s___o13}
+
+\begin{CompactList}\small\item\em Transform plans for the fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o14}{
+fftw\_\-plan $\ast$ \hyperlink{structfpt__set__s___o14}{plans\_\-dct2}}
+\label{structfpt__set__s___o14}
+
+\begin{CompactList}\small\item\em Transform plans for the fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o15}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structfpt__set__s___o15}{kinds}}
+\label{structfpt__set__s___o15}
+
+\begin{CompactList}\small\item\em Transform kinds for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o16}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structfpt__set__s___o16}{kindsr}}
+\label{structfpt__set__s___o16}
+
+\begin{CompactList}\small\item\em Transform kinds for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o17}{
+int $\ast$ \hyperlink{structfpt__set__s___o17}{lengths}}
+\label{structfpt__set__s___o17}
+
+\begin{CompactList}\small\item\em Transform lengths for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s___o18}{
+double $\ast$ {\bf xc\_\-slow}}
+\label{structfpt__set__s___o18}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Holds data for a set of cascade summations. 
+
+
+
+Definition at line 83 of file fpt.c.
+
+\subsection{Field Documentation}
+\hypertarget{structfpt__set__s___o2}{
+\index{fpt_set_s_@{fpt\_\-set\_\-s\_\-}!N@{N}}
+\index{N@{N}!fpt_set_s_@{fpt\_\-set\_\-s\_\-}}
+\subsubsection[N]{\setlength{\rightskip}{0pt plus 5cm}int \hyperlink{structfpt__set__s___o2}{fpt\_\-set\_\-s\_\-::N}}}
+\label{structfpt__set__s___o2}
+
+
+The transform length. 
+
+Must be a power of two. 
+
+Definition at line 87 of file fpt.c.
+
+Referenced by fpt\_\-finalize(), fpt\_\-init(), fpt\_\-precompute(), nfsft\_\-adjoint(), and nfsft\_\-trafo().
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{fpt_8c}{fpt.c}\end{CompactItemize}

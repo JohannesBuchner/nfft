@@ -1,0 +1,282 @@
+\hypertarget{group__nnfft}{
+\section{NNFFT - Nonequispaced in time and frequency FFT}
+\label{group__nnfft}\index{NNFFT - Nonequispaced in time and frequency FFT@{NNFFT - Nonequispaced in time and frequency FFT}}
+}
+Direct and fast computation of the discrete nonequispaced in time and frequency Fourier transform.  
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct \hyperlink{structnnfft__plan}{nnfft\_\-plan}
+\begin{CompactList}\small\item\em Structure for a transform plan. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define \hyperlink{group__nnfft_ga11}{MALLOC\_\-V}~(1U$<$$<$ 11)
+\begin{CompactList}\small\item\em If this flag is set, (de)allocation of the frequency node vector is done. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{group__nnfft_ga0}{nnfft\_\-init} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan, int d, int N\_\-total, int M\_\-total, int $\ast$N)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga1}{nnfft\_\-init\_\-guru} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan, int d, int N\_\-total, int M\_\-total, int $\ast$N, int $\ast$N1, int m, unsigned nnfft\_\-flags)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga2}{nndft\_\-trafo} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a direct NNDFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga3}{nndft\_\-adjoint} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a direct adjoint NNDFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga4}{nnfft\_\-trafo} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a NNFFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga5}{nnfft\_\-adjoint} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Executes a adjoint NNFFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga6}{nnfft\_\-precompute\_\-lin\_\-psi} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga7}{nnfft\_\-precompute\_\-psi} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga8}{nnfft\_\-precompute\_\-full\_\-psi} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga9}{nnfft\_\-precompute\_\-phi\_\-hut} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nnfft_ga10}{nnfft\_\-finalize} (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ths\_\-plan)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Direct and fast computation of the discrete nonequispaced in time and frequency Fourier transform. 
+
+
+
+\subsection{Define Documentation}
+\hypertarget{group__nnfft_ga11}{
+\index{nnfft@{nnfft}!MALLOC_V@{MALLOC\_\-V}}
+\index{MALLOC_V@{MALLOC\_\-V}!nnfft@{nnfft}}
+\subsubsection[MALLOC\_\-V]{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-V~(1U$<$$<$ 11)}}
+\label{group__nnfft_ga11}
+
+
+If this flag is set, (de)allocation of the frequency node vector is done. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nnfft_ga0}{nnfft\_\-init} 
+
+\hyperlink{group__nnfft_ga1}{nnfft\_\-init\_\-guru} 
+
+\hyperlink{group__nnfft_ga10}{nnfft\_\-finalize} \end{Desc}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 958 of file nfft3.h.
+
+Referenced by nnfft\_\-finalize(), nnfft\_\-init(), and reconstruct().
+
+\subsection{Function Documentation}
+\hypertarget{group__nnfft_ga0}{
+\index{nnfft@{nnfft}!nnfft_init@{nnfft\_\-init}}
+\index{nnfft_init@{nnfft\_\-init}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-init]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-init (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan}, int {\em d}, int {\em N\_\-total}, int {\em M\_\-total}, int $\ast$ {\em N})}}
+\label{group__nnfft_ga0}
+
+
+Creates a transform plan. 
+
+\begin{itemize}
+\item ths\_\-plan The plan for the transform \item d The dimension \item N\_\-total The number of nodes $v$ \item M\_\-total The number of nodes $x$ \item N The bandwidth $N$\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 573 of file nnfft.c.
+
+References FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, MALLOC\_\-F, MALLOC\_\-F\_\-HAT, MALLOC\_\-V, MALLOC\_\-X, PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.\hypertarget{group__nnfft_ga1}{
+\index{nnfft@{nnfft}!nnfft_init_guru@{nnfft\_\-init\_\-guru}}
+\index{nnfft_init_guru@{nnfft\_\-init\_\-guru}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-init\_\-guru]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-init\_\-guru (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan}, int {\em d}, int {\em N\_\-total}, int {\em M\_\-total}, int $\ast$ {\em N}, int $\ast$ {\em N1}, int {\em m}, unsigned {\em nnfft\_\-flags})}}
+\label{group__nnfft_ga1}
+
+
+Creates a transform plan. 
+
+\begin{itemize}
+\item ths\_\-plan The plan for the transform \item d The dimension \item N\_\-total The number of nodes $v$ \item M\_\-total The number of nodes $x$ \item N The bandwidth $N$ \item N1 The oversampled bandwidth $N$ \item m The cut-off parameter \item nnfft\_\-flags The flags\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 538 of file nnfft.c.
+
+References FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, MALLOC\_\-F\_\-HAT, PRE\_\-FULL\_\-PSI, PRE\_\-LIN\_\-PSI, PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.
+
+Referenced by reconstruct().\hypertarget{group__nnfft_ga2}{
+\index{nnfft@{nnfft}!nndft_trafo@{nndft\_\-trafo}}
+\index{nndft_trafo@{nndft\_\-trafo}!nnfft@{nnfft}}
+\subsubsection[nndft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void nndft\_\-trafo (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga2}
+
+
+Executes a direct NNDFT, i.e. 
+
+computes for $j=0,...,M_{total}-1$ \[ f(x_j) = \sum_{k = 0}^{N_{total}-1} \hat{f}(v_k) {\rm e}^{-2 \pi \mbox{\rm\scriptsize i} v_k x_j \odot N} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 64 of file nnfft.c.\hypertarget{group__nnfft_ga3}{
+\index{nnfft@{nnfft}!nndft_adjoint@{nndft\_\-adjoint}}
+\index{nndft_adjoint@{nndft\_\-adjoint}!nnfft@{nnfft}}
+\subsubsection[nndft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void nndft\_\-adjoint (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga3}
+
+
+Executes a direct adjoint NNDFT, i.e. 
+
+computes for $k=0,...,N_{total}-1$ \[ \hat{f}(v_k) = \sum_{j = 0}^{M_{total}-1} f(x_j) {\rm e}^{2 \pi \mbox{\rm\scriptsize i} v_k x_j \odot N} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 65 of file nnfft.c.\hypertarget{group__nnfft_ga4}{
+\index{nnfft@{nnfft}!nnfft_trafo@{nnfft\_\-trafo}}
+\index{nnfft_trafo@{nnfft\_\-trafo}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-trafo (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga4}
+
+
+Executes a NNFFT, i.e. 
+
+computes for $j=0,...,M_{total}-1$ \[ f(x_j) = \sum_{k = 0}^{N_{total}-1} \hat{f}(v_k) {\rm e}^{-2 \pi \mbox{\rm\scriptsize i} v_k x_j \odot N} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 270 of file nnfft.c.
+
+References nfft\_\-trafo().\hypertarget{group__nnfft_ga5}{
+\index{nnfft@{nnfft}!nnfft_adjoint@{nnfft\_\-adjoint}}
+\index{nnfft_adjoint@{nnfft\_\-adjoint}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-adjoint (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga5}
+
+
+Executes a adjoint NNFFT, i.e. 
+
+computes for $k=0,...,N_{total}-1$ \[ \hat{f}(v_k) = \sum_{j = 0}^{M_{tota}l-1} f(x_j) {\rm e}^{2 \pi \mbox{\rm\scriptsize i} v_k x_j \odot N} \]
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 294 of file nnfft.c.
+
+References nfft\_\-adjoint().\hypertarget{group__nnfft_ga6}{
+\index{nnfft@{nnfft}!nnfft_precompute_lin_psi@{nnfft\_\-precompute\_\-lin\_\-psi}}
+\index{nnfft_precompute_lin_psi@{nnfft\_\-precompute\_\-lin\_\-psi}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-precompute\_\-lin\_\-psi]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-precompute\_\-lin\_\-psi (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga6}
+
+
+Precomputation for a transform plan. 
+
+\begin{itemize}
+\item ths\_\-plan The pointer to a nfft plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp\end{Desc}
+precomputes equally spaced values of the window function psi
+
+if PRE\_\-LIN\_\-PSI is set the application program has to call this routine 
+
+Definition at line 342 of file nnfft.c.
+
+References nfft\_\-precompute\_\-lin\_\-psi().
+
+Referenced by reconstruct().\hypertarget{group__nnfft_ga7}{
+\index{nnfft@{nnfft}!nnfft_precompute_psi@{nnfft\_\-precompute\_\-psi}}
+\index{nnfft_precompute_psi@{nnfft\_\-precompute\_\-psi}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-precompute\_\-psi]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-precompute\_\-psi (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga7}
+
+
+Precomputation for a transform plan. 
+
+\begin{itemize}
+\item ths\_\-plan The pointer to a nfft plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp\end{Desc}
+precomputes the values of the window function psi in a tensor product form
+
+if PRE\_\-PSI is set the application program has to call this routine after setting the nodes x 
+
+Definition at line 360 of file nnfft.c.
+
+References nfft\_\-precompute\_\-psi().
+
+Referenced by nnfft\_\-precompute\_\-full\_\-psi(), and reconstruct().\hypertarget{group__nnfft_ga8}{
+\index{nnfft@{nnfft}!nnfft_precompute_full_psi@{nnfft\_\-precompute\_\-full\_\-psi}}
+\index{nnfft_precompute_full_psi@{nnfft\_\-precompute\_\-full\_\-psi}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-precompute\_\-full\_\-psi]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-precompute\_\-full\_\-psi (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga8}
+
+
+Precomputation for a transform plan. 
+
+\begin{itemize}
+\item ths\_\-plan The pointer to a nfft plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp\end{Desc}
+precomputes the values of the window function psi and their indices in non tensor product form
+
+if PRE\_\-FULL\_\-PSI is set the application program has to call this routine after setting the nodes x 
+
+Definition at line 399 of file nnfft.c.
+
+References nfft\_\-precompute\_\-full\_\-psi(), and nnfft\_\-precompute\_\-psi().
+
+Referenced by reconstruct().\hypertarget{group__nnfft_ga9}{
+\index{nnfft@{nnfft}!nnfft_precompute_phi_hut@{nnfft\_\-precompute\_\-phi\_\-hut}}
+\index{nnfft_precompute_phi_hut@{nnfft\_\-precompute\_\-phi\_\-hut}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-precompute\_\-phi\_\-hut]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-precompute\_\-phi\_\-hut (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga9}
+
+
+Precomputation for a transform plan. 
+
+\begin{itemize}
+\item ths\_\-plan The pointer to a nfft plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp\end{Desc}
+precomputes the values of the fourier transformed window function, i.e. phi\_\-hut
+
+if PRE\_\-PHI\_\-HUT is set the application program has to call this routine after setting the nodes v 
+
+Definition at line 320 of file nnfft.c.
+
+Referenced by reconstruct().\hypertarget{group__nnfft_ga10}{
+\index{nnfft@{nnfft}!nnfft_finalize@{nnfft\_\-finalize}}
+\index{nnfft_finalize@{nnfft\_\-finalize}!nnfft@{nnfft}}
+\subsubsection[nnfft\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void nnfft\_\-finalize (\hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$ {\em ths\_\-plan})}}
+\label{group__nnfft_ga10}
+
+
+Destroys a plan. 
+
+\begin{itemize}
+\item ths\_\-plan The plan\end{itemize}
+\begin{Desc}
+\item[Author:]Tobias Knopp \end{Desc}
+
+
+Definition at line 608 of file nnfft.c.
+
+References MALLOC\_\-F, MALLOC\_\-F\_\-HAT, MALLOC\_\-V, MALLOC\_\-X, nfft\_\-finalize(), PRE\_\-FULL\_\-PSI, PRE\_\-LIN\_\-PSI, PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.
+
+Referenced by reconstruct().

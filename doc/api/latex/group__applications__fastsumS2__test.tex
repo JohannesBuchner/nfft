@@ -1,0 +1,185 @@
+\hypertarget{group__applications__fastsumS2__test}{
+\section{fastsum\-S2\_\-matlab}
+\label{group__applications__fastsumS2__test}\index{fastsumS2_matlab@{fastsumS2\_\-matlab}}
+}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__applications__fastsumS2__test_ga6}{
+\#define \hyperlink{group__applications__fastsumS2__test_ga6}{SYMBOL\_\-ABEL\_\-POISSON}(k, h)~(pow(h,k))}
+\label{group__applications__fastsumS2__test_ga6}
+
+\begin{CompactList}\small\item\em Macro for the Fourier-Legendre coefficients of the Abel-Poisson kernel. \item\end{CompactList}\item 
+\hypertarget{group__applications__fastsumS2__test_ga7}{
+\#define \hyperlink{group__applications__fastsumS2__test_ga7}{SYMBOL\_\-SINGULARITY}(k, h)~((2.0/(2$\ast$k+1))$\ast$pow(h,k))}
+\label{group__applications__fastsumS2__test_ga7}
+
+\begin{CompactList}\small\item\em Macro for the Fourier-Legendre coefficients of the singularity kernel. \item\end{CompactList}\item 
+\hypertarget{group__applications__fastsumS2__test_ga8}{
+\#define \hyperlink{group__applications__fastsumS2__test_ga8}{KT\_\-ABEL\_\-POISSON}~(0)}
+\label{group__applications__fastsumS2__test_ga8}
+
+\begin{CompactList}\small\item\em Abel-Poisson kernel. \item\end{CompactList}\item 
+\hypertarget{group__applications__fastsumS2__test_ga9}{
+\#define \hyperlink{group__applications__fastsumS2__test_ga9}{KT\_\-SINGULARITY}~(1)}
+\label{group__applications__fastsumS2__test_ga9}
+
+\begin{CompactList}\small\item\em Singularity kernel. \item\end{CompactList}\item 
+\hypertarget{group__applications__fastsumS2__test_ga10}{
+\#define \hyperlink{group__applications__fastsumS2__test_ga10}{KT\_\-LOC\_\-SUPP}~(2)}
+\label{group__applications__fastsumS2__test_ga10}
+
+\begin{CompactList}\small\item\em Locally supported kernel. \item\end{CompactList}\item 
+\hypertarget{group__applications__fastsumS2__test_ga11}{
+\#define \hyperlink{group__applications__fastsumS2__test_ga11}{KT\_\-GAUSSIAN}~(3)}
+\label{group__applications__fastsumS2__test_ga11}
+
+\begin{CompactList}\small\item\em Gaussian kernel. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum \hyperlink{group__applications__fastsumS2__test_ga12}{pvalue} \{ {\bf NO} =  0, 
+{\bf YES} =  1, 
+{\bf BOTH} =  2
+ \}
+\begin{CompactList}\small\item\em Enumeration type for yes/no/both-type parameters. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+double \hyperlink{group__applications__fastsumS2__test_ga0}{inner\-Product} (const double phi1, const double theta1, const double phi2, const double theta2)
+\begin{CompactList}\small\item\em Computes the $\mathbb{R}^3$ standard inner product between two vectors on the unit sphere $\mathbb{S}^2$ given in spherical coordinates. \item\end{CompactList}\item 
+double \hyperlink{group__applications__fastsumS2__test_ga1}{poisson\-Kernel} (const double x, const double h)
+\begin{CompactList}\small\item\em Evaluates the Poisson kernel $Q_h: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. \item\end{CompactList}\item 
+double \hyperlink{group__applications__fastsumS2__test_ga2}{singularity\-Kernel} (const double x, const double h)
+\begin{CompactList}\small\item\em Evaluates the singularity kernel $S_h: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. \item\end{CompactList}\item 
+double \hyperlink{group__applications__fastsumS2__test_ga3}{locally\-Supported\-Kernel} (const double x, const double h, const double lambda)
+\begin{CompactList}\small\item\em Evaluates the locally supported kernel $L_{h,\lambda}: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. \item\end{CompactList}\item 
+double \hyperlink{group__applications__fastsumS2__test_ga4}{gaussian\-Kernel} (const double x, const double sigma)
+\begin{CompactList}\small\item\em Evaluates the spherical Gaussian kernel $G_\sigma: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. \item\end{CompactList}\item 
+int \hyperlink{group__applications__fastsumS2__test_ga5}{main} (int argc, char $\ast$$\ast$argv)
+\begin{CompactList}\small\item\em The main program. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__applications__fastsumS2__test_ga0}{
+\index{applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}!innerProduct@{innerProduct}}
+\index{innerProduct@{innerProduct}!applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}}
+\subsubsection[innerProduct]{\setlength{\rightskip}{0pt plus 5cm}double inner\-Product (const double {\em phi1}, const double {\em theta1}, const double {\em phi2}, const double {\em theta2})}}
+\label{group__applications__fastsumS2__test_ga0}
+
+
+Computes the $\mathbb{R}^3$ standard inner product between two vectors on the unit sphere $\mathbb{S}^2$ given in spherical coordinates. 
+
+\begin{itemize}
+\item phi1 The angle $\varphi_1 \in [-\pi,\pi)$ of the first vector \item theta1 The angle $\vartheta_1 \in [0,\pi]$ of the first vector \item phi2 The angle $\varphi_2 \in [-\pi,\pi)$ of the second vector \item theta2 The angle $\vartheta_2 \in [0,\pi]$ of the second vector\end{itemize}
+\begin{Desc}
+\item[Returns:]The inner product $\cos \vartheta_1 \cos \vartheta_2 + \sin \vartheta_1 \sin(\vartheta_2 \cos(\varphi_1 - \varphi_2)$\end{Desc}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 76 of file fastsum\-S2.c.
+
+Referenced by main().\hypertarget{group__applications__fastsumS2__test_ga1}{
+\index{applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}!poissonKernel@{poissonKernel}}
+\index{poissonKernel@{poissonKernel}!applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}}
+\subsubsection[poissonKernel]{\setlength{\rightskip}{0pt plus 5cm}double poisson\-Kernel (const double {\em x}, const double {\em h})}}
+\label{group__applications__fastsumS2__test_ga1}
+
+
+Evaluates the Poisson kernel $Q_h: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. 
+
+\begin{itemize}
+\item x The node $x \in [-1,1]$ \item h The parameter $h \in (0,1)$\end{itemize}
+\begin{Desc}
+\item[Returns:]The value of the Poisson kernel $Q_h(x)$ at the node $x$\end{Desc}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 93 of file fastsum\-S2.c.
+
+References PI.
+
+Referenced by main().\hypertarget{group__applications__fastsumS2__test_ga2}{
+\index{applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}!singularityKernel@{singularityKernel}}
+\index{singularityKernel@{singularityKernel}!applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}}
+\subsubsection[singularityKernel]{\setlength{\rightskip}{0pt plus 5cm}double singularity\-Kernel (const double {\em x}, const double {\em h})}}
+\label{group__applications__fastsumS2__test_ga2}
+
+
+Evaluates the singularity kernel $S_h: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. 
+
+\begin{itemize}
+\item x The node $x \in [-1,1]$ \item h The parameter $h \in (0,1)$\end{itemize}
+\begin{Desc}
+\item[Returns:]The value of the Poisson kernel $S_h(x)$ at the node $x$\end{Desc}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 109 of file fastsum\-S2.c.
+
+References PI.
+
+Referenced by main().\hypertarget{group__applications__fastsumS2__test_ga3}{
+\index{applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}!locallySupportedKernel@{locallySupportedKernel}}
+\index{locallySupportedKernel@{locallySupportedKernel}!applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}}
+\subsubsection[locallySupportedKernel]{\setlength{\rightskip}{0pt plus 5cm}double locally\-Supported\-Kernel (const double {\em x}, const double {\em h}, const double {\em lambda})}}
+\label{group__applications__fastsumS2__test_ga3}
+
+
+Evaluates the locally supported kernel $L_{h,\lambda}: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. 
+
+\begin{itemize}
+\item x The node $x \in [-1,1]$ \item h The parameter $h \in (0,1)$ \item lambda The parameter $\lambda \in \mathbb{N}_0$\end{itemize}
+\begin{Desc}
+\item[Returns:]The value of the locally supported kernel $L_{h,\lambda}(x)$ at the node $x$\end{Desc}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 127 of file fastsum\-S2.c.
+
+Referenced by main().\hypertarget{group__applications__fastsumS2__test_ga4}{
+\index{applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}!gaussianKernel@{gaussianKernel}}
+\index{gaussianKernel@{gaussianKernel}!applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}}
+\subsubsection[gaussianKernel]{\setlength{\rightskip}{0pt plus 5cm}double gaussian\-Kernel (const double {\em x}, const double {\em sigma})}}
+\label{group__applications__fastsumS2__test_ga4}
+
+
+Evaluates the spherical Gaussian kernel $G_\sigma: [-1,1] \rightarrow \mathbb{R}$ at a node $x \in [-1,1]$. 
+
+\begin{itemize}
+\item x The node $x \in [-1,1]$ \item sigma The parameter $\sigma \in \mathbb{R}_+$\end{itemize}
+\begin{Desc}
+\item[Returns:]The value of the pherical Gaussian kernel $G_\sigma(x)$ at the node $x$\end{Desc}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 145 of file fastsum\-S2.c.
+
+Referenced by main().\hypertarget{group__applications__fastsumS2__test_ga5}{
+\index{applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}!main@{main}}
+\index{main@{main}!applications_fastsumS2_test@{applications\_\-fastsum\-S2\_\-test}}
+\subsubsection[main]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, char $\ast$$\ast$ {\em argv})}}
+\label{group__applications__fastsumS2__test_ga5}
+
+
+The main program. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em argc}]The number of arguments \item[{\em argv}]An array containing the arguments as C-strings\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Exit code\end{Desc}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
+
+
+Definition at line 160 of file fastsum\-S2.c.
+
+References nfsft\_\-plan::f, nfsft\_\-plan::f\_\-hat, FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, gaussian\-Kernel(), inner\-Product(), KT\_\-ABEL\_\-POISSON, KT\_\-GAUSSIAN, KT\_\-LOC\_\-SUPP, KT\_\-SINGULARITY, locally\-Supported\-Kernel(), ndsft\_\-adjoint(), ndsft\_\-trafo(), nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex(), NFFT\_\-MAX, nfft\_\-second(), nfsft\_\-adjoint(), NFSFT\_\-F\_\-HAT\_\-SIZE, nfsft\_\-finalize(), nfsft\_\-forget(), NFSFT\_\-INDEX, nfsft\_\-init\_\-guru(), NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, nfsft\_\-precompute(), nfsft\_\-trafo(), NFSFT\_\-USE\_\-DPT, NFSFT\_\-USE\_\-NDFT, PI, poisson\-Kernel(), PRE\_\-PHI\_\-HUT, PRE\_\-PSI, singularity\-Kernel(), SYMBOL\_\-ABEL\_\-POISSON, SYMBOL\_\-SINGULARITY, and nfsft\_\-plan::x.

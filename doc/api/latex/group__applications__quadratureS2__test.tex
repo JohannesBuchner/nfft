@@ -1,0 +1,68 @@
+\hypertarget{group__applications__quadratureS2__test}{
+\section{quadrature\-S2\_\-test}
+\label{group__applications__quadratureS2__test}\index{quadratureS2_test@{quadratureS2\_\-test}}
+}
+\subsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum \hyperlink{group__applications__quadratureS2__test_ga1}{boolean} \{ {\bf NO} =  0, 
+{\bf YES} =  1
+ \}
+\begin{CompactList}\small\item\em Enumeration for parameter values. \item\end{CompactList}\item 
+enum \hyperlink{group__applications__quadratureS2__test_ga2}{testtype} \{ {\bf ERROR} =  0, 
+{\bf TIMING} =  1
+ \}
+\begin{CompactList}\small\item\em Enumeration for test modes. \item\end{CompactList}\item 
+enum \hyperlink{group__applications__quadratureS2__test_ga3}{gridtype} \{ \par
+{\bf GRID\_\-GAUSS\_\-LEGENDRE} =  0, 
+{\bf GRID\_\-CLENSHAW\_\-CURTIS} =  1, 
+{\bf GRID\_\-HEALPIX} =  2, 
+{\bf GRID\_\-EQUIDISTRIBUTION} =  3, 
+\par
+{\bf GRID\_\-EQUIDISTRIBUTION\_\-UNIFORM} =  4
+ \}
+\begin{CompactList}\small\item\em Enumeration for quadrature grid types. \item\end{CompactList}\item 
+enum \hyperlink{group__applications__quadratureS2__test_ga4}{functiontype} \{ \par
+{\bf FUNCTION\_\-RANDOM\_\-BANDLIMITED} =  0, 
+{\bf FUNCTION\_\-F1} =  1, 
+{\bf FUNCTION\_\-F2} =  2, 
+{\bf FUNCTION\_\-F3} =  3, 
+\par
+{\bf FUNCTION\_\-F4} =  4, 
+{\bf FUNCTION\_\-F5} =  5, 
+{\bf FUNCTION\_\-F6} =  6
+ \}
+\begin{CompactList}\small\item\em Enumeration for test functions. \item\end{CompactList}\item 
+enum \hyperlink{group__applications__quadratureS2__test_ga5}{modes} \{ {\bf USE\_\-GRID} =  0, 
+{\bf RANDOM} =  1
+ \}
+\begin{CompactList}\small\item\em TODO Add comment here. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+int \hyperlink{group__applications__quadratureS2__test_ga0}{main} (int argc, char $\ast$$\ast$argv)
+\begin{CompactList}\small\item\em The main program. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__applications__quadratureS2__test_ga0}{
+\index{applications_quadratureS2_test@{applications\_\-quadrature\-S2\_\-test}!main@{main}}
+\index{main@{main}!applications_quadratureS2_test@{applications\_\-quadrature\-S2\_\-test}}
+\subsubsection[main]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, char $\ast$$\ast$ {\em argv})}}
+\label{group__applications__quadratureS2__test_ga0}
+
+
+The main program. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em argc}]The number of arguments \item[{\em argv}]An array containing the arguments as C-strings\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Exit code \end{Desc}
+
+
+Definition at line 71 of file quadrature\-S2.c.
+
+References nfsft\_\-plan::f, nfsft\_\-plan::f\_\-hat, FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, nfsft\_\-plan::N\_\-total, ndsft\_\-adjoint(), ndsft\_\-trafo(), nfft\_\-error\_\-l\_\-2\_\-complex(), nfft\_\-error\_\-l\_\-infty\_\-complex(), NFFT\_\-MAX, nfft\_\-second(), nfsft\_\-adjoint(), NFSFT\_\-F\_\-HAT\_\-SIZE, nfsft\_\-finalize(), nfsft\_\-forget(), NFSFT\_\-INDEX, nfsft\_\-init\_\-guru(), NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, NFSFT\_\-NORMALIZED, nfsft\_\-precompute(), nfsft\_\-trafo(), NFSFT\_\-USE\_\-DPT, NFSFT\_\-USE\_\-NDFT, PI, PRE\_\-PHI\_\-HUT, PRE\_\-PSI, and nfsft\_\-plan::x.

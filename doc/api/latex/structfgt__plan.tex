@@ -1,0 +1,92 @@
+\hypertarget{structfgt__plan}{
+\section{fgt\_\-plan Struct Reference}
+\label{structfgt__plan}\index{fgt_plan@{fgt\_\-plan}}
+}
+Structure for the Gauss transform.  
+
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structfgt__plan_o0}{
+int \hyperlink{structfgt__plan_o0}{N}}
+\label{structfgt__plan_o0}
+
+\begin{CompactList}\small\item\em number of source nodes \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o1}{
+int \hyperlink{structfgt__plan_o1}{M}}
+\label{structfgt__plan_o1}
+
+\begin{CompactList}\small\item\em number of target nodes \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o2}{
+double complex $\ast$ \hyperlink{structfgt__plan_o2}{alpha}}
+\label{structfgt__plan_o2}
+
+\begin{CompactList}\small\item\em source coefficients \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o3}{
+double complex $\ast$ \hyperlink{structfgt__plan_o3}{f}}
+\label{structfgt__plan_o3}
+
+\begin{CompactList}\small\item\em target evaluations \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o4}{
+unsigned \hyperlink{structfgt__plan_o4}{flags}}
+\label{structfgt__plan_o4}
+
+\begin{CompactList}\small\item\em flags for precomputation and approximation type \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o5}{
+double complex \hyperlink{structfgt__plan_o5}{sigma}}
+\label{structfgt__plan_o5}
+
+\begin{CompactList}\small\item\em parameter of the Gaussian \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o6}{
+double $\ast$ \hyperlink{structfgt__plan_o6}{x}}
+\label{structfgt__plan_o6}
+
+\begin{CompactList}\small\item\em source nodes in $[-1/4,1/4]$ \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o7}{
+double $\ast$ \hyperlink{structfgt__plan_o7}{y}}
+\label{structfgt__plan_o7}
+
+\begin{CompactList}\small\item\em target nodes in $[-1/4,1/4]$ \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o8}{
+double complex $\ast$ \hyperlink{structfgt__plan_o8}{pre\_\-cexp}}
+\label{structfgt__plan_o8}
+
+\begin{CompactList}\small\item\em precomputed values for dgt \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o9}{
+int \hyperlink{structfgt__plan_o9}{n}}
+\label{structfgt__plan_o9}
+
+\begin{CompactList}\small\item\em expansion degree \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o10}{
+double \hyperlink{structfgt__plan_o10}{p}}
+\label{structfgt__plan_o10}
+
+\begin{CompactList}\small\item\em period, at least 1 \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o11}{
+double complex $\ast$ \hyperlink{structfgt__plan_o11}{b}}
+\label{structfgt__plan_o11}
+
+\begin{CompactList}\small\item\em expansion coefficients \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o12}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structfgt__plan_o12}{nplan1}}
+\label{structfgt__plan_o12}
+
+\begin{CompactList}\small\item\em source nfft plan \item\end{CompactList}\item 
+\hypertarget{structfgt__plan_o13}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structfgt__plan_o13}{nplan2}}
+\label{structfgt__plan_o13}
+
+\begin{CompactList}\small\item\em target nfft plan \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for the Gauss transform. 
+
+
+
+Definition at line 51 of file fastgauss.c.
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+fastgauss.c\end{CompactItemize}

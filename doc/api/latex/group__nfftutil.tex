@@ -1,0 +1,343 @@
+\hypertarget{group__nfftutil}{
+\section{Util - Auxilliary functions}
+\label{group__nfftutil}\index{Util - Auxilliary functions@{Util - Auxilliary functions}}
+}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__nfftutil_ga55}{
+\#define \hyperlink{group__nfftutil_ga55}{NFFT\_\-SWAP\_\-complex}(x, y)~\{double complex$\ast$ temp; temp=(x); (x)=(y); (y)=temp;\}}
+\label{group__nfftutil_ga55}
+
+\begin{CompactList}\small\item\em Swapping of two vectors. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga56}{
+\#define \hyperlink{group__nfftutil_ga56}{NFFT\_\-SWAP\_\-double}(x, y)~\{double$\ast$ temp; temp=(x); (x)=(y); (y)=temp;\}}
+\label{group__nfftutil_ga56}
+
+\begin{CompactList}\small\item\em Swapping of two vectors. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga57}{
+\#define \hyperlink{group__nfftutil_ga57}{PI}~3.1415926535897932384}
+\label{group__nfftutil_ga57}
+
+\begin{CompactList}\small\item\em Formerly known to be an irrational number. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga58}{
+\#define \hyperlink{group__nfftutil_ga58}{NFFT\_\-MAX}(a, b)~((a)$>$(b)? (a) : (b))}
+\label{group__nfftutil_ga58}
+
+\begin{CompactList}\small\item\em Maximum of its two arguments. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga59}{
+\#define \hyperlink{group__nfftutil_ga59}{NFFT\_\-MIN}(a, b)~((a)$<$(b)? (a) : (b))}
+\label{group__nfftutil_ga59}
+
+\begin{CompactList}\small\item\em Mimimum of its two arguments. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+double \hyperlink{group__nfftutil_ga0}{nfft\_\-second} ()
+\begin{CompactList}\small\item\em Actual used CPU time in seconds; calls getrusage, limited accuracy. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga1}{
+int \hyperlink{group__nfftutil_ga1}{nfft\_\-total\_\-used\_\-memory} ()}
+\label{group__nfftutil_ga1}
+
+\begin{CompactList}\small\item\em Actual used memory in bytes; calls mallinfo if define HAVE\_\-MALLOC\_\-H. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga2}{
+int \hyperlink{group__nfftutil_ga2}{nfft\_\-ld} (int m)}
+\label{group__nfftutil_ga2}
+
+\begin{CompactList}\small\item\em Integer logarithm of 2. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga3}{
+int \hyperlink{group__nfftutil_ga3}{nfft\_\-int\_\-2\_\-pow} (int a)}
+\label{group__nfftutil_ga3}
+
+\begin{CompactList}\small\item\em Integer power of 2. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga4}{
+int \hyperlink{group__nfftutil_ga4}{nfft\_\-next\_\-power\_\-of\_\-2} (int N)}
+\label{group__nfftutil_ga4}
+
+\begin{CompactList}\small\item\em Computes $n\ge N$ such that $n=2^j,\, j\in\mathbb{N}_0$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga5}{
+void \hyperlink{group__nfftutil_ga5}{nfft\_\-next\_\-power\_\-of\_\-2\_\-exp} (int N, int $\ast$N2, int $\ast$t)}
+\label{group__nfftutil_ga5}
+
+\begin{CompactList}\small\item\em Computes ? \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga6}{
+double \hyperlink{group__nfftutil_ga6}{nfft\_\-sinc} (double x)}
+\label{group__nfftutil_ga6}
+
+\begin{CompactList}\small\item\em Computes the sinus cardinalis $\frac{sin\left(x\right)}{x}$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga7}{
+double \hyperlink{group__nfftutil_ga7}{nfft\_\-bspline\_\-old} (int k, double x, double $\ast$A)}
+\label{group__nfftutil_ga7}
+
+\begin{CompactList}\small\item\em To test the new one. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga8}{
+double \hyperlink{group__nfftutil_ga8}{nfft\_\-bspline} (int k, double x, double $\ast$scratch)}
+\label{group__nfftutil_ga8}
+
+\begin{CompactList}\small\item\em Computes the B-spline $M_{k,0}\left(x\right)$, scratch is used for de Boor's scheme. \item\end{CompactList}\item 
+double \hyperlink{group__nfftutil_ga9}{nfft\_\-i0} (double x)
+\begin{CompactList}\small\item\em Modified Bessel function of order zero; adapted from Stephen Moshier's Cephes Math Library Release 2.8. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga10}{
+int \hyperlink{group__nfftutil_ga10}{nfft\_\-prod\_\-int} (int $\ast$vec, int d)}
+\label{group__nfftutil_ga10}
+
+\begin{CompactList}\small\item\em Computes integer $\prod_{t=0}^{d-1} v_t$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga11}{
+int \hyperlink{group__nfftutil_ga11}{nfct\_\-prod\_\-int} (int $\ast$vec, int d)}
+\label{group__nfftutil_ga11}
+
+\begin{CompactList}\small\item\em Computes integer $\prod_{t=0}^{d-1} v_t$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga12}{
+int \hyperlink{group__nfftutil_ga12}{nfst\_\-prod\_\-minus\_\-a\_\-int} (int $\ast$vec, int a, int d)}
+\label{group__nfftutil_ga12}
+
+\begin{CompactList}\small\item\em Computes integer $\prod_{t=0}^{d-1} v_t-a$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga13}{
+int \hyperlink{group__nfftutil_ga13}{nfft\_\-plain\_\-loop} (int $\ast$idx, int $\ast$N, int d)}
+\label{group__nfftutil_ga13}
+
+\begin{CompactList}\small\item\em Computes $\sum_{t=0}^{d-1} i_t \prod_{t'=t+1}^{d-1} N_{t'}$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga14}{
+double \hyperlink{group__nfftutil_ga14}{nfft\_\-prod\_\-real} (double $\ast$vec, int d)}
+\label{group__nfftutil_ga14}
+
+\begin{CompactList}\small\item\em Computes double $\prod_{t=0}^{d-1} v_t$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga15}{
+double \hyperlink{group__nfftutil_ga15}{nfft\_\-dot\_\-complex} (double complex $\ast$x, int n)}
+\label{group__nfftutil_ga15}
+
+\begin{CompactList}\small\item\em Computes the inner/dot product $x^H x$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga16}{
+double \hyperlink{group__nfftutil_ga16}{nfft\_\-dot\_\-double} (double $\ast$x, int n)}
+\label{group__nfftutil_ga16}
+
+\begin{CompactList}\small\item\em Computes the inner/dot product $x^H x$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga17}{
+double \hyperlink{group__nfftutil_ga17}{nfft\_\-dot\_\-w\_\-complex} (double complex $\ast$x, double $\ast$w, int n)}
+\label{group__nfftutil_ga17}
+
+\begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w \odot x)$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga18}{
+double \hyperlink{group__nfftutil_ga18}{nfft\_\-dot\_\-w\_\-double} (double $\ast$x, double $\ast$w, int n)}
+\label{group__nfftutil_ga18}
+
+\begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w \odot x)$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga19}{
+double \hyperlink{group__nfftutil_ga19}{nfft\_\-dot\_\-w\_\-w2\_\-complex} (double complex $\ast$x, double $\ast$w, double $\ast$w2, int n)}
+\label{group__nfftutil_ga19}
+
+\begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w1\odot w2\odot w2 \odot x)$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga20}{
+double \hyperlink{group__nfftutil_ga20}{nfft\_\-dot\_\-w2\_\-complex} (double complex $\ast$x, double $\ast$w2, int n)}
+\label{group__nfftutil_ga20}
+
+\begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w2\odot w2 \odot x)$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga21}{
+void \hyperlink{group__nfftutil_ga21}{nfft\_\-cp\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga21}
+
+\begin{CompactList}\small\item\em Copies $x \leftarrow y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga22}{
+void \hyperlink{group__nfftutil_ga22}{nfft\_\-cp\_\-double} (double $\ast$x, double $\ast$y, int n)}
+\label{group__nfftutil_ga22}
+
+\begin{CompactList}\small\item\em Copies $x \leftarrow y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga23}{
+void \hyperlink{group__nfftutil_ga23}{nfft\_\-cp\_\-a\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga23}
+
+\begin{CompactList}\small\item\em Copies $x \leftarrow a y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga24}{
+void \hyperlink{group__nfftutil_ga24}{nfft\_\-cp\_\-w\_\-complex} (double complex $\ast$x, double $\ast$w, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga24}
+
+\begin{CompactList}\small\item\em Copies $x \leftarrow w\odot y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga25}{
+void \hyperlink{group__nfftutil_ga25}{nfft\_\-cp\_\-w\_\-double} (double $\ast$x, double $\ast$w, double $\ast$y, int n)}
+\label{group__nfftutil_ga25}
+
+\begin{CompactList}\small\item\em Copies $x \leftarrow w\odot y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga26}{
+void \hyperlink{group__nfftutil_ga26}{nfft\_\-upd\_\-axpy\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga26}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow a x + y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga27}{
+void \hyperlink{group__nfftutil_ga27}{nfft\_\-upd\_\-axpy\_\-double} (double $\ast$x, double a, double $\ast$y, int n)}
+\label{group__nfftutil_ga27}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow a x + y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga28}{
+void \hyperlink{group__nfftutil_ga28}{nfft\_\-upd\_\-xpay\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga28}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow x + a y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga29}{
+void \hyperlink{group__nfftutil_ga29}{nfft\_\-upd\_\-xpay\_\-double} (double $\ast$x, double a, double $\ast$y, int n)}
+\label{group__nfftutil_ga29}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow x + a y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga30}{
+void \hyperlink{group__nfftutil_ga30}{nfft\_\-upd\_\-axpby\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, double b, int n)}
+\label{group__nfftutil_ga30}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow a x + b y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga31}{
+void \hyperlink{group__nfftutil_ga31}{nfft\_\-upd\_\-axpby\_\-double} (double $\ast$x, double a, double $\ast$y, double b, int n)}
+\label{group__nfftutil_ga31}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow a x + b y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga32}{
+void \hyperlink{group__nfftutil_ga32}{nfft\_\-upd\_\-xpawy\_\-complex} (double complex $\ast$x, double a, double $\ast$w, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga32}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow x + a w\odot y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga33}{
+void \hyperlink{group__nfftutil_ga33}{nfft\_\-upd\_\-xpawy\_\-double} (double $\ast$x, double a, double $\ast$w, double $\ast$y, int n)}
+\label{group__nfftutil_ga33}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow x + a w\odot y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga34}{
+void \hyperlink{group__nfftutil_ga34}{nfft\_\-upd\_\-axpwy\_\-complex} (double complex $\ast$x, double a, double $\ast$w, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga34}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow a x + w\odot y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga35}{
+void \hyperlink{group__nfftutil_ga35}{nfft\_\-upd\_\-axpwy\_\-double} (double $\ast$x, double a, double $\ast$w, double $\ast$y, int n)}
+\label{group__nfftutil_ga35}
+
+\begin{CompactList}\small\item\em Updates $x \leftarrow a x + w\odot y$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga36}{
+void \hyperlink{group__nfftutil_ga36}{nfft\_\-fftshift\_\-complex} (double complex $\ast$x, int d, int $\ast$N)}
+\label{group__nfftutil_ga36}
+
+\begin{CompactList}\small\item\em Swaps each half over N\mbox{[}d\mbox{]}/2. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga37}{
+double \hyperlink{group__nfftutil_ga37}{nfft\_\-error\_\-l\_\-infty\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga37}
+
+\begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} $. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga38}{
+double \hyperlink{group__nfftutil_ga38}{nfft\_\-error\_\-l\_\-infty\_\-double} (double $\ast$x, double $\ast$y, int n)}
+\label{group__nfftutil_ga38}
+
+\begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} $. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga39}{
+double \hyperlink{group__nfftutil_ga39}{nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n, double complex $\ast$z, int m)}
+\label{group__nfftutil_ga39}
+
+\begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|z\|_1} $. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga40}{
+double \hyperlink{group__nfftutil_ga40}{nfft\_\-error\_\-l\_\-infty\_\-1\_\-double} (double $\ast$x, double $\ast$y, int n, double $\ast$z, int m)}
+\label{group__nfftutil_ga40}
+
+\begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|z\|_1} $. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga41}{
+double \hyperlink{group__nfftutil_ga41}{nfft\_\-error\_\-l\_\-2\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n)}
+\label{group__nfftutil_ga41}
+
+\begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_2}{\|x\|_2} $. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga42}{
+double \hyperlink{group__nfftutil_ga42}{nfft\_\-error\_\-l\_\-2\_\-double} (double $\ast$x, double $\ast$y, int n)}
+\label{group__nfftutil_ga42}
+
+\begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_2}{\|x\|_2} $. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga43}{
+void \hyperlink{group__nfftutil_ga43}{nfft\_\-vpr\_\-int} (int $\ast$x, int n, char $\ast$text)}
+\label{group__nfftutil_ga43}
+
+\begin{CompactList}\small\item\em Prints a vector of integer numbers. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga44}{
+void \hyperlink{group__nfftutil_ga44}{nfft\_\-vpr\_\-double} (double $\ast$x, int n, char $\ast$text)}
+\label{group__nfftutil_ga44}
+
+\begin{CompactList}\small\item\em Prints a vector of doubles numbers. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga45}{
+void \hyperlink{group__nfftutil_ga45}{nfft\_\-vpr\_\-complex} (double complex $\ast$x, int n, char $\ast$text)}
+\label{group__nfftutil_ga45}
+
+\begin{CompactList}\small\item\em Prints a vector of complex numbers. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga46}{
+void \hyperlink{group__nfftutil_ga46}{nfft\_\-vrand\_\-unit\_\-complex} (double complex $\ast$x, int n)}
+\label{group__nfftutil_ga46}
+
+\begin{CompactList}\small\item\em Inits a vector of random complex numbers in $[0,1]\times[0,1]{\rm i}$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga47}{
+void \hyperlink{group__nfftutil_ga47}{nfft\_\-vrand\_\-shifted\_\-unit\_\-double} (double $\ast$x, int n)}
+\label{group__nfftutil_ga47}
+
+\begin{CompactList}\small\item\em Inits a vector of random double numbers in $[-1/2,1/2]$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga48}{
+void \hyperlink{group__nfftutil_ga48}{nfft\_\-voronoi\_\-weights\_\-1d} (double $\ast$w, double $\ast$x, int M)}
+\label{group__nfftutil_ga48}
+
+\begin{CompactList}\small\item\em Computes non periodic voronoi weights, assumes ordered nodes $x_j$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga49}{
+void \hyperlink{group__nfftutil_ga49}{nfft\_\-voronoi\_\-weights\_\-S2} (double $\ast$w, double $\ast$xi, int M)}
+\label{group__nfftutil_ga49}
+
+\begin{CompactList}\small\item\em Computes voronoi weights for nodes on the sphere S$^\wedge$2. \item\end{CompactList}\item 
+double \hyperlink{group__nfftutil_ga50}{nfft\_\-modified\_\-fejer} (int N, int kk)
+\begin{CompactList}\small\item\em Computes the damping factor for the modified Fejer kernel, ie $\frac{2}{N}\left(1-\frac{\left|2k+1\right|}{N}\right)$. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga51}{
+double \hyperlink{group__nfftutil_ga51}{nfft\_\-modified\_\-jackson2} (int N, int kk)}
+\label{group__nfftutil_ga51}
+
+\begin{CompactList}\small\item\em Computes the damping factor for the modified Jackson kernel. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga52}{
+double \hyperlink{group__nfftutil_ga52}{nfft\_\-modified\_\-jackson4} (int N, int kk)}
+\label{group__nfftutil_ga52}
+
+\begin{CompactList}\small\item\em Computes the damping factor for the modified generalised Jackson kernel. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga53}{
+double \hyperlink{group__nfftutil_ga53}{nfft\_\-modified\_\-sobolev} (double mu, int kk)}
+\label{group__nfftutil_ga53}
+
+\begin{CompactList}\small\item\em Computes the damping factor for the modified Sobolev kernel. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ga54}{
+double \hyperlink{group__nfftutil_ga54}{nfft\_\-modified\_\-multiquadric} (double mu, double c, int kk)}
+\label{group__nfftutil_ga54}
+
+\begin{CompactList}\small\item\em Computes the damping factor for the modified multiquadric kernel. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+This module implements frequently used utility functions. In particular, this includes simple measurement of resources, evaluation of window functions, vector routines for basic linear algebra tasks, and computation of weights for the inverse transforms. 
+
+\subsection{Function Documentation}
+\hypertarget{group__nfftutil_ga0}{
+\index{nfftutil@{nfftutil}!nfft_second@{nfft\_\-second}}
+\index{nfft_second@{nfft\_\-second}!nfftutil@{nfftutil}}
+\subsubsection[nfft\_\-second]{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-second ()}}
+\label{group__nfftutil_ga0}
+
+
+Actual used CPU time in seconds; calls getrusage, limited accuracy. 
+
+Calls getrusage, limited accuracy 
+
+Definition at line 25 of file util.c.
+
+Referenced by comparison\_\-fft(), fgt\_\-test\_\-measure\_\-time(), fields\_\-fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), reconstruct(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfftutil_ga9}{
+\index{nfftutil@{nfftutil}!nfft_i0@{nfft\_\-i0}}
+\index{nfft_i0@{nfft\_\-i0}!nfftutil@{nfftutil}}
+\subsubsection[nfft\_\-i0]{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-i0 (double {\em x})}}
+\label{group__nfftutil_ga9}
+
+
+Modified Bessel function of order zero; adapted from Stephen Moshier's Cephes Math Library Release 2.8. 
+
+Cephes Math Library Release 2.8: June, 2000 Copyright 1984, 1987, 2000 by Stephen L. Moshier 
+
+Definition at line 861 of file util.c.\hypertarget{group__nfftutil_ga50}{
+\index{nfftutil@{nfftutil}!nfft_modified_fejer@{nfft\_\-modified\_\-fejer}}
+\index{nfft_modified_fejer@{nfft\_\-modified\_\-fejer}!nfftutil@{nfftutil}}
+\subsubsection[nfft\_\-modified\_\-fejer]{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-modified\_\-fejer (int {\em N}, int {\em kk})}}
+\label{group__nfftutil_ga50}
+
+
+Computes the damping factor for the modified Fejer kernel, ie $\frac{2}{N}\left(1-\frac{\left|2k+1\right|}{N}\right)$. 
+
+/f\$\{2\}\{N\}(1-\{$|$2k+1$|$\}\{N\})/f\$ 
+
+Definition at line 1553 of file util.c.

@@ -1,0 +1,159 @@
+\hypertarget{structnfft__plan}{
+\section{nfft\_\-plan Struct Reference}
+\label{structnfft__plan}\index{nfft_plan@{nfft\_\-plan}}
+}
+Structure for a NFFT plan.  
+
+
+{\tt \#include $<$nfft3.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structnfft__plan_o0}{
+int \hyperlink{structnfft__plan_o0}{N\_\-total}}
+\label{structnfft__plan_o0}
+
+\begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o1}{
+int \hyperlink{structnfft__plan_o1}{M\_\-total}}
+\label{structnfft__plan_o1}
+
+\begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o2}{
+double complex $\ast$ \hyperlink{structnfft__plan_o2}{f\_\-hat}}
+\label{structnfft__plan_o2}
+
+\begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o3}{
+double complex $\ast$ \hyperlink{structnfft__plan_o3}{f}}
+\label{structnfft__plan_o3}
+
+\begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o4}{
+int \hyperlink{structnfft__plan_o4}{d}}
+\label{structnfft__plan_o4}
+
+\begin{CompactList}\small\item\em Dimension, rank. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o5}{
+int $\ast$ \hyperlink{structnfft__plan_o5}{N}}
+\label{structnfft__plan_o5}
+
+\begin{CompactList}\small\item\em Multi bandwidth. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o6}{
+double $\ast$ \hyperlink{structnfft__plan_o6}{sigma}}
+\label{structnfft__plan_o6}
+
+\begin{CompactList}\small\item\em Oversampling-factor. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o7}{
+int $\ast$ \hyperlink{structnfft__plan_o7}{n}}
+\label{structnfft__plan_o7}
+
+\begin{CompactList}\small\item\em FFTW length, equal to sigma$\ast$N, default is the power of 2 such that $2\le\sigma<4$. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o8}{
+int \hyperlink{structnfft__plan_o8}{n\_\-total}}
+\label{structnfft__plan_o8}
+
+\begin{CompactList}\small\item\em Total size of FFTW. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o9}{
+int \hyperlink{structnfft__plan_o9}{m}}
+\label{structnfft__plan_o9}
+
+\begin{CompactList}\small\item\em Cut-off parameter of the window function, default value is 6 (KAISER\_\-BESSEL), 9 (SINC\_\-POWER), 11 (B\_\-SPLINE), 12 (GAUSSIAN). \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o10}{
+double $\ast$ \hyperlink{structnfft__plan_o10}{b}}
+\label{structnfft__plan_o10}
+
+\begin{CompactList}\small\item\em Shape parameter of the window function. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o11}{
+int \hyperlink{structnfft__plan_o11}{K}}
+\label{structnfft__plan_o11}
+
+\begin{CompactList}\small\item\em Number of equispaced samples of the window function for \hyperlink{group__nfft_ga18}{PRE\_\-LIN\_\-PSI}. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o12}{
+unsigned \hyperlink{structnfft__plan_o12}{nfft\_\-flags}}
+\label{structnfft__plan_o12}
+
+\begin{CompactList}\small\item\em Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE\_\-PHI\_\-HUT$|$ PRE\_\-PSI$|$ MALLOC\_\-X$|$ MALLOC\_\-F\_\-HAT$|$ MALLOC\_\-F$|$ FFTW\_\-INIT$|$ FFT\_\-OUT\_\-OF\_\-PLACE. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o13}{
+unsigned \hyperlink{structnfft__plan_o13}{fftw\_\-flags}}
+\label{structnfft__plan_o13}
+
+\begin{CompactList}\small\item\em Flags for the FFTW, default is FFTW\_\-ESTIMATE$|$ FFTW\_\-DESTROY\_\-INPUT. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o14}{
+double $\ast$ \hyperlink{structnfft__plan_o14}{x}}
+\label{structnfft__plan_o14}
+
+\begin{CompactList}\small\item\em Nodes in time/spatial domain, size is $dM$ doubles. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o15}{
+double \hyperlink{structnfft__plan_o15}{MEASURE\_\-TIME\_\-t} \mbox{[}3\mbox{]}}
+\label{structnfft__plan_o15}
+
+\begin{CompactList}\small\item\em Measured time for each step if MEASURE\_\-TIME is set. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o16}{
+fftw\_\-plan \hyperlink{structnfft__plan_o16}{my\_\-fftw\_\-plan1}}
+\label{structnfft__plan_o16}
+
+\begin{CompactList}\small\item\em Forward FFTW plan. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o17}{
+fftw\_\-plan \hyperlink{structnfft__plan_o17}{my\_\-fftw\_\-plan2}}
+\label{structnfft__plan_o17}
+
+\begin{CompactList}\small\item\em Backward FFTW plan. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o18}{
+double $\ast$$\ast$ \hyperlink{structnfft__plan_o18}{c\_\-phi\_\-inv}}
+\label{structnfft__plan_o18}
+
+\begin{CompactList}\small\item\em Precomputed data for the diagonal matrix $D$, size is $N_0+\hdots+N_{d-1}$ doubles. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o19}{
+double $\ast$ \hyperlink{structnfft__plan_o19}{psi}}
+\label{structnfft__plan_o19}
+
+\begin{CompactList}\small\item\em Precomputed data for the sparse matrix $B$, size depends on precomputation scheme. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o20}{
+int $\ast$ \hyperlink{structnfft__plan_o20}{psi\_\-index\_\-g}}
+\label{structnfft__plan_o20}
+
+\begin{CompactList}\small\item\em Indices in source/target vector for \hyperlink{group__nfft_ga21}{PRE\_\-FULL\_\-PSI}. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o21}{
+int $\ast$ \hyperlink{structnfft__plan_o21}{psi\_\-index\_\-f}}
+\label{structnfft__plan_o21}
+
+\begin{CompactList}\small\item\em Indices in source/target vector for \hyperlink{group__nfft_ga21}{PRE\_\-FULL\_\-PSI}. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o22}{
+double complex $\ast$ \hyperlink{structnfft__plan_o22}{g}}
+\label{structnfft__plan_o22}
+
+\begin{CompactList}\small\item\em Oversampled vector of samples, size is \hyperlink{structnfft__plan_o8}{n\_\-total} double complex. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o23}{
+double complex $\ast$ \hyperlink{structnfft__plan_o23}{g\_\-hat}}
+\label{structnfft__plan_o23}
+
+\begin{CompactList}\small\item\em Zero-padded vector of Fourier coefficients, size is \hyperlink{structnfft__plan_o8}{n\_\-total} double complex. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o24}{
+double complex $\ast$ \hyperlink{structnfft__plan_o24}{g1}}
+\label{structnfft__plan_o24}
+
+\begin{CompactList}\small\item\em Input of fftw. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o25}{
+double complex $\ast$ \hyperlink{structnfft__plan_o25}{g2}}
+\label{structnfft__plan_o25}
+
+\begin{CompactList}\small\item\em Output of fftw. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_o26}{
+double $\ast$ \hyperlink{structnfft__plan_o26}{spline\_\-coeffs}}
+\label{structnfft__plan_o26}
+
+\begin{CompactList}\small\item\em Input for de Boor algorithm if B\_\-SPLINE or SINC\_\-POWER is defined. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for a NFFT plan. 
+
+
+
+Definition at line 234 of file nfft3.h.
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{nfft3_8h}{nfft3.h}\end{CompactItemize}

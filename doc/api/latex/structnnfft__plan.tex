@@ -1,0 +1,173 @@
+\hypertarget{structnnfft__plan}{
+\section{nnfft\_\-plan Struct Reference}
+\label{structnnfft__plan}\index{nnfft_plan@{nnfft\_\-plan}}
+}
+Structure for a transform plan.  
+
+
+{\tt \#include $<$nfft3.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structnnfft__plan_o0}{
+int \hyperlink{structnnfft__plan_o0}{N\_\-total}}
+\label{structnnfft__plan_o0}
+
+\begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o1}{
+int \hyperlink{structnnfft__plan_o1}{M\_\-total}}
+\label{structnnfft__plan_o1}
+
+\begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o2}{
+double complex $\ast$ \hyperlink{structnnfft__plan_o2}{f\_\-hat}}
+\label{structnnfft__plan_o2}
+
+\begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o3}{
+double complex $\ast$ \hyperlink{structnnfft__plan_o3}{f}}
+\label{structnnfft__plan_o3}
+
+\begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o4}{
+int \hyperlink{structnnfft__plan_o4}{d}}
+\label{structnnfft__plan_o4}
+
+\begin{CompactList}\small\item\em dimension, rank \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o5}{
+double $\ast$ \hyperlink{structnnfft__plan_o5}{sigma}}
+\label{structnnfft__plan_o5}
+
+\begin{CompactList}\small\item\em oversampling-factor \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o6}{
+double $\ast$ \hyperlink{structnnfft__plan_o6}{a}}
+\label{structnnfft__plan_o6}
+
+\begin{CompactList}\small\item\em 1 + 2$\ast$m/N1 \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o7}{
+int $\ast$ \hyperlink{structnnfft__plan_o7}{N}}
+\label{structnnfft__plan_o7}
+
+\begin{CompactList}\small\item\em cut-off-frequencies \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o8}{
+int $\ast$ \hyperlink{structnnfft__plan_o8}{N1}}
+\label{structnnfft__plan_o8}
+
+\begin{CompactList}\small\item\em sigma$\ast$N \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o9}{
+int $\ast$ \hyperlink{structnnfft__plan_o9}{a\-N1}}
+\label{structnnfft__plan_o9}
+
+\begin{CompactList}\small\item\em sigma$\ast$a$\ast$N \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o10}{
+int \hyperlink{structnnfft__plan_o10}{m}}
+\label{structnnfft__plan_o10}
+
+\begin{CompactList}\small\item\em cut-off parameter in time-domain \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o11}{
+double $\ast$ \hyperlink{structnnfft__plan_o11}{b}}
+\label{structnnfft__plan_o11}
+
+\begin{CompactList}\small\item\em shape parameters \item\end{CompactList}\item 
+int \hyperlink{structnnfft__plan_o12}{K}
+\begin{CompactList}\small\item\em number of precomp \item\end{CompactList}\item 
+int \hyperlink{structnnfft__plan_o13}{a\-N1\_\-total}
+\begin{CompactList}\small\item\em a\-N1\_\-total=a\-N1\mbox{[}0\mbox{]}$\ast$ .. \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o14}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnnfft__plan_o14}{direct\_\-plan}}
+\label{structnnfft__plan_o14}
+
+\begin{CompactList}\small\item\em plan for the nfft \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o15}{
+unsigned \hyperlink{structnnfft__plan_o15}{nnfft\_\-flags}}
+\label{structnnfft__plan_o15}
+
+\begin{CompactList}\small\item\em flags for precomputation, malloc \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o16}{
+int $\ast$ \hyperlink{structnnfft__plan_o16}{n}}
+\label{structnnfft__plan_o16}
+
+\begin{CompactList}\small\item\em n=N1, for the window function \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o17}{
+double $\ast$ \hyperlink{structnnfft__plan_o17}{x}}
+\label{structnnfft__plan_o17}
+
+\begin{CompactList}\small\item\em nodes (in time/spatial domain) \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o18}{
+double $\ast$ \hyperlink{structnnfft__plan_o18}{v}}
+\label{structnnfft__plan_o18}
+
+\begin{CompactList}\small\item\em nodes (in fourier domain) \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o19}{
+double $\ast$ \hyperlink{structnnfft__plan_o19}{c\_\-phi\_\-inv}}
+\label{structnnfft__plan_o19}
+
+\begin{CompactList}\small\item\em precomputed data, matrix D \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o20}{
+double $\ast$ \hyperlink{structnnfft__plan_o20}{psi}}
+\label{structnnfft__plan_o20}
+
+\begin{CompactList}\small\item\em precomputed data, matrix B \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o21}{
+int \hyperlink{structnnfft__plan_o21}{size\_\-psi}}
+\label{structnnfft__plan_o21}
+
+\begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o22}{
+int $\ast$ \hyperlink{structnnfft__plan_o22}{psi\_\-index\_\-g}}
+\label{structnnfft__plan_o22}
+
+\begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o23}{
+int $\ast$ \hyperlink{structnnfft__plan_o23}{psi\_\-index\_\-f}}
+\label{structnnfft__plan_o23}
+
+\begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
+\hypertarget{structnnfft__plan_o24}{
+double complex $\ast$ {\bf F}}
+\label{structnnfft__plan_o24}
+
+\item 
+\hypertarget{structnnfft__plan_o25}{
+double $\ast$ \hyperlink{structnnfft__plan_o25}{spline\_\-coeffs}}
+\label{structnnfft__plan_o25}
+
+\begin{CompactList}\small\item\em input for de Boor algorithm, if B\_\-SPLINE or SINC\_\-2m is defined \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for a transform plan. 
+
+
+
+Definition at line 961 of file nfft3.h.
+
+\subsection{Field Documentation}
+\hypertarget{structnnfft__plan_o12}{
+\index{nnfft_plan@{nnfft\_\-plan}!K@{K}}
+\index{K@{K}!nnfft_plan@{nnfft\_\-plan}}
+\subsubsection[K]{\setlength{\rightskip}{0pt plus 5cm}int \hyperlink{structnnfft__plan_o12}{nnfft\_\-plan::K}}}
+\label{structnnfft__plan_o12}
+
+
+number of precomp 
+
+uniform psi 
+
+Definition at line 977 of file nfft3.h.\hypertarget{structnnfft__plan_o13}{
+\index{nnfft_plan@{nnfft\_\-plan}!aN1_total@{aN1\_\-total}}
+\index{aN1_total@{aN1\_\-total}!nnfft_plan@{nnfft\_\-plan}}
+\subsubsection[aN1\_\-total]{\setlength{\rightskip}{0pt plus 5cm}int \hyperlink{structnnfft__plan_o13}{nnfft\_\-plan::a\-N1\_\-total}}}
+\label{structnnfft__plan_o13}
+
+
+a\-N1\_\-total=a\-N1\mbox{[}0\mbox{]}$\ast$ .. 
+
+$\ast$a\-N1\mbox{[}d-1\mbox{]} 
+
+Definition at line 979 of file nfft3.h.
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{nfft3_8h}{nfft3.h}\end{CompactItemize}
