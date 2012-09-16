@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fpt.c 3258 2009-07-05 09:50:06Z keiner $ */
+/* $Id: fpt.c 3333 2009-09-14 21:54:14Z keiner $ */
 
 /**
  * \file fpt.c
@@ -582,8 +582,8 @@ static int eval_clenshaw_thresh2(const double *x, double *z, double *y, int size
   const double *x_act;
   double *y_act, *z_act;
   const double *alpha_act, *beta_act, *gamma_act;
-  R min = INFINITY, max = -INFINITY;
-  const R t = /*-LOG10(EPS)*/ + LOG10(FABS(threshold));
+  R max = -R_MAX;
+  const R t = LOG10(FABS(threshold));
 
   /* Traverse all nodes. */
   x_act = x;
@@ -616,10 +616,8 @@ static int eval_clenshaw_thresh2(const double *x, double *z, double *y, int size
       }
       *z_act = a;
       *y_act = (a*((*alpha_act)*x_val_act+(*beta_act))+b);
-      min = FMIN(min,LOG10(FABS(*y_act)));
       max = FMAX(max,LOG10(FABS(*y_act)));
-//      if (fabs(*y_act) > threshold)
-      if ((max - min) > t)
+      if (max > t)
         return 1;
     }
     x_act++;

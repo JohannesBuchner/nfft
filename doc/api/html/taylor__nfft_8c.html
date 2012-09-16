@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.1 API Reference - NFFT: taylor_nfft.c File Reference
+      NFFT 3.1.2 API Reference - NFFT: taylor_nfft.c File Reference
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.1 API Reference</H1nc>
+          <H1nc>3.1.2 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -127,7 +127,7 @@ Initialisation of a transform plan.
 
 <p>Definition at line <a class="el" href="taylor__nfft_8c-source.html#l00059">59</a> of file <a class="el" href="taylor__nfft_8c-source.html">taylor_nfft.c</a>.</p>
 
-<p>References <a class="el" href="nfft3_8h-source.html#l00323">FFT_OUT_OF_PLACE</a>, <a class="el" href="nfft3_8h-source.html#l00334">FFTW_INIT</a>, <a class="el" href="nfft3_8h-source.html#l00312">MALLOC_F</a>, <a class="el" href="nfft3_8h-source.html#l00301">MALLOC_F_HAT</a>, <a class="el" href="nfft3_8h-source.html#l00289">MALLOC_X</a>, <a class="el" href="nfft_8c-source.html#l03069">nfft_init_guru()</a>, and <a class="el" href="malloc_8c-source.html#l00029">nfft_malloc()</a>.</p>
+<p>References <a class="el" href="nfft3_8h-source.html#l00257">FFT_OUT_OF_PLACE</a>, <a class="el" href="nfft3_8h-source.html#l00268">FFTW_INIT</a>, <a class="el" href="nfft3_8h-source.html#l00246">MALLOC_F</a>, <a class="el" href="nfft3_8h-source.html#l00235">MALLOC_F_HAT</a>, <a class="el" href="nfft3_8h-source.html#l00223">MALLOC_X</a>, <a class="el" href="nfft_8c-source.html#l03082">nfft_init_guru()</a>, and <a class="el" href="malloc_8c-source.html#l00029">nfft_malloc()</a>.</p>
 
 <p>Referenced by <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>.</p>
 
@@ -159,7 +159,7 @@ Precomputation of weights and indices in Taylor expansion.
 
 <p>Definition at line <a class="el" href="taylor__nfft_8c-source.html#l00078">78</a> of file <a class="el" href="taylor__nfft_8c-source.html">taylor_nfft.c</a>.</p>
 
-<p>References <a class="el" href="taylor__nfft_8c-source.html#l00045">taylor_plan::deltax0</a>, <a class="el" href="taylor__nfft_8c-source.html#l00043">taylor_plan::idx0</a>, <a class="el" href="nfft3_8h-source.html#l00356">nfft_plan::M_total</a>, <a class="el" href="nfft3_8h-source.html#l00363">nfft_plan::n</a>, and <a class="el" href="nfft3_8h-source.html#l00390">nfft_plan::x</a>.</p>
+<p>References <a class="el" href="taylor__nfft_8c-source.html#l00045">taylor_plan::deltax0</a>, <a class="el" href="taylor__nfft_8c-source.html#l00043">taylor_plan::idx0</a>, <a class="el" href="nfft3_8h-source.html#l00290">nfft_plan::M_total</a>, <a class="el" href="nfft3_8h-source.html#l00297">nfft_plan::n</a>, and <a class="el" href="nfft3_8h-source.html#l00324">nfft_plan::x</a>.</p>
 
 <p>Referenced by <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>.</p>
 
@@ -191,7 +191,7 @@ Destroys a transform plan.
 
 <p>Definition at line <a class="el" href="taylor__nfft_8c-source.html#l00100">100</a> of file <a class="el" href="taylor__nfft_8c-source.html">taylor_nfft.c</a>.</p>
 
-<p>References <a class="el" href="taylor__nfft_8c-source.html#l00045">taylor_plan::deltax0</a>, <a class="el" href="taylor__nfft_8c-source.html#l00043">taylor_plan::idx0</a>, <a class="el" href="nfft_8c-source.html#l03139">nfft_finalize()</a>, and <a class="el" href="malloc_8c-source.html#l00050">nfft_free()</a>.</p>
+<p>References <a class="el" href="taylor__nfft_8c-source.html#l00045">taylor_plan::deltax0</a>, <a class="el" href="taylor__nfft_8c-source.html#l00043">taylor_plan::idx0</a>, <a class="el" href="nfft_8c-source.html#l03152">nfft_finalize()</a>, and <a class="el" href="malloc_8c-source.html#l00050">nfft_free()</a>.</p>
 
 <p>Referenced by <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>.</p>
 
@@ -224,7 +224,7 @@ Executes a Taylor-NFFT, see equation (1.1) in [Guide], computes fast and approxi
 
 <p>Definition at line <a class="el" href="taylor__nfft_8c-source.html#l00118">118</a> of file <a class="el" href="taylor__nfft_8c-source.html">taylor_nfft.c</a>.</p>
 
-<p>References <a class="el" href="taylor__nfft_8c-source.html#l00045">taylor_plan::deltax0</a>, <a class="el" href="nfft3_8h-source.html#l00357">nfft_plan::f</a>, <a class="el" href="nfft3_8h-source.html#l00356">nfft_plan::f_hat</a>, <a class="el" href="nfft3_8h-source.html#l00417">nfft_plan::g1</a>, <a class="el" href="nfft3_8h-source.html#l00418">nfft_plan::g2</a>, <a class="el" href="taylor__nfft_8c-source.html#l00043">taylor_plan::idx0</a>, <a class="el" href="nfft3_8h-source.html#l00367">nfft_plan::m</a>, <a class="el" href="nfft3_8h-source.html#l00397">nfft_plan::my_fftw_plan1</a>, <a class="el" href="nfft3_8h-source.html#l00355">nfft_plan::N_total</a>, <a class="el" href="nfft3_8h-source.html#l00366">nfft_plan::n_total</a>, and <a class="el" href="nfft3util_8h-source.html#l00097">PI</a>.</p>
+<p>References <a class="el" href="taylor__nfft_8c-source.html#l00045">taylor_plan::deltax0</a>, <a class="el" href="nfft3_8h-source.html#l00291">nfft_plan::f</a>, <a class="el" href="nfft3_8h-source.html#l00290">nfft_plan::f_hat</a>, <a class="el" href="nfft3_8h-source.html#l00351">nfft_plan::g1</a>, <a class="el" href="nfft3_8h-source.html#l00352">nfft_plan::g2</a>, <a class="el" href="taylor__nfft_8c-source.html#l00043">taylor_plan::idx0</a>, <a class="el" href="nfft3_8h-source.html#l00301">nfft_plan::m</a>, <a class="el" href="nfft3_8h-source.html#l00331">nfft_plan::my_fftw_plan1</a>, <a class="el" href="nfft3_8h-source.html#l00289">nfft_plan::N_total</a>, <a class="el" href="nfft3_8h-source.html#l00300">nfft_plan::n_total</a>, and <a class="el" href="nfft3util_8h-source.html#l00097">PI</a>.</p>
 
 <p>Referenced by <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>.</p>
 
@@ -301,13 +301,13 @@ Compares NDFT, NFFT, and Taylor-NFFT.
 
 <p>Definition at line <a class="el" href="taylor__nfft_8c-source.html#l00174">174</a> of file <a class="el" href="taylor__nfft_8c-source.html">taylor_nfft.c</a>.</p>
 
-<p>References <a class="el" href="nfft3_8h-source.html#l00357">nfft_plan::f</a>, <a class="el" href="nfft3_8h-source.html#l00356">nfft_plan::f_hat</a>, <a class="el" href="nfft3_8h-source.html#l00323">FFT_OUT_OF_PLACE</a>, <a class="el" href="nfft3_8h-source.html#l00334">FFTW_INIT</a>, <a class="el" href="nfft3_8h-source.html#l00356">nfft_plan::M_total</a>, <a class="el" href="nfft3_8h-source.html#l00355">nfft_plan::N_total</a>, <a class="el" href="nfft_8c-source.html#l00148">ndft_trafo()</a>, <a class="el" href="group__nfftutil.html#g76b384a2f6c54e2686544e312f9ada5d">nfft_error_l_infty_complex()</a>, <a class="el" href="nfft_8c-source.html#l03139">nfft_finalize()</a>, <a class="el" href="nfft3_8h-source.html#l00379">nfft_plan::nfft_flags</a>, <a class="el" href="malloc_8c-source.html#l00050">nfft_free()</a>, <a class="el" href="nfft_8c-source.html#l03069">nfft_init_guru()</a>, <a class="el" href="malloc_8c-source.html#l00029">nfft_malloc()</a>, <a class="el" href="nfft_8c-source.html#l02963">nfft_precompute_one_psi()</a>, <a class="el" href="util_8c-source.html#l00043">nfft_second()</a>, <a class="el" href="nfft3util_8h-source.html#l00087">NFFT_SWAP_complex</a>, <a class="el" href="nfft_8c-source.html#l02771">nfft_trafo()</a>, <a class="el" href="group__nfftutil.html#ga44184ac2c1452221508e7640f391c34">nfft_vrand_shifted_unit_double()</a>, <a class="el" href="group__nfftutil.html#g5f53c8cd0b2f33200fce15ecf75a0685">nfft_vrand_unit_complex()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00041">taylor_plan::p</a>, <a class="el" href="nfft3_8h-source.html#l00253">PRE_FG_PSI</a>, <a class="el" href="nfft3_8h-source.html#l00349">PRE_ONE_PSI</a>, <a class="el" href="nfft3_8h-source.html#l00210">PRE_PHI_HUT</a>, <a class="el" href="taylor__nfft_8c-source.html#l00100">taylor_finalize()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00059">taylor_init()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00078">taylor_precompute()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00118">taylor_trafo()</a>, and <a class="el" href="nfft3_8h-source.html#l00390">nfft_plan::x</a>.</p>
+<p>References <a class="el" href="nfft3_8h-source.html#l00291">nfft_plan::f</a>, <a class="el" href="nfft3_8h-source.html#l00290">nfft_plan::f_hat</a>, <a class="el" href="nfft3_8h-source.html#l00257">FFT_OUT_OF_PLACE</a>, <a class="el" href="nfft3_8h-source.html#l00268">FFTW_INIT</a>, <a class="el" href="nfft3_8h-source.html#l00290">nfft_plan::M_total</a>, <a class="el" href="nfft3_8h-source.html#l00289">nfft_plan::N_total</a>, <a class="el" href="nfft_8c-source.html#l00163">ndft_trafo()</a>, <a class="el" href="group__nfftutil.html#g76b384a2f6c54e2686544e312f9ada5d">nfft_error_l_infty_complex()</a>, <a class="el" href="nfft_8c-source.html#l03152">nfft_finalize()</a>, <a class="el" href="nfft3_8h-source.html#l00313">nfft_plan::nfft_flags</a>, <a class="el" href="malloc_8c-source.html#l00050">nfft_free()</a>, <a class="el" href="nfft_8c-source.html#l03082">nfft_init_guru()</a>, <a class="el" href="malloc_8c-source.html#l00029">nfft_malloc()</a>, <a class="el" href="nfft_8c-source.html#l02976">nfft_precompute_one_psi()</a>, <a class="el" href="util_8c-source.html#l00043">nfft_second()</a>, <a class="el" href="nfft3util_8h-source.html#l00087">NFFT_SWAP_complex</a>, <a class="el" href="nfft_8c-source.html#l02784">nfft_trafo()</a>, <a class="el" href="group__nfftutil.html#ga44184ac2c1452221508e7640f391c34">nfft_vrand_shifted_unit_double()</a>, <a class="el" href="group__nfftutil.html#g5f53c8cd0b2f33200fce15ecf75a0685">nfft_vrand_unit_complex()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00041">taylor_plan::p</a>, <a class="el" href="nfft3_8h-source.html#l00187">PRE_FG_PSI</a>, <a class="el" href="nfft3_8h-source.html#l00283">PRE_ONE_PSI</a>, <a class="el" href="nfft3_8h-source.html#l00144">PRE_PHI_HUT</a>, <a class="el" href="taylor__nfft_8c-source.html#l00100">taylor_finalize()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00059">taylor_init()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00078">taylor_precompute()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00118">taylor_trafo()</a>, and <a class="el" href="nfft3_8h-source.html#l00324">nfft_plan::x</a>.</p>
 
 <p>Referenced by <a class="el" href="taylor__nfft_8c-source.html#l00289">main()</a>.</p>
 
 </div>
 </div><p>
     <hr size="1"/>
-    Generated on 17 Aug 2009 by Doxygen 1.5.3
+    Generated on 16 Sep 2009 by Doxygen 1.5.3
   </body>
 </html>

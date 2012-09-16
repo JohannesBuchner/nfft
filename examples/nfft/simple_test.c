@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: simple_test.c 3328 2009-09-14 12:01:12Z keiner $ */
 
 #include <stdio.h>
 #include <math.h>
@@ -30,39 +30,44 @@
 void simple_test_nfft_1d(void)
 {
   nfft_plan p;
+  double t;
 
-  int N=14;
-  int M=19;
+  int N=20000;
+  int M=20000;
+  int n=32;
 
   /** init an one dimensional plan */
   nfft_init_1d(&p,N,M);
 
   /** init pseudo random nodes */
   nfft_vrand_shifted_unit_double(p.x,p.M_total);
-
+ 
   /** precompute psi, the entries of the matrix B */
   if(p.nfft_flags & PRE_ONE_PSI)
       nfft_precompute_one_psi(&p);
 
   /** init pseudo random Fourier coefficients and show them */
   nfft_vrand_unit_complex(p.f_hat,p.N_total);
-  nfft_vpr_complex(p.f_hat,p.N_total,"given Fourier coefficients, vector f_hat");
+//  nfft_vpr_complex(p.f_hat,p.N_total,"given Fourier coefficients, vector f_hat");
 
   /** direct trafo and show the result */
+  t=nfft_second();
   ndft_trafo(&p);
-  nfft_vpr_complex(p.f,p.M_total,"ndft, vector f");
+  t=nfft_second()-t;
+//  nfft_vpr_complex(p.f,p.M_total,"ndft, vector f");
+  printf(" took %e seconds.\n",t);
 
-  /** approx. trafo and show the result */
-  nfft_trafo(&p);
-  nfft_vpr_complex(p.f,p.M_total,"nfft, vector f");
-
-  /** approx. adjoint and show the result */
-  ndft_adjoint(&p);
-  nfft_vpr_complex(p.f_hat,p.N_total,"adjoint ndft, vector f_hat");
-
-  /** approx. adjoint and show the result */
-  nfft_adjoint(&p);
-  nfft_vpr_complex(p.f_hat,p.N_total,"adjoint nfft, vector f_hat");
+//  /** approx. trafo and show the result */
+//  nfft_trafo(&p);
+//  nfft_vpr_complex(p.f,p.M_total,"nfft, vector f");
+//
+//  /** approx. adjoint and show the result */
+//  ndft_adjoint(&p);
+//  nfft_vpr_complex(p.f_hat,p.N_total,"adjoint ndft, vector f_hat");
+//
+//  /** approx. adjoint and show the result */
+//  nfft_adjoint(&p);
+//  nfft_vpr_complex(p.f_hat,p.N_total,"adjoint nfft, vector f_hat");
 
   /** finalise the one dimensional plan */
   nfft_finalize(&p);
@@ -70,19 +75,20 @@ void simple_test_nfft_1d(void)
 
 void simple_test_nfft_2d(void)
 {
-  int K,N[2],n[2];
+  int K,N[2],n[2],k,M;
   double t;
 
   nfft_plan p;
 
-  N[0]=20; n[0]=32;
-  N[1]=16; n[1]=32;
-  K=12;
+  N[0]=32; n[0]=64;
+  N[1]=14; n[1]=32;
+  M=N[0]*N[1];
+  K=16;
 
   t=nfft_second();
   /** init a two dimensional plan */
-  nfft_init_guru(&p, 2, N, N[0]*N[1], n, 4,
-		 PRE_PHI_HUT| PRE_PSI| MALLOC_F_HAT| MALLOC_X| MALLOC_F |
+  nfft_init_guru(&p, 2, N, M, n, 7,
+		 PRE_PHI_HUT| PRE_FULL_PSI| MALLOC_F_HAT| MALLOC_X| MALLOC_F |
 		 FFTW_INIT| FFT_OUT_OF_PLACE,
 		 FFTW_ESTIMATE| FFTW_DESTROY_INPUT);
 
@@ -138,11 +144,11 @@ int main(void)
   system("clear");
   printf("1) computing an one dimensional ndft, nfft and an adjoint nfft\n\n");
   simple_test_nfft_1d();
-  getc(stdin);
-
-  system("clear");
-  printf("2) computing a two dimensional ndft, nfft and an adjoint nfft\n\n");
-  simple_test_nfft_2d();
+//  getc(stdin);
+//
+//  system("clear");
+//  printf("2) computing a two dimensional ndft, nfft and an adjoint nfft\n\n");
+//  simple_test_nfft_2d();
 
   return 1;
 }

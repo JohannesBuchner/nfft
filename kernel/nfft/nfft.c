@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: nfft.c 3331 2009-09-14 12:54:59Z keiner $ */
 
 /**
  * Simple and fast computation of the NDFT.
@@ -56,90 +56,105 @@
  */
 /** macros and small sub routines for the direct transforms
  */
-#define MACRO_ndft_init_result_trafo memset(f,0,ths->M_total*                 \
-                                            sizeof(double _Complex));
+#define MACRO_ndft_init_result_trafo \
+  memset(f,0,ths->M_total*sizeof(double _Complex));
 #define MACRO_ndft_init_result_conjugated MACRO_ndft_init_result_trafo
-#define MACRO_ndft_init_result_adjoint memset(f_hat,0,ths->N_total*           \
-					      sizeof(double _Complex));
+#define MACRO_ndft_init_result_adjoint \
+  memset(f_hat,0,ths->N_total*sizeof(double _Complex));
 #define MACRO_ndft_init_result_transposed MACRO_ndft_init_result_adjoint
 
-#define MACRO_ndft_sign_trafo      +2*PI*ths->x[j*ths->d+t]
-#define MACRO_ndft_sign_conjugated -2*PI*ths->x[j*ths->d+t]
-#define MACRO_ndft_sign_adjoint    +2*PI*ths->x[j*ths->d+t]
-#define MACRO_ndft_sign_transposed -2*PI*ths->x[j*ths->d+t]
+#define MACRO_ndft_sign_trafo K2PI*ths->x[j*ths->d+t]
+#define MACRO_ndft_sign_conjugated -K2PI*ths->x[j*ths->d+t]
+#define MACRO_ndft_sign_adjoint K2PI*ths->x[j*ths->d+t]
+#define MACRO_ndft_sign_transposed -K2PI*ths->x[j*ths->d+t]
 
-#define MACRO_init_k_N_Omega_x(which_one) {                                   \
-for(t=0; t<ths->d; t++)                                                       \
+#define MACRO_init_k_N_Omega_x(which_one) \
+{                                                                             \
+  for(t = 0; t < ths->d; t++)                                                 \
   {                                                                           \
-    k[t]=-ths->N[t]/2;                                                        \
-    x[t]= MACRO_ndft_sign_ ## which_one;                                      \
-    Omega[t+1]=k[t]*x[t]+Omega[t];                                            \
+    k[t] = -ths->N[t]/2;                                                      \
+    x[t] = MACRO_ndft_sign_ ## which_one;                                     \
+    Omega[t+1] = k[t]*x[t]+Omega[t];                                          \
   }                                                                           \
-omega=Omega[ths->d];                                                          \
+  omega=Omega[ths->d];                                                        \
 }                                                                             \
 
-#define MACRO_count_k_N_Omega {                                               \
-for(t = ths->d-1; (t >= 1) && (k[t] == ths->N[t]/2-1); t--)                   \
-  k[t]-= ths->N[t]-1;                                                         \
+#define MACRO_count_k_N_Omega \
+{                                                                             \
+  for(t = ths->d-1; (t >= 1) && (k[t] == ths->N[t]/2-1); t--)                 \
+    k[t]-= ths->N[t]-1;                                                       \
                                                                               \
-k[t]++;                                                                       \
+  k[t]++;                                                                     \
                                                                               \
-for(t2 = t; t2<ths->d; t2++)                                                  \
-  Omega[t2+1]=k[t2]*x[t2]+Omega[t2];                                          \
+  for(t2 = t; t2 < ths->d; t2++)                                              \
+    Omega[t2+1] = k[t2]*x[t2]+Omega[t2];                                      \
                                                                               \
-omega=Omega[ths->d];                                                          \
+  omega = Omega[ths->d];                                                      \
 }
 
-#define MACRO_ndft_compute_trafo (*fj) += (*f_hat_k)*cexp(-_Complex_I*omega);
+#define MACRO_ndft_compute_trafo f[j] += f_hat[k_L]*cexp(-_Complex_I*omega);
 
 #define MACRO_ndft_compute_conjugated MACRO_ndft_compute_trafo
 
-#define MACRO_ndft_compute_adjoint (*f_hat_k) += (*fj)*cexp(+ _Complex_I*omega);
+#define MACRO_ndft_compute_adjoint f_hat[k_L] += f[j]*cexp(+ _Complex_I*omega);
 
 #define MACRO_ndft_compute_transposed MACRO_ndft_compute_adjoint
+
+#if defined(HAVE_LIBDISPATCH)
+#define FOR(VAR,VAL) \
+  dispatch_apply(VAL, dispatch_get_global_queue(0, 0), ^(size_t VAR)
+#else
+#define FOR(VAR,VAL) \
+  int VAR; \
+  for (VAR = 0; VAR < VAL; VAR++)
+#endif
+
+#if defined(HAVE_LIBDISPATCH)
+#define END_FOR );
+#else
+#define END_FOR
+#endif
 
 #define MACRO_ndft(which_one)                                                 \
 void ndft_ ## which_one (nfft_plan *ths)                                      \
 {                                                                             \
-  int j;                                /**< index over all nodes           */\
-  int t,t2;                             /**< index for dimensions           */\
-  int k_L;                              /**< plain index for summation      */\
-  double _Complex *f_hat, *f;           /**< dito                           */\
-  double _Complex *f_hat_k;             /**< actual Fourier coefficient     */\
-  double _Complex *fj;                  /**< actual sample                  */\
-  double x[ths->d];                     /**< actual node x[d*j+t]           */\
-  int k[ths->d];                        /**< multi index for summation      */\
-  double omega, Omega[ths->d+1];        /**< sign times 2*pi*k*x            */\
-                                                                              \
-  f_hat=ths->f_hat; f=ths->f;                                                 \
+  C *f_hat = ths->f_hat, *f = ths->f;                                         \
                                                                               \
   MACRO_ndft_init_result_ ## which_one                                        \
                                                                               \
-  if(ths->d==1) /* univariate case (due to performance) */                    \
+  if(ths->d == 1) /* treat univariate case extra, for performance */          \
+  {                                                                           \
+    const int t = 0;                                                          \
+    FOR(j,ths->M_total)                                                       \
     {                                                                         \
-      t=0;                                                                    \
-      for(j=0, fj = f; j<ths->M_total; j++, fj++)                             \
-        {                                                                     \
-	  for(k_L=0, f_hat_k = f_hat; k_L<ths->N_total; k_L++, f_hat_k++)     \
-	    {                                                                 \
-	      omega=(k_L-ths->N_total/2)* MACRO_ndft_sign_ ## which_one;      \
-              MACRO_ndft_compute_ ## which_one;                               \
-	    }                                                                 \
-        }                                                                     \
+      int k_L;                                                                \
+      for(k_L = 0; k_L < ths->N_total; k_L++)                                 \
+      {                                                                       \
+        R omega = (k_L - ths->N_total/2) * MACRO_ndft_sign_ ## which_one;     \
+        MACRO_ndft_compute_ ## which_one;                                     \
+      }                                                                       \
     }                                                                         \
-  else /* multivariate case */					              \
+    END_FOR                                                                   \
+  }                                                                           \
+  else /* multivariate case */                                                \
+  {                                                                           \
+    double _Complex *f_hat_k;                                                 \
+    FOR(j,ths->M_total)                                                       \
     {                                                                         \
-      Omega[0]=0;                                                             \
-      for(j=0, fj=f; j<ths->M_total; j++, fj++)                               \
-        {                                                                     \
-          MACRO_init_k_N_Omega_x(which_one);                                  \
-          for(k_L=0, f_hat_k=f_hat; k_L<ths->N_total; k_L++, f_hat_k++)       \
-	    {                                                                 \
-              MACRO_ndft_compute_ ## which_one;                               \
-	      MACRO_count_k_N_Omega;                                          \
-	    } /* for(k_L) */                                                  \
-        } /* for(j) */                                                        \
-    } /* else */                                                              \
+      int t, t2, k_L;                                                         \
+      double x[ths->d];                                                       \
+      int k[ths->d];                                                          \
+      double omega, Omega[ths->d+1];                                          \
+      Omega[0] = K(0.0);                                                      \
+      MACRO_init_k_N_Omega_x(which_one);                                      \
+      for(k_L = 0; k_L < ths->N_total; k_L++)                                 \
+      {                                                                       \
+        MACRO_ndft_compute_ ## which_one;                                     \
+        MACRO_count_k_N_Omega;                                                \
+      } /* for(k_L) */                                                        \
+    }                                                                         \
+    END_FOR                                                                   \
+  } /* else */                                                                \
 } /* ndft_trafo */
 
 
@@ -394,7 +409,7 @@ static inline void nfft_B_ ## which_one (nfft_plan *ths)                      \
   double tmpEXP1, tmpEXP2, tmpEXP2sq, tmp1, tmp2, tmp3;                       \
   double ip_w;                                                                \
   int ip_u;                                                                   \
-  int ip_s=ths->K/(ths->m+1);                                                 \
+  int ip_s=ths->K/(ths->m+2);                                                 \
                                                                               \
   f=ths->f; g=ths->g;                                                         \
                                                                               \
@@ -533,7 +548,7 @@ static inline void nfft_B_ ## which_one (nfft_plan *ths)                      \
           for(t2=0; t2<ths->d; t2++)                                          \
             {                                                                 \
               y[t2] = ((ths->n[t2]*ths->x[j*ths->d+t2]-                       \
-                          (double)u[t2]) * ((double)ths->K))/(ths->m+1);      \
+                          (double)u[t2]) * ((double)ths->K))/(ths->m+2);      \
               ip_u  = LRINT(floor(y[t2]));                                    \
               ip_w  = y[t2]-ip_u;                                             \
               for(l_fg=u[t2], lj_fg=0; l_fg <= o[t2]; l_fg++, lj_fg++)        \
@@ -627,7 +642,7 @@ static void nfft_adjoint_1d_compute(const double _Complex *fj, double _Complex *
   psij=psij_const;
 
   nfft_uo2(&u,&o,*xj, n, m);
-
+  
   if(u<o)
     for(l=0,gj=g+u; l<=2*m+1; l++)
       (*gj++) += (*psij++) * (*fj);
@@ -729,15 +744,13 @@ static void nfft_trafo_1d_B(nfft_plan *ths)
     {
       psij_const=(double*)nfft_malloc((2*m+2)*sizeof(double));
       K=ths->K;
-      ip_s=K/(m+1);
-
-      psij_const[2*m+1]=0;
+      ip_s=K/(m+2);
 
       for(j=0,fj=ths->f,xj=ths->x;j<M;j++,fj++,xj++)
 	{
 	  nfft_uo(ths,j,&u,&o,0);
 
-	  ip_y = fabs(n*(*xj) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n*(*xj) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -851,13 +864,13 @@ static void nfft_adjoint_1d_B(nfft_plan *ths)
     {
       psij_const=(double*)nfft_malloc((2*m+2)*sizeof(double));
       K=ths->K;
-      ip_s=K/(m+1);
+      ip_s=K/(m+2);
 
       for(j=0,fj=ths->f,xj=ths->x;j<M;j++,fj++,xj++)
 	{
 	  nfft_uo(ths,j,&u,&o,0);
 
-	  ip_y = fabs(n*(*xj) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n*(*xj) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -1268,19 +1281,19 @@ static void nfft_trafo_2d_B(nfft_plan *ths)
     {
       psij_const=(double*)nfft_malloc(2*(2*m+2)*sizeof(double));
       K=ths->K;
-      ip_s=K/(m+1);
+      ip_s=K/(m+2);
 
       for(j=0,fj=ths->f,xj=ths->x;j<M;j++,fj++,xj+=2)
 	{
 	  nfft_uo(ths,j,&u,&o,0);
-	  ip_y = fabs(n0*(*(xj+0)) - u)*ip_s;
+	  ip_y = fabs(n0*(*(xj+0)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
 	    psij_const[l] = ths->psi[abs(ip_u-l*ip_s)]*(1.0-ip_w) + ths->psi[abs(ip_u-l*ip_s+1)]*(ip_w);
 
 	  nfft_uo(ths,j,&u,&o,1);
-	  ip_y = fabs(n1*(*(xj+1)) - u)*ip_s;
+	  ip_y = fabs(n1*(*(xj+1)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -1331,8 +1344,8 @@ static void nfft_adjoint_2d_B(nfft_plan *ths)
     {
       psi_index_g=ths->psi_index_g;
       for(j=0, fj=ths->f, psij=ths->psi; j<M; j++, fj++)
-        for(l=1, g[(*psi_index_g++)]=(*psij++) * (*fj); l<(2*m+2)*(2*m+2); l++)
-	  g[(*psi_index_g++)] += (*psij++) * (*fj);
+	  for(l=0; l<(2*m+2)*(2*m+2); l++)
+	      g[(*psi_index_g++)] += (*psij++) * (*fj);
       return;
     } /* if(PRE_FULL_PSI) */
 
@@ -1423,12 +1436,12 @@ static void nfft_adjoint_2d_B(nfft_plan *ths)
     {
       psij_const=(double*)nfft_malloc(2*(2*m+2)*sizeof(double));
       K=ths->K;
-      ip_s=K/(m+1);
+      ip_s=K/(m+2);
 
       for(j=0,fj=ths->f,xj=ths->x;j<M;j++,fj++,xj+=2)
 	{
 	  nfft_uo(ths,j,&u,&o,0);
-	  ip_y = fabs(n0*(*(xj+0)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n0*(*(xj+0)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -1436,7 +1449,7 @@ static void nfft_adjoint_2d_B(nfft_plan *ths)
 	      ths->psi[abs(ip_u-l*ip_s+1)]*(ip_w);
 
 	  nfft_uo(ths,j,&u,&o,1);
-	  ip_y = fabs(n1*(*(xj+1)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n1*(*(xj+1)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -2281,12 +2294,12 @@ static void nfft_trafo_3d_B(nfft_plan *ths)
     {
       psij_const=(double*)nfft_malloc(3*(2*m+2)*sizeof(double));
       K=ths->K;
-      ip_s=K/(m+1);
+      ip_s=K/(m+2);
 
       for(j=0,fj=ths->f,xj=ths->x;j<M;j++,fj++,xj+=3)
 	{
 	  nfft_uo(ths,j,&u,&o,0);
-	  ip_y = fabs(n0*(*(xj+0)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n0*(*(xj+0)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -2294,7 +2307,7 @@ static void nfft_trafo_3d_B(nfft_plan *ths)
 	      ths->psi[abs(ip_u-l*ip_s+1)]*(ip_w);
 
 	  nfft_uo(ths,j,&u,&o,1);
-	  ip_y = fabs(n1*(*(xj+1)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n1*(*(xj+1)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -2302,7 +2315,7 @@ static void nfft_trafo_3d_B(nfft_plan *ths)
 	      ths->psi[(K+1)+abs(ip_u-l*ip_s+1)]*(ip_w);
 
 	  nfft_uo(ths,j,&u,&o,2);
-	  ip_y = fabs(n2*(*(xj+2)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n2*(*(xj+2)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -2360,7 +2373,7 @@ static void nfft_adjoint_3d_B(nfft_plan *ths)
     {
       psi_index_g=ths->psi_index_g;
       for(j=0, fj=ths->f, psij=ths->psi; j<M; j++, fj++)
-        for(l=1, g[(*psi_index_g++)]=(*psij++) * (*fj); l<(2*m+2)*(2*m+2)*(2*m+2); l++)
+        for(l=0; l<(2*m+2)*(2*m+2)*(2*m+2); l++)
 	  g[(*psi_index_g++)] += (*psij++) * (*fj);
       return;
     } /* if(PRE_FULL_PSI) */
@@ -2475,12 +2488,12 @@ static void nfft_adjoint_3d_B(nfft_plan *ths)
     {
       psij_const=(double*)nfft_malloc(3*(2*m+2)*sizeof(double));
       K=ths->K;
-      ip_s=K/(m+1);
+      ip_s=K/(m+2);
 
       for(j=0,fj=ths->f,xj=ths->x;j<M;j++,fj++,xj+=3)
 	{
 	  nfft_uo(ths,j,&u,&o,0);
-	  ip_y = fabs(n0*(*(xj+0)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n0*(*(xj+0)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -2488,7 +2501,7 @@ static void nfft_adjoint_3d_B(nfft_plan *ths)
 	      ths->psi[abs(ip_u-l*ip_s+1)]*(ip_w);
 
 	  nfft_uo(ths,j,&u,&o,1);
-	  ip_y = fabs(n1*(*(xj+1)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n1*(*(xj+1)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -2496,7 +2509,7 @@ static void nfft_adjoint_3d_B(nfft_plan *ths)
 	      ths->psi[(K+1)+abs(ip_u-l*ip_s+1)]*(ip_w);
 
 	  nfft_uo(ths,j,&u,&o,2);
-	  ip_y = fabs(n2*(*(xj+2)) - u)*((double)K)/(m+1);
+	  ip_y = fabs(n2*(*(xj+2)) - u)*((double)ip_s);
 	  ip_u = LRINT(floor(ip_y));
 	  ip_w = ip_y-ip_u;
 	  for(l=0; l < 2*m+2; l++)
@@ -2866,11 +2879,11 @@ void nfft_precompute_lin_psi(nfft_plan *ths)
 {
   int t;                                /**< index over all dimensions       */
   int j;                                /**< index over all nodes            */
-  double step;                          /**< step size in [0,(m+1)/n]        */
+  double step;                          /**< step size in [0,(m+2)/n]        */
 
   for (t=0; t<ths->d; t++)
     {
-      step=((double)(ths->m+1))/(ths->K*ths->n[t]);
+      step=((double)(ths->m+2))/(ths->K*ths->n[t]);
       for(j=0;j<=ths->K;j++)
 	{
 	  ths->psi[(ths->K+1)*t + j] = PHI(j*step,t);
@@ -3000,7 +3013,7 @@ static void nfft_init_help(nfft_plan *ths)
 
   if(ths->nfft_flags & PRE_LIN_PSI)
   {
-      ths->K=(1U<< 10)*(ths->m+1);
+      ths->K=(1U<< 10)*(ths->m+2);
       ths->psi = (double*) nfft_malloc((ths->K+1)*ths->d*sizeof(double));
   }
 

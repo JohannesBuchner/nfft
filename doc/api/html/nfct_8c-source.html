@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.1 API Reference - NFFT: nfct.c Source File
+      NFFT 3.1.2 API Reference - NFFT: nfct.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.1 API Reference</H1nc>
+          <H1nc>3.1.2 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -100,7 +100,7 @@
 <a name="l00080"></a><a class="code" href="group__nfsct.html#g10982ac173900c44e0317a8fb01e53c1">00080</a> <span class="keywordtype">double</span> <a class="code" href="group__nfsct.html#g10982ac173900c44e0317a8fb01e53c1" title="do some adjustments (N,n) then compute PHI_HUT">nfct_phi_hut</a>(<a class="code" href="structnfct__plan.html" title="Structure for a transform plan.">nfct_plan</a> *ths, <span class="keywordtype">int</span> k, <span class="keywordtype">int</span> d)
 <a name="l00081"></a>00081 {
 <a name="l00082"></a>00082   NFCT_PRE_WINFUN(d);
-<a name="l00083"></a>00083   <span class="keywordtype">double</span> phi_hut_tmp = <a class="code" href="nfft3_8h.html#e524f299131b7b6f479655197bd1a61a" title="Macros for window functions.">PHI_HUT</a>(k, d);
+<a name="l00083"></a>00083   <span class="keywordtype">double</span> phi_hut_tmp = PHI_HUT(k, d);
 <a name="l00084"></a>00084   NFCT_POST_WINFUN(d);
 <a name="l00085"></a>00085 
 <a name="l00086"></a>00086   <span class="keywordflow">return</span> phi_hut_tmp;
@@ -109,7 +109,7 @@
 <a name="l00089"></a><a class="code" href="group__nfsct.html#g825ccf26ddeddc330f320146d3d223de">00089</a> <span class="keywordtype">double</span> <a class="code" href="group__nfsct.html#g825ccf26ddeddc330f320146d3d223de" title="do some adjustments (N,n) then compute PHI">nfct_phi</a>(<a class="code" href="structnfct__plan.html" title="Structure for a transform plan.">nfct_plan</a> *ths, <span class="keywordtype">double</span> x, <span class="keywordtype">int</span> d)
 <a name="l00090"></a>00090 {
 <a name="l00091"></a>00091   NFCT_PRE_WINFUN(d);
-<a name="l00092"></a>00092   <span class="keywordtype">double</span> phi_tmp = <a class="code" href="nfft3_8h.html#e1e8a05faf8ba63c936d206e304df5b7">PHI</a>(x, d);
+<a name="l00092"></a>00092   <span class="keywordtype">double</span> phi_tmp = PHI(x, d);
 <a name="l00093"></a>00093   NFCT_POST_WINFUN(d);
 <a name="l00094"></a>00094 
 <a name="l00095"></a>00095   <span class="keywordflow">return</span> phi_tmp;
@@ -895,7 +895,7 @@
 <a name="l00965"></a>00965   <span class="keywordflow">for</span>(t = 0; t &lt; d; t++)
 <a name="l00966"></a>00966     ths-&gt;<a class="code" href="structnfct__plan.html#0ad3d47d659b3641bb90eca6e56f9047" title="length of dct-i">n</a>[t] = <a class="code" href="group__nfsct.html#gf8091eb47eeeae93a156ac83c98dc638" title="returns 2(n-1), fftw related issue">nfct_fftw_2N</a>(<a class="code" href="group__nfftutil.html#g1de4c3bcd3ccd83cca45b93169c7b7af" title="Computes  such that .">nfft_next_power_of_2</a>(ths-&gt;<a class="code" href="structnfct__plan.html#d4d0600d8b0ee9d41bff22a7d63e64cf" title="cut-off-frequencies (kernel)">N</a>[t]));
 <a name="l00967"></a>00967 
-<a name="l00968"></a>00968   <a class="code" href="nfft3_8h.html#6228c60b2fff40a2d5f698e249e54731">WINDOW_HELP_ESTIMATE_m</a>;
+<a name="l00968"></a>00968   WINDOW_HELP_ESTIMATE_m;
 <a name="l00969"></a>00969 
 <a name="l00970"></a>00970   ths-&gt;<a class="code" href="structnfct__plan.html#e2a2e493b2938fe9b22b0506765f30cf" title="flags for precomputation, malloc">nfct_flags</a> = NFCT_DEFAULT_FLAGS;
 <a name="l00971"></a>00971   ths-&gt;<a class="code" href="structnfct__plan.html#407c06575335351e1b720b40f8b4f26c" title="flags for the fftw">fftw_flags</a> = FFTW_DEFAULT_FLAGS;
@@ -1006,7 +1006,7 @@
 <a name="l01083"></a>01083   <span class="keywordflow">if</span>(ths-&gt;<a class="code" href="structnfct__plan.html#e2a2e493b2938fe9b22b0506765f30cf" title="flags for precomputation, malloc">nfct_flags</a> &amp; <a class="code" href="group__nfft.html#g353185384f87de0dc4320a82652ef724" title="If this flag is set, (de)allocation of the node vector is done.">MALLOC_X</a>)
 <a name="l01084"></a>01084   <a class="code" href="nfft3_8h.html#b8a0db03dda1317a8a3d922e0e4e8aaa">nfft_free</a>(ths-&gt;<a class="code" href="structnfct__plan.html#5635e780f4c492f087754d71f16e07ed" title="nodes (in time/spatial domain)">x</a>);
 <a name="l01085"></a>01085 
-<a name="l01086"></a>01086   <a class="code" href="nfft3_8h.html#afd97336d6085d380d018bc1c2f7789e">WINDOW_HELP_FINALIZE</a>;
+<a name="l01086"></a>01086   WINDOW_HELP_FINALIZE;
 <a name="l01087"></a>01087 
 <a name="l01088"></a>01088   <a class="code" href="nfft3_8h.html#b8a0db03dda1317a8a3d922e0e4e8aaa">nfft_free</a>(ths-&gt;<a class="code" href="structnfct__plan.html#d4d0600d8b0ee9d41bff22a7d63e64cf" title="cut-off-frequencies (kernel)">N</a>);
 <a name="l01089"></a>01089   <a class="code" href="nfft3_8h.html#b8a0db03dda1317a8a3d922e0e4e8aaa">nfft_free</a>(ths-&gt;<a class="code" href="structnfct__plan.html#0ad3d47d659b3641bb90eca6e56f9047" title="length of dct-i">n</a>);
@@ -1016,6 +1016,6 @@
 <a name="l01093"></a>01093 } <span class="comment">/* nfct_finalize */</span>
 <a name="l01094"></a>01094 
 </pre></div>    <hr size="1"/>
-    Generated on 17 Aug 2009 by Doxygen 1.5.3
+    Generated on 16 Sep 2009 by Doxygen 1.5.3
   </body>
 </html>

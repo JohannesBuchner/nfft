@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nnfft.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: nnfft.c 3321 2009-09-11 07:21:20Z kunis $ */
 
 #include <stdio.h>
 #include <math.h>
@@ -27,6 +27,7 @@
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 
 #define MACRO_nndft_init_result_trafo memset(f,0,ths->M_total*sizeof(double _Complex));

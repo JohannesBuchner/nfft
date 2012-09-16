@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.1 API Reference - NFFT: nfst.c Source File
+      NFFT 3.1.2 API Reference - NFFT: nfst.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.1 API Reference</H1nc>
+          <H1nc>3.1.2 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -100,7 +100,7 @@
 <a name="l00080"></a><a class="code" href="group__nfsct.html#ga2862de70644887849e0bc1df618a018">00080</a> <span class="keywordtype">double</span> <a class="code" href="group__nfsct.html#ga2862de70644887849e0bc1df618a018" title="do some adjustments (N,n) then compute PHI_HUT">nfst_phi_hut</a>( <a class="code" href="structnfst__plan.html" title="Structure for a transform plan.">nfst_plan</a> *ths, <span class="keywordtype">int</span> k, <span class="keywordtype">int</span> d)
 <a name="l00081"></a>00081 {
 <a name="l00082"></a>00082   NFST_PRE_WINFUN( d);
-<a name="l00083"></a>00083   <span class="keywordtype">double</span> phi_hut_tmp = <a class="code" href="nfft3_8h.html#e524f299131b7b6f479655197bd1a61a" title="Macros for window functions.">PHI_HUT</a>( k, d);
+<a name="l00083"></a>00083   <span class="keywordtype">double</span> phi_hut_tmp = PHI_HUT( k, d);
 <a name="l00084"></a>00084   NFST_POST_WINFUN( d);
 <a name="l00085"></a>00085 
 <a name="l00086"></a>00086   <span class="keywordflow">return</span> phi_hut_tmp;
@@ -109,7 +109,7 @@
 <a name="l00089"></a><a class="code" href="group__nfsct.html#gec803ab48734df96a9f21d66cbb71e23">00089</a> <span class="keywordtype">double</span> <a class="code" href="group__nfsct.html#gec803ab48734df96a9f21d66cbb71e23" title="do some adjustments (N,n) then compute PHI">nfst_phi</a>( <a class="code" href="structnfst__plan.html" title="Structure for a transform plan.">nfst_plan</a> *ths, <span class="keywordtype">double</span> x, <span class="keywordtype">int</span> d)
 <a name="l00090"></a>00090 {
 <a name="l00091"></a>00091   NFST_PRE_WINFUN( d);
-<a name="l00092"></a>00092   <span class="keywordtype">double</span> phi_tmp = <a class="code" href="nfft3_8h.html#e1e8a05faf8ba63c936d206e304df5b7">PHI</a>( x, d);
+<a name="l00092"></a>00092   <span class="keywordtype">double</span> phi_tmp = PHI( x, d);
 <a name="l00093"></a>00093   NFST_POST_WINFUN( d);
 <a name="l00094"></a>00094 
 <a name="l00095"></a>00095   <span class="keywordflow">return</span> phi_tmp;
@@ -757,7 +757,7 @@
 <a name="l00817"></a>00817     <span class="keywordflow">for</span>( t = 0,lprod = 1; t &lt; ths-&gt;<a class="code" href="structnfst__plan.html#ef00c63a4810c8e5b0eb4839d2c6abc8" title="dimension, rank">d</a>; t++)
 <a name="l00818"></a>00818     {
 <a name="l00819"></a>00819       lprod *= NFST_SUMMANDS;
-<a name="l00820"></a>00820       eps *= <a class="code" href="nfft3_8h.html#e1e8a05faf8ba63c936d206e304df5b7">PHI</a>( 0, t);
+<a name="l00820"></a>00820       eps *= PHI( 0, t);
 <a name="l00821"></a>00821     }
 <a name="l00822"></a>00822 
 <a name="l00823"></a>00823     <span class="keywordflow">for</span>( ix = 0, ix_old = 0, j = 0; j &lt; ths-&gt;<a class="code" href="structnfst__plan.html#3bf0f56c279404b80e795daf944d3d98" title="Total number of samples.">M_total</a>; j++)
@@ -824,7 +824,7 @@
 <a name="l00885"></a>00885     ths-&gt;<a class="code" href="structnfst__plan.html#3600a9bb43b2b3fee62e2040c21448ab" title="r2r transform type (dct-i)">r2r_kind</a>[t] = FFTW_RODFT00;
 <a name="l00886"></a>00886 
 <a name="l00887"></a>00887 
-<a name="l00888"></a>00888   <a class="code" href="nfft3_8h.html#a6e5c41e21d1dc3f0efc580ba782b245">WINDOW_HELP_INIT</a>;
+<a name="l00888"></a>00888   WINDOW_HELP_INIT;
 <a name="l00889"></a>00889 
 <a name="l00890"></a>00890   <span class="keywordflow">if</span>(ths-&gt;<a class="code" href="structnfst__plan.html#2c43b9c7625ed9eb42223de391c048c9" title="flags for precomputation, malloc">nfst_flags</a> &amp; <a class="code" href="group__nfft.html#g353185384f87de0dc4320a82652ef724" title="If this flag is set, (de)allocation of the node vector is done.">MALLOC_X</a>)
 <a name="l00891"></a>00891     ths-&gt;<a class="code" href="structnfst__plan.html#048ebad4f2abe3821988fa06a5e308d8" title="nodes (in time/spatial domain)">x</a> = (<span class="keywordtype">double</span>*)<a class="code" href="nfft3_8h.html#afe6167438c5de4d3d4c509f66a6694e" title="Include header for FFTW3 library for its complex type.">nfft_malloc</a>( ths-&gt;<a class="code" href="structnfst__plan.html#ef00c63a4810c8e5b0eb4839d2c6abc8" title="dimension, rank">d</a> * ths-&gt;<a class="code" href="structnfst__plan.html#3bf0f56c279404b80e795daf944d3d98" title="Total number of samples.">M_total</a> * <span class="keyword">sizeof</span>( <span class="keywordtype">double</span>));
@@ -883,7 +883,7 @@
 <a name="l00948"></a>00948 
 <a name="l00949"></a>00949   ths-&gt;<a class="code" href="structnfst__plan.html#3bf0f56c279404b80e795daf944d3d98" title="Total number of samples.">M_total</a> = M_total;
 <a name="l00950"></a>00950 
-<a name="l00951"></a>00951   <a class="code" href="nfft3_8h.html#6228c60b2fff40a2d5f698e249e54731">WINDOW_HELP_ESTIMATE_m</a>;
+<a name="l00951"></a>00951   WINDOW_HELP_ESTIMATE_m;
 <a name="l00952"></a>00952 
 <a name="l00953"></a>00953   ths-&gt;<a class="code" href="structnfst__plan.html#2c43b9c7625ed9eb42223de391c048c9" title="flags for precomputation, malloc">nfst_flags</a> = NFST_DEFAULT_FLAGS;
 <a name="l00954"></a>00954   ths-&gt;<a class="code" href="structnfst__plan.html#69d37e02b7a2868e3861c582e76e35d8" title="flags for the fftw">fftw_flags</a> = FFTW_DEFAULT_FLAGS;
@@ -998,7 +998,7 @@
 <a name="l01064"></a>01064   <span class="keywordflow">if</span>( ths-&gt;<a class="code" href="structnfst__plan.html#2c43b9c7625ed9eb42223de391c048c9" title="flags for precomputation, malloc">nfst_flags</a> &amp; <a class="code" href="group__nfft.html#g353185384f87de0dc4320a82652ef724" title="If this flag is set, (de)allocation of the node vector is done.">MALLOC_X</a>)
 <a name="l01065"></a>01065     <a class="code" href="nfft3_8h.html#b8a0db03dda1317a8a3d922e0e4e8aaa">nfft_free</a>( ths-&gt;<a class="code" href="structnfst__plan.html#048ebad4f2abe3821988fa06a5e308d8" title="nodes (in time/spatial domain)">x</a>);
 <a name="l01066"></a>01066 
-<a name="l01067"></a>01067   <a class="code" href="nfft3_8h.html#afd97336d6085d380d018bc1c2f7789e">WINDOW_HELP_FINALIZE</a>;
+<a name="l01067"></a>01067   WINDOW_HELP_FINALIZE;
 <a name="l01068"></a>01068 
 <a name="l01069"></a>01069   <a class="code" href="nfft3_8h.html#b8a0db03dda1317a8a3d922e0e4e8aaa">nfft_free</a>( ths-&gt;<a class="code" href="structnfst__plan.html#c0ddde49b376d65b38d3cf1583cb0f6b" title="bandwidth">N</a>);
 <a name="l01070"></a>01070   <a class="code" href="nfft3_8h.html#b8a0db03dda1317a8a3d922e0e4e8aaa">nfft_free</a>( ths-&gt;<a class="code" href="structnfst__plan.html#bee0aa8e104775a5b898715ea28703d2" title="length of dst-1">n</a>);
@@ -1008,6 +1008,6 @@
 <a name="l01074"></a>01074 } <span class="comment">/* nfst_finalize */</span>
 <a name="l01075"></a>01075 
 </pre></div>    <hr size="1"/>
-    Generated on 17 Aug 2009 by Doxygen 1.5.3
+    Generated on 16 Sep 2009 by Doxygen 1.5.3
   </body>
 </html>

@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: mri.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: mri.c 3321 2009-09-11 07:21:20Z kunis $ */
 
 #include <string.h>
 #include <math.h>
@@ -25,6 +25,7 @@
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 /**
  * window_funct_plan is a plan to use the window functions

@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.1 API Reference - NFFT: nfft3.h File Reference
+      NFFT 3.1.2 API Reference - NFFT: nfft3.h File Reference
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.1 API Reference</H1nc>
+          <H1nc>3.1.2 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -75,19 +75,6 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="nfft3_8h.html#744994acb26edb67cfc480a1c759d494">MACRO_MV_PLAN</a>(float_type)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Macros for public members inherited by all plan structures.  <a href="#744994acb26edb67cfc480a1c759d494"></a><br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="nfft3_8h.html#e524f299131b7b6f479655197bd1a61a">PHI_HUT</a>(k, d)</td></tr>
-
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Macros for window functions.  <a href="#e524f299131b7b6f479655197bd1a61a"></a><br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="nfft3_8h.html#e1e8a05faf8ba63c936d206e304df5b7">PHI</a>(x, d)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="nfft3_8h.html#a6e5c41e21d1dc3f0efc580ba782b245">WINDOW_HELP_INIT</a></td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="afd97336d6085d380d018bc1c2f7789e"></a><!-- doxytag: member="nfft3.h::WINDOW_HELP_FINALIZE" ref="afd97336d6085d380d018bc1c2f7789e" args="" -->
-#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="nfft3_8h.html#afd97336d6085d380d018bc1c2f7789e">WINDOW_HELP_FINALIZE</a>&nbsp;&nbsp;&nbsp;{nfft_free(ths-&gt;b);}</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="6228c60b2fff40a2d5f698e249e54731"></a><!-- doxytag: member="nfft3.h::WINDOW_HELP_ESTIMATE_m" ref="6228c60b2fff40a2d5f698e249e54731" args="" -->
-#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="nfft3_8h.html#6228c60b2fff40a2d5f698e249e54731">WINDOW_HELP_ESTIMATE_m</a>&nbsp;&nbsp;&nbsp;{ths-&gt;m = 6;}</td></tr>
-
 <tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfft.html#gda3a356fdaf5840f98374a0a7aaf3e9c">PRE_PHI_HUT</a>&nbsp;&nbsp;&nbsp;(1U&lt;&lt; 0)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">If this flag is set, the deconvolution step (the multiplication with the diagonal matrix <img class="formulaInl" alt="$\mathbf{D}$" src="form_26.png">) uses precomputed values of the Fourier transformed window function.  <a href="group__nfft.html#gda3a356fdaf5840f98374a0a7aaf3e9c"></a><br></td></tr>
@@ -748,95 +735,6 @@ Pointer to the own adjoint
 
 </div>
 </div><p>
-<a class="anchor" name="e524f299131b7b6f479655197bd1a61a"></a><!-- doxytag: member="nfft3.h::PHI_HUT" ref="e524f299131b7b6f479655197bd1a61a" args="(k, d)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PHI_HUT          </td>
-          <td>(</td>
-          <td class="paramtype">k,         <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">d&nbsp;</td>
-          <td class="paramname">          </td>
-          <td>&nbsp;)&nbsp;</td>
-          <td width="100%"></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-<b>Value:</b><div class="fragment"><pre class="fragment">((double)<a class="code" href="group__nfftutil.html#g5d6e8d0901b95c0c48f719e517733e5b" title="Modified Bessel function of order zero; adapted from Stephen Moshier&amp;#39;s Cephes...">nfft_i0</a>( ths-&gt;m*sqrt(\
-    pow((<span class="keywordtype">double</span>)(ths-&gt;b[d]),2.0) - pow(2.0*<a class="code" href="group__nfftutil.html#g598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>*(k)/ths-&gt;n[d],2.0))))
-</pre></div>Macros for window functions. 
-<p>
-
-<p>Definition at line <a class="el" href="nfft3_8h-source.html#l00126">126</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
-
-<p>Referenced by <a class="el" href="mri_8c-source.html#l00101">mri_inh_2d1d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00059">mri_inh_2d1d_trafo()</a>, <a class="el" href="mri_8c-source.html#l00218">mri_inh_3d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00186">mri_inh_3d_trafo()</a>, <a class="el" href="nfct_8c-source.html#l00080">nfct_phi_hut()</a>, <a class="el" href="nfft_8c-source.html#l00935">nfft_adjoint_1d()</a>, <a class="el" href="nfft_8c-source.html#l01552">nfft_adjoint_2d()</a>, <a class="el" href="nfft_8c-source.html#l02652">nfft_adjoint_3d()</a>, <a class="el" href="nfft_8c-source.html#l00888">nfft_trafo_1d()</a>, <a class="el" href="nfft_8c-source.html#l01471">nfft_trafo_2d()</a>, <a class="el" href="nfft_8c-source.html#l02534">nfft_trafo_3d()</a>, <a class="el" href="nfst_8c-source.html#l00080">nfst_phi_hut()</a>, and <a class="el" href="nnfft_8c-source.html#l00346">nnfft_precompute_phi_hut()</a>.</p>
-
-</div>
-</div><p>
-<a class="anchor" name="e1e8a05faf8ba63c936d206e304df5b7"></a><!-- doxytag: member="nfft3.h::PHI" ref="e1e8a05faf8ba63c936d206e304df5b7" args="(x, d)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PHI          </td>
-          <td>(</td>
-          <td class="paramtype">x,         <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">d&nbsp;</td>
-          <td class="paramname">          </td>
-          <td>&nbsp;)&nbsp;</td>
-          <td width="100%"></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-<b>Value:</b><div class="fragment"><pre class="fragment">((double)((pow((<span class="keywordtype">double</span>)(ths-&gt;m),2.0)\
-    -pow((x)*ths-&gt;n[d],2.0))&gt;0)? \
-    sinh(ths-&gt;b[d]*sqrt(pow((<span class="keywordtype">double</span>)(ths-&gt;m),2.0)-                             \
-    pow((x)*ths-&gt;n[d],2.0)))/(<a class="code" href="group__nfftutil.html#g598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>*sqrt(pow((<span class="keywordtype">double</span>)(ths-&gt;m),2.0)-               \
-    pow((x)*ths-&gt;n[d],2.0))): (((pow((<span class="keywordtype">double</span>)(ths-&gt;m),2.0)-                    \
-    pow((x)*ths-&gt;n[d],2.0))&lt;0)? sin(ths-&gt;b[d]*                                 \
-    sqrt(pow(ths-&gt;n[d]*(x),2.0)-pow((<span class="keywordtype">double</span>)(ths-&gt;m),2.0)))/                   \
-    (<a class="code" href="group__nfftutil.html#g598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>*sqrt(pow(ths-&gt;n[d]*(x),2.0)-pow((<span class="keywordtype">double</span>)(ths-&gt;m),2.0))):1.0))
-</pre></div>
-<p>Definition at line <a class="el" href="nfft3_8h-source.html#l00128">128</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
-
-<p>Referenced by <a class="el" href="mri_8c-source.html#l00101">mri_inh_2d1d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00059">mri_inh_2d1d_trafo()</a>, <a class="el" href="mri_8c-source.html#l00218">mri_inh_3d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00186">mri_inh_3d_trafo()</a>, <a class="el" href="nfct_8c-source.html#l00089">nfct_phi()</a>, <a class="el" href="nfft_8c-source.html#l02866">nfft_precompute_lin_psi()</a>, <a class="el" href="nfft_8c-source.html#l02902">nfft_precompute_psi()</a>, <a class="el" href="nfst_8c-source.html#l00788">nfst_full_psi()</a>, <a class="el" href="nfst_8c-source.html#l00089">nfst_phi()</a>, <a class="el" href="nnfft_8c-source.html#l00366">nnfft_precompute_lin_psi()</a>, and <a class="el" href="nnfft_8c-source.html#l00384">nnfft_precompute_psi()</a>.</p>
-
-</div>
-</div><p>
-<a class="anchor" name="a6e5c41e21d1dc3f0efc580ba782b245"></a><!-- doxytag: member="nfft3.h::WINDOW_HELP_INIT" ref="a6e5c41e21d1dc3f0efc580ba782b245" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define WINDOW_HELP_INIT          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-<b>Value:</b><div class="fragment"><pre class="fragment">{                                                                          \
-      <span class="keywordtype">int</span> WINDOW_idx;                                                          \
-      ths-&gt;b = (<span class="keywordtype">double</span>*) <a class="code" href="nfft3_8h.html#afe6167438c5de4d3d4c509f66a6694e" title="Include header for FFTW3 library for its complex type.">nfft_malloc</a>(ths-&gt;d*<span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));                   \
-      <span class="keywordflow">for</span>(WINDOW_idx=0; WINDOW_idx&lt;ths-&gt;d; WINDOW_idx++)                       \
-      ths-&gt;b[WINDOW_idx] = ((<span class="keywordtype">double</span>)<a class="code" href="group__nfftutil.html#g598a3330b3c21701223ee0ca14316eca" title="Formerly known to be an irrational number.">PI</a>*(2.0-1.0/ths-&gt;sigma[WINDOW_idx]));      \
-  }
-</pre></div>
-<p>Definition at line <a class="el" href="nfft3_8h-source.html#l00136">136</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
-
-</div>
-</div><p>
 <hr><h2>Typedef Documentation</h2>
 <a class="anchor" name="e2db105c02d4b63d1962dc94d4e7a4c2"></a><!-- doxytag: member="nfft3.h::nfft_malloc_type_function" ref="e2db105c02d4b63d1962dc94d4e7a4c2" args=")(size_t n)" -->
 <div class="memitem">
@@ -902,7 +800,7 @@ Our <code>malloc</code> function <dl compact><dt><b>Parameters:</b></dt><dd>
 
 <p>References <a class="el" href="malloc_8c-source.html#l00063">nfft_die()</a>, <a class="el" href="malloc_8c-source.html#l00029">nfft_malloc()</a>, and <a class="el" href="malloc_8c-source.html#l00025">nfft_malloc_hook</a>.</p>
 
-<p>Referenced by <a class="el" href="flags_8c-source.html#l00220">accuracy_pre_lin_psi()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00298">comparison_fft()</a>, <a class="el" href="fastsum_8c-source.html#l00397">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00590">fastsum_trafo()</a>, <a class="el" href="fastgauss_8c-source.html#l00167">fgt_init_guru()</a>, <a class="el" href="fastgauss_8c-source.html#l00260">fgt_init_node_dependent()</a>, <a class="el" href="fastgauss_8c-source.html#l00410">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c-source.html#l00481">fgt_test_error()</a>, <a class="el" href="fastgauss_8c-source.html#l00532">fgt_test_error_p()</a>, <a class="el" href="fastgauss_8c-source.html#l00375">fgt_test_simple()</a>, <a class="el" href="fpt_8c-source.html#l00740">fpt_init()</a>, <a class="el" href="fpt_8c-source.html#l00842">fpt_precompute()</a>, <a class="el" href="glacier_8c-source.html#l00106">glacier_cv()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00200">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00228">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00213">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c-source.html#l00112">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00077">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00134">linogram_fft()</a>, <a class="el" href="construct__data__2d1d_8c-source.html#l00119">main()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00101">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00159">mpolar_fft()</a>, <a class="el" href="mri_8c-source.html#l00101">mri_inh_2d1d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00153">mri_inh_2d1d_init_guru()</a>, <a class="el" href="mri_8c-source.html#l00059">mri_inh_2d1d_trafo()</a>, <a class="el" href="mri_8c-source.html#l00218">mri_inh_3d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00248">mri_inh_3d_init_guru()</a>, <a class="el" href="mri_8c-source.html#l00186">mri_inh_3d_trafo()</a>, <a class="el" href="ndft__fast_8c-source.html#l00083">ndft_time()</a>, <a class="el" href="nfct_8c-source.html#l00951">nfct_init()</a>, <a class="el" href="nfct_8c-source.html#l00988">nfct_init_guru()</a>, <a class="el" href="nfft_8c-source.html#l03044">nfft_init()</a>, <a class="el" href="nfft_8c-source.html#l03069">nfft_init_guru()</a>, <a class="el" href="malloc_8c-source.html#l00029">nfft_malloc()</a>, <a class="el" href="util_8c-source.html#l01447">nfft_voronoi_weights_S2()</a>, <a class="el" href="nfsft_8c-source.html#l00263">nfsft_init_guru()</a>, <a class="el" href="nfsft_8c-source.html#l00352">nfsft_precompute()</a>, <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>, <a class="el" href="nfst_8c-source.html#l00788">nfst_full_psi()</a>, <a class="el" href="nfst_8c-source.html#l00933">nfst_init()</a>, <a class="el" href="nfst_8c-source.html#l00971">nfst_init_guru()</a>, <a class="el" href="nnfft_8c-source.html#l00594">nnfft_init()</a>, <a class="el" href="nnfft_8c-source.html#l00559">nnfft_init_guru()</a>, <a class="el" href="nnfft_8c-source.html#l00346">nnfft_precompute_phi_hut()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00095">polar_dft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00149">polar_fft()</a>, <a class="el" href="radon_8c-source.html#l00112">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c-source.html#l00038">reconstruct()</a>, <a class="el" href="nfsoft_8c-source.html#l00214">SO3_single_fpt_init()</a>, <a class="el" href="solver_8c-source.html#l00031">solver_init_advanced_complex()</a>, <a class="el" href="solver_8c-source.html#l00382">solver_init_advanced_double()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00059">taylor_init()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>, and <a class="el" href="flags_8c-source.html#l00067">time_accuracy()</a>.</p>
+<p>Referenced by <a class="el" href="flags_8c-source.html#l00220">accuracy_pre_lin_psi()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00298">comparison_fft()</a>, <a class="el" href="fastsum_8c-source.html#l00397">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00590">fastsum_trafo()</a>, <a class="el" href="fastgauss_8c-source.html#l00167">fgt_init_guru()</a>, <a class="el" href="fastgauss_8c-source.html#l00260">fgt_init_node_dependent()</a>, <a class="el" href="fastgauss_8c-source.html#l00410">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c-source.html#l00481">fgt_test_error()</a>, <a class="el" href="fastgauss_8c-source.html#l00532">fgt_test_error_p()</a>, <a class="el" href="fastgauss_8c-source.html#l00375">fgt_test_simple()</a>, <a class="el" href="fpt_8c-source.html#l00738">fpt_init()</a>, <a class="el" href="fpt_8c-source.html#l00840">fpt_precompute()</a>, <a class="el" href="glacier_8c-source.html#l00106">glacier_cv()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00200">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00228">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00213">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c-source.html#l00112">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00077">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00134">linogram_fft()</a>, <a class="el" href="construct__data__2d1d_8c-source.html#l00119">main()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00101">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00159">mpolar_fft()</a>, <a class="el" href="mri_8c-source.html#l00102">mri_inh_2d1d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00154">mri_inh_2d1d_init_guru()</a>, <a class="el" href="mri_8c-source.html#l00060">mri_inh_2d1d_trafo()</a>, <a class="el" href="mri_8c-source.html#l00219">mri_inh_3d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00249">mri_inh_3d_init_guru()</a>, <a class="el" href="mri_8c-source.html#l00187">mri_inh_3d_trafo()</a>, <a class="el" href="ndft__fast_8c-source.html#l00083">ndft_time()</a>, <a class="el" href="nfct_8c-source.html#l00951">nfct_init()</a>, <a class="el" href="nfct_8c-source.html#l00988">nfct_init_guru()</a>, <a class="el" href="nfft_8c-source.html#l03057">nfft_init()</a>, <a class="el" href="nfft_8c-source.html#l03082">nfft_init_guru()</a>, <a class="el" href="malloc_8c-source.html#l00029">nfft_malloc()</a>, <a class="el" href="util_8c-source.html#l01447">nfft_voronoi_weights_S2()</a>, <a class="el" href="nfsft_8c-source.html#l00263">nfsft_init_guru()</a>, <a class="el" href="nfsft_8c-source.html#l00352">nfsft_precompute()</a>, <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>, <a class="el" href="nfst_8c-source.html#l00788">nfst_full_psi()</a>, <a class="el" href="nfst_8c-source.html#l00933">nfst_init()</a>, <a class="el" href="nfst_8c-source.html#l00971">nfst_init_guru()</a>, <a class="el" href="nnfft_8c-source.html#l00595">nnfft_init()</a>, <a class="el" href="nnfft_8c-source.html#l00560">nnfft_init_guru()</a>, <a class="el" href="nnfft_8c-source.html#l00347">nnfft_precompute_phi_hut()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00095">polar_dft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00149">polar_fft()</a>, <a class="el" href="radon_8c-source.html#l00112">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c-source.html#l00038">reconstruct()</a>, <a class="el" href="nfsoft_8c-source.html#l00214">SO3_single_fpt_init()</a>, <a class="el" href="solver_8c-source.html#l00031">solver_init_advanced_complex()</a>, <a class="el" href="solver_8c-source.html#l00382">solver_init_advanced_double()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00059">taylor_init()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>, and <a class="el" href="flags_8c-source.html#l00067">time_accuracy()</a>.</p>
 
 </div>
 </div><p>
@@ -933,7 +831,7 @@ Our <code>free</code> function <dl compact><dt><b>Parameters:</b></dt><dd>
 
 <p>References <a class="el" href="malloc_8c-source.html#l00050">nfft_free()</a>, and <a class="el" href="malloc_8c-source.html#l00026">nfft_free_hook</a>.</p>
 
-<p>Referenced by <a class="el" href="flags_8c-source.html#l00220">accuracy_pre_lin_psi()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00298">comparison_fft()</a>, <a class="el" href="fastsum_8c-source.html#l00463">fastsum_finalize()</a>, <a class="el" href="fastgauss_8c-source.html#l00292">fgt_finalize()</a>, <a class="el" href="fastgauss_8c-source.html#l00410">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c-source.html#l00481">fgt_test_error()</a>, <a class="el" href="fastgauss_8c-source.html#l00375">fgt_test_simple()</a>, <a class="el" href="fpt_8c-source.html#l01705">fpt_finalize()</a>, <a class="el" href="fpt_8c-source.html#l00740">fpt_init()</a>, <a class="el" href="fpt_8c-source.html#l00842">fpt_precompute()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00200">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00228">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00213">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c-source.html#l00112">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00077">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00134">linogram_fft()</a>, <a class="el" href="construct__data__2d1d_8c-source.html#l00119">main()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00101">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00159">mpolar_fft()</a>, <a class="el" href="mri_8c-source.html#l00101">mri_inh_2d1d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00171">mri_inh_2d1d_finalize()</a>, <a class="el" href="mri_8c-source.html#l00059">mri_inh_2d1d_trafo()</a>, <a class="el" href="mri_8c-source.html#l00218">mri_inh_3d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00263">mri_inh_3d_finalize()</a>, <a class="el" href="mri_8c-source.html#l00186">mri_inh_3d_trafo()</a>, <a class="el" href="ndft__fast_8c-source.html#l00083">ndft_time()</a>, <a class="el" href="nfct_8c-source.html#l00782">nfct_adjoint()</a>, <a class="el" href="nfct_8c-source.html#l01047">nfct_finalize()</a>, <a class="el" href="nfct_8c-source.html#l00728">nfct_trafo()</a>, <a class="el" href="nfft_8c-source.html#l03139">nfft_finalize()</a>, <a class="el" href="malloc_8c-source.html#l00050">nfft_free()</a>, <a class="el" href="util_8c-source.html#l01447">nfft_voronoi_weights_S2()</a>, <a class="el" href="nfsft_8c-source.html#l00493">nfsft_finalize()</a>, <a class="el" href="nfsft_8c-source.html#l00454">nfsft_forget()</a>, <a class="el" href="nfsft_8c-source.html#l00263">nfsft_init_guru()</a>, <a class="el" href="nfsft_8c-source.html#l00352">nfsft_precompute()</a>, <a class="el" href="nfst_8c-source.html#l01026">nfst_finalize()</a>, <a class="el" href="nfst_8c-source.html#l00788">nfst_full_psi()</a>, <a class="el" href="nnfft_8c-source.html#l00630">nnfft_finalize()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00095">polar_dft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00149">polar_fft()</a>, <a class="el" href="radon_8c-source.html#l00112">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c-source.html#l00038">reconstruct()</a>, <a class="el" href="solver_8c-source.html#l00353">solver_finalize_complex()</a>, <a class="el" href="solver_8c-source.html#l00704">solver_finalize_double()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00100">taylor_finalize()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>, and <a class="el" href="flags_8c-source.html#l00067">time_accuracy()</a>.</p>
+<p>Referenced by <a class="el" href="flags_8c-source.html#l00220">accuracy_pre_lin_psi()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00298">comparison_fft()</a>, <a class="el" href="fastsum_8c-source.html#l00463">fastsum_finalize()</a>, <a class="el" href="fastgauss_8c-source.html#l00292">fgt_finalize()</a>, <a class="el" href="fastgauss_8c-source.html#l00410">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c-source.html#l00481">fgt_test_error()</a>, <a class="el" href="fastgauss_8c-source.html#l00375">fgt_test_simple()</a>, <a class="el" href="fpt_8c-source.html#l01703">fpt_finalize()</a>, <a class="el" href="fpt_8c-source.html#l00738">fpt_init()</a>, <a class="el" href="fpt_8c-source.html#l00840">fpt_precompute()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00200">inverse_linogram_fft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00228">inverse_mpolar_fft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00213">inverse_polar_fft()</a>, <a class="el" href="inverse__radon_8c-source.html#l00112">Inverse_Radon_trafo()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00077">linogram_dft()</a>, <a class="el" href="linogram__fft__test_8c-source.html#l00134">linogram_fft()</a>, <a class="el" href="construct__data__2d1d_8c-source.html#l00119">main()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00101">mpolar_dft()</a>, <a class="el" href="mpolar__fft__test_8c-source.html#l00159">mpolar_fft()</a>, <a class="el" href="mri_8c-source.html#l00102">mri_inh_2d1d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00172">mri_inh_2d1d_finalize()</a>, <a class="el" href="mri_8c-source.html#l00060">mri_inh_2d1d_trafo()</a>, <a class="el" href="mri_8c-source.html#l00219">mri_inh_3d_adjoint()</a>, <a class="el" href="mri_8c-source.html#l00264">mri_inh_3d_finalize()</a>, <a class="el" href="mri_8c-source.html#l00187">mri_inh_3d_trafo()</a>, <a class="el" href="ndft__fast_8c-source.html#l00083">ndft_time()</a>, <a class="el" href="nfct_8c-source.html#l00782">nfct_adjoint()</a>, <a class="el" href="nfct_8c-source.html#l01047">nfct_finalize()</a>, <a class="el" href="nfct_8c-source.html#l00728">nfct_trafo()</a>, <a class="el" href="nfft_8c-source.html#l03152">nfft_finalize()</a>, <a class="el" href="malloc_8c-source.html#l00050">nfft_free()</a>, <a class="el" href="util_8c-source.html#l01447">nfft_voronoi_weights_S2()</a>, <a class="el" href="nfsft_8c-source.html#l00493">nfsft_finalize()</a>, <a class="el" href="nfsft_8c-source.html#l00454">nfsft_forget()</a>, <a class="el" href="nfsft_8c-source.html#l00263">nfsft_init_guru()</a>, <a class="el" href="nfsft_8c-source.html#l00352">nfsft_precompute()</a>, <a class="el" href="nfst_8c-source.html#l01026">nfst_finalize()</a>, <a class="el" href="nfst_8c-source.html#l00788">nfst_full_psi()</a>, <a class="el" href="nnfft_8c-source.html#l00631">nnfft_finalize()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00095">polar_dft()</a>, <a class="el" href="polar__fft__test_8c-source.html#l00149">polar_fft()</a>, <a class="el" href="radon_8c-source.html#l00112">Radon_trafo()</a>, <a class="el" href="reconstruct__data__inh__nnfft_8c-source.html#l00038">reconstruct()</a>, <a class="el" href="solver_8c-source.html#l00353">solver_finalize_complex()</a>, <a class="el" href="solver_8c-source.html#l00704">solver_finalize_double()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00100">taylor_finalize()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>, and <a class="el" href="flags_8c-source.html#l00067">time_accuracy()</a>.</p>
 
 </div>
 </div><p>
@@ -977,6 +875,6 @@ Hook for <code>nfft_free</code>
 </div>
 </div><p>
     <hr size="1"/>
-    Generated on 17 Aug 2009 by Doxygen 1.5.3
+    Generated on 16 Sep 2009 by Doxygen 1.5.3
   </body>
 </html>
