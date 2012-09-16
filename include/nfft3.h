@@ -1,14 +1,47 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: nfft3.h 3115 2009-03-15 17:04:56Z vollrath $ */
+
 /*! \file nfft3.h
  *  \brief Header file for the nfft3 library.
  */
-#ifndef NFFT3_H
-#define NFFT3_H
+#ifndef __NFFT3_H__
+#define __NFFT3_H__
 
-/** Include header for C99 complex datatype. */
-#include <complex.h>
-
-/** Include header for FFTW3 library. */
+/** Include header for FFTW3 library for its complex type. */
 #include <fftw3.h>
+
+/* config header */
+#include "nfftconf.h"
+
+/* Malloc and free functions */
+extern void *nfft_malloc(size_t n);
+extern void nfft_free(void *p);
+extern void nfft_die(const char *s);
+
+/* Malloc and free hooks */
+typedef void *(*nfft_malloc_type_function) (size_t n);
+typedef void  (*nfft_free_type_function) (void *p);
+typedef void  (*nfft_die_type_function) (const char *errString);
+extern nfft_malloc_type_function nfft_malloc_hook;
+extern nfft_free_type_function nfft_free_hook;
+extern nfft_die_type_function nfft_die_hook;
 
 /** Macros for public members inherited by all plan structures. */
 #define MACRO_MV_PLAN(float_type)                                             \
@@ -20,6 +53,84 @@
                                              size is N_total float_types    */\
   float_type *f;                        /**< Vector of samples,               \
 				             size is M_total float types    */\
+  void (*mv_trafo)(void*);              /**< Pointer to the own transform   */\
+  void (*mv_adjoint)(void*);            /**< Pointer to the own adjoint     */\
+
+typedef struct
+{
+  MACRO_MV_PLAN(fftw_complex)
+} mv_plan_complex;
+
+typedef struct
+{
+  MACRO_MV_PLAN(double)
+} mv_plan_double;
+
+/** Macros for window functions. */
+#if defined(DIRAC_DELTA)
+  #define PHI_HUT(k,d) 1.0
+  #define PHI(x,d) (fabs((x))<10e-8)? 1.0 : 0.0
+  #define WINDOW_HELP_INIT(d)
+  #define WINDOW_HELP_FINALIZE
+  #define WINDOW_HELP_ESTIMATE_m {ths->m = 0;}
+#elif defined(GAUSSIAN)
+  #define PHI_HUT(k,d) ((double)exp(-(pow(PI*(k)/ths->n[d],2.0)*ths->b[d])))
+  #define PHI(x,d) ((double)exp(-pow((x)*ths->n[d],2.0)/ ths->b[d])/sqrt(PI*ths->b[d]))
+  #define WINDOW_HELP_INIT \
+    {                                                                          \
+      int WINDOW_idx;                                                          \
+      ths->b = (double*) nfft_malloc(ths->d*sizeof(double));                   \
+      for(WINDOW_idx=0; WINDOW_idx<ths->d; WINDOW_idx++)                       \
+      ths->b[WINDOW_idx]=((double)2*ths->sigma[WINDOW_idx])/                   \
+        (2*ths->sigma[WINDOW_idx]-1)*(((double)ths->m) / PI);                  \
+      }
+  #define WINDOW_HELP_FINALIZE {nfft_free(ths->b);}
+  #define WINDOW_HELP_ESTIMATE_m {ths->m =12;}
+#elif defined(B_SPLINE)
+  #define PHI_HUT(k,d) ((double)(((k)==0)? 1.0/ths->n[(d)] :                   \
+    pow(sin((k)*PI/ths->n[(d)])/((k)*PI/ths->n[(d)]),2*ths->m)/ths->n[(d)]))
+  #define PHI(x,d) (nfft_bspline(2*ths->m,((x)*ths->n[(d)])+                   \
+    (double)ths->m,ths->spline_coeffs)/ths->n[(d)])
+  #define WINDOW_HELP_INIT \
+    {                                                                          \
+      ths->spline_coeffs= (double*)nfft_malloc(2*ths->m*sizeof(double));       \
+    }
+  #define WINDOW_HELP_FINALIZE {nfft_free(ths->spline_coeffs);}
+  #define WINDOW_HELP_ESTIMATE_m {ths->m =11;}
+#elif defined(SINC_POWER)
+  #define PHI_HUT(k,d) (nfft_bspline(2*ths->m,((double)2*ths->m*(k))/          \
+    ((2*ths->sigma[(d)]-1)*ths->n[(d)]/ths->sigma[(d)])+ (double)ths->m,       \
+    ths->spline_coeffs))
+  #define PHI(x,d) ((double)(ths->n[(d)]/ths->sigma[(d)]*(2*ths->sigma[(d)]-1)/\
+    (2*ths->m)*pow(nfft_sinc(PI*ths->n[(d)]/ths->sigma[(d)]*(x)*               \
+    (2*ths->sigma[(d)]-1)/(2*ths->m)),2*ths->m)/ths->n[(d)]))
+  #define WINDOW_HELP_INIT \
+    {                                                                          \
+      ths->spline_coeffs= (double*)nfft_malloc(2*ths->m*sizeof(double));       \
+    }
+  #define WINDOW_HELP_FINALIZE {nfft_free(ths->spline_coeffs);}
+  #define WINDOW_HELP_ESTIMATE_m {ths->m = 9;}
+#else /* Kaiser-Bessel is the default. */
+  #define PHI_HUT(k,d) ((double)nfft_i0( ths->m*sqrt(\
+    pow((double)(ths->b[d]),2.0) - pow(2.0*PI*(k)/ths->n[d],2.0))))
+  #define PHI(x,d) ((double)((pow((double)(ths->m),2.0)\
+    -pow((x)*ths->n[d],2.0))>0)? \
+    sinh(ths->b[d]*sqrt(pow((double)(ths->m),2.0)-                             \
+    pow((x)*ths->n[d],2.0)))/(PI*sqrt(pow((double)(ths->m),2.0)-               \
+    pow((x)*ths->n[d],2.0))): (((pow((double)(ths->m),2.0)-                    \
+    pow((x)*ths->n[d],2.0))<0)? sin(ths->b[d]*                                 \
+    sqrt(pow(ths->n[d]*(x),2.0)-pow((double)(ths->m),2.0)))/                   \
+    (PI*sqrt(pow(ths->n[d]*(x),2.0)-pow((double)(ths->m),2.0))):1.0))
+  #define WINDOW_HELP_INIT \
+    {                                                                          \
+      int WINDOW_idx;                                                          \
+      ths->b = (double*) nfft_malloc(ths->d*sizeof(double));                   \
+      for(WINDOW_idx=0; WINDOW_idx<ths->d; WINDOW_idx++)                       \
+      ths->b[WINDOW_idx] = ((double)PI*(2.0-1.0/ths->sigma[WINDOW_idx]));      \
+  }
+  #define WINDOW_HELP_FINALIZE {nfft_free(ths->b);}
+  #define WINDOW_HELP_ESTIMATE_m {ths->m = 6;}
+#endif
 
 /*###########################################################################*/
 /*###########################################################################*/
@@ -105,7 +216,7 @@
  * table of equispaced samples of the window function instead of exact values
  * of the window function.
  * At the moment a table of size \f$(K+1)d\f$ is used, where
- * \f$K=2^{10}(m+1)\f$. 
+ * \f$K=2^{10}(m+1)\f$.
  * An estimate for the size of the lookup table with respect to the target
  * accuracy should be implemented.
  *
@@ -229,7 +340,7 @@
 typedef struct
 {
   /* api */
-  MACRO_MV_PLAN(double complex)
+  MACRO_MV_PLAN(fftw_complex)
 
   int d;                                /**< Dimension, rank                 */
   int *N;                               /**< Multi bandwidth                 */
@@ -256,7 +367,7 @@ typedef struct
 					     PRE_PHI_HUT| PRE_PSI|
 					     MALLOC_X| MALLOC_F_HAT| MALLOC_F|
 					     FFTW_INIT| FFT_OUT_OF_PLACE     */
-					
+
   unsigned fftw_flags;                  /**< Flags for the FFTW, default is
 					     FFTW_ESTIMATE| FFTW_DESTROY_INPUT
 					                                     */
@@ -282,14 +393,14 @@ typedef struct
   int *psi_index_f;                     /**< Indices in source/target vector
 					     for \ref PRE_FULL_PSI           */
 
-  double complex *g;                    /**< Oversampled vector of samples,
+  fftw_complex *g;                    /**< Oversampled vector of samples,
 					     size is \ref n_total double
 					     complex                         */
-  double complex *g_hat;                /**< Zero-padded vector of Fourier
+  fftw_complex *g_hat;                /**< Zero-padded vector of Fourier
                                              coefficients, size is
-					     \ref n_total double complex     */
-  double complex *g1;                   /**< Input of fftw                   */
-  double complex *g2;                   /**< Output of fftw                  */
+					     \ref n_total fftw_complex     */
+  fftw_complex *g1;                   /**< Input of fftw                   */
+  fftw_complex *g2;                   /**< Output of fftw                  */
 
   double *spline_coeffs;                /**< Input for de Boor algorithm if
                                              B_SPLINE or SINC_POWER is
@@ -323,6 +434,9 @@ void ndft_adjoint(nfft_plan *ths);
  * \author Stefan Kunis, Daniel Potts
  */
 void nfft_trafo(nfft_plan *ths);
+void nfft_trafo_1d(nfft_plan *ths);
+void nfft_trafo_2d(nfft_plan *ths);
+void nfft_trafo_3d(nfft_plan *ths);
 
 /**
  * Computes an adjoint NFFT, see the \ref ndftH_formula "definition".
@@ -332,6 +446,9 @@ void nfft_trafo(nfft_plan *ths);
  * \author Stefan Kunis, Daniel Potts
  */
 void nfft_adjoint(nfft_plan *ths);
+void nfft_adjoint_1d(nfft_plan *ths);
+void nfft_adjoint_2d(nfft_plan *ths);
+void nfft_adjoint_3d(nfft_plan *ths);
 
 /**
  * Initialisation of a transform plan, wrapper d=1.
@@ -477,6 +594,8 @@ void nfft_finalize(nfft_plan *ths);
  * transform.
  * @{
  */
+
+#ifdef HAVE_NFCT
 
 /** Structure for a transform plan */
 typedef struct
@@ -686,7 +805,11 @@ int nfct_fftw_2N( int n);
  */
 int nfct_fftw_2N_rev(int n);
 
+#endif
+
 /*###########################################################################*/
+
+#ifdef HAVE_NFST
 
 /** Structure for a transform plan */
 typedef struct
@@ -920,6 +1043,8 @@ int nfst_fftw_2N( int n);
  */
 int nfst_fftw_2N_rev( int n);
 
+#endif
+
 /** @}
  */
 
@@ -932,6 +1057,8 @@ int nfst_fftw_2N_rev( int n);
  * frequency Fourier transform.
  * @{
  */
+
+#ifdef HAVE_NNFFT
 
 /**
  * If this flag is set, (de)allocation of the frequency node vector is done.
@@ -947,7 +1074,7 @@ int nfst_fftw_2N_rev( int n);
 typedef struct
 {
   /* api */
-  MACRO_MV_PLAN(double complex)
+  MACRO_MV_PLAN(fftw_complex)
 
   int d;                                /**< dimension, rank                 */
   double *sigma;                        /**< oversampling-factor             */
@@ -973,7 +1100,7 @@ typedef struct
   int size_psi;                         /**< only for thin B                 */
   int *psi_index_g;                     /**< only for thin B                 */
   int *psi_index_f;                     /**< only for thin B                 */
-  double complex *F;
+  fftw_complex *F;
 
   double *spline_coeffs;                /**< input for de Boor algorithm, if
                                              B_SPLINE or SINC_2m is defined  */
@@ -1127,6 +1254,8 @@ void nnfft_precompute_phi_hut(nnfft_plan *ths_plan);
  */
 void nnfft_finalize(nnfft_plan *ths_plan);
 
+#endif
+
 /** @}
  */
 
@@ -1139,6 +1268,8 @@ void nnfft_finalize(nnfft_plan *ths_plan);
  * cross.
  * @{
  */
+
+#ifdef HAVE_NSFFT
 
 /**
  * If this flag is set, the member \ref index_sparse_to_full is (de)allocated
@@ -1153,7 +1284,7 @@ void nnfft_finalize(nnfft_plan *ths_plan);
 /** Structure for a NFFT plan */
 typedef struct
 {
-  MACRO_MV_PLAN(double complex)
+  MACRO_MV_PLAN(fftw_complex)
 
   int d;                                /**< dimension, rank; d=2,3          */
   int J;                                /**< problem size, i.e.,
@@ -1273,6 +1404,8 @@ void nsfft_init(nsfft_plan *ths, int d, int J, int M, int m, unsigned flags);
  */
 void nsfft_finalize(nsfft_plan *ths);
 
+#endif
+
 /** @}
  */
 
@@ -1284,13 +1417,15 @@ void nsfft_finalize(nsfft_plan *ths);
  * @{
  */
 
+#ifdef HAVE_MRI
+
 /**
  * The structure for the transform plan.
  */
 typedef struct
 {
   /* api */
-  MACRO_MV_PLAN(double complex)
+  MACRO_MV_PLAN(fftw_complex)
 
   nfft_plan plan;
 
@@ -1306,7 +1441,7 @@ typedef struct
 typedef struct
 {
   /* api */
-  MACRO_MV_PLAN(double complex)
+  MACRO_MV_PLAN(fftw_complex)
 
   nfft_plan plan;
 
@@ -1409,6 +1544,8 @@ void mri_inh_3d_init_guru(mri_inh_3d_plan *ths, int *N, int M, int *n,
  * \author Tobias Knopp
  */
 void mri_inh_3d_finalize(mri_inh_3d_plan *ths);
+
+#endif
 
 /** @}
  */
@@ -1668,6 +1805,8 @@ void mri_inh_3d_finalize(mri_inh_3d_plan *ths);
  *   flags.
  */
 
+#ifdef HAVE_NFSFT
+
 /* Planner flags */
 
 /**
@@ -1887,7 +2026,7 @@ void mri_inh_3d_finalize(mri_inh_3d_plan *ths);
 typedef struct
 {
   /** Inherited public members */
-  MACRO_MV_PLAN(double complex)
+  MACRO_MV_PLAN(fftw_complex)
 
   /* Public members */
   int N;                              /**< the bandwidth \f$N\f$              */
@@ -1901,11 +2040,11 @@ typedef struct
   /* Private members */
   /*int NPT;*/                        /**< the next greater power of two with *
                                            respect to \f$N\f$                 */
-  int t;                              /**< the logaritm of NPT with           *
+  int t;                              /**< the logarithm of NPT with           *
                                            respect to the basis 2             */
   unsigned int flags;                 /**< the planner flags                  */
   nfft_plan plan_nfft;                /**< the internal NFFT plan             */
-  double complex *f_hat_intern;              /**< Internally used pointer to         *
+  fftw_complex *f_hat_intern;              /**< Internally used pointer to         *
                                            spherical Fourier coefficients     */
 } nfsft_plan;
 
@@ -1945,7 +2084,7 @@ void nfsft_init_advanced(nfsft_plan* plan, int N, int M, unsigned int
  * \author Jens Keiner
  */
 void nfsft_init_guru(nfsft_plan *plan, int N, int M, unsigned int nfsft_flags,
-  int nfft_flags, int nfft_cutoff);
+    unsigned int nfft_flags, int nfft_cutoff);
 
 /**
  * Performes precomputation up to the next power of two with respect to a given
@@ -1968,7 +2107,7 @@ void nfsft_precompute(int N, double kappa, unsigned int nfsft_flags,
  *
  * \author Jens Keiner
  */
-void nfsft_forget();
+void nfsft_forget(void);
 
 /**
  * Executes a direct NDSFT, i.e. computes for \f$m = 0,\ldots,M-1\f$
@@ -2035,6 +2174,7 @@ void nfsft_finalize(nfsft_plan* plan);
 
 void nfsft_precompute_x(nfsft_plan *plan);
 
+#endif
 
 /** @}
  */
@@ -2050,6 +2190,8 @@ void nfsft_precompute_x(nfsft_plan *plan);
  * This module implements fast polynomial transforms. In the following, we
  * abbreviate the term "fast polynomial transforms" by FPT.
  */
+
+#ifdef HAVE_FPT
 
 /* Flags for fpt_init() */
 #define FPT_NO_FAST_ALGORITHM (1U << 2) /**< If set, TODO complete comment.   */
@@ -2105,9 +2247,8 @@ fpt_set fpt_init(const int M, const int t, const unsigned int flags);
  *
  * \author Jens Keiner
  */
-void fpt_precompute(fpt_set set, const int m, const double *alpha,
-                    const double *beta, const double *gamma, int k_start,
-                    const double threshold);
+void fpt_precompute(fpt_set set, const int m, double *alpha, double *beta,
+  double *gam, int k_start, const double threshold);
 
 /**
  * Computes a single DPT transform.
@@ -2119,7 +2260,7 @@ void fpt_precompute(fpt_set set, const int m, const double *alpha,
  * \arg k_end
  * \arg flags
  */
-void dpt_trafo(fpt_set set, const int m, const double complex *x, double complex *y,
+void dpt_trafo(fpt_set set, const int m, const fftw_complex *x, fftw_complex *y,
   const int k_end, const unsigned int flags);
 
 /**
@@ -2132,7 +2273,7 @@ void dpt_trafo(fpt_set set, const int m, const double complex *x, double complex
  * \arg k_end
  * \arg flags
  */
-void fpt_trafo(fpt_set set, const int m, const double complex *x, double complex *y,
+void fpt_trafo(fpt_set set, const int m, const fftw_complex *x, fftw_complex *y,
   const int k_end, const unsigned int flags);
 
 /**
@@ -2145,8 +2286,8 @@ void fpt_trafo(fpt_set set, const int m, const double complex *x, double complex
  * \arg k_end
  * \arg flags
  */
-void dpt_transposed(fpt_set set, const int m, double complex *x, 
-  double complex *y, const int k_end, const unsigned int flags);
+void dpt_transposed(fpt_set set, const int m, fftw_complex *x,
+  fftw_complex *y, const int k_end, const unsigned int flags);
 
 /**
  * Computes a single DPT transform.
@@ -2158,13 +2299,392 @@ void dpt_transposed(fpt_set set, const int m, double complex *x,
  * \arg k_end
  * \arg flags
  */
-void fpt_transposed(fpt_set set, const int m, double complex *x, 
-  const double complex *y, const int k_end, const unsigned int flags);
+void fpt_transposed(fpt_set set, const int m, fftw_complex *x,
+  fftw_complex *y, const int k_end, const unsigned int flags);
 
 void fpt_finalize(fpt_set set);
 
+#endif
+
 /** @}
  */
+
+/*###########################################################################*/
+/*###########################################################################*/
+/*###########################################################################*/
+
+/**
+ * @defgroup nfsoft NFSOFT - Nonequispaced fast SO(3) Fourier transform
+ * @{
+ *
+ * This module implements nonuniform fast SO(3) Fourier transforms. In the
+ * following, we abbreviate the term "nonuniform fast SO(3) Fourier
+ * transform" by NFSOFT.
+ *
+ */
+
+#ifdef HAVE_NFSOFT
+
+/* Planner flags */
+/**
+ * By default, all computations are performed with respect to the
+ * unnormalized basis functions
+ * \f[
+ *   D_{mn}^l(\alpha,\beta,\gamma) = d^{mn}_{l}(\cos\beta)
+ *   \mathrm{e}^{-\mathrm{i} m \alpha}\mathrm{e}^{-\mathrm{i} n \gamma}.
+ * \f]
+ * If this flag is set, all computations are carried out using the \f$L_2\f$-
+ * normalized basis functions
+ * \f[
+ *  \tilde D_{mn}^l(\alpha,\beta,\gamma) = \sqrt{\frac{2l+1}{8\pi^2}}d^{mn}_{l}(\cos\beta)
+ *   \mathrm{e}^{-\mathrm{i} m \alpha}\mathrm{e}^{-\mathrm{i} n \gamma}
+ * \f]
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_NORMALIZED    (1U << 0)
+
+/**
+ * If this flag is set, the fast NFSOFT algorithms (see \ref nfsoft_trafo,
+ * \ref nfsoft_adjoint) will use internally the exact but usually slower direct
+ * NDFT algorithm in favor of fast but approximative NFFT algorithm.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_USE_NDFT      (1U << 1)
+
+/**
+ * If this flag is set, the fast NFSOFT algorithms (see \ref nfsoft_trafo,
+ * \ref nfsoft_adjoint) will use internally the usually slower direct
+ * DPT algorithm in favor of the fast FPT algorithm.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_USE_DPT       (1U << 2)
+
+/**
+ * If this flag is set, the init methods (see \ref nfsoft_init ,
+ * \ref nfsoft_init_advanced , and \ref nfsoft_init_guru) will allocate memory and the
+ * method \ref nfsoft_finalize will free the array \c x for you. Otherwise,
+ * you have to assure by yourself that \c x points to an array of
+ * proper size before excuting a transform and you are responsible for freeing
+ * the corresponding memory before program termination.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_MALLOC_X      (1U << 3)
+
+/**
+ * If this flag is set, the Wigner-D functions will be normed
+ * such that they satisfy the representation property of
+ * the spherical harmonics as defined in the NFFT software package
+ *
+ * \author Antje Vollrath
+ */
+#define NFSOFT_REPRESENT      (1U << 4)
+
+
+/**
+ * If this flag is set, the init methods (see \ref nfsoft_init ,
+ * \ref nfsoft_init_advanced , and \ref nfsoft_init_guru) will allocate memory and the
+ * method \ref nfsoft_finalize will free the array \c f_hat for you. Otherwise,
+ * you have to assure by yourself that \c f_hat points to an array of
+ * proper size before excuting a transform and you are responsible for freeing
+ * the corresponding memory before program termination.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_MALLOC_F_HAT  (1U << 5)
+
+/**
+ * If this flag is set, the init methods (see \ref nfsoft_init ,
+ * \ref nfsoft_init_advanced , and \ref nfsoft_init_guru) will allocate memory and the
+ * method \ref nfsoft_finalize will free the array \c f for you. Otherwise,
+ * you have to assure by yourself that \c f points to an array of
+ * proper size before excuting a transform and you are responsible for freeing
+ * the corresponding memory before program termination.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_MALLOC_F      (1U << 6)
+
+/**
+ * If this flag is set, it is guaranteed that during an execution of
+ * \ref nfsoft_trafo the content of \c f_hat remains
+ * unchanged.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_PRESERVE_F_HAT (1U << 7)
+
+/**
+ * If this flag is set, it is guaranteed that during an execution of
+ * \ref nfsoft_trafo or \ref nfsoft_adjoint
+ * the content of \c x remains
+ * unchanged.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_PRESERVE_X     (1U << 8)
+
+/**
+ * If this flag is set, it is guaranteed that during an execution of
+ * \ref ndsoft_adjoint or \ref nfsoft_adjoint the content of \c f remains
+ * unchanged.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_PRESERVE_F     (1U << 9)
+
+/**
+ * If this flag is set, it is explicitely allowed that during an execution of
+ * \ref nfsoft_trafo the content of \c f_hat may be changed.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_DESTROY_F_HAT    (1U << 10)
+
+/**
+ * If this flag is set, it is explicitely allowed that during an execution of
+ * \ref nfsoft_trafo or \ref nfsoft_adjoint
+ * the content of \c x may be changed.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_DESTROY_X      (1U << 11)
+
+/**
+ * If this flag is set, it is explicitely allowed that during an execution of
+ * \ref ndsoft_adjoint or \ref nfsoft_adjoint the content of \c f may be changed.
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_DESTROY_F      (1U << 12)
+
+/**
+ * If this flag is set, the fast NFSOFT algorithms (see \ref nfsoft_trafo,
+ * \ref nfsoft_adjoint) will use internally the FPT algorithm without the
+ * stabilization scheme and thus making bigger errors for higher
+ * bandwidth but becoming significantly faster
+ *
+ * \author Antje Vollrath
+ */
+#define NFSOFT_NO_STABILIZATION      (1U << 13)
+
+/**
+ * If this flag is set, the fast NFSOFT algorithms (see \ref nfsoft_trafo,
+ * \ref nfsoft_adjoint) will decide whether to use the DPT or
+ * FPT algorithm depending on which is faster for the chosen orders.
+ *
+ * not yet included in the checked-in version
+ *
+ * \author Antje Vollrath
+ */
+#define NFSOFT_CHOOSE_DPT            (1U << 14)
+
+/**
+ * If this flag is set, the fast NFSOFT algorithms (see \ref nfsoft_trafo,
+ * \ref nfsoft_adjoint) becomes a SOFT, i.e., we use equispaced nodes.
+ * The FFTW will be used instead of the NFFT.-->not included yet
+ *
+ * \see nfsoft_init
+ * \see nfsoft_init_advanced
+ * \see nfsoft_init_guru
+ * \author Antje Vollrath
+ */
+#define NFSOFT_SOFT                  (1U << 15)
+
+
+/**
+ * If this flag is set, the transform \ref nfsoft_adjoint
+ * sets all unused entries in \c f_hat not corresponding to
+ * SO(3) Fourier coefficients to zero.
+ *
+ * \author Antje Vollrath
+ */
+#define NFSOFT_ZERO_F_HAT             (1U << 16)
+
+
+/* Helper macros*/
+/**
+ * These macro expands to the index \f$i\f$
+ * corresponding to the SO(3) Fourier coefficient
+ * \f$f_hat^{mn}_l\f$ for \f$l=0,...,B\f$, \f$m,n =-l,...,l\f$ with
+ */
+#define NFSOFT_INDEX(m,n,l,B)        (((l)+((B)+1))+(2*(B)+2)*(((n)+((B)+1))+(2*(B)+2)*((m)+((B)+1))))
+#define NFSOFT_INDEX_TWO(m,n,l,B) ((B+1)*(B+1)+(B+1)*(B+1)*(m+B)-((m-1)*m*(2*m-1)+(B+1)*(B+2)*(2*B+3))/6)+(posN(n,m,B))+(l-MAX(ABS(m),ABS(n)))
+int posN(int n,int m, int B);
+
+/**
+ * This macro expands to the logical size of a SO(3) Fourier coefficients
+ * array for a bandwidth B.
+ */
+#define NFSOFT_F_HAT_SIZE(B)          (((B)+1)*(4*((B)+1)*((B)+1)-1)/3)
+
+/** Structure for a NFSOFT transform plan */
+typedef struct nfsoft_plan_
+{
+  /** Inherited public members */
+  MACRO_MV_PLAN(fftw_complex)
+
+  double *x;                           /**< the  input nodes                    */
+  /**some auxillary memory*/
+  fftw_complex *wig_coeffs;		       /**< contains a set of SO(3) Fourier coefficients*
+                                    for fixed orders m and n*/
+  fftw_complex *cheby;		       /**< contains a set of Chebychev coefficients for*
+                                    fixed orders m and n*/
+  fftw_complex *aux;			       /**< used when converting Chebychev to Fourier*
+                                    coeffcients*/
+
+  /** Private members */
+  int t;                               /**< the logaritm of NPT with          *
+                                          respect to the basis 2              */
+  unsigned int flags;                  /**< the planner flags                 */
+  nfft_plan nfft_plan;                /**< the internal NFFT plan             */
+  fftw_plan fftw_plan;                /**< the optional internal FFTW plan    */
+  fpt_set fpt_set;                    /**< the internal FPT plan */
+
+  int fpt_kappa;       /**a parameter controlling the accuracy of the FPT*/
+
+} nfsoft_plan;
+
+
+/** Functions for NFSOFT plans*/
+
+/**
+ * Does all node-dependent and node-independent precomputations needed for the NFSOFT.
+ *
+ * \arg plan a pointer to a \ref nfsoft_plan structure
+ */
+
+void nfsoft_precompute(nfsoft_plan *plan);
+
+/**
+ * Computes the FPT transform.
+ *
+ * \arg coeffs the Chebychev coefficients that should be transformed
+ * \arg set the FPT-set containing precomputed data
+ * \arg l the polynomial degree
+ * \arg k the first order
+ * \arg m the second order
+ * \arg nfsoft_flags
+ */
+void SO3_fpt(fftw_complex *coeffs, fpt_set set, int l, int k, int m, unsigned int nfsoft_flags);
+void SO3_fpt_transposed(fftw_complex *coeffs,fpt_set set,int l, int k, int m,unsigned int nfsoft_flags);
+
+
+/**
+ * Creates a NFSOFT transform plan.
+ *
+ * \arg plan a pointer to a \ref nfsoft_plan structure
+ * \arg N the bandwidth \f$N \in \mathbb{N}_0\f$
+ * \arg M the number of nodes \f$M \in \mathbb{N}\f$
+ *
+ * \author Antje Vollrath
+ */
+void nfsoft_init(nfsoft_plan *plan, int N, int M);
+/**
+ * Creates a NFSOFT transform plan.
+ *
+ * \arg plan a pointer to a \ref nfsoft_plan structure
+ * \arg N the bandwidth \f$N \in \mathbb{N}_0\f$
+ * \arg M the number of nodes \f$M \in \mathbb{N}\f$
+ * \arg nfsoft_flags the NFSOFT flags
+ *
+ * \author Antje Vollrath
+ */
+void nfsoft_init_advanced(nfsoft_plan *plan, int N, int M,unsigned int nfsoft_flags);
+/**
+ * Creates a  NFSOFT transform plan.
+ *
+ * \arg plan a pointer to a \ref nfsoft_plan structure
+ * \arg N the bandwidth \f$N \in \mathbb{N}_0\f$
+ * \arg M the number of nodes \f$M \in \mathbb{N}\f$
+ * \arg nfsoft_flags the NFSFT flags
+ * \arg nfft_flags the NFFT flags
+ * \arg fpt_kappa a parameter contolling the accuracy of the FPT
+ * \arg nfft_cutoff the NFFT cutoff parameter
+ *
+ * \author Antje Vollrath
+ */
+void nfsoft_init_guru(nfsoft_plan *plan, int N, int M,unsigned int nfsoft_flags,unsigned int nfft_flags,int nfft_cutoff,int fpt_kappa);
+
+/**
+ * Executes a NFSOFT, i.e. computes for \f$m = 0,\ldots,M-1\f$
+ * \f[
+ *   f(g_m) = \sum_{l=0}^B \sum_{m=-l}^l \sum_{n=-l}^l \hat{f}^{mn}_l
+ *            D_l^{mn}\left( \alpha_m,\beta_m,\gamma_m\right).
+ * \f]
+ *
+ * \arg plan_nfsoft the plan
+ *
+ * \author Antje Vollrath
+ */
+void nfsoft_trafo(nfsoft_plan *plan_nfsoft);
+/**
+ * Executes an adjoint NFSOFT, i.e. computes for \f$l=0,\ldots,B;
+ * m,n=-l,\ldots,l\f$
+ * \f[
+ *   \hat{f}^{mn}_l = \sum_{m = 0}^{M-1} f(g_m)
+ *                    D_l^{mn}\left( \alpha_m,\beta_m,\gamma_m\right)
+ * \f]
+ *
+ * \arg plan_nfsoft the plan
+ *
+ * \author Antje Vollrath
+ */
+void nfsoft_adjoint(nfsoft_plan *plan_nfsoft);
+/**
+ * Destroys a plan.
+ *
+ * \arg plan the plan to be destroyed
+ *
+ * \author Antje Vollrath
+ */
+void nfsoft_finalize(nfsoft_plan *plan);
+
+
+#endif
+
+/** @}
+ */
+
 
 /*###########################################################################*/
 /*###########################################################################*/
@@ -2234,78 +2754,81 @@ void fpt_finalize(fpt_set set);
  */
 #define PRECOMPUTE_DAMP       (1U<< 6)
 
-/**
- * Complete macro for mangling an inverse transform.
- * 
- * \arg MV Matrix vector multiplication type (eg nfft, nfct)
- * \arg FLT Float used as prefix for function names (double or complex)
- * \arg FLT_TYPE Float type (double or double complex)
- *
- * \author Stefan Kunis
- */
-#define MACRO_SOLVER_PLAN(MV, FLT, FLT_TYPE)                                  \
-                                                                              \
-/** Structure for an inverse transform plan. */                               \
-typedef struct                                                                \
-{                                                                             \
-  MV ## _plan *mv;                      /**< matrix vector multiplication   */\
-  unsigned flags;                       /**< iteration type                 */\
-                                                                              \
-  double *w;                            /**< weighting factors              */\
-  double *w_hat;                        /**< damping factors                */\
-                                                                              \
-  FLT_TYPE *y;                          /**< right hand side, samples       */\
-                                                                              \
-  FLT_TYPE *f_hat_iter;                 /**< iterative solution             */\
-                                                                              \
-  FLT_TYPE *r_iter;                     /**< iterated residual vector       */\
-  FLT_TYPE *z_hat_iter;                 /**< residual of normal equation of   \
-					     first kind                     */\
-  FLT_TYPE *p_hat_iter;                 /**< search direction               */\
-  FLT_TYPE *v_iter;                     /**< residual vector update         */\
-                                                                              \
-  double alpha_iter;                    /**< step size for search direction */\
-  double beta_iter;                     /**< step size for search correction*/\
-                                                                              \
-  double dot_r_iter;                    /**< weighted dotproduct of r_iter  */\
-  double dot_r_iter_old;                /**< previous dot_r_iter            */\
-  double dot_z_hat_iter;                /**< weighted dotproduct of           \
-					     z_hat_iter                     */\
-  double dot_z_hat_iter_old;            /**< previous dot_z_hat_iter        */\
-  double dot_p_hat_iter;                /**< weighted dotproduct of           \
-					     p_hat_iter                     */\
-  double dot_v_iter;                    /**< weighted dotproduct of v_iter  */\
-} i ## MV ## _plan;                                                           \
-                                                                              \
-/** Simple initialisation. */                                                 \
-void i ## MV ## _init(i ## MV ## _plan *ths, MV ## _plan *mv);                \
-/** Advanced initialisation. */                                               \
-void i ## MV ## _init_advanced(i ## MV ## _plan *ths, MV ## _plan *mv,        \
-                               unsigned i ## MV ## _flags);                   \
-/** Setting up residuals before the actual iteration. */                      \
-void i ## MV ## _before_loop(i ## MV ## _plan *ths);                          \
-/** Doing one step in the iteration. */                                       \
-void i ## MV ## _loop_one_step(i ## MV ## _plan *ths);                        \
-/** Destroys the plan for the inverse transform. */                           \
-void i ## MV ## _finalize(i ## MV ## _plan *ths);                             \
 
-/* previous function declarations didn't work with doxygen ....
-  F(MV, FLT, FLT_TYPE, init,    i ## MV ## _plan *ths, MV ## _plan *mv);
-  F(MV, FLT, FLT_TYPE, init_advanced, i ## MV ## _plan *ths, MV ## _plan *mv,
-                                      unsigned i ## MV ## _flags);
-  F(MV, FLT, FLT_TYPE, before_loop,   i ## MV ## _plan *ths);
-  F(MV, FLT, FLT_TYPE, loop_one_step, i ## MV ## _plan *ths);
-  F(MV, FLT, FLT_TYPE, finalize,      i ## MV ## _plan *ths);
-*/
+typedef struct
+{
+  mv_plan_complex *mv;                  /**< matrix vector multiplication   */
+  unsigned flags;                       /**< iteration type                 */
 
+  double *w;                            /**< weighting factors              */
+  double *w_hat;                        /**< damping factors                */
 
-MACRO_SOLVER_PLAN(nfft, complex, double complex)
-MACRO_SOLVER_PLAN(nfct, double, double)
-MACRO_SOLVER_PLAN(nfst, double, double)
-MACRO_SOLVER_PLAN(nnfft, complex, double complex)
-MACRO_SOLVER_PLAN(mri_inh_2d1d, complex, double complex)
-MACRO_SOLVER_PLAN(mri_inh_3d, complex, double complex)
-MACRO_SOLVER_PLAN(nfsft, complex, double complex)
+  fftw_complex *y;                      /**< right hand side, samples       */
+
+  fftw_complex *f_hat_iter;             /**< iterative solution             */
+
+  fftw_complex *r_iter;                 /**< iterated residual vector       */
+  fftw_complex *z_hat_iter;             /**< residual of normal equation of
+					     first kind                     */
+  fftw_complex *p_hat_iter;             /**< search direction               */
+  fftw_complex *v_iter;                 /**< residual vector update         */
+
+  double alpha_iter;                    /**< step size for search direction */
+  double beta_iter;                     /**< step size for search correction*/
+
+  double dot_r_iter;                    /**< weighted dotproduct of r_iter  */
+  double dot_r_iter_old;                /**< previous dot_r_iter            */
+  double dot_z_hat_iter;                /**< weighted dotproduct of
+					     z_hat_iter                     */
+  double dot_z_hat_iter_old;            /**< previous dot_z_hat_iter        */
+  double dot_p_hat_iter;                /**< weighted dotproduct of
+					     p_hat_iter                     */
+  double dot_v_iter;                    /**< weighted dotproduct of v_iter  */
+} solver_plan_complex;
+
+void solver_init_advanced_complex(solver_plan_complex* ths, mv_plan_complex *mv, unsigned flags);
+void solver_init_complex(solver_plan_complex* ths, mv_plan_complex *mv);
+void solver_before_loop_complex(solver_plan_complex* ths);
+void solver_loop_one_step_complex(solver_plan_complex *ths);
+void solver_finalize_complex(solver_plan_complex *ths);
+
+typedef struct
+{
+  mv_plan_double *mv;                   /**< matrix vector multiplication   */
+  unsigned flags;                       /**< iteration type                 */
+
+  double *w;                            /**< weighting factors              */
+  double *w_hat;                        /**< damping factors                */
+
+  double *y;                            /**< right hand side, samples       */
+
+  double *f_hat_iter;                   /**< iterative solution             */
+
+  double *r_iter;                       /**< iterated residual vector       */
+  double *z_hat_iter;                   /**< residual of normal equation of
+					     first kind                     */
+  double *p_hat_iter;                   /**< search direction               */
+  double *v_iter;                       /**< residual vector update         */
+
+  double alpha_iter;                    /**< step size for search direction */
+  double beta_iter;                     /**< step size for search correction*/
+
+  double dot_r_iter;                    /**< weighted dotproduct of r_iter  */
+  double dot_r_iter_old;                /**< previous dot_r_iter            */
+  double dot_z_hat_iter;                /**< weighted dotproduct of
+					     z_hat_iter                     */
+  double dot_z_hat_iter_old;            /**< previous dot_z_hat_iter        */
+  double dot_p_hat_iter;                /**< weighted dotproduct of
+					     p_hat_iter                     */
+  double dot_v_iter;                    /**< weighted dotproduct of v_iter  */
+} solver_plan_double;
+
+void solver_init_advanced_double(solver_plan_double* ths, mv_plan_double *mv, unsigned flags);
+void solver_init_double(solver_plan_double* ths, mv_plan_double *mv);
+void solver_before_loop_double(solver_plan_double* ths);
+void solver_loop_one_step_double(solver_plan_double *ths);
+void solver_finalize_double(solver_plan_double *ths);
+
 /** @}
  */
 

@@ -7,33 +7,37 @@ Header file for the fast NFFT-based summation algorithm.
 {\tt \#include $<$complex.h$>$}\par
 {\tt \#include \char`\"{}util.h\char`\"{}}\par
 {\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct \hyperlink{structfastsum__plan}{fastsum\_\-plan}
+\begin{CompactList}\small\item\em plan for fast summation algorithm \item\end{CompactList}\end{CompactItemize}
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\hypertarget{group__applications__fastsum_ga31}{
-\#define \hyperlink{group__applications__fastsum_ga31}{EXACT\_\-NEARFIELD}~(1U$<$$<$ 0)}
-\label{group__applications__fastsum_ga31}
-
-\begin{CompactList}\small\item\em Constant symbols. \item\end{CompactList}\end{CompactItemize}
-\subsection*{Typedefs}
-\begin{CompactItemize}
-\item 
-\hypertarget{group__applications__fastsum_ga0}{
-typedef \hyperlink{structfastsum__plan__}{fastsum\_\-plan\_\-} \hyperlink{group__applications__fastsum_ga0}{fastsum\_\-plan}}
-\label{group__applications__fastsum_ga0}
-
-\begin{CompactList}\small\item\em plan for fast summation algorithm \item\end{CompactList}\end{CompactItemize}
+\#define \hyperlink{group__applications__fastsum_gc22376cb30edef9131c592a355d1030d}{EXACT\_\-NEARFIELD}~(1U$<$$<$ 0)
+\begin{CompactList}\small\item\em Include header for C99 complex datatype. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-\hypertarget{fastsum_8h_a2}{
-double {\bf regkern} (complex($\ast$kernel)(), double xx, int p, const double $\ast$param, double a, double b)}
-\label{fastsum_8h_a2}
+void \hyperlink{group__applications__fastsum_gc9d2c1acc65b11636c1080e1dd9169ad}{fastsum\_\-init\_\-guru} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths, int d, int N\_\-total, int M\_\-total, double \_\-Complex($\ast$kernel)(), double $\ast$param, unsigned flags, int nn, int m, int p, double eps\_\-I, double eps\_\-B)
+\begin{CompactList}\small\item\em initialization of fastsum plan \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastsum_gb989ea4659fe681bd4c025e82756f769}{fastsum\_\-finalize} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em finalization of fastsum plan \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastsum_gaee3dd954ffc99e4330fabe16ccad0fd}{fastsum\_\-exact} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em direct computation of sums \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastsum_g197c16fcec7935886fc97d140f2b20ff}{fastsum\_\-precompute} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em precomputation for fastsum \item\end{CompactList}\item 
+void \hyperlink{group__applications__fastsum_gab2cc691ba59064c18d439c9fd2185e8}{fastsum\_\-trafo} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
+\begin{CompactList}\small\item\em fast NFFT-based summation \item\end{CompactList}\item 
+\hypertarget{fastsum_8h_c9f40222377fd1efecc9500d53427286}{
+double \textbf{regkern} (double \_\-Complex($\ast$kernel)(), double xx, int p, const double $\ast$param, double a, double b)}
+\label{fastsum_8h_c9f40222377fd1efecc9500d53427286}
 
 \item 
-\hypertarget{group__applications__fastsum_ga8}{
-double \hyperlink{group__applications__fastsum_ga8}{kubintkern} (double x, double $\ast$Add, int Ad, double a)}
-\label{group__applications__fastsum_ga8}
+\hypertarget{group__applications__fastsum_gb7c93097f39ef84cbe6f7f7f715590aa}{
+double \hyperlink{group__applications__fastsum_gb7c93097f39ef84cbe6f7f7f715590aa}{kubintkern} (double x, double $\ast$Add, int Ad, double a)}
+\label{group__applications__fastsum_gb7c93097f39ef84cbe6f7f7f715590aa}
 
 \begin{CompactList}\small\item\em cubic spline interpolation in near field with even kernels \item\end{CompactList}\end{CompactItemize}
 
@@ -46,7 +50,7 @@ reference: M. Fenn, G. Steidl, Fast NFFT based summation of radial functions. Sa
 \begin{Desc}
 \item[Author:]Markus Fenn \end{Desc}
 \begin{Desc}
-\item[Date:]2003-2006\end{Desc}
+\item[Date:]2003-2006 \end{Desc}
 
 
 Definition in file \hyperlink{fastsum_8h-source}{fastsum.h}.

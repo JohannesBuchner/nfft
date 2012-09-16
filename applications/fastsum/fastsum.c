@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: fastsum.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 /*! \file fastsum.c
  *  \brief Fast NFFT-based summation algorithm.
  *
@@ -6,14 +26,14 @@
  */
 
 #include <stdlib.h>
-#include <complex.h>
 #include <math.h>
+#include <complex.h>
 
 #include "util.h"
 #include "nfft3.h"
 #include "fastsum.h"
 
-/** 
+/**
  * \addtogroup applications_fastsum
  * \{
  */
@@ -44,7 +64,7 @@ double BasisPoly(int m, int r, double xx)
 }
 
 /** regularized kernel with K_I arbitrary and K_B smooth to zero */
-double regkern(complex double (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
+double regkern(double _Complex (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
 {
   int r;
   double sum=0.0;
@@ -90,7 +110,7 @@ double regkern(complex double (*kernel)(double , int , const double *), double x
 /** regularized kernel with K_I arbitrary and K_B periodized
  *  (used in 1D)
  */
-double regkern1(complex double (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
+double regkern1(double _Complex (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
 {
   int r;
   double sum=0.0;
@@ -134,7 +154,7 @@ double regkern1(complex double (*kernel)(double , int , const double *), double 
 }
 
 /** regularized kernel for even kernels with K_I even and K_B mirrored */
-double regkern2(complex double (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
+double regkern2(double _Complex (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
 {
   int r;
   double sum=0.0;
@@ -171,7 +191,7 @@ double regkern2(complex double (*kernel)(double , int , const double *), double 
 /** regularized kernel for even kernels with K_I even
  *  and K_B mirrored smooth to K(1/2) (used in dD, d>1)
  */
-double regkern3(complex double (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
+double regkern3(double _Complex (*kernel)(double , int , const double *), double xx, int p, const double *param, double a, double b)
 {
   int r;
   double sum=0.0;
@@ -251,7 +271,7 @@ double kubintkern1(double x, double *Add, int Ad, double a)
 }
 
 /** quicksort algorithm for source knots and associated coefficients */
-void quicksort(int d, int t, double *x, complex double *alpha, int N)
+void quicksort(int d, int t, double *x, double _Complex *alpha, int N)
 {
   int lpos=0;
   int rpos=N-1;
@@ -260,7 +280,7 @@ void quicksort(int d, int t, double *x, complex double *alpha, int N)
 
   int k;
   double temp1;
-  complex double temp2;
+  double _Complex temp2;
 
   while (lpos<=rpos)
   {
@@ -291,7 +311,7 @@ void quicksort(int d, int t, double *x, complex double *alpha, int N)
 }
 
 /** recursive sort of source knots dimension by dimension to get tree structure */
-void BuildTree(int d, int t, double *x, complex double *alpha, int N)
+void BuildTree(int d, int t, double *x, double _Complex *alpha, int N)
 {
   if (N>1)
   {
@@ -305,7 +325,7 @@ void BuildTree(int d, int t, double *x, complex double *alpha, int N)
 }
 
 /** fast search in tree of source knots for near field computation*/
-complex double SearchTree(int d, int t, double *x, complex double *alpha, double *xmin, double *xmax, int N, complex double (*kernel)(double , int , const double *), const double *param, int Ad, double *Add, int p, unsigned flags)
+double _Complex SearchTree(int d, int t, double *x, double _Complex *alpha, double *xmin, double *xmax, int N, double _Complex (*kernel)(double , int , const double *), const double *param, int Ad, double *Add, int p, unsigned flags)
 {
   int m=N/2;
   double Min=xmin[t], Max=xmax[t], Median=x[m*d+t];
@@ -313,7 +333,7 @@ complex double SearchTree(int d, int t, double *x, complex double *alpha, double
   int l;
   int E=0;
   double r;
-  complex double result=0.0;
+  double _Complex result=0.0;
 
   if (N==0)
     return 0.0;
@@ -367,7 +387,7 @@ complex double SearchTree(int d, int t, double *x, complex double *alpha, double
 }
 
 /** initialization of fastsum plan */
-void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, complex double (*kernel)(), double *param, unsigned flags, int nn, int m, int p, double eps_I, double eps_B)
+void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, double _Complex (*kernel)(), double *param, unsigned flags, int nn, int m, int p, double eps_I, double eps_B)
 {
   int t;
   int N[d], n[d];
@@ -378,11 +398,11 @@ void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, compl
   ths->N_total = N_total;
   ths->M_total = M_total;
 
-  ths->x = (double *)malloc(d*N_total*(sizeof(double)));
-  ths->alpha = (complex double *)malloc(N_total*(sizeof(complex double)));
+  ths->x = (double *)nfft_malloc(d*N_total*(sizeof(double)));
+  ths->alpha = (double _Complex *)nfft_malloc(N_total*(sizeof(double _Complex)));
 
-  ths->y = (double *)malloc(d*M_total*(sizeof(double)));
-  ths->f = (complex double *)malloc(M_total*(sizeof(complex double)));
+  ths->y = (double *)nfft_malloc(d*M_total*(sizeof(double)));
+  ths->f = (double _Complex *)nfft_malloc(M_total*(sizeof(double _Complex)));
 
   ths->kernel = kernel;
   ths->kernel_param = param;
@@ -399,12 +419,12 @@ void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, compl
     if (ths->d==1)
     {
       ths->Ad = 4*(ths->p)*(ths->p);
-      ths->Add = (double *)malloc((ths->Ad+5)*(sizeof(double)));
+      ths->Add = (double *)nfft_malloc((ths->Ad+5)*(sizeof(double)));
     }
     else
     {
       ths->Ad = 2*(ths->p)*(ths->p);
-      ths->Add = (double *)malloc((ths->Ad+3)*(sizeof(double)));
+      ths->Add = (double *)nfft_malloc((ths->Ad+3)*(sizeof(double)));
     }
   }
 
@@ -427,7 +447,7 @@ void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, compl
   for (t=0; t<d; t++)
     n_total *= nn;
 
-  ths->b = (fftw_complex *)fftw_malloc(n_total*sizeof(fftw_complex));
+  ths->b = (fftw_complex *)nfft_malloc(n_total*sizeof(fftw_complex));
   ths->fft_plan = fftw_plan_dft(d,N,ths->b,ths->b,FFTW_FORWARD,FFTW_ESTIMATE);
 
 }
@@ -435,19 +455,19 @@ void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, compl
 /** finalization of fastsum plan */
 void fastsum_finalize(fastsum_plan *ths)
 {
-  free(ths->x);
-  free(ths->alpha);
-  free(ths->y);
-  free(ths->f);
+  nfft_free(ths->x);
+  nfft_free(ths->alpha);
+  nfft_free(ths->y);
+  nfft_free(ths->f);
 
   if (!(ths->flags & EXACT_NEARFIELD))
-    free(ths->Add);
+    nfft_free(ths->Add);
 
   nfft_finalize(&(ths->mv1));
   nfft_finalize(&(ths->mv2));
 
   fftw_destroy_plan(ths->fft_plan);
-  fftw_free(ths->b);
+  nfft_free(ths->b);
 }
 
 /** direct computation of sums */
@@ -565,8 +585,8 @@ void fastsum_trafo(fastsum_plan *ths)
   int j,k,t;
   double *ymin, *ymax;   /** limits for d-dimensional near field box */
 
-  ymin = (double *)malloc(ths->d*(sizeof(double)));
-  ymax = (double *)malloc(ths->d*(sizeof(double)));
+  ymin = (double *)nfft_malloc(ths->d*(sizeof(double)));
+  ymax = (double *)nfft_malloc(ths->d*(sizeof(double)));
 
   /** first step of algorithm */
   nfft_adjoint(&(ths->mv1));

@@ -1,15 +1,13 @@
-AM_CFLAGS = -I$(top_srcdir)/include
-AM_LDFLAGS = -L$(top_srcdir)
+# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
+
+AM_CPPFLAGS = -I$(top_srcdir)/include
 
 exampledir = $(pkgdatadir)/examples/nfst
 
-## The program name
 example_PROGRAMS = simple_test
 
-## The source files.
 simple_test_SOURCES = simple_test.c
-simple_test_LDADD = $(top_builddir)/.libs/libnfft3.a -lm -lfftw3
+simple_test_LDADD = $(top_builddir)/libnfft3.la
 
-## Include these extra files in the distribution.
 EXTRA_DIST = README
 example_DATA = $(EXTRA_DIST)

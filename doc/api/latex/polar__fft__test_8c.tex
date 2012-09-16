@@ -2,46 +2,45 @@
 \section{polar\_\-fft\_\-test.c File Reference}
 \label{polar__fft__test_8c}\index{polar_fft_test.c@{polar\_\-fft\_\-test.c}}
 }
-NFFT-based polar FFT and inverse. 
-
 {\tt \#include $<$math.h$>$}\par
 {\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$complex.h$>$}\par
 {\tt \#include \char`\"{}util.h\char`\"{}}\par
 {\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-int \hyperlink{group__applications__polarFFT__polar_ga0}{polar\_\-grid} (int T, int R, double $\ast$x, double $\ast$w)
+static int \hyperlink{group__applications__polarFFT__polar_g307b67b4c00a1c756f140c7fa831cdae}{polar\_\-grid} (int T, int R, double $\ast$x, double $\ast$w)
 \begin{CompactList}\small\item\em Generates the points $x_{t,j}$ with weights $w_{t,j}$ for the polar grid with $T$ angles and $R$ offsets. \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga1}{
-int \hyperlink{group__applications__polarFFT__polar_ga1}{polar\_\-dft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
-\label{group__applications__polarFFT__polar_ga1}
+\hypertarget{group__applications__polarFFT__polar_gf6ec0d6bb5bfea4829e551c9dc9a656e}{
+static int \hyperlink{group__applications__polarFFT__polar_gf6ec0d6bb5bfea4829e551c9dc9a656e}{polar\_\-dft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
+\label{group__applications__polarFFT__polar_gf6ec0d6bb5bfea4829e551c9dc9a656e}
 
 \begin{CompactList}\small\item\em discrete polar FFT \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga2}{
-int \hyperlink{group__applications__polarFFT__polar_ga2}{polar\_\-fft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
-\label{group__applications__polarFFT__polar_ga2}
+\hypertarget{group__applications__polarFFT__polar_g72ebda23ef48b6509833eea9a24fa839}{
+static int \hyperlink{group__applications__polarFFT__polar_g72ebda23ef48b6509833eea9a24fa839}{polar\_\-fft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
+\label{group__applications__polarFFT__polar_g72ebda23ef48b6509833eea9a24fa839}
 
 \begin{CompactList}\small\item\em NFFT-based polar FFT. \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga3}{
-int \hyperlink{group__applications__polarFFT__polar_ga3}{inverse\_\-polar\_\-fft} (fftw\_\-complex $\ast$f, int T, int R, fftw\_\-complex $\ast$f\_\-hat, int NN, int max\_\-i, int m)}
-\label{group__applications__polarFFT__polar_ga3}
+\hypertarget{group__applications__polarFFT__polar_gd996d429207cf198e9027618e081ada0}{
+static int \hyperlink{group__applications__polarFFT__polar_gd996d429207cf198e9027618e081ada0}{inverse\_\-polar\_\-fft} (fftw\_\-complex $\ast$f, int T, int R, fftw\_\-complex $\ast$f\_\-hat, int NN, int max\_\-i, int m)}
+\label{group__applications__polarFFT__polar_gd996d429207cf198e9027618e081ada0}
 
 \begin{CompactList}\small\item\em inverse NFFT-based polar FFT \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga4}{
-int \hyperlink{group__applications__polarFFT__polar_ga4}{main} (int argc, char $\ast$$\ast$argv)}
-\label{group__applications__polarFFT__polar_ga4}
+\hypertarget{group__applications__polarFFT__polar_g3c04138a5bfe5d72780bb7e82a18e627}{
+int \hyperlink{group__applications__polarFFT__polar_g3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)}
+\label{group__applications__polarFFT__polar_g3c04138a5bfe5d72780bb7e82a18e627}
 
 \begin{CompactList}\small\item\em test program for various parameters \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Detailed Description}
-NFFT-based polar FFT and inverse. 
+NFFT-based polar FFT and inverse.
 
 Computes the NFFT-based polar FFT and its inverse for various parameters. \begin{Desc}
 \item[Author:]Markus Fenn \end{Desc}
 \begin{Desc}
-\item[Date:]2006\end{Desc}
+\item[Date:]2006 \end{Desc}
 
 
 Definition in file \hyperlink{polar__fft__test_8c-source}{polar\_\-fft\_\-test.c}.

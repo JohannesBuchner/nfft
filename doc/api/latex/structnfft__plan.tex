@@ -10,139 +10,149 @@ Structure for a NFFT plan.
 \subsection*{Data Fields}
 \begin{CompactItemize}
 \item 
-\hypertarget{structnfft__plan_o0}{
-int \hyperlink{structnfft__plan_o0}{N\_\-total}}
-\label{structnfft__plan_o0}
+\hypertarget{structnfft__plan_d33daddf76670c8731c759bf74ad0d22}{
+int \hyperlink{structnfft__plan_d33daddf76670c8731c759bf74ad0d22}{N\_\-total}}
+\label{structnfft__plan_d33daddf76670c8731c759bf74ad0d22}
 
 \begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o1}{
-int \hyperlink{structnfft__plan_o1}{M\_\-total}}
-\label{structnfft__plan_o1}
+\hypertarget{structnfft__plan_df33ce87c35b396c50d214d9bdeeefe6}{
+int \hyperlink{structnfft__plan_df33ce87c35b396c50d214d9bdeeefe6}{M\_\-total}}
+\label{structnfft__plan_df33ce87c35b396c50d214d9bdeeefe6}
 
 \begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o2}{
-double complex $\ast$ \hyperlink{structnfft__plan_o2}{f\_\-hat}}
-\label{structnfft__plan_o2}
+\hypertarget{structnfft__plan_23409aec68871e9a56f11711e2891691}{
+fftw\_\-complex $\ast$ \hyperlink{structnfft__plan_23409aec68871e9a56f11711e2891691}{f\_\-hat}}
+\label{structnfft__plan_23409aec68871e9a56f11711e2891691}
 
 \begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o3}{
-double complex $\ast$ \hyperlink{structnfft__plan_o3}{f}}
-\label{structnfft__plan_o3}
+\hypertarget{structnfft__plan_fa27a166f809acf70ae27e5e6f28daa5}{
+fftw\_\-complex $\ast$ \hyperlink{structnfft__plan_fa27a166f809acf70ae27e5e6f28daa5}{f}}
+\label{structnfft__plan_fa27a166f809acf70ae27e5e6f28daa5}
 
 \begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o4}{
-int \hyperlink{structnfft__plan_o4}{d}}
-\label{structnfft__plan_o4}
+\hypertarget{structnfft__plan_9ebd66f2964cca6a02fc50d640df3557}{
+void($\ast$ \hyperlink{structnfft__plan_9ebd66f2964cca6a02fc50d640df3557}{mv\_\-trafo} )(void $\ast$)}
+\label{structnfft__plan_9ebd66f2964cca6a02fc50d640df3557}
+
+\begin{CompactList}\small\item\em Pointer to the own transform. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_bbe724645c96ef34c3e98d821f6648a3}{
+void($\ast$ \hyperlink{structnfft__plan_bbe724645c96ef34c3e98d821f6648a3}{mv\_\-adjoint} )(void $\ast$)}
+\label{structnfft__plan_bbe724645c96ef34c3e98d821f6648a3}
+
+\begin{CompactList}\small\item\em Pointer to the own adjoint. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_e39d4867eac948d96abbe3fc930b39a8}{
+int \hyperlink{structnfft__plan_e39d4867eac948d96abbe3fc930b39a8}{d}}
+\label{structnfft__plan_e39d4867eac948d96abbe3fc930b39a8}
 
 \begin{CompactList}\small\item\em Dimension, rank. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o5}{
-int $\ast$ \hyperlink{structnfft__plan_o5}{N}}
-\label{structnfft__plan_o5}
+\hypertarget{structnfft__plan_307fb9647dee8b4a6acbd1ab26f67fa9}{
+int $\ast$ \hyperlink{structnfft__plan_307fb9647dee8b4a6acbd1ab26f67fa9}{N}}
+\label{structnfft__plan_307fb9647dee8b4a6acbd1ab26f67fa9}
 
 \begin{CompactList}\small\item\em Multi bandwidth. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o6}{
-double $\ast$ \hyperlink{structnfft__plan_o6}{sigma}}
-\label{structnfft__plan_o6}
+\hypertarget{structnfft__plan_09340f6465c23f3d94636f4f0da30f8a}{
+double $\ast$ \hyperlink{structnfft__plan_09340f6465c23f3d94636f4f0da30f8a}{sigma}}
+\label{structnfft__plan_09340f6465c23f3d94636f4f0da30f8a}
 
 \begin{CompactList}\small\item\em Oversampling-factor. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o7}{
-int $\ast$ \hyperlink{structnfft__plan_o7}{n}}
-\label{structnfft__plan_o7}
+\hypertarget{structnfft__plan_a8db04bb03357b831a1958f9a802e0ae}{
+int $\ast$ \hyperlink{structnfft__plan_a8db04bb03357b831a1958f9a802e0ae}{n}}
+\label{structnfft__plan_a8db04bb03357b831a1958f9a802e0ae}
 
 \begin{CompactList}\small\item\em FFTW length, equal to sigma$\ast$N, default is the power of 2 such that $2\le\sigma<4$. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o8}{
-int \hyperlink{structnfft__plan_o8}{n\_\-total}}
-\label{structnfft__plan_o8}
+\hypertarget{structnfft__plan_d8a5fdac5bcf62d86479c800768fdeb7}{
+int \hyperlink{structnfft__plan_d8a5fdac5bcf62d86479c800768fdeb7}{n\_\-total}}
+\label{structnfft__plan_d8a5fdac5bcf62d86479c800768fdeb7}
 
 \begin{CompactList}\small\item\em Total size of FFTW. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o9}{
-int \hyperlink{structnfft__plan_o9}{m}}
-\label{structnfft__plan_o9}
+\hypertarget{structnfft__plan_dbac137859fb87be7be73a5443de8cef}{
+int \hyperlink{structnfft__plan_dbac137859fb87be7be73a5443de8cef}{m}}
+\label{structnfft__plan_dbac137859fb87be7be73a5443de8cef}
 
 \begin{CompactList}\small\item\em Cut-off parameter of the window function, default value is 6 (KAISER\_\-BESSEL), 9 (SINC\_\-POWER), 11 (B\_\-SPLINE), 12 (GAUSSIAN). \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o10}{
-double $\ast$ \hyperlink{structnfft__plan_o10}{b}}
-\label{structnfft__plan_o10}
+\hypertarget{structnfft__plan_724949f4916b28f484eb447ee1a77f0a}{
+double $\ast$ \hyperlink{structnfft__plan_724949f4916b28f484eb447ee1a77f0a}{b}}
+\label{structnfft__plan_724949f4916b28f484eb447ee1a77f0a}
 
 \begin{CompactList}\small\item\em Shape parameter of the window function. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o11}{
-int \hyperlink{structnfft__plan_o11}{K}}
-\label{structnfft__plan_o11}
+\hypertarget{structnfft__plan_0b3735bcdd415a86126e0c86d47941a4}{
+int \hyperlink{structnfft__plan_0b3735bcdd415a86126e0c86d47941a4}{K}}
+\label{structnfft__plan_0b3735bcdd415a86126e0c86d47941a4}
 
-\begin{CompactList}\small\item\em Number of equispaced samples of the window function for \hyperlink{group__nfft_ga18}{PRE\_\-LIN\_\-PSI}. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o12}{
-unsigned \hyperlink{structnfft__plan_o12}{nfft\_\-flags}}
-\label{structnfft__plan_o12}
+\begin{CompactList}\small\item\em Number of equispaced samples of the window function for \hyperlink{group__nfft_gbb1ad048b695cb806baf010c5d1b2caf}{PRE\_\-LIN\_\-PSI}. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_2721da68a3a5b1846ecca8395d76bb1d}{
+unsigned \hyperlink{structnfft__plan_2721da68a3a5b1846ecca8395d76bb1d}{nfft\_\-flags}}
+\label{structnfft__plan_2721da68a3a5b1846ecca8395d76bb1d}
 
 \begin{CompactList}\small\item\em Flags for precomputation, (de)allocation, and FFTW usage, default setting is PRE\_\-PHI\_\-HUT$|$ PRE\_\-PSI$|$ MALLOC\_\-X$|$ MALLOC\_\-F\_\-HAT$|$ MALLOC\_\-F$|$ FFTW\_\-INIT$|$ FFT\_\-OUT\_\-OF\_\-PLACE. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o13}{
-unsigned \hyperlink{structnfft__plan_o13}{fftw\_\-flags}}
-\label{structnfft__plan_o13}
+\hypertarget{structnfft__plan_530aea04dba32fb2a41287b4581b1805}{
+unsigned \hyperlink{structnfft__plan_530aea04dba32fb2a41287b4581b1805}{fftw\_\-flags}}
+\label{structnfft__plan_530aea04dba32fb2a41287b4581b1805}
 
 \begin{CompactList}\small\item\em Flags for the FFTW, default is FFTW\_\-ESTIMATE$|$ FFTW\_\-DESTROY\_\-INPUT. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o14}{
-double $\ast$ \hyperlink{structnfft__plan_o14}{x}}
-\label{structnfft__plan_o14}
+\hypertarget{structnfft__plan_7eb64fb5fedfba0ec75261e777e020c0}{
+double $\ast$ \hyperlink{structnfft__plan_7eb64fb5fedfba0ec75261e777e020c0}{x}}
+\label{structnfft__plan_7eb64fb5fedfba0ec75261e777e020c0}
 
 \begin{CompactList}\small\item\em Nodes in time/spatial domain, size is $dM$ doubles. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o15}{
-double \hyperlink{structnfft__plan_o15}{MEASURE\_\-TIME\_\-t} \mbox{[}3\mbox{]}}
-\label{structnfft__plan_o15}
+\hypertarget{structnfft__plan_7c3e5504175fa292a6a5d0c0e1d7f848}{
+double \hyperlink{structnfft__plan_7c3e5504175fa292a6a5d0c0e1d7f848}{MEASURE\_\-TIME\_\-t} \mbox{[}3\mbox{]}}
+\label{structnfft__plan_7c3e5504175fa292a6a5d0c0e1d7f848}
 
 \begin{CompactList}\small\item\em Measured time for each step if MEASURE\_\-TIME is set. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o16}{
-fftw\_\-plan \hyperlink{structnfft__plan_o16}{my\_\-fftw\_\-plan1}}
-\label{structnfft__plan_o16}
+\hypertarget{structnfft__plan_84d87c06b22ddb3e725c61061cf4d46d}{
+fftw\_\-plan \hyperlink{structnfft__plan_84d87c06b22ddb3e725c61061cf4d46d}{my\_\-fftw\_\-plan1}}
+\label{structnfft__plan_84d87c06b22ddb3e725c61061cf4d46d}
 
 \begin{CompactList}\small\item\em Forward FFTW plan. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o17}{
-fftw\_\-plan \hyperlink{structnfft__plan_o17}{my\_\-fftw\_\-plan2}}
-\label{structnfft__plan_o17}
+\hypertarget{structnfft__plan_228dee0f91c2f326407517c27bc5105e}{
+fftw\_\-plan \hyperlink{structnfft__plan_228dee0f91c2f326407517c27bc5105e}{my\_\-fftw\_\-plan2}}
+\label{structnfft__plan_228dee0f91c2f326407517c27bc5105e}
 
 \begin{CompactList}\small\item\em Backward FFTW plan. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o18}{
-double $\ast$$\ast$ \hyperlink{structnfft__plan_o18}{c\_\-phi\_\-inv}}
-\label{structnfft__plan_o18}
+\hypertarget{structnfft__plan_a5dd76324152be95967c0a4717e8e4ce}{
+double $\ast$$\ast$ \hyperlink{structnfft__plan_a5dd76324152be95967c0a4717e8e4ce}{c\_\-phi\_\-inv}}
+\label{structnfft__plan_a5dd76324152be95967c0a4717e8e4ce}
 
 \begin{CompactList}\small\item\em Precomputed data for the diagonal matrix $D$, size is $N_0+\hdots+N_{d-1}$ doubles. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o19}{
-double $\ast$ \hyperlink{structnfft__plan_o19}{psi}}
-\label{structnfft__plan_o19}
+\hypertarget{structnfft__plan_0330a1c3ae461fa9156ba0ecbe17bb7c}{
+double $\ast$ \hyperlink{structnfft__plan_0330a1c3ae461fa9156ba0ecbe17bb7c}{psi}}
+\label{structnfft__plan_0330a1c3ae461fa9156ba0ecbe17bb7c}
 
 \begin{CompactList}\small\item\em Precomputed data for the sparse matrix $B$, size depends on precomputation scheme. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o20}{
-int $\ast$ \hyperlink{structnfft__plan_o20}{psi\_\-index\_\-g}}
-\label{structnfft__plan_o20}
+\hypertarget{structnfft__plan_877d6cbe17ec77a9e66bdbea3cfafe0a}{
+int $\ast$ \hyperlink{structnfft__plan_877d6cbe17ec77a9e66bdbea3cfafe0a}{psi\_\-index\_\-g}}
+\label{structnfft__plan_877d6cbe17ec77a9e66bdbea3cfafe0a}
 
-\begin{CompactList}\small\item\em Indices in source/target vector for \hyperlink{group__nfft_ga21}{PRE\_\-FULL\_\-PSI}. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o21}{
-int $\ast$ \hyperlink{structnfft__plan_o21}{psi\_\-index\_\-f}}
-\label{structnfft__plan_o21}
+\begin{CompactList}\small\item\em Indices in source/target vector for \hyperlink{group__nfft_g7ad8a7e19519b16340dabec48899c6a4}{PRE\_\-FULL\_\-PSI}. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_2ed144cf7d6043a93c07b6f6ba7bbe2a}{
+int $\ast$ \hyperlink{structnfft__plan_2ed144cf7d6043a93c07b6f6ba7bbe2a}{psi\_\-index\_\-f}}
+\label{structnfft__plan_2ed144cf7d6043a93c07b6f6ba7bbe2a}
 
-\begin{CompactList}\small\item\em Indices in source/target vector for \hyperlink{group__nfft_ga21}{PRE\_\-FULL\_\-PSI}. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o22}{
-double complex $\ast$ \hyperlink{structnfft__plan_o22}{g}}
-\label{structnfft__plan_o22}
+\begin{CompactList}\small\item\em Indices in source/target vector for \hyperlink{group__nfft_g7ad8a7e19519b16340dabec48899c6a4}{PRE\_\-FULL\_\-PSI}. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_844b51e453d6c80462eaad7844633539}{
+fftw\_\-complex $\ast$ \hyperlink{structnfft__plan_844b51e453d6c80462eaad7844633539}{g}}
+\label{structnfft__plan_844b51e453d6c80462eaad7844633539}
 
-\begin{CompactList}\small\item\em Oversampled vector of samples, size is \hyperlink{structnfft__plan_o8}{n\_\-total} double complex. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o23}{
-double complex $\ast$ \hyperlink{structnfft__plan_o23}{g\_\-hat}}
-\label{structnfft__plan_o23}
+\begin{CompactList}\small\item\em Oversampled vector of samples, size is \hyperlink{structnfft__plan_d8a5fdac5bcf62d86479c800768fdeb7}{n\_\-total} double complex. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_2dff6c2b829694a7d4cca5acc7c7d6d5}{
+fftw\_\-complex $\ast$ \hyperlink{structnfft__plan_2dff6c2b829694a7d4cca5acc7c7d6d5}{g\_\-hat}}
+\label{structnfft__plan_2dff6c2b829694a7d4cca5acc7c7d6d5}
 
-\begin{CompactList}\small\item\em Zero-padded vector of Fourier coefficients, size is \hyperlink{structnfft__plan_o8}{n\_\-total} double complex. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o24}{
-double complex $\ast$ \hyperlink{structnfft__plan_o24}{g1}}
-\label{structnfft__plan_o24}
+\begin{CompactList}\small\item\em Zero-padded vector of Fourier coefficients, size is \hyperlink{structnfft__plan_d8a5fdac5bcf62d86479c800768fdeb7}{n\_\-total} fftw\_\-complex. \item\end{CompactList}\item 
+\hypertarget{structnfft__plan_2190e7201c55214d153b4d91eaa7efda}{
+fftw\_\-complex $\ast$ \hyperlink{structnfft__plan_2190e7201c55214d153b4d91eaa7efda}{g1}}
+\label{structnfft__plan_2190e7201c55214d153b4d91eaa7efda}
 
 \begin{CompactList}\small\item\em Input of fftw. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o25}{
-double complex $\ast$ \hyperlink{structnfft__plan_o25}{g2}}
-\label{structnfft__plan_o25}
+\hypertarget{structnfft__plan_d96e0aa935ea3589e999c131c43d8a78}{
+fftw\_\-complex $\ast$ \hyperlink{structnfft__plan_d96e0aa935ea3589e999c131c43d8a78}{g2}}
+\label{structnfft__plan_d96e0aa935ea3589e999c131c43d8a78}
 
 \begin{CompactList}\small\item\em Output of fftw. \item\end{CompactList}\item 
-\hypertarget{structnfft__plan_o26}{
-double $\ast$ \hyperlink{structnfft__plan_o26}{spline\_\-coeffs}}
-\label{structnfft__plan_o26}
+\hypertarget{structnfft__plan_3aaf44c4f0769644075d9fc5ed60afa0}{
+double $\ast$ \hyperlink{structnfft__plan_3aaf44c4f0769644075d9fc5ed60afa0}{spline\_\-coeffs}}
+\label{structnfft__plan_3aaf44c4f0769644075d9fc5ed60afa0}
 
 \begin{CompactList}\small\item\em Input for de Boor algorithm if B\_\-SPLINE or SINC\_\-POWER is defined. \item\end{CompactList}\end{CompactItemize}
 
@@ -150,9 +160,7 @@ double $\ast$ \hyperlink{structnfft__plan_o26}{spline\_\-coeffs}}
 \subsection{Detailed Description}
 Structure for a NFFT plan. 
 
-
-
-Definition at line 234 of file nfft3.h.
+Definition at line 352 of file nfft3.h.
 
 The documentation for this struct was generated from the following file:\begin{CompactItemize}
 \item 

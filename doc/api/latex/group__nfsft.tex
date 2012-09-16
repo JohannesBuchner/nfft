@@ -12,153 +12,148 @@ struct \hyperlink{structnfsft__wisdom}{nfsft\_\-wisdom}
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\#define \hyperlink{group__nfsft_ga25}{NFSFT\_\-NORMALIZED}~(1U $<$$<$ 0)
+\#define \hyperlink{group__nfsft_g65036f479a7421863956c02aa78bc9be}{NFSFT\_\-NORMALIZED}~(1U $<$$<$ 0)
 \begin{CompactList}\small\item\em By default, all computations are performed with respect to the unnormalized basis functions \[ \tilde{Y}_k^n(\vartheta,\varphi) = P_k^{|n|}(\cos\vartheta) \mathrm{e}^{\mathrm{i} n \varphi}. \] If this flag is set, all computations are carried out using the $L_2$- normalized basis functions \[ Y_k^n(\vartheta,\varphi) = \sqrt{\frac{2k+1}{4\pi}} P_k^{|n|}(\cos\vartheta) \mathrm{e}^{\mathrm{i} n \varphi}. \]. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga26}{NFSFT\_\-USE\_\-NDFT}~(1U $<$$<$ 1)
-\begin{CompactList}\small\item\em If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint}) will use internally the exact but usually slower direct NDFT algorithm in favor of fast but approximative NFFT algorithm. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga27}{NFSFT\_\-USE\_\-DPT}~(1U $<$$<$ 2)
-\begin{CompactList}\small\item\em If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint}) will use internally the usually slower direct DPT algorithm in favor of the fast FPT algorithm. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga28}{NFSFT\_\-MALLOC\_\-X}~(1U $<$$<$ 3)
-\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt x} for you. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga29}{NFSFT\_\-MALLOC\_\-F\_\-HAT}~(1U $<$$<$ 5)
-\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt f\_\-hat} for you. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga30}{NFSFT\_\-MALLOC\_\-F}~(1U $<$$<$ 6)
-\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt f} for you. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga31}{NFSFT\_\-PRESERVE\_\-F\_\-HAT}~(1U $<$$<$ 7)
-\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} or \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} the content of {\tt f\_\-hat} remains unchanged. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga32}{NFSFT\_\-PRESERVE\_\-X}~(1U $<$$<$ 8)
-\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo}, \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} or \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt x} remains unchanged. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga33}{NFSFT\_\-PRESERVE\_\-F}~(1U $<$$<$ 9)
-\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt f} remains unchanged. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga34}{NFSFT\_\-DESTROY\_\-F\_\-HAT}~(1U $<$$<$ 10)
-\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} or \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} the content of {\tt f\_\-hat} may be changed. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga35}{NFSFT\_\-DESTROY\_\-X}~(1U $<$$<$ 11)
-\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo}, \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} or \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt x} may be changed. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga36}{NFSFT\_\-DESTROY\_\-F}~(1U $<$$<$ 12)
-\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt f} may be changed. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga37}{NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM}~(1U $<$$<$ 13)
-\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} and \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} do not work. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga38}{NFSFT\_\-NO\_\-FAST\_\-ALGORITHM}~(1U $<$$<$ 14)
-\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} and \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} do not work. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga39}{NFSFT\_\-ZERO\_\-F\_\-HAT}~(1U $<$$<$ 16)
-\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} and \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} set all unused entries in {\tt f\_\-hat} not corresponding to spherical Fourier coefficients to zero. \item\end{CompactList}\item 
-\hypertarget{group__nfsft_ga40}{
-\#define \hyperlink{group__nfsft_ga40}{NFSFT\_\-INDEX}(k, n, plan)~((2$\ast$(plan) $\rightarrow$ N+2)$\ast$((plan) $\rightarrow$ N-n+1)+(plan) $\rightarrow$ N+k+1)}
-\label{group__nfsft_ga40}
+\#define \hyperlink{group__nfsft_gba029560a4a506c8f2dad185511db827}{NFSFT\_\-USE\_\-NDFT}~(1U $<$$<$ 1)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint}) will use internally the exact but usually slower direct NDFT algorithm in favor of fast but approximative NFFT algorithm. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_g6b9eed1e7bcf862dcc3111509075fcbb}{NFSFT\_\-USE\_\-DPT}~(1U $<$$<$ 2)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint}) will use internally the usually slower direct DPT algorithm in favor of the fast FPT algorithm. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_g02e4313d15b24c79e6802f853d452454}{NFSFT\_\-MALLOC\_\-X}~(1U $<$$<$ 3)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} , \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} will free the array {\tt x} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_gb76dcf8db948f18cc87403dac804fc68}{NFSFT\_\-MALLOC\_\-F\_\-HAT}~(1U $<$$<$ 5)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} , \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} will free the array {\tt f\_\-hat} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_gf3bc3ab774cda0c1c765e97066893d30}{NFSFT\_\-MALLOC\_\-F}~(1U $<$$<$ 6)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} , \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} will free the array {\tt f} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_gc8a292845f0bdec6b0d8ef6eb693a00e}{NFSFT\_\-PRESERVE\_\-F\_\-HAT}~(1U $<$$<$ 7)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} or \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} the content of {\tt f\_\-hat} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_gcf7d73753b74dbf148167c3d46226f09}{NFSFT\_\-PRESERVE\_\-X}~(1U $<$$<$ 8)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo}, \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} or \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt x} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_g45962e763c2c551c1ea764a68b686b5c}{NFSFT\_\-PRESERVE\_\-F}~(1U $<$$<$ 9)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt f} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga808899fc4db422c7b23470e6baad904}{NFSFT\_\-DESTROY\_\-F\_\-HAT}~(1U $<$$<$ 10)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} or \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} the content of {\tt f\_\-hat} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_g6f22df0b292db920d795b3e3569181f2}{NFSFT\_\-DESTROY\_\-X}~(1U $<$$<$ 11)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo}, \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} or \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt x} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_g2b32e2eabd33bf0886f6df45365d04c0}{NFSFT\_\-DESTROY\_\-F}~(1U $<$$<$ 12)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt f} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_g9ed987164acf6e362ab2878506fbca95}{NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM}~(1U $<$$<$ 13)
+\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} and \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} do not work. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_ga228bbed7ddbbb4a15f1cd11ec27b415}{NFSFT\_\-NO\_\-FAST\_\-ALGORITHM}~(1U $<$$<$ 14)
+\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} and \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} do not work. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsft_g7797dfe75149e88ee680fc2579c31505}{NFSFT\_\-ZERO\_\-F\_\-HAT}~(1U $<$$<$ 16)
+\begin{CompactList}\small\item\em If this flag is set, the transforms \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} and \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} set all unused entries in {\tt f\_\-hat} not corresponding to spherical Fourier coefficients to zero. \item\end{CompactList}\item 
+\hypertarget{group__nfsft_g8be22087991e0a82cfa59a3f0f2a5e86}{
+\#define \hyperlink{group__nfsft_g8be22087991e0a82cfa59a3f0f2a5e86}{NFSFT\_\-INDEX}(k, n, plan)~((2$\ast$(plan) $\rightarrow$ N+2)$\ast$((plan) $\rightarrow$ N-n+1)+(plan) $\rightarrow$ N+k+1)}
+\label{group__nfsft_g8be22087991e0a82cfa59a3f0f2a5e86}
 
 \begin{CompactList}\small\item\em This helper macro expands to the index $i$ corresponding to the spherical Fourier coefficient $f_hat(k,n)$ for $0 \le k \le N$, $-k \le n \le k$ with \[ (N+2)(N-n+1)+N+k+1 \]. \item\end{CompactList}\item 
-\hypertarget{group__nfsft_ga41}{
-\#define \hyperlink{group__nfsft_ga41}{NFSFT\_\-F\_\-HAT\_\-SIZE}(N)~((2$\ast$N+2)$\ast$(2$\ast$N+2))}
-\label{group__nfsft_ga41}
+\hypertarget{group__nfsft_gd426bf64ff72d6e3c2450fbb56146a44}{
+\#define \hyperlink{group__nfsft_gd426bf64ff72d6e3c2450fbb56146a44}{NFSFT\_\-F\_\-HAT\_\-SIZE}(N)~((2$\ast$N+2)$\ast$(2$\ast$N+2))}
+\label{group__nfsft_gd426bf64ff72d6e3c2450fbb56146a44}
 
 \begin{CompactList}\small\item\em This helper macro expands to the logical size of a spherical Fourier coefficients array for a bandwidth N. \item\end{CompactList}\item 
-\hypertarget{group__nfsft_ga42}{
-\#define {\bf BWEXP\_\-MAX}~10}
-\label{group__nfsft_ga42}
+\hypertarget{group__nfsft_g6ebc87b6a9996327fdf13c4c3b2f79c1}{
+\#define \hyperlink{group__nfsft_g6ebc87b6a9996327fdf13c4c3b2f79c1}{BWEXP\_\-MAX}~10}
+\label{group__nfsft_g6ebc87b6a9996327fdf13c4c3b2f79c1}
 
 \item 
-\hypertarget{group__nfsft_ga43}{
-\#define {\bf BW\_\-MAX}~1024}
-\label{group__nfsft_ga43}
+\hypertarget{group__nfsft_g7a05635f8b2f1099a6a57dafbb6a1cb1}{
+\#define \hyperlink{group__nfsft_g7a05635f8b2f1099a6a57dafbb6a1cb1}{BW\_\-MAX}~1024}
+\label{group__nfsft_g7a05635f8b2f1099a6a57dafbb6a1cb1}
 
 \item 
-\hypertarget{group__nfsft_ga44}{
-\#define {\bf ROW}(k)~(k$\ast$(wisdom.N\_\-MAX+2))}
-\label{group__nfsft_ga44}
+\hypertarget{group__nfsft_g419a0077c38536976cf6ad9d7fddd9e5}{
+\#define \hyperlink{group__nfsft_g419a0077c38536976cf6ad9d7fddd9e5}{ROW}(k)~(k$\ast$(wisdom.N\_\-MAX+2))}
+\label{group__nfsft_g419a0077c38536976cf6ad9d7fddd9e5}
 
 \item 
-\hypertarget{group__nfsft_ga45}{
-\#define {\bf ROWK}(k)~(k$\ast$(wisdom.N\_\-MAX+2)+k)}
-\label{group__nfsft_ga45}
+\hypertarget{group__nfsft_g5c75ea9f4835d9aa1b75dac53622e488}{
+\#define \hyperlink{group__nfsft_g5c75ea9f4835d9aa1b75dac53622e488}{ROWK}(k)~(k$\ast$(wisdom.N\_\-MAX+2)+k)}
+\label{group__nfsft_g5c75ea9f4835d9aa1b75dac53622e488}
 
 \item 
-\#define \hyperlink{group__nfsft_ga46}{NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF}~6
+\#define \hyperlink{group__nfsft_g206c4faaf800b49dcb14e26148fa9ac6}{NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF}~6
 \begin{CompactList}\small\item\em The default NFFT cutoff parameter. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga47}{NFSFT\_\-DEFAULT\_\-THRESHOLD}~1000
+\#define \hyperlink{group__nfsft_gb7d25b80464387893b3c773f92e5c4f3}{NFSFT\_\-DEFAULT\_\-THRESHOLD}~1000
 \begin{CompactList}\small\item\em The default threshold for the FPT. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga48}{NFSFT\_\-BREAK\_\-EVEN}~5
+\#define \hyperlink{group__nfsft_g54b840898df97bcd14af4cb004650ed3}{NFSFT\_\-BREAK\_\-EVEN}~5
 \begin{CompactList}\small\item\em The break-even bandwidth $N \in \mathbb{N}_0$. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Enumerations}
 \begin{CompactItemize}
 \item 
-enum {\bf bool} \{ {\bf false} =  0, 
-{\bf true} =  1
+enum \hyperlink{group__nfsft_gf6a258d8f3ee5206d682d799316314b1}{bool} \{ \hyperlink{group__nfsft_ggf6a258d8f3ee5206d682d799316314b1e9de385ef6fe9bf3360d1038396b884c}{false} =  0, 
+\hyperlink{group__nfsft_ggf6a258d8f3ee5206d682d799316314b108f175a5505a10b9ed657defeb050e4b}{true} =  1
  \}
 \end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-void \hyperlink{group__nfsft_ga1}{nfsft\_\-init} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M)
+void \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M)
 \begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags)
+void \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags)
 \begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags, int nfft\_\-flags, int nfft\_\-cutoff)
+void \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags, unsigned int nfft\_\-flags, int nfft\_\-cutoff)
 \begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga4}{nfsft\_\-precompute} (int N, double kappa, unsigned int nfsft\_\-flags, unsigned int fpt\_\-flags)
+void \hyperlink{group__nfsft_gbe87aeea1f7cfef9ae8febb16d702f3b}{nfsft\_\-precompute} (int N, double kappa, unsigned int nfsft\_\-flags, unsigned int fpt\_\-flags)
 \begin{CompactList}\small\item\em Performes precomputation up to the next power of two with respect to a given bandwidth $N \in \mathbb{N}_2$. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga5}{nfsft\_\-forget} ()
+void \hyperlink{group__nfsft_g3b69bca6c76a63877534f5a9781bf285}{nfsft\_\-forget} (void)
 \begin{CompactList}\small\item\em Forgets all precomputed data. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+void \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
 \begin{CompactList}\small\item\em Executes a direct NDSFT, i.e. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+void \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
 \begin{CompactList}\small\item\em Executes a direct adjoint NDSFT, i.e. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+void \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
 \begin{CompactList}\small\item\em Executes a NFSFT, i.e. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+void \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
 \begin{CompactList}\small\item\em Executes an adjoint NFSFT, i.e. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+void \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
 \begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
-\hypertarget{group__nfsft_ga11}{
-void {\bf nfsft\_\-precompute\_\-x} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)}
-\label{group__nfsft_ga11}
+\hypertarget{group__nfsft_g7a7fa6722d6ba3aade4c69299af86e4e}{
+void \hyperlink{group__nfsft_g7a7fa6722d6ba3aade4c69299af86e4e}{nfsft\_\-precompute\_\-x} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)}
+\label{group__nfsft_g7a7fa6722d6ba3aade4c69299af86e4e}
 
 \item 
-double \hyperlink{group__nfsft_ga12}{alpha\_\-al} (int k, int n)
-\begin{CompactList}\small\item\em Computes three-term recurrence coefficients $\alpha_k^n$ of associated Legendre functions. \item\end{CompactList}\item 
-double \hyperlink{group__nfsft_ga13}{beta\_\-al} (int k, int n)
-\begin{CompactList}\small\item\em Computes three-term recurrence coefficients $\beta_k^n$ of associated Legendre functions. \item\end{CompactList}\item 
-double \hyperlink{group__nfsft_ga14}{gamma\_\-al} (int k, int n)
-\begin{CompactList}\small\item\em Computes three-term recurrence coefficients $\gamma_k^n$ of associated Legendre functions. \item\end{CompactList}\item 
-\hypertarget{group__nfsft_ga15}{
-void {\bf alpha\_\-al\_\-row} (double $\ast$alpha, int N, int n)}
-\label{group__nfsft_ga15}
+\hypertarget{group__nfsft_g579cd4224a1b91605551f9ef36c02570}{
+void \hyperlink{group__nfsft_g579cd4224a1b91605551f9ef36c02570}{alpha\_\-al\_\-row} (R $\ast$alpha, const int N, const int n)}
+\label{group__nfsft_g579cd4224a1b91605551f9ef36c02570}
 
 \item 
-\hypertarget{group__nfsft_ga16}{
-void {\bf beta\_\-al\_\-row} (double $\ast$beta, int N, int n)}
-\label{group__nfsft_ga16}
+\hypertarget{group__nfsft_g701e714a76a30130d1db3394ef199b7a}{
+void \hyperlink{group__nfsft_g701e714a76a30130d1db3394ef199b7a}{beta\_\-al\_\-row} (R $\ast$beta, const int N, const int n)}
+\label{group__nfsft_g701e714a76a30130d1db3394ef199b7a}
 
 \item 
-\hypertarget{group__nfsft_ga17}{
-void {\bf gamma\_\-al\_\-row} (double $\ast$gamma, int N, int n)}
-\label{group__nfsft_ga17}
+\hypertarget{group__nfsft_gcc014bf577397cff2b508de22a4581bb}{
+void \hyperlink{group__nfsft_gcc014bf577397cff2b508de22a4581bb}{gamma\_\-al\_\-row} (R $\ast$gamma, const int N, const int n)}
+\label{group__nfsft_gcc014bf577397cff2b508de22a4581bb}
 
 \item 
-void \hyperlink{group__nfsft_ga18}{alpha\_\-al\_\-all} (double $\ast$alpha, int N)
+void \hyperlink{group__nfsft_g6b01d5f2e8b3a026906e977118d7b0d2}{alpha\_\-al\_\-all} (R $\ast$alpha, const int N)
 \begin{CompactList}\small\item\em Compute three-term-recurrence coefficients $\alpha_{k-1}^n$ of associated Legendre functions for $k,n = 0,1,\ldots,N$. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga19}{beta\_\-al\_\-all} (double $\ast$alpha, int N)
+void \hyperlink{group__nfsft_gf0fb6a3993b3c956bea8fa75e3a71290}{beta\_\-al\_\-all} (R $\ast$beta, const int N)
 \begin{CompactList}\small\item\em Compute three-term-recurrence coefficients $\beta_{k-1}^n$ of associated Legendre functions for $k,n = 0,1,\ldots,N$. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga20}{gamma\_\-al\_\-all} (double $\ast$alpha, int N)
+void \hyperlink{group__nfsft_g88de851c8f9a4c042ad101cb4fb8c51d}{gamma\_\-al\_\-all} (R $\ast$gamma, const int N)
 \begin{CompactList}\small\item\em Compute three-term-recurrence coefficients $\gamma_{k-1}^n$ of associated Legendre functions for $k,n = 0,1,\ldots,N$. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga21}{eval\_\-al} (double $\ast$x, double $\ast$y, int size, int k, double $\ast$alpha, double $\ast$beta, double $\ast$gamma)
+void \hyperlink{group__nfsft_gc5f2f8c36dc4f8ca65f058af6491f163}{eval\_\-al} (R $\ast$x, R $\ast$y, const int size, const int k, R $\ast$alpha, R $\ast$beta, R $\ast$gamma)
 \begin{CompactList}\small\item\em Evaluates an associated Legendre polynomials $P_k^n(x,c)$ using the Clenshaw-algorithm. \item\end{CompactList}\item 
-int \hyperlink{group__nfsft_ga22}{eval\_\-al\_\-thresh} (double $\ast$x, double $\ast$y, int size, int k, double $\ast$alpha, double $\ast$beta, double $\ast$gamma, double threshold)
+int \hyperlink{group__nfsft_g1bc5682379de94e87031afa38e02675d}{eval\_\-al\_\-thresh} (R $\ast$x, R $\ast$y, const int size, const int k, R $\ast$alpha, R $\ast$beta, R $\ast$gamma, R threshold)
 \begin{CompactList}\small\item\em Evaluates an associated Legendre polynomials $P_k^n(x,c)$ using the Clenshaw-algorithm if it no exceeds a given threshold. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga23}{c2e} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+static void \hyperlink{group__nfsft_g47209b28b6561fca7349ed8afa5f9656}{c2e} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
 \begin{CompactList}\small\item\em Converts coefficients $\left(b_k^n\right)_{k=0}^M$ with $M \in \mathbb{N}_0$, $-M \le n \le M$ from a linear combination of Chebyshev polynomials \[ f(\cos\vartheta) = \sum_{k=0}^{2\lfloor\frac{M}{2}\rfloor} a_k (\sin\vartheta)^{n\;\mathrm{mod}\;2} T_k(\cos\vartheta) \] to coefficients $\left(c_k^n\right)_{k=0}^M$ matching the representation by complex exponentials \[ f(\cos\vartheta) = \sum_{k=-M}^{M} c_k \mathrm{e}^{\mathrm{i}k\vartheta} \] for each order $n=-M,\ldots,M$. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga24}{c2e\_\-transposed} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
-\begin{CompactList}\small\item\em Transposed version of the function \hyperlink{group__nfsft_ga23}{c2e}. \item\end{CompactList}\end{CompactItemize}
+static void \hyperlink{group__nfsft_g0e033457136bc0ecb18bb57d3ee5aa37}{c2e\_\-transposed} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Transposed version of the function \hyperlink{group__nfsft_g47209b28b6561fca7349ed8afa5f9656}{c2e}. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Variables}
 \begin{CompactItemize}
 \item 
-static struct \hyperlink{structnfsft__wisdom}{nfsft\_\-wisdom} \hyperlink{group__nfsft_ga0}{wisdom} = \{false,0U\}
+static struct \hyperlink{structnfsft__wisdom}{nfsft\_\-wisdom} \hyperlink{group__nfsft_g0af81d81e1b436949ddc46dbd27346e5}{wisdom} = \{false,0U,-1,-1,0,0,0,0,0\}
 \begin{CompactList}\small\item\em The global wisdom structure for precomputed data. \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Detailed Description}
 This module implements nonuniform fast spherical Fourier transforms. In the following, we abbreviate the term \char`\"{}nonuniform fast spherical Fourier transform\char`\"{} by NFSFT.\hypertarget{group__nfsft_Preliminaries}{}\subsection{Preliminaries}\label{group__nfsft_Preliminaries}
 This section summarises basic definitions and properties related to spherical Fourier transforms.\hypertarget{group__nfsft_sc}{}\subsubsection{Spherical Coordinates}\label{group__nfsft_sc}
-Every point in $\mathbb{R}^3$ can be described in {\em spherical\/} {\em coordinates\/} by a vector $(r,\vartheta,\varphi)^{\mathrm{T}}$ with the radius $r \in \mathbb{R}^{+}$ and two angles $\vartheta \in [0,\pi]$, $\varphi \in [-\pi,\pi)$. We denote by $\mathbb{S}^2$ the two-dimensional unit sphere embedded into $\mathbb{R}^3$, i.e. \[ \mathbb{S}^2 := \left\{\mathbf{x} \in \mathbb{R}^{3}:\; \|\mathbf{x}\|_2=1\right\} \] and identify a point from $\mathbb{S}^2$ with the corresponding vector $(\vartheta,\varphi)^{\mathrm{T}}$. The spherical coordinate system is illustrated in the following figure:  \mbox{\includegraphics[width=0.45\textwidth]{sphere}}
+Every point in $\mathbb{R}^3$ can be described in {\em spherical\/} {\em coordinates\/} by a vector $(r,\vartheta,\varphi)^{\mathrm{T}}$ with the radius $r \in \mathbb{R}^{+}$ and two angles $\vartheta \in [0,\pi]$, $\varphi \in [-\pi,\pi)$. We denote by $\mathbb{S}^2$ the two-dimensional unit sphere embedded into $\mathbb{R}^3$, i.e. \[ \mathbb{S}^2 := \left\{\mathbf{x} \in \mathbb{R}^{3}:\; \|\mathbf{x}\|_2=1\right\} \] and identify a point from $\mathbb{S}^2$ with the corresponding vector $(\vartheta,\varphi)^{\mathrm{T}}$. The spherical coordinate system is illustrated in the following figure:  \begin{ImageNoCaption}\mbox{\includegraphics[width=0.45\textwidth]{sphere}}
+\end{ImageNoCaption}
  For consistency with the other modules and the conventions used there, we also use {\em swapped\/} {\em scaled\/} {\em spherical\/} {\em coordinates\/} $x_1 := \frac{\varphi}{2\pi}$, $x_2 := \frac{\vartheta}{2\pi}$ and identify a point from $\mathbb{S}^2$ with the vector $\mathbf{x} := \left(x_1,x_2\right) \in [-\frac{1}{2}, \frac{1}{2}) \times [0,\frac{1}{2}]$.\hypertarget{group__nfsft_lp}{}\subsubsection{Legendre Polynomials}\label{group__nfsft_lp}
 The {\em Legendre\/} {\em polynomials\/} $P_k : [-1,1] \rightarrow \mathbb{R}$, $k \in \mathbb{N}_{0}$ as {\em classical\/} {\em orthogonal\/} {\em polynomials\/} are given by their corresponding {\em Rodrigues\/} {\em formula\/} \[ P_k(t) := \frac{1}{2^k k!} \frac{\text{d}^k}{\text{d} t^k} \left(t^2-1\right)^k. \] The corresponding three-term recurrence relation is \[ (k+1)P_{k+1}(t) = (2k+1) x P_{k}(t) - k P_{k-1}(t) \quad (k \in \mathbb{N}_0). \] With \[ \left< f,g \right>_{\text{L}^2\left([-1,1]\right)} := \int_{-1}^{1} f(t) g(t) \text{d} t \] being the usual $\text{L}^2\left([-1,1]\right)$ inner product, the Legendre polynomials obey the orthogonality condition \[ \left< P_k,P_l \right>_{\text{L}^2\left([-1,1]\right)} = \frac{2}{2k+1} \delta_{k,l}. \]
 
@@ -175,329 +170,329 @@ This section describes the input and output relation of the spherical Fourier tr
 The {\em nonuniform\/} {\em discrete\/} {\em spherical\/} {\em Fourier\/} {\em transform\/} ({\em NDSFT\/}) is defined as follows: \[ \begin{array}{rcl} \text{\textbf{Input}} & : & \text{coefficients } \hat{f}(k,n) \in \mathbb{C} \text{ for } k=0,\ldots,N,\;n=-k, \ldots,k,\; N \in \mathbb{N}_0,\\[1ex] & & \text{arbitrary nodes } \mathbf{x}(m) \in [-\frac{1}{2},\frac{1}{2}] \times [0,\frac{1}{2}] \text{ for } m=0,\ldots,M-1, M \in \mathbb{N}. \\[1ex] \text{\textbf{Task}} & : & \text{evaluate } f(m) := f\left( \mathbf{x}(m)\right) = \sum_{k=0}^N \sum_{n=-k}^k \hat{f}_k^n Y_k^n\left(\mathbf{x}(m)\right) \text{ for } m=0,\ldots,M-1. \\[1ex] \text{\textbf{Output}} & : & \text{coefficients } f(m) \in \mathbb{C} \text{ for } m=0,\ldots,M-1.\\ \end{array} \]\hypertarget{group__nfsft_andsft}{}\subsubsection{Adjoint Nonuniform Discrete Spherical Fourier Transform}\label{group__nfsft_andsft}
 The {\em adjoint\/} {\em nonuniform\/} {\em discrete\/} {\em spherical\/} {\em Fourier\/} {\em transform\/} ({\em adjoint\/} {\em NDSFT\/}) is defined as follows: \[ \begin{array}{rcl} \text{\textbf{Input}} & : & \text{coefficients } f(m) \in \mathbb{C} \text{ for } m=0,\ldots,M-1, M \in \mathbb{N},\\ & & \text{arbitrary nodes } \mathbf{x}(m) \in [-\frac{1}{2},\frac{1}{2}] \times [0,\frac{1}{2}] \text{ for } m=0,\ldots,M-1, N \in \mathbb{N}_0.\\[1ex] \text{\textbf{Task}} & : & \text{evaluate } \hat{f}(k,n) := \sum_{m=0}^{M-1} f(m) \overline{Y_k^n\left(\mathbf{x}(m)\right)}cd Do \text{ for } k=0,\ldots,N,\;n=-k,\ldots,k.\\[1ex] \text{\textbf{Output}} & : & \text{coefficients } \hat{f}(k,n) \in \mathbb{C} \text{ for } k=0,\ldots,N,\;n=-k,\ldots,k.\\[1ex] \end{array} \]\hypertarget{group__nfsft_dl}{}\subsubsection{Data Layout}\label{group__nfsft_dl}
 This section describes the public layout of the \hyperlink{structnfsft__plan}{nfsft\_\-plan} structure which contains all data for the computation of the aforementioned spherical Fourier transforms. The structure contains private (no read or write allowed), public read-only (only read access permitted), and public read-write (read and write access allowed) members. In the following, we indicate read and write access by {\tt read} and {\tt write}. The public members are structured as follows: \begin{itemize}
-\item {\tt N\_\-total} ({\tt read}) The total number of components in {\tt f\_\-hat}. If the bandwidth is $N \in \mathbb{N}_0$, the total number of components in {\tt f\_\-hat} is {\tt N\_\-total} $ = (2N+2)^2$. \item {\tt M\_\-total} ({\tt read}) the total number of samples $M$ \item {\tt f\_\-hat} ({\tt read-write}) The flattened array of spherical Fourier coefficents. The array has length $(2N+2)^2$ such that valid indices $i \in \mathbb{N}_0$ for array access {\tt f\_\-hat} {\tt }\mbox{[} $i$ {\tt }\mbox{]} are $i=0,1,\ldots,(2N+2)^2-1$. However, only read and write access to indices corresponding to spherical Fourier coefficients $\hat{f}(k,n)$ is defined. The index $i$ corresponding to the spherical Fourier coefficient $\hat{f}(k,n)$ with $0 \le k \le M$, $-k \le n \le k$ is $i = (N+2)(N-n+1)+N+k+1$. For convenience, the helper macro \hyperlink{group__nfsft_ga40}{NFSFT\_\-INDEX(k,n)} provides the necessary index calculations such that one can write {\tt f\_\-hat}\mbox{[} {\tt NFSFT\_\-INDEX}($k,n${\tt })\mbox{]} {\tt =} {\tt }... to access the component corresponding to $\hat{f}(k,n)$. The data layout is due to implementation details. \item {\tt f} ({\tt read-write}) the array of coefficients $f(m)$ for $m=0,\ldots,M-1$ such that {\tt f}\mbox{[}$m${\tt }\mbox{]} = $f(m)$ \item {\tt N} ({\tt read}) the bandwidth $N \in \mathbb{N}_0$ \item {\tt x} the array of nodes $\mathbf{x}(m) \in [-\frac{1}{2},\frac{1}{2}] \times [0,\frac{1}{2}]$ for $m = 0, \ldots,M-1$ such that {\tt f}\mbox{[}$2m${\tt }\mbox{]} = $x_1$ and {\tt f}\mbox{[}$2m+1${\tt }\mbox{]} = $x_2$\end{itemize}
+\item {\tt N\_\-total} ({\tt read}) The total number of components in {\tt f\_\-hat}. If the bandwidth is $N \in \mathbb{N}_0$, the total number of components in {\tt f\_\-hat} is {\tt N\_\-total} $ = (2N+2)^2$. \item {\tt M\_\-total} ({\tt read}) the total number of samples $M$ \item {\tt f\_\-hat} ({\tt read-write}) The flattened array of spherical Fourier coefficents. The array has length $(2N+2)^2$ such that valid indices $i \in \mathbb{N}_0$ for array access {\tt f\_\-hat} {\tt }\mbox{[} $i$ {\tt }\mbox{]} are $i=0,1,\ldots,(2N+2)^2-1$. However, only read and write access to indices corresponding to spherical Fourier coefficients $\hat{f}(k,n)$ is defined. The index $i$ corresponding to the spherical Fourier coefficient $\hat{f}(k,n)$ with $0 \le k \le M$, $-k \le n \le k$ is $i = (N+2)(N-n+1)+N+k+1$. For convenience, the helper macro \hyperlink{group__nfsft_g8be22087991e0a82cfa59a3f0f2a5e86}{NFSFT\_\-INDEX(k,n)} provides the necessary index calculations such that one can write {\tt f\_\-hat}\mbox{[} {\tt NFSFT\_\-INDEX}($k,n${\tt })\mbox{]} {\tt =} {\tt }... to access the component corresponding to $\hat{f}(k,n)$. The data layout is due to implementation details. \item {\tt f} ({\tt read-write}) the array of coefficients $f(m)$ for $m=0,\ldots,M-1$ such that {\tt f}\mbox{[}$m${\tt }\mbox{]} = $f(m)$ \item {\tt N} ({\tt read}) the bandwidth $N \in \mathbb{N}_0$ \item {\tt x} the array of nodes $\mathbf{x}(m) \in [-\frac{1}{2},\frac{1}{2}] \times [0,\frac{1}{2}]$ for $m = 0, \ldots,M-1$ such that {\tt f}\mbox{[}$2m${\tt }\mbox{]} = $x_1$ and {\tt f}\mbox{[}$2m+1${\tt }\mbox{]} = $x_2$\end{itemize}
 \hypertarget{group__nfsft_gtn}{}\subsubsection{Good to know...}\label{group__nfsft_gtn}
 When using the routines of this module you should bear in mind the following: \begin{itemize}
-\item The bandwidth $N_{\text{max}}$ up to which precomputation is performed is always chosen as the next power of two with respect to the specified maximum bandwidth. \item By default, the NDSFT transforms (see \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo}, \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo}) are allowed to destroy the input {\tt f\_\-hat} while the input {\tt x} is preserved. On the contrary, the adjoint NDSFT transforms (see \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint}) do not destroy the input {\tt f} and {\tt x} by default. The desired behaviour can be assured by using the \hyperlink{group__nfsft_ga31}{NFSFT\_\-PRESERVE\_\-F\_\-HAT}, \hyperlink{group__nfsft_ga32}{NFSFT\_\-PRESERVE\_\-X}, \hyperlink{group__nfsft_ga33}{NFSFT\_\-PRESERVE\_\-F} and \hyperlink{group__nfsft_ga34}{NFSFT\_\-DESTROY\_\-F\_\-HAT}, \hyperlink{group__nfsft_ga35}{NFSFT\_\-DESTROY\_\-X}, \hyperlink{group__nfsft_ga36}{NFSFT\_\-DESTROY\_\-F} flags. \end{itemize}
+\item The bandwidth $N_{\text{max}}$ up to which precomputation is performed is always chosen as the next power of two with respect to the specified maximum bandwidth. \item By default, the NDSFT transforms (see \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo}, \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo}) are allowed to destroy the input {\tt f\_\-hat} while the input {\tt x} is preserved. On the contrary, the adjoint NDSFT transforms (see \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint}) do not destroy the input {\tt f} and {\tt x} by default. The desired behaviour can be assured by using the \hyperlink{group__nfsft_gc8a292845f0bdec6b0d8ef6eb693a00e}{NFSFT\_\-PRESERVE\_\-F\_\-HAT}, \hyperlink{group__nfsft_gcf7d73753b74dbf148167c3d46226f09}{NFSFT\_\-PRESERVE\_\-X}, \hyperlink{group__nfsft_g45962e763c2c551c1ea764a68b686b5c}{NFSFT\_\-PRESERVE\_\-F} and \hyperlink{group__nfsft_ga808899fc4db422c7b23470e6baad904}{NFSFT\_\-DESTROY\_\-F\_\-HAT}, \hyperlink{group__nfsft_g6f22df0b292db920d795b3e3569181f2}{NFSFT\_\-DESTROY\_\-X}, \hyperlink{group__nfsft_g2b32e2eabd33bf0886f6df45365d04c0}{NFSFT\_\-DESTROY\_\-F} flags. \end{itemize}
 
 
 \subsection{Define Documentation}
-\hypertarget{group__nfsft_ga25}{
+\hypertarget{group__nfsft_g65036f479a7421863956c02aa78bc9be}{
 \index{nfsft@{nfsft}!NFSFT_NORMALIZED@{NFSFT\_\-NORMALIZED}}
 \index{NFSFT_NORMALIZED@{NFSFT\_\-NORMALIZED}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-NORMALIZED]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-NORMALIZED~(1U $<$$<$ 0)}}
-\label{group__nfsft_ga25}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-NORMALIZED~(1U $<$$<$ 0)}}
+\label{group__nfsft_g65036f479a7421863956c02aa78bc9be}
 
 
 By default, all computations are performed with respect to the unnormalized basis functions \[ \tilde{Y}_k^n(\vartheta,\varphi) = P_k^{|n|}(\cos\vartheta) \mathrm{e}^{\mathrm{i} n \varphi}. \] If this flag is set, all computations are carried out using the $L_2$- normalized basis functions \[ Y_k^n(\vartheta,\varphi) = \sqrt{\frac{2k+1}{4\pi}} P_k^{|n|}(\cos\vartheta) \mathrm{e}^{\mathrm{i} n \varphi}. \]. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1718 of file nfft3.h.
+Definition at line 1864 of file nfft3.h.
 
-Referenced by main(), ndsft\_\-adjoint(), ndsft\_\-trafo(), nfsft\_\-adjoint(), and nfsft\_\-trafo().\hypertarget{group__nfsft_ga26}{
+Referenced by main(), ndsft\_\-adjoint(), ndsft\_\-trafo(), nfsft\_\-adjoint(), and nfsft\_\-trafo().\hypertarget{group__nfsft_gba029560a4a506c8f2dad185511db827}{
 \index{nfsft@{nfsft}!NFSFT_USE_NDFT@{NFSFT\_\-USE\_\-NDFT}}
 \index{NFSFT_USE_NDFT@{NFSFT\_\-USE\_\-NDFT}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-USE\_\-NDFT]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-USE\_\-NDFT~(1U $<$$<$ 1)}}
-\label{group__nfsft_ga26}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-USE\_\-NDFT~(1U $<$$<$ 1)}}
+\label{group__nfsft_gba029560a4a506c8f2dad185511db827}
 
 
-If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint}) will use internally the exact but usually slower direct NDFT algorithm in favor of fast but approximative NFFT algorithm. 
+If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint}) will use internally the exact but usually slower direct NDFT algorithm in favor of fast but approximative NFFT algorithm. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1730 of file nfft3.h.
+Definition at line 1876 of file nfft3.h.
 
-Referenced by main(), nfsft\_\-adjoint(), and nfsft\_\-trafo().\hypertarget{group__nfsft_ga27}{
+Referenced by main(), nfsft\_\-adjoint(), and nfsft\_\-trafo().\hypertarget{group__nfsft_g6b9eed1e7bcf862dcc3111509075fcbb}{
 \index{nfsft@{nfsft}!NFSFT_USE_DPT@{NFSFT\_\-USE\_\-DPT}}
 \index{NFSFT_USE_DPT@{NFSFT\_\-USE\_\-DPT}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-USE\_\-DPT]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-USE\_\-DPT~(1U $<$$<$ 2)}}
-\label{group__nfsft_ga27}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-USE\_\-DPT~(1U $<$$<$ 2)}}
+\label{group__nfsft_g6b9eed1e7bcf862dcc3111509075fcbb}
 
 
-If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint}) will use internally the usually slower direct DPT algorithm in favor of the fast FPT algorithm. 
+If this flag is set, the fast NFSFT algorithms (see \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint}) will use internally the usually slower direct DPT algorithm in favor of the fast FPT algorithm. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 \begin{Desc}
 \item[Warning:]This feature is not implemented yet! \end{Desc}
 
 
-Definition at line 1743 of file nfft3.h.
+Definition at line 1889 of file nfft3.h.
 
-Referenced by main(), nfsft\_\-adjoint(), and nfsft\_\-trafo().\hypertarget{group__nfsft_ga28}{
+Referenced by main(), nfsft\_\-adjoint(), and nfsft\_\-trafo().\hypertarget{group__nfsft_g02e4313d15b24c79e6802f853d452454}{
 \index{nfsft@{nfsft}!NFSFT_MALLOC_X@{NFSFT\_\-MALLOC\_\-X}}
 \index{NFSFT_MALLOC_X@{NFSFT\_\-MALLOC\_\-X}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-MALLOC\_\-X]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-MALLOC\_\-X~(1U $<$$<$ 3)}}
-\label{group__nfsft_ga28}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-MALLOC\_\-X~(1U $<$$<$ 3)}}
+\label{group__nfsft_g02e4313d15b24c79e6802f853d452454}
 
 
-If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt x} for you. 
+If this flag is set, the init methods (see \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} , \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} will free the array {\tt x} for you. 
 
 Otherwise, you have to assure by yourself that {\tt x} points to an array of proper size before excuting a transform and you are responsible for freeing the corresponding memory before program termination.
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1758 of file nfft3.h.
+Definition at line 1904 of file nfft3.h.
 
-Referenced by main(), nfsft\_\-finalize(), nfsft\_\-init(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_ga29}{
+Referenced by main(), nfsft\_\-finalize(), nfsft\_\-init(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_gb76dcf8db948f18cc87403dac804fc68}{
 \index{nfsft@{nfsft}!NFSFT_MALLOC_F_HAT@{NFSFT\_\-MALLOC\_\-F\_\-HAT}}
 \index{NFSFT_MALLOC_F_HAT@{NFSFT\_\-MALLOC\_\-F\_\-HAT}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-MALLOC\_\-F\_\-HAT]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-MALLOC\_\-F\_\-HAT~(1U $<$$<$ 5)}}
-\label{group__nfsft_ga29}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-MALLOC\_\-F\_\-HAT~(1U $<$$<$ 5)}}
+\label{group__nfsft_gb76dcf8db948f18cc87403dac804fc68}
 
 
-If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt f\_\-hat} for you. 
+If this flag is set, the init methods (see \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} , \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} will free the array {\tt f\_\-hat} for you. 
 
 Otherwise, you have to assure by yourself that {\tt f\_\-hat} points to an array of proper size before excuting a transform and you are responsible for freeing the corresponding memory before program termination.
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1773 of file nfft3.h.
+Definition at line 1919 of file nfft3.h.
 
-Referenced by main(), nfsft\_\-finalize(), nfsft\_\-init(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_ga30}{
+Referenced by main(), nfsft\_\-finalize(), nfsft\_\-init(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_gf3bc3ab774cda0c1c765e97066893d30}{
 \index{nfsft@{nfsft}!NFSFT_MALLOC_F@{NFSFT\_\-MALLOC\_\-F}}
 \index{NFSFT_MALLOC_F@{NFSFT\_\-MALLOC\_\-F}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-MALLOC\_\-F]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-MALLOC\_\-F~(1U $<$$<$ 6)}}
-\label{group__nfsft_ga30}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-MALLOC\_\-F~(1U $<$$<$ 6)}}
+\label{group__nfsft_gf3bc3ab774cda0c1c765e97066893d30}
 
 
-If this flag is set, the init methods (see \hyperlink{group__nfsft_ga1}{nfsft\_\-init} , \hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga10}{nfsft\_\-finalize} will free the array {\tt f} for you. 
+If this flag is set, the init methods (see \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} , \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} , and \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} will free the array {\tt f} for you. 
 
 Otherwise, you have to assure by yourself that {\tt f} points to an array of proper size before excuting a transform and you are responsible for freeing the corresponding memory before program termination.
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1788 of file nfft3.h.
+Definition at line 1934 of file nfft3.h.
 
-Referenced by main(), nfsft\_\-finalize(), nfsft\_\-init(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_ga31}{
+Referenced by main(), nfsft\_\-finalize(), nfsft\_\-init(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_gc8a292845f0bdec6b0d8ef6eb693a00e}{
 \index{nfsft@{nfsft}!NFSFT_PRESERVE_F_HAT@{NFSFT\_\-PRESERVE\_\-F\_\-HAT}}
 \index{NFSFT_PRESERVE_F_HAT@{NFSFT\_\-PRESERVE\_\-F\_\-HAT}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-PRESERVE\_\-F\_\-HAT]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-PRESERVE\_\-F\_\-HAT~(1U $<$$<$ 7)}}
-\label{group__nfsft_ga31}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-PRESERVE\_\-F\_\-HAT~(1U $<$$<$ 7)}}
+\label{group__nfsft_gc8a292845f0bdec6b0d8ef6eb693a00e}
 
 
-If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} or \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} the content of {\tt f\_\-hat} remains unchanged. 
+If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} or \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} the content of {\tt f\_\-hat} remains unchanged. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1800 of file nfft3.h.
+Definition at line 1946 of file nfft3.h.
 
-Referenced by ndsft\_\-trafo(), nfsft\_\-finalize(), nfsft\_\-init\_\-guru(), and nfsft\_\-trafo().\hypertarget{group__nfsft_ga32}{
+Referenced by ndsft\_\-trafo(), nfsft\_\-finalize(), nfsft\_\-init\_\-guru(), and nfsft\_\-trafo().\hypertarget{group__nfsft_gcf7d73753b74dbf148167c3d46226f09}{
 \index{nfsft@{nfsft}!NFSFT_PRESERVE_X@{NFSFT\_\-PRESERVE\_\-X}}
 \index{NFSFT_PRESERVE_X@{NFSFT\_\-PRESERVE\_\-X}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-PRESERVE\_\-X]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-PRESERVE\_\-X~(1U $<$$<$ 8)}}
-\label{group__nfsft_ga32}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-PRESERVE\_\-X~(1U $<$$<$ 8)}}
+\label{group__nfsft_gcf7d73753b74dbf148167c3d46226f09}
 
 
-If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo}, \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} or \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt x} remains unchanged. 
+If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo}, \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} or \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt x} remains unchanged. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1813 of file nfft3.h.\hypertarget{group__nfsft_ga33}{
+Definition at line 1959 of file nfft3.h.\hypertarget{group__nfsft_g45962e763c2c551c1ea764a68b686b5c}{
 \index{nfsft@{nfsft}!NFSFT_PRESERVE_F@{NFSFT\_\-PRESERVE\_\-F}}
 \index{NFSFT_PRESERVE_F@{NFSFT\_\-PRESERVE\_\-F}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-PRESERVE\_\-F]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-PRESERVE\_\-F~(1U $<$$<$ 9)}}
-\label{group__nfsft_ga33}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-PRESERVE\_\-F~(1U $<$$<$ 9)}}
+\label{group__nfsft_g45962e763c2c551c1ea764a68b686b5c}
 
 
-If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt f} remains unchanged. 
+If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt f} remains unchanged. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1825 of file nfft3.h.\hypertarget{group__nfsft_ga34}{
+Definition at line 1971 of file nfft3.h.\hypertarget{group__nfsft_ga808899fc4db422c7b23470e6baad904}{
 \index{nfsft@{nfsft}!NFSFT_DESTROY_F_HAT@{NFSFT\_\-DESTROY\_\-F\_\-HAT}}
 \index{NFSFT_DESTROY_F_HAT@{NFSFT\_\-DESTROY\_\-F\_\-HAT}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-DESTROY\_\-F\_\-HAT]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DESTROY\_\-F\_\-HAT~(1U $<$$<$ 10)}}
-\label{group__nfsft_ga34}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DESTROY\_\-F\_\-HAT~(1U $<$$<$ 10)}}
+\label{group__nfsft_ga808899fc4db422c7b23470e6baad904}
 
 
-If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} or \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} the content of {\tt f\_\-hat} may be changed. 
+If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} or \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} the content of {\tt f\_\-hat} may be changed. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1836 of file nfft3.h.\hypertarget{group__nfsft_ga35}{
+Definition at line 1982 of file nfft3.h.\hypertarget{group__nfsft_g6f22df0b292db920d795b3e3569181f2}{
 \index{nfsft@{nfsft}!NFSFT_DESTROY_X@{NFSFT\_\-DESTROY\_\-X}}
 \index{NFSFT_DESTROY_X@{NFSFT\_\-DESTROY\_\-X}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-DESTROY\_\-X]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DESTROY\_\-X~(1U $<$$<$ 11)}}
-\label{group__nfsft_ga35}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DESTROY\_\-X~(1U $<$$<$ 11)}}
+\label{group__nfsft_g6f22df0b292db920d795b3e3569181f2}
 
 
-If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo}, \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} or \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt x} may be changed. 
+If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo}, \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} or \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint}, \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt x} may be changed. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1848 of file nfft3.h.\hypertarget{group__nfsft_ga36}{
+Definition at line 1994 of file nfft3.h.\hypertarget{group__nfsft_g2b32e2eabd33bf0886f6df45365d04c0}{
 \index{nfsft@{nfsft}!NFSFT_DESTROY_F@{NFSFT\_\-DESTROY\_\-F}}
 \index{NFSFT_DESTROY_F@{NFSFT\_\-DESTROY\_\-F}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-DESTROY\_\-F]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DESTROY\_\-F~(1U $<$$<$ 12)}}
-\label{group__nfsft_ga36}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DESTROY\_\-F~(1U $<$$<$ 12)}}
+\label{group__nfsft_g2b32e2eabd33bf0886f6df45365d04c0}
 
 
-If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} the content of {\tt f} may be changed. 
+If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} or \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} the content of {\tt f} may be changed. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga1}{nfsft\_\-init} 
+\item[See also:]\hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} 
 
-\hyperlink{group__nfsft_ga2}{nfsft\_\-init\_\-advanced} 
+\hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfsft_ga3}{nfsft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1859 of file nfft3.h.\hypertarget{group__nfsft_ga37}{
+Definition at line 2005 of file nfft3.h.\hypertarget{group__nfsft_g9ed987164acf6e362ab2878506fbca95}{
 \index{nfsft@{nfsft}!NFSFT_NO_DIRECT_ALGORITHM@{NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM}}
 \index{NFSFT_NO_DIRECT_ALGORITHM@{NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM~(1U $<$$<$ 13)}}
-\label{group__nfsft_ga37}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM~(1U $<$$<$ 13)}}
+\label{group__nfsft_g9ed987164acf6e362ab2878506fbca95}
 
 
-If this flag is set, the transforms \hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} and \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} do not work. 
+If this flag is set, the transforms \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} and \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} do not work. 
 
 Setting this flag saves some memory for precomputed data.
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga4}{nfsft\_\-precompute} 
+\item[See also:]\hyperlink{group__nfsft_gbe87aeea1f7cfef9ae8febb16d702f3b}{nfsft\_\-precompute} 
 
-\hyperlink{group__nfsft_ga6}{ndsft\_\-trafo} 
+\hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} 
 
-\hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} \end{Desc}
+\hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1872 of file nfft3.h.
+Definition at line 2018 of file nfft3.h.
 
-Referenced by ndsft\_\-adjoint(), ndsft\_\-trafo(), nfsft\_\-forget(), and nfsft\_\-precompute().\hypertarget{group__nfsft_ga38}{
+Referenced by ndsft\_\-adjoint(), ndsft\_\-trafo(), nfsft\_\-forget(), and nfsft\_\-precompute().\hypertarget{group__nfsft_ga228bbed7ddbbb4a15f1cd11ec27b415}{
 \index{nfsft@{nfsft}!NFSFT_NO_FAST_ALGORITHM@{NFSFT\_\-NO\_\-FAST\_\-ALGORITHM}}
 \index{NFSFT_NO_FAST_ALGORITHM@{NFSFT\_\-NO\_\-FAST\_\-ALGORITHM}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-NO\_\-FAST\_\-ALGORITHM]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-NO\_\-FAST\_\-ALGORITHM~(1U $<$$<$ 14)}}
-\label{group__nfsft_ga38}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-NO\_\-FAST\_\-ALGORITHM~(1U $<$$<$ 14)}}
+\label{group__nfsft_ga228bbed7ddbbb4a15f1cd11ec27b415}
 
 
-If this flag is set, the transforms \hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} and \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} do not work. 
+If this flag is set, the transforms \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} and \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} do not work. 
 
 Setting this flag saves memory for precomputed data.
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfsft_ga4}{nfsft\_\-precompute} 
+\item[See also:]\hyperlink{group__nfsft_gbe87aeea1f7cfef9ae8febb16d702f3b}{nfsft\_\-precompute} 
 
-\hyperlink{group__nfsft_ga8}{nfsft\_\-trafo} 
+\hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} 
 
-\hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} \end{Desc}
+\hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} \end{Desc}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1883 of file nfft3.h.
+Definition at line 2029 of file nfft3.h.
 
-Referenced by main(), nfsft\_\-adjoint(), nfsft\_\-forget(), nfsft\_\-init\_\-guru(), nfsft\_\-precompute(), and nfsft\_\-trafo().\hypertarget{group__nfsft_ga39}{
+Referenced by main(), nfsft\_\-adjoint(), nfsft\_\-forget(), nfsft\_\-init\_\-guru(), nfsft\_\-precompute(), and nfsft\_\-trafo().\hypertarget{group__nfsft_g7797dfe75149e88ee680fc2579c31505}{
 \index{nfsft@{nfsft}!NFSFT_ZERO_F_HAT@{NFSFT\_\-ZERO\_\-F\_\-HAT}}
 \index{NFSFT_ZERO_F_HAT@{NFSFT\_\-ZERO\_\-F\_\-HAT}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-ZERO\_\-F\_\-HAT]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-ZERO\_\-F\_\-HAT~(1U $<$$<$ 16)}}
-\label{group__nfsft_ga39}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-ZERO\_\-F\_\-HAT~(1U $<$$<$ 16)}}
+\label{group__nfsft_g7797dfe75149e88ee680fc2579c31505}
 
 
-If this flag is set, the transforms \hyperlink{group__nfsft_ga9}{nfsft\_\-adjoint} and \hyperlink{group__nfsft_ga7}{ndsft\_\-adjoint} set all unused entries in {\tt f\_\-hat} not corresponding to spherical Fourier coefficients to zero. 
+If this flag is set, the transforms \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} and \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} set all unused entries in {\tt f\_\-hat} not corresponding to spherical Fourier coefficients to zero. 
 
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 1892 of file nfft3.h.
+Definition at line 2038 of file nfft3.h.
 
-Referenced by main(), ndsft\_\-adjoint(), and nfsft\_\-adjoint().\hypertarget{group__nfsft_ga46}{
+Referenced by main(), ndsft\_\-adjoint(), and nfsft\_\-adjoint().\hypertarget{group__nfsft_g206c4faaf800b49dcb14e26148fa9ac6}{
 \index{nfsft@{nfsft}!NFSFT_DEFAULT_NFFT_CUTOFF@{NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF}}
 \index{NFSFT_DEFAULT_NFFT_CUTOFF@{NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF~6}}
-\label{group__nfsft_ga46}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF~6}}
+\label{group__nfsft_g206c4faaf800b49dcb14e26148fa9ac6}
 
 
 The default NFFT cutoff parameter. 
@@ -506,13 +501,13 @@ The default NFFT cutoff parameter.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 34 of file nfsft.c.
+Definition at line 57 of file nfsft.c.
 
-Referenced by nfsft\_\-init\_\-advanced().\hypertarget{group__nfsft_ga47}{
+Referenced by nfsft\_\-init\_\-advanced().\hypertarget{group__nfsft_gb7d25b80464387893b3c773f92e5c4f3}{
 \index{nfsft@{nfsft}!NFSFT_DEFAULT_THRESHOLD@{NFSFT\_\-DEFAULT\_\-THRESHOLD}}
 \index{NFSFT_DEFAULT_THRESHOLD@{NFSFT\_\-DEFAULT\_\-THRESHOLD}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-DEFAULT\_\-THRESHOLD]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DEFAULT\_\-THRESHOLD~1000}}
-\label{group__nfsft_ga47}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-DEFAULT\_\-THRESHOLD~1000}}
+\label{group__nfsft_gb7d25b80464387893b3c773f92e5c4f3}
 
 
 The default threshold for the FPT. 
@@ -521,11 +516,11 @@ The default threshold for the FPT.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 41 of file nfsft.c.\hypertarget{group__nfsft_ga48}{
+Definition at line 64 of file nfsft.c.\hypertarget{group__nfsft_g54b840898df97bcd14af4cb004650ed3}{
 \index{nfsft@{nfsft}!NFSFT_BREAK_EVEN@{NFSFT\_\-BREAK\_\-EVEN}}
 \index{NFSFT_BREAK_EVEN@{NFSFT\_\-BREAK\_\-EVEN}!nfsft@{nfsft}}
-\subsubsection[NFSFT\_\-BREAK\_\-EVEN]{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-BREAK\_\-EVEN~5}}
-\label{group__nfsft_ga48}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSFT\_\-BREAK\_\-EVEN~5}}
+\label{group__nfsft_g54b840898df97bcd14af4cb004650ed3}
 
 
 The break-even bandwidth $N \in \mathbb{N}_0$. 
@@ -534,16 +529,42 @@ The break-even bandwidth $N \in \mathbb{N}_0$.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 48 of file nfsft.c.
+Definition at line 71 of file nfsft.c.
 
 Referenced by nfsft\_\-adjoint(), nfsft\_\-forget(), nfsft\_\-precompute(), and nfsft\_\-trafo().
 
+\subsection{Enumeration Type Documentation}
+\hypertarget{group__nfsft_gf6a258d8f3ee5206d682d799316314b1}{
+\index{nfsft@{nfsft}!bool@{bool}}
+\index{bool@{bool}!nfsft@{nfsft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum {\bf bool}}}
+\label{group__nfsft_gf6a258d8f3ee5206d682d799316314b1}
+
+
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{false@{false}!nfsft@{nfsft}}\index{nfsft@{nfsft}!false@{false}}\item[{\em 
+\hypertarget{group__nfsft_ggf6a258d8f3ee5206d682d799316314b1e9de385ef6fe9bf3360d1038396b884c}{
+false}
+\label{group__nfsft_ggf6a258d8f3ee5206d682d799316314b1e9de385ef6fe9bf3360d1038396b884c}
+}]\index{true@{true}!nfsft@{nfsft}}\index{nfsft@{nfsft}!true@{true}}\item[{\em 
+\hypertarget{group__nfsft_ggf6a258d8f3ee5206d682d799316314b108f175a5505a10b9ed657defeb050e4b}{
+true}
+\label{group__nfsft_ggf6a258d8f3ee5206d682d799316314b108f175a5505a10b9ed657defeb050e4b}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 48 of file api.h.
+
 \subsection{Function Documentation}
-\hypertarget{group__nfsft_ga1}{
+\hypertarget{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{
 \index{nfsft@{nfsft}!nfsft_init@{nfsft\_\-init}}
 \index{nfsft_init@{nfsft\_\-init}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-init]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-init (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M})}}
-\label{group__nfsft_ga1}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-init ({\bf nfsft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M})}}
+\label{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}
 
 
 Creates a transform plan. 
@@ -554,13 +575,13 @@ Creates a transform plan.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 225 of file nfsft.c.
+Definition at line 248 of file nfsft.c.
 
-References nfsft\_\-init\_\-advanced(), NFSFT\_\-MALLOC\_\-F, NFSFT\_\-MALLOC\_\-F\_\-HAT, and NFSFT\_\-MALLOC\_\-X.\hypertarget{group__nfsft_ga2}{
+References nfsft\_\-init\_\-advanced(), NFSFT\_\-MALLOC\_\-F, NFSFT\_\-MALLOC\_\-F\_\-HAT, and NFSFT\_\-MALLOC\_\-X.\hypertarget{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{
 \index{nfsft@{nfsft}!nfsft_init_advanced@{nfsft\_\-init\_\-advanced}}
 \index{nfsft_init_advanced@{nfsft\_\-init\_\-advanced}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-init\_\-advanced]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-init\_\-advanced (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M}, unsigned int {\em nfsft\_\-flags})}}
-\label{group__nfsft_ga2}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-init\_\-advanced ({\bf nfsft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M}, unsigned int {\em nfsft\_\-flags})}}
+\label{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}
 
 
 Creates a transform plan. 
@@ -568,52 +589,66 @@ Creates a transform plan.
 \begin{itemize}
 \item plan a pointer to a 
 
-\footnotesize\begin{verbatim} nfsft_plan \end{verbatim}
+\footnotesize\begin{verbatim}nfsft_plan \end{verbatim}
 \normalsize
  structure \item N the bandwidth $N \in \mathbb{N}_0$ \item M the number of nodes $M \in \mathbb{N}$ \item nfsft\_\-flags the NFSFT flags\end{itemize}
 \begin{Desc}
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 232 of file nfsft.c.
+Definition at line 255 of file nfsft.c.
 
 References FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF, nfsft\_\-init\_\-guru(), PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.
 
-Referenced by nfsft\_\-init().\hypertarget{group__nfsft_ga3}{
+Referenced by nfsft\_\-init().\hypertarget{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{
 \index{nfsft@{nfsft}!nfsft_init_guru@{nfsft\_\-init\_\-guru}}
 \index{nfsft_init_guru@{nfsft\_\-init\_\-guru}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-init\_\-guru]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-init\_\-guru (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M}, unsigned int {\em flags}, int {\em nfft\_\-flags}, int {\em nfft\_\-cutoff})}}
-\label{group__nfsft_ga3}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-init\_\-guru ({\bf nfsft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M}, unsigned int {\em nfsft\_\-flags}, unsigned int {\em nfft\_\-flags}, int {\em nfft\_\-cutoff})}}
+\label{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}
 
 
 Creates a transform plan. 
 
+\begin{itemize}
+\item plan a pointer to a 
+
+\footnotesize\begin{verbatim}nfsft_plan \end{verbatim}
+\normalsize
+ structure \item N the bandwidth $N \in \mathbb{N}_0$ \item M the number of nodes $M \in \mathbb{N}$ \item nfsft\_\-flags the NFSFT flags \item nfft\_\-cutoff the NFFT cutoff parameter\end{itemize}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 240 of file nfsft.c.
+Definition at line 263 of file nfsft.c.
 
-References nfsft\_\-wisdom::flags, nfft\_\-init\_\-guru(), NFSFT\_\-MALLOC\_\-F, NFSFT\_\-MALLOC\_\-F\_\-HAT, NFSFT\_\-MALLOC\_\-X, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, and NFSFT\_\-PRESERVE\_\-F\_\-HAT.
+References nfft\_\-plan::f, nfsft\_\-plan::f, nfft\_\-plan::f\_\-hat, nfsft\_\-plan::f\_\-hat, nfsft\_\-plan::f\_\-hat\_\-intern, nfsft\_\-plan::flags, nfsft\_\-plan::M\_\-total, nfsft\_\-plan::mv\_\-adjoint, nfsft\_\-plan::mv\_\-trafo, nfsft\_\-plan::N, nfsft\_\-plan::N\_\-total, nfft\_\-free(), nfft\_\-init\_\-guru(), nfft\_\-malloc(), nfsft\_\-adjoint(), NFSFT\_\-MALLOC\_\-F, NFSFT\_\-MALLOC\_\-F\_\-HAT, NFSFT\_\-MALLOC\_\-X, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, NFSFT\_\-PRESERVE\_\-F\_\-HAT, nfsft\_\-trafo(), nfsft\_\-plan::plan\_\-nfft, nfft\_\-plan::x, and nfsft\_\-plan::x.
 
-Referenced by main(), and nfsft\_\-init\_\-advanced().\hypertarget{group__nfsft_ga4}{
+Referenced by main(), and nfsft\_\-init\_\-advanced().\hypertarget{group__nfsft_gbe87aeea1f7cfef9ae8febb16d702f3b}{
 \index{nfsft@{nfsft}!nfsft_precompute@{nfsft\_\-precompute}}
 \index{nfsft_precompute@{nfsft\_\-precompute}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-precompute]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-precompute (int {\em N}, double {\em kappa}, unsigned int {\em nfsft\_\-flags}, unsigned int {\em fpt\_\-flags})}}
-\label{group__nfsft_ga4}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-precompute (int {\em N}, double {\em kappa}, unsigned int {\em nfsft\_\-flags}, unsigned int {\em fpt\_\-flags})}}
+\label{group__nfsft_gbe87aeea1f7cfef9ae8febb16d702f3b}
 
 
 Performes precomputation up to the next power of two with respect to a given bandwidth $N \in \mathbb{N}_2$. 
 
+The threshold parameter $\kappa \in \mathbb{R}^{+}$ determines the number of stabilization steps computed in the discrete polynomial transform and thereby its accuracy.
+
+\begin{itemize}
+\item N the bandwidth $N \in \mathbb{N}_0$ \item threshold the threshold $\kappa \in \mathbb{R}^{+}$ \item nfsft\_\-precomputation\_\-flags the NFSFT precomputation flags \item fpt\_\-precomputation\_\-flags the FPT precomputation flags\end{itemize}
+\begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 326 of file nfsft.c.
+Definition at line 352 of file nfsft.c.
 
-References nfsft\_\-wisdom::alpha, alpha\_\-al\_\-all(), nfsft\_\-wisdom::beta, beta\_\-al\_\-all(), nfsft\_\-wisdom::flags, FPT\_\-AL\_\-SYMMETRY, fpt\_\-init(), FPT\_\-PERSISTENT\_\-DATA, fpt\_\-precompute(), nfsft\_\-wisdom::gamma, gamma\_\-al\_\-all(), nfsft\_\-wisdom::initialized, nfsft\_\-wisdom::N\_\-MAX, nfft\_\-next\_\-power\_\-of\_\-2\_\-exp(), NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, nfsft\_\-wisdom::set, nfsft\_\-wisdom::T\_\-MAX, and wisdom.
+References nfsft\_\-wisdom::alpha, alpha\_\-al\_\-all(), alpha\_\-al\_\-row(), nfsft\_\-wisdom::beta, beta\_\-al\_\-all(), beta\_\-al\_\-row(), nfsft\_\-wisdom::flags, FPT\_\-AL\_\-SYMMETRY, fpt\_\-init(), FPT\_\-PERSISTENT\_\-DATA, fpt\_\-precompute(), nfsft\_\-wisdom::gamma, gamma\_\-al\_\-all(), gamma\_\-al\_\-row(), nfsft\_\-wisdom::initialized, nfsft\_\-wisdom::N\_\-MAX, nfft\_\-free(), nfft\_\-malloc(), nfft\_\-next\_\-power\_\-of\_\-2\_\-exp(), NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, ROW, nfsft\_\-wisdom::set, and nfsft\_\-wisdom::T\_\-MAX.
 
-Referenced by main().\hypertarget{group__nfsft_ga5}{
+Referenced by main().\hypertarget{group__nfsft_g3b69bca6c76a63877534f5a9781bf285}{
 \index{nfsft@{nfsft}!nfsft_forget@{nfsft\_\-forget}}
 \index{nfsft_forget@{nfsft\_\-forget}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-forget]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-forget ()}}
-\label{group__nfsft_ga5}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-forget (void)}}
+\label{group__nfsft_g3b69bca6c76a63877534f5a9781bf285}
 
 
 Forgets all precomputed data. 
@@ -622,15 +657,15 @@ Forgets all precomputed data.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 428 of file nfsft.c.
+Definition at line 454 of file nfsft.c.
 
-References nfsft\_\-wisdom::alpha, nfsft\_\-wisdom::beta, nfsft\_\-wisdom::flags, fpt\_\-finalize(), nfsft\_\-wisdom::gamma, nfsft\_\-wisdom::initialized, nfsft\_\-wisdom::N\_\-MAX, NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, nfsft\_\-wisdom::set, and wisdom.
+References nfsft\_\-wisdom::alpha, nfsft\_\-wisdom::beta, nfsft\_\-wisdom::flags, fpt\_\-finalize(), nfsft\_\-wisdom::gamma, nfsft\_\-wisdom::initialized, nfsft\_\-wisdom::N\_\-MAX, nfft\_\-free(), NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, and nfsft\_\-wisdom::set.
 
-Referenced by main().\hypertarget{group__nfsft_ga6}{
+Referenced by main().\hypertarget{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{
 \index{nfsft@{nfsft}!ndsft_trafo@{ndsft\_\-trafo}}
 \index{ndsft_trafo@{ndsft\_\-trafo}!nfsft@{nfsft}}
-\subsubsection[ndsft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void ndsft\_\-trafo (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan})}}
-\label{group__nfsft_ga6}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void ndsft\_\-trafo ({\bf nfsft\_\-plan} $\ast$ {\em plan})}}
+\label{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}
 
 
 Executes a direct NDSFT, i.e. 
@@ -643,15 +678,15 @@ computes for $m = 0,\ldots,M-1$ \[ f(m) = \sum_{k=0}^N \sum_{n=-k}^k \hat{f}(k,n
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 501 of file nfsft.c.
+Definition at line 530 of file nfsft.c.
 
-References nfsft\_\-wisdom::alpha, nfsft\_\-wisdom::flags, nfsft\_\-wisdom::gamma, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-PRESERVE\_\-F\_\-HAT, PI, and wisdom.
+References nfsft\_\-wisdom::alpha, nfsft\_\-plan::f, nfsft\_\-plan::f\_\-hat, nfsft\_\-plan::f\_\-hat\_\-intern, nfsft\_\-plan::flags, nfsft\_\-wisdom::flags, nfsft\_\-wisdom::gamma, nfsft\_\-plan::M\_\-total, nfsft\_\-plan::N, nfsft\_\-plan::N\_\-total, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-PRESERVE\_\-F\_\-HAT, PI, ROW, ROWK, and nfsft\_\-plan::x.
 
-Referenced by main(), and nfsft\_\-trafo().\hypertarget{group__nfsft_ga7}{
+Referenced by main(), and nfsft\_\-trafo().\hypertarget{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{
 \index{nfsft@{nfsft}!ndsft_adjoint@{ndsft\_\-adjoint}}
 \index{ndsft_adjoint@{ndsft\_\-adjoint}!nfsft@{nfsft}}
-\subsubsection[ndsft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void ndsft\_\-adjoint (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan})}}
-\label{group__nfsft_ga7}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void ndsft\_\-adjoint ({\bf nfsft\_\-plan} $\ast$ {\em plan})}}
+\label{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}
 
 
 Executes a direct adjoint NDSFT, i.e. 
@@ -664,15 +699,15 @@ computes for $k=0,\ldots,N; n=-k,\ldots,k$ \[ \hat{f}(k,n) = \sum_{m = 0}^{M-1} 
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 633 of file nfsft.c.
+Definition at line 662 of file nfsft.c.
 
-References nfsft\_\-wisdom::alpha, nfsft\_\-wisdom::flags, nfsft\_\-wisdom::gamma, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-ZERO\_\-F\_\-HAT, PI, and wisdom.
+References nfsft\_\-wisdom::alpha, nfsft\_\-plan::f, nfsft\_\-plan::f\_\-hat, nfsft\_\-plan::flags, nfsft\_\-wisdom::flags, nfsft\_\-wisdom::gamma, nfsft\_\-plan::M\_\-total, nfsft\_\-plan::N, nfsft\_\-plan::N\_\-total, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-DIRECT\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-ZERO\_\-F\_\-HAT, PI, ROW, ROWK, and nfsft\_\-plan::x.
 
-Referenced by main(), and nfsft\_\-adjoint().\hypertarget{group__nfsft_ga8}{
+Referenced by main(), and nfsft\_\-adjoint().\hypertarget{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{
 \index{nfsft@{nfsft}!nfsft_trafo@{nfsft\_\-trafo}}
 \index{nfsft_trafo@{nfsft\_\-trafo}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-trafo (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan})}}
-\label{group__nfsft_ga8}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-trafo ({\bf nfsft\_\-plan} $\ast$ {\em plan})}}
+\label{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}
 
 
 Executes a NFSFT, i.e. 
@@ -685,15 +720,15 @@ computes for $m = 0,\ldots,M-1$ \[ f(m) = \sum_{k=0}^N \sum_{n=-k}^k \hat{f}(k,n
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 745 of file nfsft.c.
+Definition at line 775 of file nfsft.c.
 
-References c2e(), dpt\_\-trafo(), nfsft\_\-wisdom::flags, fpt\_\-trafo(), nfsft\_\-wisdom::initialized, fpt\_\-set\_\-s\_\-::N, nfsft\_\-wisdom::N\_\-MAX, ndft\_\-trafo(), ndsft\_\-trafo(), nfft\_\-trafo(), NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-PRESERVE\_\-F\_\-HAT, NFSFT\_\-USE\_\-DPT, NFSFT\_\-USE\_\-NDFT, PI, nfsft\_\-wisdom::set, and wisdom.
+References c2e(), dpt\_\-trafo(), nfsft\_\-plan::f, nfft\_\-plan::f, nfft\_\-plan::f\_\-hat, nfsft\_\-plan::f\_\-hat, nfsft\_\-plan::f\_\-hat\_\-intern, nfsft\_\-plan::flags, nfsft\_\-wisdom::flags, fpt\_\-trafo(), nfsft\_\-wisdom::initialized, nfsft\_\-plan::N, nfsft\_\-wisdom::N\_\-MAX, nfsft\_\-plan::N\_\-total, ndft\_\-trafo(), ndsft\_\-trafo(), nfft\_\-trafo\_\-2d(), NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-PRESERVE\_\-F\_\-HAT, NFSFT\_\-USE\_\-DPT, NFSFT\_\-USE\_\-NDFT, PI, nfsft\_\-plan::plan\_\-nfft, nfsft\_\-wisdom::set, nfsft\_\-plan::x, and nfft\_\-plan::x.
 
-Referenced by main().\hypertarget{group__nfsft_ga9}{
+Referenced by main(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_g813bb48d404c7286310733c99a81a169}{
 \index{nfsft@{nfsft}!nfsft_adjoint@{nfsft\_\-adjoint}}
 \index{nfsft_adjoint@{nfsft\_\-adjoint}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-adjoint (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan})}}
-\label{group__nfsft_ga9}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-adjoint ({\bf nfsft\_\-plan} $\ast$ {\em plan})}}
+\label{group__nfsft_g813bb48d404c7286310733c99a81a169}
 
 
 Executes an adjoint NFSFT, i.e. 
@@ -706,15 +741,15 @@ computes for $k=0,\ldots,N; n=-k,\ldots,k$ \[ \hat{f}(k,n) = \sum_{m = 0}^{M-1} 
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 864 of file nfsft.c.
+Definition at line 894 of file nfsft.c.
 
-References c2e\_\-transposed(), dpt\_\-transposed(), nfsft\_\-wisdom::flags, fpt\_\-transposed(), nfsft\_\-wisdom::initialized, fpt\_\-set\_\-s\_\-::N, nfsft\_\-wisdom::N\_\-MAX, ndft\_\-adjoint(), ndsft\_\-adjoint(), nfft\_\-adjoint(), NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-USE\_\-DPT, NFSFT\_\-USE\_\-NDFT, NFSFT\_\-ZERO\_\-F\_\-HAT, PI, nfsft\_\-wisdom::set, and wisdom.
+References c2e\_\-transposed(), dpt\_\-transposed(), nfsft\_\-plan::f, nfft\_\-plan::f, nfsft\_\-plan::f\_\-hat, nfft\_\-plan::f\_\-hat, nfsft\_\-plan::flags, nfsft\_\-wisdom::flags, fpt\_\-transposed(), nfsft\_\-wisdom::initialized, nfsft\_\-plan::N, nfsft\_\-wisdom::N\_\-MAX, ndft\_\-adjoint(), ndsft\_\-adjoint(), nfft\_\-adjoint\_\-2d(), NFSFT\_\-BREAK\_\-EVEN, NFSFT\_\-INDEX, NFSFT\_\-NO\_\-FAST\_\-ALGORITHM, NFSFT\_\-NORMALIZED, NFSFT\_\-USE\_\-DPT, NFSFT\_\-USE\_\-NDFT, NFSFT\_\-ZERO\_\-F\_\-HAT, PI, nfsft\_\-plan::plan\_\-nfft, nfsft\_\-wisdom::set, nfsft\_\-plan::x, and nfft\_\-plan::x.
 
-Referenced by main().\hypertarget{group__nfsft_ga10}{
+Referenced by main(), and nfsft\_\-init\_\-guru().\hypertarget{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{
 \index{nfsft@{nfsft}!nfsft_finalize@{nfsft\_\-finalize}}
 \index{nfsft_finalize@{nfsft\_\-finalize}!nfsft@{nfsft}}
-\subsubsection[nfsft\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-finalize (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan})}}
-\label{group__nfsft_ga10}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsft\_\-finalize ({\bf nfsft\_\-plan} $\ast$ {\em plan})}}
+\label{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}
 
 
 Destroys a plan. 
@@ -725,60 +760,15 @@ Destroys a plan.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 467 of file nfsft.c.
+Definition at line 493 of file nfsft.c.
 
-References nfft\_\-finalize(), NFSFT\_\-MALLOC\_\-F, NFSFT\_\-MALLOC\_\-F\_\-HAT, NFSFT\_\-MALLOC\_\-X, and NFSFT\_\-PRESERVE\_\-F\_\-HAT.
+References nfsft\_\-plan::f, nfsft\_\-plan::f\_\-hat, nfsft\_\-plan::f\_\-hat\_\-intern, nfsft\_\-plan::flags, nfft\_\-finalize(), nfft\_\-free(), NFSFT\_\-MALLOC\_\-F, NFSFT\_\-MALLOC\_\-F\_\-HAT, NFSFT\_\-MALLOC\_\-X, NFSFT\_\-PRESERVE\_\-F\_\-HAT, nfsft\_\-plan::plan\_\-nfft, and nfsft\_\-plan::x.
 
-Referenced by main().\hypertarget{group__nfsft_ga12}{
-\index{nfsft@{nfsft}!alpha_al@{alpha\_\-al}}
-\index{alpha_al@{alpha\_\-al}!nfsft@{nfsft}}
-\subsubsection[alpha\_\-al]{\setlength{\rightskip}{0pt plus 5cm}double alpha\_\-al (int {\em k}, int {\em n})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga12}
-
-
-Computes three-term recurrence coefficients $\alpha_k^n$ of associated Legendre functions. 
-
-\begin{itemize}
-\item k The index $k$ \item n The index $n$ \end{itemize}
-
-
-Definition at line 9 of file legendre.c.
-
-Referenced by alpha\_\-al\_\-all().\hypertarget{group__nfsft_ga13}{
-\index{nfsft@{nfsft}!beta_al@{beta\_\-al}}
-\index{beta_al@{beta\_\-al}!nfsft@{nfsft}}
-\subsubsection[beta\_\-al]{\setlength{\rightskip}{0pt plus 5cm}double beta\_\-al (int {\em k}, int {\em n})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga13}
-
-
-Computes three-term recurrence coefficients $\beta_k^n$ of associated Legendre functions. 
-
-\begin{itemize}
-\item k The index $k$ \item n The index $n$ \end{itemize}
-
-
-Definition at line 36 of file legendre.c.
-
-Referenced by beta\_\-al\_\-all().\hypertarget{group__nfsft_ga14}{
-\index{nfsft@{nfsft}!gamma_al@{gamma\_\-al}}
-\index{gamma_al@{gamma\_\-al}!nfsft@{nfsft}}
-\subsubsection[gamma\_\-al]{\setlength{\rightskip}{0pt plus 5cm}double gamma\_\-al (int {\em k}, int {\em n})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga14}
-
-
-Computes three-term recurrence coefficients $\gamma_k^n$ of associated Legendre functions. 
-
-\begin{itemize}
-\item k The index $k$ \item n The index $n$ \end{itemize}
-
-
-Definition at line 48 of file legendre.c.
-
-Referenced by gamma\_\-al\_\-all().\hypertarget{group__nfsft_ga18}{
+Referenced by main().\hypertarget{group__nfsft_g6b01d5f2e8b3a026906e977118d7b0d2}{
 \index{nfsft@{nfsft}!alpha_al_all@{alpha\_\-al\_\-all}}
 \index{alpha_al_all@{alpha\_\-al\_\-all}!nfsft@{nfsft}}
-\subsubsection[alpha\_\-al\_\-all]{\setlength{\rightskip}{0pt plus 5cm}void alpha\_\-al\_\-all (double $\ast$ {\em alpha}, int {\em N})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga18}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void alpha\_\-al\_\-all (R $\ast$ {\em alpha}, const int {\em N})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{group__nfsft_g6b01d5f2e8b3a026906e977118d7b0d2}
 
 
 Compute three-term-recurrence coefficients $\alpha_{k-1}^n$ of associated Legendre functions for $k,n = 0,1,\ldots,N$. 
@@ -787,15 +777,11 @@ Compute three-term-recurrence coefficients $\alpha_{k-1}^n$ of associated Legend
 \item alpha A pointer to an array of doubles of size $(N+1)^2$ where the coefficients will be stored such that alpha\mbox{[}n+(N+1)+k\mbox{]} = $\alpha_{k-1}^n$. \item N The upper bound $N$. \end{itemize}
 
 
-Definition at line 106 of file legendre.c.
-
-References alpha\_\-al().
-
-Referenced by nfsft\_\-precompute().\hypertarget{group__nfsft_ga19}{
+Definition at line 97 of file legendre.c.\hypertarget{group__nfsft_gf0fb6a3993b3c956bea8fa75e3a71290}{
 \index{nfsft@{nfsft}!beta_al_all@{beta\_\-al\_\-all}}
 \index{beta_al_all@{beta\_\-al\_\-all}!nfsft@{nfsft}}
-\subsubsection[beta\_\-al\_\-all]{\setlength{\rightskip}{0pt plus 5cm}void beta\_\-al\_\-all (double $\ast$ {\em beta}, int {\em N})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga19}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void beta\_\-al\_\-all (R $\ast$ {\em beta}, const int {\em N})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{group__nfsft_gf0fb6a3993b3c956bea8fa75e3a71290}
 
 
 Compute three-term-recurrence coefficients $\beta_{k-1}^n$ of associated Legendre functions for $k,n = 0,1,\ldots,N$. 
@@ -804,15 +790,11 @@ Compute three-term-recurrence coefficients $\beta_{k-1}^n$ of associated Legendr
 \item beta A pointer to an array of doubles of size $(N+1)^2$ where the coefficients will be stored such that beta\mbox{[}n+(N+1)+k\mbox{]} = $\beta_{k-1}^n$. \item N The upper bound $N$. \end{itemize}
 
 
-Definition at line 120 of file legendre.c.
-
-References beta\_\-al().
-
-Referenced by nfsft\_\-precompute().\hypertarget{group__nfsft_ga20}{
+Definition at line 106 of file legendre.c.\hypertarget{group__nfsft_g88de851c8f9a4c042ad101cb4fb8c51d}{
 \index{nfsft@{nfsft}!gamma_al_all@{gamma\_\-al\_\-all}}
 \index{gamma_al_all@{gamma\_\-al\_\-all}!nfsft@{nfsft}}
-\subsubsection[gamma\_\-al\_\-all]{\setlength{\rightskip}{0pt plus 5cm}void gamma\_\-al\_\-all (double $\ast$ {\em gamma}, int {\em N})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga20}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void gamma\_\-al\_\-all (R $\ast$ {\em gamma}, const int {\em N})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{group__nfsft_g88de851c8f9a4c042ad101cb4fb8c51d}
 
 
 Compute three-term-recurrence coefficients $\gamma_{k-1}^n$ of associated Legendre functions for $k,n = 0,1,\ldots,N$. 
@@ -821,15 +803,11 @@ Compute three-term-recurrence coefficients $\gamma_{k-1}^n$ of associated Legend
 \item beta A pointer to an array of doubles of size $(N+1)^2$ where the coefficients will be stored such that gamma\mbox{[}n+(N+1)+k\mbox{]} = $\gamma_{k-1}^n$. \item N The upper bound $N$. \end{itemize}
 
 
-Definition at line 134 of file legendre.c.
-
-References gamma\_\-al().
-
-Referenced by nfsft\_\-precompute().\hypertarget{group__nfsft_ga21}{
+Definition at line 115 of file legendre.c.\hypertarget{group__nfsft_gc5f2f8c36dc4f8ca65f058af6491f163}{
 \index{nfsft@{nfsft}!eval_al@{eval\_\-al}}
 \index{eval_al@{eval\_\-al}!nfsft@{nfsft}}
-\subsubsection[eval\_\-al]{\setlength{\rightskip}{0pt plus 5cm}void eval\_\-al (double $\ast$ {\em x}, double $\ast$ {\em y}, int {\em size}, int {\em k}, double $\ast$ {\em alpha}, double $\ast$ {\em beta}, double $\ast$ {\em gamma})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga21}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void eval\_\-al (R $\ast$ {\em x}, R $\ast$ {\em y}, const int {\em size}, const int {\em k}, R $\ast$ {\em alpha}, R $\ast$ {\em beta}, R $\ast$ {\em gamma})}}
+\label{group__nfsft_gc5f2f8c36dc4f8ca65f058af6491f163}
 
 
 Evaluates an associated Legendre polynomials $P_k^n(x,c)$ using the Clenshaw-algorithm. 
@@ -838,11 +816,11 @@ Evaluates an associated Legendre polynomials $P_k^n(x,c)$ using the Clenshaw-alg
 \item x A pointer to an array of nodes where the function is to be evaluated \item y A pointer to an array where the function values are returned \item size The length of x and y \item k The index $k$ \item alpha A pointer to an array containing the recurrence coefficients $\alpha_c^n,\ldots,\alpha_{c+k}^n$ \item beta A pointer to an array containing the recurrence coefficients $\beta_c^n,\ldots,\beta_{c+k}^n$ \item gamma A pointer to an array containing the recurrence coefficients $\gamma_c^n,\ldots,\gamma_{c+k}^n$ \end{itemize}
 
 
-Definition at line 148 of file legendre.c.\hypertarget{group__nfsft_ga22}{
+Definition at line 124 of file legendre.c.\hypertarget{group__nfsft_g1bc5682379de94e87031afa38e02675d}{
 \index{nfsft@{nfsft}!eval_al_thresh@{eval\_\-al\_\-thresh}}
 \index{eval_al_thresh@{eval\_\-al\_\-thresh}!nfsft@{nfsft}}
-\subsubsection[eval\_\-al\_\-thresh]{\setlength{\rightskip}{0pt plus 5cm}int eval\_\-al\_\-thresh (double $\ast$ {\em x}, double $\ast$ {\em y}, int {\em size}, int {\em k}, double $\ast$ {\em alpha}, double $\ast$ {\em beta}, double $\ast$ {\em gamma}, double {\em threshold})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga22}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int eval\_\-al\_\-thresh (R $\ast$ {\em x}, R $\ast$ {\em y}, const int {\em size}, const int {\em k}, R $\ast$ {\em alpha}, R $\ast$ {\em beta}, R $\ast$ {\em gamma}, R {\em threshold})}}
+\label{group__nfsft_g1bc5682379de94e87031afa38e02675d}
 
 
 Evaluates an associated Legendre polynomials $P_k^n(x,c)$ using the Clenshaw-algorithm if it no exceeds a given threshold. 
@@ -851,11 +829,11 @@ Evaluates an associated Legendre polynomials $P_k^n(x,c)$ using the Clenshaw-alg
 \item x A pointer to an array of nodes where the function is to be evaluated \item y A pointer to an array where the function values are returned \item size The length of x and y \item k The index $k$ \item alpha A pointer to an array containing the recurrence coefficients $\alpha_c^n,\ldots,\alpha_{c+k}^n$ \item beta A pointer to an array containing the recurrence coefficients $\beta_c^n,\ldots,\beta_{c+k}^n$ \item gamma A pointer to an array containing the recurrence coefficients $\gamma_c^n,\ldots,\gamma_{c+k}^n$ \item threshold The threshold \end{itemize}
 
 
-Definition at line 193 of file legendre.c.\hypertarget{group__nfsft_ga23}{
+Definition at line 169 of file legendre.c.\hypertarget{group__nfsft_g47209b28b6561fca7349ed8afa5f9656}{
 \index{nfsft@{nfsft}!c2e@{c2e}}
 \index{c2e@{c2e}!nfsft@{nfsft}}
-\subsubsection[c2e]{\setlength{\rightskip}{0pt plus 5cm}void c2e (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga23}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}static void c2e ({\bf nfsft\_\-plan} $\ast$ {\em plan})\hspace{0.3cm}{\tt  \mbox{[}inline, static\mbox{]}}}}
+\label{group__nfsft_g47209b28b6561fca7349ed8afa5f9656}
 
 
 Converts coefficients $\left(b_k^n\right)_{k=0}^M$ with $M \in \mathbb{N}_0$, $-M \le n \le M$ from a linear combination of Chebyshev polynomials \[ f(\cos\vartheta) = \sum_{k=0}^{2\lfloor\frac{M}{2}\rfloor} a_k (\sin\vartheta)^{n\;\mathrm{mod}\;2} T_k(\cos\vartheta) \] to coefficients $\left(c_k^n\right)_{k=0}^M$ matching the representation by complex exponentials \[ f(\cos\vartheta) = \sum_{k=-M}^{M} c_k \mathrm{e}^{\mathrm{i}k\vartheta} \] for each order $n=-M,\ldots,M$. 
@@ -868,18 +846,18 @@ Converts coefficients $\left(b_k^n\right)_{k=0}^M$ with $M \in \mathbb{N}_0$, $-
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 80 of file nfsft.c.
+Definition at line 103 of file nfsft.c.
 
-References NFSFT\_\-INDEX.
+References nfsft\_\-plan::f\_\-hat\_\-intern, nfsft\_\-plan::N, and NFSFT\_\-INDEX.
 
-Referenced by nfsft\_\-trafo().\hypertarget{group__nfsft_ga24}{
+Referenced by nfsft\_\-trafo(), and nfsoft\_\-trafo().\hypertarget{group__nfsft_g0e033457136bc0ecb18bb57d3ee5aa37}{
 \index{nfsft@{nfsft}!c2e_transposed@{c2e\_\-transposed}}
 \index{c2e_transposed@{c2e\_\-transposed}!nfsft@{nfsft}}
-\subsubsection[c2e\_\-transposed]{\setlength{\rightskip}{0pt plus 5cm}void c2e\_\-transposed (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$ {\em plan})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
-\label{group__nfsft_ga24}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}static void c2e\_\-transposed ({\bf nfsft\_\-plan} $\ast$ {\em plan})\hspace{0.3cm}{\tt  \mbox{[}inline, static\mbox{]}}}}
+\label{group__nfsft_g0e033457136bc0ecb18bb57d3ee5aa37}
 
 
-Transposed version of the function \hyperlink{group__nfsft_ga23}{c2e}. 
+Transposed version of the function \hyperlink{group__nfsft_g47209b28b6561fca7349ed8afa5f9656}{c2e}. 
 
 \begin{itemize}
 \item plan The {\tt \hyperlink{structnfsft__plan}{nfsft\_\-plan}} containing the coefficients $\left(c_k^n\right)_{k=-M,\ldots,M;n=-M,\ldots,M}$\end{itemize}
@@ -889,18 +867,18 @@ Transposed version of the function \hyperlink{group__nfsft_ga23}{c2e}.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 158 of file nfsft.c.
+Definition at line 181 of file nfsft.c.
 
-References NFSFT\_\-INDEX.
+References nfsft\_\-plan::f\_\-hat, nfsft\_\-plan::N, and NFSFT\_\-INDEX.
 
 Referenced by nfsft\_\-adjoint().
 
 \subsection{Variable Documentation}
-\hypertarget{group__nfsft_ga0}{
+\hypertarget{group__nfsft_g0af81d81e1b436949ddc46dbd27346e5}{
 \index{nfsft@{nfsft}!wisdom@{wisdom}}
 \index{wisdom@{wisdom}!nfsft@{nfsft}}
-\subsubsection[wisdom]{\setlength{\rightskip}{0pt plus 5cm}struct \hyperlink{structnfsft__wisdom}{nfsft\_\-wisdom} \hyperlink{group__nfsft_ga0}{wisdom} = \{false,0U\}\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
-\label{group__nfsft_ga0}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}struct {\bf nfsft\_\-wisdom} {\bf wisdom} = \{false,0U,-1,-1,0,0,0,0,0\}\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
+\label{group__nfsft_g0af81d81e1b436949ddc46dbd27346e5}
 
 
 The global wisdom structure for precomputed data. 
@@ -911,6 +889,4 @@ The global wisdom structure for precomputed data.
 \item[Author:]Jens Keiner \end{Desc}
 
 
-Definition at line 56 of file nfsft.c.
-
-Referenced by ndsft\_\-adjoint(), ndsft\_\-trafo(), nfsft\_\-adjoint(), nfsft\_\-forget(), nfsft\_\-precompute(), and nfsft\_\-trafo().
+Definition at line 79 of file nfsft.c.

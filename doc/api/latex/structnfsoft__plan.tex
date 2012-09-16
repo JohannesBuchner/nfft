@@ -1,0 +1,133 @@
+\hypertarget{structnfsoft__plan}{
+\section{nfsoft\_\-plan Struct Reference}
+\label{structnfsoft__plan}\index{nfsoft_plan@{nfsoft\_\-plan}}
+}
+Structure for a NFSOFT transform plan.  
+
+
+{\tt \#include $<$nfft3.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+int \hyperlink{structnfsoft__plan_2f54052e48b3c46b98898e768f0f9350}{N\_\-total}
+\begin{CompactList}\small\item\em Inherited public members. \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_549fec5b758aee2a846b1025f5875799}{
+int \hyperlink{structnfsoft__plan_549fec5b758aee2a846b1025f5875799}{M\_\-total}}
+\label{structnfsoft__plan_549fec5b758aee2a846b1025f5875799}
+
+\begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_8ebb50336db1a16d7d3c148846f3b464}{
+fftw\_\-complex $\ast$ \hyperlink{structnfsoft__plan_8ebb50336db1a16d7d3c148846f3b464}{f\_\-hat}}
+\label{structnfsoft__plan_8ebb50336db1a16d7d3c148846f3b464}
+
+\begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_50bbe0671c97b378973ca31d634916a3}{
+fftw\_\-complex $\ast$ \hyperlink{structnfsoft__plan_50bbe0671c97b378973ca31d634916a3}{f}}
+\label{structnfsoft__plan_50bbe0671c97b378973ca31d634916a3}
+
+\begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_39c0c7e5bb34d19f758c7fc97bd087b7}{
+void($\ast$ \hyperlink{structnfsoft__plan_39c0c7e5bb34d19f758c7fc97bd087b7}{mv\_\-trafo} )(void $\ast$)}
+\label{structnfsoft__plan_39c0c7e5bb34d19f758c7fc97bd087b7}
+
+\begin{CompactList}\small\item\em Pointer to the own transform. \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_bd4b85ee2e34f26391587b9527208cdd}{
+void($\ast$ \hyperlink{structnfsoft__plan_bd4b85ee2e34f26391587b9527208cdd}{mv\_\-adjoint} )(void $\ast$)}
+\label{structnfsoft__plan_bd4b85ee2e34f26391587b9527208cdd}
+
+\begin{CompactList}\small\item\em Pointer to the own adjoint. \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_568e2c79a7c0e447fe635fa4a7e793bf}{
+double $\ast$ \hyperlink{structnfsoft__plan_568e2c79a7c0e447fe635fa4a7e793bf}{x}}
+\label{structnfsoft__plan_568e2c79a7c0e447fe635fa4a7e793bf}
+
+\begin{CompactList}\small\item\em the input nodes \item\end{CompactList}\item 
+fftw\_\-complex $\ast$ \hyperlink{structnfsoft__plan_10aef5036be8e0cf822db94e3b254543}{wig\_\-coeffs}
+\begin{CompactList}\small\item\em some auxillary memory \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_7139a61f18756d43f5aff62233447378}{
+fftw\_\-complex $\ast$ \hyperlink{structnfsoft__plan_7139a61f18756d43f5aff62233447378}{cheby}}
+\label{structnfsoft__plan_7139a61f18756d43f5aff62233447378}
+
+\begin{CompactList}\small\item\em contains a set of Chebychev coefficients for$\ast$ fixed orders m and n \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_3fcaa11033cad53c02ece5475d46cdee}{
+fftw\_\-complex $\ast$ \hyperlink{structnfsoft__plan_3fcaa11033cad53c02ece5475d46cdee}{aux}}
+\label{structnfsoft__plan_3fcaa11033cad53c02ece5475d46cdee}
+
+\begin{CompactList}\small\item\em used when converting Chebychev to Fourier$\ast$ coeffcients \item\end{CompactList}\item 
+int \hyperlink{structnfsoft__plan_e716c2f66be287f40e49df0e09f6b777}{t}
+\begin{CompactList}\small\item\em Private members. \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_47a1fde8fa984c73bd2e5db3324ff4f4}{
+unsigned int \hyperlink{structnfsoft__plan_47a1fde8fa984c73bd2e5db3324ff4f4}{flags}}
+\label{structnfsoft__plan_47a1fde8fa984c73bd2e5db3324ff4f4}
+
+\begin{CompactList}\small\item\em the planner flags \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_d29c3ab33e053e3a0a28332d93304231}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} \hyperlink{structnfsoft__plan_d29c3ab33e053e3a0a28332d93304231}{nfft\_\-plan}}
+\label{structnfsoft__plan_d29c3ab33e053e3a0a28332d93304231}
+
+\begin{CompactList}\small\item\em the internal NFFT plan \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_586afdc9afd5e707f5900b37b4d56499}{
+\hyperlink{structnfsoft__plan_586afdc9afd5e707f5900b37b4d56499}{fftw\_\-plan} \hyperlink{structnfsoft__plan_586afdc9afd5e707f5900b37b4d56499}{fftw\_\-plan}}
+\label{structnfsoft__plan_586afdc9afd5e707f5900b37b4d56499}
+
+\begin{CompactList}\small\item\em the optional internal FFTW plan \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_3599e1524573f9796277406acde9628f}{
+\hyperlink{structnfsoft__plan_3599e1524573f9796277406acde9628f}{fpt\_\-set} \hyperlink{structnfsoft__plan_3599e1524573f9796277406acde9628f}{fpt\_\-set}}
+\label{structnfsoft__plan_3599e1524573f9796277406acde9628f}
+
+\begin{CompactList}\small\item\em the internal FPT plan \item\end{CompactList}\item 
+\hypertarget{structnfsoft__plan_af9177dc2e45502fe9a7f2331ae1872f}{
+int \hyperlink{structnfsoft__plan_af9177dc2e45502fe9a7f2331ae1872f}{fpt\_\-kappa}}
+\label{structnfsoft__plan_af9177dc2e45502fe9a7f2331ae1872f}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for a NFSOFT transform plan. 
+
+Definition at line 2597 of file nfft3.h.
+
+\subsection{Field Documentation}
+\hypertarget{structnfsoft__plan_2f54052e48b3c46b98898e768f0f9350}{
+\index{nfsoft_plan@{nfsoft\_\-plan}!N_total@{N\_\-total}}
+\index{N_total@{N\_\-total}!nfsoft_plan@{nfsoft\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf nfsoft\_\-plan::N\_\-total}}}
+\label{structnfsoft__plan_2f54052e48b3c46b98898e768f0f9350}
+
+
+Inherited public members. 
+
+Total number of Fourier $\backslash$ coefficients 
+
+Definition at line 2600 of file nfft3.h.
+
+Referenced by nfsoft\_\-adjoint(), nfsoft\_\-init\_\-guru(), nfsoft\_\-precompute(), and nfsoft\_\-trafo().\hypertarget{structnfsoft__plan_10aef5036be8e0cf822db94e3b254543}{
+\index{nfsoft_plan@{nfsoft\_\-plan}!wig_coeffs@{wig\_\-coeffs}}
+\index{wig_coeffs@{wig\_\-coeffs}!nfsoft_plan@{nfsoft\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}fftw\_\-complex$\ast$ {\bf nfsoft\_\-plan::wig\_\-coeffs}}}
+\label{structnfsoft__plan_10aef5036be8e0cf822db94e3b254543}
+
+
+some auxillary memory 
+
+contains a set of SO(3) Fourier coefficients$\ast$ for fixed orders m and n 
+
+Definition at line 2607 of file nfft3.h.
+
+Referenced by nfsoft\_\-adjoint(), nfsoft\_\-finalize(), nfsoft\_\-init\_\-guru(), and nfsoft\_\-trafo().\hypertarget{structnfsoft__plan_e716c2f66be287f40e49df0e09f6b777}{
+\index{nfsoft_plan@{nfsoft\_\-plan}!t@{t}}
+\index{t@{t}!nfsoft_plan@{nfsoft\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf nfsoft\_\-plan::t}}}
+\label{structnfsoft__plan_e716c2f66be287f40e49df0e09f6b777}
+
+
+Private members. 
+
+the logaritm of NPT with $\ast$ respect to the basis 2 
+
+Definition at line 2615 of file nfft3.h.
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{nfft3_8h}{nfft3.h}\end{CompactItemize}

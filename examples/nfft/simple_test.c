@@ -1,11 +1,33 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: simple_test.c 3124 2009-03-18 13:44:27Z kunis $ */
+
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include <complex.h>
+
 #include "util.h"
 #include "nfft3.h"
 
-void simple_test_nfft_1d()
+void simple_test_nfft_1d(void)
 {
   nfft_plan p;
 
@@ -24,16 +46,16 @@ void simple_test_nfft_1d()
 
   /** init pseudo random Fourier coefficients and show them */
   nfft_vrand_unit_complex(p.f_hat,p.N_total);
-  nfft_vpr_complex(p.f_hat,p.N_total,"given Fourier coefficients, vector f_hat"); 
+  nfft_vpr_complex(p.f_hat,p.N_total,"given Fourier coefficients, vector f_hat");
 
   /** direct trafo and show the result */
   ndft_trafo(&p);
-  nfft_vpr_complex(p.f,p.M_total,"ndft, vector f"); 
+  nfft_vpr_complex(p.f,p.M_total,"ndft, vector f");
 
   /** approx. trafo and show the result */
   nfft_trafo(&p);
   nfft_vpr_complex(p.f,p.M_total,"nfft, vector f");
-  
+
   /** approx. adjoint and show the result */
   ndft_adjoint(&p);
   nfft_vpr_complex(p.f_hat,p.N_total,"adjoint ndft, vector f_hat");
@@ -46,15 +68,15 @@ void simple_test_nfft_1d()
   nfft_finalize(&p);
 }
 
-void simple_test_nfft_2d()
+void simple_test_nfft_2d(void)
 {
   int K,N[2],n[2];
   double t;
 
   nfft_plan p;
-   
-  N[0]=70; n[0]=128;
-  N[1]=50; n[1]=128;
+
+  N[0]=20; n[0]=32;
+  N[1]=16; n[1]=32;
   K=12;
 
   t=nfft_second();
@@ -104,21 +126,21 @@ void simple_test_nfft_2d()
   t=nfft_second();
   nfft_adjoint(&p);
   t=nfft_second()-t;
-  nfft_vpr_complex(p.f_hat,K,"adjoint nfft, vector f_hat (first few entries)"); 
+  nfft_vpr_complex(p.f_hat,K,"adjoint nfft, vector f_hat (first few entries)");
   printf(" took %e seconds.\n",t);
 
   /** finalise the two dimensional plan */
   nfft_finalize(&p);
 }
 
-int main()
+int main(void)
 {
   system("clear");
   printf("1) computing an one dimensional ndft, nfft and an adjoint nfft\n\n");
   simple_test_nfft_1d();
   getc(stdin);
 
-  system("clear"); 
+  system("clear");
   printf("2) computing a two dimensional ndft, nfft and an adjoint nfft\n\n");
   simple_test_nfft_2d();
 

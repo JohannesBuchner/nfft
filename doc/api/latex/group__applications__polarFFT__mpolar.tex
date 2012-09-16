@@ -5,56 +5,56 @@
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-int \hyperlink{group__applications__polarFFT__mpolar_ga1}{mpolar\_\-grid} (int T, int R, double $\ast$x, double $\ast$w)
+static int \hyperlink{group__applications__polarFFT__mpolar_g08d0441aceedbcb98b985ee5aa121952}{mpolar\_\-grid} (int T, int R, double $\ast$x, double $\ast$w)
 \begin{CompactList}\small\item\em Generates the points $x_{t,j}$ with weights $w_{t,j}$ for the modified polar grid with $T$ angles and $R$ offsets. \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__mpolar_ga2}{
-int \hyperlink{group__applications__polarFFT__mpolar_ga2}{mpolar\_\-dft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
-\label{group__applications__polarFFT__mpolar_ga2}
+\hypertarget{group__applications__polarFFT__mpolar_gee9902054200ea50d90b5d290bff8c71}{
+static int \hyperlink{group__applications__polarFFT__mpolar_gee9902054200ea50d90b5d290bff8c71}{mpolar\_\-dft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
+\label{group__applications__polarFFT__mpolar_gee9902054200ea50d90b5d290bff8c71}
 
 \begin{CompactList}\small\item\em discrete mpolar FFT \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__mpolar_ga3}{
-int \hyperlink{group__applications__polarFFT__mpolar_ga3}{mpolar\_\-fft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
-\label{group__applications__polarFFT__mpolar_ga3}
+\hypertarget{group__applications__polarFFT__mpolar_g55b2f979a5c69176a73f59eb0312b53d}{
+static int \hyperlink{group__applications__polarFFT__mpolar_g55b2f979a5c69176a73f59eb0312b53d}{mpolar\_\-fft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
+\label{group__applications__polarFFT__mpolar_g55b2f979a5c69176a73f59eb0312b53d}
 
 \begin{CompactList}\small\item\em NFFT-based mpolar FFT. \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__mpolar_ga4}{
-int \hyperlink{group__applications__polarFFT__mpolar_ga4}{inverse\_\-mpolar\_\-fft} (fftw\_\-complex $\ast$f, int T, int R, fftw\_\-complex $\ast$f\_\-hat, int NN, int max\_\-i, int m)}
-\label{group__applications__polarFFT__mpolar_ga4}
+\hypertarget{group__applications__polarFFT__mpolar_g5d0560e898b722ee5fe09acc485bbec8}{
+static int \hyperlink{group__applications__polarFFT__mpolar_g5d0560e898b722ee5fe09acc485bbec8}{inverse\_\-mpolar\_\-fft} (fftw\_\-complex $\ast$f, int T, int R, fftw\_\-complex $\ast$f\_\-hat, int NN, int max\_\-i, int m)}
+\label{group__applications__polarFFT__mpolar_g5d0560e898b722ee5fe09acc485bbec8}
 
 \begin{CompactList}\small\item\em inverse NFFT-based mpolar FFT \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__mpolar_ga5}{
-int \hyperlink{group__applications__polarFFT__mpolar_ga5}{comparison\_\-fft} (FILE $\ast$fp, int N, int T, int R)}
-\label{group__applications__polarFFT__mpolar_ga5}
+\hypertarget{group__applications__polarFFT__mpolar_g522ff84df31c08a1f237ad0ec7ce4ac5}{
+static int \hyperlink{group__applications__polarFFT__mpolar_g522ff84df31c08a1f237ad0ec7ce4ac5}{comparison\_\-fft} (FILE $\ast$fp, int N, int T, int R)}
+\label{group__applications__polarFFT__mpolar_g522ff84df31c08a1f237ad0ec7ce4ac5}
 
 \begin{CompactList}\small\item\em Comparison of the FFTW, mpolar FFT, and inverse mpolar FFT. \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__mpolar_ga6}{
-int \hyperlink{group__applications__polarFFT__mpolar_ga6}{main} (int argc, char $\ast$$\ast$argv)}
-\label{group__applications__polarFFT__mpolar_ga6}
+\hypertarget{group__applications__polarFFT__mpolar_g3c04138a5bfe5d72780bb7e82a18e627}{
+int \hyperlink{group__applications__polarFFT__mpolar_g3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)}
+\label{group__applications__polarFFT__mpolar_g3c04138a5bfe5d72780bb7e82a18e627}
 
 \begin{CompactList}\small\item\em test program for various parameters \item\end{CompactList}\end{CompactItemize}
 \subsection*{Variables}
 \begin{CompactItemize}
 \item 
-\hypertarget{group__applications__polarFFT__mpolar_ga0}{
-double {\bf GLOBAL\_\-elapsed\_\-time}}
-\label{group__applications__polarFFT__mpolar_ga0}
+\hypertarget{group__applications__polarFFT__mpolar_g89f1a3516fab4c4d4d274df955af639b}{
+double \hyperlink{group__applications__polarFFT__mpolar_g89f1a3516fab4c4d4d274df955af639b}{GLOBAL\_\-elapsed\_\-time}}
+\label{group__applications__polarFFT__mpolar_g89f1a3516fab4c4d4d274df955af639b}
 
 \end{CompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{group__applications__polarFFT__mpolar_ga1}{
-\index{applications_polarFFT_mpolar@{applications\_\-polar\-FFT\_\-mpolar}!mpolar_grid@{mpolar\_\-grid}}
-\index{mpolar_grid@{mpolar\_\-grid}!applications_polarFFT_mpolar@{applications\_\-polar\-FFT\_\-mpolar}}
-\subsubsection[mpolar\_\-grid]{\setlength{\rightskip}{0pt plus 5cm}int mpolar\_\-grid (int {\em T}, int {\em R}, double $\ast$ {\em x}, double $\ast$ {\em w})}}
-\label{group__applications__polarFFT__mpolar_ga1}
+\hypertarget{group__applications__polarFFT__mpolar_g08d0441aceedbcb98b985ee5aa121952}{
+\index{applications_polarFFT_mpolar@{applications\_\-polarFFT\_\-mpolar}!mpolar_grid@{mpolar\_\-grid}}
+\index{mpolar_grid@{mpolar\_\-grid}!applications_polarFFT_mpolar@{applications\_\-polarFFT\_\-mpolar}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}static int mpolar\_\-grid (int {\em T}, int {\em R}, double $\ast$ {\em x}, double $\ast$ {\em w})\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
+\label{group__applications__polarFFT__mpolar_g08d0441aceedbcb98b985ee5aa121952}
 
 
 Generates the points $x_{t,j}$ with weights $w_{t,j}$ for the modified polar grid with $T$ angles and $R$ offsets. 
 
 We add more concentric circles to the polar grid and exclude those nodes not located in the unit square, i.e., \[ x_{t,j} := r_j\left(\cos\theta_t, \sin\theta_t\right)^{\top}\,,\qquad (j,t)^{\top}\in I_{\sqrt{2}R}\times I_T\,. \] with $r_j$ and $\theta_t$ as for the polar grid. The number of nodes for the modified polar grid can be estimated as $M \approx \frac{4}{\pi}\log(1+\sqrt{2}) T R$. 
 
-Definition at line 36 of file mpolar\_\-fft\_\-test.c.
+Definition at line 58 of file mpolar\_\-fft\_\-test.c.
 
 References PI.
 

@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: fastsum_test.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 /*! \file fastsum_test.c
  *  \brief Simple test program for the fast NFFT-based summation algorithm.
  *
@@ -8,13 +28,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <complex.h>
 #include <math.h>
+#include <complex.h>
 
 #include "fastsum.h"
 #include "kernels.h"
 
-/** 
+/**
  * \defgroup applications_fastsum_test fastsum_test
  * \ingroup applications_fastsum
  * \{
@@ -30,10 +50,10 @@ int main(int argc, char **argv)
   int m;                                             /**< cut-off parameter       */
   int p;                                             /**< degree of smoothness    */
   char *s;                                           /**< name of kernel          */
-  complex double (*kernel)(double , int , const double *);  /**< kernel function         */
+  double _Complex (*kernel)(double , int , const double *);  /**< kernel function         */
   double c;                                          /**< parameter for kernel    */
   fastsum_plan my_fastsum_plan;                      /**< plan for fast summation */
-  complex double *direct;                                   /**< array for direct computation */
+  double _Complex *direct;                                   /**< array for direct computation */
   double time;                                       /**< for time measurement    */
   double error=0.0;                                  /**< for error computation   */
   double eps_I;                                      /**< inner boundary          */
@@ -89,7 +109,7 @@ int main(int argc, char **argv)
     else if (strcmp(s,"cosc")==0)
       kernel = cosc;
     else if (strcmp(s,"cot")==0)
-      kernel = cot;
+      kernel = kcot;
     else
     {
       s="multiquadric";
@@ -118,7 +138,7 @@ int main(int argc, char **argv)
       my_fastsum_plan.x[k*d+j] *= sin(phi);
     }
 
-    my_fastsum_plan.alpha[k] = (double)rand()/(double)RAND_MAX + I*(double)rand()/(double)RAND_MAX;
+    my_fastsum_plan.alpha[k] = (double)rand()/(double)RAND_MAX + _Complex_I*(double)rand()/(double)RAND_MAX;
   }
 
   /** init target knots in a d-ball with radius 0.25-eps_b/2 */
@@ -146,7 +166,7 @@ int main(int argc, char **argv)
   printf("%fsec\n",time);
 
   /** copy result */
-  direct = (complex double *)malloc(my_fastsum_plan.M_total*(sizeof(complex double)));
+  direct = (double _Complex *)nfft_malloc(my_fastsum_plan.M_total*(sizeof(double _Complex)));
   for (j=0; j<my_fastsum_plan.M_total; j++)
     direct[j]=my_fastsum_plan.f[j];
 

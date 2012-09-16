@@ -1,0 +1,70 @@
+\hypertarget{structfields__fastsum__plan}{
+\section{fields\_\-fastsum\_\-plan Struct Reference}
+\label{structfields__fastsum__plan}\index{fields_fastsum_plan@{fields\_\-fastsum\_\-plan}}
+}
+plan for fast calculation of 3D space-charge fields of bunches of charged particles.  
+
+
+{\tt \#include $<$fields\_\-fastsum.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+int \hyperlink{structfields__fastsum__plan_9e6c7fdded131315c670e971b29fb5e0}{N\_\-total}
+\begin{CompactList}\small\item\em api \item\end{CompactList}\item 
+\hypertarget{structfields__fastsum__plan_f4fa4d98cd696cbb734a85b154c1f86d}{
+double $\ast$ \hyperlink{structfields__fastsum__plan_f4fa4d98cd696cbb734a85b154c1f86d}{q}}
+\label{structfields__fastsum__plan_f4fa4d98cd696cbb734a85b154c1f86d}
+
+\begin{CompactList}\small\item\em charges \item\end{CompactList}\item 
+\hypertarget{structfields__fastsum__plan_14b91ce119e2a1926250d22ee4b47748}{
+double $\ast$ \hyperlink{structfields__fastsum__plan_14b91ce119e2a1926250d22ee4b47748}{r}}
+\label{structfields__fastsum__plan_14b91ce119e2a1926250d22ee4b47748}
+
+\begin{CompactList}\small\item\em source knots in ball with radius 1/4-eps\_\-b/2 \item\end{CompactList}\item 
+\hypertarget{structfields__fastsum__plan_77d68a77ebcefd9cf9d8ec75a5fd6007}{
+double $\ast$ \hyperlink{structfields__fastsum__plan_77d68a77ebcefd9cf9d8ec75a5fd6007}{E}}
+\label{structfields__fastsum__plan_77d68a77ebcefd9cf9d8ec75a5fd6007}
+
+\begin{CompactList}\small\item\em self-induced field at each source knot \item\end{CompactList}\item 
+\hyperlink{structfastsum__plan}{fastsum\_\-plan} \hyperlink{structfields__fastsum__plan_3d6cdb7e962a19abec6faa6e532e2745}{fsum}
+\begin{CompactList}\small\item\em internal \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+plan for fast calculation of 3D space-charge fields of bunches of charged particles. 
+
+Definition at line 29 of file fields\_\-fastsum.h.
+
+\subsection{Field Documentation}
+\hypertarget{structfields__fastsum__plan_9e6c7fdded131315c670e971b29fb5e0}{
+\index{fields_fastsum_plan@{fields\_\-fastsum\_\-plan}!N_total@{N\_\-total}}
+\index{N_total@{N\_\-total}!fields_fastsum_plan@{fields\_\-fastsum\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf fields\_\-fastsum\_\-plan::N\_\-total}}}
+\label{structfields__fastsum__plan_9e6c7fdded131315c670e971b29fb5e0}
+
+
+api 
+
+number of source knots 
+
+Definition at line 33 of file fields\_\-fastsum.h.
+
+Referenced by fields\_\-fastsum\_\-exact(), fields\_\-fastsum\_\-init(), fields\_\-fastsum\_\-precompute(), fields\_\-fastsum\_\-simple(), fields\_\-fastsum\_\-trafo(), and main().\hypertarget{structfields__fastsum__plan_3d6cdb7e962a19abec6faa6e532e2745}{
+\index{fields_fastsum_plan@{fields\_\-fastsum\_\-plan}!fsum@{fsum}}
+\index{fsum@{fsum}!fields_fastsum_plan@{fields\_\-fastsum\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf fastsum\_\-plan} {\bf fields\_\-fastsum\_\-plan::fsum}}}
+\label{structfields__fastsum__plan_3d6cdb7e962a19abec6faa6e532e2745}
+
+
+internal 
+
+fast summation plan 
+
+Definition at line 43 of file fields\_\-fastsum.h.
+
+Referenced by fields\_\-fastsum\_\-finalize(), fields\_\-fastsum\_\-init(), fields\_\-fastsum\_\-precompute(), fields\_\-fastsum\_\-simple(), and fields\_\-fastsum\_\-trafo().
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{fields__fastsum_8h}{fields\_\-fastsum.h}\end{CompactItemize}

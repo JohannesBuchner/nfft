@@ -1,9 +1,31 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: reconstruct_data_2d1d.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 #include <stdlib.h>
 #include <math.h>
+#include <complex.h>
+
 #include "util.h"
 #include "nfft3.h"
 
-/** 
+/**
  * \defgroup applications_mri3d_reconstruct_data_1d2d reconstruct_data_1d2d
  * \ingroup applications_mri3d
  * \{
@@ -17,44 +39,44 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
   int j,k,l,z;                  /* some variables  */
   double real,imag;             /* to read the real and imag part of a complex number */
   nfft_plan my_plan;            /* plan for the two dimensional nfft  */
-  infft_plan my_iplan;          /* plan for the two dimensional infft */
+  solver_plan_complex my_iplan; /* plan for the two dimensional infft */
   FILE* fin;                    /* input file */
   int my_N[2],my_n[2];          /* to init the nfft */
   double tmp, epsilon=0.0000003;/* tmp to read the obsolent z from the input file
                                    epsilon is the break criterium for
                                    the iteration */
   unsigned infft_flags = CGNR | PRECOMPUTE_DAMP; /* flags for the infft */
-                                   
+
   /* initialise my_plan */
   my_N[0]=N;my_n[0]=ceil(N*1.2);
   my_N[1]=N; my_n[1]=ceil(N*1.2);
   nfft_init_guru(&my_plan, 2, my_N, M/Z, my_n, 6, PRE_PHI_HUT| PRE_PSI|
-                         MALLOC_X| MALLOC_F_HAT| MALLOC_F| 
+                         MALLOC_X| MALLOC_F_HAT| MALLOC_F|
                         FFTW_INIT| FFT_OUT_OF_PLACE,
                         FFTW_MEASURE| FFTW_DESTROY_INPUT);
-  
+
   /* precompute lin psi if set */
   if(my_plan.nfft_flags & PRE_LIN_PSI)
     nfft_precompute_lin_psi(&my_plan);
-  
+
   /* set the flags for the infft*/
   if (weight)
     infft_flags = infft_flags | PRECOMPUTE_WEIGHT;
-  
+
   /* initialise my_iplan, advanced */
-  infft_init_advanced(&my_iplan,&my_plan, infft_flags );
+  solver_init_advanced_complex(&my_iplan,(mv_plan_complex*)(&my_plan), infft_flags );
 
   /* get the weights */
   if(my_iplan.flags & PRECOMPUTE_WEIGHT)
   {
     fin=fopen("weights.dat","r");
-    for(j=0;j<my_plan.M_total;j++) 
+    for(j=0;j<my_plan.M_total;j++)
     {
         fscanf(fin,"%le ",&my_iplan.w[j]);
     }
     fclose(fin);
   }
-  
+
   /* get the damping factors */
   if(my_iplan.flags & PRECOMPUTE_DAMP)
   {
@@ -63,16 +85,16 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
         int j2= j-N/2;
         int k2= k-N/2;
         double r=sqrt(j2*j2+k2*k2);
-        if(r>(double) N/2) 
+        if(r>(double) N/2)
           my_iplan.w_hat[j*N+k]=0.0;
         else
           my_iplan.w_hat[j*N+k]=1.0;
-      }   
+      }
     }
   }
-  
+
   /* open the input file */
-  fin=fopen(filename,"r"); 
+  fin=fopen(filename,"r");
 
   /* For every Layer*/
   for(z=0;z<Z;z++) {
@@ -82,13 +104,13 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
     {
       fscanf(fin,"%le %le %le %le %le ",&my_plan.x[2*j+0],&my_plan.x[2*j+1], &tmp,
       &real,&imag);
-      my_iplan.y[j] = real + I*imag;
+      my_iplan.y[j] = real + _Complex_I*imag;
     }
-    
+
     /* precompute psi if set just one time because the knots equal each plane */
-    if(z==0 && my_plan.nfft_flags & PRE_PSI) 
+    if(z==0 && my_plan.nfft_flags & PRE_PSI)
       nfft_precompute_psi(&my_plan);
-      
+
     /* precompute full psi if set just one time because the knots equal each plane */
     if(z==0 && my_plan.nfft_flags & PRE_FULL_PSI)
       nfft_precompute_full_psi(&my_plan);
@@ -96,9 +118,9 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
     /* init some guess */
     for(k=0;k<my_plan.N_total;k++)
       my_iplan.f_hat_iter[k]=0.0;
- 
+
     /* inverse trafo */
-    infft_before_loop(&my_iplan);
+    solver_before_loop_complex(&my_iplan);
     for(l=0;l<iteration;l++)
     {
       /* break if dot_r_iter is smaller than epsilon*/
@@ -106,7 +128,7 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
       break;
       fprintf(stderr,"%e,  %i of %i\n",sqrt(my_iplan.dot_r_iter),
       iteration*z+l+1,iteration*Z);
-      infft_loop_one_step(&my_iplan);
+      solver_loop_one_step_complex(&my_iplan);
     }
     for(k=0;k<my_plan.N_total;k++) {
       /* write every slice in the memory.
@@ -116,10 +138,10 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
   }
 
   fclose(fin);
-	
+
   /* finalize the infft */
-  infft_finalize(&my_iplan);
-  
+  solver_finalize_complex(&my_iplan);
+
   /* finalize the nfft */
   nfft_finalize(&my_plan);
 }
@@ -153,7 +175,7 @@ int main(int argc, char **argv)
 {
   fftw_complex *mem;
   fftw_plan plan;
-  int N,M,Z;  
+  int N,M,Z;
 
   if (argc <= 6) {
     printf("usage: ./reconstruct FILENAME N M Z ITER WEIGHTS\n");
@@ -166,7 +188,7 @@ int main(int argc, char **argv)
 
   /* Allocate memory to hold every layer in memory after the
   2D-infft */
-  mem = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * atoi(argv[2]) * atoi(argv[2]) * atoi(argv[4]));
+  mem = (fftw_complex*) nfft_malloc(sizeof(fftw_complex) * atoi(argv[2]) * atoi(argv[2]) * atoi(argv[4]));
 
   /* Create plan for the 1d-ifft */
   plan = fftw_plan_many_dft(1, &Z, N*N,
@@ -175,7 +197,7 @@ int main(int argc, char **argv)
                                   mem, NULL,
                                   N*N,1 ,
                                   FFTW_BACKWARD, FFTW_MEASURE);
-  
+
   /* execute the 2d-infft's */
   reconstruct(argv[1],N,M,Z,atoi(argv[5]),atoi(argv[6]),mem);
 
@@ -186,7 +208,7 @@ int main(int argc, char **argv)
   print(N,M,Z, mem);
 
   /* free memory */
-  fftw_free(mem);
+  nfft_free(mem);
   fftw_destroy_plan(plan);
   return 1;
 }

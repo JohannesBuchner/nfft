@@ -10,139 +10,146 @@ Structure for a transform plan.
 \subsection*{Data Fields}
 \begin{CompactItemize}
 \item 
-\hypertarget{structnfst__plan_o0}{
-int \hyperlink{structnfst__plan_o0}{N\_\-total}}
-\label{structnfst__plan_o0}
+\hypertarget{structnfst__plan_5622220bff0d3174b4dcae2a91313eed}{
+int \hyperlink{structnfst__plan_5622220bff0d3174b4dcae2a91313eed}{N\_\-total}}
+\label{structnfst__plan_5622220bff0d3174b4dcae2a91313eed}
 
 \begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o1}{
-int \hyperlink{structnfst__plan_o1}{M\_\-total}}
-\label{structnfst__plan_o1}
+\hypertarget{structnfst__plan_3bf0f56c279404b80e795daf944d3d98}{
+int \hyperlink{structnfst__plan_3bf0f56c279404b80e795daf944d3d98}{M\_\-total}}
+\label{structnfst__plan_3bf0f56c279404b80e795daf944d3d98}
 
 \begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o2}{
-double $\ast$ \hyperlink{structnfst__plan_o2}{f\_\-hat}}
-\label{structnfst__plan_o2}
+\hypertarget{structnfst__plan_8e7ed6ed137f58dea8f3871d959f8d9c}{
+double $\ast$ \hyperlink{structnfst__plan_8e7ed6ed137f58dea8f3871d959f8d9c}{f\_\-hat}}
+\label{structnfst__plan_8e7ed6ed137f58dea8f3871d959f8d9c}
 
 \begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o3}{
-double $\ast$ \hyperlink{structnfst__plan_o3}{f}}
-\label{structnfst__plan_o3}
+\hypertarget{structnfst__plan_314e2d828775d6aa93a26d7c40b7b931}{
+double $\ast$ \hyperlink{structnfst__plan_314e2d828775d6aa93a26d7c40b7b931}{f}}
+\label{structnfst__plan_314e2d828775d6aa93a26d7c40b7b931}
 
 \begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o4}{
-int \hyperlink{structnfst__plan_o4}{d}}
-\label{structnfst__plan_o4}
+\hypertarget{structnfst__plan_4a3b2ecc26204b3087d1c19b7857943f}{
+void($\ast$ \hyperlink{structnfst__plan_4a3b2ecc26204b3087d1c19b7857943f}{mv\_\-trafo} )(void $\ast$)}
+\label{structnfst__plan_4a3b2ecc26204b3087d1c19b7857943f}
+
+\begin{CompactList}\small\item\em Pointer to the own transform. \item\end{CompactList}\item 
+\hypertarget{structnfst__plan_edfe6da9afb5dc0457cc4f2197034fc0}{
+void($\ast$ \hyperlink{structnfst__plan_edfe6da9afb5dc0457cc4f2197034fc0}{mv\_\-adjoint} )(void $\ast$)}
+\label{structnfst__plan_edfe6da9afb5dc0457cc4f2197034fc0}
+
+\begin{CompactList}\small\item\em Pointer to the own adjoint. \item\end{CompactList}\item 
+\hypertarget{structnfst__plan_ef00c63a4810c8e5b0eb4839d2c6abc8}{
+int \hyperlink{structnfst__plan_ef00c63a4810c8e5b0eb4839d2c6abc8}{d}}
+\label{structnfst__plan_ef00c63a4810c8e5b0eb4839d2c6abc8}
 
 \begin{CompactList}\small\item\em dimension, rank \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o5}{
-int $\ast$ \hyperlink{structnfst__plan_o5}{N}}
-\label{structnfst__plan_o5}
+\hypertarget{structnfst__plan_c0ddde49b376d65b38d3cf1583cb0f6b}{
+int $\ast$ \hyperlink{structnfst__plan_c0ddde49b376d65b38d3cf1583cb0f6b}{N}}
+\label{structnfst__plan_c0ddde49b376d65b38d3cf1583cb0f6b}
 
 \begin{CompactList}\small\item\em bandwidth \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o6}{
-int $\ast$ \hyperlink{structnfst__plan_o6}{n}}
-\label{structnfst__plan_o6}
+\hypertarget{structnfst__plan_bee0aa8e104775a5b898715ea28703d2}{
+int $\ast$ \hyperlink{structnfst__plan_bee0aa8e104775a5b898715ea28703d2}{n}}
+\label{structnfst__plan_bee0aa8e104775a5b898715ea28703d2}
 
 \begin{CompactList}\small\item\em length of dst-1 \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o7}{
-double $\ast$ \hyperlink{structnfst__plan_o7}{sigma}}
-\label{structnfst__plan_o7}
+\hypertarget{structnfst__plan_7a8028a0e7348e5fa7717eebf07b76d1}{
+double $\ast$ \hyperlink{structnfst__plan_7a8028a0e7348e5fa7717eebf07b76d1}{sigma}}
+\label{structnfst__plan_7a8028a0e7348e5fa7717eebf07b76d1}
 
 \begin{CompactList}\small\item\em oversampling-factor \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o8}{
-int \hyperlink{structnfst__plan_o8}{m}}
-\label{structnfst__plan_o8}
+\hypertarget{structnfst__plan_c3aacf128a897c132809411ef9d41d7d}{
+int \hyperlink{structnfst__plan_c3aacf128a897c132809411ef9d41d7d}{m}}
+\label{structnfst__plan_c3aacf128a897c132809411ef9d41d7d}
 
 \begin{CompactList}\small\item\em cut-off parameter in time-domain \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o9}{
-double {\bf nfst\_\-full\_\-psi\_\-eps}}
-\label{structnfst__plan_o9}
+\hypertarget{structnfst__plan_255445e279e22fb6224821011e117a7c}{
+double \hyperlink{structnfst__plan_255445e279e22fb6224821011e117a7c}{nfst\_\-full\_\-psi\_\-eps}}
+\label{structnfst__plan_255445e279e22fb6224821011e117a7c}
 
 \item 
-\hypertarget{structnfst__plan_o10}{
-double $\ast$ \hyperlink{structnfst__plan_o10}{b}}
-\label{structnfst__plan_o10}
+\hypertarget{structnfst__plan_49927bec2aa96ab8596740011fabb914}{
+double $\ast$ \hyperlink{structnfst__plan_49927bec2aa96ab8596740011fabb914}{b}}
+\label{structnfst__plan_49927bec2aa96ab8596740011fabb914}
 
 \begin{CompactList}\small\item\em shape parameters \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o11}{
-unsigned \hyperlink{structnfst__plan_o11}{nfst\_\-flags}}
-\label{structnfst__plan_o11}
+\hypertarget{structnfst__plan_2c43b9c7625ed9eb42223de391c048c9}{
+unsigned \hyperlink{structnfst__plan_2c43b9c7625ed9eb42223de391c048c9}{nfst\_\-flags}}
+\label{structnfst__plan_2c43b9c7625ed9eb42223de391c048c9}
 
 \begin{CompactList}\small\item\em flags for precomputation, malloc \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o12}{
-unsigned \hyperlink{structnfst__plan_o12}{fftw\_\-flags}}
-\label{structnfst__plan_o12}
+\hypertarget{structnfst__plan_69d37e02b7a2868e3861c582e76e35d8}{
+unsigned \hyperlink{structnfst__plan_69d37e02b7a2868e3861c582e76e35d8}{fftw\_\-flags}}
+\label{structnfst__plan_69d37e02b7a2868e3861c582e76e35d8}
 
 \begin{CompactList}\small\item\em flags for the fftw \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o13}{
-double $\ast$ \hyperlink{structnfst__plan_o13}{x}}
-\label{structnfst__plan_o13}
+\hypertarget{structnfst__plan_048ebad4f2abe3821988fa06a5e308d8}{
+double $\ast$ \hyperlink{structnfst__plan_048ebad4f2abe3821988fa06a5e308d8}{x}}
+\label{structnfst__plan_048ebad4f2abe3821988fa06a5e308d8}
 
 \begin{CompactList}\small\item\em nodes (in time/spatial domain) \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o14}{
-double \hyperlink{structnfst__plan_o14}{MEASURE\_\-TIME\_\-t} \mbox{[}3\mbox{]}}
-\label{structnfst__plan_o14}
+\hypertarget{structnfst__plan_74e5be807909e0a443ea9b48e0a7da4b}{
+double \hyperlink{structnfst__plan_74e5be807909e0a443ea9b48e0a7da4b}{MEASURE\_\-TIME\_\-t} \mbox{[}3\mbox{]}}
+\label{structnfst__plan_74e5be807909e0a443ea9b48e0a7da4b}
 
 \begin{CompactList}\small\item\em measured time for each step \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o15}{
-fftw\_\-plan \hyperlink{structnfst__plan_o15}{my\_\-fftw\_\-r2r\_\-plan}}
-\label{structnfst__plan_o15}
-
-\begin{CompactList}\small\item\em fftw\_\-plan forward \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o16}{
-fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structnfst__plan_o16}{r2r\_\-kind}}
-\label{structnfst__plan_o16}
+fftw\_\-plan \hyperlink{structnfst__plan_f14a8654877825238cc8a6f39d425d7b}{my\_\-fftw\_\-r2r\_\-plan}
+\begin{CompactList}\small\item\em internal \item\end{CompactList}\item 
+\hypertarget{structnfst__plan_3600a9bb43b2b3fee62e2040c21448ab}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structnfst__plan_3600a9bb43b2b3fee62e2040c21448ab}{r2r\_\-kind}}
+\label{structnfst__plan_3600a9bb43b2b3fee62e2040c21448ab}
 
 \begin{CompactList}\small\item\em r2r transform type (dct-i) \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o17}{
-double $\ast$$\ast$ \hyperlink{structnfst__plan_o17}{c\_\-phi\_\-inv}}
-\label{structnfst__plan_o17}
+\hypertarget{structnfst__plan_2c42ae2c8ca95bb4c0c1dfc279bc2cab}{
+double $\ast$$\ast$ \hyperlink{structnfst__plan_2c42ae2c8ca95bb4c0c1dfc279bc2cab}{c\_\-phi\_\-inv}}
+\label{structnfst__plan_2c42ae2c8ca95bb4c0c1dfc279bc2cab}
 
 \begin{CompactList}\small\item\em precomputed data, matrix D \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o18}{
-double $\ast$ \hyperlink{structnfst__plan_o18}{psi}}
-\label{structnfst__plan_o18}
+\hypertarget{structnfst__plan_59c1ef7493650838cf31086a46ff2e3f}{
+double $\ast$ \hyperlink{structnfst__plan_59c1ef7493650838cf31086a46ff2e3f}{psi}}
+\label{structnfst__plan_59c1ef7493650838cf31086a46ff2e3f}
 
 \begin{CompactList}\small\item\em precomputed data, matrix B \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o19}{
-int \hyperlink{structnfst__plan_o19}{size\_\-psi}}
-\label{structnfst__plan_o19}
+\hypertarget{structnfst__plan_1780e54f9fed43e92c22a1e70274e7ad}{
+int \hyperlink{structnfst__plan_1780e54f9fed43e92c22a1e70274e7ad}{size\_\-psi}}
+\label{structnfst__plan_1780e54f9fed43e92c22a1e70274e7ad}
 
 \begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o20}{
-int $\ast$ \hyperlink{structnfst__plan_o20}{psi\_\-index\_\-g}}
-\label{structnfst__plan_o20}
+\hypertarget{structnfst__plan_2d2a4a4d3c7ff12f35045b5466f41811}{
+int $\ast$ \hyperlink{structnfst__plan_2d2a4a4d3c7ff12f35045b5466f41811}{psi\_\-index\_\-g}}
+\label{structnfst__plan_2d2a4a4d3c7ff12f35045b5466f41811}
 
 \begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o21}{
-int $\ast$ \hyperlink{structnfst__plan_o21}{psi\_\-index\_\-f}}
-\label{structnfst__plan_o21}
+\hypertarget{structnfst__plan_028609e96fa5f10d4197e4b50312180c}{
+int $\ast$ \hyperlink{structnfst__plan_028609e96fa5f10d4197e4b50312180c}{psi\_\-index\_\-f}}
+\label{structnfst__plan_028609e96fa5f10d4197e4b50312180c}
 
 \begin{CompactList}\small\item\em only for thin B \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o22}{
-double $\ast$ {\bf g}}
-\label{structnfst__plan_o22}
+\hypertarget{structnfst__plan_7aef31878adb193e3b3741feb21d4455}{
+double $\ast$ \hyperlink{structnfst__plan_7aef31878adb193e3b3741feb21d4455}{g}}
+\label{structnfst__plan_7aef31878adb193e3b3741feb21d4455}
 
 \item 
-\hypertarget{structnfst__plan_o23}{
-double $\ast$ {\bf g\_\-hat}}
-\label{structnfst__plan_o23}
+\hypertarget{structnfst__plan_1838fdef7d9a2c8b0a77f6d3f90cf687}{
+double $\ast$ \hyperlink{structnfst__plan_1838fdef7d9a2c8b0a77f6d3f90cf687}{g\_\-hat}}
+\label{structnfst__plan_1838fdef7d9a2c8b0a77f6d3f90cf687}
 
 \item 
-\hypertarget{structnfst__plan_o24}{
-double $\ast$ \hyperlink{structnfst__plan_o24}{g1}}
-\label{structnfst__plan_o24}
+\hypertarget{structnfst__plan_06cd5d11b13d590c9ab3a88d93b21fb2}{
+double $\ast$ \hyperlink{structnfst__plan_06cd5d11b13d590c9ab3a88d93b21fb2}{g1}}
+\label{structnfst__plan_06cd5d11b13d590c9ab3a88d93b21fb2}
 
 \begin{CompactList}\small\item\em input of fftw \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o25}{
-double $\ast$ \hyperlink{structnfst__plan_o25}{g2}}
-\label{structnfst__plan_o25}
+\hypertarget{structnfst__plan_7b67e2cf657227ae46d13fa239d534f7}{
+double $\ast$ \hyperlink{structnfst__plan_7b67e2cf657227ae46d13fa239d534f7}{g2}}
+\label{structnfst__plan_7b67e2cf657227ae46d13fa239d534f7}
 
 \begin{CompactList}\small\item\em output of fftw \item\end{CompactList}\item 
-\hypertarget{structnfst__plan_o26}{
-double $\ast$ \hyperlink{structnfst__plan_o26}{spline\_\-coeffs}}
-\label{structnfst__plan_o26}
+\hypertarget{structnfst__plan_23bec4401a652efc87ee6781061c9363}{
+double $\ast$ \hyperlink{structnfst__plan_23bec4401a652efc87ee6781061c9363}{spline\_\-coeffs}}
+\label{structnfst__plan_23bec4401a652efc87ee6781061c9363}
 
 \begin{CompactList}\small\item\em input for de Boor algorithm, if B\_\-SPLINE or SINC\_\-2m is defined \item\end{CompactList}\end{CompactItemize}
 
@@ -150,9 +157,23 @@ double $\ast$ \hyperlink{structnfst__plan_o26}{spline\_\-coeffs}}
 \subsection{Detailed Description}
 Structure for a transform plan. 
 
+Definition at line 833 of file nfft3.h.
+
+\subsection{Field Documentation}
+\hypertarget{structnfst__plan_f14a8654877825238cc8a6f39d425d7b}{
+\index{nfst_plan@{nfst\_\-plan}!my_fftw_r2r_plan@{my\_\-fftw\_\-r2r\_\-plan}}
+\index{my_fftw_r2r_plan@{my\_\-fftw\_\-r2r\_\-plan}!nfst_plan@{nfst\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}fftw\_\-plan {\bf nfst\_\-plan::my\_\-fftw\_\-r2r\_\-plan}}}
+\label{structnfst__plan_f14a8654877825238cc8a6f39d425d7b}
 
 
-Definition at line 703 of file nfft3.h.
+internal 
+
+fftw\_\-plan forward 
+
+Definition at line 858 of file nfft3.h.
+
+Referenced by nfst\_\-adjoint(), and nfst\_\-finalize().
 
 The documentation for this struct was generated from the following file:\begin{CompactItemize}
 \item 

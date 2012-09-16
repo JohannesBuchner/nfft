@@ -2,342 +2,466 @@
 \section{Util - Auxilliary functions}
 \label{group__nfftutil}\index{Util - Auxilliary functions@{Util - Auxilliary functions}}
 }
+Include header for FFTW3 library for its complex type.  
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\hypertarget{group__nfftutil_ga55}{
-\#define \hyperlink{group__nfftutil_ga55}{NFFT\_\-SWAP\_\-complex}(x, y)~\{double complex$\ast$ temp; temp=(x); (x)=(y); (y)=temp;\}}
-\label{group__nfftutil_ga55}
+\#define \hyperlink{group__nfftutil_g05909fc22b7177d1bd50119f40fbb1ec}{TIC}(a)
+\begin{CompactList}\small\item\em Timing, method works since the inaccurate timer is updated mostly in the measured function. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_ge1adb0a4004b84a277c80676c8bb6efb}{
+\#define \hyperlink{group__nfftutil_ge1adb0a4004b84a277c80676c8bb6efb}{TOC}(a)}
+\label{group__nfftutil_ge1adb0a4004b84a277c80676c8bb6efb}
 
-\begin{CompactList}\small\item\em Swapping of two vectors. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga56}{
-\#define \hyperlink{group__nfftutil_ga56}{NFFT\_\-SWAP\_\-double}(x, y)~\{double$\ast$ temp; temp=(x); (x)=(y); (y)=temp;\}}
-\label{group__nfftutil_ga56}
+\item 
+\hypertarget{group__nfftutil_g165d2a2300a7c50957661f7df0e14ec9}{
+\#define \hyperlink{group__nfftutil_g165d2a2300a7c50957661f7df0e14ec9}{TIC\_\-FFTW}(a)}
+\label{group__nfftutil_g165d2a2300a7c50957661f7df0e14ec9}
 
+\item 
+\hypertarget{group__nfftutil_ga223d5c614418ff5e5f47211b1ef2e22}{
+\#define \hyperlink{group__nfftutil_ga223d5c614418ff5e5f47211b1ef2e22}{TOC\_\-FFTW}(a)}
+\label{group__nfftutil_ga223d5c614418ff5e5f47211b1ef2e22}
+
+\item 
+\#define \hyperlink{group__nfftutil_g4df074728562efbb458f6662e649d1d5}{NFFT\_\-SWAP\_\-complex}(x, y)
 \begin{CompactList}\small\item\em Swapping of two vectors. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga57}{
-\#define \hyperlink{group__nfftutil_ga57}{PI}~3.1415926535897932384}
-\label{group__nfftutil_ga57}
+\#define \hyperlink{group__nfftutil_g4d8733560ed5e4cc3ff7ecadac62e83e}{NFFT\_\-SWAP\_\-double}(x, y)
+\begin{CompactList}\small\item\em Swapping of two vectors. \item\end{CompactList}\item 
+\hypertarget{group__nfftutil_g598a3330b3c21701223ee0ca14316eca}{
+\#define \hyperlink{group__nfftutil_g598a3330b3c21701223ee0ca14316eca}{PI}~3.141592653589793238462643383279502884197169399375105820974944592}
+\label{group__nfftutil_g598a3330b3c21701223ee0ca14316eca}
 
 \begin{CompactList}\small\item\em Formerly known to be an irrational number. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga58}{
-\#define \hyperlink{group__nfftutil_ga58}{NFFT\_\-MAX}(a, b)~((a)$>$(b)? (a) : (b))}
-\label{group__nfftutil_ga58}
+\hypertarget{group__nfftutil_g2750dfdda752269a036f487a4a34b849}{
+\#define \hyperlink{group__nfftutil_g2750dfdda752269a036f487a4a34b849}{PI2}~6.283185307179586476925286766559005768394338798750211641949889185}
+\label{group__nfftutil_g2750dfdda752269a036f487a4a34b849}
+
+\item 
+\hypertarget{group__nfftutil_gfd17621e12029ff7c53518b74a487c94}{
+\#define \hyperlink{group__nfftutil_gfd17621e12029ff7c53518b74a487c94}{PI4}~12.56637061435917295385057353311801153678867759750042328389977837}
+\label{group__nfftutil_gfd17621e12029ff7c53518b74a487c94}
+
+\item 
+\hypertarget{group__nfftutil_gd2e3f0e1983de6d70f003545cc556ed3}{
+\#define \hyperlink{group__nfftutil_gd2e3f0e1983de6d70f003545cc556ed3}{NFFT\_\-MAX}(a, b)~((a)$>$(b)? (a) : (b))}
+\label{group__nfftutil_gd2e3f0e1983de6d70f003545cc556ed3}
 
 \begin{CompactList}\small\item\em Maximum of its two arguments. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga59}{
-\#define \hyperlink{group__nfftutil_ga59}{NFFT\_\-MIN}(a, b)~((a)$<$(b)? (a) : (b))}
-\label{group__nfftutil_ga59}
+\hypertarget{group__nfftutil_g9087991411f723f26723b2b26dbf3308}{
+\#define \hyperlink{group__nfftutil_g9087991411f723f26723b2b26dbf3308}{NFFT\_\-MIN}(a, b)~((a)$<$(b)? (a) : (b))}
+\label{group__nfftutil_g9087991411f723f26723b2b26dbf3308}
 
 \begin{CompactList}\small\item\em Mimimum of its two arguments. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-double \hyperlink{group__nfftutil_ga0}{nfft\_\-second} ()
+double \hyperlink{group__nfftutil_gae7e89f8691419d4a5bc972db7a3abd7}{nfft\_\-second} (void)
 \begin{CompactList}\small\item\em Actual used CPU time in seconds; calls getrusage, limited accuracy. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga1}{
-int \hyperlink{group__nfftutil_ga1}{nfft\_\-total\_\-used\_\-memory} ()}
-\label{group__nfftutil_ga1}
+\hypertarget{group__nfftutil_g28fb58b4b760f463c6f32d4f04fec5cc}{
+int \hyperlink{group__nfftutil_g28fb58b4b760f463c6f32d4f04fec5cc}{nfft\_\-total\_\-used\_\-memory} (void)}
+\label{group__nfftutil_g28fb58b4b760f463c6f32d4f04fec5cc}
 
 \begin{CompactList}\small\item\em Actual used memory in bytes; calls mallinfo if define HAVE\_\-MALLOC\_\-H. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga2}{
-int \hyperlink{group__nfftutil_ga2}{nfft\_\-ld} (int m)}
-\label{group__nfftutil_ga2}
+\hypertarget{group__nfftutil_ga92817fc5f0782104ffa89d39832af0d}{
+int \hyperlink{group__nfftutil_ga92817fc5f0782104ffa89d39832af0d}{nfft\_\-ld} (int m)}
+\label{group__nfftutil_ga92817fc5f0782104ffa89d39832af0d}
 
 \begin{CompactList}\small\item\em Integer logarithm of 2. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga3}{
-int \hyperlink{group__nfftutil_ga3}{nfft\_\-int\_\-2\_\-pow} (int a)}
-\label{group__nfftutil_ga3}
+\hypertarget{group__nfftutil_g88a881909b8dfa742b00610b612fc679}{
+int \hyperlink{group__nfftutil_g88a881909b8dfa742b00610b612fc679}{nfft\_\-int\_\-2\_\-pow} (int a)}
+\label{group__nfftutil_g88a881909b8dfa742b00610b612fc679}
 
 \begin{CompactList}\small\item\em Integer power of 2. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga4}{
-int \hyperlink{group__nfftutil_ga4}{nfft\_\-next\_\-power\_\-of\_\-2} (int N)}
-\label{group__nfftutil_ga4}
+\hypertarget{group__nfftutil_g1de4c3bcd3ccd83cca45b93169c7b7af}{
+int \hyperlink{group__nfftutil_g1de4c3bcd3ccd83cca45b93169c7b7af}{nfft\_\-next\_\-power\_\-of\_\-2} (int N)}
+\label{group__nfftutil_g1de4c3bcd3ccd83cca45b93169c7b7af}
 
 \begin{CompactList}\small\item\em Computes $n\ge N$ such that $n=2^j,\, j\in\mathbb{N}_0$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga5}{
-void \hyperlink{group__nfftutil_ga5}{nfft\_\-next\_\-power\_\-of\_\-2\_\-exp} (int N, int $\ast$N2, int $\ast$t)}
-\label{group__nfftutil_ga5}
+\hypertarget{group__nfftutil_g2c58df6a4bcf2274288ee7a9e5256423}{
+void \hyperlink{group__nfftutil_g2c58df6a4bcf2274288ee7a9e5256423}{nfft\_\-next\_\-power\_\-of\_\-2\_\-exp} (int N, int $\ast$N2, int $\ast$t)}
+\label{group__nfftutil_g2c58df6a4bcf2274288ee7a9e5256423}
 
 \begin{CompactList}\small\item\em Computes ? \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga6}{
-double \hyperlink{group__nfftutil_ga6}{nfft\_\-sinc} (double x)}
-\label{group__nfftutil_ga6}
+\hypertarget{group__nfftutil_g120a748e397a224ed520ac3019e9bfa9}{
+double \hyperlink{group__nfftutil_g120a748e397a224ed520ac3019e9bfa9}{nfft\_\-sinc} (double x)}
+\label{group__nfftutil_g120a748e397a224ed520ac3019e9bfa9}
 
 \begin{CompactList}\small\item\em Computes the sinus cardinalis $\frac{sin\left(x\right)}{x}$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga7}{
-double \hyperlink{group__nfftutil_ga7}{nfft\_\-bspline\_\-old} (int k, double x, double $\ast$A)}
-\label{group__nfftutil_ga7}
+\hypertarget{group__nfftutil_g89bd624abdfb13abc10c144a8ff949cd}{
+double \hyperlink{group__nfftutil_g89bd624abdfb13abc10c144a8ff949cd}{nfft\_\-bspline\_\-old} (int k, double x, double $\ast$A)}
+\label{group__nfftutil_g89bd624abdfb13abc10c144a8ff949cd}
 
 \begin{CompactList}\small\item\em To test the new one. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga8}{
-double \hyperlink{group__nfftutil_ga8}{nfft\_\-bspline} (int k, double x, double $\ast$scratch)}
-\label{group__nfftutil_ga8}
+\hypertarget{group__nfftutil_g2fd48f1f700153c050d27691c4b2a6cc}{
+double \hyperlink{group__nfftutil_g2fd48f1f700153c050d27691c4b2a6cc}{nfft\_\-bspline} (int k, double x, double $\ast$scratch)}
+\label{group__nfftutil_g2fd48f1f700153c050d27691c4b2a6cc}
 
 \begin{CompactList}\small\item\em Computes the B-spline $M_{k,0}\left(x\right)$, scratch is used for de Boor's scheme. \item\end{CompactList}\item 
-double \hyperlink{group__nfftutil_ga9}{nfft\_\-i0} (double x)
+double \hyperlink{group__nfftutil_g5d6e8d0901b95c0c48f719e517733e5b}{nfft\_\-i0} (double x)
 \begin{CompactList}\small\item\em Modified Bessel function of order zero; adapted from Stephen Moshier's Cephes Math Library Release 2.8. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga10}{
-int \hyperlink{group__nfftutil_ga10}{nfft\_\-prod\_\-int} (int $\ast$vec, int d)}
-\label{group__nfftutil_ga10}
+\hypertarget{group__nfftutil_g2752ca372ee2622f173a706e86e2b116}{
+int \hyperlink{group__nfftutil_g2752ca372ee2622f173a706e86e2b116}{nfft\_\-prod\_\-int} (int $\ast$vec, int d)}
+\label{group__nfftutil_g2752ca372ee2622f173a706e86e2b116}
 
 \begin{CompactList}\small\item\em Computes integer $\prod_{t=0}^{d-1} v_t$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga11}{
-int \hyperlink{group__nfftutil_ga11}{nfct\_\-prod\_\-int} (int $\ast$vec, int d)}
-\label{group__nfftutil_ga11}
+\hypertarget{group__nfftutil_g9f0473beec441216c874021d2aa3064f}{
+int \hyperlink{group__nfftutil_g9f0473beec441216c874021d2aa3064f}{nfct\_\-prod\_\-int} (int $\ast$vec, int d)}
+\label{group__nfftutil_g9f0473beec441216c874021d2aa3064f}
 
 \begin{CompactList}\small\item\em Computes integer $\prod_{t=0}^{d-1} v_t$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga12}{
-int \hyperlink{group__nfftutil_ga12}{nfst\_\-prod\_\-minus\_\-a\_\-int} (int $\ast$vec, int a, int d)}
-\label{group__nfftutil_ga12}
+\hypertarget{group__nfftutil_g8adc6bf59ec10f16243030ee00ad4a40}{
+int \hyperlink{group__nfftutil_g8adc6bf59ec10f16243030ee00ad4a40}{nfst\_\-prod\_\-minus\_\-a\_\-int} (int $\ast$vec, int a, int d)}
+\label{group__nfftutil_g8adc6bf59ec10f16243030ee00ad4a40}
 
 \begin{CompactList}\small\item\em Computes integer $\prod_{t=0}^{d-1} v_t-a$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga13}{
-int \hyperlink{group__nfftutil_ga13}{nfft\_\-plain\_\-loop} (int $\ast$idx, int $\ast$N, int d)}
-\label{group__nfftutil_ga13}
+\hypertarget{group__nfftutil_gd979f626cc8397e26d1bd78a7ba342cd}{
+int \hyperlink{group__nfftutil_gd979f626cc8397e26d1bd78a7ba342cd}{nfft\_\-plain\_\-loop} (int $\ast$idx, int $\ast$N, int d)}
+\label{group__nfftutil_gd979f626cc8397e26d1bd78a7ba342cd}
 
 \begin{CompactList}\small\item\em Computes $\sum_{t=0}^{d-1} i_t \prod_{t'=t+1}^{d-1} N_{t'}$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga14}{
-double \hyperlink{group__nfftutil_ga14}{nfft\_\-prod\_\-real} (double $\ast$vec, int d)}
-\label{group__nfftutil_ga14}
+\hypertarget{group__nfftutil_gd7bad7074a695341742f57526f8695eb}{
+double \hyperlink{group__nfftutil_gd7bad7074a695341742f57526f8695eb}{nfft\_\-prod\_\-real} (double $\ast$vec, int d)}
+\label{group__nfftutil_gd7bad7074a695341742f57526f8695eb}
 
 \begin{CompactList}\small\item\em Computes double $\prod_{t=0}^{d-1} v_t$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga15}{
-double \hyperlink{group__nfftutil_ga15}{nfft\_\-dot\_\-complex} (double complex $\ast$x, int n)}
-\label{group__nfftutil_ga15}
+\hypertarget{group__nfftutil_g135eb6c5a8ae1a84ea64c9099caac004}{
+double \hyperlink{group__nfftutil_g135eb6c5a8ae1a84ea64c9099caac004}{nfft\_\-dot\_\-complex} (fftw\_\-complex $\ast$x, int n)}
+\label{group__nfftutil_g135eb6c5a8ae1a84ea64c9099caac004}
 
 \begin{CompactList}\small\item\em Computes the inner/dot product $x^H x$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga16}{
-double \hyperlink{group__nfftutil_ga16}{nfft\_\-dot\_\-double} (double $\ast$x, int n)}
-\label{group__nfftutil_ga16}
+\hypertarget{group__nfftutil_g02357d8d67d2591573089e49958855a5}{
+double \hyperlink{group__nfftutil_g02357d8d67d2591573089e49958855a5}{nfft\_\-dot\_\-double} (double $\ast$x, int n)}
+\label{group__nfftutil_g02357d8d67d2591573089e49958855a5}
 
 \begin{CompactList}\small\item\em Computes the inner/dot product $x^H x$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga17}{
-double \hyperlink{group__nfftutil_ga17}{nfft\_\-dot\_\-w\_\-complex} (double complex $\ast$x, double $\ast$w, int n)}
-\label{group__nfftutil_ga17}
+\hypertarget{group__nfftutil_gc712b4a91652e20dc53719ce6fc1f9e1}{
+double \hyperlink{group__nfftutil_gc712b4a91652e20dc53719ce6fc1f9e1}{nfft\_\-dot\_\-w\_\-complex} (fftw\_\-complex $\ast$x, double $\ast$w, int n)}
+\label{group__nfftutil_gc712b4a91652e20dc53719ce6fc1f9e1}
 
 \begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w \odot x)$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga18}{
-double \hyperlink{group__nfftutil_ga18}{nfft\_\-dot\_\-w\_\-double} (double $\ast$x, double $\ast$w, int n)}
-\label{group__nfftutil_ga18}
+\hypertarget{group__nfftutil_g69cceec47679c500072d3d60c6181b39}{
+double \hyperlink{group__nfftutil_g69cceec47679c500072d3d60c6181b39}{nfft\_\-dot\_\-w\_\-double} (double $\ast$x, double $\ast$w, int n)}
+\label{group__nfftutil_g69cceec47679c500072d3d60c6181b39}
 
 \begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w \odot x)$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga19}{
-double \hyperlink{group__nfftutil_ga19}{nfft\_\-dot\_\-w\_\-w2\_\-complex} (double complex $\ast$x, double $\ast$w, double $\ast$w2, int n)}
-\label{group__nfftutil_ga19}
+\hypertarget{group__nfftutil_g68268fc9bfad5a7e7383098ac1715674}{
+double \hyperlink{group__nfftutil_g68268fc9bfad5a7e7383098ac1715674}{nfft\_\-dot\_\-w\_\-w2\_\-complex} (fftw\_\-complex $\ast$x, double $\ast$w, double $\ast$w2, int n)}
+\label{group__nfftutil_g68268fc9bfad5a7e7383098ac1715674}
 
 \begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w1\odot w2\odot w2 \odot x)$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga20}{
-double \hyperlink{group__nfftutil_ga20}{nfft\_\-dot\_\-w2\_\-complex} (double complex $\ast$x, double $\ast$w2, int n)}
-\label{group__nfftutil_ga20}
+\hypertarget{group__nfftutil_g9b59288597d159357fe86395e635a075}{
+double \hyperlink{group__nfftutil_g9b59288597d159357fe86395e635a075}{nfft\_\-dot\_\-w2\_\-complex} (fftw\_\-complex $\ast$x, double $\ast$w2, int n)}
+\label{group__nfftutil_g9b59288597d159357fe86395e635a075}
 
 \begin{CompactList}\small\item\em Computes the weighted inner/dot product $x^H (w2\odot w2 \odot x)$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga21}{
-void \hyperlink{group__nfftutil_ga21}{nfft\_\-cp\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga21}
+\hypertarget{group__nfftutil_g21fd5b4d5f6113538320188306611133}{
+void \hyperlink{group__nfftutil_g21fd5b4d5f6113538320188306611133}{nfft\_\-cp\_\-complex} (fftw\_\-complex $\ast$x, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_g21fd5b4d5f6113538320188306611133}
 
 \begin{CompactList}\small\item\em Copies $x \leftarrow y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga22}{
-void \hyperlink{group__nfftutil_ga22}{nfft\_\-cp\_\-double} (double $\ast$x, double $\ast$y, int n)}
-\label{group__nfftutil_ga22}
+\hypertarget{group__nfftutil_gb220a37bd6e58be7413507b17ca3bfe2}{
+void \hyperlink{group__nfftutil_gb220a37bd6e58be7413507b17ca3bfe2}{nfft\_\-cp\_\-double} (double $\ast$x, double $\ast$y, int n)}
+\label{group__nfftutil_gb220a37bd6e58be7413507b17ca3bfe2}
 
 \begin{CompactList}\small\item\em Copies $x \leftarrow y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga23}{
-void \hyperlink{group__nfftutil_ga23}{nfft\_\-cp\_\-a\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga23}
+\hypertarget{group__nfftutil_g33409df91e7ad5e1dca3beaa63e0ef25}{
+void \hyperlink{group__nfftutil_g33409df91e7ad5e1dca3beaa63e0ef25}{nfft\_\-cp\_\-a\_\-complex} (fftw\_\-complex $\ast$x, double a, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_g33409df91e7ad5e1dca3beaa63e0ef25}
 
 \begin{CompactList}\small\item\em Copies $x \leftarrow a y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga24}{
-void \hyperlink{group__nfftutil_ga24}{nfft\_\-cp\_\-w\_\-complex} (double complex $\ast$x, double $\ast$w, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga24}
+\hypertarget{group__nfftutil_g630054cb816785d766959a867965f619}{
+void \hyperlink{group__nfftutil_g630054cb816785d766959a867965f619}{nfft\_\-cp\_\-w\_\-complex} (fftw\_\-complex $\ast$x, double $\ast$w, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_g630054cb816785d766959a867965f619}
 
 \begin{CompactList}\small\item\em Copies $x \leftarrow w\odot y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga25}{
-void \hyperlink{group__nfftutil_ga25}{nfft\_\-cp\_\-w\_\-double} (double $\ast$x, double $\ast$w, double $\ast$y, int n)}
-\label{group__nfftutil_ga25}
+\hypertarget{group__nfftutil_g27a75e17d21c508cacf81276ca531099}{
+void \hyperlink{group__nfftutil_g27a75e17d21c508cacf81276ca531099}{nfft\_\-cp\_\-w\_\-double} (double $\ast$x, double $\ast$w, double $\ast$y, int n)}
+\label{group__nfftutil_g27a75e17d21c508cacf81276ca531099}
 
 \begin{CompactList}\small\item\em Copies $x \leftarrow w\odot y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga26}{
-void \hyperlink{group__nfftutil_ga26}{nfft\_\-upd\_\-axpy\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga26}
+\hypertarget{group__nfftutil_g676395f56bbf1c444d074a21753de8d5}{
+void \hyperlink{group__nfftutil_g676395f56bbf1c444d074a21753de8d5}{nfft\_\-upd\_\-axpy\_\-complex} (fftw\_\-complex $\ast$x, double a, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_g676395f56bbf1c444d074a21753de8d5}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow a x + y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga27}{
-void \hyperlink{group__nfftutil_ga27}{nfft\_\-upd\_\-axpy\_\-double} (double $\ast$x, double a, double $\ast$y, int n)}
-\label{group__nfftutil_ga27}
+\hypertarget{group__nfftutil_g7610a506bc5ab40a6e1d7937b36921a3}{
+void \hyperlink{group__nfftutil_g7610a506bc5ab40a6e1d7937b36921a3}{nfft\_\-upd\_\-axpy\_\-double} (double $\ast$x, double a, double $\ast$y, int n)}
+\label{group__nfftutil_g7610a506bc5ab40a6e1d7937b36921a3}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow a x + y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga28}{
-void \hyperlink{group__nfftutil_ga28}{nfft\_\-upd\_\-xpay\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga28}
+\hypertarget{group__nfftutil_g1fde8da1b69413398fca44e2ef2fbdb4}{
+void \hyperlink{group__nfftutil_g1fde8da1b69413398fca44e2ef2fbdb4}{nfft\_\-upd\_\-xpay\_\-complex} (fftw\_\-complex $\ast$x, double a, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_g1fde8da1b69413398fca44e2ef2fbdb4}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow x + a y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga29}{
-void \hyperlink{group__nfftutil_ga29}{nfft\_\-upd\_\-xpay\_\-double} (double $\ast$x, double a, double $\ast$y, int n)}
-\label{group__nfftutil_ga29}
+\hypertarget{group__nfftutil_g2389c3b56a484a3f165b7d9203700064}{
+void \hyperlink{group__nfftutil_g2389c3b56a484a3f165b7d9203700064}{nfft\_\-upd\_\-xpay\_\-double} (double $\ast$x, double a, double $\ast$y, int n)}
+\label{group__nfftutil_g2389c3b56a484a3f165b7d9203700064}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow x + a y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga30}{
-void \hyperlink{group__nfftutil_ga30}{nfft\_\-upd\_\-axpby\_\-complex} (double complex $\ast$x, double a, double complex $\ast$y, double b, int n)}
-\label{group__nfftutil_ga30}
+\hypertarget{group__nfftutil_g903a4b3ed369dcfe67b9379a238ed23d}{
+void \hyperlink{group__nfftutil_g903a4b3ed369dcfe67b9379a238ed23d}{nfft\_\-upd\_\-axpby\_\-complex} (fftw\_\-complex $\ast$x, double a, fftw\_\-complex $\ast$y, double b, int n)}
+\label{group__nfftutil_g903a4b3ed369dcfe67b9379a238ed23d}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow a x + b y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga31}{
-void \hyperlink{group__nfftutil_ga31}{nfft\_\-upd\_\-axpby\_\-double} (double $\ast$x, double a, double $\ast$y, double b, int n)}
-\label{group__nfftutil_ga31}
+\hypertarget{group__nfftutil_g75e403e92875b0b919a555f8cede0e8d}{
+void \hyperlink{group__nfftutil_g75e403e92875b0b919a555f8cede0e8d}{nfft\_\-upd\_\-axpby\_\-double} (double $\ast$x, double a, double $\ast$y, double b, int n)}
+\label{group__nfftutil_g75e403e92875b0b919a555f8cede0e8d}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow a x + b y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga32}{
-void \hyperlink{group__nfftutil_ga32}{nfft\_\-upd\_\-xpawy\_\-complex} (double complex $\ast$x, double a, double $\ast$w, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga32}
+\hypertarget{group__nfftutil_gd8e10773e59818c88a8ea2cb560b936e}{
+void \hyperlink{group__nfftutil_gd8e10773e59818c88a8ea2cb560b936e}{nfft\_\-upd\_\-xpawy\_\-complex} (fftw\_\-complex $\ast$x, double a, double $\ast$w, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_gd8e10773e59818c88a8ea2cb560b936e}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow x + a w\odot y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga33}{
-void \hyperlink{group__nfftutil_ga33}{nfft\_\-upd\_\-xpawy\_\-double} (double $\ast$x, double a, double $\ast$w, double $\ast$y, int n)}
-\label{group__nfftutil_ga33}
+\hypertarget{group__nfftutil_gc5db5bbc58f772844cf0caf5fd9fafb0}{
+void \hyperlink{group__nfftutil_gc5db5bbc58f772844cf0caf5fd9fafb0}{nfft\_\-upd\_\-xpawy\_\-double} (double $\ast$x, double a, double $\ast$w, double $\ast$y, int n)}
+\label{group__nfftutil_gc5db5bbc58f772844cf0caf5fd9fafb0}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow x + a w\odot y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga34}{
-void \hyperlink{group__nfftutil_ga34}{nfft\_\-upd\_\-axpwy\_\-complex} (double complex $\ast$x, double a, double $\ast$w, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga34}
+\hypertarget{group__nfftutil_g693919963b51cf396311b15660e04cd8}{
+void \hyperlink{group__nfftutil_g693919963b51cf396311b15660e04cd8}{nfft\_\-upd\_\-axpwy\_\-complex} (fftw\_\-complex $\ast$x, double a, double $\ast$w, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_g693919963b51cf396311b15660e04cd8}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow a x + w\odot y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga35}{
-void \hyperlink{group__nfftutil_ga35}{nfft\_\-upd\_\-axpwy\_\-double} (double $\ast$x, double a, double $\ast$w, double $\ast$y, int n)}
-\label{group__nfftutil_ga35}
+\hypertarget{group__nfftutil_gf6777c4b8aa9f575f1600c51e8ae343a}{
+void \hyperlink{group__nfftutil_gf6777c4b8aa9f575f1600c51e8ae343a}{nfft\_\-upd\_\-axpwy\_\-double} (double $\ast$x, double a, double $\ast$w, double $\ast$y, int n)}
+\label{group__nfftutil_gf6777c4b8aa9f575f1600c51e8ae343a}
 
 \begin{CompactList}\small\item\em Updates $x \leftarrow a x + w\odot y$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga36}{
-void \hyperlink{group__nfftutil_ga36}{nfft\_\-fftshift\_\-complex} (double complex $\ast$x, int d, int $\ast$N)}
-\label{group__nfftutil_ga36}
+\hypertarget{group__nfftutil_ga388b5ec231e02ac45e37b60fd62e770}{
+void \hyperlink{group__nfftutil_ga388b5ec231e02ac45e37b60fd62e770}{nfft\_\-fftshift\_\-complex} (fftw\_\-complex $\ast$x, int d, int $\ast$N)}
+\label{group__nfftutil_ga388b5ec231e02ac45e37b60fd62e770}
 
 \begin{CompactList}\small\item\em Swaps each half over N\mbox{[}d\mbox{]}/2. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga37}{
-double \hyperlink{group__nfftutil_ga37}{nfft\_\-error\_\-l\_\-infty\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga37}
+\hypertarget{group__nfftutil_g76b384a2f6c54e2686544e312f9ada5d}{
+double \hyperlink{group__nfftutil_g76b384a2f6c54e2686544e312f9ada5d}{nfft\_\-error\_\-l\_\-infty\_\-complex} (fftw\_\-complex $\ast$x, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_g76b384a2f6c54e2686544e312f9ada5d}
 
 \begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} $. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga38}{
-double \hyperlink{group__nfftutil_ga38}{nfft\_\-error\_\-l\_\-infty\_\-double} (double $\ast$x, double $\ast$y, int n)}
-\label{group__nfftutil_ga38}
+\hypertarget{group__nfftutil_g49b9288690e3cf1990119c13e9137f09}{
+double \hyperlink{group__nfftutil_g49b9288690e3cf1990119c13e9137f09}{nfft\_\-error\_\-l\_\-infty\_\-double} (double $\ast$x, double $\ast$y, int n)}
+\label{group__nfftutil_g49b9288690e3cf1990119c13e9137f09}
 
 \begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} $. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga39}{
-double \hyperlink{group__nfftutil_ga39}{nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n, double complex $\ast$z, int m)}
-\label{group__nfftutil_ga39}
+\hypertarget{group__nfftutil_g1f46e07f46c6236beaf67679579d98ec}{
+double \hyperlink{group__nfftutil_g1f46e07f46c6236beaf67679579d98ec}{nfft\_\-error\_\-l\_\-infty\_\-1\_\-complex} (fftw\_\-complex $\ast$x, fftw\_\-complex $\ast$y, int n, fftw\_\-complex $\ast$z, int m)}
+\label{group__nfftutil_g1f46e07f46c6236beaf67679579d98ec}
 
 \begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|z\|_1} $. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga40}{
-double \hyperlink{group__nfftutil_ga40}{nfft\_\-error\_\-l\_\-infty\_\-1\_\-double} (double $\ast$x, double $\ast$y, int n, double $\ast$z, int m)}
-\label{group__nfftutil_ga40}
+\hypertarget{group__nfftutil_g4f6d14f232cb3476578062789966d5cd}{
+double \hyperlink{group__nfftutil_g4f6d14f232cb3476578062789966d5cd}{nfft\_\-error\_\-l\_\-infty\_\-1\_\-double} (double $\ast$x, double $\ast$y, int n, double $\ast$z, int m)}
+\label{group__nfftutil_g4f6d14f232cb3476578062789966d5cd}
 
 \begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_{\infty}}{\|z\|_1} $. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga41}{
-double \hyperlink{group__nfftutil_ga41}{nfft\_\-error\_\-l\_\-2\_\-complex} (double complex $\ast$x, double complex $\ast$y, int n)}
-\label{group__nfftutil_ga41}
+\hypertarget{group__nfftutil_gcdfad5420393c822ecc1602d9c164090}{
+double \hyperlink{group__nfftutil_gcdfad5420393c822ecc1602d9c164090}{nfft\_\-error\_\-l\_\-2\_\-complex} (fftw\_\-complex $\ast$x, fftw\_\-complex $\ast$y, int n)}
+\label{group__nfftutil_gcdfad5420393c822ecc1602d9c164090}
 
 \begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_2}{\|x\|_2} $. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga42}{
-double \hyperlink{group__nfftutil_ga42}{nfft\_\-error\_\-l\_\-2\_\-double} (double $\ast$x, double $\ast$y, int n)}
-\label{group__nfftutil_ga42}
+\hypertarget{group__nfftutil_gfbeb63506d5b5a85a17a282f9c316288}{
+double \hyperlink{group__nfftutil_gfbeb63506d5b5a85a17a282f9c316288}{nfft\_\-error\_\-l\_\-2\_\-double} (double $\ast$x, double $\ast$y, int n)}
+\label{group__nfftutil_gfbeb63506d5b5a85a17a282f9c316288}
 
 \begin{CompactList}\small\item\em Computes $\frac{\|x-y\|_2}{\|x\|_2} $. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga43}{
-void \hyperlink{group__nfftutil_ga43}{nfft\_\-vpr\_\-int} (int $\ast$x, int n, char $\ast$text)}
-\label{group__nfftutil_ga43}
+\hypertarget{group__nfftutil_ga8e0581d802c4b7bb153682a4c156409}{
+void \hyperlink{group__nfftutil_ga8e0581d802c4b7bb153682a4c156409}{nfft\_\-vpr\_\-int} (int $\ast$x, int n, char $\ast$text)}
+\label{group__nfftutil_ga8e0581d802c4b7bb153682a4c156409}
 
 \begin{CompactList}\small\item\em Prints a vector of integer numbers. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga44}{
-void \hyperlink{group__nfftutil_ga44}{nfft\_\-vpr\_\-double} (double $\ast$x, int n, char $\ast$text)}
-\label{group__nfftutil_ga44}
+\hypertarget{group__nfftutil_g5021b4c5ea2a24b0014786deb81cca91}{
+void \hyperlink{group__nfftutil_g5021b4c5ea2a24b0014786deb81cca91}{nfft\_\-vpr\_\-double} (double $\ast$x, int n, const char $\ast$text)}
+\label{group__nfftutil_g5021b4c5ea2a24b0014786deb81cca91}
 
 \begin{CompactList}\small\item\em Prints a vector of doubles numbers. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga45}{
-void \hyperlink{group__nfftutil_ga45}{nfft\_\-vpr\_\-complex} (double complex $\ast$x, int n, char $\ast$text)}
-\label{group__nfftutil_ga45}
+\hypertarget{group__nfftutil_g52ad07055e22b83a016bdbf43d3884d0}{
+void \hyperlink{group__nfftutil_g52ad07055e22b83a016bdbf43d3884d0}{nfft\_\-vpr\_\-complex} (fftw\_\-complex $\ast$x, int n, const char $\ast$text)}
+\label{group__nfftutil_g52ad07055e22b83a016bdbf43d3884d0}
 
 \begin{CompactList}\small\item\em Prints a vector of complex numbers. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga46}{
-void \hyperlink{group__nfftutil_ga46}{nfft\_\-vrand\_\-unit\_\-complex} (double complex $\ast$x, int n)}
-\label{group__nfftutil_ga46}
+\hypertarget{group__nfftutil_g5f53c8cd0b2f33200fce15ecf75a0685}{
+void \hyperlink{group__nfftutil_g5f53c8cd0b2f33200fce15ecf75a0685}{nfft\_\-vrand\_\-unit\_\-complex} (fftw\_\-complex $\ast$x, int n)}
+\label{group__nfftutil_g5f53c8cd0b2f33200fce15ecf75a0685}
 
 \begin{CompactList}\small\item\em Inits a vector of random complex numbers in $[0,1]\times[0,1]{\rm i}$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga47}{
-void \hyperlink{group__nfftutil_ga47}{nfft\_\-vrand\_\-shifted\_\-unit\_\-double} (double $\ast$x, int n)}
-\label{group__nfftutil_ga47}
+\hypertarget{group__nfftutil_ga44184ac2c1452221508e7640f391c34}{
+void \hyperlink{group__nfftutil_ga44184ac2c1452221508e7640f391c34}{nfft\_\-vrand\_\-shifted\_\-unit\_\-double} (double $\ast$x, int n)}
+\label{group__nfftutil_ga44184ac2c1452221508e7640f391c34}
 
 \begin{CompactList}\small\item\em Inits a vector of random double numbers in $[-1/2,1/2]$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga48}{
-void \hyperlink{group__nfftutil_ga48}{nfft\_\-voronoi\_\-weights\_\-1d} (double $\ast$w, double $\ast$x, int M)}
-\label{group__nfftutil_ga48}
+\hypertarget{group__nfftutil_g797e81f55e6379efabf4d98522d1ee9d}{
+void \hyperlink{group__nfftutil_g797e81f55e6379efabf4d98522d1ee9d}{nfft\_\-voronoi\_\-weights\_\-1d} (double $\ast$w, double $\ast$x, int M)}
+\label{group__nfftutil_g797e81f55e6379efabf4d98522d1ee9d}
 
 \begin{CompactList}\small\item\em Computes non periodic voronoi weights, assumes ordered nodes $x_j$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga49}{
-void \hyperlink{group__nfftutil_ga49}{nfft\_\-voronoi\_\-weights\_\-S2} (double $\ast$w, double $\ast$xi, int M)}
-\label{group__nfftutil_ga49}
-
+void \hyperlink{group__nfftutil_g26a4ed487a23e99e01f111113be9f994}{nfft\_\-voronoi\_\-weights\_\-S2} (double $\ast$w, double $\ast$xi, int M)
 \begin{CompactList}\small\item\em Computes voronoi weights for nodes on the sphere S$^\wedge$2. \item\end{CompactList}\item 
-double \hyperlink{group__nfftutil_ga50}{nfft\_\-modified\_\-fejer} (int N, int kk)
+\hypertarget{group__nfftutil_gc9b810183abafb668f8aa777c7985256}{
+double \hyperlink{group__nfftutil_gc9b810183abafb668f8aa777c7985256}{nfft\_\-modified\_\-fejer} (int N, int kk)}
+\label{group__nfftutil_gc9b810183abafb668f8aa777c7985256}
+
 \begin{CompactList}\small\item\em Computes the damping factor for the modified Fejer kernel, ie $\frac{2}{N}\left(1-\frac{\left|2k+1\right|}{N}\right)$. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga51}{
-double \hyperlink{group__nfftutil_ga51}{nfft\_\-modified\_\-jackson2} (int N, int kk)}
-\label{group__nfftutil_ga51}
+\hypertarget{group__nfftutil_gb45a6cd3528d3716522a0cf184375aaf}{
+double \hyperlink{group__nfftutil_gb45a6cd3528d3716522a0cf184375aaf}{nfft\_\-modified\_\-jackson2} (int N, int kk)}
+\label{group__nfftutil_gb45a6cd3528d3716522a0cf184375aaf}
 
 \begin{CompactList}\small\item\em Computes the damping factor for the modified Jackson kernel. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga52}{
-double \hyperlink{group__nfftutil_ga52}{nfft\_\-modified\_\-jackson4} (int N, int kk)}
-\label{group__nfftutil_ga52}
+\hypertarget{group__nfftutil_g126ec2282393435f0d795ac79db8654b}{
+double \hyperlink{group__nfftutil_g126ec2282393435f0d795ac79db8654b}{nfft\_\-modified\_\-jackson4} (int N, int kk)}
+\label{group__nfftutil_g126ec2282393435f0d795ac79db8654b}
 
 \begin{CompactList}\small\item\em Computes the damping factor for the modified generalised Jackson kernel. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga53}{
-double \hyperlink{group__nfftutil_ga53}{nfft\_\-modified\_\-sobolev} (double mu, int kk)}
-\label{group__nfftutil_ga53}
+\hypertarget{group__nfftutil_ga84cb34c6d368599fb2f997eadb184a7}{
+double \hyperlink{group__nfftutil_ga84cb34c6d368599fb2f997eadb184a7}{nfft\_\-modified\_\-sobolev} (double mu, int kk)}
+\label{group__nfftutil_ga84cb34c6d368599fb2f997eadb184a7}
 
 \begin{CompactList}\small\item\em Computes the damping factor for the modified Sobolev kernel. \item\end{CompactList}\item 
-\hypertarget{group__nfftutil_ga54}{
-double \hyperlink{group__nfftutil_ga54}{nfft\_\-modified\_\-multiquadric} (double mu, double c, int kk)}
-\label{group__nfftutil_ga54}
+\hypertarget{group__nfftutil_gc6201bc2aa806bd25cb14c5f96d644e9}{
+double \hyperlink{group__nfftutil_gc6201bc2aa806bd25cb14c5f96d644e9}{nfft\_\-modified\_\-multiquadric} (double mu, double c, int kk)}
+\label{group__nfftutil_gc6201bc2aa806bd25cb14c5f96d644e9}
 
-\begin{CompactList}\small\item\em Computes the damping factor for the modified multiquadric kernel. \item\end{CompactList}\end{CompactItemize}
+\begin{CompactList}\small\item\em Computes the damping factor for the modified multiquadric kernel. \item\end{CompactList}\item 
+int \hyperlink{group__nfftutil_g2decee6fe50d50797a82737ba82cf97a}{nfft\_\-smbi} (const double x, const double alpha, const int nb, const int ize, double $\ast$b)
+\begin{CompactList}\small\item\em Calculates the modified bessel function $I_{n+\alpha}(x)$, possibly scaled by $\mathrm{e}^{-x}$, for real non-negative $x,alpha$ with $0 \le \alpha < 1$, and $n=0,1,\ldots,nb-1$. \item\end{CompactList}\item 
+double \hyperlink{group__nfftutil_g8b29244516d573dca1d0fe134a97b9a6}{nfft\_\-lambda} (const double z, const double eps)
+\begin{CompactList}\small\item\em Computes the function $\Lambda(z,\epsilon) = \frac{\Gamma(z+\epsilon)}{\Gamma(z+1)}$, with $ z + \epsilon > 0$. \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Detailed Description}
+Include header for FFTW3 library for its complex type. 
+
 This module implements frequently used utility functions. In particular, this includes simple measurement of resources, evaluation of window functions, vector routines for basic linear algebra tasks, and computation of weights for the inverse transforms. 
 
+\subsection{Define Documentation}
+\hypertarget{group__nfftutil_g05909fc22b7177d1bd50119f40fbb1ec}{
+\index{nfftutil@{nfftutil}!TIC@{TIC}}
+\index{TIC@{TIC}!nfftutil@{nfftutil}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define TIC(a)}}
+\label{group__nfftutil_g05909fc22b7177d1bd50119f40fbb1ec}
+
+
+Timing, method works since the inaccurate timer is updated mostly in the measured function. 
+
+For small times not every call of the measured function will also produce a 'unit' time step. Measuring the fftw might cause a wrong output vector due to the repeated ffts. 
+
+Definition at line 72 of file util.h.
+
+Referenced by nfct\_\-adjoint(), nfct\_\-trafo(), nfft\_\-adjoint(), nfft\_\-adjoint\_\-1d(), nfft\_\-adjoint\_\-2d(), nfft\_\-adjoint\_\-3d(), nfft\_\-trafo(), nfft\_\-trafo\_\-1d(), nfft\_\-trafo\_\-2d(), nfft\_\-trafo\_\-3d(), nfst\_\-adjoint(), and nfst\_\-trafo().\hypertarget{group__nfftutil_g4df074728562efbb458f6662e649d1d5}{
+\index{nfftutil@{nfftutil}!NFFT_SWAP_complex@{NFFT\_\-SWAP\_\-complex}}
+\index{NFFT_SWAP_complex@{NFFT\_\-SWAP\_\-complex}!nfftutil@{nfftutil}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFFT\_\-SWAP\_\-complex(x, y)}}
+\label{group__nfftutil_g4df074728562efbb458f6662e649d1d5}
+
+
+\textbf{Value:}
+
+\begin{Code}\begin{verbatim}{fftw_complex* NFFT_SWAP_temp__; \
+  NFFT_SWAP_temp__=(x); (x)=(y); (y)=NFFT_SWAP_temp__;}
+\end{verbatim}
+\end{Code}
+Swapping of two vectors. 
+
+
+
+Definition at line 87 of file util.h.
+
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), fgt\_\-test\_\-andersson(), fgt\_\-test\_\-error(), fgt\_\-test\_\-error\_\-p(), fgt\_\-test\_\-simple(), glacier\_\-cv(), main(), solver\_\-before\_\-loop\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-cgnr\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-landweber\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-steepest\_\-descent\_\-complex(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfftutil_g4d8733560ed5e4cc3ff7ecadac62e83e}{
+\index{nfftutil@{nfftutil}!NFFT_SWAP_double@{NFFT\_\-SWAP\_\-double}}
+\index{NFFT_SWAP_double@{NFFT\_\-SWAP\_\-double}!nfftutil@{nfftutil}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFFT\_\-SWAP\_\-double(x, y)}}
+\label{group__nfftutil_g4d8733560ed5e4cc3ff7ecadac62e83e}
+
+
+\textbf{Value:}
+
+\begin{Code}\begin{verbatim}{double* NFFT_SWAP_temp__; NFFT_SWAP_temp__=(x); \
+  (x)=(y); (y)=NFFT_SWAP_temp__;}
+\end{verbatim}
+\end{Code}
+Swapping of two vectors. 
+
+
+
+Definition at line 92 of file util.h.
+
+Referenced by solver\_\-before\_\-loop\_\-double(), solver\_\-loop\_\-one\_\-step\_\-cgnr\_\-double(), solver\_\-loop\_\-one\_\-step\_\-landweber\_\-double(), and solver\_\-loop\_\-one\_\-step\_\-steepest\_\-descent\_\-double().
+
 \subsection{Function Documentation}
-\hypertarget{group__nfftutil_ga0}{
+\hypertarget{group__nfftutil_gae7e89f8691419d4a5bc972db7a3abd7}{
 \index{nfftutil@{nfftutil}!nfft_second@{nfft\_\-second}}
 \index{nfft_second@{nfft\_\-second}!nfftutil@{nfftutil}}
-\subsubsection[nfft\_\-second]{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-second ()}}
-\label{group__nfftutil_ga0}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-second (void)}}
+\label{group__nfftutil_gae7e89f8691419d4a5bc972db7a3abd7}
 
 
 Actual used CPU time in seconds; calls getrusage, limited accuracy. 
 
-Calls getrusage, limited accuracy 
+Actual used CPU time in seconds; calls getrusage, limited accuracy.
 
-Definition at line 25 of file util.c.
+functions for vectors, window functions, ... (c) if not stated otherwise: Daniel Potts, Stefan Kunis Actual used CPU time in seconds. Calls getrusage, limited accuracy 
 
-Referenced by comparison\_\-fft(), fgt\_\-test\_\-measure\_\-time(), fields\_\-fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), reconstruct(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfftutil_ga9}{
+Definition at line 43 of file util.c.
+
+Referenced by comparison\_\-fft(), fgt\_\-test\_\-measure\_\-time(), fields\_\-fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), ndft\_\-time(), reconstruct(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfftutil_g5d6e8d0901b95c0c48f719e517733e5b}{
 \index{nfftutil@{nfftutil}!nfft_i0@{nfft\_\-i0}}
 \index{nfft_i0@{nfft\_\-i0}!nfftutil@{nfftutil}}
-\subsubsection[nfft\_\-i0]{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-i0 (double {\em x})}}
-\label{group__nfftutil_ga9}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-i0 (double {\em x})}}
+\label{group__nfftutil_g5d6e8d0901b95c0c48f719e517733e5b}
 
 
 Modified Bessel function of order zero; adapted from Stephen Moshier's Cephes Math Library Release 2.8. 
 
+Modified Bessel function of order zero; adapted from Stephen Moshier's Cephes Math Library Release 2.8.
+
 Cephes Math Library Release 2.8: June, 2000 Copyright 1984, 1987, 2000 by Stephen L. Moshier 
 
-Definition at line 861 of file util.c.\hypertarget{group__nfftutil_ga50}{
-\index{nfftutil@{nfftutil}!nfft_modified_fejer@{nfft\_\-modified\_\-fejer}}
-\index{nfft_modified_fejer@{nfft\_\-modified\_\-fejer}!nfftutil@{nfftutil}}
-\subsubsection[nfft\_\-modified\_\-fejer]{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-modified\_\-fejer (int {\em N}, int {\em kk})}}
-\label{group__nfftutil_ga50}
+Definition at line 879 of file util.c.\hypertarget{group__nfftutil_g26a4ed487a23e99e01f111113be9f994}{
+\index{nfftutil@{nfftutil}!nfft_voronoi_weights_S2@{nfft\_\-voronoi\_\-weights\_\-S2}}
+\index{nfft_voronoi_weights_S2@{nfft\_\-voronoi\_\-weights\_\-S2}!nfftutil@{nfftutil}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-voronoi\_\-weights\_\-S2 (double $\ast$ {\em w}, double $\ast$ {\em xi}, int {\em M})}}
+\label{group__nfftutil_g26a4ed487a23e99e01f111113be9f994}
 
 
-Computes the damping factor for the modified Fejer kernel, ie $\frac{2}{N}\left(1-\frac{\left|2k+1\right|}{N}\right)$. 
+Computes voronoi weights for nodes on the sphere S$^\wedge$2. 
 
-/f\$\{2\}\{N\}(1-\{$|$2k+1$|$\}\{N\})/f\$ 
 
-Definition at line 1553 of file util.c.
+
+Definition at line 1447 of file util.c.
+
+Referenced by main().\hypertarget{group__nfftutil_g2decee6fe50d50797a82737ba82cf97a}{
+\index{nfftutil@{nfftutil}!nfft_smbi@{nfft\_\-smbi}}
+\index{nfft_smbi@{nfft\_\-smbi}!nfftutil@{nfftutil}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int nfft\_\-smbi (const R {\em x}, const R {\em alpha}, const int {\em nb}, const int {\em ize}, R $\ast$ {\em b})}}
+\label{group__nfftutil_g2decee6fe50d50797a82737ba82cf97a}
+
+
+Calculates the modified bessel function $I_{n+\alpha}(x)$, possibly scaled by $\mathrm{e}^{-x}$, for real non-negative $x,alpha$ with $0 \le \alpha < 1$, and $n=0,1,\ldots,nb-1$. 
+
+\begin{itemize}
+\item \mbox{[}in\mbox{]} {\tt x} non-negative real number in $I_{n+\alpha}(x)$ \item \mbox{[}in\mbox{]} {\tt alpha} non-negative real number with $0 \le \alpha < 1$ in $I_{n+\alpha}(x)$ \item \mbox{[}in\mbox{]} {\tt nb} number of functions to be calculated \item \mbox{[}in\mbox{]} {\tt ize} switch between no scaling ({\tt ize} = 1) and exponential scaling ({\tt ize} = 2) \item \mbox{[}out\mbox{]} {\tt b} real output vector to contain $I_{n+\alpha}(x)$, $n=0,1,\ldots,nb-1$ \begin{Desc}
+\item[Returns:]error indicator. Only if this value is identical to {\tt nb}, then all values in {\tt b} have been calculated to full accuracy. If not, errors are indicated using the following scheme:\begin{itemize}
+\item ncalc $<$ 0: At least one of the arguments was out of range (e.g. nb $<$= 0, ize neither equals 1 nor 2, $|x| \ge exparg$). In this case, the output vector b is not calculated and {\tt ncalc} is set to $\min(nb,0)-1$.\item 0 $<$ ncalc $<$ nb: Not all requested functions could be calculated to full accuracy. This can occur when nb is much larger than $|$x$|$. in this case, the values $I_{n+\alpha}(x)$ are calculated to full accuracy for $n=0,1,\ldots,ncalc$. The rest of the values up to $n=0,1,\ldots,nb-1$ is calculated to a lower accuracy.\end{itemize}
+\end{Desc}
+\end{itemize}
+This program is based on a program written by David J. Sookne \mbox{[}2\mbox{]} that computes values of the Bessel functions $J_{\nu}(x)$ or $I_{\nu}(x)$ for real argument $x$ and integer order $\nu$. modifications include the restriction of the computation to the Bessel function $I_{\nu}(x)$ for non-negative real argument, the extension of the computation to arbitrary non-negative orders $\nu$, and the elimination of most underflow.
+
+References: \mbox{[}1\mbox{]} F. W. J. Olver and D. J. Sookne, A note on backward recurrence algorithms\char`\"{}, Math. Comput. (26), 1972, pp 125 -- 132. \mbox{[}2\mbox{]} D. J. Sookne, \char`\"{}Bessel functions of real argument and int order\char`\"{}, NBS Jour. of Res. B. (77B), 1973, pp. 125 -- 132.
+
+Modified by W. J. Cody, Applied Mathematics Division, Argonne National Laboratory, Argonne, IL, 60439, USA
+
+Modified by Jens Keiner, Institute of Mathematics, University of Lübeck, 23560 Lübeck, Germany 
+
+Definition at line 1816 of file util.c.
+
+Referenced by main().\hypertarget{group__nfftutil_g8b29244516d573dca1d0fe134a97b9a6}{
+\index{nfftutil@{nfftutil}!nfft_lambda@{nfft\_\-lambda}}
+\index{nfft_lambda@{nfft\_\-lambda}!nfftutil@{nfftutil}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double nfft\_\-lambda (const double {\em z}, const double {\em eps})}}
+\label{group__nfftutil_g8b29244516d573dca1d0fe134a97b9a6}
+
+
+Computes the function $\Lambda(z,\epsilon) = \frac{\Gamma(z+\epsilon)}{\Gamma(z+1)}$, with $ z + \epsilon > 0$. 
+
+This method uses the Lanczos approximation to compute the result; see Glendon Ralph Pugh. An Analysis of The Lanczos Gamma Approximation. PhD Thesis, The University of British Columbia, 2004. 
+
+Definition at line 2155 of file util.c.

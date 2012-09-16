@@ -10,54 +10,58 @@ Structure for a NFSFT transform plan.
 \subsection*{Data Fields}
 \begin{CompactItemize}
 \item 
-\hypertarget{structnfsft__plan_o0}{
-int \hyperlink{structnfsft__plan_o0}{N\_\-total}}
-\label{structnfsft__plan_o0}
-
-\begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o1}{
-int \hyperlink{structnfsft__plan_o1}{M\_\-total}}
-\label{structnfsft__plan_o1}
+int \hyperlink{structnfsft__plan_57fe4569f9109b92ed55caeddce686b8}{N\_\-total}
+\begin{CompactList}\small\item\em Inherited public members. \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_e83b4ef24662500a1c0374f9e0bf73ed}{
+int \hyperlink{structnfsft__plan_e83b4ef24662500a1c0374f9e0bf73ed}{M\_\-total}}
+\label{structnfsft__plan_e83b4ef24662500a1c0374f9e0bf73ed}
 
 \begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o2}{
-double complex $\ast$ \hyperlink{structnfsft__plan_o2}{f\_\-hat}}
-\label{structnfsft__plan_o2}
+\hypertarget{structnfsft__plan_f3f147694cf5d7ac7b658288bf2cfb42}{
+fftw\_\-complex $\ast$ \hyperlink{structnfsft__plan_f3f147694cf5d7ac7b658288bf2cfb42}{f\_\-hat}}
+\label{structnfsft__plan_f3f147694cf5d7ac7b658288bf2cfb42}
 
 \begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o3}{
-double complex $\ast$ \hyperlink{structnfsft__plan_o3}{f}}
-\label{structnfsft__plan_o3}
+\hypertarget{structnfsft__plan_ebedb76f2df25603c548ae9672e970df}{
+fftw\_\-complex $\ast$ \hyperlink{structnfsft__plan_ebedb76f2df25603c548ae9672e970df}{f}}
+\label{structnfsft__plan_ebedb76f2df25603c548ae9672e970df}
 
 \begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o4}{
-int \hyperlink{structnfsft__plan_o4}{N}}
-\label{structnfsft__plan_o4}
+\hypertarget{structnfsft__plan_01bf30c31f886ffa9d486c010a452051}{
+void($\ast$ \hyperlink{structnfsft__plan_01bf30c31f886ffa9d486c010a452051}{mv\_\-trafo} )(void $\ast$)}
+\label{structnfsft__plan_01bf30c31f886ffa9d486c010a452051}
+
+\begin{CompactList}\small\item\em Pointer to the own transform. \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_14cc99f56f6a61958aef26f80aac6f12}{
+void($\ast$ \hyperlink{structnfsft__plan_14cc99f56f6a61958aef26f80aac6f12}{mv\_\-adjoint} )(void $\ast$)}
+\label{structnfsft__plan_14cc99f56f6a61958aef26f80aac6f12}
+
+\begin{CompactList}\small\item\em Pointer to the own adjoint. \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_e5da5c37169612dcf2d66ff595ee4403}{
+int \hyperlink{structnfsft__plan_e5da5c37169612dcf2d66ff595ee4403}{N}}
+\label{structnfsft__plan_e5da5c37169612dcf2d66ff595ee4403}
 
 \begin{CompactList}\small\item\em the bandwidth $N$ \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o5}{
-double $\ast$ \hyperlink{structnfsft__plan_o5}{x}}
-\label{structnfsft__plan_o5}
+\hypertarget{structnfsft__plan_f361cee5b4f7dabae68e53674861df90}{
+double $\ast$ \hyperlink{structnfsft__plan_f361cee5b4f7dabae68e53674861df90}{x}}
+\label{structnfsft__plan_f361cee5b4f7dabae68e53674861df90}
 
 \begin{CompactList}\small\item\em the nodes $\mathbf{x}(m) = * \left(x_1,x_2\right) \in * [-\frac{1}{2},\frac{1}{2}) \times * [0,\frac{1}{2}]$ for $\ast$ $m=0,\ldots,M-1$,$M \in * \mathbb{N},$ \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o6}{
-int \hyperlink{structnfsft__plan_o6}{t}}
-\label{structnfsft__plan_o6}
-
-\begin{CompactList}\small\item\em the logaritm of NPT with $\ast$ respect to the basis 2 \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o7}{
-unsigned int \hyperlink{structnfsft__plan_o7}{flags}}
-\label{structnfsft__plan_o7}
+int \hyperlink{structnfsft__plan_59d80818cb9c0dcaccc477954720772c}{t}
+\begin{CompactList}\small\item\em $<$ the next greater power of two with $\ast$ respect to $N$ \item\end{CompactList}\item 
+\hypertarget{structnfsft__plan_5ad6e9d30dd23d5be94b9277e5068694}{
+unsigned int \hyperlink{structnfsft__plan_5ad6e9d30dd23d5be94b9277e5068694}{flags}}
+\label{structnfsft__plan_5ad6e9d30dd23d5be94b9277e5068694}
 
 \begin{CompactList}\small\item\em the planner flags \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o8}{
-\hyperlink{structnfft__plan}{nfft\_\-plan} \hyperlink{structnfsft__plan_o8}{plan\_\-nfft}}
-\label{structnfsft__plan_o8}
+\hypertarget{structnfsft__plan_f21a62a31af4918fda1376612398369e}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} \hyperlink{structnfsft__plan_f21a62a31af4918fda1376612398369e}{plan\_\-nfft}}
+\label{structnfsft__plan_f21a62a31af4918fda1376612398369e}
 
 \begin{CompactList}\small\item\em the internal NFFT plan \item\end{CompactList}\item 
-\hypertarget{structnfsft__plan_o9}{
-double complex $\ast$ \hyperlink{structnfsft__plan_o9}{f\_\-hat\_\-intern}}
-\label{structnfsft__plan_o9}
+\hypertarget{structnfsft__plan_79156943fb3c87599ee7fa3bc157f548}{
+fftw\_\-complex $\ast$ \hyperlink{structnfsft__plan_79156943fb3c87599ee7fa3bc157f548}{f\_\-hat\_\-intern}}
+\label{structnfsft__plan_79156943fb3c87599ee7fa3bc157f548}
 
 \begin{CompactList}\small\item\em Internally used pointer to $\ast$ spherical Fourier coefficients. \item\end{CompactList}\end{CompactItemize}
 
@@ -65,9 +69,34 @@ double complex $\ast$ \hyperlink{structnfsft__plan_o9}{f\_\-hat\_\-intern}}
 \subsection{Detailed Description}
 Structure for a NFSFT transform plan. 
 
+Definition at line 2059 of file nfft3.h.
+
+\subsection{Field Documentation}
+\hypertarget{structnfsft__plan_57fe4569f9109b92ed55caeddce686b8}{
+\index{nfsft_plan@{nfsft\_\-plan}!N_total@{N\_\-total}}
+\index{N_total@{N\_\-total}!nfsft_plan@{nfsft\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf nfsft\_\-plan::N\_\-total}}}
+\label{structnfsft__plan_57fe4569f9109b92ed55caeddce686b8}
 
 
-Definition at line 1913 of file nfft3.h.
+Inherited public members. 
+
+Total number of Fourier $\backslash$ coefficients 
+
+Definition at line 2062 of file nfft3.h.
+
+Referenced by main(), ndsft\_\-adjoint(), ndsft\_\-trafo(), nfsft\_\-init\_\-guru(), and nfsft\_\-trafo().\hypertarget{structnfsft__plan_59d80818cb9c0dcaccc477954720772c}{
+\index{nfsft_plan@{nfsft\_\-plan}!t@{t}}
+\index{t@{t}!nfsft_plan@{nfsft\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf nfsft\_\-plan::t}}}
+\label{structnfsft__plan_59d80818cb9c0dcaccc477954720772c}
+
+
+$<$ the next greater power of two with $\ast$ respect to $N$ 
+
+the logarithm of NPT with $\ast$ respect to the basis 2 
+
+Definition at line 2079 of file nfft3.h.
 
 The documentation for this struct was generated from the following file:\begin{CompactItemize}
 \item 

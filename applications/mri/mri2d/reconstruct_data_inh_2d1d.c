@@ -1,10 +1,32 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: reconstruct_data_inh_2d1d.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
+#include <complex.h>
+
 #include "nfft3.h"
 #include "util.h"
 
-/** 
+/**
  * \defgroup applications_mri2d_reconstruct_data_inh_2d1d reconstruct_data__inh_2d1d
  * \ingroup applications_mri2d
  * \{
@@ -18,7 +40,7 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
   double w,epsilon=0.0000003;     /* epsilon is a the break criterium for
                                    the iteration */;
   mri_inh_2d1d_plan my_plan;
-  imri_inh_2d1d_plan my_iplan;
+  solver_plan_complex my_iplan;
   FILE* fp,*fw,*fout_real,*fout_imag,*finh,*ftime;
   int my_N[3],my_n[3];
   int flags = PRE_PHI_HUT| PRE_PSI |MALLOC_X| MALLOC_F_HAT|
@@ -43,9 +65,9 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
     if(time>max_time)
       max_time = time;
   }
-  
+
   fclose(ftime);
-  
+
   Ts=(min_time+max_time)/2.0;
 
 
@@ -64,15 +86,15 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
 	/* N3 has to be even */
 	if(N3%2!=0)
 	  N3++;
-  
+
 	T=((max_time-min_time)/2.0)/(0.5-((double) (m))/N3);
   W=N3/T;
 
   my_N[0]=N; my_n[0]=ceil(N*sigma);
   my_N[1]=N; my_n[1]=ceil(N*sigma);
   my_N[2]=N3; my_n[2]=N3;
-  
-  /* initialise nfft */ 
+
+  /* initialise nfft */
   mri_inh_2d1d_init_guru(&my_plan, my_N, M, my_n, m, sigma, flags,
                       FFTW_MEASURE| FFTW_DESTROY_INPUT);
 
@@ -80,12 +102,12 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
   /* precompute lin psi if set */
   if(my_plan.plan.nfft_flags & PRE_LIN_PSI)
     nfft_precompute_lin_psi(&my_plan.plan);
-                      
+
   if (weight)
     infft_flags = infft_flags | PRECOMPUTE_WEIGHT;
 
   /* initialise my_iplan, advanced */
-  imri_inh_2d1d_init_advanced(&my_iplan,&my_plan, infft_flags );
+  solver_init_advanced_complex(&my_iplan,(mv_plan_complex*)(&my_plan), infft_flags );
 
   /* get the weights */
   if(my_iplan.flags & PRECOMPUTE_WEIGHT)
@@ -97,7 +119,7 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
     }
     fclose(fw);
   }
-                      
+
   /* get the damping factors */
   if(my_iplan.flags & PRECOMPUTE_DAMP)
   {
@@ -106,11 +128,11 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
         int j2= j-N/2;
         int k2= k-N/2;
         double r=sqrt(j2*j2+k2*k2);
-        if(r>(double) N/2) 
+        if(r>(double) N/2)
           my_iplan.w_hat[j*N+k]=0.0;
         else
           my_iplan.w_hat[j*N+k]=1.0;
-      }   
+      }
     }
   }
 
@@ -120,7 +142,7 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
   for(j=0;j<my_plan.M_total;j++)
   {
     fscanf(fp,"%le %le %le %le",&my_plan.plan.x[2*j+0],&my_plan.plan.x[2*j+1],&real,&imag);
-    my_iplan.y[j]=real+I*imag;
+    my_iplan.y[j]=real+ _Complex_I*imag;
     fscanf(ftime,"%le ",&my_plan.t[j]);
 
     my_plan.t[j] = (my_plan.t[j]-Ts)/T;
@@ -135,26 +157,26 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
     fscanf(finh,"%le ",&my_plan.w[j]);
     my_plan.w[j]/=W;
   }
-  fclose(finh);  
+  fclose(finh);
 
-    
+
   if(my_plan.plan.nfft_flags & PRE_PSI) {
     nfft_precompute_psi(&my_plan.plan);
   }
   if(my_plan.plan.nfft_flags & PRE_FULL_PSI) {
       nfft_precompute_full_psi(&my_plan.plan);
-  } 
+  }
 
   /* init some guess */
   for(j=0;j<my_plan.N_total;j++)
   {
     my_iplan.f_hat_iter[j]=0.0;
   }
- 
+
   t=nfft_second();
-  
+
   /* inverse trafo */
-  imri_inh_2d1d_before_loop(&my_iplan);
+  solver_before_loop_complex(&my_iplan);
   for(l=0;l<iteration;l++)
   {
     /* break if dot_r_iter is smaller than epsilon*/
@@ -162,7 +184,7 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
     break;
     fprintf(stderr,"%e,  %i of %i\n",sqrt(my_iplan.dot_r_iter),
     l+1,iteration);
-    imri_inh_2d1d_loop_one_step(&my_iplan);
+    solver_loop_one_step_complex(&my_iplan);
   }
 
   t=nfft_second()-t;
@@ -171,21 +193,21 @@ void reconstruct(char* filename,int N,int M,int iteration , int weight)
 #else
   fprintf(stderr,"time: %e seconds mem: mallinfo not available\n",t);
 #endif
-  
+
   fout_real=fopen("output_real.dat","w");
   fout_imag=fopen("output_imag.dat","w");
-  
+
   for (j=0;j<N*N;j++) {
     /* Verschiebung wieder herausrechnen */
-    my_iplan.f_hat_iter[j]*=cexp(-2.0*I*PI*Ts*my_plan.w[j]*W);
-    
+    my_iplan.f_hat_iter[j]*=cexp(-2.0*_Complex_I*PI*Ts*my_plan.w[j]*W);
+
     fprintf(fout_real,"%le ",creal(my_iplan.f_hat_iter[j]));
     fprintf(fout_imag,"%le ",cimag(my_iplan.f_hat_iter[j]));
   }
 
   fclose(fout_real);
   fclose(fout_imag);
-  imri_inh_2d1d_finalize(&my_iplan);
+  solver_finalize_complex(&my_iplan);
   mri_inh_2d1d_finalize(&my_plan);
 }
 
@@ -197,7 +219,7 @@ int main(int argc, char **argv)
     printf("usage: ./reconstruct_data_inh_2d1d FILENAME N M ITER WEIGHTS\n");
     return 1;
   }
-  
+
   reconstruct(argv[1],atoi(argv[2]),atoi(argv[3]),atoi(argv[4]),atoi(argv[5]));
 
   return 1;

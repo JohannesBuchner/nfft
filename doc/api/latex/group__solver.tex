@@ -5,225 +5,88 @@
 \subsection*{Data Structures}
 \begin{CompactItemize}
 \item 
-struct \hyperlink{structinfft__plan}{infft\_\-plan}
-\begin{CompactList}\small\item\em Structure for an inverse transform plan. \item\end{CompactList}\item 
-struct \hyperlink{structinfct__plan}{infct\_\-plan}
-\begin{CompactList}\small\item\em Structure for an inverse transform plan. \item\end{CompactList}\item 
-struct \hyperlink{structinfst__plan}{infst\_\-plan}
-\begin{CompactList}\small\item\em Structure for an inverse transform plan. \item\end{CompactList}\item 
-struct \hyperlink{structinnfft__plan}{innfft\_\-plan}
-\begin{CompactList}\small\item\em Structure for an inverse transform plan. \item\end{CompactList}\item 
-struct \hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan}
-\begin{CompactList}\small\item\em Structure for an inverse transform plan. \item\end{CompactList}\item 
-struct \hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan}
-\begin{CompactList}\small\item\em Structure for an inverse transform plan. \item\end{CompactList}\item 
-struct \hyperlink{structinfsft__plan}{infsft\_\-plan}
-\begin{CompactList}\small\item\em Structure for an inverse transform plan. \item\end{CompactList}\end{CompactItemize}
+struct \hyperlink{structsolver__plan__complex}{solver\_\-plan\_\-complex}
+\item 
+struct \hyperlink{structsolver__plan__double}{solver\_\-plan\_\-double}
+\end{CompactItemize}
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\#define \hyperlink{group__solver_ga35}{LANDWEBER}~(1U$<$$<$ 0)
+\#define \hyperlink{group__solver_g84bae5d48296d5a0d1e548ed58b9e495}{LANDWEBER}~(1U$<$$<$ 0)
 \begin{CompactList}\small\item\em If this flag is set, the Landweber (Richardson) iteration is used to compute an inverse transform. \item\end{CompactList}\item 
-\#define \hyperlink{group__solver_ga36}{STEEPEST\_\-DESCENT}~(1U$<$$<$ 1)
+\#define \hyperlink{group__solver_g1f016d06d661c80eacb5182d80813cd9}{STEEPEST\_\-DESCENT}~(1U$<$$<$ 1)
 \begin{CompactList}\small\item\em If this flag is set, the method of steepest descent (gradient) is used to compute an inverse transform. \item\end{CompactList}\item 
-\#define \hyperlink{group__solver_ga37}{CGNR}~(1U$<$$<$ 2)
+\#define \hyperlink{group__solver_g5716b96b5141dfb52b747a78b11defa7}{CGNR}~(1U$<$$<$ 2)
 \begin{CompactList}\small\item\em If this flag is set, the conjugate gradient method for the normal equation of first kind is used to compute an inverse transform. \item\end{CompactList}\item 
-\#define \hyperlink{group__solver_ga38}{CGNE}~(1U$<$$<$ 3)
+\#define \hyperlink{group__solver_gae8290aa6a83fd56699a98cc0a55baf5}{CGNE}~(1U$<$$<$ 3)
 \begin{CompactList}\small\item\em If this flag is set, the conjugate gradient method for the normal equation of second kind is used to compute an inverse transform. \item\end{CompactList}\item 
-\#define \hyperlink{group__solver_ga39}{NORMS\_\-FOR\_\-LANDWEBER}~(1U$<$$<$ 4)
+\#define \hyperlink{group__solver_g6be0dda24e7cbd9f3f1d1b299e815973}{NORMS\_\-FOR\_\-LANDWEBER}~(1U$<$$<$ 4)
 \begin{CompactList}\small\item\em If this flag is set, the Landweber iteration updates the member dot\_\-r\_\-iter. \item\end{CompactList}\item 
-\#define \hyperlink{group__solver_ga40}{PRECOMPUTE\_\-WEIGHT}~(1U$<$$<$ 5)
+\#define \hyperlink{group__solver_ga59267dba2cd3247c5ee4eb493d31c2d}{PRECOMPUTE\_\-WEIGHT}~(1U$<$$<$ 5)
 \begin{CompactList}\small\item\em If this flag is set, the samples are weighted, eg to cope with varying sampling density. \item\end{CompactList}\item 
-\#define \hyperlink{group__solver_ga41}{PRECOMPUTE\_\-DAMP}~(1U$<$$<$ 6)
-\begin{CompactList}\small\item\em If this flag is set, the Fourier coefficients are damped, eg to favour fast decaying coefficients. \item\end{CompactList}\item 
-\#define \hyperlink{group__solver_ga42}{MACRO\_\-SOLVER\_\-PLAN}(MV, FLT, FLT\_\-TYPE)
-\begin{CompactList}\small\item\em Complete macro for mangling an inverse transform. \item\end{CompactList}\end{CompactItemize}
+\#define \hyperlink{group__solver_g9ccacd28b2d441a797a5c0d9e6c17fa7}{PRECOMPUTE\_\-DAMP}~(1U$<$$<$ 6)
+\begin{CompactList}\small\item\em If this flag is set, the Fourier coefficients are damped, eg to favour fast decaying coefficients. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-\hypertarget{group__solver_ga0}{
-void \hyperlink{group__solver_ga0}{infft\_\-init} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$mv)}
-\label{group__solver_ga0}
+\hypertarget{group__solver_gdc8907c56239059e1d313b9aa93bc710}{
+void \hyperlink{group__solver_gdc8907c56239059e1d313b9aa93bc710}{solver\_\-init\_\-advanced\_\-complex} (\hyperlink{structsolver__plan__complex}{solver\_\-plan\_\-complex} $\ast$ths, \hyperlink{structmv__plan__complex}{mv\_\-plan\_\-complex} $\ast$mv, unsigned flags)}
+\label{group__solver_gdc8907c56239059e1d313b9aa93bc710}
 
-\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga1}{
-void \hyperlink{group__solver_ga1}{infft\_\-init\_\-advanced} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$mv, unsigned infft\_\-flags)}
-\label{group__solver_ga1}
+\item 
+\hypertarget{group__solver_g136cee51323de9e8402a4735549c0bc5}{
+void \hyperlink{group__solver_g136cee51323de9e8402a4735549c0bc5}{solver\_\-init\_\-complex} (\hyperlink{structsolver__plan__complex}{solver\_\-plan\_\-complex} $\ast$ths, \hyperlink{structmv__plan__complex}{mv\_\-plan\_\-complex} $\ast$mv)}
+\label{group__solver_g136cee51323de9e8402a4735549c0bc5}
 
-\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga2}{
-void \hyperlink{group__solver_ga2}{infft\_\-before\_\-loop} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths)}
-\label{group__solver_ga2}
+\item 
+\hypertarget{group__solver_g54498806e5ab4046a2ef8fc426e5b141}{
+void \hyperlink{group__solver_g54498806e5ab4046a2ef8fc426e5b141}{solver\_\-before\_\-loop\_\-complex} (\hyperlink{structsolver__plan__complex}{solver\_\-plan\_\-complex} $\ast$ths)}
+\label{group__solver_g54498806e5ab4046a2ef8fc426e5b141}
 
-\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga3}{
-void \hyperlink{group__solver_ga3}{infft\_\-loop\_\-one\_\-step} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths)}
-\label{group__solver_ga3}
+\item 
+\hypertarget{group__solver_g3b80b04ee3429b04c310992fb0a12420}{
+void \hyperlink{group__solver_g3b80b04ee3429b04c310992fb0a12420}{solver\_\-loop\_\-one\_\-step\_\-complex} (\hyperlink{structsolver__plan__complex}{solver\_\-plan\_\-complex} $\ast$ths)}
+\label{group__solver_g3b80b04ee3429b04c310992fb0a12420}
 
-\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga4}{
-void \hyperlink{group__solver_ga4}{infft\_\-finalize} (\hyperlink{structinfft__plan}{infft\_\-plan} $\ast$ths)}
-\label{group__solver_ga4}
+\begin{CompactList}\small\item\em void solver\_\-loop\_\-one\_\-step \item\end{CompactList}\item 
+\hypertarget{group__solver_g2f44c78734390e47d72578f4c9cbe709}{
+void \hyperlink{group__solver_g2f44c78734390e47d72578f4c9cbe709}{solver\_\-finalize\_\-complex} (\hyperlink{structsolver__plan__complex}{solver\_\-plan\_\-complex} $\ast$ths)}
+\label{group__solver_g2f44c78734390e47d72578f4c9cbe709}
 
-\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga5}{
-void \hyperlink{group__solver_ga5}{infct\_\-init} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths, \hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$mv)}
-\label{group__solver_ga5}
+\begin{CompactList}\small\item\em void solver\_\-finalize \item\end{CompactList}\item 
+\hypertarget{group__solver_g86bbf9d33b307eab191be8f7d30326ac}{
+void \hyperlink{group__solver_g86bbf9d33b307eab191be8f7d30326ac}{solver\_\-init\_\-advanced\_\-double} (\hyperlink{structsolver__plan__double}{solver\_\-plan\_\-double} $\ast$ths, \hyperlink{structmv__plan__double}{mv\_\-plan\_\-double} $\ast$mv, unsigned flags)}
+\label{group__solver_g86bbf9d33b307eab191be8f7d30326ac}
 
-\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga6}{
-void \hyperlink{group__solver_ga6}{infct\_\-init\_\-advanced} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths, \hyperlink{structnfct__plan}{nfct\_\-plan} $\ast$mv, unsigned infct\_\-flags)}
-\label{group__solver_ga6}
+\begin{CompactList}\small\item\em void solver\_\-finalize \item\end{CompactList}\item 
+\hypertarget{group__solver_g64cfaa8d4478850d5e95b910c7235e30}{
+void \hyperlink{group__solver_g64cfaa8d4478850d5e95b910c7235e30}{solver\_\-init\_\-double} (\hyperlink{structsolver__plan__double}{solver\_\-plan\_\-double} $\ast$ths, \hyperlink{structmv__plan__double}{mv\_\-plan\_\-double} $\ast$mv)}
+\label{group__solver_g64cfaa8d4478850d5e95b910c7235e30}
 
-\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga7}{
-void \hyperlink{group__solver_ga7}{infct\_\-before\_\-loop} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths)}
-\label{group__solver_ga7}
+\item 
+\hypertarget{group__solver_g101de2753c7c709e635b7c70a5fb5fe8}{
+void \hyperlink{group__solver_g101de2753c7c709e635b7c70a5fb5fe8}{solver\_\-before\_\-loop\_\-double} (\hyperlink{structsolver__plan__double}{solver\_\-plan\_\-double} $\ast$ths)}
+\label{group__solver_g101de2753c7c709e635b7c70a5fb5fe8}
 
-\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga8}{
-void \hyperlink{group__solver_ga8}{infct\_\-loop\_\-one\_\-step} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths)}
-\label{group__solver_ga8}
+\item 
+\hypertarget{group__solver_gd4f10ac01c0f0361e6c12b9c522ae5f6}{
+void \hyperlink{group__solver_gd4f10ac01c0f0361e6c12b9c522ae5f6}{solver\_\-loop\_\-one\_\-step\_\-double} (\hyperlink{structsolver__plan__double}{solver\_\-plan\_\-double} $\ast$ths)}
+\label{group__solver_gd4f10ac01c0f0361e6c12b9c522ae5f6}
 
-\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga9}{
-void \hyperlink{group__solver_ga9}{infct\_\-finalize} (\hyperlink{structinfct__plan}{infct\_\-plan} $\ast$ths)}
-\label{group__solver_ga9}
+\begin{CompactList}\small\item\em void solver\_\-loop\_\-one\_\-step \item\end{CompactList}\item 
+\hypertarget{group__solver_g1b474dc7b8c84ac43e6c8cb2b5a66e47}{
+void \hyperlink{group__solver_g1b474dc7b8c84ac43e6c8cb2b5a66e47}{solver\_\-finalize\_\-double} (\hyperlink{structsolver__plan__double}{solver\_\-plan\_\-double} $\ast$ths)}
+\label{group__solver_g1b474dc7b8c84ac43e6c8cb2b5a66e47}
 
-\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga10}{
-void \hyperlink{group__solver_ga10}{infst\_\-init} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths, \hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$mv)}
-\label{group__solver_ga10}
-
-\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga11}{
-void \hyperlink{group__solver_ga11}{infst\_\-init\_\-advanced} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths, \hyperlink{structnfst__plan}{nfst\_\-plan} $\ast$mv, unsigned infst\_\-flags)}
-\label{group__solver_ga11}
-
-\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga12}{
-void \hyperlink{group__solver_ga12}{infst\_\-before\_\-loop} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths)}
-\label{group__solver_ga12}
-
-\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga13}{
-void \hyperlink{group__solver_ga13}{infst\_\-loop\_\-one\_\-step} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths)}
-\label{group__solver_ga13}
-
-\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga14}{
-void \hyperlink{group__solver_ga14}{infst\_\-finalize} (\hyperlink{structinfst__plan}{infst\_\-plan} $\ast$ths)}
-\label{group__solver_ga14}
-
-\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga15}{
-void \hyperlink{group__solver_ga15}{innfft\_\-init} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths, \hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$mv)}
-\label{group__solver_ga15}
-
-\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga16}{
-void \hyperlink{group__solver_ga16}{innfft\_\-init\_\-advanced} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths, \hyperlink{structnnfft__plan}{nnfft\_\-plan} $\ast$mv, unsigned innfft\_\-flags)}
-\label{group__solver_ga16}
-
-\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga17}{
-void \hyperlink{group__solver_ga17}{innfft\_\-before\_\-loop} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths)}
-\label{group__solver_ga17}
-
-\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga18}{
-void \hyperlink{group__solver_ga18}{innfft\_\-loop\_\-one\_\-step} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths)}
-\label{group__solver_ga18}
-
-\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga19}{
-void \hyperlink{group__solver_ga19}{innfft\_\-finalize} (\hyperlink{structinnfft__plan}{innfft\_\-plan} $\ast$ths)}
-\label{group__solver_ga19}
-
-\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga20}{
-void \hyperlink{group__solver_ga20}{imri\_\-inh\_\-2d1d\_\-init} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$mv)}
-\label{group__solver_ga20}
-
-\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga21}{
-void \hyperlink{group__solver_ga21}{imri\_\-inh\_\-2d1d\_\-init\_\-advanced} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__2d1d__plan}{mri\_\-inh\_\-2d1d\_\-plan} $\ast$mv, unsigned imri\_\-inh\_\-2d1d\_\-flags)}
-\label{group__solver_ga21}
-
-\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga22}{
-void \hyperlink{group__solver_ga22}{imri\_\-inh\_\-2d1d\_\-before\_\-loop} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)}
-\label{group__solver_ga22}
-
-\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga23}{
-void \hyperlink{group__solver_ga23}{imri\_\-inh\_\-2d1d\_\-loop\_\-one\_\-step} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)}
-\label{group__solver_ga23}
-
-\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga24}{
-void \hyperlink{group__solver_ga24}{imri\_\-inh\_\-2d1d\_\-finalize} (\hyperlink{structimri__inh__2d1d__plan}{imri\_\-inh\_\-2d1d\_\-plan} $\ast$ths)}
-\label{group__solver_ga24}
-
-\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga25}{
-void \hyperlink{group__solver_ga25}{imri\_\-inh\_\-3d\_\-init} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$mv)}
-\label{group__solver_ga25}
-
-\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga26}{
-void \hyperlink{group__solver_ga26}{imri\_\-inh\_\-3d\_\-init\_\-advanced} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths, \hyperlink{structmri__inh__3d__plan}{mri\_\-inh\_\-3d\_\-plan} $\ast$mv, unsigned imri\_\-inh\_\-3d\_\-flags)}
-\label{group__solver_ga26}
-
-\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga27}{
-void \hyperlink{group__solver_ga27}{imri\_\-inh\_\-3d\_\-before\_\-loop} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths)}
-\label{group__solver_ga27}
-
-\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga28}{
-void \hyperlink{group__solver_ga28}{imri\_\-inh\_\-3d\_\-loop\_\-one\_\-step} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths)}
-\label{group__solver_ga28}
-
-\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga29}{
-void \hyperlink{group__solver_ga29}{imri\_\-inh\_\-3d\_\-finalize} (\hyperlink{structimri__inh__3d__plan}{imri\_\-inh\_\-3d\_\-plan} $\ast$ths)}
-\label{group__solver_ga29}
-
-\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga30}{
-void \hyperlink{group__solver_ga30}{infsft\_\-init} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths, \hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$mv)}
-\label{group__solver_ga30}
-
-\begin{CompactList}\small\item\em Simple initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga31}{
-void \hyperlink{group__solver_ga31}{infsft\_\-init\_\-advanced} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths, \hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$mv, unsigned infsft\_\-flags)}
-\label{group__solver_ga31}
-
-\begin{CompactList}\small\item\em Advanced initialisation. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga32}{
-void \hyperlink{group__solver_ga32}{infsft\_\-before\_\-loop} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths)}
-\label{group__solver_ga32}
-
-\begin{CompactList}\small\item\em Setting up residuals before the actual iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga33}{
-void \hyperlink{group__solver_ga33}{infsft\_\-loop\_\-one\_\-step} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths)}
-\label{group__solver_ga33}
-
-\begin{CompactList}\small\item\em Doing one step in the iteration. \item\end{CompactList}\item 
-\hypertarget{group__solver_ga34}{
-void \hyperlink{group__solver_ga34}{infsft\_\-finalize} (\hyperlink{structinfsft__plan}{infsft\_\-plan} $\ast$ths)}
-\label{group__solver_ga34}
-
-\begin{CompactList}\small\item\em Destroys the plan for the inverse transform. \item\end{CompactList}\end{CompactItemize}
+\begin{CompactList}\small\item\em void solver\_\-finalize \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Define Documentation}
-\hypertarget{group__solver_ga35}{
+\hypertarget{group__solver_g84bae5d48296d5a0d1e548ed58b9e495}{
 \index{solver@{solver}!LANDWEBER@{LANDWEBER}}
 \index{LANDWEBER@{LANDWEBER}!solver@{solver}}
-\subsubsection[LANDWEBER]{\setlength{\rightskip}{0pt plus 5cm}\#define LANDWEBER~(1U$<$$<$ 0)}}
-\label{group__solver_ga35}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define LANDWEBER~(1U$<$$<$ 0)}}
+\label{group__solver_g84bae5d48296d5a0d1e548ed58b9e495}
 
 
 If this flag is set, the Landweber (Richardson) iteration is used to compute an inverse transform. 
@@ -232,11 +95,13 @@ If this flag is set, the Landweber (Richardson) iteration is used to compute an 
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 2214 of file nfft3.h.\hypertarget{group__solver_ga36}{
+Definition at line 2744 of file nfft3.h.
+
+Referenced by solver\_\-before\_\-loop\_\-complex(), solver\_\-before\_\-loop\_\-double(), solver\_\-init\_\-advanced\_\-complex(), solver\_\-init\_\-advanced\_\-double(), solver\_\-loop\_\-one\_\-step\_\-complex(), and solver\_\-loop\_\-one\_\-step\_\-double().\hypertarget{group__solver_g1f016d06d661c80eacb5182d80813cd9}{
 \index{solver@{solver}!STEEPEST_DESCENT@{STEEPEST\_\-DESCENT}}
 \index{STEEPEST_DESCENT@{STEEPEST\_\-DESCENT}!solver@{solver}}
-\subsubsection[STEEPEST\_\-DESCENT]{\setlength{\rightskip}{0pt plus 5cm}\#define STEEPEST\_\-DESCENT~(1U$<$$<$ 1)}}
-\label{group__solver_ga36}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define STEEPEST\_\-DESCENT~(1U$<$$<$ 1)}}
+\label{group__solver_g1f016d06d661c80eacb5182d80813cd9}
 
 
 If this flag is set, the method of steepest descent (gradient) is used to compute an inverse transform. 
@@ -245,11 +110,13 @@ If this flag is set, the method of steepest descent (gradient) is used to comput
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 2222 of file nfft3.h.\hypertarget{group__solver_ga37}{
+Definition at line 2752 of file nfft3.h.
+
+Referenced by solver\_\-finalize\_\-complex(), solver\_\-finalize\_\-double(), solver\_\-init\_\-advanced\_\-complex(), solver\_\-init\_\-advanced\_\-double(), solver\_\-loop\_\-one\_\-step\_\-complex(), and solver\_\-loop\_\-one\_\-step\_\-double().\hypertarget{group__solver_g5716b96b5141dfb52b747a78b11defa7}{
 \index{solver@{solver}!CGNR@{CGNR}}
 \index{CGNR@{CGNR}!solver@{solver}}
-\subsubsection[CGNR]{\setlength{\rightskip}{0pt plus 5cm}\#define CGNR~(1U$<$$<$ 2)}}
-\label{group__solver_ga37}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define CGNR~(1U$<$$<$ 2)}}
+\label{group__solver_g5716b96b5141dfb52b747a78b11defa7}
 
 
 If this flag is set, the conjugate gradient method for the normal equation of first kind is used to compute an inverse transform. 
@@ -260,13 +127,13 @@ Each iterate minimises the residual in the current Krylov subspace.
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 2231 of file nfft3.h.
+Definition at line 2761 of file nfft3.h.
 
-Referenced by inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), main(), and reconstruct().\hypertarget{group__solver_ga38}{
+Referenced by inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), main(), reconstruct(), solver\_\-before\_\-loop\_\-complex(), solver\_\-before\_\-loop\_\-double(), solver\_\-finalize\_\-complex(), solver\_\-finalize\_\-double(), solver\_\-init\_\-advanced\_\-complex(), solver\_\-init\_\-advanced\_\-double(), solver\_\-init\_\-complex(), solver\_\-init\_\-double(), solver\_\-loop\_\-one\_\-step\_\-complex(), and solver\_\-loop\_\-one\_\-step\_\-double().\hypertarget{group__solver_gae8290aa6a83fd56699a98cc0a55baf5}{
 \index{solver@{solver}!CGNE@{CGNE}}
 \index{CGNE@{CGNE}!solver@{solver}}
-\subsubsection[CGNE]{\setlength{\rightskip}{0pt plus 5cm}\#define CGNE~(1U$<$$<$ 3)}}
-\label{group__solver_ga38}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define CGNE~(1U$<$$<$ 3)}}
+\label{group__solver_gae8290aa6a83fd56699a98cc0a55baf5}
 
 
 If this flag is set, the conjugate gradient method for the normal equation of second kind is used to compute an inverse transform. 
@@ -277,13 +144,13 @@ Each iterate minimises the error in the current Krylov subspace.
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 2240 of file nfft3.h.
+Definition at line 2770 of file nfft3.h.
 
-Referenced by glacier(), and main().\hypertarget{group__solver_ga39}{
+Referenced by glacier(), main(), solver\_\-before\_\-loop\_\-complex(), solver\_\-before\_\-loop\_\-double(), solver\_\-init\_\-advanced\_\-complex(), solver\_\-init\_\-advanced\_\-double(), solver\_\-loop\_\-one\_\-step\_\-complex(), and solver\_\-loop\_\-one\_\-step\_\-double().\hypertarget{group__solver_g6be0dda24e7cbd9f3f1d1b299e815973}{
 \index{solver@{solver}!NORMS_FOR_LANDWEBER@{NORMS\_\-FOR\_\-LANDWEBER}}
 \index{NORMS_FOR_LANDWEBER@{NORMS\_\-FOR\_\-LANDWEBER}!solver@{solver}}
-\subsubsection[NORMS\_\-FOR\_\-LANDWEBER]{\setlength{\rightskip}{0pt plus 5cm}\#define NORMS\_\-FOR\_\-LANDWEBER~(1U$<$$<$ 4)}}
-\label{group__solver_ga39}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NORMS\_\-FOR\_\-LANDWEBER~(1U$<$$<$ 4)}}
+\label{group__solver_g6be0dda24e7cbd9f3f1d1b299e815973}
 
 
 If this flag is set, the Landweber iteration updates the member dot\_\-r\_\-iter. 
@@ -292,11 +159,13 @@ If this flag is set, the Landweber iteration updates the member dot\_\-r\_\-iter
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 2248 of file nfft3.h.\hypertarget{group__solver_ga40}{
+Definition at line 2778 of file nfft3.h.
+
+Referenced by solver\_\-before\_\-loop\_\-complex(), solver\_\-before\_\-loop\_\-double(), solver\_\-loop\_\-one\_\-step\_\-landweber\_\-complex(), and solver\_\-loop\_\-one\_\-step\_\-landweber\_\-double().\hypertarget{group__solver_ga59267dba2cd3247c5ee4eb493d31c2d}{
 \index{solver@{solver}!PRECOMPUTE_WEIGHT@{PRECOMPUTE\_\-WEIGHT}}
 \index{PRECOMPUTE_WEIGHT@{PRECOMPUTE\_\-WEIGHT}!solver@{solver}}
-\subsubsection[PRECOMPUTE\_\-WEIGHT]{\setlength{\rightskip}{0pt plus 5cm}\#define PRECOMPUTE\_\-WEIGHT~(1U$<$$<$ 5)}}
-\label{group__solver_ga40}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRECOMPUTE\_\-WEIGHT~(1U$<$$<$ 5)}}
+\label{group__solver_ga59267dba2cd3247c5ee4eb493d31c2d}
 
 
 If this flag is set, the samples are weighted, eg to cope with varying sampling density. 
@@ -305,13 +174,13 @@ If this flag is set, the samples are weighted, eg to cope with varying sampling 
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 2256 of file nfft3.h.
+Definition at line 2786 of file nfft3.h.
 
-Referenced by inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), main(), and reconstruct().\hypertarget{group__solver_ga41}{
+Referenced by inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), main(), reconstruct(), solver\_\-before\_\-loop\_\-complex(), solver\_\-before\_\-loop\_\-double(), solver\_\-finalize\_\-complex(), solver\_\-finalize\_\-double(), solver\_\-init\_\-advanced\_\-complex(), solver\_\-init\_\-advanced\_\-double(), solver\_\-loop\_\-one\_\-step\_\-cgne\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-cgne\_\-double(), solver\_\-loop\_\-one\_\-step\_\-cgnr\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-cgnr\_\-double(), solver\_\-loop\_\-one\_\-step\_\-landweber\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-landweber\_\-double(), solver\_\-loop\_\-one\_\-step\_\-steepest\_\-descent\_\-complex(), and solver\_\-loop\_\-one\_\-step\_\-steepest\_\-descent\_\-double().\hypertarget{group__solver_g9ccacd28b2d441a797a5c0d9e6c17fa7}{
 \index{solver@{solver}!PRECOMPUTE_DAMP@{PRECOMPUTE\_\-DAMP}}
 \index{PRECOMPUTE_DAMP@{PRECOMPUTE\_\-DAMP}!solver@{solver}}
-\subsubsection[PRECOMPUTE\_\-DAMP]{\setlength{\rightskip}{0pt plus 5cm}\#define PRECOMPUTE\_\-DAMP~(1U$<$$<$ 6)}}
-\label{group__solver_ga41}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRECOMPUTE\_\-DAMP~(1U$<$$<$ 6)}}
+\label{group__solver_g9ccacd28b2d441a797a5c0d9e6c17fa7}
 
 
 If this flag is set, the Fourier coefficients are damped, eg to favour fast decaying coefficients. 
@@ -320,21 +189,6 @@ If this flag is set, the Fourier coefficients are damped, eg to favour fast deca
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 2264 of file nfft3.h.
+Definition at line 2794 of file nfft3.h.
 
-Referenced by glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), main(), and reconstruct().\hypertarget{group__solver_ga42}{
-\index{solver@{solver}!MACRO_SOLVER_PLAN@{MACRO\_\-SOLVER\_\-PLAN}}
-\index{MACRO_SOLVER_PLAN@{MACRO\_\-SOLVER\_\-PLAN}!solver@{solver}}
-\subsubsection[MACRO\_\-SOLVER\_\-PLAN]{\setlength{\rightskip}{0pt plus 5cm}\#define MACRO\_\-SOLVER\_\-PLAN(MV, FLT, FLT\_\-TYPE)}}
-\label{group__solver_ga42}
-
-
-Complete macro for mangling an inverse transform. 
-
-\begin{itemize}
-\item MV Matrix vector multiplication type (eg nfft, nfct) \item FLT Float used as prefix for function names (double or complex) \item FLT\_\-TYPE Float type (double or double complex)\end{itemize}
-\begin{Desc}
-\item[Author:]Stefan Kunis \end{Desc}
-
-
-Definition at line 2275 of file nfft3.h.
+Referenced by glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), main(), reconstruct(), solver\_\-before\_\-loop\_\-complex(), solver\_\-before\_\-loop\_\-double(), solver\_\-finalize\_\-complex(), solver\_\-finalize\_\-double(), solver\_\-init\_\-advanced\_\-complex(), solver\_\-init\_\-advanced\_\-double(), solver\_\-loop\_\-one\_\-step\_\-cgne\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-cgne\_\-double(), solver\_\-loop\_\-one\_\-step\_\-cgnr\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-cgnr\_\-double(), solver\_\-loop\_\-one\_\-step\_\-landweber\_\-complex(), solver\_\-loop\_\-one\_\-step\_\-landweber\_\-double(), solver\_\-loop\_\-one\_\-step\_\-steepest\_\-descent\_\-complex(), and solver\_\-loop\_\-one\_\-step\_\-steepest\_\-descent\_\-double().

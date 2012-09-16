@@ -11,64 +11,94 @@ struct \hyperlink{structnfft__plan}{nfft\_\-plan}
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\#define \hyperlink{group__nfft_ga16}{PRE\_\-PHI\_\-HUT}~(1U$<$$<$ 0)
+\#define \hyperlink{group__nfft_gda3a356fdaf5840f98374a0a7aaf3e9c}{PRE\_\-PHI\_\-HUT}~(1U$<$$<$ 0)
 \begin{CompactList}\small\item\em If this flag is set, the deconvolution step (the multiplication with the diagonal matrix $\mathbf{D}$) uses precomputed values of the Fourier transformed window function. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga17}{FG\_\-PSI}~(1U$<$$<$ 1)
+\#define \hyperlink{group__nfft_g01ebac2d2071639df189f083fc9f24eb}{FG\_\-PSI}~(1U$<$$<$ 1)
 \begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses particular properties of the Gaussian window function to trade multiplications for direct calls to exponential function. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga18}{PRE\_\-LIN\_\-PSI}~(1U$<$$<$ 2)
+\#define \hyperlink{group__nfft_gbb1ad048b695cb806baf010c5d1b2caf}{PRE\_\-LIN\_\-PSI}~(1U$<$$<$ 2)
 \begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses linear interpolation from a lookup table of equispaced samples of the window function instead of exact values of the window function. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga19}{PRE\_\-FG\_\-PSI}~(1U$<$$<$ 3)
+\#define \hyperlink{group__nfft_g9c5a5ab61009a801082897ca40a1658c}{PRE\_\-FG\_\-PSI}~(1U$<$$<$ 3)
 \begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses particular properties of the Gaussian window function to trade multiplications for direct calls to exponential function (the remaining $2dM$ direct calls are precomputed). \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga20}{PRE\_\-PSI}~(1U$<$$<$ 4)
+\#define \hyperlink{group__nfft_g959463a5c7723ccef5057ddcb784b40c}{PRE\_\-PSI}~(1U$<$$<$ 4)
 \begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses $(2m+2)dM$ precomputed values of the window function. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga21}{PRE\_\-FULL\_\-PSI}~(1U$<$$<$ 5)
+\#define \hyperlink{group__nfft_g7ad8a7e19519b16340dabec48899c6a4}{PRE\_\-FULL\_\-PSI}~(1U$<$$<$ 5)
 \begin{CompactList}\small\item\em If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses $(2m+2)^dM$ precomputed values of the window function, in addition indices of source and target vectors are stored. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga22}{MALLOC\_\-X}~(1U$<$$<$ 6)
+\#define \hyperlink{group__nfft_g353185384f87de0dc4320a82652ef724}{MALLOC\_\-X}~(1U$<$$<$ 6)
 \begin{CompactList}\small\item\em If this flag is set, (de)allocation of the node vector is done. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga23}{MALLOC\_\-F\_\-HAT}~(1U$<$$<$ 7)
+\#define \hyperlink{group__nfft_g02d52cb02b6cfdbc3e4d5fd4de1aef9e}{MALLOC\_\-F\_\-HAT}~(1U$<$$<$ 7)
 \begin{CompactList}\small\item\em If this flag is set, (de)allocation of the vector of Fourier coefficients is done. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga24}{MALLOC\_\-F}~(1U$<$$<$ 8)
+\#define \hyperlink{group__nfft_ga7b5098f4136080bbe0dd989973e2a69}{MALLOC\_\-F}~(1U$<$$<$ 8)
 \begin{CompactList}\small\item\em If this flag is set, (de)allocation of the vector of samples is done. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga25}{FFT\_\-OUT\_\-OF\_\-PLACE}~(1U$<$$<$ 9)
+\#define \hyperlink{group__nfft_g9193f768d5839892d0e303080c370eaf}{FFT\_\-OUT\_\-OF\_\-PLACE}~(1U$<$$<$ 9)
 \begin{CompactList}\small\item\em If this flag is set, FFTW uses disjoint input/output vectors. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga26}{FFTW\_\-INIT}~(1U$<$$<$ 10)
+\#define \hyperlink{group__nfft_gd3fe6867a3351441c6f44dd5a3746f5b}{FFTW\_\-INIT}~(1U$<$$<$ 10)
 \begin{CompactList}\small\item\em If this flag is set, fftw\_\-init/fftw\_\-finalize is called. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfft_ga27}{PRE\_\-ONE\_\-PSI}~(PRE\_\-LIN\_\-PSI$|$ PRE\_\-FG\_\-PSI$|$ PRE\_\-PSI$|$ PRE\_\-FULL\_\-PSI)
+\#define \hyperlink{group__nfft_g44c85197c6bdcf4b632aeff5e94d5329}{PRE\_\-ONE\_\-PSI}~(PRE\_\-LIN\_\-PSI$|$ PRE\_\-FG\_\-PSI$|$ PRE\_\-PSI$|$ PRE\_\-FULL\_\-PSI)
 \begin{CompactList}\small\item\em Summarises if precomputation is used within the convolution step (the multiplication with the sparse matrix $\mathbf{B}$). \item\end{CompactList}\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-void \hyperlink{group__nfft_ga0}{ndft\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_g27ef1bcb8dd3a3fc1cdbeee368ec1acf}{ndft\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Computes a NDFT, see the \hyperlink{group__nfft_ndft_formula}{definition}. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga1}{ndft\_\-adjoint} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_g03975608fdf8cfd8757f1f52b43ec51b}{ndft\_\-adjoint} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Computes an adjoint NDFT, see the definition. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga2}{nfft\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_g9f1e6bd9f7f956a8679e6b413c97b421}{nfft\_\-trafo} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Computes a NFFT, see the \hyperlink{group__nfft_ndft_formula}{definition}. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga3}{nfft\_\-adjoint} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+\hypertarget{group__nfft_ge6dff0553d273fc53a15ce4535df8087}{
+void \hyperlink{group__nfft_ge6dff0553d273fc53a15ce4535df8087}{nfft\_\-trafo\_\-1d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)}
+\label{group__nfft_ge6dff0553d273fc53a15ce4535df8087}
+
+\item 
+\hypertarget{group__nfft_gc05ae265993ff8e1396ac6c801c47ffe}{
+void \hyperlink{group__nfft_gc05ae265993ff8e1396ac6c801c47ffe}{nfft\_\-trafo\_\-2d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)}
+\label{group__nfft_gc05ae265993ff8e1396ac6c801c47ffe}
+
+\item 
+\hypertarget{group__nfft_g503e48334b8cdefb63f55941460354bf}{
+void \hyperlink{group__nfft_g503e48334b8cdefb63f55941460354bf}{nfft\_\-trafo\_\-3d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)}
+\label{group__nfft_g503e48334b8cdefb63f55941460354bf}
+
+\item 
+void \hyperlink{group__nfft_g4b44c1dd52026dcb494dc735f0fa5b08}{nfft\_\-adjoint} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Computes an adjoint NFFT, see the definition. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga4}{nfft\_\-init\_\-1d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int M)
+\hypertarget{group__nfft_g13f8052bab72ec8994354cdd6ccb6982}{
+void \hyperlink{group__nfft_g13f8052bab72ec8994354cdd6ccb6982}{nfft\_\-adjoint\_\-1d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)}
+\label{group__nfft_g13f8052bab72ec8994354cdd6ccb6982}
+
+\item 
+\hypertarget{group__nfft_gda6d6c809694e08aac88fa0204192325}{
+void \hyperlink{group__nfft_gda6d6c809694e08aac88fa0204192325}{nfft\_\-adjoint\_\-2d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)}
+\label{group__nfft_gda6d6c809694e08aac88fa0204192325}
+
+\item 
+\hypertarget{group__nfft_g4469a1fc88e71eaff7b6912a15079195}{
+void \hyperlink{group__nfft_g4469a1fc88e71eaff7b6912a15079195}{nfft\_\-adjoint\_\-3d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)}
+\label{group__nfft_g4469a1fc88e71eaff7b6912a15079195}
+
+\item 
+void \hyperlink{group__nfft_g01dbd2cfc9cc8577fc097e607e3c845f}{nfft\_\-init\_\-1d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int M)
 \begin{CompactList}\small\item\em Initialisation of a transform plan, wrapper d=1. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga5}{nfft\_\-init\_\-2d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int N2, int M)
+void \hyperlink{group__nfft_g54ab08124f47fe412b2979abdc28cc16}{nfft\_\-init\_\-2d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int N2, int M)
 \begin{CompactList}\small\item\em Initialisation of a transform plan, wrapper d=2. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga6}{nfft\_\-init\_\-3d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int N2, int N3, int M)
+void \hyperlink{group__nfft_g67493342a23bdbb4301063f96e13fd88}{nfft\_\-init\_\-3d} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int N1, int N2, int N3, int M)
 \begin{CompactList}\small\item\em Initialisation of a transform plan, wrapper d=3. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga7}{nfft\_\-init} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M)
+void \hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M)
 \begin{CompactList}\small\item\em Initialisation of a transform plan, simple. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M, unsigned nfft\_\-flags\_\-on, unsigned nfft\_\-flags\_\-off)
+void \hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M, unsigned nfft\_\-flags\_\-on, unsigned nfft\_\-flags\_\-off)
 \begin{CompactList}\small\item\em Initialisation of a transform plan, advanced. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M, int $\ast$n, int m, unsigned nfft\_\-flags, unsigned fftw\_\-flags)
+void \hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths, int d, int $\ast$N, int M, int $\ast$n, int m, unsigned nfft\_\-flags, unsigned fftw\_\-flags)
 \begin{CompactList}\small\item\em Initialisation of a transform plan, guru. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga10}{nfft\_\-precompute\_\-one\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_gfd7b278b6ed04d929212b4807dd195f0}{nfft\_\-precompute\_\-one\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Precomputation for a transform plan. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga11}{nfft\_\-precompute\_\-full\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_gee7a88956c66b2113014084d6dd04b3a}{nfft\_\-precompute\_\-full\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Superceded by nfft\_\-precompute\_\-one\_\-psi. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga12}{nfft\_\-precompute\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_ge6a8367b03fd75b2af42dbbaccb78bf2}{nfft\_\-precompute\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Superceded by nfft\_\-precompute\_\-one\_\-psi. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga13}{nfft\_\-precompute\_\-lin\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_g3f91a7a005cc31a8b05f33fea0507ddc}{nfft\_\-precompute\_\-lin\_\-psi} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Superceded by nfft\_\-precompute\_\-one\_\-psi. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga14}{nfft\_\-check} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_g7af648ae0503976536b8db18200f99fe}{nfft\_\-check} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Checks a transform plan for frequently used bad parameter. \item\end{CompactList}\item 
-void \hyperlink{group__nfft_ga15}{nfft\_\-finalize} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{nfft\_\-finalize} (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Destroys a transform plan. \item\end{CompactList}\end{CompactItemize}
 
 
@@ -81,54 +111,56 @@ We introduce our notation and nomenclature for discrete Fourier transforms. Let 
 
 Our concern is the computation of the {\em nonequispaced\/} discrete Fourier transform {\em \/}(NDFT) \label{group__nfft_ndft_formula}
 \hypertarget{group__nfft_ndft_formula}{}
- \[ f_j = \sum_{\mathbf{k}\in I_{\mathbf{N}}} \hat{f}_{\mathbf{k}} {\rm e}^{-2\pi{\rm i} \mathbf{k}\mathbf{x}_j}, \qquad j=0,\hdots,M-1. \] The corresponding adjoint NDFT is the computation of \[ \hat f_{\mathbf{k}}=\sum_{j=0}^{M-1} f_j {\rm e}^{+2\pi{\rm i} \mathbf{k}\mathbf{x}_j}, \qquad \mathbf{k}\in I_{\mathbf{N}}. \] Direct implementations are given by \hyperlink{group__nfft_ga0}{ndft\_\-trafo} and \hyperlink{group__nfft_ga1}{ndft\_\-adjoint} taking ${\cal O}(|I_{\mathbf{N}}|M)$ floating point operations. Approximative realisations take only ${\cal O}(|I_{\mathbf{N}}|\log|I_{\mathbf{N}}|+M)$ floating point operations. These are provided by \hyperlink{group__nfft_ga2}{nfft\_\-trafo} and \hyperlink{group__nfft_ga3}{nfft\_\-adjoint}, respectively. 
+ \[ f_j = \sum_{\mathbf{k}\in I_{\mathbf{N}}} \hat{f}_{\mathbf{k}} {\rm e}^{-2\pi{\rm i} \mathbf{k}\mathbf{x}_j}, \qquad j=0,\hdots,M-1. \] The corresponding adjoint NDFT is the computation of \[ \hat f_{\mathbf{k}}=\sum_{j=0}^{M-1} f_j {\rm e}^{+2\pi{\rm i} \mathbf{k}\mathbf{x}_j}, \qquad \mathbf{k}\in I_{\mathbf{N}}. \] Direct implementations are given by \hyperlink{group__nfft_g27ef1bcb8dd3a3fc1cdbeee368ec1acf}{ndft\_\-trafo} and \hyperlink{group__nfft_g03975608fdf8cfd8757f1f52b43ec51b}{ndft\_\-adjoint} taking ${\cal O}(|I_{\mathbf{N}}|M)$ floating point operations. Approximative realisations take only ${\cal O}(|I_{\mathbf{N}}|\log|I_{\mathbf{N}}|+M)$ floating point operations. These are provided by \hyperlink{group__nfft_g9f1e6bd9f7f956a8679e6b413c97b421}{nfft\_\-trafo} and \hyperlink{group__nfft_g4b44c1dd52026dcb494dc735f0fa5b08}{nfft\_\-adjoint}, respectively. 
 
 \subsection{Define Documentation}
-\hypertarget{group__nfft_ga16}{
+\hypertarget{group__nfft_gda3a356fdaf5840f98374a0a7aaf3e9c}{
 \index{nfft@{nfft}!PRE_PHI_HUT@{PRE\_\-PHI\_\-HUT}}
 \index{PRE_PHI_HUT@{PRE\_\-PHI\_\-HUT}!nfft@{nfft}}
-\subsubsection[PRE\_\-PHI\_\-HUT]{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-PHI\_\-HUT~(1U$<$$<$ 0)}}
-\label{group__nfft_ga16}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-PHI\_\-HUT~(1U$<$$<$ 0)}}
+\label{group__nfft_gda3a356fdaf5840f98374a0a7aaf3e9c}
 
 
 If this flag is set, the deconvolution step (the multiplication with the diagonal matrix $\mathbf{D}$) uses precomputed values of the Fourier transformed window function. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 92 of file nfft3.h.
+Definition at line 210 of file nfft3.h.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga17}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-adjoint\_\-1d(), nfft\_\-adjoint\_\-2d(), nfft\_\-adjoint\_\-3d(), nfft\_\-finalize(), nfft\_\-init(), nfft\_\-trafo\_\-1d(), nfft\_\-trafo\_\-2d(), nfft\_\-trafo\_\-3d(), nfsft\_\-init\_\-advanced(), nfsoft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_g01ebac2d2071639df189f083fc9f24eb}{
 \index{nfft@{nfft}!FG_PSI@{FG\_\-PSI}}
 \index{FG_PSI@{FG\_\-PSI}!nfft@{nfft}}
-\subsubsection[FG\_\-PSI]{\setlength{\rightskip}{0pt plus 5cm}\#define FG\_\-PSI~(1U$<$$<$ 1)}}
-\label{group__nfft_ga17}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define FG\_\-PSI~(1U$<$$<$ 1)}}
+\label{group__nfft_g01ebac2d2071639df189f083fc9f24eb}
 
 
 If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses particular properties of the Gaussian window function to trade multiplications for direct calls to exponential function. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 105 of file nfft3.h.\hypertarget{group__nfft_ga18}{
+Definition at line 223 of file nfft3.h.
+
+Referenced by nfsoft\_\-precompute(), and time\_\-accuracy().\hypertarget{group__nfft_gbb1ad048b695cb806baf010c5d1b2caf}{
 \index{nfft@{nfft}!PRE_LIN_PSI@{PRE\_\-LIN\_\-PSI}}
 \index{PRE_LIN_PSI@{PRE\_\-LIN\_\-PSI}!nfft@{nfft}}
-\subsubsection[PRE\_\-LIN\_\-PSI]{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-LIN\_\-PSI~(1U$<$$<$ 2)}}
-\label{group__nfft_ga18}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-LIN\_\-PSI~(1U$<$$<$ 2)}}
+\label{group__nfft_gbb1ad048b695cb806baf010c5d1b2caf}
 
 
 If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses linear interpolation from a lookup table of equispaced samples of the window function instead of exact values of the window function. 
@@ -136,230 +168,230 @@ If this flag is set, the convolution step (the multiplication with the sparse ma
 At the moment a table of size $(K+1)d$ is used, where $K=2^{10}(m+1)$. An estimate for the size of the lookup table with respect to the target accuracy should be implemented.
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 122 of file nfft3.h.
+Definition at line 240 of file nfft3.h.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-finalize(), nfft\_\-precompute\_\-one\_\-psi(), nnfft\_\-finalize(), nnfft\_\-init\_\-guru(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_ga19}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-finalize(), nfft\_\-precompute\_\-one\_\-psi(), nfsoft\_\-init\_\-guru(), nnfft\_\-finalize(), nnfft\_\-init\_\-guru(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), and time\_\-accuracy().\hypertarget{group__nfft_g9c5a5ab61009a801082897ca40a1658c}{
 \index{nfft@{nfft}!PRE_FG_PSI@{PRE\_\-FG\_\-PSI}}
 \index{PRE_FG_PSI@{PRE\_\-FG\_\-PSI}!nfft@{nfft}}
-\subsubsection[PRE\_\-FG\_\-PSI]{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-FG\_\-PSI~(1U$<$$<$ 3)}}
-\label{group__nfft_ga19}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-FG\_\-PSI~(1U$<$$<$ 3)}}
+\label{group__nfft_g9c5a5ab61009a801082897ca40a1658c}
 
 
 If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses particular properties of the Gaussian window function to trade multiplications for direct calls to exponential function (the remaining $2dM$ direct calls are precomputed). 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 135 of file nfft3.h.
+Definition at line 253 of file nfft3.h.
 
-Referenced by nfft\_\-finalize(), nfft\_\-precompute\_\-one\_\-psi(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga20}{
+Referenced by nfft\_\-finalize(), nfft\_\-precompute\_\-one\_\-psi(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_g959463a5c7723ccef5057ddcb784b40c}{
 \index{nfft@{nfft}!PRE_PSI@{PRE\_\-PSI}}
 \index{PRE_PSI@{PRE\_\-PSI}!nfft@{nfft}}
-\subsubsection[PRE\_\-PSI]{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-PSI~(1U$<$$<$ 4)}}
-\label{group__nfft_ga20}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-PSI~(1U$<$$<$ 4)}}
+\label{group__nfft_g959463a5c7723ccef5057ddcb784b40c}
 
 
 If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses $(2m+2)dM$ precomputed values of the window function. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 147 of file nfft3.h.
+Definition at line 265 of file nfft3.h.
 
-Referenced by construct(), fastsum\_\-init\_\-guru(), fastsum\_\-precompute(), fgt\_\-init\_\-guru(), fgt\_\-init\_\-node\_\-dependent(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfft\_\-precompute\_\-one\_\-psi(), nfsft\_\-init\_\-advanced(), nfst\_\-finalize(), nfst\_\-full\_\-psi(), nnfft\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_ga21}{
+Referenced by construct(), fastsum\_\-init\_\-guru(), fastsum\_\-precompute(), fgt\_\-init\_\-guru(), fgt\_\-init\_\-node\_\-dependent(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfft\_\-precompute\_\-one\_\-psi(), nfsft\_\-init\_\-advanced(), nfsoft\_\-init\_\-advanced(), nfsoft\_\-precompute(), nfst\_\-finalize(), nfst\_\-full\_\-psi(), nnfft\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), and time\_\-accuracy().\hypertarget{group__nfft_g7ad8a7e19519b16340dabec48899c6a4}{
 \index{nfft@{nfft}!PRE_FULL_PSI@{PRE\_\-FULL\_\-PSI}}
 \index{PRE_FULL_PSI@{PRE\_\-FULL\_\-PSI}!nfft@{nfft}}
-\subsubsection[PRE\_\-FULL\_\-PSI]{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-FULL\_\-PSI~(1U$<$$<$ 5)}}
-\label{group__nfft_ga21}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-FULL\_\-PSI~(1U$<$$<$ 5)}}
+\label{group__nfft_g7ad8a7e19519b16340dabec48899c6a4}
 
 
 If this flag is set, the convolution step (the multiplication with the sparse matrix $\mathbf{B}$) uses $(2m+2)^dM$ precomputed values of the window function, in addition indices of source and target vectors are stored. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} \end{Desc}
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 160 of file nfft3.h.
+Definition at line 278 of file nfft3.h.
 
-Referenced by fastsum\_\-precompute(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfct\_\-adjoint(), nfct\_\-trafo(), nfft\_\-finalize(), nfft\_\-precompute\_\-one\_\-psi(), nfst\_\-finalize(), nfst\_\-precompute\_\-psi(), nnfft\_\-finalize(), nnfft\_\-init\_\-guru(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_ga22}{
+Referenced by fastsum\_\-precompute(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfct\_\-adjoint(), nfct\_\-trafo(), nfft\_\-finalize(), nfft\_\-precompute\_\-one\_\-psi(), nfst\_\-finalize(), nfst\_\-precompute\_\-psi(), nnfft\_\-finalize(), nnfft\_\-init\_\-guru(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), and time\_\-accuracy().\hypertarget{group__nfft_g353185384f87de0dc4320a82652ef724}{
 \index{nfft@{nfft}!MALLOC_X@{MALLOC\_\-X}}
 \index{MALLOC_X@{MALLOC\_\-X}!nfft@{nfft}}
-\subsubsection[MALLOC\_\-X]{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-X~(1U$<$$<$ 6)}}
-\label{group__nfft_ga22}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-X~(1U$<$$<$ 6)}}
+\label{group__nfft_g353185384f87de0dc4320a82652ef724}
 
 
 If this flag is set, (de)allocation of the node vector is done. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} 
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} 
 
-\hyperlink{group__nfft_ga15}{nfft\_\-finalize} \end{Desc}
+\hyperlink{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{nfft\_\-finalize} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 171 of file nfft3.h.
+Definition at line 289 of file nfft3.h.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), and taylor\_\-init().\hypertarget{group__nfft_ga23}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsoft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), and time\_\-accuracy().\hypertarget{group__nfft_g02d52cb02b6cfdbc3e4d5fd4de1aef9e}{
 \index{nfft@{nfft}!MALLOC_F_HAT@{MALLOC\_\-F\_\-HAT}}
 \index{MALLOC_F_HAT@{MALLOC\_\-F\_\-HAT}!nfft@{nfft}}
-\subsubsection[MALLOC\_\-F\_\-HAT]{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-F\_\-HAT~(1U$<$$<$ 7)}}
-\label{group__nfft_ga23}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-F\_\-HAT~(1U$<$$<$ 7)}}
+\label{group__nfft_g02d52cb02b6cfdbc3e4d5fd4de1aef9e}
 
 
 If this flag is set, (de)allocation of the vector of Fourier coefficients is done. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} 
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} 
 
-\hyperlink{group__nfft_ga15}{nfft\_\-finalize} \end{Desc}
+\hyperlink{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{nfft\_\-finalize} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 183 of file nfft3.h.
+Definition at line 301 of file nfft3.h.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), and taylor\_\-init().\hypertarget{group__nfft_ga24}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsoft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), and time\_\-accuracy().\hypertarget{group__nfft_ga7b5098f4136080bbe0dd989973e2a69}{
 \index{nfft@{nfft}!MALLOC_F@{MALLOC\_\-F}}
 \index{MALLOC_F@{MALLOC\_\-F}!nfft@{nfft}}
-\subsubsection[MALLOC\_\-F]{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-F~(1U$<$$<$ 8)}}
-\label{group__nfft_ga24}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-F~(1U$<$$<$ 8)}}
+\label{group__nfft_ga7b5098f4136080bbe0dd989973e2a69}
 
 
 If this flag is set, (de)allocation of the vector of samples is done. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} 
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} 
 
-\hyperlink{group__nfft_ga15}{nfft\_\-finalize} \end{Desc}
+\hyperlink{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{nfft\_\-finalize} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 194 of file nfft3.h.
+Definition at line 312 of file nfft3.h.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), and taylor\_\-init().\hypertarget{group__nfft_ga25}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsoft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-finalize(), nnfft\_\-init(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), and time\_\-accuracy().\hypertarget{group__nfft_g9193f768d5839892d0e303080c370eaf}{
 \index{nfft@{nfft}!FFT_OUT_OF_PLACE@{FFT\_\-OUT\_\-OF\_\-PLACE}}
 \index{FFT_OUT_OF_PLACE@{FFT\_\-OUT\_\-OF\_\-PLACE}!nfft@{nfft}}
-\subsubsection[FFT\_\-OUT\_\-OF\_\-PLACE]{\setlength{\rightskip}{0pt plus 5cm}\#define FFT\_\-OUT\_\-OF\_\-PLACE~(1U$<$$<$ 9)}}
-\label{group__nfft_ga25}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define FFT\_\-OUT\_\-OF\_\-PLACE~(1U$<$$<$ 9)}}
+\label{group__nfft_g9193f768d5839892d0e303080c370eaf}
 
 
 If this flag is set, FFTW uses disjoint input/output vectors. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} 
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} 
 
-\hyperlink{group__nfft_ga15}{nfft\_\-finalize} \end{Desc}
+\hyperlink{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{nfft\_\-finalize} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 205 of file nfft3.h.
+Definition at line 323 of file nfft3.h.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga26}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsft\_\-init\_\-advanced(), nfsoft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_gd3fe6867a3351441c6f44dd5a3746f5b}{
 \index{nfft@{nfft}!FFTW_INIT@{FFTW\_\-INIT}}
 \index{FFTW_INIT@{FFTW\_\-INIT}!nfft@{nfft}}
-\subsubsection[FFTW\_\-INIT]{\setlength{\rightskip}{0pt plus 5cm}\#define FFTW\_\-INIT~(1U$<$$<$ 10)}}
-\label{group__nfft_ga26}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define FFTW\_\-INIT~(1U$<$$<$ 10)}}
+\label{group__nfft_gd3fe6867a3351441c6f44dd5a3746f5b}
 
 
 If this flag is set, fftw\_\-init/fftw\_\-finalize is called. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} 
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} 
 
-\hyperlink{group__nfft_ga15}{nfft\_\-finalize} \end{Desc}
+\hyperlink{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{nfft\_\-finalize} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 216 of file nfft3.h.
+Definition at line 334 of file nfft3.h.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga27}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), main(), mpolar\_\-dft(), mpolar\_\-fft(), nfct\_\-finalize(), nfft\_\-finalize(), nfft\_\-init(), nfsft\_\-init\_\-advanced(), nfsoft\_\-init\_\-advanced(), nfst\_\-finalize(), nnfft\_\-init(), nnfft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_g44c85197c6bdcf4b632aeff5e94d5329}{
 \index{nfft@{nfft}!PRE_ONE_PSI@{PRE\_\-ONE\_\-PSI}}
 \index{PRE_ONE_PSI@{PRE\_\-ONE\_\-PSI}!nfft@{nfft}}
-\subsubsection[PRE\_\-ONE\_\-PSI]{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-ONE\_\-PSI~(PRE\_\-LIN\_\-PSI$|$ PRE\_\-FG\_\-PSI$|$ PRE\_\-PSI$|$ PRE\_\-FULL\_\-PSI)}}
-\label{group__nfft_ga27}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PRE\_\-ONE\_\-PSI~(PRE\_\-LIN\_\-PSI$|$ PRE\_\-FG\_\-PSI$|$ PRE\_\-PSI$|$ PRE\_\-FULL\_\-PSI)}}
+\label{group__nfft_g44c85197c6bdcf4b632aeff5e94d5329}
 
 
 Summarises if precomputation is used within the convolution step (the multiplication with the sparse matrix $\mathbf{B}$). 
 
-If testing against this flag is positive, \hyperlink{group__nfft_ga10}{nfft\_\-precompute\_\-one\_\-psi} has to be called.
+If testing against this flag is positive, \hyperlink{group__nfft_gfd7b278b6ed04d929212b4807dd195f0}{nfft\_\-precompute\_\-one\_\-psi} has to be called.
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nfft_ga7}{nfft\_\-init} 
+\item[See also:]\hyperlink{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{nfft\_\-init} 
 
-\hyperlink{group__nfft_ga8}{nfft\_\-init\_\-advanced} 
+\hyperlink{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{nfft\_\-init\_\-advanced} 
 
-\hyperlink{group__nfft_ga9}{nfft\_\-init\_\-guru} 
+\hyperlink{group__nfft_g406f05717c6299b918261c61aaa9de23}{nfft\_\-init\_\-guru} 
 
-\hyperlink{group__nfft_ga10}{nfft\_\-precompute\_\-one\_\-psi} 
+\hyperlink{group__nfft_gfd7b278b6ed04d929212b4807dd195f0}{nfft\_\-precompute\_\-one\_\-psi} 
 
-\hyperlink{group__nfft_ga15}{nfft\_\-finalize} \end{Desc}
+\hyperlink{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{nfft\_\-finalize} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 231 of file nfft3.h.
+Definition at line 349 of file nfft3.h.
 
-Referenced by glacier(), glacier\_\-cv(), simple\_\-test\_\-infft\_\-1d(), and taylor\_\-time\_\-accuracy().
+Referenced by glacier(), glacier\_\-cv(), nfsft\_\-precompute\_\-x(), and taylor\_\-time\_\-accuracy().
 
 \subsection{Function Documentation}
-\hypertarget{group__nfft_ga0}{
+\hypertarget{group__nfft_g27ef1bcb8dd3a3fc1cdbeee368ec1acf}{
 \index{nfft@{nfft}!ndft_trafo@{ndft\_\-trafo}}
 \index{ndft_trafo@{ndft\_\-trafo}!nfft@{nfft}}
-\subsubsection[ndft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void ndft\_\-trafo (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga0}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void ndft\_\-trafo ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_g27ef1bcb8dd3a3fc1cdbeee368ec1acf}
 
 
 Computes a NDFT, see the \hyperlink{group__nfft_ndft_formula}{definition}. 
@@ -370,13 +402,13 @@ Computes a NDFT, see the \hyperlink{group__nfft_ndft_formula}{definition}.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 129 of file nfft.c.
+Definition at line 148 of file nfft.c.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), fgt\_\-trafo(), linogram\_\-dft(), mpolar\_\-dft(), nfsft\_\-trafo(), polar\_\-dft(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga1}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), fgt\_\-trafo(), linogram\_\-dft(), mpolar\_\-dft(), ndft\_\-time(), nfsft\_\-trafo(), nfsoft\_\-trafo(), polar\_\-dft(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_g03975608fdf8cfd8757f1f52b43ec51b}{
 \index{nfft@{nfft}!ndft_adjoint@{ndft\_\-adjoint}}
 \index{ndft_adjoint@{ndft\_\-adjoint}!nfft@{nfft}}
-\subsubsection[ndft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void ndft\_\-adjoint (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga1}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void ndft\_\-adjoint ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_g03975608fdf8cfd8757f1f52b43ec51b}
 
 
 Computes an adjoint NDFT, see the definition. 
@@ -387,13 +419,13 @@ Computes an adjoint NDFT, see the definition.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 130 of file nfft.c.
+Definition at line 149 of file nfft.c.
 
-Referenced by fgt\_\-trafo(), and nfsft\_\-adjoint().\hypertarget{group__nfft_ga2}{
+Referenced by fgt\_\-trafo(), nfsft\_\-adjoint(), and nfsoft\_\-adjoint().\hypertarget{group__nfft_g9f1e6bd9f7f956a8679e6b413c97b421}{
 \index{nfft@{nfft}!nfft_trafo@{nfft\_\-trafo}}
 \index{nfft_trafo@{nfft\_\-trafo}!nfft@{nfft}}
-\subsubsection[nfft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-trafo (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga2}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-trafo ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_g9f1e6bd9f7f956a8679e6b413c97b421}
 
 
 Computes a NFFT, see the \hyperlink{group__nfft_ndft_formula}{definition}. 
@@ -404,13 +436,13 @@ Computes a NFFT, see the \hyperlink{group__nfft_ndft_formula}{definition}.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 550 of file nfft.c.
+Definition at line 2771 of file nfft.c.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-trafo(), fgt\_\-trafo(), fields\_\-fastsum\_\-trafo(), glacier\_\-cv(), linogram\_\-fft(), mpolar\_\-fft(), mri\_\-inh\_\-2d1d\_\-trafo(), mri\_\-inh\_\-3d\_\-trafo(), nfsft\_\-trafo(), nnfft\_\-trafo(), polar\_\-fft(), Radon\_\-trafo(), simple\_\-test\_\-infft\_\-1d(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga3}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-trafo(), fgt\_\-trafo(), fields\_\-fastsum\_\-trafo(), glacier\_\-cv(), linogram\_\-fft(), mpolar\_\-fft(), mri\_\-inh\_\-2d1d\_\-trafo(), mri\_\-inh\_\-3d\_\-trafo(), ndft\_\-time(), nfsoft\_\-trafo(), nnfft\_\-trafo(), polar\_\-fft(), Radon\_\-trafo(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_g4b44c1dd52026dcb494dc735f0fa5b08}{
 \index{nfft@{nfft}!nfft_adjoint@{nfft\_\-adjoint}}
 \index{nfft_adjoint@{nfft\_\-adjoint}!nfft@{nfft}}
-\subsubsection[nfft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-adjoint (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga3}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-adjoint ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_g4b44c1dd52026dcb494dc735f0fa5b08}
 
 
 Computes an adjoint NFFT, see the definition. 
@@ -421,13 +453,13 @@ Computes an adjoint NFFT, see the definition.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 579 of file nfft.c.
+Definition at line 2807 of file nfft.c.
 
-Referenced by fastsum\_\-trafo(), fgt\_\-trafo(), fields\_\-fastsum\_\-trafo(), mri\_\-inh\_\-2d1d\_\-adjoint(), mri\_\-inh\_\-3d\_\-adjoint(), nfsft\_\-adjoint(), nnfft\_\-adjoint(), and reconstruct().\hypertarget{group__nfft_ga4}{
+Referenced by fastsum\_\-trafo(), fgt\_\-trafo(), fields\_\-fastsum\_\-trafo(), mri\_\-inh\_\-2d1d\_\-adjoint(), mri\_\-inh\_\-3d\_\-adjoint(), nfsoft\_\-adjoint(), nnfft\_\-adjoint(), and reconstruct().\hypertarget{group__nfft_g01dbd2cfc9cc8577fc097e607e3c845f}{
 \index{nfft@{nfft}!nfft_init_1d@{nfft\_\-init\_\-1d}}
 \index{nfft_init_1d@{nfft\_\-init\_\-1d}!nfft@{nfft}}
-\subsubsection[nfft\_\-init\_\-1d]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-1d (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths}, int {\em N1}, int {\em M})}}
-\label{group__nfft_ga4}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-1d ({\bf nfft\_\-plan} $\ast$ {\em ths}, int {\em N1}, int {\em M})}}
+\label{group__nfft_g01dbd2cfc9cc8577fc097e607e3c845f}
 
 
 Initialisation of a transform plan, wrapper d=1. 
@@ -438,15 +470,13 @@ Initialisation of a transform plan, wrapper d=1.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 855 of file nfft.c.
+Definition at line 3089 of file nfft.c.
 
-References nfft\_\-init().
-
-Referenced by simple\_\-test\_\-infft\_\-1d().\hypertarget{group__nfft_ga5}{
+Referenced by ndft\_\-time().\hypertarget{group__nfft_g54ab08124f47fe412b2979abdc28cc16}{
 \index{nfft@{nfft}!nfft_init_2d@{nfft\_\-init\_\-2d}}
 \index{nfft_init_2d@{nfft\_\-init\_\-2d}!nfft@{nfft}}
-\subsubsection[nfft\_\-init\_\-2d]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-2d (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths}, int {\em N1}, int {\em N2}, int {\em M})}}
-\label{group__nfft_ga5}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-2d ({\bf nfft\_\-plan} $\ast$ {\em ths}, int {\em N1}, int {\em N2}, int {\em M})}}
+\label{group__nfft_g54ab08124f47fe412b2979abdc28cc16}
 
 
 Initialisation of a transform plan, wrapper d=2. 
@@ -457,15 +487,13 @@ Initialisation of a transform plan, wrapper d=2.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 863 of file nfft.c.
+Definition at line 3097 of file nfft.c.
 
-References nfft\_\-init().
-
-Referenced by construct().\hypertarget{group__nfft_ga6}{
+Referenced by construct().\hypertarget{group__nfft_g67493342a23bdbb4301063f96e13fd88}{
 \index{nfft@{nfft}!nfft_init_3d@{nfft\_\-init\_\-3d}}
 \index{nfft_init_3d@{nfft\_\-init\_\-3d}!nfft@{nfft}}
-\subsubsection[nfft\_\-init\_\-3d]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-3d (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths}, int {\em N1}, int {\em N2}, int {\em N3}, int {\em M})}}
-\label{group__nfft_ga6}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-3d ({\bf nfft\_\-plan} $\ast$ {\em ths}, int {\em N1}, int {\em N2}, int {\em N3}, int {\em M})}}
+\label{group__nfft_g67493342a23bdbb4301063f96e13fd88}
 
 
 Initialisation of a transform plan, wrapper d=3. 
@@ -476,13 +504,11 @@ Initialisation of a transform plan, wrapper d=3.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 872 of file nfft.c.
-
-References nfft\_\-init().\hypertarget{group__nfft_ga7}{
+Definition at line 3106 of file nfft.c.\hypertarget{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}{
 \index{nfft@{nfft}!nfft_init@{nfft\_\-init}}
 \index{nfft_init@{nfft\_\-init}!nfft@{nfft}}
-\subsubsection[nfft\_\-init]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int $\ast$ {\em N}, int {\em M})}}
-\label{group__nfft_ga7}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init ({\bf nfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int $\ast$ {\em N}, int {\em M})}}
+\label{group__nfft_g1dfeaf18f3735f035afa62ca768d99c4}
 
 
 Initialisation of a transform plan, simple. 
@@ -493,15 +519,13 @@ Initialisation of a transform plan, simple.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 810 of file nfft.c.
+Definition at line 3044 of file nfft.c.
 
-References FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, MALLOC\_\-F, MALLOC\_\-F\_\-HAT, MALLOC\_\-X, nfft\_\-next\_\-power\_\-of\_\-2(), PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.
-
-Referenced by nfft\_\-init\_\-1d(), nfft\_\-init\_\-2d(), and nfft\_\-init\_\-3d().\hypertarget{group__nfft_ga8}{
+Referenced by nfft\_\-init\_\-1d(), nfft\_\-init\_\-2d(), and nfft\_\-init\_\-3d().\hypertarget{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}{
 \index{nfft@{nfft}!nfft_init_advanced@{nfft\_\-init\_\-advanced}}
 \index{nfft_init_advanced@{nfft\_\-init\_\-advanced}!nfft@{nfft}}
-\subsubsection[nfft\_\-init\_\-advanced]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-advanced (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int $\ast$ {\em N}, int {\em M}, unsigned {\em nfft\_\-flags\_\-on}, unsigned {\em nfft\_\-flags\_\-off})}}
-\label{group__nfft_ga8}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-advanced ({\bf nfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int $\ast$ {\em N}, int {\em M}, unsigned {\em nfft\_\-flags\_\-on}, unsigned {\em nfft\_\-flags\_\-off})}}
+\label{group__nfft_gcd4a22fd1f6ea476a57759a90510d114}
 
 
 Initialisation of a transform plan, advanced. 
@@ -512,11 +536,11 @@ NOT YET IMPLEMENTED!!
 \item ths The pointer to a nfft plan \item d The dimension \item N The multi bandwidth \item M The number of nodes \item nfft\_\-flags\_\-on NFFT flags to switch on \item nfft\_\-flags\_\-off NFFT flags to switch off\end{itemize}
 \begin{Desc}
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
-\hypertarget{group__nfft_ga9}{
+\hypertarget{group__nfft_g406f05717c6299b918261c61aaa9de23}{
 \index{nfft@{nfft}!nfft_init_guru@{nfft\_\-init\_\-guru}}
 \index{nfft_init_guru@{nfft\_\-init\_\-guru}!nfft@{nfft}}
-\subsubsection[nfft\_\-init\_\-guru]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-guru (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int $\ast$ {\em N}, int {\em M}, int $\ast$ {\em n}, int {\em m}, unsigned {\em nfft\_\-flags}, unsigned {\em fftw\_\-flags})}}
-\label{group__nfft_ga9}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-init\_\-guru ({\bf nfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int $\ast$ {\em N}, int {\em M}, int $\ast$ {\em n}, int {\em m}, unsigned {\em nfft\_\-flags}, unsigned {\em fftw\_\-flags})}}
+\label{group__nfft_g406f05717c6299b918261c61aaa9de23}
 
 
 Initialisation of a transform plan, guru. 
@@ -527,13 +551,13 @@ Initialisation of a transform plan, guru.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 835 of file nfft.c.
+Definition at line 3069 of file nfft.c.
 
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), mri\_\-inh\_\-2d1d\_\-init\_\-guru(), nfsft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga10}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-init\_\-guru(), fgt\_\-init\_\-guru(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), mri\_\-inh\_\-2d1d\_\-init\_\-guru(), mri\_\-inh\_\-3d\_\-init\_\-guru(), nfsft\_\-init\_\-guru(), nfsoft\_\-init\_\-guru(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-init(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_gfd7b278b6ed04d929212b4807dd195f0}{
 \index{nfft@{nfft}!nfft_precompute_one_psi@{nfft\_\-precompute\_\-one\_\-psi}}
 \index{nfft_precompute_one_psi@{nfft\_\-precompute\_\-one\_\-psi}!nfft@{nfft}}
-\subsubsection[nfft\_\-precompute\_\-one\_\-psi]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-one\_\-psi (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga10}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-one\_\-psi ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_gfd7b278b6ed04d929212b4807dd195f0}
 
 
 Precomputation for a transform plan. 
@@ -546,15 +570,13 @@ wrapper for precompute$\ast$\_\-psi
 
 if PRE\_\-$\ast$\_\-PSI is set the application program has to call this routine (after) setting the nodes x 
 
-Definition at line 727 of file nfft.c.
+Definition at line 2963 of file nfft.c.
 
-References nfft\_\-precompute\_\-full\_\-psi(), nfft\_\-precompute\_\-lin\_\-psi(), nfft\_\-precompute\_\-psi(), PRE\_\-FG\_\-PSI, PRE\_\-FULL\_\-PSI, PRE\_\-LIN\_\-PSI, and PRE\_\-PSI.
-
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), glacier(), glacier\_\-cv(), simple\_\-test\_\-infft\_\-1d(), and taylor\_\-time\_\-accuracy().\hypertarget{group__nfft_ga11}{
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), glacier(), glacier\_\-cv(), nfsft\_\-precompute\_\-x(), nfsoft\_\-precompute(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().\hypertarget{group__nfft_gee7a88956c66b2113014084d6dd04b3a}{
 \index{nfft@{nfft}!nfft_precompute_full_psi@{nfft\_\-precompute\_\-full\_\-psi}}
 \index{nfft_precompute_full_psi@{nfft\_\-precompute\_\-full\_\-psi}!nfft@{nfft}}
-\subsubsection[nfft\_\-precompute\_\-full\_\-psi]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-full\_\-psi (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga11}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-full\_\-psi ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_gee7a88956c66b2113014084d6dd04b3a}
 
 
 Superceded by nfft\_\-precompute\_\-one\_\-psi. 
@@ -563,13 +585,13 @@ Superceded by nfft\_\-precompute\_\-one\_\-psi.
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 686 of file nfft.c.
+Definition at line 2922 of file nfft.c.
 
-Referenced by fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-precompute\_\-one\_\-psi(), nnfft\_\-precompute\_\-full\_\-psi(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_ga12}{
+Referenced by fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-precompute\_\-one\_\-psi(), nnfft\_\-precompute\_\-full\_\-psi(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_ge6a8367b03fd75b2af42dbbaccb78bf2}{
 \index{nfft@{nfft}!nfft_precompute_psi@{nfft\_\-precompute\_\-psi}}
 \index{nfft_precompute_psi@{nfft\_\-precompute\_\-psi}!nfft@{nfft}}
-\subsubsection[nfft\_\-precompute\_\-psi]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-psi (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga12}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-psi ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_ge6a8367b03fd75b2af42dbbaccb78bf2}
 
 
 Superceded by nfft\_\-precompute\_\-one\_\-psi. 
@@ -578,13 +600,13 @@ Superceded by nfft\_\-precompute\_\-one\_\-psi.
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 666 of file nfft.c.
+Definition at line 2902 of file nfft.c.
 
-Referenced by construct(), fastsum\_\-precompute(), fgt\_\-init\_\-node\_\-dependent(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-precompute\_\-one\_\-psi(), nnfft\_\-precompute\_\-psi(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_ga13}{
+Referenced by construct(), fastsum\_\-precompute(), fgt\_\-init\_\-node\_\-dependent(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-precompute\_\-one\_\-psi(), nnfft\_\-precompute\_\-psi(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_g3f91a7a005cc31a8b05f33fea0507ddc}{
 \index{nfft@{nfft}!nfft_precompute_lin_psi@{nfft\_\-precompute\_\-lin\_\-psi}}
 \index{nfft_precompute_lin_psi@{nfft\_\-precompute\_\-lin\_\-psi}!nfft@{nfft}}
-\subsubsection[nfft\_\-precompute\_\-lin\_\-psi]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-lin\_\-psi (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga13}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-precompute\_\-lin\_\-psi ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_g3f91a7a005cc31a8b05f33fea0507ddc}
 
 
 Superceded by nfft\_\-precompute\_\-one\_\-psi. 
@@ -593,13 +615,13 @@ Superceded by nfft\_\-precompute\_\-one\_\-psi.
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 630 of file nfft.c.
+Definition at line 2866 of file nfft.c.
 
-Referenced by fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-precompute\_\-one\_\-psi(), nnfft\_\-precompute\_\-lin\_\-psi(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_ga14}{
+Referenced by fastsum\_\-precompute(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-fft(), mpolar\_\-fft(), nfft\_\-precompute\_\-one\_\-psi(), nfsoft\_\-init\_\-guru(), nnfft\_\-precompute\_\-lin\_\-psi(), polar\_\-fft(), Radon\_\-trafo(), and reconstruct().\hypertarget{group__nfft_g7af648ae0503976536b8db18200f99fe}{
 \index{nfft@{nfft}!nfft_check@{nfft\_\-check}}
 \index{nfft_check@{nfft\_\-check}!nfft@{nfft}}
-\subsubsection[nfft\_\-check]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-check (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga14}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-check ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_g7af648ae0503976536b8db18200f99fe}
 
 
 Checks a transform plan for frequently used bad parameter. 
@@ -610,11 +632,11 @@ Checks a transform plan for frequently used bad parameter.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 882 of file nfft.c.\hypertarget{group__nfft_ga15}{
+Definition at line 3116 of file nfft.c.\hypertarget{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}{
 \index{nfft@{nfft}!nfft_finalize@{nfft\_\-finalize}}
 \index{nfft_finalize@{nfft\_\-finalize}!nfft@{nfft}}
-\subsubsection[nfft\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-finalize (\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nfft_ga15}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfft\_\-finalize ({\bf nfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nfft_g614f9f7af5b0d5491afa9495393c4dc3}
 
 
 Destroys a transform plan. 
@@ -625,8 +647,6 @@ Destroys a transform plan.
 \item[Author:]Stefan Kunis, Daniel Potts \end{Desc}
 
 
-Definition at line 905 of file nfft.c.
+Definition at line 3139 of file nfft.c.
 
-References FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, MALLOC\_\-F, MALLOC\_\-F\_\-HAT, MALLOC\_\-X, PRE\_\-FG\_\-PSI, PRE\_\-FULL\_\-PSI, PRE\_\-LIN\_\-PSI, PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.
-
-Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-finalize(), fgt\_\-finalize(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), mri\_\-inh\_\-2d1d\_\-finalize(), mri\_\-inh\_\-3d\_\-finalize(), nfsft\_\-finalize(), nnfft\_\-finalize(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), simple\_\-test\_\-infft\_\-1d(), taylor\_\-finalize(), and taylor\_\-time\_\-accuracy().
+Referenced by accuracy\_\-pre\_\-lin\_\-psi(), construct(), fastsum\_\-finalize(), fgt\_\-finalize(), glacier(), glacier\_\-cv(), inverse\_\-linogram\_\-fft(), inverse\_\-mpolar\_\-fft(), inverse\_\-polar\_\-fft(), Inverse\_\-Radon\_\-trafo(), linogram\_\-dft(), linogram\_\-fft(), mpolar\_\-dft(), mpolar\_\-fft(), mri\_\-inh\_\-2d1d\_\-finalize(), mri\_\-inh\_\-3d\_\-finalize(), ndft\_\-time(), nfsft\_\-finalize(), nfsoft\_\-finalize(), nnfft\_\-finalize(), polar\_\-dft(), polar\_\-fft(), Radon\_\-trafo(), reconstruct(), taylor\_\-finalize(), taylor\_\-time\_\-accuracy(), and time\_\-accuracy().

@@ -2,7 +2,6 @@
 \section{NSFFT - Nonequispaced sparse FFT}
 \label{group__nsfft}\index{NSFFT - Nonequispaced sparse FFT@{NSFFT - Nonequispaced sparse FFT}}
 }
-Direct and fast computation of the nonequispaced FFT on the hyperbolic cross.  
 \subsection*{Data Structures}
 \begin{CompactItemize}
 \item 
@@ -11,58 +10,56 @@ struct \hyperlink{structnsfft__plan}{nsfft\_\-plan}
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\#define \hyperlink{group__nsfft_ga8}{NSDFT}~(1U$<$$<$ 12)
-\begin{CompactList}\small\item\em If this flag is set, the member index\_\-sparse\_\-to\_\-full is (de)allocated and initialised for the use in the routine \hyperlink{group__nsfft_ga0}{nsdft\_\-trafo} and \hyperlink{group__nsfft_ga1}{nsdft\_\-adjoint}. \item\end{CompactList}\end{CompactItemize}
+\#define \hyperlink{group__nsfft_g3a5a1f8be42adf0575f0e0c4b8e0a32a}{NSDFT}~(1U$<$$<$ 12)
+\begin{CompactList}\small\item\em If this flag is set, the member index\_\-sparse\_\-to\_\-full is (de)allocated and initialised for the use in the routine \hyperlink{group__nsfft_gd7ab4bcc35ad74e32af2abe42bc9e7f3}{nsdft\_\-trafo} and \hyperlink{group__nsfft_ge287757bca5164f2e5db7fe92ae1df13}{nsdft\_\-adjoint}. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-void \hyperlink{group__nsfft_ga0}{nsdft\_\-trafo} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nsfft_gd7ab4bcc35ad74e32af2abe42bc9e7f3}{nsdft\_\-trafo} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Executes an NSDFT, computes for $j=0,\hdots,M-1$: \[ f_j = \sum_{k\in H_N^d}\hat f_k {\rm e}^{-2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
-void \hyperlink{group__nsfft_ga1}{nsdft\_\-adjoint} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nsfft_ge287757bca5164f2e5db7fe92ae1df13}{nsdft\_\-adjoint} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Executes an adjoint NSFFT, computes for $k\in H_N^d$: \[ \hat f_k = \sum_{j=0,\hdots,M-1} f_j {\rm e}^{+2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
-void \hyperlink{group__nsfft_ga2}{nsfft\_\-trafo} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nsfft_gee06e4a864e22e2c41f71606a8e2644e}{nsfft\_\-trafo} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Executes an NSFFT, computes {\bf fast} and {\bf approximate} for $j=0,\hdots,M-1$: \[ f_j = \sum_{k\in H_N^d}\hat f_k {\rm e}^{-2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
-void \hyperlink{group__nsfft_ga3}{nsfft\_\-adjoint} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nsfft_gb3de4bceeffaea05a29daf75cad04d38}{nsfft\_\-adjoint} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Executes an adjoint NSFFT, computes {\bf fast} and {\bf approximate} for $k\in H_N^d$: \[ \hat f_k = \sum_{j=0,\hdots,M-1} f_j {\rm e}^{+2\pi{\rm\scriptsize i}k x_j} \]. \item\end{CompactList}\item 
-void \hyperlink{group__nsfft_ga4}{nsfft\_\-cp} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths\_\-nfft)
+void \hyperlink{group__nsfft_ga90a04e2110e52bedb70382704f3f004}{nsfft\_\-cp} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ths\_\-nfft)
 \begin{CompactList}\small\item\em Copy coefficients from nsfft plan to a nfft plan. \item\end{CompactList}\item 
-void \hyperlink{group__nsfft_ga5}{nsfft\_\-init\_\-random\_\-nodes\_\-coeffs} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nsfft_g7cbc20c44eeecadc5c30f4159616f30a}{nsfft\_\-init\_\-random\_\-nodes\_\-coeffs} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Initialisation of pseudo random nodes and coefficients. \item\end{CompactList}\item 
-void \hyperlink{group__nsfft_ga6}{nsfft\_\-init} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths, int d, int J, int M, int m, unsigned flags)
+void \hyperlink{group__nsfft_g1b7f87f960cb22420a933e915c539aaf}{nsfft\_\-init} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths, int d, int J, int M, int m, unsigned flags)
 \begin{CompactList}\small\item\em Initialisation of a transform plan. \item\end{CompactList}\item 
-void \hyperlink{group__nsfft_ga7}{nsfft\_\-finalize} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
+void \hyperlink{group__nsfft_gef170ad12eff8fde1c78bc6071142b36}{nsfft\_\-finalize} (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em Destroys a transform plan. \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Detailed Description}
 Direct and fast computation of the nonequispaced FFT on the hyperbolic cross. 
 
-
-
 \subsection{Define Documentation}
-\hypertarget{group__nsfft_ga8}{
+\hypertarget{group__nsfft_g3a5a1f8be42adf0575f0e0c4b8e0a32a}{
 \index{nsfft@{nsfft}!NSDFT@{NSDFT}}
 \index{NSDFT@{NSDFT}!nsfft@{nsfft}}
-\subsubsection[NSDFT]{\setlength{\rightskip}{0pt plus 5cm}\#define NSDFT~(1U$<$$<$ 12)}}
-\label{group__nsfft_ga8}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NSDFT~(1U$<$$<$ 12)}}
+\label{group__nsfft_g3a5a1f8be42adf0575f0e0c4b8e0a32a}
 
 
-If this flag is set, the member index\_\-sparse\_\-to\_\-full is (de)allocated and initialised for the use in the routine \hyperlink{group__nsfft_ga0}{nsdft\_\-trafo} and \hyperlink{group__nsfft_ga1}{nsdft\_\-adjoint}. 
+If this flag is set, the member index\_\-sparse\_\-to\_\-full is (de)allocated and initialised for the use in the routine \hyperlink{group__nsfft_gd7ab4bcc35ad74e32af2abe42bc9e7f3}{nsdft\_\-trafo} and \hyperlink{group__nsfft_ge287757bca5164f2e5db7fe92ae1df13}{nsdft\_\-adjoint}. 
 
 \begin{Desc}
-\item[See also:]\hyperlink{group__nsfft_ga6}{nsfft\_\-init} \end{Desc}
+\item[See also:]\hyperlink{group__nsfft_g1b7f87f960cb22420a933e915c539aaf}{nsfft\_\-init} \end{Desc}
 \begin{Desc}
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 1168 of file nfft3.h.
+Definition at line 1306 of file nfft3.h.
 
 \subsection{Function Documentation}
-\hypertarget{group__nsfft_ga0}{
+\hypertarget{group__nsfft_gd7ab4bcc35ad74e32af2abe42bc9e7f3}{
 \index{nsfft@{nsfft}!nsdft_trafo@{nsdft\_\-trafo}}
 \index{nsdft_trafo@{nsdft\_\-trafo}!nsfft@{nsfft}}
-\subsubsection[nsdft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void nsdft\_\-trafo (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nsfft_ga0}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsdft\_\-trafo ({\bf nsfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nsfft_gd7ab4bcc35ad74e32af2abe42bc9e7f3}
 
 
 Executes an NSDFT, computes for $j=0,\hdots,M-1$: \[ f_j = \sum_{k\in H_N^d}\hat f_k {\rm e}^{-2\pi{\rm\scriptsize i}k x_j} \]. 
@@ -73,11 +70,11 @@ Executes an NSDFT, computes for $j=0,\hdots,M-1$: \[ f_j = \sum_{k\in H_N^d}\hat
 \item[Author:]Markus Fenn, Stefan Kunis \end{Desc}
 
 
-Definition at line 772 of file nsfft.c.\hypertarget{group__nsfft_ga1}{
+Definition at line 794 of file nsfft.c.\hypertarget{group__nsfft_ge287757bca5164f2e5db7fe92ae1df13}{
 \index{nsfft@{nsfft}!nsdft_adjoint@{nsdft\_\-adjoint}}
 \index{nsdft_adjoint@{nsdft\_\-adjoint}!nsfft@{nsfft}}
-\subsubsection[nsdft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void nsdft\_\-adjoint (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nsfft_ga1}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsdft\_\-adjoint ({\bf nsfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nsfft_ge287757bca5164f2e5db7fe92ae1df13}
 
 
 Executes an adjoint NSFFT, computes for $k\in H_N^d$: \[ \hat f_k = \sum_{j=0,\hdots,M-1} f_j {\rm e}^{+2\pi{\rm\scriptsize i}k x_j} \]. 
@@ -88,11 +85,11 @@ Executes an adjoint NSFFT, computes for $k\in H_N^d$: \[ \hat f_k = \sum_{j=0,\h
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 832 of file nsfft.c.\hypertarget{group__nsfft_ga2}{
+Definition at line 854 of file nsfft.c.\hypertarget{group__nsfft_gee06e4a864e22e2c41f71606a8e2644e}{
 \index{nsfft@{nsfft}!nsfft_trafo@{nsfft\_\-trafo}}
 \index{nsfft_trafo@{nsfft\_\-trafo}!nsfft@{nsfft}}
-\subsubsection[nsfft\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-trafo (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nsfft_ga2}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-trafo ({\bf nsfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nsfft_gee06e4a864e22e2c41f71606a8e2644e}
 
 
 Executes an NSFFT, computes {\bf fast} and {\bf approximate} for $j=0,\hdots,M-1$: \[ f_j = \sum_{k\in H_N^d}\hat f_k {\rm e}^{-2\pi{\rm\scriptsize i}k x_j} \]. 
@@ -103,11 +100,11 @@ Executes an NSFFT, computes {\bf fast} and {\bf approximate} for $j=0,\hdots,M-1
 \item[Author:]Markus Fenn, Stefan Kunis \end{Desc}
 
 
-Definition at line 1501 of file nsfft.c.\hypertarget{group__nsfft_ga3}{
+Definition at line 1523 of file nsfft.c.\hypertarget{group__nsfft_gb3de4bceeffaea05a29daf75cad04d38}{
 \index{nsfft@{nsfft}!nsfft_adjoint@{nsfft\_\-adjoint}}
 \index{nsfft_adjoint@{nsfft\_\-adjoint}!nsfft@{nsfft}}
-\subsubsection[nsfft\_\-adjoint]{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-adjoint (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nsfft_ga3}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-adjoint ({\bf nsfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nsfft_gb3de4bceeffaea05a29daf75cad04d38}
 
 
 Executes an adjoint NSFFT, computes {\bf fast} and {\bf approximate} for $k\in H_N^d$: \[ \hat f_k = \sum_{j=0,\hdots,M-1} f_j {\rm e}^{+2\pi{\rm\scriptsize i}k x_j} \]. 
@@ -118,11 +115,11 @@ Executes an adjoint NSFFT, computes {\bf fast} and {\bf approximate} for $k\in H
 \item[Author:]Stefan Kunis \end{Desc}
 
 
-Definition at line 1509 of file nsfft.c.\hypertarget{group__nsfft_ga4}{
+Definition at line 1531 of file nsfft.c.\hypertarget{group__nsfft_ga90a04e2110e52bedb70382704f3f004}{
 \index{nsfft@{nsfft}!nsfft_cp@{nsfft\_\-cp}}
 \index{nsfft_cp@{nsfft\_\-cp}!nsfft@{nsfft}}
-\subsubsection[nsfft\_\-cp]{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-cp (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths}, \hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ {\em ths\_\-nfft})}}
-\label{group__nsfft_ga4}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-cp ({\bf nsfft\_\-plan} $\ast$ {\em ths}, {\bf nfft\_\-plan} $\ast$ {\em ths\_\-nfft})}}
+\label{group__nsfft_ga90a04e2110e52bedb70382704f3f004}
 
 
 Copy coefficients from nsfft plan to a nfft plan. 
@@ -133,11 +130,11 @@ Copy coefficients from nsfft plan to a nfft plan.
 \item[Author:]Markus Fenn, Stefan Kunis \end{Desc}
 
 
-Definition at line 565 of file nsfft.c.\hypertarget{group__nsfft_ga5}{
+Definition at line 587 of file nsfft.c.\hypertarget{group__nsfft_g7cbc20c44eeecadc5c30f4159616f30a}{
 \index{nsfft@{nsfft}!nsfft_init_random_nodes_coeffs@{nsfft\_\-init\_\-random\_\-nodes\_\-coeffs}}
 \index{nsfft_init_random_nodes_coeffs@{nsfft\_\-init\_\-random\_\-nodes\_\-coeffs}!nsfft@{nsfft}}
-\subsubsection[nsfft\_\-init\_\-random\_\-nodes\_\-coeffs]{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-init\_\-random\_\-nodes\_\-coeffs (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nsfft_ga5}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-init\_\-random\_\-nodes\_\-coeffs ({\bf nsfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nsfft_g7cbc20c44eeecadc5c30f4159616f30a}
 
 
 Initialisation of pseudo random nodes and coefficients. 
@@ -148,13 +145,11 @@ Initialisation of pseudo random nodes and coefficients.
 \item[Author:]Markus Fenn, Stefan Kunis \end{Desc}
 
 
-Definition at line 683 of file nsfft.c.
-
-References nfft\_\-vrand\_\-shifted\_\-unit\_\-double(), and nfft\_\-vrand\_\-unit\_\-complex().\hypertarget{group__nsfft_ga6}{
+Definition at line 705 of file nsfft.c.\hypertarget{group__nsfft_g1b7f87f960cb22420a933e915c539aaf}{
 \index{nsfft@{nsfft}!nsfft_init@{nsfft\_\-init}}
 \index{nsfft_init@{nsfft\_\-init}!nsfft@{nsfft}}
-\subsubsection[nsfft\_\-init]{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-init (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int {\em J}, int {\em M}, int {\em m}, unsigned {\em flags})}}
-\label{group__nsfft_ga6}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-init ({\bf nsfft\_\-plan} $\ast$ {\em ths}, int {\em d}, int {\em J}, int {\em M}, int {\em m}, unsigned {\em flags})}}
+\label{group__nsfft_g1b7f87f960cb22420a933e915c539aaf}
 
 
 Initialisation of a transform plan. 
@@ -165,11 +160,11 @@ Initialisation of a transform plan.
 \item[Author:]Markus Fenn, Stefan Kunis \end{Desc}
 
 
-Definition at line 1730 of file nsfft.c.\hypertarget{group__nsfft_ga7}{
+Definition at line 1756 of file nsfft.c.\hypertarget{group__nsfft_gef170ad12eff8fde1c78bc6071142b36}{
 \index{nsfft@{nsfft}!nsfft_finalize@{nsfft\_\-finalize}}
 \index{nsfft_finalize@{nsfft\_\-finalize}!nsfft@{nsfft}}
-\subsubsection[nsfft\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-finalize (\hyperlink{structnsfft__plan}{nsfft\_\-plan} $\ast$ {\em ths})}}
-\label{group__nsfft_ga7}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nsfft\_\-finalize ({\bf nsfft\_\-plan} $\ast$ {\em ths})}}
+\label{group__nsfft_gef170ad12eff8fde1c78bc6071142b36}
 
 
 Destroys a transform plan. 
@@ -180,4 +175,4 @@ Destroys a transform plan.
 \item[Author:]Markus Fenn, Stefan Kunis \end{Desc}
 
 
-Definition at line 1831 of file nsfft.c.
+Definition at line 1863 of file nsfft.c.

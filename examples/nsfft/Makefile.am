@@ -1,17 +1,16 @@
-AM_CFLAGS = -I$(top_srcdir)/include
-AM_LDFLAGS = -L$(top_builddir)/.libs
+# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
+
+AM_CPPFLAGS = -I$(top_srcdir)/include
 
 exampledir = $(pkgdatadir)/examples/nsfft
 
-## The program name
 example_PROGRAMS = simple_test nsfft_test
+
+simple_test_SOURCES = simple_test.c
+simple_test_LDADD = $(top_builddir)/libnfft3.la
+
+nsfft_test_SOURCES = nsfft_test.c
+nsfft_test_LDADD = $(top_builddir)/libnfft3.la
 
 EXTRA_DIST = README
 example_DATA = $(EXTRA_DIST)
-
-## The source files.
-simple_test_SOURCES = simple_test.c
-simple_test_LDADD = $(top_builddir)/.libs/libnfft3.a -lm -lfftw3
-
-nsfft_test_SOURCES = nsfft_test.c
-nsfft_test_LDADD = $(top_builddir)/.libs/libnfft3.a -lm -lfftw3

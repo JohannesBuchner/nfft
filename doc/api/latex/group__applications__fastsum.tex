@@ -12,173 +12,180 @@
 \subsection*{Data Structures}
 \begin{CompactItemize}
 \item 
-struct \hyperlink{structfastsum__plan__}{fastsum\_\-plan\_\-}
+struct \hyperlink{structfastsum__plan}{fastsum\_\-plan}
 \begin{CompactList}\small\item\em plan for fast summation algorithm \item\end{CompactList}\end{CompactItemize}
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\hypertarget{group__applications__fastsum_ga31}{
-\#define \hyperlink{group__applications__fastsum_ga31}{EXACT\_\-NEARFIELD}~(1U$<$$<$ 0)}
-\label{group__applications__fastsum_ga31}
-
-\begin{CompactList}\small\item\em Constant symbols. \item\end{CompactList}\end{CompactItemize}
-\subsection*{Typedefs}
-\begin{CompactItemize}
-\item 
-\hypertarget{group__applications__fastsum_ga0}{
-typedef \hyperlink{structfastsum__plan__}{fastsum\_\-plan\_\-} \hyperlink{group__applications__fastsum_ga0}{fastsum\_\-plan}}
-\label{group__applications__fastsum_ga0}
-
-\begin{CompactList}\small\item\em plan for fast summation algorithm \item\end{CompactList}\end{CompactItemize}
+\#define \hyperlink{group__applications__fastsum_gc22376cb30edef9131c592a355d1030d}{EXACT\_\-NEARFIELD}~(1U$<$$<$ 0)
+\begin{CompactList}\small\item\em Include header for C99 complex datatype. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-\hypertarget{group__applications__fastsum_ga1}{
-double \hyperlink{group__applications__fastsum_ga1}{fak} (int n)}
-\label{group__applications__fastsum_ga1}
+\hypertarget{group__applications__fastsum_g6fd3e84b794684dd1c6236619437bf09}{
+double \hyperlink{group__applications__fastsum_g6fd3e84b794684dd1c6236619437bf09}{fak} (int n)}
+\label{group__applications__fastsum_g6fd3e84b794684dd1c6236619437bf09}
 
 \begin{CompactList}\small\item\em factorial \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga2}{
-double \hyperlink{group__applications__fastsum_ga2}{binom} (int n, int m)}
-\label{group__applications__fastsum_ga2}
+\hypertarget{group__applications__fastsum_ge767db8af0cbe9244cfbd0580b0bb9f4}{
+double \hyperlink{group__applications__fastsum_ge767db8af0cbe9244cfbd0580b0bb9f4}{binom} (int n, int m)}
+\label{group__applications__fastsum_ge767db8af0cbe9244cfbd0580b0bb9f4}
 
 \begin{CompactList}\small\item\em binomial coefficient \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga3}{
-double \hyperlink{group__applications__fastsum_ga3}{Basis\-Poly} (int m, int r, double xx)}
-\label{group__applications__fastsum_ga3}
+\hypertarget{group__applications__fastsum_g0c4b940daf11ebe201355f43f26cddd0}{
+double \hyperlink{group__applications__fastsum_g0c4b940daf11ebe201355f43f26cddd0}{BasisPoly} (int m, int r, double xx)}
+\label{group__applications__fastsum_g0c4b940daf11ebe201355f43f26cddd0}
 
 \begin{CompactList}\small\item\em basis polynomial for regularized kernel \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga4}{
-double \hyperlink{group__applications__fastsum_ga4}{regkern} (complex double($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
-\label{group__applications__fastsum_ga4}
+\hypertarget{group__applications__fastsum_g42189eaf1638274b8080ef9ad2c9bd26}{
+double \hyperlink{group__applications__fastsum_g42189eaf1638274b8080ef9ad2c9bd26}{regkern} (double \_\-Complex($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
+\label{group__applications__fastsum_g42189eaf1638274b8080ef9ad2c9bd26}
 
 \begin{CompactList}\small\item\em regularized kernel with K\_\-I arbitrary and K\_\-B smooth to zero \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga5}{
-double \hyperlink{group__applications__fastsum_ga5}{regkern1} (complex double($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
-\label{group__applications__fastsum_ga5}
+\hypertarget{group__applications__fastsum_g94158e815aa82c0e38d79329d8969216}{
+double \hyperlink{group__applications__fastsum_g94158e815aa82c0e38d79329d8969216}{regkern1} (double \_\-Complex($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
+\label{group__applications__fastsum_g94158e815aa82c0e38d79329d8969216}
 
 \begin{CompactList}\small\item\em regularized kernel with K\_\-I arbitrary and K\_\-B periodized (used in 1D) \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga6}{
-double \hyperlink{group__applications__fastsum_ga6}{regkern2} (complex double($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
-\label{group__applications__fastsum_ga6}
+\hypertarget{group__applications__fastsum_g90524637b6a6b87c1b91688138792da7}{
+double \hyperlink{group__applications__fastsum_g90524637b6a6b87c1b91688138792da7}{regkern2} (double \_\-Complex($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
+\label{group__applications__fastsum_g90524637b6a6b87c1b91688138792da7}
 
 \begin{CompactList}\small\item\em regularized kernel for even kernels with K\_\-I even and K\_\-B mirrored \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga7}{
-double \hyperlink{group__applications__fastsum_ga7}{regkern3} (complex double($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
-\label{group__applications__fastsum_ga7}
+\hypertarget{group__applications__fastsum_g882707fc3173608ec8822867f9972a0d}{
+double \hyperlink{group__applications__fastsum_g882707fc3173608ec8822867f9972a0d}{regkern3} (double \_\-Complex($\ast$kernel)(double, int, const double $\ast$), double xx, int p, const double $\ast$param, double a, double b)}
+\label{group__applications__fastsum_g882707fc3173608ec8822867f9972a0d}
 
-\begin{CompactList}\small\item\em regularized kernel for even kernels with K\_\-I even and K\_\-B mirrored smooth to K(1/2) (used in d\-D, d$>$1) \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga8}{
-double \hyperlink{group__applications__fastsum_ga8}{kubintkern} (double x, double $\ast$Add, int Ad, double a)}
-\label{group__applications__fastsum_ga8}
+\begin{CompactList}\small\item\em regularized kernel for even kernels with K\_\-I even and K\_\-B mirrored smooth to K(1/2) (used in dD, d$>$1) \item\end{CompactList}\item 
+\hypertarget{group__applications__fastsum_gb7c93097f39ef84cbe6f7f7f715590aa}{
+double \hyperlink{group__applications__fastsum_gb7c93097f39ef84cbe6f7f7f715590aa}{kubintkern} (double x, double $\ast$Add, int Ad, double a)}
+\label{group__applications__fastsum_gb7c93097f39ef84cbe6f7f7f715590aa}
 
 \begin{CompactList}\small\item\em cubic spline interpolation in near field with even kernels \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga9}{
-double \hyperlink{group__applications__fastsum_ga9}{kubintkern1} (double x, double $\ast$Add, int Ad, double a)}
-\label{group__applications__fastsum_ga9}
+\hypertarget{group__applications__fastsum_g0b76080e32db9fac633c35f105d03f62}{
+double \hyperlink{group__applications__fastsum_g0b76080e32db9fac633c35f105d03f62}{kubintkern1} (double x, double $\ast$Add, int Ad, double a)}
+\label{group__applications__fastsum_g0b76080e32db9fac633c35f105d03f62}
 
 \begin{CompactList}\small\item\em cubic spline interpolation in near field with arbitrary kernels \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga10}{
-void \hyperlink{group__applications__fastsum_ga10}{quicksort} (int d, int t, double $\ast$x, complex double $\ast$alpha, int N)}
-\label{group__applications__fastsum_ga10}
+\hypertarget{group__applications__fastsum_g7d3d3786f2e799dc1fa1704281f4a3fe}{
+void \hyperlink{group__applications__fastsum_g7d3d3786f2e799dc1fa1704281f4a3fe}{quicksort} (int d, int t, double $\ast$x, double \_\-Complex $\ast$alpha, int N)}
+\label{group__applications__fastsum_g7d3d3786f2e799dc1fa1704281f4a3fe}
 
 \begin{CompactList}\small\item\em quicksort algorithm for source knots and associated coefficients \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga11}{
-void \hyperlink{group__applications__fastsum_ga11}{Build\-Tree} (int d, int t, double $\ast$x, complex double $\ast$alpha, int N)}
-\label{group__applications__fastsum_ga11}
+\hypertarget{group__applications__fastsum_g61bae6836e2c586b9de245b664853174}{
+void \hyperlink{group__applications__fastsum_g61bae6836e2c586b9de245b664853174}{BuildTree} (int d, int t, double $\ast$x, double \_\-Complex $\ast$alpha, int N)}
+\label{group__applications__fastsum_g61bae6836e2c586b9de245b664853174}
 
 \begin{CompactList}\small\item\em recursive sort of source knots dimension by dimension to get tree structure \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga12}{
-complex double \hyperlink{group__applications__fastsum_ga12}{Search\-Tree} (int d, int t, double $\ast$x, complex double $\ast$alpha, double $\ast$xmin, double $\ast$xmax, int N, complex double($\ast$kernel)(double, int, const double $\ast$), const double $\ast$param, int Ad, double $\ast$Add, int p, unsigned flags)}
-\label{group__applications__fastsum_ga12}
+\hypertarget{group__applications__fastsum_g03b6b1585f02be878a4960e82b6f99ee}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g03b6b1585f02be878a4960e82b6f99ee}{SearchTree} (int d, int t, double $\ast$x, double \_\-Complex $\ast$alpha, double $\ast$xmin, double $\ast$xmax, int N, double \_\-Complex($\ast$kernel)(double, int, const double $\ast$), const double $\ast$param, int Ad, double $\ast$Add, int p, unsigned flags)}
+\label{group__applications__fastsum_g03b6b1585f02be878a4960e82b6f99ee}
 
 \begin{CompactList}\small\item\em fast search in tree of source knots for near field computation \item\end{CompactList}\item 
-void \hyperlink{group__applications__fastsum_ga13}{fastsum\_\-init\_\-guru} (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ths, int d, int N\_\-total, int M\_\-total, complex double($\ast$kernel)(), double $\ast$param, unsigned flags, int nn, int m, int p, double eps\_\-I, double eps\_\-B)
+void \hyperlink{group__applications__fastsum_gc9d2c1acc65b11636c1080e1dd9169ad}{fastsum\_\-init\_\-guru} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths, int d, int N\_\-total, int M\_\-total, double \_\-Complex($\ast$kernel)(), double $\ast$param, unsigned flags, int nn, int m, int p, double eps\_\-I, double eps\_\-B)
 \begin{CompactList}\small\item\em initialization of fastsum plan \item\end{CompactList}\item 
-void \hyperlink{group__applications__fastsum_ga14}{fastsum\_\-finalize} (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ths)
+void \hyperlink{group__applications__fastsum_gb989ea4659fe681bd4c025e82756f769}{fastsum\_\-finalize} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em finalization of fastsum plan \item\end{CompactList}\item 
-void \hyperlink{group__applications__fastsum_ga15}{fastsum\_\-exact} (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ths)
+void \hyperlink{group__applications__fastsum_gaee3dd954ffc99e4330fabe16ccad0fd}{fastsum\_\-exact} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em direct computation of sums \item\end{CompactList}\item 
-void \hyperlink{group__applications__fastsum_ga16}{fastsum\_\-precompute} (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ths)
+void \hyperlink{group__applications__fastsum_g197c16fcec7935886fc97d140f2b20ff}{fastsum\_\-precompute} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em precomputation for fastsum \item\end{CompactList}\item 
-void \hyperlink{group__applications__fastsum_ga17}{fastsum\_\-trafo} (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ths)
+void \hyperlink{group__applications__fastsum_gab2cc691ba59064c18d439c9fd2185e8}{fastsum\_\-trafo} (\hyperlink{structfastsum__plan}{fastsum\_\-plan} $\ast$ths)
 \begin{CompactList}\small\item\em fast NFFT-based summation \item\end{CompactList}\item 
-\hypertarget{group__applications__fastsum_ga18}{
-complex double {\bf gaussian} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga18}
+\hypertarget{group__applications__fastsum_g81bf029788afe857325a760743f9fdd3}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g81bf029788afe857325a760743f9fdd3}{gaussian} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g81bf029788afe857325a760743f9fdd3}
 
 \item 
-\hypertarget{group__applications__fastsum_ga19}{
-complex double {\bf multiquadric} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga19}
+\hypertarget{group__applications__fastsum_g44a58143a1f5c79b45c538134117e091}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g44a58143a1f5c79b45c538134117e091}{multiquadric} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g44a58143a1f5c79b45c538134117e091}
 
 \item 
-\hypertarget{group__applications__fastsum_ga20}{
-complex double {\bf inverse\_\-multiquadric} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga20}
+\hypertarget{group__applications__fastsum_g889c2a1791e42bb8fa5a594588d68a5c}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g889c2a1791e42bb8fa5a594588d68a5c}{inverse\_\-multiquadric} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g889c2a1791e42bb8fa5a594588d68a5c}
 
 \item 
-\hypertarget{group__applications__fastsum_ga21}{
-complex double {\bf logarithm} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga21}
+\hypertarget{group__applications__fastsum_g91be4b7bcc7d3a415e6b9b6ccaec39a7}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g91be4b7bcc7d3a415e6b9b6ccaec39a7}{logarithm} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g91be4b7bcc7d3a415e6b9b6ccaec39a7}
 
 \item 
-\hypertarget{group__applications__fastsum_ga22}{
-complex double {\bf thinplate\_\-spline} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga22}
+\hypertarget{group__applications__fastsum_g7723414bb26fd9b1cc76686aeca57425}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g7723414bb26fd9b1cc76686aeca57425}{thinplate\_\-spline} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g7723414bb26fd9b1cc76686aeca57425}
 
 \item 
-\hypertarget{group__applications__fastsum_ga23}{
-complex double {\bf one\_\-over\_\-square} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga23}
+\hypertarget{group__applications__fastsum_ged5f8559b7b7a24674318cb58856602b}{
+double \_\-Complex \hyperlink{group__applications__fastsum_ged5f8559b7b7a24674318cb58856602b}{one\_\-over\_\-square} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_ged5f8559b7b7a24674318cb58856602b}
 
 \item 
-\hypertarget{group__applications__fastsum_ga24}{
-complex double {\bf one\_\-over\_\-modulus} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga24}
+\hypertarget{group__applications__fastsum_g635ef40090e33b4917a20ab62913ef05}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g635ef40090e33b4917a20ab62913ef05}{one\_\-over\_\-modulus} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g635ef40090e33b4917a20ab62913ef05}
 
 \item 
-\hypertarget{group__applications__fastsum_ga25}{
-complex double {\bf one\_\-over\_\-x} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga25}
+\hypertarget{group__applications__fastsum_g6a6096569616d5cf9604c514f925581b}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g6a6096569616d5cf9604c514f925581b}{one\_\-over\_\-x} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g6a6096569616d5cf9604c514f925581b}
 
 \item 
-\hypertarget{group__applications__fastsum_ga26}{
-complex double {\bf inverse\_\-multiquadric3} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga26}
+\hypertarget{group__applications__fastsum_g221604ef3a42dc2de4f1ce68831e7524}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g221604ef3a42dc2de4f1ce68831e7524}{inverse\_\-multiquadric3} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g221604ef3a42dc2de4f1ce68831e7524}
 
 \item 
-\hypertarget{group__applications__fastsum_ga27}{
-complex double {\bf sinc\_\-kernel} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga27}
+\hypertarget{group__applications__fastsum_g8946fd3f992262c24477b56cba844873}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g8946fd3f992262c24477b56cba844873}{sinc\_\-kernel} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g8946fd3f992262c24477b56cba844873}
 
 \item 
-\hypertarget{group__applications__fastsum_ga28}{
-complex double {\bf cosc} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga28}
+\hypertarget{group__applications__fastsum_gb7b7015bc5f2946583e7adbecb2cf630}{
+double \_\-Complex \hyperlink{group__applications__fastsum_gb7b7015bc5f2946583e7adbecb2cf630}{cosc} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_gb7b7015bc5f2946583e7adbecb2cf630}
 
 \item 
-\hypertarget{group__applications__fastsum_ga29}{
-complex double {\bf cot} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga29}
+\hypertarget{group__applications__fastsum_gc693b76a84e9435efc06c1ef26fc7435}{
+double \_\-Complex \hyperlink{group__applications__fastsum_gc693b76a84e9435efc06c1ef26fc7435}{kcot} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_gc693b76a84e9435efc06c1ef26fc7435}
 
 \item 
-\hypertarget{group__applications__fastsum_ga30}{
-complex {\bf one\_\-over\_\-cube} (double x, int der, const double $\ast$param)}
-\label{group__applications__fastsum_ga30}
+\hypertarget{group__applications__fastsum_g1deb0e10a0d6cf7f11d8b90ee008eb53}{
+double \_\-Complex \hyperlink{group__applications__fastsum_g1deb0e10a0d6cf7f11d8b90ee008eb53}{one\_\-over\_\-cube} (double x, int der, const double $\ast$param)}
+\label{group__applications__fastsum_g1deb0e10a0d6cf7f11d8b90ee008eb53}
 
 \end{CompactItemize}
 
 
+\subsection{Define Documentation}
+\hypertarget{group__applications__fastsum_gc22376cb30edef9131c592a355d1030d}{
+\index{applications_fastsum@{applications\_\-fastsum}!EXACT_NEARFIELD@{EXACT\_\-NEARFIELD}}
+\index{EXACT_NEARFIELD@{EXACT\_\-NEARFIELD}!applications_fastsum@{applications\_\-fastsum}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define EXACT\_\-NEARFIELD~(1U$<$$<$ 0)}}
+\label{group__applications__fastsum_gc22376cb30edef9131c592a355d1030d}
+
+
+Include header for C99 complex datatype. 
+
+Include header for utils from NFFT3 library. Include header for NFFT3 library. Constant symbols 
+
+Definition at line 51 of file fastsum.h.
+
+Referenced by fastsum\_\-finalize(), fastsum\_\-init\_\-guru(), fastsum\_\-precompute(), FieldsSearchTree(), and SearchTree().
+
 \subsection{Function Documentation}
-\hypertarget{group__applications__fastsum_ga13}{
+\hypertarget{group__applications__fastsum_gc9d2c1acc65b11636c1080e1dd9169ad}{
 \index{applications_fastsum@{applications\_\-fastsum}!fastsum_init_guru@{fastsum\_\-init\_\-guru}}
 \index{fastsum_init_guru@{fastsum\_\-init\_\-guru}!applications_fastsum@{applications\_\-fastsum}}
-\subsubsection[fastsum\_\-init\_\-guru]{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-init\_\-guru (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ {\em ths}, int {\em d}, int {\em N\_\-total}, int {\em M\_\-total}, complex double($\ast$)() {\em kernel}, double $\ast$ {\em param}, unsigned {\em flags}, int {\em nn}, int {\em m}, int {\em p}, double {\em eps\_\-I}, double {\em eps\_\-B})}}
-\label{group__applications__fastsum_ga13}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-init\_\-guru ({\bf fastsum\_\-plan} $\ast$ {\em ths}, int {\em d}, int {\em N\_\-total}, int {\em M\_\-total}, double \_\-Complex($\ast$)() {\em kernel}, double $\ast$ {\em param}, unsigned {\em flags}, int {\em nn}, int {\em m}, int {\em p}, double {\em eps\_\-I}, double {\em eps\_\-B})}}
+\label{group__applications__fastsum_gc9d2c1acc65b11636c1080e1dd9169ad}
 
 
 initialization of fastsum plan 
+
+initialize fast summation plan
 
 \begin{Desc}
 \item[Parameters:]
@@ -187,19 +194,21 @@ initialization of fastsum plan
 \end{Desc}
 
 
-Definition at line 370 of file fastsum.c.
+Definition at line 390 of file fastsum.c.
 
-References EXACT\_\-NEARFIELD, FFT\_\-OUT\_\-OF\_\-PLACE, FFTW\_\-INIT, MALLOC\_\-F, MALLOC\_\-F\_\-HAT, MALLOC\_\-X, nfft\_\-init\_\-guru(), PRE\_\-PHI\_\-HUT, and PRE\_\-PSI.
+References fastsum\_\-plan::Ad, fastsum\_\-plan::Add, fastsum\_\-plan::alpha, fastsum\_\-plan::b, fastsum\_\-plan::d, fastsum\_\-plan::eps\_\-B, fastsum\_\-plan::eps\_\-I, EXACT\_\-NEARFIELD, fastsum\_\-plan::f, FFT\_\-OUT\_\-OF\_\-PLACE, fastsum\_\-plan::fft\_\-plan, FFTW\_\-INIT, fastsum\_\-plan::flags, fastsum\_\-plan::kernel, fastsum\_\-plan::kernel\_\-param, fastsum\_\-plan::M\_\-total, MALLOC\_\-F, MALLOC\_\-F\_\-HAT, MALLOC\_\-X, fastsum\_\-plan::mv1, fastsum\_\-plan::mv2, fastsum\_\-plan::n, fastsum\_\-plan::N\_\-total, nfft\_\-init\_\-guru(), nfft\_\-malloc(), fastsum\_\-plan::p, PRE\_\-PHI\_\-HUT, PRE\_\-PSI, fastsum\_\-plan::x, and fastsum\_\-plan::y.
 
-Referenced by fields\_\-fastsum\_\-init().\hypertarget{group__applications__fastsum_ga14}{
+Referenced by fields\_\-fastsum\_\-init(), and main().\hypertarget{group__applications__fastsum_gb989ea4659fe681bd4c025e82756f769}{
 \index{applications_fastsum@{applications\_\-fastsum}!fastsum_finalize@{fastsum\_\-finalize}}
 \index{fastsum_finalize@{fastsum\_\-finalize}!applications_fastsum@{applications\_\-fastsum}}
-\subsubsection[fastsum\_\-finalize]{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-finalize (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ {\em ths})}}
-\label{group__applications__fastsum_ga14}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-finalize ({\bf fastsum\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastsum_gb989ea4659fe681bd4c025e82756f769}
 
 
 finalization of fastsum plan 
 
+finalize plan
+
 \begin{Desc}
 \item[Parameters:]
 \begin{description}
@@ -207,19 +216,21 @@ finalization of fastsum plan
 \end{Desc}
 
 
-Definition at line 436 of file fastsum.c.
+Definition at line 456 of file fastsum.c.
 
-References EXACT\_\-NEARFIELD, and nfft\_\-finalize().
+References fastsum\_\-plan::Add, fastsum\_\-plan::alpha, fastsum\_\-plan::b, EXACT\_\-NEARFIELD, fastsum\_\-plan::f, fastsum\_\-plan::fft\_\-plan, fastsum\_\-plan::flags, fastsum\_\-plan::mv1, fastsum\_\-plan::mv2, nfft\_\-finalize(), nfft\_\-free(), fastsum\_\-plan::x, and fastsum\_\-plan::y.
 
-Referenced by fields\_\-fastsum\_\-finalize().\hypertarget{group__applications__fastsum_ga15}{
+Referenced by fields\_\-fastsum\_\-finalize(), and main().\hypertarget{group__applications__fastsum_gaee3dd954ffc99e4330fabe16ccad0fd}{
 \index{applications_fastsum@{applications\_\-fastsum}!fastsum_exact@{fastsum\_\-exact}}
 \index{fastsum_exact@{fastsum\_\-exact}!applications_fastsum@{applications\_\-fastsum}}
-\subsubsection[fastsum\_\-exact]{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-exact (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ {\em ths})}}
-\label{group__applications__fastsum_ga15}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-exact ({\bf fastsum\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastsum_gaee3dd954ffc99e4330fabe16ccad0fd}
 
 
 direct computation of sums 
 
+direct summation
+
 \begin{Desc}
 \item[Parameters:]
 \begin{description}
@@ -227,15 +238,21 @@ direct computation of sums
 \end{Desc}
 
 
-Definition at line 454 of file fastsum.c.\hypertarget{group__applications__fastsum_ga16}{
+Definition at line 474 of file fastsum.c.
+
+References fastsum\_\-plan::alpha, fastsum\_\-plan::d, fastsum\_\-plan::f, fastsum\_\-plan::kernel, fastsum\_\-plan::kernel\_\-param, fastsum\_\-plan::M\_\-total, fastsum\_\-plan::N\_\-total, fastsum\_\-plan::x, and fastsum\_\-plan::y.
+
+Referenced by main().\hypertarget{group__applications__fastsum_g197c16fcec7935886fc97d140f2b20ff}{
 \index{applications_fastsum@{applications\_\-fastsum}!fastsum_precompute@{fastsum\_\-precompute}}
 \index{fastsum_precompute@{fastsum\_\-precompute}!applications_fastsum@{applications\_\-fastsum}}
-\subsubsection[fastsum\_\-precompute]{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-precompute (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ {\em ths})}}
-\label{group__applications__fastsum_ga16}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-precompute ({\bf fastsum\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastsum_g197c16fcec7935886fc97d140f2b20ff}
 
 
 precomputation for fastsum 
 
+sort source nodes, precompute Fourier coefficients, etc.
+
 \begin{Desc}
 \item[Parameters:]
 \begin{description}
@@ -243,19 +260,21 @@ precomputation for fastsum
 \end{Desc}
 
 
-Definition at line 480 of file fastsum.c.
+Definition at line 500 of file fastsum.c.
 
-References Build\-Tree(), EXACT\_\-NEARFIELD, nfft\_\-fftshift\_\-complex(), nfft\_\-precompute\_\-full\_\-psi(), nfft\_\-precompute\_\-lin\_\-psi(), nfft\_\-precompute\_\-psi(), PRE\_\-FULL\_\-PSI, PRE\_\-LIN\_\-PSI, PRE\_\-PSI, regkern1(), and regkern3().
+References fastsum\_\-plan::Ad, fastsum\_\-plan::Add, fastsum\_\-plan::alpha, fastsum\_\-plan::b, BuildTree(), nfft\_\-plan::d, fastsum\_\-plan::d, fastsum\_\-plan::eps\_\-B, fastsum\_\-plan::eps\_\-I, EXACT\_\-NEARFIELD, nfft\_\-plan::f, fastsum\_\-plan::fft\_\-plan, fastsum\_\-plan::flags, fastsum\_\-plan::kernel, fastsum\_\-plan::kernel\_\-param, nfft\_\-plan::M\_\-total, fastsum\_\-plan::mv1, fastsum\_\-plan::mv2, nfft\_\-plan::N, fastsum\_\-plan::n, fastsum\_\-plan::N\_\-total, nfft\_\-fftshift\_\-complex(), nfft\_\-plan::nfft\_\-flags, nfft\_\-precompute\_\-full\_\-psi(), nfft\_\-precompute\_\-lin\_\-psi(), nfft\_\-precompute\_\-psi(), fastsum\_\-plan::p, PRE\_\-FULL\_\-PSI, PRE\_\-LIN\_\-PSI, PRE\_\-PSI, regkern1(), regkern3(), nfft\_\-plan::x, fastsum\_\-plan::x, and fastsum\_\-plan::y.
 
-Referenced by fields\_\-fastsum\_\-precompute(), and fields\_\-fastsum\_\-simple().\hypertarget{group__applications__fastsum_ga17}{
+Referenced by fields\_\-fastsum\_\-precompute(), fields\_\-fastsum\_\-simple(), and main().\hypertarget{group__applications__fastsum_gab2cc691ba59064c18d439c9fd2185e8}{
 \index{applications_fastsum@{applications\_\-fastsum}!fastsum_trafo@{fastsum\_\-trafo}}
 \index{fastsum_trafo@{fastsum\_\-trafo}!applications_fastsum@{applications\_\-fastsum}}
-\subsubsection[fastsum\_\-trafo]{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-trafo (\hyperlink{structfastsum__plan__}{fastsum\_\-plan} $\ast$ {\em ths})}}
-\label{group__applications__fastsum_ga17}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void fastsum\_\-trafo ({\bf fastsum\_\-plan} $\ast$ {\em ths})}}
+\label{group__applications__fastsum_gab2cc691ba59064c18d439c9fd2185e8}
 
 
 fast NFFT-based summation 
 
+fast NFFT-based summation algorithm
+
 \begin{Desc}
 \item[Parameters:]
 \begin{description}
@@ -263,8 +282,8 @@ fast NFFT-based summation
 \end{Desc}
 
 
-Definition at line 563 of file fastsum.c.
+Definition at line 583 of file fastsum.c.
 
-References nfft\_\-adjoint(), nfft\_\-trafo(), and Search\-Tree().
+References fastsum\_\-plan::Ad, fastsum\_\-plan::Add, fastsum\_\-plan::alpha, fastsum\_\-plan::b, fastsum\_\-plan::d, fastsum\_\-plan::eps\_\-I, nfft\_\-plan::f, fastsum\_\-plan::f, nfft\_\-plan::f\_\-hat, fastsum\_\-plan::flags, fastsum\_\-plan::kernel, fastsum\_\-plan::kernel\_\-param, fastsum\_\-plan::M\_\-total, fastsum\_\-plan::mv1, fastsum\_\-plan::mv2, fastsum\_\-plan::N\_\-total, nfft\_\-plan::N\_\-total, nfft\_\-adjoint(), nfft\_\-malloc(), nfft\_\-trafo(), fastsum\_\-plan::p, SearchTree(), fastsum\_\-plan::x, and fastsum\_\-plan::y.
 
-Referenced by fields\_\-fastsum\_\-simple().
+Referenced by fields\_\-fastsum\_\-simple(), and main().

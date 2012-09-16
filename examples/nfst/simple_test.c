@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: simple_test.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
@@ -6,7 +26,7 @@
 #include "util.h"
 #include "nfft3.h"
 
-void simple_test_nfst_1d()
+void simple_test_nfst_1d(void)
 {
   int j,k;
   nfst_plan p;
@@ -33,12 +53,12 @@ void simple_test_nfst_1d()
 
   /** direct trafo and show the result */
   ndst_trafo(&p);
-  nfft_vpr_double(p.f,p.M_total,"ndst, vector f"); 
+  nfft_vpr_double(p.f,p.M_total,"ndst, vector f");
 
   /** approx. trafo and show the result */
   nfst_trafo(&p);
   nfft_vpr_double(p.f,p.M_total,"nfst, vector f");
-  
+
   /** approx. adjoint and show the result */
   ndst_adjoint(&p);
   nfft_vpr_double(p.f_hat,p.N_total,"adjoint ndst, vector f_hat");
@@ -51,7 +71,7 @@ void simple_test_nfst_1d()
   nfst_finalize(&p);
 }
 
-int main()
+int main(void)
 {
   system("clear");
   printf("computing one dimensional ndst, nfst and adjoint ndst, nfst\n\n");

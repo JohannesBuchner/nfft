@@ -1,0 +1,220 @@
+\hypertarget{structfpt__set__s}{
+\section{fpt\_\-set\_\-s Struct Reference}
+\label{structfpt__set__s}\index{fpt_set_s@{fpt\_\-set\_\-s}}
+}
+Holds data for a set of cascade summations.  
+
+
+{\tt \#include $<$fpt.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+\hypertarget{structfpt__set__s_edea90ea36bd52716ab88d95117660ad}{
+int \hyperlink{structfpt__set__s_edea90ea36bd52716ab88d95117660ad}{flags}}
+\label{structfpt__set__s_edea90ea36bd52716ab88d95117660ad}
+
+\begin{CompactList}\small\item\em The flags. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_0b331c8ad987abe23a05a77f3c3f6211}{
+int \hyperlink{structfpt__set__s_0b331c8ad987abe23a05a77f3c3f6211}{M}}
+\label{structfpt__set__s_0b331c8ad987abe23a05a77f3c3f6211}
+
+\begin{CompactList}\small\item\em The number of DPT transforms. \item\end{CompactList}\item 
+int \hyperlink{structfpt__set__s_79ef24e290c43364646520ab94cf43e5}{N}
+\begin{CompactList}\small\item\em The transform length. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_4ba60e2cce448ea70d4cc773454fd553}{
+int \hyperlink{structfpt__set__s_4ba60e2cce448ea70d4cc773454fd553}{t}}
+\label{structfpt__set__s_4ba60e2cce448ea70d4cc773454fd553}
+
+\begin{CompactList}\small\item\em The exponent of N. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_83cab05366d06e3e442865967c7b9ca1}{
+\hyperlink{structfpt__data}{fpt\_\-data} $\ast$ \hyperlink{structfpt__set__s_83cab05366d06e3e442865967c7b9ca1}{dpt}}
+\label{structfpt__set__s_83cab05366d06e3e442865967c7b9ca1}
+
+\begin{CompactList}\small\item\em The DPT transform data. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_2775cb8a0a1f0b45114bdf9b4976d118}{
+double $\ast$$\ast$ \hyperlink{structfpt__set__s_2775cb8a0a1f0b45114bdf9b4976d118}{xcvecs}}
+\label{structfpt__set__s_2775cb8a0a1f0b45114bdf9b4976d118}
+
+\begin{CompactList}\small\item\em Array of pointers to arrays containing the Chebyshev nodes. \item\end{CompactList}\item 
+double $\ast$ \hyperlink{structfpt__set__s_b84648e5abdffa255d8b77e4fb19a3c4}{xc}
+\begin{CompactList}\small\item\em Array for Chebychev-nodes. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_58270153ad4019aa255d97b2bf66ff87}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_58270153ad4019aa255d97b2bf66ff87}{temp}}
+\label{structfpt__set__s_58270153ad4019aa255d97b2bf66ff87}
+
+\item 
+\hypertarget{structfpt__set__s_4606aac141a1340ce6524388c7475883}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_4606aac141a1340ce6524388c7475883}{work}}
+\label{structfpt__set__s_4606aac141a1340ce6524388c7475883}
+
+\item 
+\hypertarget{structfpt__set__s_b73d28aa9069e71d759a9cd601b6f303}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_b73d28aa9069e71d759a9cd601b6f303}{result}}
+\label{structfpt__set__s_b73d28aa9069e71d759a9cd601b6f303}
+
+\item 
+\hypertarget{structfpt__set__s_1fa99510092110f3e93bb7cf344f1dc7}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_1fa99510092110f3e93bb7cf344f1dc7}{vec3}}
+\label{structfpt__set__s_1fa99510092110f3e93bb7cf344f1dc7}
+
+\item 
+\hypertarget{structfpt__set__s_e54438879d73c9f8810028d5fd34feeb}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_e54438879d73c9f8810028d5fd34feeb}{vec4}}
+\label{structfpt__set__s_e54438879d73c9f8810028d5fd34feeb}
+
+\item 
+\hypertarget{structfpt__set__s_7ce3da82bc29b6abfca26852c1cd5623}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_7ce3da82bc29b6abfca26852c1cd5623}{z}}
+\label{structfpt__set__s_7ce3da82bc29b6abfca26852c1cd5623}
+
+\item 
+\hypertarget{structfpt__set__s_af6570c7ca5ad28137d7c3463009bcf7}{
+fftw\_\-plan $\ast$ \hyperlink{structfpt__set__s_af6570c7ca5ad28137d7c3463009bcf7}{plans\_\-dct3}}
+\label{structfpt__set__s_af6570c7ca5ad28137d7c3463009bcf7}
+
+\begin{CompactList}\small\item\em Transform plans for the fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_7449ebd0a23f7820bf6c9d8174f50fcd}{
+fftw\_\-plan $\ast$ \hyperlink{structfpt__set__s_7449ebd0a23f7820bf6c9d8174f50fcd}{plans\_\-dct2}}
+\label{structfpt__set__s_7449ebd0a23f7820bf6c9d8174f50fcd}
+
+\begin{CompactList}\small\item\em Transform plans for the fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_4e680e88d3613043b520eed1de851d12}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structfpt__set__s_4e680e88d3613043b520eed1de851d12}{kinds}}
+\label{structfpt__set__s_4e680e88d3613043b520eed1de851d12}
+
+\begin{CompactList}\small\item\em Transform kinds for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_e8aad5af91f269f07df48add8d7d7882}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structfpt__set__s_e8aad5af91f269f07df48add8d7d7882}{kindsr}}
+\label{structfpt__set__s_e8aad5af91f269f07df48add8d7d7882}
+
+\begin{CompactList}\small\item\em Transform kinds for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_197fa4604506c20774f37853a4d04e0c}{
+int $\ast$ \hyperlink{structfpt__set__s_197fa4604506c20774f37853a4d04e0c}{lengths}}
+\label{structfpt__set__s_197fa4604506c20774f37853a4d04e0c}
+
+\begin{CompactList}\small\item\em Transform lengths for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_97d7abaf8a8772aebc59ee20b6d41c93}{
+double $\ast$ \hyperlink{structfpt__set__s_97d7abaf8a8772aebc59ee20b6d41c93}{xc\_\-slow}}
+\label{structfpt__set__s_97d7abaf8a8772aebc59ee20b6d41c93}
+
+\item 
+\hypertarget{structfpt__set__s_83cab05366d06e3e442865967c7b9ca1}{
+\hyperlink{structfpt__data}{fpt\_\-data} $\ast$ \hyperlink{structfpt__set__s_83cab05366d06e3e442865967c7b9ca1}{dpt}}
+\label{structfpt__set__s_83cab05366d06e3e442865967c7b9ca1}
+
+\begin{CompactList}\small\item\em The DPT transform data. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_2775cb8a0a1f0b45114bdf9b4976d118}{
+double $\ast$$\ast$ \hyperlink{structfpt__set__s_2775cb8a0a1f0b45114bdf9b4976d118}{xcvecs}}
+\label{structfpt__set__s_2775cb8a0a1f0b45114bdf9b4976d118}
+
+\begin{CompactList}\small\item\em Array of pointers to arrays containing the Chebyshev nodes. \item\end{CompactList}\item 
+double $\ast$ \hyperlink{structfpt__set__s_b84648e5abdffa255d8b77e4fb19a3c4}{xc}
+\begin{CompactList}\small\item\em Array for Chebychev-nodes. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_58270153ad4019aa255d97b2bf66ff87}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_58270153ad4019aa255d97b2bf66ff87}{temp}}
+\label{structfpt__set__s_58270153ad4019aa255d97b2bf66ff87}
+
+\item 
+\hypertarget{structfpt__set__s_4606aac141a1340ce6524388c7475883}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_4606aac141a1340ce6524388c7475883}{work}}
+\label{structfpt__set__s_4606aac141a1340ce6524388c7475883}
+
+\item 
+\hypertarget{structfpt__set__s_b73d28aa9069e71d759a9cd601b6f303}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_b73d28aa9069e71d759a9cd601b6f303}{result}}
+\label{structfpt__set__s_b73d28aa9069e71d759a9cd601b6f303}
+
+\item 
+\hypertarget{structfpt__set__s_1fa99510092110f3e93bb7cf344f1dc7}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_1fa99510092110f3e93bb7cf344f1dc7}{vec3}}
+\label{structfpt__set__s_1fa99510092110f3e93bb7cf344f1dc7}
+
+\item 
+\hypertarget{structfpt__set__s_e54438879d73c9f8810028d5fd34feeb}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_e54438879d73c9f8810028d5fd34feeb}{vec4}}
+\label{structfpt__set__s_e54438879d73c9f8810028d5fd34feeb}
+
+\item 
+\hypertarget{structfpt__set__s_7ce3da82bc29b6abfca26852c1cd5623}{
+double \_\-Complex $\ast$ \hyperlink{structfpt__set__s_7ce3da82bc29b6abfca26852c1cd5623}{z}}
+\label{structfpt__set__s_7ce3da82bc29b6abfca26852c1cd5623}
+
+\item 
+\hypertarget{structfpt__set__s_af6570c7ca5ad28137d7c3463009bcf7}{
+fftw\_\-plan $\ast$ \hyperlink{structfpt__set__s_af6570c7ca5ad28137d7c3463009bcf7}{plans\_\-dct3}}
+\label{structfpt__set__s_af6570c7ca5ad28137d7c3463009bcf7}
+
+\begin{CompactList}\small\item\em Transform plans for the fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_7449ebd0a23f7820bf6c9d8174f50fcd}{
+fftw\_\-plan $\ast$ \hyperlink{structfpt__set__s_7449ebd0a23f7820bf6c9d8174f50fcd}{plans\_\-dct2}}
+\label{structfpt__set__s_7449ebd0a23f7820bf6c9d8174f50fcd}
+
+\begin{CompactList}\small\item\em Transform plans for the fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_4e680e88d3613043b520eed1de851d12}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structfpt__set__s_4e680e88d3613043b520eed1de851d12}{kinds}}
+\label{structfpt__set__s_4e680e88d3613043b520eed1de851d12}
+
+\begin{CompactList}\small\item\em Transform kinds for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_e8aad5af91f269f07df48add8d7d7882}{
+fftw\_\-r2r\_\-kind $\ast$ \hyperlink{structfpt__set__s_e8aad5af91f269f07df48add8d7d7882}{kindsr}}
+\label{structfpt__set__s_e8aad5af91f269f07df48add8d7d7882}
+
+\begin{CompactList}\small\item\em Transform kinds for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_197fa4604506c20774f37853a4d04e0c}{
+int $\ast$ \hyperlink{structfpt__set__s_197fa4604506c20774f37853a4d04e0c}{lengths}}
+\label{structfpt__set__s_197fa4604506c20774f37853a4d04e0c}
+
+\begin{CompactList}\small\item\em Transform lengths for fftw library. \item\end{CompactList}\item 
+\hypertarget{structfpt__set__s_97d7abaf8a8772aebc59ee20b6d41c93}{
+double $\ast$ \hyperlink{structfpt__set__s_97d7abaf8a8772aebc59ee20b6d41c93}{xc\_\-slow}}
+\label{structfpt__set__s_97d7abaf8a8772aebc59ee20b6d41c93}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Holds data for a set of cascade summations. 
+
+Definition at line 95 of file fpt.c.
+
+\subsection{Field Documentation}
+\hypertarget{structfpt__set__s_79ef24e290c43364646520ab94cf43e5}{
+\index{fpt_set_s@{fpt\_\-set\_\-s}!N@{N}}
+\index{N@{N}!fpt_set_s@{fpt\_\-set\_\-s}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf fpt\_\-set\_\-s::N}}}
+\label{structfpt__set__s_79ef24e290c43364646520ab94cf43e5}
+
+
+The transform length. 
+
+Must be a power of two. 
+
+Definition at line 99 of file fpt.c.\hypertarget{structfpt__set__s_b84648e5abdffa255d8b77e4fb19a3c4}{
+\index{fpt_set_s@{fpt\_\-set\_\-s}!xc@{xc}}
+\index{xc@{xc}!fpt_set_s@{fpt\_\-set\_\-s}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf fpt\_\-set\_\-s::xc}}}
+\label{structfpt__set__s_b84648e5abdffa255d8b77e4fb19a3c4}
+
+
+Array for Chebychev-nodes. 
+
+
+
+Definition at line 106 of file fpt.c.\hypertarget{structfpt__set__s_b84648e5abdffa255d8b77e4fb19a3c4}{
+\index{fpt_set_s@{fpt\_\-set\_\-s}!xc@{xc}}
+\index{xc@{xc}!fpt_set_s@{fpt\_\-set\_\-s}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf fpt\_\-set\_\-s::xc}}}
+\label{structfpt__set__s_b84648e5abdffa255d8b77e4fb19a3c4}
+
+
+Array for Chebychev-nodes. 
+
+
+
+Definition at line 71 of file fpt.h.
+
+The documentation for this struct was generated from the following files:\begin{CompactItemize}
+\item 
+\hyperlink{fpt_8c}{fpt.c}\item 
+fpt.h\end{CompactItemize}

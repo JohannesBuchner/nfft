@@ -1,11 +1,31 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: util.h 3133 2009-03-19 10:46:24Z keiner $ */
+
 /*! \file util.h
  *  \brief Header file for utility functions used by the nfft3 library.
  */
-#ifndef utils_h_inc
-#define utils_h_inc
+#ifndef __UTIL_H__
+#define __UTIL_H__
 
-/** Include header for C99 complex datatype. */
-#include <complex.h>
+/** Include header for FFTW3 library for its complex type. */
+#include <fftw3.h>
 
 /*###########################################################################*/
 /*###########################################################################*/
@@ -19,20 +39,64 @@
  * In particular, this includes simple measurement of resources, evaluation of
  * window functions, vector routines for basic linear algebra tasks, and
  * computation of weights for the inverse transforms.
- * 
+ *
  */
+
+/** Timing, method works since the inaccurate timer is updated mostly in the
+ *  measured function. For small times not every call of the measured function
+ *  will also produce a 'unit' time step.
+ *  Measuring the fftw might cause a wrong output vector due to the repeated
+ *  ffts.
+ */
+#ifdef MEASURE_TIME
+ int MEASURE_TIME_r;
+ double MEASURE_TIME_tt;
+
+#define TIC(a)                                                                \
+  ths->MEASURE_TIME_t[(a)]=0;                                                 \
+  MEASURE_TIME_r=0;                                                           \
+  while(ths->MEASURE_TIME_t[(a)]<0.01)                                        \
+    {                                                                         \
+      MEASURE_TIME_r++;                                                       \
+      MEASURE_TIME_tt=nfft_second();                                          \
+
+/* THE MEASURED FUNCTION IS CALLED REPEATEDLY */
+
+#define TOC(a)                                                                \
+      MEASURE_TIME_tt=nfft_second()-MEASURE_TIME_tt;                          \
+      ths->MEASURE_TIME_t[(a)]+=MEASURE_TIME_tt;                              \
+    }                                                                         \
+  ths->MEASURE_TIME_t[(a)]/=MEASURE_TIME_r;                                   \
+
+#else
+#define TIC(a)
+#define TOC(a)
+#endif
+
+#ifdef MEASURE_TIME_FFTW
+#define TIC_FFTW(a) TIC(a)
+#define TOC_FFTW(a) TOC(a)
+#else
+#define TIC_FFTW(a)
+#define TOC_FFTW(a)
+#endif
+
 
 /** Swapping of two vectors.
  */
-#define NFFT_SWAP_complex(x,y) {double complex* temp; temp=(x); (x)=(y); (y)=temp;}
+#define NFFT_SWAP_complex(x,y) {fftw_complex* NFFT_SWAP_temp__; \
+  NFFT_SWAP_temp__=(x); (x)=(y); (y)=NFFT_SWAP_temp__;}
 
 /** Swapping of two vectors.
  */
-#define NFFT_SWAP_double(x,y) {double* temp; temp=(x); (x)=(y); (y)=temp;}
+#define NFFT_SWAP_double(x,y) {double* NFFT_SWAP_temp__; NFFT_SWAP_temp__=(x); \
+  (x)=(y); (y)=NFFT_SWAP_temp__;}
 
 /** Formerly known to be an irrational number.
  */
-#define PI 3.1415926535897932384
+#define PI 3.141592653589793238462643383279502884197169399375105820974944592
+#define PI2 6.283185307179586476925286766559005768394338798750211641949889185
+#define PI4 12.56637061435917295385057353311801153678867759750042328389977837
 
 /** Maximum of its two arguments.
  */
@@ -48,11 +112,11 @@
 
 /** Actual used CPU time in seconds; calls getrusage, limited accuracy.
  */
-double nfft_second();
+double nfft_second(void);
 
 /** Actual used memory in bytes; calls mallinfo if define HAVE_MALLOC_H.
  */
-int nfft_total_used_memory();
+int nfft_total_used_memory(void);
 
 /** Integer logarithm of 2.
  */
@@ -82,12 +146,12 @@ double nfft_sinc(double x);
  */
 double nfft_bspline_old(int k,double x,double *A);
 
-/** Computes the B-spline \f$M_{k,0}\left(x\right)\f$, 
+/** Computes the B-spline \f$M_{k,0}\left(x\right)\f$,
     scratch is used for de Boor's scheme
  */
 double nfft_bspline(int k, double x, double *scratch);
 
-/** Modified Bessel function of order zero; 
+/** Modified Bessel function of order zero;
     adapted from Stephen Moshier's Cephes Math Library Release 2.8
  */
 double nfft_i0(double x);
@@ -118,7 +182,7 @@ double nfft_prod_real(double *vec,int d);
 
 /** Computes the inner/dot product \f$x^H x\f$.
  */
-double nfft_dot_complex(double complex* x, int n);
+double nfft_dot_complex(fftw_complex* x, int n);
 
 /** Computes the inner/dot product \f$x^H x\f$.
  */
@@ -126,7 +190,7 @@ double nfft_dot_double( double*  x, int n);
 
 /** Computes the weighted inner/dot product \f$x^H (w \odot x)\f$.
  */
-double nfft_dot_w_complex(double complex* x, double* w, int n);
+double nfft_dot_w_complex(fftw_complex* x, double* w, int n);
 
 /** Computes the weighted inner/dot product \f$x^H (w \odot x)\f$.
  */
@@ -135,16 +199,16 @@ double nfft_dot_w_double( double*  x, double* w, int n);
 /** Computes the weighted inner/dot product
     \f$x^H (w1\odot w2\odot w2 \odot x)\f$.
 */
-double nfft_dot_w_w2_complex(double complex* x, double* w, double* w2, int n);
+double nfft_dot_w_w2_complex(fftw_complex* x, double* w, double* w2, int n);
 
 /** Computes the weighted inner/dot product
     \f$x^H (w2\odot w2 \odot x)\f$.
  */
-double nfft_dot_w2_complex(double complex* x, double* w2, int n);
+double nfft_dot_w2_complex(fftw_complex* x, double* w2, int n);
 
 /** Copies \f$x \leftarrow y\f$.
  */
-void nfft_cp_complex(double complex* x, double complex* y, int n);
+void nfft_cp_complex(fftw_complex* x, fftw_complex* y, int n);
 
 /** Copies \f$x \leftarrow y\f$.
  */
@@ -152,11 +216,11 @@ void nfft_cp_double( double*  x, double*  y, int n);
 
 /** Copies \f$x \leftarrow a y\f$.
  */
-void nfft_cp_a_complex(double complex* x, double a, double complex* y, int n);
+void nfft_cp_a_complex(fftw_complex* x, double a, fftw_complex* y, int n);
 
 /** Copies \f$x \leftarrow w\odot y\f$.
  */
-void nfft_cp_w_complex(double complex* x, double* w, double complex* y, int n);
+void nfft_cp_w_complex(fftw_complex* x, double* w, fftw_complex* y, int n);
 
 /** Copies \f$x \leftarrow w\odot y\f$.
  */
@@ -164,7 +228,7 @@ void nfft_cp_w_double( double*  x, double* w, double*  y, int n);
 
 /** Updates \f$x \leftarrow a x + y\f$.
  */
-void nfft_upd_axpy_complex(double complex* x, double a, double complex* y, int n);
+void nfft_upd_axpy_complex(fftw_complex* x, double a, fftw_complex* y, int n);
 
 /** Updates \f$x \leftarrow a x + y\f$.
  */
@@ -172,7 +236,7 @@ void nfft_upd_axpy_double( double*  x, double a, double*  y, int n);
 
 /** Updates \f$x \leftarrow x + a y\f$.
  */
-void nfft_upd_xpay_complex(double complex* x, double a, double complex* y, int n);
+void nfft_upd_xpay_complex(fftw_complex* x, double a, fftw_complex* y, int n);
 
 /** Updates \f$x \leftarrow x + a y\f$.
  */
@@ -180,7 +244,7 @@ void nfft_upd_xpay_double( double*  x, double a, double*  y, int n);
 
 /** Updates \f$x \leftarrow a x + b y\f$.
  */
-void nfft_upd_axpby_complex(double complex* x, double a, double complex* y, double b, int n);
+void nfft_upd_axpby_complex(fftw_complex* x, double a, fftw_complex* y, double b, int n);
 
 /** Updates \f$x \leftarrow a x + b y\f$.
  */
@@ -188,7 +252,7 @@ void nfft_upd_axpby_double(  double* x, double a, double*  y, double b, int n);
 
 /** Updates \f$x \leftarrow x + a w\odot y\f$.
  */
-void nfft_upd_xpawy_complex(double complex* x, double a, double* w, double complex* y, int n);
+void nfft_upd_xpawy_complex(fftw_complex* x, double a, double* w, fftw_complex* y, int n);
 
 /** Updates \f$x \leftarrow x + a w\odot y\f$.
  */
@@ -196,7 +260,7 @@ void nfft_upd_xpawy_double( double*  x, double a, double* w, double*  y, int n);
 
 /** Updates \f$x \leftarrow a x +  w\odot y\f$.
  */
-void nfft_upd_axpwy_complex(double complex* x, double a, double* w, double complex* y, int n);
+void nfft_upd_axpwy_complex(fftw_complex* x, double a, double* w, fftw_complex* y, int n);
 
 /** Updates \f$x \leftarrow a x +  w\odot y\f$.
  */
@@ -204,11 +268,11 @@ void nfft_upd_axpwy_double( double*  x, double a, double* w, double*  y, int n);
 
 /** Swaps each half over N[d]/2.
  */
-void nfft_fftshift_complex(double complex *x, int d, int* N);
+void nfft_fftshift_complex(fftw_complex *x, int d, int* N);
 
 /** Computes \f$\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} \f$
  */
-double nfft_error_l_infty_complex(double complex *x, double complex *y, int n);
+double nfft_error_l_infty_complex(fftw_complex *x, fftw_complex *y, int n);
 
 /** Computes \f$\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} \f$
  */
@@ -216,7 +280,7 @@ double nfft_error_l_infty_double(double *x, double *y, int n);
 
 /** Computes \f$\frac{\|x-y\|_{\infty}}{\|z\|_1} \f$
  */
-double nfft_error_l_infty_1_complex(double complex *x, double complex *y, int n, double complex *z,
+double nfft_error_l_infty_1_complex(fftw_complex *x, fftw_complex *y, int n, fftw_complex *z,
                                int m);
 
 /** Computes \f$\frac{\|x-y\|_{\infty}}{\|z\|_1} \f$
@@ -226,7 +290,7 @@ double nfft_error_l_infty_1_double(double *x, double *y, int n, double *z,
 
 /** Computes \f$\frac{\|x-y\|_2}{\|x\|_2} \f$
  */
-double nfft_error_l_2_complex(double complex *x, double complex *y, int n);
+double nfft_error_l_2_complex(fftw_complex *x, fftw_complex *y, int n);
 
 /** Computes \f$\frac{\|x-y\|_2}{\|x\|_2} \f$
  */
@@ -238,15 +302,15 @@ void nfft_vpr_int(int *x, int n, char *text);
 
 /** Prints a vector of doubles numbers.
  */
-void nfft_vpr_double(double *x, int n, char *text);
+void nfft_vpr_double(double *x, int n, const char *text);
 
 /** Prints a vector of complex numbers.
  */
-void nfft_vpr_complex(double complex *x, int n, char *text);
+void nfft_vpr_complex(fftw_complex *x, int n, const char *text);
 
 /** Inits a vector of random complex numbers in \f$[0,1]\times[0,1]{\rm i}\f$.
  */
-void nfft_vrand_unit_complex(double complex *x, int n);
+void nfft_vrand_unit_complex(fftw_complex *x, int n);
 
 /** Inits a vector of random double numbers in \f$[-1/2,1/2]\f$.
  */
@@ -282,6 +346,20 @@ double nfft_modified_sobolev(double mu,int kk);
 /** Computes the damping factor for the modified multiquadric kernel.
  */
 double nfft_modified_multiquadric(double mu,double c,int kk);
+
+int nfft_smbi(const double x, const double alpha, const int nb, const int ize,
+  double *b);
+
+/**
+ * Computes the function
+ *   \f$\Lambda(z,\epsilon) = \frac{\Gamma(z+\epsilon)}{\Gamma(z+1)}\f$,
+ * with \f$ z + \epsilon > 0\f$.
+ *
+ * This method uses the Lanczos approximation to compute the result; see
+ * Glendon Ralph Pugh. An Analysis of The Lanczos Gamma Approximation. PhD
+ * Thesis, The University of British Columbia, 2004.
+ */
+double nfft_lambda(const double z, const double eps);
 
 /** @}
  */

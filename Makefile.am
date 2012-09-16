@@ -1,21 +1,39 @@
-# Subdirectories
-DIST_SUBDIRS= 3rdparty include util kernel . examples applications
+# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
 
-if WITH_DEVCODE 
+LIBTOOL_DEPS = @LIBTOOL_DEPS@
+
+libtool: $(LIBTOOL_DEPS)
+	$(SHELL) ./config.status --recheck
+
+# Subdirectories
+DIST_SUBDIRS= 3rdparty include util kernel . examples applications matlab
+
+if MAINTAINER_MODE
   EXTRA_DIRS= tests
 else
-  EXTRA_DIRS=   
-endif 
+  EXTRA_DIRS=
+endif
 
-SUBDIRS= $(DIST_SUBDIRS) $(EXTRA_DIRS)
+if HAVE_MATLAB
+  MATLAB_DIRS= matlab
+else
+  MATLAB_DIRS=
+endif
 
-lib_LTLIBRARIES = libnfft3.la      
+SUBDIRS= 3rdparty include util kernel . examples applications $(EXTRA_DIRS) $(MATLAB_DIRS)
+
+lib_LTLIBRARIES = libnfft3.la
+noinst_LTLIBRARIES = libnfft3noinst.la
 
 libnfft3_la_SOURCES =
+libnfft3_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @fftw3_LIBS@
+libnfft3_la_LDFLAGS = -version-info @SHARED_VERSION_INFO@ @fftw3_LDFLAGS@
 
-libnfft3_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la
+libnfft3noinst_la_SOURCES =
+libnfft3noinst_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @fftw3_LIBS@
+libnfft3noinst_la_LDFLAGS = @fftw3_LDFLAGS@
 
-EXTRA_DIST = bootstrap.sh VERSION
+EXTRA_DIST = bootstrap.sh VERSION doxygen.c
 
 install-data-hook:
 	mkdir -p $(pkgdatadir)
@@ -49,4 +67,6 @@ dist-hook:
 	rm -Rf $(distdir)/doxygen
 	rm -Rf $(distdir)/VERSION.in
 	cp VERSION $(distdir)
-	
+
+# Flags to be passed to aclocal.
+ACLOCAL_AMFLAGS = -I m4

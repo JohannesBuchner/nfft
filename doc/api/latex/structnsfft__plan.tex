@@ -10,109 +10,119 @@ Structure for a NFFT plan.
 \subsection*{Data Fields}
 \begin{CompactItemize}
 \item 
-\hypertarget{structnsfft__plan_o0}{
-int \hyperlink{structnsfft__plan_o0}{N\_\-total}}
-\label{structnsfft__plan_o0}
+\hypertarget{structnsfft__plan_87e0123a3ccf6a42102e065dca2f8505}{
+int \hyperlink{structnsfft__plan_87e0123a3ccf6a42102e065dca2f8505}{N\_\-total}}
+\label{structnsfft__plan_87e0123a3ccf6a42102e065dca2f8505}
 
 \begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o1}{
-int \hyperlink{structnsfft__plan_o1}{M\_\-total}}
-\label{structnsfft__plan_o1}
+\hypertarget{structnsfft__plan_03da0fc6abab6b0d2e15053ef1f3109e}{
+int \hyperlink{structnsfft__plan_03da0fc6abab6b0d2e15053ef1f3109e}{M\_\-total}}
+\label{structnsfft__plan_03da0fc6abab6b0d2e15053ef1f3109e}
 
 \begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o2}{
-double complex $\ast$ \hyperlink{structnsfft__plan_o2}{f\_\-hat}}
-\label{structnsfft__plan_o2}
+\hypertarget{structnsfft__plan_e3e2fcefd21caff3aa1e978b522d4ee3}{
+fftw\_\-complex $\ast$ \hyperlink{structnsfft__plan_e3e2fcefd21caff3aa1e978b522d4ee3}{f\_\-hat}}
+\label{structnsfft__plan_e3e2fcefd21caff3aa1e978b522d4ee3}
 
 \begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o3}{
-double complex $\ast$ \hyperlink{structnsfft__plan_o3}{f}}
-\label{structnsfft__plan_o3}
+\hypertarget{structnsfft__plan_7ffefff1410360f4264e12398db06787}{
+fftw\_\-complex $\ast$ \hyperlink{structnsfft__plan_7ffefff1410360f4264e12398db06787}{f}}
+\label{structnsfft__plan_7ffefff1410360f4264e12398db06787}
 
 \begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o4}{
-int \hyperlink{structnsfft__plan_o4}{d}}
-\label{structnsfft__plan_o4}
+\hypertarget{structnsfft__plan_bbab5fc009e68a329bbebee4904e53a5}{
+void($\ast$ \hyperlink{structnsfft__plan_bbab5fc009e68a329bbebee4904e53a5}{mv\_\-trafo} )(void $\ast$)}
+\label{structnsfft__plan_bbab5fc009e68a329bbebee4904e53a5}
+
+\begin{CompactList}\small\item\em Pointer to the own transform. \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_9761ac166f3ec93197e8e409ba78fb4f}{
+void($\ast$ \hyperlink{structnsfft__plan_9761ac166f3ec93197e8e409ba78fb4f}{mv\_\-adjoint} )(void $\ast$)}
+\label{structnsfft__plan_9761ac166f3ec93197e8e409ba78fb4f}
+
+\begin{CompactList}\small\item\em Pointer to the own adjoint. \item\end{CompactList}\item 
+\hypertarget{structnsfft__plan_c5e6ad608ed1e1d39f17d1512703ddfe}{
+int \hyperlink{structnsfft__plan_c5e6ad608ed1e1d39f17d1512703ddfe}{d}}
+\label{structnsfft__plan_c5e6ad608ed1e1d39f17d1512703ddfe}
 
 \begin{CompactList}\small\item\em dimension, rank; d=2,3 \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o5}{
-int \hyperlink{structnsfft__plan_o5}{J}}
-\label{structnsfft__plan_o5}
+\hypertarget{structnsfft__plan_d2186982dfb4c6df290c29a47d8e3c52}{
+int \hyperlink{structnsfft__plan_d2186982dfb4c6df290c29a47d8e3c52}{J}}
+\label{structnsfft__plan_d2186982dfb4c6df290c29a47d8e3c52}
 
 \begin{CompactList}\small\item\em problem size, i.e., d=2: N\_\-total=(J+4) 2$^\wedge$(J+1) d=3: N\_\-total=2$^\wedge$J 6(2$^\wedge$((J+1)/2+1) -1)+2$^\wedge$(3(J/2+1)) \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o6}{
-int \hyperlink{structnsfft__plan_o6}{sigma}}
-\label{structnsfft__plan_o6}
+\hypertarget{structnsfft__plan_4b5a4d8e23b0309da9c51bdea4b7d954}{
+int \hyperlink{structnsfft__plan_4b5a4d8e23b0309da9c51bdea4b7d954}{sigma}}
+\label{structnsfft__plan_4b5a4d8e23b0309da9c51bdea4b7d954}
 
 \begin{CompactList}\small\item\em oversampling-factor \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o7}{
-unsigned \hyperlink{structnsfft__plan_o7}{flags}}
-\label{structnsfft__plan_o7}
+\hypertarget{structnsfft__plan_5fcea2cbb16bfdfc4a5a3f5142db3281}{
+unsigned \hyperlink{structnsfft__plan_5fcea2cbb16bfdfc4a5a3f5142db3281}{flags}}
+\label{structnsfft__plan_5fcea2cbb16bfdfc4a5a3f5142db3281}
 
 \begin{CompactList}\small\item\em flags for precomputation, malloc \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o8}{
-int $\ast$ \hyperlink{structnsfft__plan_o8}{index\_\-sparse\_\-to\_\-full}}
-\label{structnsfft__plan_o8}
+\hypertarget{structnsfft__plan_9112356adf28d6c7f6c5d57354b8fa55}{
+int $\ast$ \hyperlink{structnsfft__plan_9112356adf28d6c7f6c5d57354b8fa55}{index\_\-sparse\_\-to\_\-full}}
+\label{structnsfft__plan_9112356adf28d6c7f6c5d57354b8fa55}
 
 \begin{CompactList}\small\item\em index conversation, overflow for d=3, J=9! \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o9}{
-int \hyperlink{structnsfft__plan_o9}{r\_\-act\_\-nfft\_\-plan}}
-\label{structnsfft__plan_o9}
+\hypertarget{structnsfft__plan_0a1b5e59c9ff83bc7b2d2894f96edd23}{
+int \hyperlink{structnsfft__plan_0a1b5e59c9ff83bc7b2d2894f96edd23}{r\_\-act\_\-nfft\_\-plan}}
+\label{structnsfft__plan_0a1b5e59c9ff83bc7b2d2894f96edd23}
 
 \begin{CompactList}\small\item\em index of current nfft block \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o10}{
-\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o10}{act\_\-nfft\_\-plan}}
-\label{structnsfft__plan_o10}
+\hypertarget{structnsfft__plan_9a3f23953542f9909597f559a546422f}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_9a3f23953542f9909597f559a546422f}{act\_\-nfft\_\-plan}}
+\label{structnsfft__plan_9a3f23953542f9909597f559a546422f}
 
 \begin{CompactList}\small\item\em current nfft block \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o11}{
-\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o11}{center\_\-nfft\_\-plan}}
-\label{structnsfft__plan_o11}
+\hypertarget{structnsfft__plan_0d68f66b8d41342a0b6e820ee2fffb3e}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_0d68f66b8d41342a0b6e820ee2fffb3e}{center\_\-nfft\_\-plan}}
+\label{structnsfft__plan_0d68f66b8d41342a0b6e820ee2fffb3e}
 
 \begin{CompactList}\small\item\em central nfft block \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o12}{
-fftw\_\-plan $\ast$ \hyperlink{structnsfft__plan_o12}{set\_\-fftw\_\-plan1}}
-\label{structnsfft__plan_o12}
+\hypertarget{structnsfft__plan_193fcc93df1cf4f9d54c8c35a761aee3}{
+fftw\_\-plan $\ast$ \hyperlink{structnsfft__plan_193fcc93df1cf4f9d54c8c35a761aee3}{set\_\-fftw\_\-plan1}}
+\label{structnsfft__plan_193fcc93df1cf4f9d54c8c35a761aee3}
 
 \begin{CompactList}\small\item\em fftw plan for the nfft blocks \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o13}{
-fftw\_\-plan $\ast$ \hyperlink{structnsfft__plan_o13}{set\_\-fftw\_\-plan2}}
-\label{structnsfft__plan_o13}
+\hypertarget{structnsfft__plan_cda0a6c6986d756bdf9ac54df70ba8cd}{
+fftw\_\-plan $\ast$ \hyperlink{structnsfft__plan_cda0a6c6986d756bdf9ac54df70ba8cd}{set\_\-fftw\_\-plan2}}
+\label{structnsfft__plan_cda0a6c6986d756bdf9ac54df70ba8cd}
 
 \begin{CompactList}\small\item\em fftw plan for the nfft blocks \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o14}{
-\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o14}{set\_\-nfft\_\-plan\_\-1d}}
-\label{structnsfft__plan_o14}
+\hypertarget{structnsfft__plan_ca7c2bc3da4c17412a72471576b76bcc}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_ca7c2bc3da4c17412a72471576b76bcc}{set\_\-nfft\_\-plan\_\-1d}}
+\label{structnsfft__plan_ca7c2bc3da4c17412a72471576b76bcc}
 
 \begin{CompactList}\small\item\em nfft plans for short nffts \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o15}{
-\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_o15}{set\_\-nfft\_\-plan\_\-2d}}
-\label{structnsfft__plan_o15}
+\hypertarget{structnsfft__plan_3f4e3d8adb31adbef7a3579e42311a3b}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} $\ast$ \hyperlink{structnsfft__plan_3f4e3d8adb31adbef7a3579e42311a3b}{set\_\-nfft\_\-plan\_\-2d}}
+\label{structnsfft__plan_3f4e3d8adb31adbef7a3579e42311a3b}
 
 \begin{CompactList}\small\item\em nfft plans for short nffts \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o16}{
-double $\ast$ \hyperlink{structnsfft__plan_o16}{x\_\-transposed}}
-\label{structnsfft__plan_o16}
+\hypertarget{structnsfft__plan_ca6c9880cde07f3bc26dd7666c09a9d6}{
+double $\ast$ \hyperlink{structnsfft__plan_ca6c9880cde07f3bc26dd7666c09a9d6}{x\_\-transposed}}
+\label{structnsfft__plan_ca6c9880cde07f3bc26dd7666c09a9d6}
 
 \begin{CompactList}\small\item\em coordinate exchanged nodes, d=2 \item\end{CompactList}\item 
-\hypertarget{structnsfft__plan_o17}{
-double $\ast$ {\bf x\_\-102}}
-\label{structnsfft__plan_o17}
+\hypertarget{structnsfft__plan_56345708a95cbcd3ee2ebf472607f274}{
+double $\ast$ \hyperlink{structnsfft__plan_56345708a95cbcd3ee2ebf472607f274}{x\_\-102}}
+\label{structnsfft__plan_56345708a95cbcd3ee2ebf472607f274}
 
 \item 
-\hypertarget{structnsfft__plan_o18}{
-double $\ast$ {\bf x\_\-201}}
-\label{structnsfft__plan_o18}
+\hypertarget{structnsfft__plan_d47d5d52d2abf71be638f1b6859c3080}{
+double $\ast$ \hyperlink{structnsfft__plan_d47d5d52d2abf71be638f1b6859c3080}{x\_\-201}}
+\label{structnsfft__plan_d47d5d52d2abf71be638f1b6859c3080}
 
 \item 
-\hypertarget{structnsfft__plan_o19}{
-double $\ast$ {\bf x\_\-120}}
-\label{structnsfft__plan_o19}
+\hypertarget{structnsfft__plan_b67c4a556040bc7699980cf02bf6c8a7}{
+double $\ast$ \hyperlink{structnsfft__plan_b67c4a556040bc7699980cf02bf6c8a7}{x\_\-120}}
+\label{structnsfft__plan_b67c4a556040bc7699980cf02bf6c8a7}
 
 \item 
-\hypertarget{structnsfft__plan_o20}{
-double $\ast$ \hyperlink{structnsfft__plan_o20}{x\_\-021}}
-\label{structnsfft__plan_o20}
+\hypertarget{structnsfft__plan_ee5ad936bb790f00bf0797c94e185549}{
+double $\ast$ \hyperlink{structnsfft__plan_ee5ad936bb790f00bf0797c94e185549}{x\_\-021}}
+\label{structnsfft__plan_ee5ad936bb790f00bf0797c94e185549}
 
 \begin{CompactList}\small\item\em coordinate exchanged nodes, d=3 \item\end{CompactList}\end{CompactItemize}
 
@@ -120,9 +130,7 @@ double $\ast$ \hyperlink{structnsfft__plan_o20}{x\_\-021}}
 \subsection{Detailed Description}
 Structure for a NFFT plan. 
 
-
-
-Definition at line 1171 of file nfft3.h.
+Definition at line 1309 of file nfft3.h.
 
 The documentation for this struct was generated from the following file:\begin{CompactItemize}
 \item 

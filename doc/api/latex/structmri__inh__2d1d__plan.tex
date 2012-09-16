@@ -10,49 +10,59 @@ The structure for the transform plan.
 \subsection*{Data Fields}
 \begin{CompactItemize}
 \item 
-\hypertarget{structmri__inh__2d1d__plan_o0}{
-int \hyperlink{structmri__inh__2d1d__plan_o0}{N\_\-total}}
-\label{structmri__inh__2d1d__plan_o0}
+\hypertarget{structmri__inh__2d1d__plan_25e2abd348fabee511856c61a7074c5b}{
+int \hyperlink{structmri__inh__2d1d__plan_25e2abd348fabee511856c61a7074c5b}{N\_\-total}}
+\label{structmri__inh__2d1d__plan_25e2abd348fabee511856c61a7074c5b}
 
 \begin{CompactList}\small\item\em Total number of Fourier $\backslash$ coefficients. \item\end{CompactList}\item 
-\hypertarget{structmri__inh__2d1d__plan_o1}{
-int \hyperlink{structmri__inh__2d1d__plan_o1}{M\_\-total}}
-\label{structmri__inh__2d1d__plan_o1}
+\hypertarget{structmri__inh__2d1d__plan_45f3f352231150e660ca1b8819d58d09}{
+int \hyperlink{structmri__inh__2d1d__plan_45f3f352231150e660ca1b8819d58d09}{M\_\-total}}
+\label{structmri__inh__2d1d__plan_45f3f352231150e660ca1b8819d58d09}
 
 \begin{CompactList}\small\item\em Total number of samples. \item\end{CompactList}\item 
-\hypertarget{structmri__inh__2d1d__plan_o2}{
-double complex $\ast$ \hyperlink{structmri__inh__2d1d__plan_o2}{f\_\-hat}}
-\label{structmri__inh__2d1d__plan_o2}
+\hypertarget{structmri__inh__2d1d__plan_d34c95b6390628c8fcd223b77e37e5bf}{
+fftw\_\-complex $\ast$ \hyperlink{structmri__inh__2d1d__plan_d34c95b6390628c8fcd223b77e37e5bf}{f\_\-hat}}
+\label{structmri__inh__2d1d__plan_d34c95b6390628c8fcd223b77e37e5bf}
 
 \begin{CompactList}\small\item\em Vector of Fourier coefficients, $\backslash$ size is N\_\-total float\_\-types. \item\end{CompactList}\item 
-\hypertarget{structmri__inh__2d1d__plan_o3}{
-double complex $\ast$ \hyperlink{structmri__inh__2d1d__plan_o3}{f}}
-\label{structmri__inh__2d1d__plan_o3}
+\hypertarget{structmri__inh__2d1d__plan_985f125ad6a94361939572f8323872a0}{
+fftw\_\-complex $\ast$ \hyperlink{structmri__inh__2d1d__plan_985f125ad6a94361939572f8323872a0}{f}}
+\label{structmri__inh__2d1d__plan_985f125ad6a94361939572f8323872a0}
 
 \begin{CompactList}\small\item\em Vector of samples, $\backslash$ size is M\_\-total float types. \item\end{CompactList}\item 
-\hypertarget{structmri__inh__2d1d__plan_o4}{
-\hyperlink{structnfft__plan}{nfft\_\-plan} {\bf plan}}
-\label{structmri__inh__2d1d__plan_o4}
+\hypertarget{structmri__inh__2d1d__plan_4cad33b38f4d5bc54b8d25d90913ab44}{
+void($\ast$ \hyperlink{structmri__inh__2d1d__plan_4cad33b38f4d5bc54b8d25d90913ab44}{mv\_\-trafo} )(void $\ast$)}
+\label{structmri__inh__2d1d__plan_4cad33b38f4d5bc54b8d25d90913ab44}
+
+\begin{CompactList}\small\item\em Pointer to the own transform. \item\end{CompactList}\item 
+\hypertarget{structmri__inh__2d1d__plan_fe427225384a2d226c3cb85cf9aa4042}{
+void($\ast$ \hyperlink{structmri__inh__2d1d__plan_fe427225384a2d226c3cb85cf9aa4042}{mv\_\-adjoint} )(void $\ast$)}
+\label{structmri__inh__2d1d__plan_fe427225384a2d226c3cb85cf9aa4042}
+
+\begin{CompactList}\small\item\em Pointer to the own adjoint. \item\end{CompactList}\item 
+\hypertarget{structmri__inh__2d1d__plan_c911bea7fd2e5b81f3f7a917842d6bc7}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} \hyperlink{structmri__inh__2d1d__plan_c911bea7fd2e5b81f3f7a917842d6bc7}{plan}}
+\label{structmri__inh__2d1d__plan_c911bea7fd2e5b81f3f7a917842d6bc7}
 
 \item 
-\hypertarget{structmri__inh__2d1d__plan_o5}{
-int {\bf N3}}
-\label{structmri__inh__2d1d__plan_o5}
+\hypertarget{structmri__inh__2d1d__plan_9776bd2e03278b7cbdef2b4dce19dbc1}{
+int \hyperlink{structmri__inh__2d1d__plan_9776bd2e03278b7cbdef2b4dce19dbc1}{N3}}
+\label{structmri__inh__2d1d__plan_9776bd2e03278b7cbdef2b4dce19dbc1}
 
 \item 
-\hypertarget{structmri__inh__2d1d__plan_o6}{
-double {\bf sigma3}}
-\label{structmri__inh__2d1d__plan_o6}
+\hypertarget{structmri__inh__2d1d__plan_94c6285d9cfeb7e358dd4990245639e7}{
+double \hyperlink{structmri__inh__2d1d__plan_94c6285d9cfeb7e358dd4990245639e7}{sigma3}}
+\label{structmri__inh__2d1d__plan_94c6285d9cfeb7e358dd4990245639e7}
 
 \item 
-\hypertarget{structmri__inh__2d1d__plan_o7}{
-double $\ast$ {\bf t}}
-\label{structmri__inh__2d1d__plan_o7}
+\hypertarget{structmri__inh__2d1d__plan_e80cae06faca26a12bbbb896d5d7c527}{
+double $\ast$ \hyperlink{structmri__inh__2d1d__plan_e80cae06faca26a12bbbb896d5d7c527}{t}}
+\label{structmri__inh__2d1d__plan_e80cae06faca26a12bbbb896d5d7c527}
 
 \item 
-\hypertarget{structmri__inh__2d1d__plan_o8}{
-double $\ast$ {\bf w}}
-\label{structmri__inh__2d1d__plan_o8}
+\hypertarget{structmri__inh__2d1d__plan_22ed3402646ded705084299c84d97a62}{
+double $\ast$ \hyperlink{structmri__inh__2d1d__plan_22ed3402646ded705084299c84d97a62}{w}}
+\label{structmri__inh__2d1d__plan_22ed3402646ded705084299c84d97a62}
 
 \end{CompactItemize}
 
@@ -60,9 +70,7 @@ double $\ast$ {\bf w}}
 \subsection{Detailed Description}
 The structure for the transform plan. 
 
-
-
-Definition at line 1310 of file nfft3.h.
+Definition at line 1452 of file nfft3.h.
 
 The documentation for this struct was generated from the following file:\begin{CompactItemize}
 \item 

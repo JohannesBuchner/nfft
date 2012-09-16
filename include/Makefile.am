@@ -1,2 +1,3 @@
-pkginclude_HEADERS = nfft3.h options.h util.h window_defines.h
+pkginclude_HEADERS = nfft3.h util.h nfftconf.h
 
+EXTRA_DIST = infft.h

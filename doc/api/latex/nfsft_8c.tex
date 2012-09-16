@@ -2,43 +2,66 @@
 \section{nfsft.c File Reference}
 \label{nfsft_8c}\index{nfsft.c@{nfsft.c}}
 }
-Implementation file for the NFSFT module. 
-
 {\tt \#include $<$math.h$>$}\par
 {\tt \#include $<$stdlib.h$>$}\par
 {\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$complex.h$>$}\par
+{\tt \#include \char`\"{}util.h\char`\"{}}\par
 {\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
+{\tt \#include \char`\"{}infft.h\char`\"{}}\par
 {\tt \#include \char`\"{}legendre.h\char`\"{}}\par
 {\tt \#include \char`\"{}api.h\char`\"{}}\par
-{\tt \#include \char`\"{}util.h\char`\"{}}\par
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\#define \hyperlink{group__nfsft_ga46}{NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF}~6
+\#define \hyperlink{group__nfsft_g206c4faaf800b49dcb14e26148fa9ac6}{NFSFT\_\-DEFAULT\_\-NFFT\_\-CUTOFF}~6
 \begin{CompactList}\small\item\em The default NFFT cutoff parameter. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga47}{NFSFT\_\-DEFAULT\_\-THRESHOLD}~1000
+\#define \hyperlink{group__nfsft_gb7d25b80464387893b3c773f92e5c4f3}{NFSFT\_\-DEFAULT\_\-THRESHOLD}~1000
 \begin{CompactList}\small\item\em The default threshold for the FPT. \item\end{CompactList}\item 
-\#define \hyperlink{group__nfsft_ga48}{NFSFT\_\-BREAK\_\-EVEN}~5
+\#define \hyperlink{group__nfsft_g54b840898df97bcd14af4cb004650ed3}{NFSFT\_\-BREAK\_\-EVEN}~5
 \begin{CompactList}\small\item\em The break-even bandwidth $N \in \mathbb{N}_0$. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-void \hyperlink{group__nfsft_ga23}{c2e} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+static void \hyperlink{group__nfsft_g47209b28b6561fca7349ed8afa5f9656}{c2e} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
 \begin{CompactList}\small\item\em Converts coefficients $\left(b_k^n\right)_{k=0}^M$ with $M \in \mathbb{N}_0$, $-M \le n \le M$ from a linear combination of Chebyshev polynomials \[ f(\cos\vartheta) = \sum_{k=0}^{2\lfloor\frac{M}{2}\rfloor} a_k (\sin\vartheta)^{n\;\mathrm{mod}\;2} T_k(\cos\vartheta) \] to coefficients $\left(c_k^n\right)_{k=0}^M$ matching the representation by complex exponentials \[ f(\cos\vartheta) = \sum_{k=-M}^{M} c_k \mathrm{e}^{\mathrm{i}k\vartheta} \] for each order $n=-M,\ldots,M$. \item\end{CompactList}\item 
-void \hyperlink{group__nfsft_ga24}{c2e\_\-transposed} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
-\begin{CompactList}\small\item\em Transposed version of the function \hyperlink{group__nfsft_ga23}{c2e}. \item\end{CompactList}\end{CompactItemize}
+static void \hyperlink{group__nfsft_g0e033457136bc0ecb18bb57d3ee5aa37}{c2e\_\-transposed} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Transposed version of the function \hyperlink{group__nfsft_g47209b28b6561fca7349ed8afa5f9656}{c2e}. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_g65cda3f4a3edc5eb39c697cf34b1f0b9}{nfsft\_\-init} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ge7dca3e41afdb39e8c518af414878c18}{nfsft\_\-init\_\-advanced} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_g60466ed37643b6b7b7c1638056604d2b}{nfsft\_\-init\_\-guru} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsft\_\-flags, unsigned int nfft\_\-flags, int nfft\_\-cutoff)
+\begin{CompactList}\small\item\em Creates a transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_gbe87aeea1f7cfef9ae8febb16d702f3b}{nfsft\_\-precompute} (int N, double kappa, unsigned int nfsft\_\-flags, unsigned int fpt\_\-flags)
+\begin{CompactList}\small\item\em Performes precomputation up to the next power of two with respect to a given bandwidth $N \in \mathbb{N}_2$. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_g3b69bca6c76a63877534f5a9781bf285}{nfsft\_\-forget} (void)
+\begin{CompactList}\small\item\em Forgets all precomputed data. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_ga63e193a27d84059742ff25ff81e2ed1}{nfsft\_\-finalize} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_gc1bcdf551a0bf1b4a5890b87e583caf8}{ndsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes a direct NDSFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_g88c7be3ead1c726a1d5b8b903952c527}{ndsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes a direct adjoint NDSFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_g5796fc68c432d46dfcab7abd8c56ee22}{nfsft\_\-trafo} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes a NFSFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsft_g813bb48d404c7286310733c99a81a169}{nfsft\_\-adjoint} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Executes an adjoint NFSFT, i.e. \item\end{CompactList}\item 
+\hypertarget{group__nfsft_g7a7fa6722d6ba3aade4c69299af86e4e}{
+void \hyperlink{group__nfsft_g7a7fa6722d6ba3aade4c69299af86e4e}{nfsft\_\-precompute\_\-x} (\hyperlink{structnfsft__plan}{nfsft\_\-plan} $\ast$plan)}
+\label{group__nfsft_g7a7fa6722d6ba3aade4c69299af86e4e}
+
+\end{CompactItemize}
 \subsection*{Variables}
 \begin{CompactItemize}
 \item 
-static struct \hyperlink{structnfsft__wisdom}{nfsft\_\-wisdom} \hyperlink{group__nfsft_ga0}{wisdom} = \{false,0U\}
+static struct \hyperlink{structnfsft__wisdom}{nfsft\_\-wisdom} \hyperlink{group__nfsft_g0af81d81e1b436949ddc46dbd27346e5}{wisdom} = \{false,0U,-1,-1,0,0,0,0,0\}
 \begin{CompactList}\small\item\em The global wisdom structure for precomputed data. \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Detailed Description}
-Implementation file for the NFSFT module. 
-
-\begin{Desc}
-\item[Author:]Jens Keiner\end{Desc}
+Implementation file for the NFSFT module \begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
 
 
 Definition in file \hyperlink{nfsft_8c-source}{nfsft.c}.

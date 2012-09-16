@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: flags.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 /*! \file flags.c
  *
  * \brief Testing the nfft.
@@ -10,9 +30,10 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include <complex.h>
+
 #include "util.h"
 #include "nfft3.h"
-#include "options.h"
 
 #ifdef GAUSSIAN
   unsigned test_fg=1;
@@ -48,7 +69,7 @@ void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
 {
   int r, NN[d], nn[d];
   double t_ndft, t, e;
-  double complex *swapndft;
+  double _Complex *swapndft;
 
   nfft_plan p;
   nfft_plan p_pre_phi_hut;
@@ -68,7 +89,7 @@ void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
 
   /** output vector ndft */
   if(test_ndft)
-    swapndft=(double complex*)fftw_malloc(M*sizeof(double complex));
+    swapndft=(double _Complex*)nfft_malloc(M*sizeof(double _Complex));
 
   nfft_init_guru(&p, d, NN, M, nn, m,
                  MALLOC_X| MALLOC_F_HAT| MALLOC_F|
@@ -118,9 +139,9 @@ void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
   if(test_ndft)
     {
       NFFT_SWAP_complex(p.f,swapndft);
-      
+
       t_ndft=0;
-      r=0; 
+      r=0;
       while(t_ndft<0.01)
         {
           r++;
@@ -193,14 +214,14 @@ void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
   nfft_finalize(&p);
 
   if(test_ndft)
-    fftw_free(swapndft);
+    nfft_free(swapndft);
 }
 
 void accuracy_pre_lin_psi(int d, int N, int M, int n, int m, int K)
 {
   int r, NN[d], nn[d];
   double e;
-  double complex *swapndft;
+  double _Complex *swapndft;
 
   nfft_plan p;
 
@@ -211,7 +232,7 @@ void accuracy_pre_lin_psi(int d, int N, int M, int n, int m, int K)
     }
 
   /** output vector ndft */
-  swapndft=(double complex*)fftw_malloc(M*sizeof(double complex));
+  swapndft=(double _Complex*)nfft_malloc(M*sizeof(double _Complex));
 
   nfft_init_guru(&p, d, NN, M, nn, m,
                  MALLOC_X| MALLOC_F_HAT| MALLOC_F|
@@ -220,9 +241,9 @@ void accuracy_pre_lin_psi(int d, int N, int M, int n, int m, int K)
 		 FFTW_MEASURE| FFTW_DESTROY_INPUT);
 
   /** realloc psi */
-  fftw_free(p.psi);
+  nfft_free(p.psi);
   p.K=K;
-  p.psi=(double*) fftw_malloc((p.K+1)*p.d*sizeof(double));
+  p.psi=(double*) nfft_malloc((p.K+1)*p.d*sizeof(double));
 
   /** precomputation can be done before the nodes are initialised */
   nfft_precompute_one_psi(&p);
@@ -249,7 +270,7 @@ void accuracy_pre_lin_psi(int d, int N, int M, int n, int m, int K)
 
   /** finalise */
   nfft_finalize(&p);
-  fftw_free(swapndft);
+  nfft_free(swapndft);
 }
 
 
@@ -265,7 +286,7 @@ int main(int argc,char **argv)
 
   if((test==0)&&(atoi(argv[1])<2))
     {
-      fprintf(stderr,"MEASURE_TIME in options.h not set\n");
+      fprintf(stderr,"MEASURE_TIME in util.h not set\n");
       return -1;
     }
 
@@ -316,6 +337,6 @@ int main(int argc,char **argv)
 
       printf("\n");
     }
-      
+
   return 1;
 }

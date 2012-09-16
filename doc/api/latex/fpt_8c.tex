@@ -2,338 +2,320 @@
 \section{fpt.c File Reference}
 \label{fpt_8c}\index{fpt.c@{fpt.c}}
 }
-Implementation file for the FPT module. 
-
-{\tt \#include $<$math.h$>$}\par
-{\tt \#include $<$string.h$>$}\par
+{\tt \#include \char`\"{}config.h\char`\"{}}\par
 {\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
 {\tt \#include $<$stdbool.h$>$}\par
+{\tt \#include $<$math.h$>$}\par
+{\tt \#include $<$complex.h$>$}\par
 {\tt \#include \char`\"{}nfft3.h\char`\"{}}\par
 {\tt \#include \char`\"{}util.h\char`\"{}}\par
+{\tt \#include \char`\"{}infft.h\char`\"{}}\par
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct \hyperlink{structfpt__step}{fpt\_\-step}
+\begin{CompactList}\small\item\em Holds data for a single multiplication step in the cascade summation. \item\end{CompactList}\item 
+struct \hyperlink{structfpt__data}{fpt\_\-data}
+\begin{CompactList}\small\item\em Holds data for a single cascade summation. \item\end{CompactList}\item 
+struct \hyperlink{structfpt__set__s}{fpt\_\-set\_\-s}
+\begin{CompactList}\small\item\em Holds data for a set of cascade summations. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Defines}
 \begin{CompactItemize}
 \item 
-\hypertarget{fpt_8c_a0}{
-\#define \hyperlink{fpt_8c_a0}{K\_\-START\_\-TILDE}(x, y)~(NFFT\_\-MAX(NFFT\_\-MIN(x,y-2),0))}
-\label{fpt_8c_a0}
+\hypertarget{fpt_8c_58f899926cc6e95ea54dd68d131979b8}{
+\#define \hyperlink{fpt_8c_58f899926cc6e95ea54dd68d131979b8}{K\_\-START\_\-TILDE}(x, y)~(NFFT\_\-MAX(NFFT\_\-MIN(x,y-2),0))}
+\label{fpt_8c_58f899926cc6e95ea54dd68d131979b8}
 
-\begin{CompactList}\small\item\em Computes the minimum degree at the top of a cascade. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a1}{
-\#define \hyperlink{fpt_8c_a1}{K\_\-END\_\-TILDE}(x, y)~NFFT\_\-MIN(x,y-1)}
-\label{fpt_8c_a1}
+\begin{CompactList}\small\item\em Minimum degree at top of a cascade. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_769119c8ae45f2a30a62ba802d83139f}{
+\#define \hyperlink{fpt_8c_769119c8ae45f2a30a62ba802d83139f}{K\_\-END\_\-TILDE}(x, y)~NFFT\_\-MIN(x,y-1)}
+\label{fpt_8c_769119c8ae45f2a30a62ba802d83139f}
 
-\begin{CompactList}\small\item\em Computes the maximum degree at the top of a cascade. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a2}{
-\#define \hyperlink{fpt_8c_a2}{FIRST\_\-L}(x, y)~((int)floor((x)/(double)y))}
-\label{fpt_8c_a2}
+\begin{CompactList}\small\item\em Maximum degree at top of a cascade. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_c81f7eac1a01b06e91817857f47b9804}{
+\#define \hyperlink{fpt_8c_c81f7eac1a01b06e91817857f47b9804}{FIRST\_\-L}(x, y)~(LRINT(floor((x)/(double)y)))}
+\label{fpt_8c_c81f7eac1a01b06e91817857f47b9804}
 
-\begin{CompactList}\small\item\em Computes the index of the first block of four functions in a cascade level. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a3}{
-\#define \hyperlink{fpt_8c_a3}{LAST\_\-L}(x, y)~((int)ceil(((x)+1)/(double)y)-1)}
-\label{fpt_8c_a3}
+\begin{CompactList}\small\item\em Index of first block of four functions at level. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_c9f7e1529d635e3357d1e081ddf7e349}{
+\#define \hyperlink{fpt_8c_c9f7e1529d635e3357d1e081ddf7e349}{LAST\_\-L}(x, y)~(LRINT(ceil(((x)+1)/(double)y))-1)}
+\label{fpt_8c_c9f7e1529d635e3357d1e081ddf7e349}
 
-\begin{CompactList}\small\item\em Computes the index of the last block of four functions in a cascade level. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a4}{
-\#define {\bf N\_\-TILDE}(y)~(y-1)}
-\label{fpt_8c_a4}
-
-\item 
-\hypertarget{fpt_8c_a5}{
-\#define {\bf IS\_\-SYMMETRIC}(x, y, z)~(x $>$= ((y-1.0)/z))}
-\label{fpt_8c_a5}
+\begin{CompactList}\small\item\em Index of last block of four functions at level. \item\end{CompactList}\item 
+\hypertarget{fpt_8c_3861f1554af7a46ab4788955bff82e16}{
+\#define \hyperlink{fpt_8c_3861f1554af7a46ab4788955bff82e16}{N\_\-TILDE}(y)~(y-1)}
+\label{fpt_8c_3861f1554af7a46ab4788955bff82e16}
 
 \item 
-\hypertarget{fpt_8c_a6}{
-\#define {\bf FPT\_\-BREAK\_\-EVEN}~4}
-\label{fpt_8c_a6}
+\hypertarget{fpt_8c_2a3d2e8d45a563c618a6c2b6a292cc64}{
+\#define \hyperlink{fpt_8c_2a3d2e8d45a563c618a6c2b6a292cc64}{IS\_\-SYMMETRIC}(x, y, z)~(x $>$= ((y-1.0)/z))}
+\label{fpt_8c_2a3d2e8d45a563c618a6c2b6a292cc64}
 
 \item 
-\#define {\bf ABUVXPWY\_\-SYMMETRIC}(NAME, S1, S2)
-\item 
-\#define {\bf ABUVXPWY\_\-SYMMETRIC\_\-1}(NAME, S1)
-\item 
-\#define {\bf ABUVXPWY\_\-SYMMETRIC\_\-2}(NAME, S1)
-\item 
-\hypertarget{fpt_8c_a10}{
-\#define {\bf AUVXPWY\_\-SYMMETRIC}(NAME, S1, S2)}
-\label{fpt_8c_a10}
+\hypertarget{fpt_8c_81f8de5e3b3597d325e47d05d9f1213c}{
+\#define \hyperlink{fpt_8c_81f8de5e3b3597d325e47d05d9f1213c}{FPT\_\-BREAK\_\-EVEN}~4}
+\label{fpt_8c_81f8de5e3b3597d325e47d05d9f1213c}
 
 \item 
-\hypertarget{fpt_8c_a11}{
-\#define {\bf FPT\_\-DO\_\-STEP}(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)}
-\label{fpt_8c_a11}
+\#define \hyperlink{fpt_8c_0afca80d182fb1abd524bc0a1378dc25}{ABUVXPWY\_\-SYMMETRIC}(NAME, S1, S2)
+\item 
+\#define \hyperlink{fpt_8c_18db89dcff6fae9720e01a0be56fc8f7}{ABUVXPWY\_\-SYMMETRIC\_\-1}(NAME, S1)
+\item 
+\#define \hyperlink{fpt_8c_d301783a6575cd0fc132ebaa12d3cf60}{ABUVXPWY\_\-SYMMETRIC\_\-2}(NAME, S1)
+\item 
+\hypertarget{fpt_8c_9fe176f7a67aa76e7d5c101ff5aefe68}{
+\#define \hyperlink{fpt_8c_9fe176f7a67aa76e7d5c101ff5aefe68}{FPT\_\-DO\_\-STEP}(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)}
+\label{fpt_8c_9fe176f7a67aa76e7d5c101ff5aefe68}
 
 \item 
-\#define \hyperlink{fpt_8c_a12}{FPT\_\-DO\_\-STEP\_\-TRANSPOSED}(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\end{CompactItemize}
-\subsection*{Typedefs}
-\begin{CompactItemize}
-\item 
-\hypertarget{fpt_8c_a13}{
-typedef \hyperlink{structfpt__step__}{fpt\_\-step\_\-} \hyperlink{fpt_8c_a13}{fpt\_\-step}}
-\label{fpt_8c_a13}
-
-\begin{CompactList}\small\item\em Holds data for a single multiplication step in the cascade summation. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a14}{
-typedef \hyperlink{structfpt__data__}{fpt\_\-data\_\-} \hyperlink{fpt_8c_a14}{fpt\_\-data}}
-\label{fpt_8c_a14}
-
-\begin{CompactList}\small\item\em Holds data for a single cascade summation. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a15}{
-typedef \hyperlink{structfpt__set__s__}{fpt\_\-set\_\-s\_\-} \hyperlink{fpt_8c_a15}{fpt\_\-set\_\-s}}
-\label{fpt_8c_a15}
-
-\begin{CompactList}\small\item\em Holds data for a set of cascade summations. \item\end{CompactList}\end{CompactItemize}
+\#define \hyperlink{fpt_8c_8cb478c4a27a921310d57427c1e94aa4}{FPT\_\-DO\_\-STEP\_\-TRANSPOSED}(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)
+\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-\hypertarget{fpt_8c_a16}{
-void {\bf abuvxpwy} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a16}
+\hypertarget{fpt_8c_736cbc7c2da6a04952583fd49e25e4e3}{
+static void \hyperlink{fpt_8c_736cbc7c2da6a04952583fd49e25e4e3}{abuvxpwy} (double a, double b, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_736cbc7c2da6a04952583fd49e25e4e3}
 
 \item 
-\hypertarget{fpt_8c_a17}{
-void {\bf abuvxpwy\_\-symmetric1} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a17}
+\hypertarget{fpt_8c_ad216e28422c530c4ee4fbf95fd33e1b}{
+static void \hyperlink{fpt_8c_ad216e28422c530c4ee4fbf95fd33e1b}{abuvxpwy\_\-symmetric1} (double a, double b, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_ad216e28422c530c4ee4fbf95fd33e1b}
 
 \item 
-\hypertarget{fpt_8c_a18}{
-void {\bf abuvxpwy\_\-symmetric2} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a18}
+\hypertarget{fpt_8c_83f9840e24ce540950b72434c661fde0}{
+static void \hyperlink{fpt_8c_83f9840e24ce540950b72434c661fde0}{abuvxpwy\_\-symmetric2} (double a, double b, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_83f9840e24ce540950b72434c661fde0}
 
 \item 
-\hypertarget{fpt_8c_a19}{
-void {\bf abuvxpwy\_\-symmetric1\_\-1} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a19}
+\hypertarget{fpt_8c_3b79087d7b531639c88b9e63663d0001}{
+static void \hyperlink{fpt_8c_3b79087d7b531639c88b9e63663d0001}{abuvxpwy\_\-symmetric1\_\-1} (double a, double b, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, int n, double $\ast$xx)}
+\label{fpt_8c_3b79087d7b531639c88b9e63663d0001}
 
 \item 
-\hypertarget{fpt_8c_a20}{
-void {\bf abuvxpwy\_\-symmetric1\_\-2} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a20}
+\hypertarget{fpt_8c_8144ba83b6da484aef595c3d9dacc138}{
+static void \hyperlink{fpt_8c_8144ba83b6da484aef595c3d9dacc138}{abuvxpwy\_\-symmetric1\_\-2} (double a, double b, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, int n, double $\ast$xx)}
+\label{fpt_8c_8144ba83b6da484aef595c3d9dacc138}
 
 \item 
-\hypertarget{fpt_8c_a21}{
-void {\bf abuvxpwy\_\-symmetric2\_\-1} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a21}
+\hypertarget{fpt_8c_b0f8ee56f80660ec5e0f203389d736cc}{
+static void \hyperlink{fpt_8c_b0f8ee56f80660ec5e0f203389d736cc}{abuvxpwy\_\-symmetric2\_\-1} (double a, double b, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double \_\-Complex $\ast$y, double $\ast$w, int n, double $\ast$xx)}
+\label{fpt_8c_b0f8ee56f80660ec5e0f203389d736cc}
 
 \item 
-\hypertarget{fpt_8c_a22}{
-void {\bf abuvxpwy\_\-symmetric2\_\-2} (double a, double b, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a22}
+\hypertarget{fpt_8c_0ef6c4c0b701e19dc21041d62882f375}{
+static void \hyperlink{fpt_8c_0ef6c4c0b701e19dc21041d62882f375}{abuvxpwy\_\-symmetric2\_\-2} (double a, double b, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double \_\-Complex $\ast$y, double $\ast$w, int n, double $\ast$xx)}
+\label{fpt_8c_0ef6c4c0b701e19dc21041d62882f375}
 
 \item 
-\hypertarget{fpt_8c_a23}{
-void {\bf auvxpwy} (double a, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a23}
+\hypertarget{fpt_8c_b1fe68d8531716c8a5e036baca7a182b}{
+static void \hyperlink{fpt_8c_b1fe68d8531716c8a5e036baca7a182b}{auvxpwy} (double a, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_b1fe68d8531716c8a5e036baca7a182b}
 
 \item 
-\hypertarget{fpt_8c_a24}{
-void {\bf auvxpwy\_\-symmetric} (double a, double complex $\ast$u, double complex $\ast$x, double $\ast$v, double complex $\ast$y, double $\ast$w, int n)}
-\label{fpt_8c_a24}
+\hypertarget{fpt_8c_fef4734728c0be3266b66352674602e6}{
+static void \hyperlink{fpt_8c_fef4734728c0be3266b66352674602e6}{auvxpwy\_\-symmetric} (double a, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, double $\ast$w, int n)}
+\label{fpt_8c_fef4734728c0be3266b66352674602e6}
 
 \item 
-\hypertarget{fpt_8c_a25}{
-void {\bf fpt\_\-do\_\-step} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a25}
+\hypertarget{fpt_8c_8c808df9f2681afd90495d0440773474}{
+static void \hyperlink{fpt_8c_8c808df9f2681afd90495d0440773474}{auvxpwy\_\-symmetric\_\-1} (double a, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, double $\ast$w, int n, double $\ast$xx)}
+\label{fpt_8c_8c808df9f2681afd90495d0440773474}
 
 \item 
-\hypertarget{fpt_8c_a26}{
-void \hyperlink{fpt_8c_a26}{fpt\_\-do\_\-step\_\-symmetric} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a26}
-
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a27}{
-void \hyperlink{fpt_8c_a27}{fpt\_\-do\_\-step\_\-symmetric\_\-u} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a27}
-
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a28}{
-void \hyperlink{fpt_8c_a28}{fpt\_\-do\_\-step\_\-symmetric\_\-l} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a28}
-
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a29}{
-void {\bf fpt\_\-do\_\-step\_\-transposed} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a29}
+\hypertarget{fpt_8c_b68e898834538d04a587fb3b47ca9e77}{
+static void \hyperlink{fpt_8c_b68e898834538d04a587fb3b47ca9e77}{auvxpwy\_\-symmetric\_\-2} (double a, double \_\-Complex $\ast$u, double \_\-Complex $\ast$x, double $\ast$v, double \_\-Complex $\ast$y, double $\ast$w, int n, double $\ast$xx)}
+\label{fpt_8c_b68e898834538d04a587fb3b47ca9e77}
 
 \item 
-\hypertarget{fpt_8c_a30}{
-void \hyperlink{fpt_8c_a30}{fpt\_\-do\_\-step\_\-transposed\_\-symmetric} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a30}
-
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a31}{
-void \hyperlink{fpt_8c_a31}{fpt\_\-do\_\-step\_\-transposed\_\-symmetric\_\-u} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a31}
-
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a32}{
-void \hyperlink{fpt_8c_a32}{fpt\_\-do\_\-step\_\-transposed\_\-symmetric\_\-l} (double complex $\ast$a, double complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double gamma, int tau, \hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{fpt_8c_a32}
-
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a33}{
-void \hyperlink{fpt_8c_a33}{eval\_\-clenshaw} (const double $\ast$x, double $\ast$y, int size, int k, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma)}
-\label{fpt_8c_a33}
-
-\begin{CompactList}\small\item\em Twice the length of the coefficient arrays. \item\end{CompactList}\item 
-\hypertarget{fpt_8c_a34}{
-int {\bf eval\_\-clenshaw\_\-thresh} (const double $\ast$x, double $\ast$y, int size, int k, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, const double threshold)}
-\label{fpt_8c_a34}
+\hypertarget{fpt_8c_6eb07ec910d75702e7407e7c33cf3817}{
+static void \hyperlink{fpt_8c_6eb07ec910d75702e7407e7c33cf3817}{fpt\_\-do\_\-step} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double g, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_6eb07ec910d75702e7407e7c33cf3817}
 
 \item 
-void \hyperlink{fpt_8c_a35}{eval\_\-sum\_\-clenshaw} (int N, int M, double complex $\ast$a, double $\ast$x, double complex $\ast$y, double complex $\ast$temp, double $\ast$alpha, double $\ast$beta, double $\ast$gamma, double lambda)
+\hypertarget{fpt_8c_37851bd35e077d1e38b83030e711640c}{
+static void \hyperlink{fpt_8c_37851bd35e077d1e38b83030e711640c}{fpt\_\-do\_\-step\_\-symmetric} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double g, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_37851bd35e077d1e38b83030e711640c}
+
+\item 
+\hypertarget{fpt_8c_d4cc7fcfaa539fb650f6d2bee240772a}{
+static void \hyperlink{fpt_8c_d4cc7fcfaa539fb650f6d2bee240772a}{fpt\_\-do\_\-step\_\-symmetric\_\-u} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double $\ast$x, double gamma, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_d4cc7fcfaa539fb650f6d2bee240772a}
+
+\item 
+\hypertarget{fpt_8c_e54901ed63002e54a3a030e4f0641b83}{
+static void \hyperlink{fpt_8c_e54901ed63002e54a3a030e4f0641b83}{fpt\_\-do\_\-step\_\-symmetric\_\-l} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double $\ast$x, double gamma, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_e54901ed63002e54a3a030e4f0641b83}
+
+\item 
+\hypertarget{fpt_8c_ef54b179ce562d67ede119727d18dfbf}{
+static void \hyperlink{fpt_8c_ef54b179ce562d67ede119727d18dfbf}{fpt\_\-do\_\-step\_\-t} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double g, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_ef54b179ce562d67ede119727d18dfbf}
+
+\item 
+\hypertarget{fpt_8c_672e9251669c82c40fab19a2c66bd04f}{
+static void \hyperlink{fpt_8c_672e9251669c82c40fab19a2c66bd04f}{fpt\_\-do\_\-step\_\-t\_\-symmetric} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$a21, double $\ast$a22, double g, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_672e9251669c82c40fab19a2c66bd04f}
+
+\item 
+\hypertarget{fpt_8c_4a2c8dcb444f9bb4b3b288a5e74ae604}{
+static void \hyperlink{fpt_8c_4a2c8dcb444f9bb4b3b288a5e74ae604}{fpt\_\-do\_\-step\_\-t\_\-symmetric\_\-u} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a11, double $\ast$a12, double $\ast$x, double gamma, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_4a2c8dcb444f9bb4b3b288a5e74ae604}
+
+\item 
+\hypertarget{fpt_8c_d3418e76e85c4fb31efa812256bb3f9c}{
+static void \hyperlink{fpt_8c_d3418e76e85c4fb31efa812256bb3f9c}{fpt\_\-do\_\-step\_\-t\_\-symmetric\_\-l} (double \_\-Complex $\ast$a, double \_\-Complex $\ast$b, double $\ast$a21, double $\ast$a22, double $\ast$x, double gamma, int tau, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{fpt_8c_d3418e76e85c4fb31efa812256bb3f9c}
+
+\item 
+\hypertarget{fpt_8c_0267c93911cfcf1e0f30c23cd58f8211}{
+static void \hyperlink{fpt_8c_0267c93911cfcf1e0f30c23cd58f8211}{eval\_\-clenshaw} (const double $\ast$x, double $\ast$y, int size, int k, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma)}
+\label{fpt_8c_0267c93911cfcf1e0f30c23cd58f8211}
+
+\item 
+\hypertarget{fpt_8c_c8f9ccbc5f3929afb1e9ca1a4785639f}{
+static void \hyperlink{fpt_8c_c8f9ccbc5f3929afb1e9ca1a4785639f}{eval\_\-clenshaw2} (const double $\ast$x, double $\ast$z, double $\ast$y, int size1, int size, int k, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma)}
+\label{fpt_8c_c8f9ccbc5f3929afb1e9ca1a4785639f}
+
+\item 
+\hypertarget{fpt_8c_dbbc1c9625fcc556ab035486aa3cb2a7}{
+static int \hyperlink{fpt_8c_dbbc1c9625fcc556ab035486aa3cb2a7}{eval\_\-clenshaw\_\-thresh2} (const double $\ast$x, double $\ast$z, double $\ast$y, int size, int k, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, const double threshold)}
+\label{fpt_8c_dbbc1c9625fcc556ab035486aa3cb2a7}
+
+\item 
+\hypertarget{fpt_8c_b60b91834b645778dc0b9ce0806d1785}{
+static void \hyperlink{fpt_8c_b60b91834b645778dc0b9ce0806d1785}{eval\_\-sum\_\-clenshaw\_\-fast} (const int N, const int M, const double \_\-Complex $\ast$a, const double $\ast$x, double \_\-Complex $\ast$y, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, const double lambda)}
+\label{fpt_8c_b60b91834b645778dc0b9ce0806d1785}
+
+\item 
+static void \hyperlink{fpt_8c_804880a0ee03818e0c2c3a4394382742}{eval\_\-sum\_\-clenshaw\_\-transposed} (int N, int M, double \_\-Complex $\ast$a, double $\ast$x, double \_\-Complex $\ast$y, double \_\-Complex $\ast$temp, double $\ast$alpha, double $\ast$beta, double $\ast$gamma, double lambda)
 \begin{CompactList}\small\item\em Clenshaw algorithm. \item\end{CompactList}\item 
-void \hyperlink{fpt_8c_a36}{eval\_\-sum\_\-clenshaw\_\-transposed} (int N, int M, double complex $\ast$a, double $\ast$x, double complex $\ast$y, double complex $\ast$temp, double $\ast$alpha, double $\ast$beta, double $\ast$gamma, double lambda)
-\begin{CompactList}\small\item\em Clenshaw algorithm. \item\end{CompactList}\item 
-\hyperlink{structfpt__set__s__}{fpt\_\-set} \hyperlink{group__fpt_ga1}{fpt\_\-init} (const int M, const int t, const unsigned int flags)
+\hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} \hyperlink{group__fpt_gd103ad18c75ee5dd048392dfd1ca7305}{fpt\_\-init} (const int M, const int t, const unsigned int flags)
 \begin{CompactList}\small\item\em Initializes a set of precomputed data for DPT transforms of equal length. \item\end{CompactList}\item 
-void \hyperlink{group__fpt_ga2}{fpt\_\-precompute} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double $\ast$alpha, const double $\ast$beta, const double $\ast$gamma, int k\_\-start, const double threshold)
+void \hyperlink{group__fpt_gd3c3b30fda57364c92958cc7390b6378}{fpt\_\-precompute} (\hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set, const int m, double $\ast$alpha, double $\ast$beta, double $\ast$gam, int k\_\-start, const double threshold)
 \begin{CompactList}\small\item\em Computes the data required for a single DPT transform. \item\end{CompactList}\item 
-void \hyperlink{group__fpt_ga3}{dpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
-\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
-void \hyperlink{group__fpt_ga4}{fpt\_\-trafo} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, const double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
-\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
-void \hyperlink{group__fpt_ga5}{dpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, double complex $\ast$y, const int k\_\-end, const unsigned int flags)
-\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
-void \hyperlink{group__fpt_ga6}{fpt\_\-transposed} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set, const int m, double complex $\ast$x, const double complex $\ast$y, const int k\_\-end, const unsigned int flags)
-\begin{CompactList}\small\item\em Computes a single DPT transform. \item\end{CompactList}\item 
-\hypertarget{group__fpt_ga7}{
-void \hyperlink{group__fpt_ga7}{fpt\_\-finalize} (\hyperlink{structfpt__set__s__}{fpt\_\-set} set)}
-\label{group__fpt_ga7}
+\hypertarget{fpt_8c_95723fd10b19abca2554fe06087fd7d0}{
+void \hyperlink{fpt_8c_95723fd10b19abca2554fe06087fd7d0}{dpt\_\-trafo} (\hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set, const int m, const double \_\-Complex $\ast$x, double \_\-Complex $\ast$y, const int k\_\-end, const unsigned int flags)}
+\label{fpt_8c_95723fd10b19abca2554fe06087fd7d0}
 
-\begin{CompactList}\small\item\em Save copy of inpute data for stabilization steps. \item\end{CompactList}\end{CompactItemize}
+\item 
+\hypertarget{fpt_8c_41f2c9ddd39779e60f0431efa67bb560}{
+void \hyperlink{fpt_8c_41f2c9ddd39779e60f0431efa67bb560}{fpt\_\-trafo} (\hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set, const int m, const double \_\-Complex $\ast$x, double \_\-Complex $\ast$y, const int k\_\-end, const unsigned int flags)}
+\label{fpt_8c_41f2c9ddd39779e60f0431efa67bb560}
+
+\item 
+\hypertarget{fpt_8c_2c7a553c1644f3e659dbcb5eb69f271d}{
+void \hyperlink{fpt_8c_2c7a553c1644f3e659dbcb5eb69f271d}{dpt\_\-transposed} (\hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set, const int m, double \_\-Complex $\ast$x, double \_\-Complex $\ast$y, const int k\_\-end, const unsigned int flags)}
+\label{fpt_8c_2c7a553c1644f3e659dbcb5eb69f271d}
+
+\item 
+\hypertarget{fpt_8c_a2084b56c851ff0c58d10bf34a084a38}{
+void \hyperlink{fpt_8c_a2084b56c851ff0c58d10bf34a084a38}{fpt\_\-transposed} (\hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set, const int m, double \_\-Complex $\ast$x, double \_\-Complex $\ast$y, const int k\_\-end, const unsigned int flags)}
+\label{fpt_8c_a2084b56c851ff0c58d10bf34a084a38}
+
+\item 
+\hypertarget{group__fpt_g7f2a1b915af8d0e7f2eb2f37ddb6772c}{
+void \hyperlink{group__fpt_g7f2a1b915af8d0e7f2eb2f37ddb6772c}{fpt\_\-finalize} (\hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set)}
+\label{group__fpt_g7f2a1b915af8d0e7f2eb2f37ddb6772c}
+
+\end{CompactItemize}
 
 
 \subsection{Detailed Description}
-Implementation file for the FPT module. 
-
-\begin{Desc}
-\item[Author:]Jens Keiner\end{Desc}
+Implementation file for the FPT module \begin{Desc}
+\item[Author:]Jens Keiner \end{Desc}
 
 
 Definition in file \hyperlink{fpt_8c-source}{fpt.c}.
 
 \subsection{Define Documentation}
-\hypertarget{fpt_8c_a7}{
+\hypertarget{fpt_8c_0afca80d182fb1abd524bc0a1378dc25}{
 \index{fpt.c@{fpt.c}!ABUVXPWY_SYMMETRIC@{ABUVXPWY\_\-SYMMETRIC}}
 \index{ABUVXPWY_SYMMETRIC@{ABUVXPWY\_\-SYMMETRIC}!fpt.c@{fpt.c}}
-\subsubsection[ABUVXPWY\_\-SYMMETRIC]{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC(NAME, S1, S2)}}
-\label{fpt_8c_a7}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC(NAME, S1, S2)}}
+\label{fpt_8c_0afca80d182fb1abd524bc0a1378dc25}
 
 
-{\bf Value:}
+\textbf{Value:}
 
-\footnotesize\begin{verbatim}inline void NAME(double a, double b, double complex* u, double complex* x, double* v, \
-  double complex* y, double* w, int n) \
+\begin{Code}\begin{verbatim}static inline void NAME(double a, double b, double _Complex* u, double _Complex* x, \
+  double* v, double _Complex* y, double* w, int n) \
 { \
-  int l; \
-  double complex *u_ptr, *x_ptr, *y_ptr; \
-  double *v_ptr, *w_ptr; \
-  \
-  u_ptr = u; \
-  x_ptr = x; \
-  v_ptr = v; \
-  y_ptr = y; \
-  w_ptr = w; \
-  \
-  for (l = 0; l < n/2; l++) \
-  { \
+  const int n2 = n>>1; \
+  int l; double _Complex *u_ptr = u, *x_ptr = x, *y_ptr = y; \
+  double *v_ptr = v, *w_ptr = w; \
+  for (l = 0; l < n2; l++) \
     *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
-  } \
-  v_ptr--; \
-  w_ptr--; \
-  for (l = 0; l < n/2; l++) \
-  { \
+  v_ptr--; w_ptr--; \
+  for (l = 0; l < n2; l++) \
     *u_ptr++ = a * (b * S1 * (*v_ptr--) * (*x_ptr++) + S2 * (*w_ptr--) * (*y_ptr++)); \
-  } \
 }
-\end{verbatim}\normalsize 
+\end{verbatim}
+\end{Code}
 
 
-Definition at line 135 of file fpt.c.\hypertarget{fpt_8c_a8}{
+Definition at line 137 of file fpt.c.\hypertarget{fpt_8c_18db89dcff6fae9720e01a0be56fc8f7}{
 \index{fpt.c@{fpt.c}!ABUVXPWY_SYMMETRIC_1@{ABUVXPWY\_\-SYMMETRIC\_\-1}}
 \index{ABUVXPWY_SYMMETRIC_1@{ABUVXPWY\_\-SYMMETRIC\_\-1}!fpt.c@{fpt.c}}
-\subsubsection[ABUVXPWY\_\-SYMMETRIC\_\-1]{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC\_\-1(NAME, S1)}}
-\label{fpt_8c_a8}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC\_\-1(NAME, S1)}}
+\label{fpt_8c_18db89dcff6fae9720e01a0be56fc8f7}
 
 
-{\bf Value:}
+\textbf{Value:}
 
-\footnotesize\begin{verbatim}inline void NAME(double a, double b, double complex* u, double complex* x, double* v, \
-  double complex* y, double* w, int n) \
+\begin{Code}\begin{verbatim}static inline void NAME(double a, double b, double _Complex* u, double _Complex* x, \
+  double* v, double _Complex* y, int n, double *xx) \
 { \
-  int l; \
-  double complex *u_ptr, *x_ptr, *y_ptr; \
-  double *v_ptr, *w_ptr; \
-  \
-  u_ptr = u; \
-  x_ptr = x; \
-  v_ptr = v; \
-  y_ptr = y; \
-  w_ptr = w; \
-  \
-  for (l = 0; l < n/2; l++) \
-  { \
-    *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
-  } \
+  const int n2 = n>>1; \
+  int l; double _Complex *u_ptr = u, *x_ptr = x, *y_ptr = y; \
+  double *v_ptr = v, *xx_ptr = xx; \
+  for (l = 0; l < n2; l++, v_ptr++) \
+    *u_ptr++ = a * (b * (*v_ptr) * (*x_ptr++) + ((*v_ptr)*(1.0+*xx_ptr++)) * (*y_ptr++)); \
   v_ptr--; \
-  /*w_ptr--;*/ \
-  for (l = 0; l < n/2; l++) \
-  { \
-    *u_ptr++ = a * (b * S1 * (*v_ptr--) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
-  } \
+  for (l = 0; l < n2; l++, v_ptr--) \
+    *u_ptr++ = a * (b * S1 * (*v_ptr) * (*x_ptr++) + (S1 * (*v_ptr) * (1.0+*xx_ptr++)) * (*y_ptr++)); \
 }
-\end{verbatim}\normalsize 
+\end{verbatim}
+\end{Code}
 
 
-Definition at line 164 of file fpt.c.\hypertarget{fpt_8c_a9}{
+Definition at line 154 of file fpt.c.\hypertarget{fpt_8c_d301783a6575cd0fc132ebaa12d3cf60}{
 \index{fpt.c@{fpt.c}!ABUVXPWY_SYMMETRIC_2@{ABUVXPWY\_\-SYMMETRIC\_\-2}}
 \index{ABUVXPWY_SYMMETRIC_2@{ABUVXPWY\_\-SYMMETRIC\_\-2}!fpt.c@{fpt.c}}
-\subsubsection[ABUVXPWY\_\-SYMMETRIC\_\-2]{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC\_\-2(NAME, S1)}}
-\label{fpt_8c_a9}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define ABUVXPWY\_\-SYMMETRIC\_\-2(NAME, S1)}}
+\label{fpt_8c_d301783a6575cd0fc132ebaa12d3cf60}
 
 
-{\bf Value:}
+\textbf{Value:}
 
-\footnotesize\begin{verbatim}inline void NAME(double a, double b, double complex* u, double complex* x, double* v, \
-  double complex* y, double* w, int n) \
+\begin{Code}\begin{verbatim}static inline void NAME(double a, double b, double _Complex* u, double _Complex* x, \
+  double _Complex* y, double* w, int n, double *xx) \
 { \
-  int l; \
-  double complex *u_ptr, *x_ptr, *y_ptr; \
-  double *v_ptr, *w_ptr; \
-  \
-  u_ptr = u; \
-  x_ptr = x; \
-  v_ptr = v; \
-  y_ptr = y; \
-  w_ptr = w; \
-  \
-  for (l = 0; l < n/2; l++) \
-  { \
-    *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + (*w_ptr++) * (*y_ptr++)); \
-  } \
-  /*v_ptr--;*/ \
+  const int n2 = n>>1; \
+  int l; double _Complex *u_ptr = u, *x_ptr = x, *y_ptr = y; \
+  double *w_ptr = w, *xx_ptr = xx; \
+  for (l = 0; l < n2; l++, w_ptr++) \
+    *u_ptr++ = a * (b * (*w_ptr/(1.0+*xx_ptr++)) * (*x_ptr++) + (*w_ptr) * (*y_ptr++)); \
   w_ptr--; \
-  for (l = 0; l < n/2; l++) \
-  { \
-    *u_ptr++ = a * (b * (*v_ptr++) * (*x_ptr++) + S1 * (*w_ptr--) * (*y_ptr++)); \
-  } \
+  for (l = 0; l < n2; l++, w_ptr--) \
+    *u_ptr++ = a * (b * (S1 * (*w_ptr)/(1.0+*xx_ptr++) ) * (*x_ptr++) + S1 * (*w_ptr) * (*y_ptr++)); \
 }
-\end{verbatim}\normalsize 
+\end{verbatim}
+\end{Code}
 
 
-Definition at line 193 of file fpt.c.\hypertarget{fpt_8c_a12}{
+Definition at line 171 of file fpt.c.\hypertarget{fpt_8c_8cb478c4a27a921310d57427c1e94aa4}{
 \index{fpt.c@{fpt.c}!FPT_DO_STEP_TRANSPOSED@{FPT\_\-DO\_\-STEP\_\-TRANSPOSED}}
 \index{FPT_DO_STEP_TRANSPOSED@{FPT\_\-DO\_\-STEP\_\-TRANSPOSED}!fpt.c@{fpt.c}}
-\subsubsection[FPT\_\-DO\_\-STEP\_\-TRANSPOSED]{\setlength{\rightskip}{0pt plus 5cm}\#define FPT\_\-DO\_\-STEP\_\-TRANSPOSED(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)}}
-\label{fpt_8c_a12}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define FPT\_\-DO\_\-STEP\_\-TRANSPOSED(NAME, M1\_\-FUNCTION, M2\_\-FUNCTION)}}
+\label{fpt_8c_8cb478c4a27a921310d57427c1e94aa4}
 
 
-{\bf Value:}
+\textbf{Value:}
 
-\footnotesize\begin{verbatim}inline void NAME(double complex  *a, double complex *b, double *a11, \
-  double *a12, double *a21, double *a22, double gamma, int tau, fpt_set set) \
+\begin{Code}\begin{verbatim}static inline void NAME(double _Complex  *a, double _Complex *b, double *a11, \
+  double *a12, double *a21, double *a22, double g, int tau, fpt_set set) \
 { \ \
   int length = 1<<(tau+1); \ \
   double norm = 1.0/(length<<1); \
@@ -343,46 +325,32 @@ Definition at line 193 of file fpt.c.\hypertarget{fpt_8c_a12}{
   fftw_execute_r2r(set->plans_dct3[tau-1],(double*)b,(double*)b); \
   \
   /* Perform matrix multiplication. */ \
-  M1_FUNCTION(norm,gamma,set->z,a,a11,b,a21,length); \
-  M2_FUNCTION(norm,gamma,b,a,a12,b,a22,length); \
-  memcpy(a,set->z,length*sizeof(double complex)); \
+  M1_FUNCTION(norm,g,set->z,a,a11,b,a21,length); \
+  M2_FUNCTION(norm,g,b,a,a12,b,a22,length); \
+  memcpy(a,set->z,length*sizeof(double _Complex)); \
   \
   /* Compute Chebyshev-coefficients using a DCT-II. */ \
   fftw_execute_r2r(set->plans_dct2[tau-1],(double*)a,(double*)a); \
   fftw_execute_r2r(set->plans_dct2[tau-1],(double*)b,(double*)b); \
 }
-\end{verbatim}\normalsize 
-Twice the length of the coefficient arrays. 
+\end{verbatim}
+\end{Code}
 
 
-
-Definition at line 335 of file fpt.c.
+Definition at line 395 of file fpt.c.
 
 \subsection{Function Documentation}
-\hypertarget{fpt_8c_a35}{
-\index{fpt.c@{fpt.c}!eval_sum_clenshaw@{eval\_\-sum\_\-clenshaw}}
-\index{eval_sum_clenshaw@{eval\_\-sum\_\-clenshaw}!fpt.c@{fpt.c}}
-\subsubsection[eval\_\-sum\_\-clenshaw]{\setlength{\rightskip}{0pt plus 5cm}void eval\_\-sum\_\-clenshaw (int {\em N}, int {\em M}, double complex $\ast$ {\em a}, double $\ast$ {\em x}, double complex $\ast$ {\em y}, double complex $\ast$ {\em temp}, double $\ast$ {\em alpha}, double $\ast$ {\em beta}, double $\ast$ {\em gamma}, double {\em lambda})}}
-\label{fpt_8c_a35}
-
-
-Clenshaw algorithm. 
-
-Evaluates a sum of real-valued functions $P_k : \mathbb{R} \rightarrow \mathbb{R}$ \[ f(x) = \sum_{k=0}^N a_k P_k(x) \quad (N \in \mathbb{N}_0) \] obeying a three-term recurrence relation \[ P_{k+1}(x) = (alpha_k * x + beta_k)*P_{k}(x) + gamma_k P_{k-1}(x) \quad (alpha_k, beta_k, gamma_k \in \mathbb{R},\; k \ge 0) \] with initial conditions $P_{-1}(x) := 0$, $P_0(x) := \lambda$ for given double complex coefficients $\left(a_k\right)_{k=0}^N \in \mathbb{C}^{N+1}$ at given nodes $\left(x_j\right)_{j=0}^M \in \mathbb{R}^{M+1}$, $M \in \mathbb{N}_0$. 
-
-Definition at line 479 of file fpt.c.
-
-Referenced by dpt\_\-trafo().\hypertarget{fpt_8c_a36}{
+\hypertarget{fpt_8c_804880a0ee03818e0c2c3a4394382742}{
 \index{fpt.c@{fpt.c}!eval_sum_clenshaw_transposed@{eval\_\-sum\_\-clenshaw\_\-transposed}}
 \index{eval_sum_clenshaw_transposed@{eval\_\-sum\_\-clenshaw\_\-transposed}!fpt.c@{fpt.c}}
-\subsubsection[eval\_\-sum\_\-clenshaw\_\-transposed]{\setlength{\rightskip}{0pt plus 5cm}void eval\_\-sum\_\-clenshaw\_\-transposed (int {\em N}, int {\em M}, double complex $\ast$ {\em a}, double $\ast$ {\em x}, double complex $\ast$ {\em y}, double complex $\ast$ {\em temp}, double $\ast$ {\em alpha}, double $\ast$ {\em beta}, double $\ast$ {\em gamma}, double {\em lambda})}}
-\label{fpt_8c_a36}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}static void eval\_\-sum\_\-clenshaw\_\-transposed (int {\em N}, int {\em M}, double \_\-Complex $\ast$ {\em a}, double $\ast$ {\em x}, double \_\-Complex $\ast$ {\em y}, double \_\-Complex $\ast$ {\em temp}, double $\ast$ {\em alpha}, double $\ast$ {\em beta}, double $\ast$ {\em gamma}, double {\em lambda})\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
+\label{fpt_8c_804880a0ee03818e0c2c3a4394382742}
 
 
 Clenshaw algorithm. 
 
-Evaluates a sum of real-valued functions $P_k : \mathbb{R} \rightarrow \mathbb{R}$ \[ f(x) = \sum_{k=0}^N a_k P_k(x) \quad (N \in \mathbb{N}_0) \] obeying a three-term recurrence relation \[ P_{k+1}(x) = (alpha_k * x + beta_k)*P_{k}(x) + gamma_k P_{k-1}(x) \quad (alpha_k, beta_k, gamma_k \in \mathbb{R},\; k \ge 0) \] with initial conditions $P_{-1}(x) := 0$, $P_0(x) := \lambda$ for given double complex coefficients $\left(a_k\right)_{k=0}^N \in \mathbb{C}^{N+1}$ at given nodes $\left(x_j\right)_{j=0}^M \in \mathbb{R}^{M+1}$, $M \in \mathbb{N}_0$. 
+Evaluates a sum of real-valued functions $P_k : \mathbb{R} \rightarrow \mathbb{R}$ \[ f(x) = \sum_{k=0}^N a_k P_k(x) \quad (N \in \mathbb{N}_0) \] obeying a three-term recurrence relation \[ P_{k+1}(x) = (alpha_k * x + beta_k)*P_{k}(x) + gamma_k P_{k-1}(x) \quad (alpha_k, beta_k, gamma_k \in \mathbb{R},\; k \ge 0) \] with initial conditions $P_{-1}(x) := 0$, $P_0(x) := \lambda$ for given double \_\-Complex coefficients $\left(a_k\right)_{k=0}^N \in \mathbb{C}^{N+1}$ at given nodes $\left(x_j\right)_{j=0}^M \in \mathbb{R}^{M+1}$, $M \in \mathbb{N}_0$. 
 
-Definition at line 545 of file fpt.c.
+Definition at line 694 of file fpt.c.
 
 Referenced by dpt\_\-transposed().

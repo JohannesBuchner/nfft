@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: polar_fft_test.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 /**
  * \file polarFFT/polar_fft_test.c
  * \brief NFFT-based polar FFT and inverse.
@@ -8,10 +28,12 @@
  */
 #include <math.h>
 #include <stdlib.h>
+#include <complex.h>
+
 #include "util.h"
 #include "nfft3.h"
 
-/** 
+/**
  * \defgroup applications_polarFFT_polar polar_fft_test
  * \ingroup applications_polarFFT
  * \{
@@ -24,7 +46,7 @@
  *  They are given for \f$(j,t)^{\top}\in I_R\times I_T\f$ by
  *  a signed radius \f$r_j := \frac{j}{R} \in [-\frac{1}{2},\frac{1}{2})\f$ and
  *  an angle \f$\theta_t := \frac{\pi t}{T} \in [-\frac{\pi}{2},\frac{\pi}{2})\f$
- *  as 
+ *  as
  *  \f[
  *    x_{t,j} := r_j\left(\cos\theta_t, \sin\theta_t\right)^{\top}\,.
  *  \f]
@@ -48,7 +70,7 @@
  *  Thus, the sum of all weights is \f$\frac{\pi}{4}(1+\frac{1}{R^2})\f$ and
  *  we divide by this value for normalization.
  */
-int polar_grid(int T, int R, double *x, double *w)
+static int polar_grid(int T, int R, double *x, double *w)
 {
   int t, r;
   double W=(double)T*(((double)R/2.0)*((double)R/2.0)+1.0/4.0);
@@ -70,7 +92,7 @@ int polar_grid(int T, int R, double *x, double *w)
 }
 
 /** discrete polar FFT */
-int polar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
+static int polar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
 {
   int j,k;                              /**< index for nodes and frequencies  */
   nfft_plan my_nfft_plan;               /**< plan for the nfft-2D             */
@@ -83,11 +105,11 @@ int polar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
   N[0]=NN; n[0]=2*N[0];                 /**< oversampling factor sigma=2      */
   N[1]=NN; n[1]=2*N[1];                 /**< oversampling factor sigma=2      */
 
-  x = (double *)malloc(2*T*R*(sizeof(double)));
+  x = (double *)nfft_malloc(2*T*R*(sizeof(double)));
   if (x==NULL)
     return -1;
 
-  w = (double *)malloc(T*R*(sizeof(double)));
+  w = (double *)nfft_malloc(T*R*(sizeof(double)));
   if (w==NULL)
     return -1;
 
@@ -117,14 +139,14 @@ int polar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
 
   /** finalise the plans and free the variables */
   nfft_finalize(&my_nfft_plan);
-  free(x);
-  free(w);
+  nfft_free(x);
+  nfft_free(w);
 
   return EXIT_SUCCESS;
 }
 
 /** NFFT-based polar FFT */
-int polar_fft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
+static int polar_fft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
 {
   int j,k;                              /**< index for nodes and freqencies   */
   nfft_plan my_nfft_plan;               /**< plan for the nfft-2D             */
@@ -137,11 +159,11 @@ int polar_fft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
   N[0]=NN; n[0]=2*N[0];                 /**< oversampling factor sigma=2      */
   N[1]=NN; n[1]=2*N[1];                 /**< oversampling factor sigma=2      */
 
-  x = (double *)malloc(2*T*R*(sizeof(double)));
+  x = (double *)nfft_malloc(2*T*R*(sizeof(double)));
   if (x==NULL)
     return -1;
 
-  w = (double *)malloc(T*R*(sizeof(double)));
+  w = (double *)nfft_malloc(T*R*(sizeof(double)));
   if (w==NULL)
     return -1;
 
@@ -181,18 +203,18 @@ int polar_fft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
 
   /** finalise the plans and free the variables */
   nfft_finalize(&my_nfft_plan);
-  free(x);
-  free(w);
+  nfft_free(x);
+  nfft_free(w);
 
   return EXIT_SUCCESS;
 }
 
 /** inverse NFFT-based polar FFT */
-int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN, int max_i, int m)
+static int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN, int max_i, int m)
 {
   int j,k;                              /**< index for nodes and freqencies   */
   nfft_plan my_nfft_plan;               /**< plan for the nfft-2D             */
-  infft_plan my_infft_plan;             /**< plan for the inverse nfft        */
+  solver_plan_complex my_infft_plan;             /**< plan for the inverse nfft        */
 
   double *x, *w;                        /**< knots and associated weights     */
   int l;                                /**< index for iterations             */
@@ -203,11 +225,11 @@ int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN
   N[0]=NN; n[0]=2*N[0];                 /**< oversampling factor sigma=2      */
   N[1]=NN; n[1]=2*N[1];                 /**< oversampling factor sigma=2      */
 
-  x = (double *)malloc(2*T*R*(sizeof(double)));
+  x = (double *)nfft_malloc(2*T*R*(sizeof(double)));
   if (x==NULL)
     return -1;
 
-  w = (double *)malloc(T*R*(sizeof(double)));
+  w = (double *)nfft_malloc(T*R*(sizeof(double)));
   if (w==NULL)
     return -1;
 
@@ -217,7 +239,7 @@ int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN
                   FFTW_MEASURE| FFTW_DESTROY_INPUT);
 
   /** init two dimensional infft plan */
-  infft_init_advanced(&my_infft_plan,&my_nfft_plan, CGNR | PRECOMPUTE_WEIGHT );
+  solver_init_advanced_complex(&my_infft_plan,(mv_plan_complex*)(&my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT );
 
   /** init nodes, given samples and weights */
   polar_grid(T,R,x,w);
@@ -241,19 +263,20 @@ int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN
 
   /** initialise damping factors */
   if(my_infft_plan.flags & PRECOMPUTE_DAMP)
-    for(j=0;j<my_infft_plan.mv->N[0];j++)
-      for(k=0;k<my_infft_plan.mv->N[1];k++)
+    for(j=0;j<my_nfft_plan.N[0];j++)
+      for(k=0;k<my_nfft_plan.N[1];k++)
   {
-    my_infft_plan.w_hat[j*my_infft_plan.mv->N[1]+k]=
-        (sqrt(pow(j-my_infft_plan.mv->N[0]/2,2)+pow(k-my_infft_plan.mv->N[1]/2,2))>(my_infft_plan.mv->N[0]/2)?0:1);
+    my_infft_plan.w_hat[j*my_nfft_plan.N[1]+k]=
+        (sqrt(pow((double)(j-my_nfft_plan.N[0]/2),2.0)+pow((double)(k-my_nfft_plan.N[1]/2),2.0))
+            >((double)(my_nfft_plan.N[0]/2))?0:1);
   }
 
   /** initialise some guess f_hat_0 */
   for(k=0;k<my_nfft_plan.N_total;k++)
-    my_infft_plan.f_hat_iter[k] = 0.0 + I*0.0;
+    my_infft_plan.f_hat_iter[k] = 0.0 + _Complex_I*0.0;
 
   /** solve the system */
-  infft_before_loop(&my_infft_plan);
+  solver_before_loop_complex(&my_infft_plan);
 
   if (max_i<1)
   {
@@ -265,7 +288,7 @@ int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN
   {
     for(l=1;l<=max_i;l++)
     {
-      infft_loop_one_step(&my_infft_plan);
+      solver_loop_one_step_complex(&my_infft_plan);
     }
   }
 
@@ -274,10 +297,10 @@ int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN
     f_hat[k] = my_infft_plan.f_hat_iter[k];
 
   /** finalise the plans and free the variables */
-  infft_finalize(&my_infft_plan);
+  solver_finalize_complex(&my_infft_plan);
   nfft_finalize(&my_nfft_plan);
-  free(x);
-  free(w);
+  nfft_free(x);
+  nfft_free(w);
 
   return EXIT_SUCCESS;
 }
@@ -292,7 +315,7 @@ int main(int argc,char **argv)
   fftw_complex *f_hat, *f, *f_direct, *f_tilde;
   int k;
   int max_i;                            /**< number of iterations             */
-  int m;
+  int m = 1;
   double temp1, temp2, E_max=0.0;
   FILE *fp1, *fp2;
   char filename[30];
@@ -312,13 +335,13 @@ int main(int argc,char **argv)
   R = atoi(argv[3]);
   printf("N=%d, polar grid with T=%d, R=%d => ",N,T,R);
 
-  x = (double *)malloc(2*1.25*T*R*(sizeof(double)));
-  w = (double *)malloc(1.25*T*R*(sizeof(double)));
+  x = (double *)nfft_malloc(2*5*(T/2)*(R/2)*(sizeof(double)));
+  w = (double *)nfft_malloc(5*(T/2)*(R/2)*(sizeof(double)));
 
-  f_hat    = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*N*N);
-  f        = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*T*R);
-  f_direct = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*T*R);
-  f_tilde  = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*N*N);
+  f_hat    = (fftw_complex *)nfft_malloc(sizeof(fftw_complex)*N*N);
+  f        = (fftw_complex *)nfft_malloc(sizeof(fftw_complex)*T*R);
+  f_direct = (fftw_complex *)nfft_malloc(sizeof(fftw_complex)*T*R);
+  f_tilde  = (fftw_complex *)nfft_malloc(sizeof(fftw_complex)*N*N);
 
   /** generate knots of mpolar grid */
   M=polar_grid(T,R,x,w); printf("M=%d.\n",M);
@@ -332,7 +355,7 @@ int main(int argc,char **argv)
   {
     fscanf(fp1,"%le ",&temp1);
     fscanf(fp2,"%le ",&temp2);
-    f_hat[k]=temp1+I*temp2;
+    f_hat[k]=temp1+ _Complex_I*temp2;
   }
   fclose(fp1);
   fclose(fp2);
@@ -383,12 +406,12 @@ int main(int argc,char **argv)
   }
 
   /** free the variables */
-  free(x);
-  free(w);
-  free(f_hat);
-  free(f);
-  free(f_direct);
-  free(f_tilde);
+  nfft_free(x);
+  nfft_free(w);
+  nfft_free(f_hat);
+  nfft_free(f);
+  nfft_free(f_direct);
+  nfft_free(f_tilde);
 
   return 0;
 }

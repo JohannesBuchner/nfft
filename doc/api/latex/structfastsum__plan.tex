@@ -1,0 +1,178 @@
+\hypertarget{structfastsum__plan}{
+\section{fastsum\_\-plan Struct Reference}
+\label{structfastsum__plan}\index{fastsum_plan@{fastsum\_\-plan}}
+}
+plan for fast summation algorithm  
+
+
+{\tt \#include $<$fastsum.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+int \hyperlink{structfastsum__plan_8c32876370be14f7e88337d979c93382}{d}
+\begin{CompactList}\small\item\em api \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_45fd4a73ba0f2b5795364d6d3a239a85}{
+int \hyperlink{structfastsum__plan_45fd4a73ba0f2b5795364d6d3a239a85}{N\_\-total}}
+\label{structfastsum__plan_45fd4a73ba0f2b5795364d6d3a239a85}
+
+\begin{CompactList}\small\item\em number of source knots \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_7c55ef5f14439f86f01b4e06281aa01d}{
+int \hyperlink{structfastsum__plan_7c55ef5f14439f86f01b4e06281aa01d}{M\_\-total}}
+\label{structfastsum__plan_7c55ef5f14439f86f01b4e06281aa01d}
+
+\begin{CompactList}\small\item\em number of target knots \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_f36c72276fd20ef9c8c1b484f6cbf834}{
+double \_\-Complex $\ast$ \hyperlink{structfastsum__plan_f36c72276fd20ef9c8c1b484f6cbf834}{alpha}}
+\label{structfastsum__plan_f36c72276fd20ef9c8c1b484f6cbf834}
+
+\begin{CompactList}\small\item\em source coefficients \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_3bb9a1eea981916a97336ac6eb19d292}{
+double \_\-Complex $\ast$ \hyperlink{structfastsum__plan_3bb9a1eea981916a97336ac6eb19d292}{f}}
+\label{structfastsum__plan_3bb9a1eea981916a97336ac6eb19d292}
+
+\begin{CompactList}\small\item\em target evaluations \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_590dd3d6fd12f3e8cbd72b8a83905760}{
+double $\ast$ \hyperlink{structfastsum__plan_590dd3d6fd12f3e8cbd72b8a83905760}{x}}
+\label{structfastsum__plan_590dd3d6fd12f3e8cbd72b8a83905760}
+
+\begin{CompactList}\small\item\em source knots in d-ball with radius 1/4-eps\_\-b/2 \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_79615d0f0d38b754742c3ff445b6c733}{
+double $\ast$ \hyperlink{structfastsum__plan_79615d0f0d38b754742c3ff445b6c733}{y}}
+\label{structfastsum__plan_79615d0f0d38b754742c3ff445b6c733}
+
+\begin{CompactList}\small\item\em target knots in d-ball with radius 1/4-eps\_\-b/2 \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_910b9b7bc966ca0241ccf8093405668d}{
+double \_\-Complex($\ast$ \hyperlink{structfastsum__plan_910b9b7bc966ca0241ccf8093405668d}{kernel} )(double, int, const double $\ast$)}
+\label{structfastsum__plan_910b9b7bc966ca0241ccf8093405668d}
+
+\begin{CompactList}\small\item\em kernel function \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_e494d11cd336be135f7a93d112a16852}{
+double $\ast$ \hyperlink{structfastsum__plan_e494d11cd336be135f7a93d112a16852}{kernel\_\-param}}
+\label{structfastsum__plan_e494d11cd336be135f7a93d112a16852}
+
+\begin{CompactList}\small\item\em parameters for kernel function \item\end{CompactList}\item 
+unsigned \hyperlink{structfastsum__plan_3d264dc33ae01a71908311ac9b7eadc2}{flags}
+\begin{CompactList}\small\item\em flags precomp. \item\end{CompactList}\item 
+double \_\-Complex $\ast$ \hyperlink{structfastsum__plan_8dbf6da034fa65b1c2c2d35883a59367}{pre\_\-K}
+\begin{CompactList}\small\item\em internal \item\end{CompactList}\item 
+int \hyperlink{structfastsum__plan_5615cf980018c32de59c9aba950bdfb2}{n}
+\begin{CompactList}\small\item\em FS\_\-\_\- - fast summation. \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_f8e5c612c9a1bb2a1a8ad30d37fba10c}{
+fftw\_\-complex $\ast$ \hyperlink{structfastsum__plan_f8e5c612c9a1bb2a1a8ad30d37fba10c}{b}}
+\label{structfastsum__plan_f8e5c612c9a1bb2a1a8ad30d37fba10c}
+
+\begin{CompactList}\small\item\em expansion coefficients \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_50bdfe4efb1b7df3556347cc7cffe945}{
+int \hyperlink{structfastsum__plan_50bdfe4efb1b7df3556347cc7cffe945}{p}}
+\label{structfastsum__plan_50bdfe4efb1b7df3556347cc7cffe945}
+
+\begin{CompactList}\small\item\em degree of smoothness of regularization \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_02e7e2f5e7b0f5713331bd129aad8192}{
+double \hyperlink{structfastsum__plan_02e7e2f5e7b0f5713331bd129aad8192}{eps\_\-I}}
+\label{structfastsum__plan_02e7e2f5e7b0f5713331bd129aad8192}
+
+\begin{CompactList}\small\item\em inner boundary \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_8ff877981769fb215912d9d440071cc4}{
+double \hyperlink{structfastsum__plan_8ff877981769fb215912d9d440071cc4}{eps\_\-B}}
+\label{structfastsum__plan_8ff877981769fb215912d9d440071cc4}
+
+\begin{CompactList}\small\item\em outer boundary \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_41da99ba24cced38e30e886ccc9d46b5}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} \hyperlink{structfastsum__plan_41da99ba24cced38e30e886ccc9d46b5}{mv1}}
+\label{structfastsum__plan_41da99ba24cced38e30e886ccc9d46b5}
+
+\begin{CompactList}\small\item\em source nfft plan \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_4e16f1a797a3217e54bbd5b4fe057dcb}{
+\hyperlink{structnfft__plan}{nfft\_\-plan} \hyperlink{structfastsum__plan_4e16f1a797a3217e54bbd5b4fe057dcb}{mv2}}
+\label{structfastsum__plan_4e16f1a797a3217e54bbd5b4fe057dcb}
+
+\begin{CompactList}\small\item\em target nfft plan \item\end{CompactList}\item 
+int \hyperlink{structfastsum__plan_d0217e28060b4f3992de52511b6b8a04}{Ad}
+\begin{CompactList}\small\item\em near field \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_49a55958ef74d27bf8e7a825e61474f4}{
+double $\ast$ \hyperlink{structfastsum__plan_49a55958ef74d27bf8e7a825e61474f4}{Add}}
+\label{structfastsum__plan_49a55958ef74d27bf8e7a825e61474f4}
+
+\begin{CompactList}\small\item\em spline values \item\end{CompactList}\item 
+\hypertarget{structfastsum__plan_f3298ee265bc5738cad179cf8e38f7ac}{
+fftw\_\-plan \hyperlink{structfastsum__plan_f3298ee265bc5738cad179cf8e38f7ac}{fft\_\-plan}}
+\label{structfastsum__plan_f3298ee265bc5738cad179cf8e38f7ac}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+plan for fast summation algorithm 
+
+Definition at line 54 of file fastsum.h.
+
+\subsection{Field Documentation}
+\hypertarget{structfastsum__plan_8c32876370be14f7e88337d979c93382}{
+\index{fastsum_plan@{fastsum\_\-plan}!d@{d}}
+\index{d@{d}!fastsum_plan@{fastsum\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf fastsum\_\-plan::d}}}
+\label{structfastsum__plan_8c32876370be14f7e88337d979c93382}
+
+
+api 
+
+number of dimensions 
+
+Definition at line 58 of file fastsum.h.
+
+Referenced by fastsum\_\-exact(), fastsum\_\-init\_\-guru(), fastsum\_\-precompute(), and fastsum\_\-trafo().\hypertarget{structfastsum__plan_3d264dc33ae01a71908311ac9b7eadc2}{
+\index{fastsum_plan@{fastsum\_\-plan}!flags@{flags}}
+\index{flags@{flags}!fastsum_plan@{fastsum\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf fastsum\_\-plan::flags}}}
+\label{structfastsum__plan_3d264dc33ae01a71908311ac9b7eadc2}
+
+
+flags precomp. 
+
+and approx.type 
+
+Definition at line 72 of file fastsum.h.
+
+Referenced by fastsum\_\-finalize(), fastsum\_\-init\_\-guru(), fastsum\_\-precompute(), fastsum\_\-trafo(), and fields\_\-fastsum\_\-trafo().\hypertarget{structfastsum__plan_8dbf6da034fa65b1c2c2d35883a59367}{
+\index{fastsum_plan@{fastsum\_\-plan}!pre_K@{pre\_\-K}}
+\index{pre_K@{pre\_\-K}!fastsum_plan@{fastsum\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \_\-Complex$\ast$ {\bf fastsum\_\-plan::pre\_\-K}}}
+\label{structfastsum__plan_8dbf6da034fa65b1c2c2d35883a59367}
+
+
+internal 
+
+DS\_\-PRE - direct summation precomputed K(x\_\-j-y\_\-l) 
+
+Definition at line 77 of file fastsum.h.\hypertarget{structfastsum__plan_5615cf980018c32de59c9aba950bdfb2}{
+\index{fastsum_plan@{fastsum\_\-plan}!n@{n}}
+\index{n@{n}!fastsum_plan@{fastsum\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf fastsum\_\-plan::n}}}
+\label{structfastsum__plan_5615cf980018c32de59c9aba950bdfb2}
+
+
+FS\_\-\_\- - fast summation. 
+
+expansion degree 
+
+Definition at line 80 of file fastsum.h.
+
+Referenced by fastsum\_\-init\_\-guru(), and fastsum\_\-precompute().\hypertarget{structfastsum__plan_d0217e28060b4f3992de52511b6b8a04}{
+\index{fastsum_plan@{fastsum\_\-plan}!Ad@{Ad}}
+\index{Ad@{Ad}!fastsum_plan@{fastsum\_\-plan}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf fastsum\_\-plan::Ad}}}
+\label{structfastsum__plan_d0217e28060b4f3992de52511b6b8a04}
+
+
+near field 
+
+number of spline knots for nearfield computation of regularized kernel 
+
+Definition at line 91 of file fastsum.h.
+
+Referenced by fastsum\_\-init\_\-guru(), fastsum\_\-precompute(), fastsum\_\-trafo(), and fields\_\-fastsum\_\-trafo().
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+\hyperlink{fastsum_8h}{fastsum.h}\end{CompactItemize}

@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/* $Id: radon.c 3100 2009-03-12 08:42:48Z keiner $ */
+
 /**
  * \file radon.c
  * \brief NFFT-based discrete Radon transform.
@@ -21,6 +41,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <complex.h>
 
 #include "util.h"
 #include "nfft3.h"
@@ -105,14 +126,14 @@ int Radon_trafo(int (*gridfcn)(), int T, int R, double *f, int NN, double *Rf)
   N[0]=NN; n[0]=2*N[0];
   N[1]=NN; n[1]=2*N[1];
 
-  fft = (fftw_complex *)fftw_malloc(R*sizeof(fftw_complex));
+  fft = (fftw_complex *)nfft_malloc(R*sizeof(fftw_complex));
   my_fftw_plan = fftw_plan_dft_1d(R,fft,fft,FFTW_BACKWARD,FFTW_MEASURE);
 
-  x = (double *)malloc(2*T*R*(sizeof(double)));
+  x = (double *)nfft_malloc(2*T*R*(sizeof(double)));
   if (x==NULL)
     return -1;
 
-  w = (double *)malloc(T*R*(sizeof(double)));
+  w = (double *)nfft_malloc(T*R*(sizeof(double)));
   if (w==NULL)
     return -1;
 
@@ -142,7 +163,7 @@ int Radon_trafo(int (*gridfcn)(), int T, int R, double *f, int NN, double *Rf)
 
   /** init Fourier coefficients from given image */
   for(k=0;k<my_nfft_plan.N_total;k++)
-    my_nfft_plan.f_hat[k] = f[k] + I*0.0;
+    my_nfft_plan.f_hat[k] = f[k] + _Complex_I*0.0;
 
   /** NFFT-2D */
   nfft_trafo(&my_nfft_plan);
@@ -170,10 +191,10 @@ int Radon_trafo(int (*gridfcn)(), int T, int R, double *f, int NN, double *Rf)
 
   /** finalise the plans and free the variables */
   fftw_destroy_plan(my_fftw_plan);
-  fftw_free(fft);
+  nfft_free(fft);
   nfft_finalize(&my_nfft_plan);
-  free(x);
-  free(w);
+  nfft_free(x);
+  nfft_free(w);
   return 0;
 }
 
@@ -208,8 +229,8 @@ int main(int argc,char **argv)
   R = atoi(argv[4]);
   /*printf("N=%d, %s grid with T=%d, R=%d. \n",N,argv[1],T,R);*/
 
-  f   = (double *)malloc(N*N*(sizeof(double)));
-  Rf  = (double *)malloc(T*R*(sizeof(double)));
+  f   = (double *)nfft_malloc(N*N*(sizeof(double)));
+  Rf  = (double *)nfft_malloc(T*R*(sizeof(double)));
 
   /** load data */
   fp=fopen("input_data.bin","rb");
@@ -229,8 +250,8 @@ int main(int argc,char **argv)
   fclose(fp);
 
   /** free the variables */
-  free(f);
-  free(Rf);
+  nfft_free(f);
+  nfft_free(Rf);
 
   return EXIT_SUCCESS;
 }

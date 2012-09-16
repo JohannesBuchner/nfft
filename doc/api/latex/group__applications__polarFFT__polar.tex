@@ -5,36 +5,36 @@
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-int \hyperlink{group__applications__polarFFT__polar_ga0}{polar\_\-grid} (int T, int R, double $\ast$x, double $\ast$w)
+static int \hyperlink{group__applications__polarFFT__polar_g307b67b4c00a1c756f140c7fa831cdae}{polar\_\-grid} (int T, int R, double $\ast$x, double $\ast$w)
 \begin{CompactList}\small\item\em Generates the points $x_{t,j}$ with weights $w_{t,j}$ for the polar grid with $T$ angles and $R$ offsets. \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga1}{
-int \hyperlink{group__applications__polarFFT__polar_ga1}{polar\_\-dft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
-\label{group__applications__polarFFT__polar_ga1}
+\hypertarget{group__applications__polarFFT__polar_gf6ec0d6bb5bfea4829e551c9dc9a656e}{
+static int \hyperlink{group__applications__polarFFT__polar_gf6ec0d6bb5bfea4829e551c9dc9a656e}{polar\_\-dft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
+\label{group__applications__polarFFT__polar_gf6ec0d6bb5bfea4829e551c9dc9a656e}
 
 \begin{CompactList}\small\item\em discrete polar FFT \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga2}{
-int \hyperlink{group__applications__polarFFT__polar_ga2}{polar\_\-fft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
-\label{group__applications__polarFFT__polar_ga2}
+\hypertarget{group__applications__polarFFT__polar_g72ebda23ef48b6509833eea9a24fa839}{
+static int \hyperlink{group__applications__polarFFT__polar_g72ebda23ef48b6509833eea9a24fa839}{polar\_\-fft} (fftw\_\-complex $\ast$f\_\-hat, int NN, fftw\_\-complex $\ast$f, int T, int R, int m)}
+\label{group__applications__polarFFT__polar_g72ebda23ef48b6509833eea9a24fa839}
 
 \begin{CompactList}\small\item\em NFFT-based polar FFT. \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga3}{
-int \hyperlink{group__applications__polarFFT__polar_ga3}{inverse\_\-polar\_\-fft} (fftw\_\-complex $\ast$f, int T, int R, fftw\_\-complex $\ast$f\_\-hat, int NN, int max\_\-i, int m)}
-\label{group__applications__polarFFT__polar_ga3}
+\hypertarget{group__applications__polarFFT__polar_gd996d429207cf198e9027618e081ada0}{
+static int \hyperlink{group__applications__polarFFT__polar_gd996d429207cf198e9027618e081ada0}{inverse\_\-polar\_\-fft} (fftw\_\-complex $\ast$f, int T, int R, fftw\_\-complex $\ast$f\_\-hat, int NN, int max\_\-i, int m)}
+\label{group__applications__polarFFT__polar_gd996d429207cf198e9027618e081ada0}
 
 \begin{CompactList}\small\item\em inverse NFFT-based polar FFT \item\end{CompactList}\item 
-\hypertarget{group__applications__polarFFT__polar_ga4}{
-int \hyperlink{group__applications__polarFFT__polar_ga4}{main} (int argc, char $\ast$$\ast$argv)}
-\label{group__applications__polarFFT__polar_ga4}
+\hypertarget{group__applications__polarFFT__polar_g3c04138a5bfe5d72780bb7e82a18e627}{
+int \hyperlink{group__applications__polarFFT__polar_g3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)}
+\label{group__applications__polarFFT__polar_g3c04138a5bfe5d72780bb7e82a18e627}
 
 \begin{CompactList}\small\item\em test program for various parameters \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{group__applications__polarFFT__polar_ga0}{
-\index{applications_polarFFT_polar@{applications\_\-polar\-FFT\_\-polar}!polar_grid@{polar\_\-grid}}
-\index{polar_grid@{polar\_\-grid}!applications_polarFFT_polar@{applications\_\-polar\-FFT\_\-polar}}
-\subsubsection[polar\_\-grid]{\setlength{\rightskip}{0pt plus 5cm}int polar\_\-grid (int {\em T}, int {\em R}, double $\ast$ {\em x}, double $\ast$ {\em w})}}
-\label{group__applications__polarFFT__polar_ga0}
+\hypertarget{group__applications__polarFFT__polar_g307b67b4c00a1c756f140c7fa831cdae}{
+\index{applications_polarFFT_polar@{applications\_\-polarFFT\_\-polar}!polar_grid@{polar\_\-grid}}
+\index{polar_grid@{polar\_\-grid}!applications_polarFFT_polar@{applications\_\-polarFFT\_\-polar}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}static int polar\_\-grid (int {\em T}, int {\em R}, double $\ast$ {\em x}, double $\ast$ {\em w})\hspace{0.3cm}{\tt  \mbox{[}static\mbox{]}}}}
+\label{group__applications__polarFFT__polar_g307b67b4c00a1c756f140c7fa831cdae}
 
 
 Generates the points $x_{t,j}$ with weights $w_{t,j}$ for the polar grid with $T$ angles and $R$ offsets. 
@@ -43,7 +43,7 @@ The nodes of the polar grid lie on concentric circles around the origin. They ar
 
 Weights are introduced to compensate for local sampling density variations. For every point in the sampling set, we associate a small surrounding area. In case of the polar grid, we choose small ring segments. The area of such a ring segment around $x_{t,j}$ ($j \ne 0$) is \[ w_{t,j} = \frac{\pi}{2TR^2}\left(\left(|j|+\frac{1}{2}\right)^2- \left(|j|-\frac{1}{2}\right)^2\right) = \frac{\pi |j| }{TR^2}\, . \] The area of the small circle of radius $\frac{1}{2R}$ around the origin is $\frac{\pi}{4R^2}$. Divided by the multiplicity of the origin in the sampling set, we get $w_{t,0} := \frac{\pi}{4TR^2}$. Thus, the sum of all weights is $\frac{\pi}{4}(1+\frac{1}{R^2})$ and we divide by this value for normalization. 
 
-Definition at line 51 of file polar\_\-fft\_\-test.c.
+Definition at line 73 of file polar\_\-fft\_\-test.c.
 
 References PI.
 

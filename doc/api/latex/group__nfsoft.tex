@@ -1,0 +1,551 @@
+\hypertarget{group__nfsoft}{
+\section{NFSOFT - Nonequispaced fast SO(3) Fourier transform}
+\label{group__nfsoft}\index{NFSOFT - Nonequispaced fast SO(3) Fourier transform@{NFSOFT - Nonequispaced fast SO(3) Fourier transform}}
+}
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct \hyperlink{structnfsoft__plan}{nfsoft\_\-plan}
+\begin{CompactList}\small\item\em Structure for a NFSOFT transform plan. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define \hyperlink{group__nfsoft_g8c53e32dd194bda4a828c15ad044d44a}{NFSOFT\_\-NORMALIZED}~(1U $<$$<$ 0)
+\begin{CompactList}\small\item\em By default, all computations are performed with respect to the unnormalized basis functions \[ D_{mn}^l(\alpha,\beta,\gamma) = d^{mn}_{l}(\cos\beta) \mathrm{e}^{-\mathrm{i} m \alpha}\mathrm{e}^{-\mathrm{i} n \gamma}. \] If this flag is set, all computations are carried out using the $L_2$- normalized basis functions \[ \tilde D_{mn}^l(\alpha,\beta,\gamma) = \sqrt{\frac{2l+1}{8\pi^2}}d^{mn}_{l}(\cos\beta) \mathrm{e}^{-\mathrm{i} m \alpha}\mathrm{e}^{-\mathrm{i} n \gamma} \]. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g14cae92f8ee539b4a41aebdf913ef2c5}{NFSOFT\_\-USE\_\-NDFT}~(1U $<$$<$ 1)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will use internally the exact but usually slower direct NDFT algorithm in favor of fast but approximative NFFT algorithm. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g619b249b5d4b4675d2ce9a17d7817590}{NFSOFT\_\-USE\_\-DPT}~(1U $<$$<$ 2)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will use internally the usually slower direct DPT algorithm in favor of the fast FPT algorithm. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_gbe0d04599c1b06144e9a66fc2ac7b09d}{NFSOFT\_\-MALLOC\_\-X}~(1U $<$$<$ 3)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} , \hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} , and \hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{nfsoft\_\-finalize} will free the array {\tt x} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g379d5bf88e399cf492d86090ce47d47d}{NFSOFT\_\-REPRESENT}~(1U $<$$<$ 4)
+\begin{CompactList}\small\item\em If this flag is set, the Wigner-D functions will be normed such that they satisfy the representation property of the spherical harmonics as defined in the NFFT software package. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g846e8298ed59219f7072230bd61c7a2a}{NFSOFT\_\-MALLOC\_\-F\_\-HAT}~(1U $<$$<$ 5)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} , \hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} , and \hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{nfsoft\_\-finalize} will free the array {\tt f\_\-hat} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_gc65bdc42b4c11296197dc991bbebbd12}{NFSOFT\_\-MALLOC\_\-F}~(1U $<$$<$ 6)
+\begin{CompactList}\small\item\em If this flag is set, the init methods (see \hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} , \hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} , and \hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{nfsoft\_\-finalize} will free the array {\tt f} for you. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g83119b0d4e62f7cd83e0f74c5ef08dec}{NFSOFT\_\-PRESERVE\_\-F\_\-HAT}~(1U $<$$<$ 7)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} the content of {\tt f\_\-hat} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g2650cbfde4c8259e5059d6e9b91e0ec3}{NFSOFT\_\-PRESERVE\_\-X}~(1U $<$$<$ 8)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt x} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g629a86dd29a3cf09872755cd82bf7062}{NFSOFT\_\-PRESERVE\_\-F}~(1U $<$$<$ 9)
+\begin{CompactList}\small\item\em If this flag is set, it is guaranteed that during an execution of ndsoft\_\-adjoint or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt f} remains unchanged. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_gd324d67114a4f52a9fc86d2639745acd}{NFSOFT\_\-DESTROY\_\-F\_\-HAT}~(1U $<$$<$ 10)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} the content of {\tt f\_\-hat} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_gb7ca87a4bb214bcc25d544aa0b6dd503}{NFSOFT\_\-DESTROY\_\-X}~(1U $<$$<$ 11)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt x} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g93ab283dcb14d5b37b130e2556bb6e7d}{NFSOFT\_\-DESTROY\_\-F}~(1U $<$$<$ 12)
+\begin{CompactList}\small\item\em If this flag is set, it is explicitely allowed that during an execution of ndsoft\_\-adjoint or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt f} may be changed. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_ge6c22599d21b5d8a8f144a39b49d3677}{NFSOFT\_\-NO\_\-STABILIZATION}~(1U $<$$<$ 13)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will use internally the FPT algorithm without the stabilization scheme and thus making bigger errors for higher bandwidth but becoming significantly faster. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g43ce16ed2d1893df2b997e637ccde4d4}{NFSOFT\_\-CHOOSE\_\-DPT}~(1U $<$$<$ 14)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will decide whether to use the DPT or FPT algorithm depending on which is faster for the chosen orders. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_g07ad8a429e8451bd153563eedc3ef0bf}{NFSOFT\_\-SOFT}~(1U $<$$<$ 15)
+\begin{CompactList}\small\item\em If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) becomes a SOFT, i.e., we use equispaced nodes. \item\end{CompactList}\item 
+\#define \hyperlink{group__nfsoft_gdaa4a4436a6a9e8b491660bb5fc54f8e}{NFSOFT\_\-ZERO\_\-F\_\-HAT}~(1U $<$$<$ 16)
+\begin{CompactList}\small\item\em If this flag is set, the transform \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} sets all unused entries in {\tt f\_\-hat} not corresponding to SO(3) Fourier coefficients to zero. \item\end{CompactList}\item 
+\hypertarget{group__nfsoft_g796e2f298278bbed00bf0704b553be98}{
+\#define \hyperlink{group__nfsoft_g796e2f298278bbed00bf0704b553be98}{NFSOFT\_\-INDEX}(m, n, l, B)~(((l)+((B)+1))+(2$\ast$(B)+2)$\ast$(((n)+((B)+1))+(2$\ast$(B)+2)$\ast$((m)+((B)+1))))}
+\label{group__nfsoft_g796e2f298278bbed00bf0704b553be98}
+
+\begin{CompactList}\small\item\em These macro expands to the index $i$ corresponding to the SO(3) Fourier coefficient $f_hat^{mn}_l$ for $l=0,...,B$, $m,n =-l,...,l$ with. \item\end{CompactList}\item 
+\hypertarget{group__nfsoft_g67274491cbbbca79a4170608dec640ce}{
+\#define \hyperlink{group__nfsoft_g67274491cbbbca79a4170608dec640ce}{NFSOFT\_\-INDEX\_\-TWO}(m, n, l, B)~((B+1)$\ast$(B+1)+(B+1)$\ast$(B+1)$\ast$(m+B)-((m-1)$\ast$m$\ast$(2$\ast$m-1)+(B+1)$\ast$(B+2)$\ast$(2$\ast$B+3))/6)+(posN(n,m,B))+(l-MAX(ABS(m),ABS(n)))}
+\label{group__nfsoft_g67274491cbbbca79a4170608dec640ce}
+
+\item 
+\hypertarget{group__nfsoft_gd214901ec9451e6076e05d22eb734d49}{
+\#define \hyperlink{group__nfsoft_gd214901ec9451e6076e05d22eb734d49}{NFSOFT\_\-F\_\-HAT\_\-SIZE}(B)~(((B)+1)$\ast$(4$\ast$((B)+1)$\ast$((B)+1)-1)/3)}
+\label{group__nfsoft_gd214901ec9451e6076e05d22eb734d49}
+
+\begin{CompactList}\small\item\em This macro expands to the logical size of a SO(3) Fourier coefficients array for a bandwidth B. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{group__nfsoft_gaec46df0644d73d48cea150cefffffae}{
+int \hyperlink{group__nfsoft_gaec46df0644d73d48cea150cefffffae}{posN} (int n, int m, int B)}
+\label{group__nfsoft_gaec46df0644d73d48cea150cefffffae}
+
+\item 
+void \hyperlink{group__nfsoft_g123df5d17a0d43fe5e061ac0fb8c1d23}{nfsoft\_\-precompute} (\hyperlink{structnfsoft__plan}{nfsoft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Functions for NFSOFT plans. \item\end{CompactList}\item 
+void \hyperlink{group__nfsoft_gfdc0cc0432918bfa8643c7a5f42d7ea5}{SO3\_\-fpt} (fftw\_\-complex $\ast$coeffs, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set, int l, int k, int m, unsigned int nfsoft\_\-flags)
+\begin{CompactList}\small\item\em Computes the FPT transform. \item\end{CompactList}\item 
+\hypertarget{group__nfsoft_g9cfa0279bc0f6ad32d69cb17dbd206a8}{
+void \textbf{SO3\_\-fpt\_\-transposed} (fftw\_\-complex $\ast$coeffs, \hyperlink{group__fpt_g73d630ac21d6474ba0693f124d465e15}{fpt\_\-set} set, int l, int k, int m, unsigned int nfsoft\_\-flags)}
+\label{group__nfsoft_g9cfa0279bc0f6ad32d69cb17dbd206a8}
+
+\item 
+void \hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} (\hyperlink{structnfsoft__plan}{nfsoft\_\-plan} $\ast$plan, int N, int M)
+\begin{CompactList}\small\item\em Creates a NFSOFT transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} (\hyperlink{structnfsoft__plan}{nfsoft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsoft\_\-flags)
+\begin{CompactList}\small\item\em Creates a NFSOFT transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} (\hyperlink{structnfsoft__plan}{nfsoft\_\-plan} $\ast$plan, int N, int M, unsigned int nfsoft\_\-flags, unsigned int nfft\_\-flags, int nfft\_\-cutoff, int fpt\_\-kappa)
+\begin{CompactList}\small\item\em Creates a NFSOFT transform plan. \item\end{CompactList}\item 
+void \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} (\hyperlink{structnfsoft__plan}{nfsoft\_\-plan} $\ast$plan\_\-nfsoft)
+\begin{CompactList}\small\item\em Executes a NFSOFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} (\hyperlink{structnfsoft__plan}{nfsoft\_\-plan} $\ast$plan\_\-nfsoft)
+\begin{CompactList}\small\item\em Executes an adjoint NFSOFT, i.e. \item\end{CompactList}\item 
+void \hyperlink{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{nfsoft\_\-finalize} (\hyperlink{structnfsoft__plan}{nfsoft\_\-plan} $\ast$plan)
+\begin{CompactList}\small\item\em Destroys a plan. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+This module implements nonuniform fast SO(3) Fourier transforms. In the following, we abbreviate the term \char`\"{}nonuniform fast SO(3) Fourier transform\char`\"{} by NFSOFT. 
+
+\subsection{Define Documentation}
+\hypertarget{group__nfsoft_g8c53e32dd194bda4a828c15ad044d44a}{
+\index{nfsoft@{nfsoft}!NFSOFT_NORMALIZED@{NFSOFT\_\-NORMALIZED}}
+\index{NFSOFT_NORMALIZED@{NFSOFT\_\-NORMALIZED}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-NORMALIZED~(1U $<$$<$ 0)}}
+\label{group__nfsoft_g8c53e32dd194bda4a828c15ad044d44a}
+
+
+By default, all computations are performed with respect to the unnormalized basis functions \[ D_{mn}^l(\alpha,\beta,\gamma) = d^{mn}_{l}(\cos\beta) \mathrm{e}^{-\mathrm{i} m \alpha}\mathrm{e}^{-\mathrm{i} n \gamma}. \] If this flag is set, all computations are carried out using the $L_2$- normalized basis functions \[ \tilde D_{mn}^l(\alpha,\beta,\gamma) = \sqrt{\frac{2l+1}{8\pi^2}}d^{mn}_{l}(\cos\beta) \mathrm{e}^{-\mathrm{i} m \alpha}\mathrm{e}^{-\mathrm{i} n \gamma} \]. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2384 of file nfft3.h.
+
+Referenced by nfsoft\_\-adjoint(), and nfsoft\_\-trafo().\hypertarget{group__nfsoft_g14cae92f8ee539b4a41aebdf913ef2c5}{
+\index{nfsoft@{nfsoft}!NFSOFT_USE_NDFT@{NFSOFT\_\-USE\_\-NDFT}}
+\index{NFSOFT_USE_NDFT@{NFSOFT\_\-USE\_\-NDFT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-USE\_\-NDFT~(1U $<$$<$ 1)}}
+\label{group__nfsoft_g14cae92f8ee539b4a41aebdf913ef2c5}
+
+
+If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will use internally the exact but usually slower direct NDFT algorithm in favor of fast but approximative NFFT algorithm. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2396 of file nfft3.h.
+
+Referenced by nfsoft\_\-adjoint(), and nfsoft\_\-trafo().\hypertarget{group__nfsoft_g619b249b5d4b4675d2ce9a17d7817590}{
+\index{nfsoft@{nfsoft}!NFSOFT_USE_DPT@{NFSOFT\_\-USE\_\-DPT}}
+\index{NFSOFT_USE_DPT@{NFSOFT\_\-USE\_\-DPT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-USE\_\-DPT~(1U $<$$<$ 2)}}
+\label{group__nfsoft_g619b249b5d4b4675d2ce9a17d7817590}
+
+
+If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will use internally the usually slower direct DPT algorithm in favor of the fast FPT algorithm. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2408 of file nfft3.h.\hypertarget{group__nfsoft_gbe0d04599c1b06144e9a66fc2ac7b09d}{
+\index{nfsoft@{nfsoft}!NFSOFT_MALLOC_X@{NFSOFT\_\-MALLOC\_\-X}}
+\index{NFSOFT_MALLOC_X@{NFSOFT\_\-MALLOC\_\-X}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-MALLOC\_\-X~(1U $<$$<$ 3)}}
+\label{group__nfsoft_gbe0d04599c1b06144e9a66fc2ac7b09d}
+
+
+If this flag is set, the init methods (see \hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} , \hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} , and \hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{nfsoft\_\-finalize} will free the array {\tt x} for you. 
+
+Otherwise, you have to assure by yourself that {\tt x} points to an array of proper size before excuting a transform and you are responsible for freeing the corresponding memory before program termination.
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2423 of file nfft3.h.
+
+Referenced by nfsoft\_\-finalize(), nfsoft\_\-init(), and nfsoft\_\-init\_\-guru().\hypertarget{group__nfsoft_g379d5bf88e399cf492d86090ce47d47d}{
+\index{nfsoft@{nfsoft}!NFSOFT_REPRESENT@{NFSOFT\_\-REPRESENT}}
+\index{NFSOFT_REPRESENT@{NFSOFT\_\-REPRESENT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-REPRESENT~(1U $<$$<$ 4)}}
+\label{group__nfsoft_g379d5bf88e399cf492d86090ce47d47d}
+
+
+If this flag is set, the Wigner-D functions will be normed such that they satisfy the representation property of the spherical harmonics as defined in the NFFT software package. 
+
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2432 of file nfft3.h.
+
+Referenced by nfsoft\_\-adjoint(), and nfsoft\_\-trafo().\hypertarget{group__nfsoft_g846e8298ed59219f7072230bd61c7a2a}{
+\index{nfsoft@{nfsoft}!NFSOFT_MALLOC_F_HAT@{NFSOFT\_\-MALLOC\_\-F\_\-HAT}}
+\index{NFSOFT_MALLOC_F_HAT@{NFSOFT\_\-MALLOC\_\-F\_\-HAT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-MALLOC\_\-F\_\-HAT~(1U $<$$<$ 5)}}
+\label{group__nfsoft_g846e8298ed59219f7072230bd61c7a2a}
+
+
+If this flag is set, the init methods (see \hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} , \hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} , and \hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{nfsoft\_\-finalize} will free the array {\tt f\_\-hat} for you. 
+
+Otherwise, you have to assure by yourself that {\tt f\_\-hat} points to an array of proper size before excuting a transform and you are responsible for freeing the corresponding memory before program termination.
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2448 of file nfft3.h.
+
+Referenced by nfsoft\_\-finalize(), nfsoft\_\-init(), and nfsoft\_\-init\_\-guru().\hypertarget{group__nfsoft_gc65bdc42b4c11296197dc991bbebbd12}{
+\index{nfsoft@{nfsoft}!NFSOFT_MALLOC_F@{NFSOFT\_\-MALLOC\_\-F}}
+\index{NFSOFT_MALLOC_F@{NFSOFT\_\-MALLOC\_\-F}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-MALLOC\_\-F~(1U $<$$<$ 6)}}
+\label{group__nfsoft_gc65bdc42b4c11296197dc991bbebbd12}
+
+
+If this flag is set, the init methods (see \hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} , \hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} , and \hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru}) will allocate memory and the method \hyperlink{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{nfsoft\_\-finalize} will free the array {\tt f} for you. 
+
+Otherwise, you have to assure by yourself that {\tt f} points to an array of proper size before excuting a transform and you are responsible for freeing the corresponding memory before program termination.
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2463 of file nfft3.h.
+
+Referenced by nfsoft\_\-finalize(), nfsoft\_\-init(), and nfsoft\_\-init\_\-guru().\hypertarget{group__nfsoft_g83119b0d4e62f7cd83e0f74c5ef08dec}{
+\index{nfsoft@{nfsoft}!NFSOFT_PRESERVE_F_HAT@{NFSOFT\_\-PRESERVE\_\-F\_\-HAT}}
+\index{NFSOFT_PRESERVE_F_HAT@{NFSOFT\_\-PRESERVE\_\-F\_\-HAT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-PRESERVE\_\-F\_\-HAT~(1U $<$$<$ 7)}}
+\label{group__nfsoft_g83119b0d4e62f7cd83e0f74c5ef08dec}
+
+
+If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} the content of {\tt f\_\-hat} remains unchanged. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2475 of file nfft3.h.\hypertarget{group__nfsoft_g2650cbfde4c8259e5059d6e9b91e0ec3}{
+\index{nfsoft@{nfsoft}!NFSOFT_PRESERVE_X@{NFSOFT\_\-PRESERVE\_\-X}}
+\index{NFSOFT_PRESERVE_X@{NFSOFT\_\-PRESERVE\_\-X}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-PRESERVE\_\-X~(1U $<$$<$ 8)}}
+\label{group__nfsoft_g2650cbfde4c8259e5059d6e9b91e0ec3}
+
+
+If this flag is set, it is guaranteed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt x} remains unchanged. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2488 of file nfft3.h.\hypertarget{group__nfsoft_g629a86dd29a3cf09872755cd82bf7062}{
+\index{nfsoft@{nfsoft}!NFSOFT_PRESERVE_F@{NFSOFT\_\-PRESERVE\_\-F}}
+\index{NFSOFT_PRESERVE_F@{NFSOFT\_\-PRESERVE\_\-F}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-PRESERVE\_\-F~(1U $<$$<$ 9)}}
+\label{group__nfsoft_g629a86dd29a3cf09872755cd82bf7062}
+
+
+If this flag is set, it is guaranteed that during an execution of ndsoft\_\-adjoint or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt f} remains unchanged. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2500 of file nfft3.h.\hypertarget{group__nfsoft_gd324d67114a4f52a9fc86d2639745acd}{
+\index{nfsoft@{nfsoft}!NFSOFT_DESTROY_F_HAT@{NFSOFT\_\-DESTROY\_\-F\_\-HAT}}
+\index{NFSOFT_DESTROY_F_HAT@{NFSOFT\_\-DESTROY\_\-F\_\-HAT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-DESTROY\_\-F\_\-HAT~(1U $<$$<$ 10)}}
+\label{group__nfsoft_gd324d67114a4f52a9fc86d2639745acd}
+
+
+If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} the content of {\tt f\_\-hat} may be changed. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2511 of file nfft3.h.\hypertarget{group__nfsoft_gb7ca87a4bb214bcc25d544aa0b6dd503}{
+\index{nfsoft@{nfsoft}!NFSOFT_DESTROY_X@{NFSOFT\_\-DESTROY\_\-X}}
+\index{NFSOFT_DESTROY_X@{NFSOFT\_\-DESTROY\_\-X}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-DESTROY\_\-X~(1U $<$$<$ 11)}}
+\label{group__nfsoft_gb7ca87a4bb214bcc25d544aa0b6dd503}
+
+
+If this flag is set, it is explicitely allowed that during an execution of \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo} or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt x} may be changed. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2523 of file nfft3.h.\hypertarget{group__nfsoft_g93ab283dcb14d5b37b130e2556bb6e7d}{
+\index{nfsoft@{nfsoft}!NFSOFT_DESTROY_F@{NFSOFT\_\-DESTROY\_\-F}}
+\index{NFSOFT_DESTROY_F@{NFSOFT\_\-DESTROY\_\-F}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-DESTROY\_\-F~(1U $<$$<$ 12)}}
+\label{group__nfsoft_g93ab283dcb14d5b37b130e2556bb6e7d}
+
+
+If this flag is set, it is explicitely allowed that during an execution of ndsoft\_\-adjoint or \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} the content of {\tt f} may be changed. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2534 of file nfft3.h.\hypertarget{group__nfsoft_ge6c22599d21b5d8a8f144a39b49d3677}{
+\index{nfsoft@{nfsoft}!NFSOFT_NO_STABILIZATION@{NFSOFT\_\-NO\_\-STABILIZATION}}
+\index{NFSOFT_NO_STABILIZATION@{NFSOFT\_\-NO\_\-STABILIZATION}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-NO\_\-STABILIZATION~(1U $<$$<$ 13)}}
+\label{group__nfsoft_ge6c22599d21b5d8a8f144a39b49d3677}
+
+
+If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will use internally the FPT algorithm without the stabilization scheme and thus making bigger errors for higher bandwidth but becoming significantly faster. 
+
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2544 of file nfft3.h.\hypertarget{group__nfsoft_g43ce16ed2d1893df2b997e637ccde4d4}{
+\index{nfsoft@{nfsoft}!NFSOFT_CHOOSE_DPT@{NFSOFT\_\-CHOOSE\_\-DPT}}
+\index{NFSOFT_CHOOSE_DPT@{NFSOFT\_\-CHOOSE\_\-DPT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-CHOOSE\_\-DPT~(1U $<$$<$ 14)}}
+\label{group__nfsoft_g43ce16ed2d1893df2b997e637ccde4d4}
+
+
+If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) will decide whether to use the DPT or FPT algorithm depending on which is faster for the chosen orders. 
+
+not yet included in the checked-in version
+
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2555 of file nfft3.h.\hypertarget{group__nfsoft_g07ad8a429e8451bd153563eedc3ef0bf}{
+\index{nfsoft@{nfsoft}!NFSOFT_SOFT@{NFSOFT\_\-SOFT}}
+\index{NFSOFT_SOFT@{NFSOFT\_\-SOFT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-SOFT~(1U $<$$<$ 15)}}
+\label{group__nfsoft_g07ad8a429e8451bd153563eedc3ef0bf}
+
+
+If this flag is set, the fast NFSOFT algorithms (see \hyperlink{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{nfsoft\_\-trafo}, \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint}) becomes a SOFT, i.e., we use equispaced nodes. 
+
+The FFTW will be used instead of the NFFT.--$>$not included yet
+
+\begin{Desc}
+\item[See also:]\hyperlink{group__nfsoft_g31c884458165fa204073c6c16c10775e}{nfsoft\_\-init} 
+
+\hyperlink{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{nfsoft\_\-init\_\-advanced} 
+
+\hyperlink{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{nfsoft\_\-init\_\-guru} \end{Desc}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2567 of file nfft3.h.\hypertarget{group__nfsoft_gdaa4a4436a6a9e8b491660bb5fc54f8e}{
+\index{nfsoft@{nfsoft}!NFSOFT_ZERO_F_HAT@{NFSOFT\_\-ZERO\_\-F\_\-HAT}}
+\index{NFSOFT_ZERO_F_HAT@{NFSOFT\_\-ZERO\_\-F\_\-HAT}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NFSOFT\_\-ZERO\_\-F\_\-HAT~(1U $<$$<$ 16)}}
+\label{group__nfsoft_gdaa4a4436a6a9e8b491660bb5fc54f8e}
+
+
+If this flag is set, the transform \hyperlink{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{nfsoft\_\-adjoint} sets all unused entries in {\tt f\_\-hat} not corresponding to SO(3) Fourier coefficients to zero. 
+
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 2577 of file nfft3.h.
+
+\subsection{Function Documentation}
+\hypertarget{group__nfsoft_g123df5d17a0d43fe5e061ac0fb8c1d23}{
+\index{nfsoft@{nfsoft}!nfsoft_precompute@{nfsoft\_\-precompute}}
+\index{nfsoft_precompute@{nfsoft\_\-precompute}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsoft\_\-precompute ({\bf nfsoft\_\-plan} $\ast$ {\em plan})}}
+\label{group__nfsoft_g123df5d17a0d43fe5e061ac0fb8c1d23}
+
+
+Functions for NFSOFT plans. 
+
+Does all node-dependent and node-independent precomputations needed for the NFSOFT.
+
+\begin{itemize}
+\item plan a pointer to a \hyperlink{structnfsoft__plan}{nfsoft\_\-plan} structure \end{itemize}
+
+
+Definition at line 360 of file nfsoft.c.\hypertarget{group__nfsoft_gfdc0cc0432918bfa8643c7a5f42d7ea5}{
+\index{nfsoft@{nfsoft}!SO3_fpt@{SO3\_\-fpt}}
+\index{SO3_fpt@{SO3\_\-fpt}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void SO3\_\-fpt (fftw\_\-complex $\ast$ {\em coeffs}, {\bf fpt\_\-set} {\em set}, int {\em l}, int {\em k}, int {\em m}, unsigned int {\em nfsoft\_\-flags})}}
+\label{group__nfsoft_gfdc0cc0432918bfa8643c7a5f42d7ea5}
+
+
+Computes the FPT transform. 
+
+\begin{itemize}
+\item coeffs the Chebychev coefficients that should be transformed \item set the FPT-set containing precomputed data \item l the polynomial degree \item k the first order \item m the second order \item nfsoft\_\-flags \end{itemize}
+
+
+Referenced by nfsoft\_\-trafo().\hypertarget{group__nfsoft_g31c884458165fa204073c6c16c10775e}{
+\index{nfsoft@{nfsoft}!nfsoft_init@{nfsoft\_\-init}}
+\index{nfsoft_init@{nfsoft\_\-init}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsoft\_\-init ({\bf nfsoft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M})}}
+\label{group__nfsoft_g31c884458165fa204073c6c16c10775e}
+
+
+Creates a NFSOFT transform plan. 
+
+\begin{itemize}
+\item plan a pointer to a \hyperlink{structnfsoft__plan}{nfsoft\_\-plan} structure \item N the bandwidth $N \in \mathbb{N}_0$ \item M the number of nodes $M \in \mathbb{N}$\end{itemize}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 34 of file nfsoft.c.\hypertarget{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}{
+\index{nfsoft@{nfsoft}!nfsoft_init_advanced@{nfsoft\_\-init\_\-advanced}}
+\index{nfsoft_init_advanced@{nfsoft\_\-init\_\-advanced}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsoft\_\-init\_\-advanced ({\bf nfsoft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M}, unsigned int {\em nfsoft\_\-flags})}}
+\label{group__nfsoft_gf4aec4ee2a2a5d56ca27c4f1a7f90b18}
+
+
+Creates a NFSOFT transform plan. 
+
+\begin{itemize}
+\item plan a pointer to a \hyperlink{structnfsoft__plan}{nfsoft\_\-plan} structure \item N the bandwidth $N \in \mathbb{N}_0$ \item M the number of nodes $M \in \mathbb{N}$ \item nfsoft\_\-flags the NFSOFT flags\end{itemize}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 40 of file nfsoft.c.
+
+Referenced by nfsoft\_\-init().\hypertarget{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}{
+\index{nfsoft@{nfsoft}!nfsoft_init_guru@{nfsoft\_\-init\_\-guru}}
+\index{nfsoft_init_guru@{nfsoft\_\-init\_\-guru}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsoft\_\-init\_\-guru ({\bf nfsoft\_\-plan} $\ast$ {\em plan}, int {\em N}, int {\em M}, unsigned int {\em nfsoft\_\-flags}, unsigned int {\em nfft\_\-flags}, int {\em nfft\_\-cutoff}, int {\em fpt\_\-kappa})}}
+\label{group__nfsoft_g1c13cdd3f82f48fa41acdd313cdc2052}
+
+
+Creates a NFSOFT transform plan. 
+
+\begin{itemize}
+\item plan a pointer to a \hyperlink{structnfsoft__plan}{nfsoft\_\-plan} structure \item N the bandwidth $N \in \mathbb{N}_0$ \item M the number of nodes $M \in \mathbb{N}$ \item nfsoft\_\-flags the NFSFT flags \item nfft\_\-flags the NFFT flags \item fpt\_\-kappa a parameter contolling the accuracy of the FPT \item nfft\_\-cutoff the NFFT cutoff parameter\end{itemize}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 48 of file nfsoft.c.
+
+Referenced by nfsoft\_\-init\_\-advanced().\hypertarget{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}{
+\index{nfsoft@{nfsoft}!nfsoft_trafo@{nfsoft\_\-trafo}}
+\index{nfsoft_trafo@{nfsoft\_\-trafo}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsoft\_\-trafo ({\bf nfsoft\_\-plan} $\ast$ {\em plan\_\-nfsoft})}}
+\label{group__nfsoft_ge243cd75d7571a99eae53818e32355fb}
+
+
+Executes a NFSOFT, i.e. 
+
+computes for $m = 0,\ldots,M-1$ \[ f(g_m) = \sum_{l=0}^B \sum_{m=-l}^l \sum_{n=-l}^l \hat{f}^{mn}_l D_l^{mn}\left( \alpha_m,\beta_m,\gamma_m\right). \]
+
+\begin{itemize}
+\item plan\_\-nfsoft the plan\end{itemize}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 398 of file nfsoft.c.
+
+Referenced by nfsoft\_\-init\_\-guru().\hypertarget{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}{
+\index{nfsoft@{nfsoft}!nfsoft_adjoint@{nfsoft\_\-adjoint}}
+\index{nfsoft_adjoint@{nfsoft\_\-adjoint}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsoft\_\-adjoint ({\bf nfsoft\_\-plan} $\ast$ {\em plan\_\-nfsoft})}}
+\label{group__nfsoft_g08395b1dd90f9a2565685d17460afc5b}
+
+
+Executes an adjoint NFSOFT, i.e. 
+
+computes for $l=0,\ldots,B; m,n=-l,\ldots,l$ \[ \hat{f}^{mn}_l = \sum_{m = 0}^{M-1} f(g_m) D_l^{mn}\left( \alpha_m,\beta_m,\gamma_m\right) \]
+
+\begin{itemize}
+\item plan\_\-nfsoft the plan\end{itemize}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 523 of file nfsoft.c.
+
+Referenced by nfsoft\_\-init\_\-guru().\hypertarget{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}{
+\index{nfsoft@{nfsoft}!nfsoft_finalize@{nfsoft\_\-finalize}}
+\index{nfsoft_finalize@{nfsoft\_\-finalize}!nfsoft@{nfsoft}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void nfsoft\_\-finalize ({\bf nfsoft\_\-plan} $\ast$ {\em plan})}}
+\label{group__nfsoft_g30b5c6ae1ff496680f11ddcaad2d5a47}
+
+
+Destroys a plan. 
+
+\begin{itemize}
+\item plan the plan to be destroyed\end{itemize}
+\begin{Desc}
+\item[Author:]Antje Vollrath \end{Desc}
+
+
+Definition at line 612 of file nfsoft.c.
