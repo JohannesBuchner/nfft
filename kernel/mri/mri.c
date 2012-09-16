@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,13 +16,15 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: mri.c 3321 2009-09-11 07:21:20Z kunis $ */
+/* $Id: mri.c 3775 2012-06-02 16:39:48Z keiner $ */
+
+#include "config.h"
 
 #include <string.h>
 #include <math.h>
-
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
-
+#endif
 #include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
@@ -45,7 +47,7 @@ typedef struct window_funct_plan_ {
 /**
  * init the window_funct_plan
  */
-void window_funct_init(window_funct_plan* ths, int m, int n, double sigma) {
+static void window_funct_init(window_funct_plan* ths, int m, int n, double sigma) {
 	ths->d=1;
 	ths->m=m;
 	ths->n[0]=n;

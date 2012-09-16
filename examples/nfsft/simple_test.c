@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,9 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+
+#include "config.h"
 
 /* standard headers */
 #include <stdio.h>
@@ -24,7 +26,9 @@
 #include <string.h>
 #include <stdlib.h>
 /* It is important to include complex.h before nfft3.h. */
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3.h" /* NFFT3 header */
 #include "nfft3util.h" /* NFFT3 utilities header*/
@@ -53,8 +57,8 @@ static void simple_test_nfsft(void)
   /* pseudo-random nodes */
   for (j = 0; j < plan.M_total; j++)
   {
-    plan.x[2*j]= RAND - K(0.5);
-    plan.x[2*j+1]= K(0.5) * RAND;
+    plan.x[2*j]= nfft_drand48() - K(0.5);
+    plan.x[2*j+1]= K(0.5) * nfft_drand48();
   }
 
   /* precomputation (for NFFT, node-dependent) */
@@ -64,10 +68,10 @@ static void simple_test_nfsft(void)
   for (k = 0; k <= plan.N; k++)
     for (n = -k; n <= k; n++)
       plan.f_hat[NFSFT_INDEX(k,n,&plan)] =
-        RAND - K(0.5) + _Complex_I*(RAND - K(0.5));
+          nfft_drand48() - K(0.5) + _Complex_I*(nfft_drand48() - K(0.5));
 
   /* Direct transformation, display result. */
-  ndsft_trafo(&plan);
+  nfsft_trafo_direct(&plan);
   printf("Vector f (NDSFT):\n");
   for (j = 0; j < plan.M_total; j++)
     printf("f[%+2d] = %+5.3" FE " %+5.3" FE "*I\n",j,
@@ -84,7 +88,7 @@ static void simple_test_nfsft(void)
   printf("\n");
 
   /* Direct adjoint transformation, display result. */
-  ndsft_adjoint(&plan);
+  nfsft_adjoint_direct(&plan);
   printf("Vector f_hat (NDSFT):\n");
   for (k = 0; k <= plan.N; k++)
     for (n = -k; n <= k; n++)

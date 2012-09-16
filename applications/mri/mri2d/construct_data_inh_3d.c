@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,12 +16,15 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: construct_data_inh_3d.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: construct_data_inh_3d.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3.h"
 #include "nfft3util.h"
@@ -35,7 +38,7 @@
 /**
  * construct
  */
-void construct(char * file, int N, int M)
+static void construct(char * file, int N, int M)
 {
   int j;                  /* some variables */
   double real;

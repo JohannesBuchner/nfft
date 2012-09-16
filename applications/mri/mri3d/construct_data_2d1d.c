@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,11 +16,14 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: construct_data_2d1d.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: construct_data_2d1d.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdlib.h>
 #include <math.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
@@ -34,7 +37,7 @@
 /**
  * construct makes an 2d-nfft for every slice
  */
-void construct(char * file, int N, int M, int Z, fftw_complex *mem)
+static void construct(char * file, int N, int M, int Z, fftw_complex *mem)
 {
   int j,z;                /* some variables */
   double tmp;             /* a placeholder */
@@ -80,7 +83,7 @@ void construct(char * file, int N, int M, int Z, fftw_complex *mem)
  * fft makes an 1D-ftt for every knot through
  * all layers
  */
-void fft(int N,int M,int Z, fftw_complex *mem)
+static void fft(int N,int M,int Z, fftw_complex *mem)
 {
   fftw_plan plan;
   plan = fftw_plan_many_dft(1, &Z, N*N,
@@ -98,7 +101,7 @@ void fft(int N,int M,int Z, fftw_complex *mem)
  * read fills the memory with the file input_data_f.dat as
  * the real part of f and with zeros for the imag part of f
  */
-void read_data(int N,int M,int Z, fftw_complex *mem)
+static void read_data(int N,int M,int Z, fftw_complex *mem)
 {
   int i,z;
   double real;

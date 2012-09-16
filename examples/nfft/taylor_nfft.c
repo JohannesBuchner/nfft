@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: taylor_nfft.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: taylor_nfft.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /*! \file taylor_nfft.c
  *
@@ -27,14 +27,19 @@
  * References: Time and memory requirements of the Nonequispaced FFT
  *
  */
+#include "config.h"
+
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 typedef struct
 {
@@ -56,7 +61,7 @@ typedef struct
  *
  * \author Stefan Kunis
  */
-void taylor_init(taylor_plan *ths, int N, int M, int n, int m)
+static void taylor_init(taylor_plan *ths, int N, int M, int n, int m)
 {
   /* Note: no nfft precomputation! */
   nfft_init_guru((nfft_plan*)ths, 1, &N, M, &n, m,
@@ -75,7 +80,7 @@ void taylor_init(taylor_plan *ths, int N, int M, int n, int m)
  *
  * \author Stefan Kunis
  */
-void taylor_precompute(taylor_plan *ths)
+static void taylor_precompute(taylor_plan *ths)
 {
   int j;
 
@@ -97,7 +102,7 @@ void taylor_precompute(taylor_plan *ths)
  *
  * \author Stefan Kunis, Daniel Potts
  */
-void taylor_finalize(taylor_plan *ths)
+static void taylor_finalize(taylor_plan *ths)
 {
   nfft_free(ths->deltax0);
   nfft_free(ths->idx0);
@@ -115,7 +120,7 @@ void taylor_finalize(taylor_plan *ths)
  *
  * \author Stefan Kunis
  */
-void taylor_trafo(taylor_plan *ths)
+static void taylor_trafo(taylor_plan *ths)
 {
   int j,k,l,ll;
   double _Complex *f, *f_hat, *g1;
@@ -171,12 +176,13 @@ void taylor_trafo(taylor_plan *ths)
  *
  * \author Stefan Kunis
  */
-void taylor_time_accuracy(int N, int M, int n, int m, int n_taylor,
+static void taylor_time_accuracy(int N, int M, int n, int m, int n_taylor,
                           int m_taylor, unsigned test_accuracy)
 {
   int r;
   double t_ndft, t_nfft, t_taylor, t;
-  double _Complex *swapndft;
+  double _Complex *swapndft = NULL;
+  ticks t0, t1;
 
   taylor_plan tp;
   nfft_plan np;
@@ -222,9 +228,10 @@ void taylor_time_accuracy(int N, int M, int n, int m, int n_taylor,
       while(t_ndft<0.01)
         {
           r++;
-          t=nfft_second();
-          ndft_trafo(&np);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_trafo_direct(&np);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -241,9 +248,10 @@ void taylor_time_accuracy(int N, int M, int n, int m, int n_taylor,
   while(t_nfft<0.01)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo(&np);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
@@ -251,7 +259,7 @@ void taylor_time_accuracy(int N, int M, int n, int m, int n_taylor,
   printf("%.2f\t%d\t%.2e\t",((double)n)/N, m, t_nfft);
 
   if(test_accuracy)
-    printf("%.2e\t",nfft_error_l_infty_complex(swapndft, np.f, np.M_total));
+    printf("%.2e\t",X(error_l_infty_complex)(swapndft, np.f, np.M_total));
   else
     printf("nan\t\t");
 
@@ -261,9 +269,10 @@ void taylor_time_accuracy(int N, int M, int n, int m, int n_taylor,
   while(t_taylor<0.01)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       taylor_trafo(&tp);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_taylor+=t;
     }
   t_taylor/=r;
@@ -272,7 +281,7 @@ void taylor_time_accuracy(int N, int M, int n, int m, int n_taylor,
   printf("%.2f\t%d\t%.2e\t",((double)n_taylor)/N,m_taylor,t_taylor);
 
   if(test_accuracy)
-    printf("%.2e\n",nfft_error_l_infty_complex(swapndft, np.f, np.M_total));
+    printf("%.2e\n",X(error_l_infty_complex)(swapndft, np.f, np.M_total));
   else
     printf("nan\t\n");
 

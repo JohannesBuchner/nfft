@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,26 +16,30 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastsumS2.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: fastsumS2.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * \defgroup applications_fastsumS2_test fastsumS2_matlab
  * \ingroup applications_fastsumS2
  * \{
  */
+#include "config.h"
 
 /* standard headers */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 /* NFFT3 header */
 #include "nfft3.h"
 
 /* NFFT3 utilities */
 #include "nfft3util.h"
+#include "infft.h"
 
 /* Fourier-Legendre coefficients for Abel-Poisson kernel */
 #define SYMBOL_ABEL_POISSON(k,h) (pow(h,k))
@@ -195,7 +199,7 @@ int main (int argc, char **argv)
   double temp;                 /*                                             */
   double err_f;                /* Error E_infty for fast algorithm            */
   double err_fd;               /* Error E_\infty for fast direct algorithm    */
-  double t;                    /*                                             */
+  ticks t0, t1;                /*                                             */
   int precompute = NO;         /*                                             */
   fftw_complex *ptr;         /*                                             */
   double* steed;               /*                                             */
@@ -513,7 +517,7 @@ int main (int argc, char **argv)
             t_dp = 0.0;
 
             /* Initialize time measurement. */
-            t = nfft_second();
+            t0 = getticks();
 
             /* Cycle through all runs. */
             for (i = 0; i < ld[ild][4]; i++)
@@ -568,7 +572,8 @@ int main (int argc, char **argv)
             }
 
             /* Calculate the time needed. */
-            t_dp = nfft_second() - t;
+            t1 = getticks();
+            t_dp = nfft_elapsed_seconds(t1,t0);
 
             /* Calculate average time needed. */
             t_dp = t_dp/((double)ld[ild][4]);
@@ -583,7 +588,7 @@ int main (int argc, char **argv)
           t_d = 0.0;
 
           /* Initialize time measurement. */
-          t = nfft_second();
+          t0 = getticks();
 
           /* Cycle through all runs. */
           for (i = 0; i < ld[ild][4]; i++)
@@ -684,7 +689,8 @@ int main (int argc, char **argv)
           }
 
           /* Calculate and add the time needed. */
-          t_d = nfft_second() - t;
+          t1 = getticks();
+          t_d = nfft_elapsed_seconds(t1,t0);
           /* Calculate average time needed. */
           t_d = t_d/((double)ld[ild][4]);
         }
@@ -733,14 +739,14 @@ int main (int argc, char **argv)
             t_fd = 0.0;
 
             /* Initialize time measurement. */
-            t = nfft_second();
+            t0 = getticks();
 
             /* Cycle through all runs. */
             for (i = 0; i < ld[ild][4]; i++)
             {
 
               /* Execute adjoint direct NDSFT transformation. */
-              ndsft_adjoint(&plan_adjoint);
+              nfsft_adjoint_direct(&plan_adjoint);
 
               /* Multiplication with the Fourier-Legendre coefficients. */
               for (k = 0; k <= m[im]; k++)
@@ -748,12 +754,13 @@ int main (int argc, char **argv)
                   f_hat[NFSFT_INDEX(k,n,&plan_adjoint)] *= a[k];
 
               /* Execute direct NDSFT transformation. */
-              ndsft_trafo(&plan);
+              nfsft_trafo_direct(&plan);
 
             }
 
             /* Calculate and add the time needed. */
-            t_fd = nfft_second() - t;
+            t1 = getticks();
+            t_fd = nfft_elapsed_seconds(t1,t0);
 
             /* Calculate average time needed. */
             t_fd = t_fd/((double)ld[ild][4]);
@@ -762,7 +769,7 @@ int main (int argc, char **argv)
             if (ld[ild][2] != NO)
             {
               /* Compute the error E_infinity. */
-              err_fd = nfft_error_l_infty_1_complex(f, f_m, ld[ild][1], b,
+              err_fd = X(error_l_infty_1_complex)(f, f_m, ld[ild][1], b,
                 ld[ild][0]);
             }
           }
@@ -781,7 +788,7 @@ int main (int argc, char **argv)
           }
 
           /* Initialize time measurement. */
-          t = nfft_second();
+          t0 = getticks();
 
           /* Cycle through all runs. */
           for (i = 0; i < ld[ild][4]; i++)
@@ -795,7 +802,7 @@ int main (int argc, char **argv)
             else
             {
               /* Execute the adjoint direct NDSFT transformation. */
-              ndsft_adjoint(&plan_adjoint);
+              nfsft_adjoint_direct(&plan_adjoint);
             }
 
             /* Multiplication with the Fourier-Legendre coefficients. */
@@ -812,21 +819,17 @@ int main (int argc, char **argv)
             else
             {
               /* Execute the NDSFT transformation. */
-              ndsft_trafo(&plan);
+              nfsft_trafo_direct(&plan);
             }
           }
 
           /* Check if the fast NFSFT algorithm has been used. */
+          t1 = getticks();
+
           if (use_nfsft != NO)
-          {
-            /* Calculate and add the time needed. */
-            t_f = nfft_second() - t;
-          }
+            t_f = nfft_elapsed_seconds(t1,t0);
           else
-          {
-            /* Calculate and add the time needed. */
-            t_fd = nfft_second() - t;
-          }
+            t_fd = nfft_elapsed_seconds(t1,t0);
 
           /* Check if the fast NFSFT algorithm has been used. */
           if (use_nfsft != NO)
@@ -847,13 +850,13 @@ int main (int argc, char **argv)
             if (use_nfsft != NO)
             {
               /* Compute the error E_infinity. */
-              err_f = nfft_error_l_infty_1_complex(f, f_m, ld[ild][1], b,
+              err_f = X(error_l_infty_1_complex)(f, f_m, ld[ild][1], b,
                 ld[ild][0]);
             }
             else
             {
               /* Compute the error E_infinity. */
-              err_fd = nfft_error_l_infty_1_complex(f, f_m, ld[ild][1], b,
+              err_fd = X(error_l_infty_1_complex)(f, f_m, ld[ild][1], b,
                 ld[ild][0]);
             }
           }

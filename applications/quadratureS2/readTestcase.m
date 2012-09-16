@@ -1,5 +1,9 @@
+function T = readTestcase(file)
+%READTESTCASE - Read quadratureS2.c testcase results from file
 %
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+%   Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
+
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -15,7 +19,7 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: readTestcase.m 3100 2009-03-12 08:42:48Z keiner $
+% $Id: readTestcase.m 3784 2012-06-06 20:30:39Z keiner $
 
 % Read the number of testcases.
 tc_max = fscanf(file,'%d',1);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastgauss.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: fastgauss.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * \defgroup applications_fastgauss Fast Gauss transfrom with complex parameter
@@ -24,15 +24,18 @@
  * \{
  */
 
+#include "config.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <sys/resource.h>
-#include <time.h>
-#include <complex.h>
+#ifdef HAVE_COMPLEX_H
+  #include <complex.h>
+#endif
 
 #include "nfft3.h"
 #include "nfft3util.h"
+#include "infft.h"
 
 /**
  * If this flag is set, the whole matrix is precomputed and stored for the
@@ -49,7 +52,7 @@
  * the fast Fourier transform.
  *
  * \see fgt_init
- * \see ndft_trafo
+ * \see nfft_trafo_direct
  * \see nfft_trafo
  * \author Stefan Kunis
  */
@@ -132,12 +135,12 @@ void fgt_trafo(fgt_plan *ths)
 
   if(ths->flags & FGT_NDFT)
     {
-      ndft_adjoint(ths->nplan1);
+      nfft_adjoint_direct(ths->nplan1);
 
       for(l=0; l<ths->n; l++)
         ths->nplan1->f_hat[l] *= ths->b[l];
 
-      ndft_trafo(ths->nplan2);
+      nfft_trafo_direct(ths->nplan2);
     }
   else
     {
@@ -188,7 +191,7 @@ void fgt_init_guru(fgt_plan *ths, int N, int M, double _Complex sigma, int n,
   ths->nplan1 = (nfft_plan*) nfft_malloc(sizeof(nfft_plan));
   ths->nplan2 = (nfft_plan*) nfft_malloc(sizeof(nfft_plan));
 
-  n_fftw=nfft_next_power_of_2(2*ths->n);
+  n_fftw=X(next_power_of_2)(2*ths->n);
 
   nfft_init_guru(ths->nplan1, 1, &(ths->n), ths->N, &n_fftw, m, PRE_PHI_HUT|
                  PRE_PSI| MALLOC_X| MALLOC_F_HAT| FFTW_INIT, FFTW_MEASURE);
@@ -338,7 +341,8 @@ void fgt_test_init_rand(fgt_plan *ths)
 double fgt_test_measure_time(fgt_plan *ths, unsigned dgt)
 {
   int r;
-  double t_out,t;
+  ticks t0, t1;
+  double t_out;
   double tau=0.01;
 
   t_out=0;
@@ -346,17 +350,13 @@ double fgt_test_measure_time(fgt_plan *ths, unsigned dgt)
   while(t_out<tau)
     {
       r++;
-      if(dgt)
-        {
-          t=nfft_second();
-          dgt_trafo(ths);
-        }
+      t0 = getticks();
+      if (dgt)
+        dgt_trafo(ths);
       else
-        {
-          t=nfft_second();
-          fgt_trafo(ths);
-        }
-      t_out+=nfft_second()-t;
+        fgt_trafo(ths);
+      t1 = getticks();
+      t_out += nfft_elapsed_seconds(t1,t0);
     }
   t_out/=r;
 
@@ -391,7 +391,7 @@ void fgt_test_simple(int N, int M, double _Complex sigma, double eps)
   fgt_trafo(&my_plan);
   nfft_vpr_complex(my_plan.f,my_plan.M,"fast gauss transform");
 
-  printf("\n relative error: %1.3e\n", nfft_error_l_infty_1_complex(swap_dgt,
+  printf("\n relative error: %1.3e\n", X(error_l_infty_1_complex)(swap_dgt,
          my_plan.f, my_plan.M, my_plan.alpha, my_plan.N));
 
   nfft_free(swap_dgt);
@@ -462,7 +462,7 @@ void fgt_test_andersson(void)
       printf("$%1.1e$\t & ",fgt_test_measure_time(&my_plan, 0));
 
       printf("$%1.1e$\t \\\\ \n",
-	     nfft_error_l_infty_1_complex(swap_dgt, my_plan.f, my_plan.M,
+	     X(error_l_infty_1_complex)(swap_dgt, my_plan.f, my_plan.M,
 					  my_plan.alpha, my_plan.N));
       fflush(stdout);
 
@@ -509,7 +509,7 @@ void fgt_test_error(void)
 
           fgt_trafo(&my_plan);
 
-          printf("%1.3e\t", nfft_error_l_infty_1_complex(swap_dgt, my_plan.f,
+          printf("%1.3e\t", X(error_l_infty_1_complex)(swap_dgt, my_plan.f,
                  my_plan.M, my_plan.alpha, my_plan.N));
           fflush(stdout);
 
@@ -560,7 +560,7 @@ void fgt_test_error_p(void)
 
           fgt_trafo(&my_plan);
 
-          printf("%1.3e\t", nfft_error_l_infty_1_complex(swap_dgt, my_plan.f,
+          printf("%1.3e\t", X(error_l_infty_1_complex)(swap_dgt, my_plan.f,
                  my_plan.M, my_plan.alpha, my_plan.N));
           fflush(stdout);
 

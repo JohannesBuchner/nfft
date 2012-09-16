@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,25 +16,29 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3372 2009-10-21 06:04:05Z skunis $ */
+/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
-void simple_test_nfft_1d(void)
+static void simple_test_nfft_1d(void)
 {
   nfft_plan p;
   double t;
 
   int N=14;
   int M=19;
-  int n=32;
+  ticks t0, t1;
 
   /** init an one dimensional plan */
   nfft_init_1d(&p,N,M);
@@ -51,9 +55,10 @@ void simple_test_nfft_1d(void)
   nfft_vpr_complex(p.f_hat,p.N_total,"given Fourier coefficients, vector f_hat");
 
   /** direct trafo and show the result */
-  t=nfft_second();
-  ndft_trafo(&p);
-  t=nfft_second()-t;
+  t0 = getticks();
+  nfft_trafo_direct(&p);
+  t1 = getticks();
+  t = nfft_elapsed_seconds(t1,t0);
   nfft_vpr_complex(p.f,p.M_total,"ndft, vector f");
   printf(" took %e seconds.\n",t);
 
@@ -62,7 +67,7 @@ void simple_test_nfft_1d(void)
   nfft_vpr_complex(p.f,p.M_total,"nfft, vector f");
 
   /** approx. adjoint and show the result */
-  ndft_adjoint(&p);
+  nfft_adjoint_direct(&p);
   nfft_vpr_complex(p.f_hat,p.N_total,"adjoint ndft, vector f_hat");
 
   /** approx. adjoint and show the result */
@@ -73,10 +78,11 @@ void simple_test_nfft_1d(void)
   nfft_finalize(&p);
 }
 
-void simple_test_nfft_2d(void)
+static void simple_test_nfft_2d(void)
 {
-  int K,N[2],n[2],k,M;
+  int K,N[2],n[2],M;
   double t;
+  ticks t0, t1;
 
   nfft_plan p;
 
@@ -85,7 +91,7 @@ void simple_test_nfft_2d(void)
   M=N[0]*N[1];
   K=16;
 
-  t=nfft_second();
+  t0 = getticks();
   /** init a two dimensional plan */
   nfft_init_guru(&p, 2, N, M, n, 7,
 		 PRE_PHI_HUT| PRE_FULL_PSI| MALLOC_F_HAT| MALLOC_X| MALLOC_F |
@@ -102,36 +108,41 @@ void simple_test_nfft_2d(void)
   /** init pseudo random Fourier coefficients and show them */
   nfft_vrand_unit_complex(p.f_hat,p.N_total);
 
-  t=nfft_second()-t;
+  t1 = getticks();
+  t = nfft_elapsed_seconds(t1,t0);
   nfft_vpr_complex(p.f_hat,K,
               "given Fourier coefficients, vector f_hat (first few entries)");
   printf(" ... initialisation took %e seconds.\n",t);
 
   /** direct trafo and show the result */
-  t=nfft_second();
-  ndft_trafo(&p);
-  t=nfft_second()-t;
+  t0 = getticks();
+  nfft_trafo_direct(&p);
+  t1 = getticks();
+  t = nfft_elapsed_seconds(t1,t0);
   nfft_vpr_complex(p.f,K,"ndft, vector f (first few entries)");
   printf(" took %e seconds.\n",t);
 
   /** approx. trafo and show the result */
-  t=nfft_second();
+  t0 = getticks();
   nfft_trafo(&p);
-  t=nfft_second()-t;
+  t1 = getticks();
+  t = nfft_elapsed_seconds(t1,t0);
   nfft_vpr_complex(p.f,K,"nfft, vector f (first few entries)");
   printf(" took %e seconds.\n",t);
 
   /** direct adjoint and show the result */
-  t=nfft_second();
-  ndft_adjoint(&p);
-  t=nfft_second()-t;
+  t0 = getticks();
+  nfft_adjoint_direct(&p);
+  t1 = getticks();
+  t = nfft_elapsed_seconds(t1,t0);
   nfft_vpr_complex(p.f_hat,K,"adjoint ndft, vector f_hat (first few entries)");
   printf(" took %e seconds.\n",t);
 
   /** approx. adjoint and show the result */
-  t=nfft_second();
+  t0 = getticks();
   nfft_adjoint(&p);
-  t=nfft_second()-t;
+  t1 = getticks();
+  t = nfft_elapsed_seconds(t1,t0);
   nfft_vpr_complex(p.f_hat,K,"adjoint nfft, vector f_hat (first few entries)");
   printf(" took %e seconds.\n",t);
 
@@ -141,12 +152,11 @@ void simple_test_nfft_2d(void)
 
 int main(void)
 {
-  system("clear");
-  printf("1) computing an one dimensional ndft, nfft and an adjoint nfft\n\n");
+  printf("1) computing a one dimensional ndft, nfft and an adjoint nfft\n\n");
   simple_test_nfft_1d();
+
   getc(stdin);
 
-  system("clear");
   printf("2) computing a two dimensional ndft, nfft and an adjoint nfft\n\n");
   simple_test_nfft_2d();
 

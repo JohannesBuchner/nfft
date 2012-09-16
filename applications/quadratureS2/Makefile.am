@@ -1,13 +1,10 @@
-# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
+# $Id: Makefile.am 3786 2012-06-07 14:51:35Z keiner $
 
 AM_CPPFLAGS = -I$(top_srcdir)/include
 
-applicationdir = $(pkgdatadir)/applications/quadratureS2
+noinst_PROGRAMS = quadratureS2
 
-application_PROGRAMS = quadratureS2
-
-quadratureS2_SOURCES = quadratureS2.c
+quadratureS2_SOURCES = quadratureS2.c doxygen.h
 quadratureS2_LDADD = $(top_builddir)/libnfft3.la @fftw3_LDFLAGS@ @fftw3_LIBS@
 
-EXTRA_DIST = quadratureS2.m writeTestcase.m writeWeights.m readTestcase.m lgwt.m plotGrid.m
-application_DATA = $(EXTRA_DIST)
+EXTRA_DIST = quadratureS2.m writeTestcase.m writeWeights.m readTestcase.m lgwt.m plotGrid.m example.in example.out

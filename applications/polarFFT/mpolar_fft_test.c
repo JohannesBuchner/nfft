@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: mpolar_fft_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: mpolar_fft_test.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * \file polarFFT/mpolar_fft_test.c
@@ -27,12 +27,17 @@
  * \author Markus Fenn
  * \date 2006
  */
+#include "config.h"
+
 #include <math.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 /**
  * \defgroup applications_polarFFT_mpolar mpolar_fft_test
@@ -100,6 +105,7 @@ static int mpolar_grid(int T, int R, double *x, double *w)
 /** discrete mpolar FFT */
 static int mpolar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
 {
+  ticks t0, t1;
   int j,k;                              /**< index for nodes and freqencies   */
   nfft_plan my_nfft_plan;               /**< plan for the nfft-2D             */
 
@@ -136,12 +142,13 @@ static int mpolar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R
   for(k=0;k<my_nfft_plan.N_total;k++)
     my_nfft_plan.f_hat[k] = f_hat[k];
 
-  GLOBAL_elapsed_time=nfft_second();
+  t0 = getticks();
 
   /** NDFT-2D */
-  ndft_trafo(&my_nfft_plan);
+  nfft_trafo_direct(&my_nfft_plan);
 
-  GLOBAL_elapsed_time=nfft_second()-GLOBAL_elapsed_time;
+  t1 = getticks();
+  GLOBAL_elapsed_time = nfft_elapsed_seconds(t1,t0);
 
   /** copy result */
   for(j=0;j<my_nfft_plan.M_total;j++)
@@ -158,6 +165,7 @@ static int mpolar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R
 /** NFFT-based mpolar FFT */
 static int mpolar_fft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R, int m)
 {
+  ticks t0, t1;
   int j,k;                              /**< index for nodes and freqencies   */
   nfft_plan my_nfft_plan;               /**< plan for the nfft-2D             */
 
@@ -205,12 +213,13 @@ static int mpolar_fft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R
   for(k=0;k<my_nfft_plan.N_total;k++)
     my_nfft_plan.f_hat[k] = f_hat[k];
 
-  GLOBAL_elapsed_time=nfft_second();
+  t0 = getticks();
 
   /** NFFT-2D */
   nfft_trafo(&my_nfft_plan);
 
-  GLOBAL_elapsed_time=nfft_second()-GLOBAL_elapsed_time;
+  t1 = getticks();
+  GLOBAL_elapsed_time = nfft_elapsed_seconds(t1,t0);
 
   /** copy result */
   for(j=0;j<my_nfft_plan.M_total;j++)
@@ -227,6 +236,7 @@ static int mpolar_fft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R
 /** inverse NFFT-based mpolar FFT */
 static int inverse_mpolar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat, int NN, int max_i, int m)
 {
+  ticks t0, t1;
   int j,k;                              /**< index for nodes and freqencies   */
   nfft_plan my_nfft_plan;               /**< plan for the nfft-2D             */
   solver_plan_complex my_infft_plan;             /**< plan for the inverse nfft        */
@@ -255,7 +265,7 @@ static int inverse_mpolar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat
                   FFTW_MEASURE| FFTW_DESTROY_INPUT);
 
   /** init two dimensional infft plan */
-    solver_init_advanced_complex(&my_infft_plan,(mv_plan_complex*)(&my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT );
+    solver_init_advanced_complex(&my_infft_plan,(nfft_mv_plan_complex*)(&my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT );
 
   /** init nodes, given samples and weights */
   for(j=0;j<my_nfft_plan.M_total;j++)
@@ -290,7 +300,7 @@ static int inverse_mpolar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat
   for(k=0;k<my_nfft_plan.N_total;k++)
       my_infft_plan.f_hat_iter[k] = 0.0 + _Complex_I*0.0;
 
-  GLOBAL_elapsed_time=nfft_second();
+  t0 = getticks();
 
   /** solve the system */
   solver_before_loop_complex(&my_infft_plan);
@@ -309,7 +319,8 @@ static int inverse_mpolar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat
     }
   }
 
-  GLOBAL_elapsed_time=nfft_second()-GLOBAL_elapsed_time;
+  t1 = getticks();
+  GLOBAL_elapsed_time = nfft_elapsed_seconds(t1,t0);
 
   /** copy result */
   for(k=0;k<my_nfft_plan.N_total;k++)
@@ -327,6 +338,7 @@ static int inverse_mpolar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat
 /** Comparison of the FFTW, mpolar FFT, and inverse mpolar FFT */
 static int comparison_fft(FILE *fp, int N, int T, int R)
 {
+  ticks t0, t1;
   fftw_plan my_fftw_plan;
   fftw_complex *f_hat,*f;
   int m,k;
@@ -340,14 +352,15 @@ static int comparison_fft(FILE *fp, int N, int T, int R)
   for(k=0; k<N*N; k++)
     f_hat[k] = (((double)rand())/RAND_MAX) + _Complex_I* (((double)rand())/RAND_MAX);
 
-  GLOBAL_elapsed_time=nfft_second();
+  t0 = getticks();
   for(m=0;m<65536/N;m++)
     {
       fftw_execute(my_fftw_plan);
       /* touch */
       f_hat[2]=2*f_hat[0];
     }
-  GLOBAL_elapsed_time=nfft_second()-GLOBAL_elapsed_time;
+  t1 = getticks();
+  GLOBAL_elapsed_time = nfft_elapsed_seconds(t1,t0);
   t_fft=N*GLOBAL_elapsed_time/65536;
 
   if(N<256)
@@ -466,7 +479,7 @@ int main(int argc,char **argv)
     mpolar_fft(f_hat,N,f,T,R,m);
 
     /** compute error of fast mpolar FFT */
-    E_max=nfft_error_l_infty_complex(f_direct,f,M);
+    E_max=X(error_l_infty_complex)(f_direct,f,M);
     printf("m=%2d: E_max = %e\n",m,E_max);
     fprintf(fp1,"%e\n",E_max);
   }
@@ -484,7 +497,7 @@ int main(int argc,char **argv)
       inverse_mpolar_fft(f_direct,T,R,f_tilde,N,max_i,m);
 
       /** compute maximum relativ error */
-      E_max=nfft_error_l_infty_complex(f_hat,f_tilde,N*N);
+      E_max=X(error_l_infty_complex)(f_hat,f_tilde,N*N);
       printf("%3d iterations: E_max = %e\n",max_i,E_max);
       fprintf(fp1,"%e\n",E_max);
     }

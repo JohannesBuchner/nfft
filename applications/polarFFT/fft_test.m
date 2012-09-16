@@ -1,5 +1,4 @@
-%
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -15,7 +14,7 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: fft_test.m 3100 2009-03-12 08:42:48Z keiner $
+% $Id: fft_test.m 3776 2012-06-03 13:29:25Z keiner $
 N=64;
 T=3*N; %T=5*N/2;
 R=3*N/2;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,13 +16,16 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
@@ -84,7 +87,7 @@
 /* } */
 
 /** Simple test routine for the inverse nfft */
-void simple_test_solver_nfft_1d(int N, int M, int iter)
+static void simple_test_solver_nfft_1d(int N, int M, int iter)
 {
   int k,l;                            /**< index for nodes, freqencies,iter*/
   nfft_plan p;                          /**< plan for the nfft               */
@@ -101,7 +104,7 @@ void simple_test_solver_nfft_1d(int N, int M, int iter)
     nfft_precompute_one_psi(&p);
 
   /** initialise inverse plan */
-  solver_init_complex(&ip,(mv_plan_complex*)(&p));
+  solver_init_complex(&ip,(nfft_mv_plan_complex*)(&p));
 
   /** init pseudo random samples and show them */
   nfft_vrand_unit_complex(ip.y,p.M_total);

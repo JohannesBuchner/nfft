@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: inverse_radon.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: inverse_radon.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * \file inverse_radon.c
@@ -36,11 +36,15 @@
  * \author Markus Fenn
  * \date 2005
  */
+#include "config.h"
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
@@ -52,7 +56,7 @@
 /** generates the points x with weights w
  *  for the polar grid with T angles and R offsets
  */
-int polar_grid(int T, int R, double *x, double *w)
+static int polar_grid(int T, int R, double *x, double *w)
 {
   int t, r;
   double W=(double)T*(((double)R/2.0)*((double)R/2.0)+1.0/4.0);
@@ -76,7 +80,7 @@ int polar_grid(int T, int R, double *x, double *w)
 /** generates the points x with weights w
  *  for the linogram grid with T slopes and R offsets
  */
-int linogram_grid(int T, int R, double *x, double *w)
+static int linogram_grid(int T, int R, double *x, double *w)
 {
   int t, r;
   double W=(double)T*(((double)R/2.0)*((double)R/2.0)+1.0/4.0);
@@ -145,7 +149,7 @@ int Inverse_Radon_trafo(int (*gridfcn)(), int T, int R, double *Rf, int NN, doub
                   FFTW_MEASURE| FFTW_DESTROY_INPUT);
 
   /** init two dimensional infft plan */
-  solver_init_advanced_complex(&my_infft_plan,(mv_plan_complex*)(&my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT);
+  solver_init_advanced_complex(&my_infft_plan,(nfft_mv_plan_complex*)(&my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT);
 
   /** init nodes and weights of grid*/
   gridfcn(T,R,x,w);

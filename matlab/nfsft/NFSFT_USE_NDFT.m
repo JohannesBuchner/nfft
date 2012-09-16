@@ -1,7 +1,7 @@
 %NFSFT_USE_NDFT Flag for using the NDFT algorithm internally
-%   Copyright (c) 2006, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+%   Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -17,6 +17,6 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: NFSFT_USE_NDFT.m 3108 2009-03-13 12:57:05Z keiner $
+% $Id: NFSFT_USE_NDFT.m 3776 2012-06-03 13:29:25Z keiner $
 function f = NFSFT_USE_NDFT()
 f = 2;

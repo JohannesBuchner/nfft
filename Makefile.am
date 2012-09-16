@@ -1,4 +1,4 @@
-# $Id: Makefile.am 3411 2009-12-23 10:55:00Z keiner $
+# $Id: Makefile.am 3774 2012-06-01 07:41:57Z tovo $
 
 LIBTOOL_DEPS = @LIBTOOL_DEPS@
 
@@ -6,62 +6,92 @@ libtool: $(LIBTOOL_DEPS)
 	$(SHELL) ./config.status --recheck
 
 # Subdirectories
-DIST_SUBDIRS= 3rdparty include util kernel . examples applications matlab
-
-if MAINTAINER_MODE
-  EXTRA_DIRS= tests
-else
-  EXTRA_DIRS=
-endif
+DIST_SUBDIRS=3rdparty include util kernel . tests examples applications matlab support doxygen
 
 if HAVE_MATLAB
-  MATLAB_DIRS= matlab
+  MATLAB_DIRS=matlab
+  LIBNFFT3_MATLAB_LA=libnfft3_matlab.la
 else
   MATLAB_DIRS=
+  LIBNFFT3_MATLAB_LA=
 endif
 
-SUBDIRS= 3rdparty include util kernel . examples applications $(EXTRA_DIRS) $(MATLAB_DIRS)
+if HAVE_THREADS
+  LIBNFFT3_THREADS_LA = libnfft3_threads.la
+else
+  LIBNFFT3_THREADS_LA =
+endif
 
-lib_LTLIBRARIES = libnfft3.la
+SUBDIRS= 3rdparty include util kernel . tests examples applications $(MATLAB_DIRS)
+
+lib_LTLIBRARIES = libnfft3.la $(LIBNFFT3_THREADS_LA)
+noinst_LTLIBRARIES = $(LIBNFFT3_MATLAB_LA)
 
 libnfft3_la_SOURCES =
 libnfft3_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @fftw3_LIBS@ -lm
-libnfft3_la_LDFLAGS = -version-info @SHARED_VERSION_INFO@ @fftw3_LDFLAGS@
+libnfft3_la_LDFLAGS = -no-undefined -version-info @SHARED_VERSION_INFO@ @fftw3_LDFLAGS@
 
-EXTRA_DIST = bootstrap.sh VERSION doxygen.c
+if HAVE_THREADS
+libnfft3_threads_la_SOURCES =
+libnfft3_threads_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil_threads.la kernel/libkernel_threads.la @fftw3_threads_LIBS@ -lm
+libnfft3_threads_la_LDFLAGS = -no-undefined -version-info @SHARED_VERSION_INFO@ @fftw3_LDFLAGS@
+if HAVE_OPENMP
+  libnfft3_threads_la_CFLAGS = $(OPENMP_CFLAGS)
+endif
+endif
 
-install-data-hook:
-	mkdir -p $(pkgdatadir)
-	cp -R doc $(pkgdatadir)
+if HAVE_MATLAB
+  libnfft3_matlab_la_SOURCES =
+if HAVE_MATLAB_THREADS
+    libnfft3_matlab_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil_threads.la kernel/libkernel_threads.la @matlab_fftw3_LIBS@ -lm
+else
+    libnfft3_matlab_la_LIBADD = 3rdparty/lib3rdparty.la util/libutil.la kernel/libkernel.la @matlab_fftw3_LIBS@ -lm
+endif
+  libnfft3_matlab_la_LDFLAGS = @matlab_fftw3_LDFLAGS@
+endif
+
+EXTRA_DIST = bootstrap.sh doxygen.dox nfft3.pc.in
+
+pkgconfigdir=$(libdir)/pkgconfig
+pkgconfig_DATA = nfft3.pc
+
+#install-data-hook:
+#	$(MKDIR_P) $(docdir)
+#	cp -R $(srcdir)/doc/* $(docdir)/
+#	chmod -R u+rwX,g+rX,g-w,o+rX,o-w $(docdir)
+
+#uninstall-hook:
+#	rm -Rf $(docdir)
 
 maintainer-clean-local:
-	rm -f doc/api/html/*.html
-	rm -f doc/api/html/*.png
-	rm -f doc/api/html/*.gif
-	rm -f doc/api/html/doxygen.css
-	rm -f doc/api/html/formula.repository
-	rm -f doc/api/latex/*.tex
-	rm -f doc/api/latex/*.sty
-	rm -f doc/api/latex/*.ttf
-	rm -f doc/api/latex/*.pdf
-	rm -f doc/api/latex/Makefile
+	rm -f $(srcdir)/doc/api/html/*.html
+	rm -f $(srcdir)/doc/api/html/*.png
+	rm -f $(srcdir)/doc/api/html/*.gif
+	rm -f $(srcdir)/doc/api/html/doxygen.css
+	rm -f $(srcdir)/doc/api/html/formula.repository
+	rm -f $(srcdir)/doc/api/latex/*.tex
+	rm -f $(srcdir)/doc/api/latex/*.sty
+	rm -f $(srcdir)/doc/api/latex/*.ttf
+	rm -f $(srcdir)/doc/api/latex/*.pdf
+	rm -f $(srcdir)/doc/api/latex/Makefile
 
 dist-hook:
-	doxygen doxygen/doxygen.Doxyfile
-	mkdir -p $(distdir)/doc
-	mkdir -p $(distdir)/doc/api
-	cp -R doc/api/html $(distdir)/doc/api
-	cp -R doc/api/latex $(distdir)/doc/api
-	cp -R doc/tutorial $(distdir)/doc
-	rm -Rf $(distdir)/doc/.svn
-	rm -Rf $(distdir)/doc/tutorial/.svn
-	rm -Rf $(distdir)/doc/api/html/.svn
-	rm -Rf $(distdir)/doc/api/html/images/.svn
-	rm -Rf $(distdir)/doc/api/latex/.svn
-	rm -Rf $(distdir)/doc/api/latex/images/.svn
-	rm -Rf $(distdir)/doxygen
-	rm -Rf $(distdir)/VERSION.in
-	cp VERSION $(distdir)
+	echo `pwd`
+	chmod -Rf u+rwX $(srcdir)/doc
+	sed 's/^ \* \\section \([a-zA-Z0-9_]*\) \(.*\)/<ul><li><a href="#\1">\2<\/a><\/li><\/ul>/' < $(srcdir)/doxygen.dox > $(srcdir)/doc/api/html/toc.txt
+	sed 's/^ \* \\subsection \([a-zA-Z0-9_]*\) \(.*\)/<ul><ul><li><a href="#\1">\2<\/a><\/li><\/ul><\/ul>/' < $(srcdir)/doxygen.dox > $(srcdir)/doc/api/html/toc.txt
+	sed 's/^ \* \\subsubsection \([a-zA-Z0-9_]*\) \(.*\)/<ul><ul><ul><li><a href="#\1">\2<\/a><\/li><\/ul><\/ul><\/ul>/' < $(srcdir)/doxygen.dox > $(srcdir)/doc/api/html/toc.txt
+	doxygen $(builddir)/doxygen/doxygen.Doxyfile
+	rm -f $(srcdir)/doc/api/html/toc.txt
+	$(srcdir)/support/rem.sed < $(srcdir)/doc/api/html/index.html > $(srcdir)/doc/api/html/index.html.new
+	mv $(srcdir)/doc/api/html/index.html.new $(srcdir)/doc/api/html/index.html
+	cp -R $(srcdir)/doc $(distdir)/
+	rm -Rf `find $(distdir) -name .svn -type d`
 
 # Flags to be passed to aclocal.
 ACLOCAL_AMFLAGS = -I m4
+
+distclean-local:
+	rm -Rf `find $(builddir) -type f -name *.Po`
+	rm -Rf `find $(builddir) -type f -name Makefile`
+	

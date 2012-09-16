@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,13 +16,17 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfsoft.c 3360 2009-10-12 14:23:59Z keiner $ */
+/* $Id: nfsoft.c 3775 2012-06-02 16:39:48Z keiner $ */
+
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 #include "nfft3.h"
 #include "nfft3util.h"
 #include "infft.h"
@@ -90,7 +94,7 @@ void nfsoft_init_guru(nfsoft_plan *plan, int B, int M,
       if (plan->f == NULL ) printf("Allocation failed!\n");
   }
 
-  plan->wig_coeffs = (C*) nfft_malloc((nfft_next_power_of_2(B)+1)*sizeof(C));
+  plan->wig_coeffs = (C*) nfft_malloc((X(next_power_of_2)(B)+1)*sizeof(C));
   plan->cheby = (C*) nfft_malloc((2*B+2)*sizeof(C));
   plan->aux = (C*) nfft_malloc((2*B+4)*sizeof(C));
 
@@ -101,7 +105,7 @@ void nfsoft_init_guru(nfsoft_plan *plan, int B, int M,
   plan->mv_trafo = (void (*) (void* ))nfsoft_trafo;
   plan->mv_adjoint = (void (*) (void* ))nfsoft_adjoint;
 
-  plan->fpt_set = 0;
+  plan->internal_fpt_set = 0;
 }
 
 static void c2e(nfsoft_plan *my_plan, int even)
@@ -157,7 +161,7 @@ static fpt_set SO3_fpt_init(int l, fpt_set set, unsigned int flags, int kappa)
     else
       N = l;
 
-    t = (int) log2(nfft_next_power_of_2(N));
+    t = (int) log2(X(next_power_of_2)(N));
 
   }
   else
@@ -166,7 +170,7 @@ static fpt_set SO3_fpt_init(int l, fpt_set set, unsigned int flags, int kappa)
     if (l < 2)
       N = 2;
     else
-      N = nfft_next_power_of_2(l);
+      N = X(next_power_of_2)(l);
 
     t = (int) log2(N);
   }
@@ -211,7 +215,7 @@ static fpt_set SO3_fpt_init(int l, fpt_set set, unsigned int flags, int kappa)
   return set;
 }
 
-fpt_set SO3_single_fpt_init(int l, int k, int m, unsigned int flags, int kappa)
+static fpt_set SO3_single_fpt_init(int l, int k, int m, unsigned int flags, int kappa)
 {
   int N, t, k_start, k_end;
   R *alpha, *beta, *gamma;
@@ -225,7 +229,7 @@ fpt_set SO3_single_fpt_init(int l, int k, int m, unsigned int flags, int kappa)
     else
       N = l;
 
-    t = (int) log2(nfft_next_power_of_2(N));
+    t = (int) log2(X(next_power_of_2)(N));
 
   }
   else
@@ -234,7 +238,7 @@ fpt_set SO3_single_fpt_init(int l, int k, int m, unsigned int flags, int kappa)
     if (l < 2)
       N = 2;
     else
-      N = nfft_next_power_of_2(l);
+      N = X(next_power_of_2)(l);
 
     t = (int) log2(N);
   }
@@ -245,24 +249,26 @@ fpt_set SO3_single_fpt_init(int l, int k, int m, unsigned int flags, int kappa)
   gamma = (R*) nfft_malloc((N + 2) * sizeof(R));
 
   /** Initialize DPT. */
-  if (flags & NFSOFT_NO_STABILIZATION)
   {
-    set = fpt_init(1, t, 0U | FPT_NO_STABILIZATION);
+    unsigned int fptflags = 0U 
+      | IF(flags & NFSOFT_USE_DPT,FPT_NO_FAST_ALGORITHM,IF(t > 1,FPT_NO_DIRECT_ALGORITHM,0U))
+      | IF(flags & NFSOFT_NO_STABILIZATION,FPT_NO_STABILIZATION,0U);
+    set = fpt_init(1, t, fptflags);
   }
-  else
-  {
-    set = fpt_init(1, t, 0U);
-  }
-
 
   /** Read in start and end indices */
   k_start = (ABS(k) >= ABS(m)) ? ABS(k) : ABS(m);
   k_end = N;
 
-
   SO3_alpha_row(alpha, N, k, m);
   SO3_beta_row(beta, N, k, m);
   SO3_gamma_row(gamma, N, k, m);
+  
+  /*{
+    int rr;
+    for (rr = 0; rr < N + 2; rr++)
+      fprintf(stderr, "a[%4d] = %10e b[%4d] = %10e c[%4d] = %10e\n",rr,alpha[rr],rr,beta[rr],rr,gamma[rr]);
+  }*/
 
   fpt_precompute(set, 0, alpha, beta, gamma, k_start, kappa);
 
@@ -300,7 +306,7 @@ void SO3_fpt(C *coeffs, fpt_set set, int l, int k, int m, unsigned int flags)
     if (l < 2)
       N = 2;
     else
-      N = nfft_next_power_of_2(l);
+      N = X(next_power_of_2)(l);
   }
 
   /** Read in start and end indeces */
@@ -329,7 +335,7 @@ void SO3_fpt(C *coeffs, fpt_set set, int l, int k, int m, unsigned int flags)
 
   if (flags & NFSOFT_USE_DPT)
   { /** Execute DPT. */
-    dpt_trafo(set, trafo_nr, &x[k_start], y, k_end, 0U
+    fpt_trafo_direct(set, trafo_nr, &x[k_start], y, k_end, 0U
         | (function_values ? FPT_FUNCTION_VALUES : 0U));
   }
   else
@@ -376,7 +382,7 @@ void SO3_fpt_transposed(C *coeffs, fpt_set set, int l, int k, int m,
     if (l < 2)
       N = 2;
     else
-      N = nfft_next_power_of_2(l);
+      N = X(next_power_of_2)(l);
   }
 
   /** Read in start and end indeces */
@@ -400,7 +406,7 @@ void SO3_fpt_transposed(C *coeffs, fpt_set set, int l, int k, int m,
 
   if (flags & NFSOFT_USE_DPT)
   {
-    dpt_transposed(set, trafo_nr, &x[k_start], y, k_end, 0U
+    fpt_transposed_direct(set, trafo_nr, &x[k_start], y, k_end, 0U
         | (function_values ? FPT_FUNCTION_VALUES : 0U));
   }
   else
@@ -451,8 +457,8 @@ void nfsoft_precompute(nfsoft_plan *plan3D)
   }
 
   /** Node-independent part*/
-  plan3D->fpt_set = SO3_fpt_init(N, plan3D->fpt_set, plan3D->flags,
-      plan3D->fpt_kappa);
+  plan3D->internal_fpt_set = SO3_fpt_init(N, plan3D->internal_fpt_set,
+    plan3D->flags, plan3D->fpt_kappa);
 
   if ((plan3D->p_nfft).nfft_flags & MALLOC_F_HAT)
   for (j = 0; j < plan3D->p_nfft.N_total; j++)
@@ -507,15 +513,19 @@ void nfsoft_trafo(nfsoft_plan *plan3D)
           }
           if ((m < 0) && (m % 2))
             plan3D->wig_coeffs[j] = plan3D->wig_coeffs[j] * (-1);
+
+          if ((m + k) % 2)
+	    plan3D->wig_coeffs[j] = plan3D->wig_coeffs[j] * (-1);
+
         }
 
         glo1++;
       }
 
-      for (j = N - max + 1; j < nfft_next_power_of_2(N) + 1; j++)
+      for (j = N - max + 1; j < X(next_power_of_2)(N) + 1; j++)
         plan3D->wig_coeffs[j] = 0.0;
       //fprintf(stdout,"\n k= %d, m= %d \n",k,m);
-      SO3_fpt(plan3D->wig_coeffs, plan3D->fpt_set, N, k, m, plan3D->flags);
+      SO3_fpt(plan3D->wig_coeffs, plan3D->internal_fpt_set, N, k, m, plan3D->flags);
 
       c2e(plan3D, ABS((k + m) % 2));
 
@@ -532,7 +542,7 @@ void nfsoft_trafo(nfsoft_plan *plan3D)
 
   if (plan3D->flags & NFSOFT_USE_NDFT)
   {
-    ndft_trafo(&(plan3D->p_nfft));
+    nfft_trafo_direct(&(plan3D->p_nfft));
   }
   else
   {
@@ -612,7 +622,7 @@ void nfsoft_adjoint(nfsoft_plan *plan3D)
 
   if (plan3D->flags & NFSOFT_USE_NDFT)
   {
-    ndft_adjoint(&(plan3D->p_nfft));
+    nfft_adjoint_direct(&(plan3D->p_nfft));
   }
   else
   {
@@ -641,7 +651,7 @@ void nfsoft_adjoint(nfsoft_plan *plan3D)
       e2c(plan3D, ABS((k + m) % 2));
 
       //nfft_vpr_complex(plan3D->wig_coeffs,plan3D->N_total+1,"chebys");
-      SO3_fpt_transposed(plan3D->wig_coeffs, plan3D->fpt_set, N, k, m,
+      SO3_fpt_transposed(plan3D->wig_coeffs, plan3D->internal_fpt_set, N, k, m,
           plan3D->flags);
       //nfft_vpr_complex(plan3D->wig_coeffs,plan3D->N_total+1,"wigners");
       //  SO3_fpt_transposed(plan3D->wig_coeffs,N,k,m,plan3D->flags,plan3D->fpt_kappa);
@@ -657,6 +667,10 @@ void nfsoft_adjoint(nfsoft_plan *plan3D)
           }
           if ((m < 0) && (m % 2))
             plan3D->wig_coeffs[j] = -plan3D->wig_coeffs[j];
+
+          if ((m + k) % 2)
+            plan3D->wig_coeffs[j] = plan3D->wig_coeffs[j] * (-1);
+
         }
 
         plan3D->f_hat[glo1] = plan3D->wig_coeffs[j];
@@ -682,8 +696,8 @@ void nfsoft_finalize(nfsoft_plan *plan)
   free(plan->cheby);
   free(plan->aux);
 
-  fpt_finalize(plan->fpt_set);
-  plan->fpt_set = NULL;
+  fpt_finalize(plan->internal_fpt_set);
+  plan->internal_fpt_set = NULL;
 
   if (plan->flags & NFSOFT_MALLOC_F_HAT)
   {

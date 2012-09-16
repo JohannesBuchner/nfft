@@ -1,5 +1,16 @@
+function plotGrid(gridType,p)
+%plotGrid - Plot spherical quadrature grids
 %
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+%   plotGrid(gridtype) plots a quadrature grid. The parameter gridType specifies
+%   the point set to plot and can take the following values:
+%   0: Gauss-Legendre quadrature grid,
+%   1: Clenshaw-Curtis qudrature grid,
+%   2: HEALPix point set,
+%   3: Equidistribution point set.
+%
+%   Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
+
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -15,33 +26,7 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: plotGrid.m 3100 2009-03-12 08:42:48Z keiner $
-
-%
-% plotGrid - Plot spherical quadrature grids
-%
-% plotGrid(gridtype) plots a quadrature grid. The parameter gridType specifies
-% the point set to plot and can take the following values:
-% 0: Gauss-Legendre quadrature grid,
-% 1: Clenshaw-Curtis qudrature grid,
-% 2: HEALPix point set,
-% 3: Equidistribution point set.
-%
-% Copyright (C) 2005 Jens Keiner
-%
-% This program is free software; you can redistribute it and/or modify
-% it under the terms of the GNU General Public License as published by
-% the Free Software Foundation; either version 2, or (at your option)
-% any later version.
-%
-% This program is distributed in the hope that it will be useful,
-% but WITHOUT ANY WARRANTY; without even the implied warranty of
-% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-% GNU General Public License for more details.
-%
-% You should have received a copy of the GNU General Public License
-% along with this program; if not, write to the Free Software Foundation,
-% Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+% $Id: plotGrid.m 3784 2012-06-06 20:30:39Z keiner $
 
 if (gridType == 0)
   [theta,w] = lgwt(p(1)+1,-1,1);

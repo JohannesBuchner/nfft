@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,18 +16,22 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nsfft_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: nsfft_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
-void accuracy_nsfft(int d, int J, int M, int m)
+static void accuracy_nsfft(int d, int J, int M, int m)
 {
   nsfft_plan p;
   double _Complex *swap_sndft_trafo, *swap_sndft_adjoint;
@@ -42,7 +46,7 @@ void accuracy_nsfft(int d, int J, int M, int m)
   nsfft_init_random_nodes_coeffs(&p);
 
   /** direct trafo */
-  nsdft_trafo(&p);
+  nsfft_trafo_direct(&p);
 
   NFFT_SWAP_complex(swap_sndft_trafo,p.f);
 
@@ -50,14 +54,14 @@ void accuracy_nsfft(int d, int J, int M, int m)
   nsfft_trafo(&p);
 
   printf("%5d\t %+.5E\t",J,
-         nfft_error_l_infty_1_complex(swap_sndft_trafo, p.f, p.M_total,
+         X(error_l_infty_1_complex)(swap_sndft_trafo, p.f, p.M_total,
                                  p.f_hat, p.N_total));
   fflush(stdout);
 
   nfft_vrand_unit_complex(p.f, p.M_total);
 
   /** direct adjoint */
-  nsdft_adjoint(&p);
+  nsfft_adjoint_direct(&p);
 
   NFFT_SWAP_complex(swap_sndft_adjoint,p.f_hat);
 
@@ -65,7 +69,7 @@ void accuracy_nsfft(int d, int J, int M, int m)
   nsfft_adjoint(&p);
 
   printf("%+.5E\n",
-         nfft_error_l_infty_1_complex(swap_sndft_adjoint, p.f_hat,
+         X(error_l_infty_1_complex)(swap_sndft_adjoint, p.f_hat,
                                  p.N_total,
                                  p.f, p.M_total));
   fflush(stdout);
@@ -77,26 +81,24 @@ void accuracy_nsfft(int d, int J, int M, int m)
   nsfft_finalize(&p);
 }
 
-void time_nsfft(int d, int J, int M, unsigned test_nsdft, unsigned test_nfft)
+static void time_nsfft(int d, int J, int M, unsigned test_nsdft, unsigned test_nfft)
 {
   int r, N[d], n[d];
-  int m, m_nfft, m_nsfft;
   double t, t_nsdft, t_nfft, t_nsfft;
+  ticks t0, t1;
 
   nsfft_plan p;
   nfft_plan np;
 
   for(r=0;r<d;r++)
   {
-    N[r]=nfft_int_2_pow(J+2);
+    N[r]= X(exp2i)(J+2);
     n[r]=(3*N[r])/2;
     /*n[r]=2*N[r];*/
   }
 
   /** init */
-  m=nfft_total_used_memory();
   nsfft_init(&p, d, J, M, 4, NSDFT);
-  m_nsfft=nfft_total_used_memory()-m;
   nsfft_init_random_nodes_coeffs(&p);
 
   /* transforms */
@@ -107,9 +109,10 @@ void time_nsfft(int d, int J, int M, unsigned test_nsdft, unsigned test_nfft)
     while(t_nsdft<0.1)
     {
       r++;
-      t=nfft_second();
-      nsdft_trafo(&p);
-      t=nfft_second()-t;
+      t0 = getticks();
+      nsfft_trafo_direct(&p);
+      t1 = getticks();
+      t = nfft_elapsed_seconds(t1,t0);
       t_nsdft+=t;
     }
     t_nsdft/=r;
@@ -119,10 +122,8 @@ void time_nsfft(int d, int J, int M, unsigned test_nsdft, unsigned test_nfft)
 
   if(test_nfft)
   {
-    m=nfft_total_used_memory();
     nfft_init_guru(&np,d,N,M,n,6, FG_PSI| MALLOC_F_HAT| MALLOC_F| FFTW_INIT,
-		   FFTW_MEASURE);
-    m_nfft=nfft_total_used_memory()-m;
+      FFTW_MEASURE);
     np.x=p.act_nfft_plan->x;
     if(np.nfft_flags & PRE_ONE_PSI)
       nfft_precompute_one_psi(&np);
@@ -133,9 +134,10 @@ void time_nsfft(int d, int J, int M, unsigned test_nsdft, unsigned test_nfft)
     while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo(&np);
-      t=nfft_second()-t;
+      t1 = getticks();
+      t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
     t_nfft/=r;
@@ -145,7 +147,6 @@ void time_nsfft(int d, int J, int M, unsigned test_nsdft, unsigned test_nfft)
   else
   {
     t_nfft=nan("");
-    m_nfft=-1;
   }
 
   t_nsfft=0;
@@ -153,20 +154,15 @@ void time_nsfft(int d, int J, int M, unsigned test_nsdft, unsigned test_nfft)
   while(t_nsfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nsfft_trafo(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+      t = nfft_elapsed_seconds(t1,t0);
       t_nsfft+=t;
     }
   t_nsfft/=r;
 
-  printf("%d\t%.2e\t%.2e\t%.2e\t%d\t%d\n",
-	 J,
-         t_nsdft,
-	 t_nfft,
-	 t_nsfft,
-         m_nfft,
-	 m_nsfft);
+  printf("%d\t%.2e\t%.2e\t%.2e\n", J, t_nsdft, t_nfft, t_nsfft);
 
   fflush(stdout);
 
@@ -203,9 +199,9 @@ int main(int argc,char **argv)
     for(J=atoi(argv[3]); J<=atoi(argv[4]); J++)
     {
       if(d==2)
-	M=(J+4)*nfft_int_2_pow(J+1);
+	M=(J+4)*X(exp2i)(J+1);
       else
-	M=6*nfft_int_2_pow(J)*(nfft_int_2_pow((J+1)/2+1)-1)+nfft_int_2_pow(3*(J/2+1));
+	M=6*X(exp2i)(J)*(X(exp2i)((J+1)/2+1)-1)+X(exp2i)(3*(J/2+1));
 
       if(d*(J+2)<=24)
 	time_nsfft(d, J, M, 1, 1);

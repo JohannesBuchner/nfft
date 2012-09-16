@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: ndft_fast.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: ndft_fast.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /*! \file ndft_fast.c
  *
@@ -24,17 +24,21 @@
  *
  * \author Stefan Kunis
  */
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
-void ndft_horner_trafo(nfft_plan *ths)
+static void ndft_horner_trafo(nfft_plan *ths)
 {
   int j,k;
   double _Complex *f_hat_k, *f_j;
@@ -55,7 +59,7 @@ void ndft_horner_trafo(nfft_plan *ths)
     }
 } /* ndft_horner_trafo */
 
-void ndft_pre_full_trafo(nfft_plan *ths, double _Complex *A)
+static void ndft_pre_full_trafo(nfft_plan *ths, double _Complex *A)
 {
   int j,k;
   double _Complex *f_hat_k, *f_j;
@@ -69,7 +73,7 @@ void ndft_pre_full_trafo(nfft_plan *ths, double _Complex *A)
       (*f_j) += (*f_hat_k)*(*A_local);
 } /* ndft_pre_full_trafo */
 
-void ndft_pre_full_init(nfft_plan *ths, double _Complex *A)
+static void ndft_pre_full_init(nfft_plan *ths, double _Complex *A)
 {
   int j,k;
   double _Complex *f_hat_k, *f_j, *A_local;
@@ -80,11 +84,12 @@ void ndft_pre_full_init(nfft_plan *ths, double _Complex *A)
 
 } /* ndft_pre_full_init */
 
-void ndft_time(int N, int M, unsigned test_ndft, unsigned test_pre_full)
+static void ndft_time(int N, int M, unsigned test_ndft, unsigned test_pre_full)
 {
   int r;
   double t, t_ndft, t_horner, t_pre_full, t_nfft;
-  double _Complex *A;
+  double _Complex *A = NULL;
+  ticks t0, t1;
 
   nfft_plan np;
 
@@ -112,9 +117,10 @@ void ndft_time(int N, int M, unsigned test_ndft, unsigned test_pre_full)
       while(t_ndft<0.1)
         {
           r++;
-          t=nfft_second();
-          ndft_trafo(&np);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_trafo_direct(&np);
+          t1 = getticks();
+          t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -130,9 +136,10 @@ void ndft_time(int N, int M, unsigned test_ndft, unsigned test_pre_full)
   while(t_horner<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       ndft_horner_trafo(&np);
-      t=nfft_second()-t;
+      t1 = getticks();
+      t = nfft_elapsed_seconds(t1,t0);
       t_horner+=t;
     }
   t_horner/=r;
@@ -147,9 +154,10 @@ void ndft_time(int N, int M, unsigned test_ndft, unsigned test_pre_full)
       while(t_pre_full<0.1)
         {
           r++;
-          t=nfft_second();
+          t0 = getticks();
           ndft_pre_full_trafo(&np,A);
-          t=nfft_second()-t;
+          t1 = getticks();
+          t = nfft_elapsed_seconds(t1,t0);
           t_pre_full+=t;
         }
       t_pre_full/=r;
@@ -164,9 +172,10 @@ void ndft_time(int N, int M, unsigned test_ndft, unsigned test_pre_full)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo(&np);
-      t=nfft_second()-t;
+      t1 = getticks();
+      t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;

@@ -1,13 +1,10 @@
-# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
+# $Id: Makefile.am 3654 2011-10-13 12:02:47Z rahi $
 
 AM_CPPFLAGS = -I$(top_srcdir)/include
 
-exampledir = $(pkgdatadir)/examples/nfst
-
-example_PROGRAMS = simple_test
+noinst_PROGRAMS = simple_test
 
 simple_test_SOURCES = simple_test.c
-simple_test_LDADD = $(top_builddir)/libnfft3.la
+simple_test_LDADD = $(top_builddir)/libnfft3.la @fftw3_LDFLAGS@ @fftw3_LIBS@
 
 EXTRA_DIST = README
-example_DATA = $(EXTRA_DIST)

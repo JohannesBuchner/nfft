@@ -1,8 +1,21 @@
-# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
+# $Id: Makefile.am 3774 2012-06-01 07:41:57Z tovo $
 
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/3rdparty/cstripack
 
-noinst_LTLIBRARIES = libutil.la
+if HAVE_THREADS
+  LIBUTIL_THREADS_LA = libutil_threads.la
+else
+  LIBUTIL_THREADS_LA =
+endif
 
-libutil_la_SOURCES = util.c malloc.c
+noinst_LTLIBRARIES = libutil.la $(LIBUTIL_THREADS_LA)
+
+libutil_la_SOURCES = util.c
+
+if HAVE_THREADS
+  libutil_threads_la_SOURCES = util.c
+if HAVE_OPENMP
+  libutil_threads_la_CFLAGS = $(OPENMP_CFLAGS)
+endif
+endif
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,14 +16,19 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: accuracy.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: accuracy.c 3775 2012-06-02 16:39:48Z keiner $ */
+
+#include "config.h"
 
 #include <math.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 void accuracy(int d)
 {
@@ -74,7 +79,7 @@ void accuracy(int d)
       nfft_vrand_unit_complex(my_plan.f_hat, my_plan.N_total);
 
       /** direct trafo and show the result */
-      nndft_trafo(&my_plan);
+      nnfft_trafo_direct(&my_plan);
 
       NFFT_SWAP_complex(my_plan.f,slow);
 
@@ -82,8 +87,8 @@ void accuracy(int d)
       nnfft_trafo(&my_plan);
 
       printf("%e, %e\n",
-	     nfft_error_l_infty_complex(slow, my_plan.f, M_total),
-	     nfft_error_l_infty_1_complex(slow, my_plan.f, M_total, my_plan.f_hat,
+	     X(error_l_infty_complex)(slow, my_plan.f, M_total),
+	     X(error_l_infty_1_complex)(slow, my_plan.f, M_total, my_plan.f_hat,
 				     my_plan.N_total));
 
       /** finalise the one dimensional plan */

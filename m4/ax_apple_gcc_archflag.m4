@@ -32,13 +32,9 @@ AC_ARG_WITH(apple-gcc-arch, [AC_HELP_STRING([--with-apple-gcc-arch=<arch>],
   [use architecture <arch> for Apple's gcc -arch, instead of guessing])], 
   ax_apple_gcc_arch=$withval, ax_apple_gcc_arch=yes)
 
-AC_MSG_CHECKING([for Apple's gcc architecture flag])
-AC_MSG_RESULT([])
 AC_CACHE_VAL(ax_cv_apple_gcc_archflag,
 [
 ax_cv_apple_gcc_archflag="unknown"
-
-echo $ax_apple_gcc_arch
 
 if test "$GCC" = yes; then
   if test "x$ax_apple_gcc_arch" = xyes; then
@@ -77,7 +73,7 @@ if test "$GCC" = yes; then
         CFLAGS="$CFLAGS -arch $arch";
         LIBS="$LIBS $fftw3_LIBS"
         AC_MSG_CHECKING([whether linking is possible with -arch $arch]);
-        AC_LINK_IFELSE([int main(void){return 0;}],[last_result=yes;AC_MSG_RESULT([yes]);ax_cv_apple_gcc_archflag="$ax_cv_apple_gcc_archflag -arch $arch"],[last_result=no;AC_MSG_RESULT([no])]);
+        AC_LINK_IFELSE([AC_LANG_PROGRAM([], [[int main(void){return 0;}]])],[last_result=yes;AC_MSG_RESULT([yes]);ax_cv_apple_gcc_archflag="$ax_cv_apple_gcc_archflag -arch $arch"],[last_result=no;AC_MSG_RESULT([no])]);
         CFLAGS="$saved_CFLAGS"
       ])
       if test "x$last_result" = "xyes"; then

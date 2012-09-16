@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fpt.h 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: fpt.h 3775 2012-06-02 16:39:48Z keiner $ */
 
 #ifndef _FPT_H_
 #define _FPT_H_
@@ -59,7 +59,7 @@ typedef struct fpt_data_
  */
 typedef struct fpt_set_s_
 {
-  int flags;                              /**< The flags                     */
+  unsigned int flags;                     /**< The flags                     */
   int M;                                  /**< The number of DPT transforms  */
   int N;                                  /**< The transform length. Must be
                                                a power of two.               */

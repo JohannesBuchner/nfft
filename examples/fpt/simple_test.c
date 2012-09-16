@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,9 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3153 2009-04-07 11:05:56Z keiner $ */
+/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+
+#include "config.h"
 
 /* standard headers */
 #include <stdlib.h>
@@ -24,20 +26,15 @@
 #include <math.h>
 
 /* It is important to include complex.h before nfft3.h. */
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
+
+#include <fftw3.h>
 
 /* NFFT3 header */
 #include "nfft3.h"
-
-/* We declare drand48() and srand48() ourselves, if they are is not declared in
- * math.h (e.g. on SuSE 9.3), grrr. */
-#include "config.h"
-#if HAVE_DECL_DRAND48 == 0
-  extern double drand48(void);
-#endif
-#if HAVE_DECL_SRAND48 == 0
-  extern void srand48(long int);
-#endif
+#include "nfft3util.h"
 
 /* Two times Pi */
 #define KPI2 6.2831853071795864769252867665590057683943387987502
@@ -89,7 +86,7 @@ int main(void)
   );
 
   /* Random seed, makes things reproducible. */
-  srand48(616642);
+  nfft_srand48(314);
 
   /* The function fpt_repcompute actually does the precomputation for a single
    * transform. It needs arrays alpha, beta, and gamma, containing the three-
@@ -119,7 +116,7 @@ int main(void)
       printf("\n2) Random Fourier coefficients a_k, k=0,1,...,N:\n");
       for (k = 0; k <= N; k++)
       {
-        a[k] = 2.0*drand48() - 1.0; /* for debugging: use k+1 */
+        a[k] = 2.0*nfft_drand48() - 1.0; /* for debugging: use k+1 */
         printf("   a_%-2d = %+5.3lE\n",k,creal(a[k]));
       }
     }

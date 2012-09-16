@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,17 +16,19 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: kernels.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: kernels.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /*! \file kernels.c
  *  \brief File with predefined kernels for the fast summation algorithm.
  */
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <float.h>
-
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "kernels.h"
 

@@ -1,7 +1,8 @@
 %F_HAT_INDEX Return indices of Fourier coefficients
-%   Copyright (c) 2006, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+%   Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 
-% Copyright (c) 2006, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
+%
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
 % Foundation; either version 2 of the License, or (at your option) any later
@@ -16,7 +17,7 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: f_hat_index.m 3108 2009-03-13 12:57:05Z keiner $
+% $Id: f_hat_index.m 3776 2012-06-03 13:29:25Z keiner $
 function ind = f_hat_index(f_hat,j,k)
 [m,n] = size(f_hat);
 N = (m-1)/2;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,14 +16,18 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3355 2009-09-29 12:30:48Z vollrath $ */
+/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+
+#include "config.h"
 
 /* Include standard C headers. */
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 /* Include NFFT 3 utilities headers. */
 #include "nfft3util.h"
@@ -36,6 +40,7 @@ static void simple_test_nfsoft(int bw, int M)
   nfsoft_plan plan_nfsoft; /**< Plan for the NFSOFT   */
   nfsoft_plan plan_ndsoft; /**< Plan for the NDSOFT   */
 
+  ticks t0, t1;
   int j; /** just an index*/
   int k, m; /** the two parameters controlling the accuracy of the NFSOFT*/
   double d1, d2, d3; /** indeces for initializing the Euler angles*/
@@ -98,9 +103,10 @@ static void simple_test_nfsoft(int bw, int M)
 
 
   /** Compute NFSOFT and display the time needed. */
-  time = nfft_second();
+  t0 = getticks();
   nfsoft_trafo(&plan_nfsoft);
-  time = (nfft_second() - time);
+  t1 = getticks();
+  time = nfft_elapsed_seconds(t1,t0);
   if (plan_nfsoft.M_total<=20)
     nfft_vpr_complex(plan_nfsoft.f,plan_nfsoft.M_total,"NFSOFT, function samples");
   else
@@ -108,9 +114,10 @@ static void simple_test_nfsoft(int bw, int M)
   printf(" computed in %11le seconds\n",time);
 
   /** Compute NDSOFT and display the time needed. */
-  time = nfft_second();
+  t0 = getticks();
   nfsoft_trafo(&plan_ndsoft);
-  time = (nfft_second() - time);
+  t1 = getticks();
+time = nfft_elapsed_seconds(t1,t0);
   if (plan_ndsoft.M_total<=20)
     nfft_vpr_complex(plan_ndsoft.f,plan_ndsoft.M_total,"NDSOFT, function samples");
   else
@@ -118,7 +125,7 @@ static void simple_test_nfsoft(int bw, int M)
   printf(" computed in %11le seconds\n",time);
 
   /**compute the error between the NFSOFT and NDSOFT and display it*/
-  error= nfft_error_l_infty_complex(plan_ndsoft.f,plan_nfsoft.f, plan_nfsoft.M_total);
+  error= X(error_l_infty_complex)(plan_ndsoft.f,plan_nfsoft.f, plan_nfsoft.M_total);
   printf("\n The NFSOFT of bandwidth=%d for %d rotations has infty-error %11le \n",bw, M,error);
 
   printf("\n---------------------------------------------\n");
@@ -128,9 +135,10 @@ static void simple_test_nfsoft(int bw, int M)
   nfft_vpr_complex(plan_ndsoft.f,plan_ndsoft.M_total, "function samples to start adjoint trafo");
 
   /** Compute the adjoint NFSOFT and display the time needed.*/
-  time = nfft_second();
+  t0 = getticks();
   nfsoft_adjoint(&plan_nfsoft);
-  time = (nfft_second() - time);
+  t1 = getticks();
+time = nfft_elapsed_seconds(t1,t0);
   if ((bw+1)*(4*(bw+1)*(bw+1)-1)/3<=20)
      nfft_vpr_complex(plan_nfsoft.f_hat,(bw+1)*(4*(bw+1)*(bw+1)-1)/3,"SO(3) Fourier coefficients");
   else
@@ -138,9 +146,10 @@ static void simple_test_nfsoft(int bw, int M)
   printf(" computed in %11le seconds\n",time);
 
   /** Compute adjoint NDSOFT and display the time needed.*/
-  time = nfft_second();
+  t0 = getticks();
   nfsoft_adjoint(&plan_ndsoft);
-  time = (nfft_second() - time);
+  t1 = getticks();
+time = nfft_elapsed_seconds(t1,t0);
   if ((bw+1)*(4*(bw+1)*(bw+1)-1)/3<=20)
 	nfft_vpr_complex(plan_ndsoft.f_hat,(bw+1)*(4*(bw+1)*(bw+1)-1)/3,"SO(3) Fourier coefficients");
   else
@@ -149,7 +158,7 @@ static void simple_test_nfsoft(int bw, int M)
 
 
   /**compute the error between the adjoint NFSOFT and NDSOFT and display it*/
-  error=nfft_error_l_infty_complex(plan_ndsoft.f_hat,plan_nfsoft.f_hat, (bw+1)*(4*(bw+1)*(bw+1)-1)/3);
+  error=X(error_l_infty_complex)(plan_ndsoft.f_hat,plan_nfsoft.f_hat, (bw+1)*(4*(bw+1)*(bw+1)-1)/3);
   printf("\n The adjoint NFSOFT of bandwidth=%d for %d rotations has infty-error %11le \n",bw, M,error);
 
   printf("\n---------------------------------------------\n");

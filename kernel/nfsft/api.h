@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: api.h 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: api.h 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * \file api.h
@@ -91,8 +91,13 @@ struct nfsft_wisdom
 
   /** The threshold /f$\kappa/f$ */
   double threshold;
+#ifdef _OPENMP
+  int nthreads;
+  fpt_set *set_threads;
+#else
   /** Structure for \e discrete \e polynomial \e transform (\e DPT) */
   fpt_set set;
+#endif
 };
 /* \} */
 #endif

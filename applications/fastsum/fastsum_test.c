@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastsum_test.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: fastsum_test.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /*! \file fastsum_test.c
  *  \brief Simple test program for the fast NFFT-based summation algorithm.
@@ -24,15 +24,23 @@
  *  \author Markus Fenn
  *  \date 2006
  */
+#include "config.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <complex.h>
+#ifdef HAVE_COMPLEX_H
+  #include <complex.h>
+#endif
+
+#ifdef _OPENMP
+  #include <omp.h>
+#endif
 
 #include "fastsum.h"
 #include "kernels.h"
+#include "infft.h"
 
 /**
  * \defgroup applications_fastsum_test fastsum_test
@@ -54,6 +62,7 @@ int main(int argc, char **argv)
   double c;                                          /**< parameter for kernel    */
   fastsum_plan my_fastsum_plan;                      /**< plan for fast summation */
   double _Complex *direct;                                   /**< array for direct computation */
+  ticks t0, t1;                                      /**< for time measurement    */
   double time;                                       /**< for time measurement    */
   double error=0.0;                                  /**< for error computation   */
   double eps_I;                                      /**< inner boundary          */
@@ -117,15 +126,57 @@ int main(int argc, char **argv)
     }
   }
   printf("d=%d, N=%d, M=%d, n=%d, m=%d, p=%d, kernel=%s, c=%g, eps_I=%g, eps_B=%g \n",d,N,M,n,m,p,s,c,eps_I,eps_B);
+#ifdef NF_KUB
+  printf("nearfield correction using piecewise cubic Lagrange interpolation\n");
+#elif defined(NF_QUADR)
+  printf("nearfield correction using piecewise quadratic Lagrange interpolation\n");
+#elif defined(NF_LIN)
+  printf("nearfield correction using piecewise linear Lagrange interpolation\n");
+#endif
 
-  /** init two dimensional fastsum plan */
+#ifdef _OPENMP
+  #pragma omp parallel
+  {
+    #pragma omp single
+    {
+      printf("nthreads=%d\n", omp_get_max_threads());
+    }
+  }
+
+  fftw_init_threads();
+#endif
+
+  /** init d-dimensional fastsum plan */
   fastsum_init_guru(&my_fastsum_plan, d, N, M, kernel, &c, 0, n, m, p, eps_I, eps_B);
-  /*fastsum_init_guru(&my_fastsum_plan, d, N, M, kernel, &c, EXACT_NEARFIELD, n, m, p);*/
+  //fastsum_init_guru(&my_fastsum_plan, d, N, M, kernel, &c, NEARFIELD_BOXES, n, m, p, eps_I, eps_B);
+
+  if (my_fastsum_plan.flags & NEARFIELD_BOXES)
+    printf("determination of nearfield candidates based on partitioning into boxes\n");
+  else
+    printf("determination of nearfield candidates based on search tree\n");
 
   /** init source knots in a d-ball with radius 0.25-eps_b/2 */
+  k = 0;
+  while (k < N)
+  {
+    double r_max = 0.25 - my_fastsum_plan.eps_B/2.0;
+    double r2 = 0.0;
+
+    for (j=0; j<d; j++)
+      my_fastsum_plan.x[k*d+j] = 2.0 * r_max * (double)rand()/(double)RAND_MAX - r_max;
+
+    for (j=0; j<d; j++)
+      r2 += my_fastsum_plan.x[k*d+j] * my_fastsum_plan.x[k*d+j];
+
+    if (r2 >= r_max * r_max)
+      continue;
+
+    k++;
+  }
+
   for (k=0; k<N; k++)
   {
-    double r=(0.25-my_fastsum_plan.eps_B/2.0)*pow((double)rand()/(double)RAND_MAX,1.0/d);
+/*    double r=(0.25-my_fastsum_plan.eps_B/2.0)*pow((double)rand()/(double)RAND_MAX,1.0/d);
     my_fastsum_plan.x[k*d+0] = r;
     for (j=1; j<d; j++)
     {
@@ -137,12 +188,29 @@ int main(int argc, char **argv)
       }
       my_fastsum_plan.x[k*d+j] *= sin(phi);
     }
-
+*/
     my_fastsum_plan.alpha[k] = (double)rand()/(double)RAND_MAX + _Complex_I*(double)rand()/(double)RAND_MAX;
   }
 
   /** init target knots in a d-ball with radius 0.25-eps_b/2 */
-  for (k=0; k<M; k++)
+  k = 0;
+  while (k < M)
+  {
+    double r_max = 0.25 - my_fastsum_plan.eps_B/2.0;
+    double r2 = 0.0;
+
+    for (j=0; j<d; j++)
+      my_fastsum_plan.y[k*d+j] = 2.0 * r_max * (double)rand()/(double)RAND_MAX - r_max;
+
+    for (j=0; j<d; j++)
+      r2 += my_fastsum_plan.y[k*d+j] * my_fastsum_plan.y[k*d+j];
+
+    if (r2 >= r_max * r_max)
+      continue;
+
+    k++;
+  }
+/*  for (k=0; k<M; k++)
   {
     double r=(0.25-my_fastsum_plan.eps_B/2.0)*pow((double)rand()/(double)RAND_MAX,1.0/d);
     my_fastsum_plan.y[k*d+0] = r;
@@ -156,13 +224,14 @@ int main(int argc, char **argv)
       }
       my_fastsum_plan.y[k*d+j] *= sin(phi);
     }
-  }
+  } */
 
   /** direct computation */
   printf("direct computation: "); fflush(NULL);
-  time=nfft_second();
+  t0 = getticks();
   fastsum_exact(&my_fastsum_plan);
-  time=nfft_second()-time;
+  t1 = getticks();
+  time=nfft_elapsed_seconds(t1,t0);
   printf("%fsec\n",time);
 
   /** copy result */
@@ -172,16 +241,18 @@ int main(int argc, char **argv)
 
   /** precomputation */
   printf("pre-computation:    "); fflush(NULL);
-  time=nfft_second();
+  t0 = getticks();
   fastsum_precompute(&my_fastsum_plan);
-  time=nfft_second()-time;
+  t1 = getticks();
+  time=nfft_elapsed_seconds(t1,t0);
   printf("%fsec\n",time);
 
   /** fast computation */
   printf("fast computation:   "); fflush(NULL);
-  time=nfft_second();
+  t0 = getticks();
   fastsum_trafo(&my_fastsum_plan);
-  time=nfft_second()-time;
+  t1 = getticks();
+  time=nfft_elapsed_seconds(t1,t0);
   printf("%fsec\n",time);
 
   /** compute max error */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,15 +16,17 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nnfft.c 3321 2009-09-11 07:21:20Z kunis $ */
+/* $Id: nnfft.c 3775 2012-06-02 16:39:48Z keiner $ */
+
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
-
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
-
+#endif
 #include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
@@ -49,7 +51,7 @@
 #define MACRO_nndft_compute_transposed MACRO_nndft_compute_adjoint
 
 #define MACRO_nndft(which_one)                                                \
-void nndft_ ## which_one (nnfft_plan *ths)                                    \
+void nnfft_ ## which_one ## _direct (nnfft_plan *ths)                                    \
 {                                                                             \
   int j;                               /**< index over all nodes (time)     */\
   int t;                               /**< index for dimensions            */\
@@ -84,7 +86,7 @@ MACRO_nndft(adjoint)
 
 /** computes 2m+2 indices for the matrix B
  */
-void nnfft_uo(nnfft_plan *ths,int j,int *up,int *op,int act_dim)
+static void nnfft_uo(nnfft_plan *ths,int j,int *up,int *op,int act_dim)
 {
   double c;
   int u,o;
@@ -477,7 +479,7 @@ void nnfft_precompute_full_psi(nnfft_plan *ths)
     } /* for(j) */
 }
 
-void nnfft_init_help(nnfft_plan *ths, int m2, unsigned nfft_flags, unsigned fftw_flags)
+static void nnfft_init_help(nnfft_plan *ths, int m2, unsigned nfft_flags, unsigned fftw_flags)
 {
   int t;                                /**< index over all dimensions       */
   int lprod;                            /**< 'bandwidth' of matrix B         */
@@ -603,7 +605,10 @@ void nnfft_init(nnfft_plan *ths, int d, int N_total, int M_total, int *N)
   ths->N_total = N_total;
 
   /* m should be greater to get the same accuracy as the nfft */
+/* Was soll dieser Ausdruck machen? Es handelt sich um eine Ganzzahl!
+
   WINDOW_HELP_ESTIMATE_m;
+*/
 
   ths->N = (int*) nfft_malloc(ths->d*sizeof(int));
   ths->N1 = (int*) nfft_malloc(ths->d*sizeof(int));

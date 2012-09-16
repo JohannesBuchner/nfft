@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,29 +16,32 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: quadratureS2.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: quadratureS2.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * \defgroup applications_quadratureS2_test quadratureS2_test
  * \ingroup applications_quadratureS2
  * \{
  */
+#include "config.h"
 
 /* Include standard C headers. */
 #include <math.h>
 #include <stdlib.h>
-/* extern double drand48 (void) __THROW; */
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 /* Include NFFT 3 utilities headers. */
 #include "nfft3util.h"
 
 /* Include NFFT 3 library header. */
 #include "nfft3.h"
+
+#include "infft.h"
 
 /** Enumeration for parameter values */
 enum boolean {NO = 0, YES = 1};
@@ -109,8 +112,6 @@ int main (int argc, char **argv)
   nfsft_plan plan;             /**< The NFSFT plan                            */
   nfsft_plan plan_gen;         /**< The NFSFT plan                            */
 
-  double t;                    /**< The computation time needed for a single  *
-                                    run                                       */
   double t_avg;                /**< The average computation time needed       */
   double err_infty_avg;        /**< The average error \f$E_\infty\f$          */
   double err_2_avg;            /**< The average error \f$E_2\f$               */
@@ -141,6 +142,7 @@ int main (int argc, char **argv)
   nfsft_plan *plan_ptr;
   double *w_temp;
   int testmode;
+  ticks t0, t1;
 
   /* Read the number of testcases. */
   fscanf(stdin,"testcases=%d\n",&tc_max);
@@ -342,7 +344,7 @@ int main (int argc, char **argv)
 
         for (i = 0; i < RQ[iNQ]; i++)
         {
-          t = nfft_second();
+          t0 = getticks();
 
           if (use_nfsft != NO)
           {
@@ -352,10 +354,11 @@ int main (int argc, char **argv)
           else
           {
             /* Execute the adjoint direct NDSFT transformation. */
-            ndsft_adjoint(&plan);
+            nfsft_adjoint_direct(&plan);
           }
 
-          t_avg += nfft_second() - t;
+          t1 = getticks();
+          t_avg += nfft_elapsed_seconds(t1,t0);
         }
 
         t_avg = t_avg/((double)RQ[iNQ]);
@@ -710,7 +713,7 @@ int main (int argc, char **argv)
             else
             {
               /* Execute the direct NDSFT transformation. */
-              ndsft_trafo(&plan_gen);
+              nfsft_trafo_direct(&plan_gen);
             }
 
             nfsft_finalize(&plan_gen);
@@ -737,7 +740,7 @@ int main (int argc, char **argv)
               else
               {
                 /* Execute the direct NDSFT transformation. */
-                ndsft_trafo(&plan_gen);
+                nfsft_trafo_direct(&plan_gen);
               }
 
               nfsft_finalize(&plan_gen);
@@ -981,7 +984,7 @@ int main (int argc, char **argv)
           //memcpy(f,f_grid,m_total*sizeof(double _Complex));
 
           /* Initialize time measurement. */
-          t = nfft_second();
+          t0 = getticks();
 
           //fprintf(stderr,"Multiplying with quadrature weights\n");
           //fflush(stderr);
@@ -1000,11 +1003,12 @@ int main (int argc, char **argv)
             }
           }
 
-          t_avg += nfft_second() - t;
+          t1 = getticks();
+          t_avg += nfft_elapsed_seconds(t1,t0);
 
           nfft_free(w);
 
-          t = nfft_second();
+          t0 = getticks();
 
           /*fprintf(stderr,"\n");
           d = 0;
@@ -1025,7 +1029,7 @@ int main (int argc, char **argv)
           else
           {
             /* Execute the adjoint direct NDSFT transformation. */
-            ndsft_adjoint(plan_adjoint_ptr);
+            nfsft_adjoint_direct(plan_adjoint_ptr);
           }
 
           /* Multiplication with the Fourier-Legendre coefficients. */
@@ -1049,10 +1053,11 @@ int main (int argc, char **argv)
           else
           {
             /* Execute the direct NDSFT transformation. */
-            ndsft_trafo(plan_ptr);
+            nfsft_trafo_direct(plan_ptr);
           }
 
-          t_avg += nfft_second() - t;
+          t1 = getticks();
+          t_avg += nfft_elapsed_seconds(t1,t0);
 
           //fprintf(stderr,"Finalizing\n");
           //fflush(stderr);
@@ -1067,8 +1072,8 @@ int main (int argc, char **argv)
           nfft_free(f_hat);
           nfft_free(x_grid);
 
-          err_infty_avg += nfft_error_l_infty_complex(f, f_compare, m_compare);
-          err_2_avg += nfft_error_l_2_complex(f, f_compare, m_compare);
+          err_infty_avg += X(error_l_infty_complex)(f, f_compare, m_compare);
+          err_2_avg += X(error_l_2_complex)(f, f_compare, m_compare);
 
           nfft_free(f_grid);
 

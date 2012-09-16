@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: polar_fft_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: polar_fft_test.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * \file polarFFT/polar_fft_test.c
@@ -26,12 +26,17 @@
  * \author Markus Fenn
  * \date 2006
  */
+#include "config.h"
+
 #include <math.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 /**
  * \defgroup applications_polarFFT_polar polar_fft_test
@@ -131,7 +136,7 @@ static int polar_dft(fftw_complex *f_hat, int NN, fftw_complex *f, int T, int R,
     my_nfft_plan.f_hat[k] = f_hat[k];
 
   /** NDFT-2D */
-  ndft_trafo(&my_nfft_plan);
+  nfft_trafo_direct(&my_nfft_plan);
 
   /** copy result */
   for(j=0;j<my_nfft_plan.M_total;j++)
@@ -239,7 +244,7 @@ static int inverse_polar_fft(fftw_complex *f, int T, int R, fftw_complex *f_hat,
                   FFTW_MEASURE| FFTW_DESTROY_INPUT);
 
   /** init two dimensional infft plan */
-  solver_init_advanced_complex(&my_infft_plan,(mv_plan_complex*)(&my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT );
+  solver_init_advanced_complex(&my_infft_plan,(nfft_mv_plan_complex*)(&my_nfft_plan), CGNR | PRECOMPUTE_WEIGHT );
 
   /** init nodes, given samples and weights */
   polar_grid(T,R,x,w);
@@ -373,7 +378,7 @@ int main(int argc,char **argv)
     polar_fft(f_hat,N,f,T,R,m);
 
     /** compute error of fast polar FFT */
-    E_max=nfft_error_l_infty_complex(f_direct,f,M);
+    E_max=X(error_l_infty_complex)(f_direct,f,M);
     printf("m=%2d: E_max = %e\n",m,E_max);
     fprintf(fp1,"%e\n",E_max);
   }
@@ -398,7 +403,7 @@ int main(int argc,char **argv)
         if (temp>E_max) E_max=temp;
       }
       */
-       E_max=nfft_error_l_infty_complex(f_hat,f_tilde,N*N);
+       E_max=X(error_l_infty_complex)(f_hat,f_tilde,N*N);
       printf("%3d iterations: E_max = %e\n",max_i,E_max);
       fprintf(fp1,"%e\n",E_max);
     }

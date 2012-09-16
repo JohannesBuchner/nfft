@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,11 +16,14 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: reconstruct_data_2d1d.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: reconstruct_data_2d1d.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdlib.h>
 #include <math.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
@@ -34,7 +37,7 @@
 /**
  * reconstruct makes an inverse 2d-nfft for every slice
  */
-void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fftw_complex *mem)
+static void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fftw_complex *mem)
 {
   int j,k,l,z;                  /* some variables  */
   double real,imag;             /* to read the real and imag part of a complex number */
@@ -64,7 +67,7 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
     infft_flags = infft_flags | PRECOMPUTE_WEIGHT;
 
   /* initialise my_iplan, advanced */
-  solver_init_advanced_complex(&my_iplan,(mv_plan_complex*)(&my_plan), infft_flags );
+  solver_init_advanced_complex(&my_iplan,(nfft_mv_plan_complex*)(&my_plan), infft_flags );
 
   /* get the weights */
   if(my_iplan.flags & PRECOMPUTE_WEIGHT)
@@ -150,7 +153,7 @@ void reconstruct(char* filename,int N,int M,int Z,int iteration, int weight, fft
  * print writes the memory back in a file
  * output_real.dat for the real part and output_imag.dat for the imaginary part
  */
-void print(int N,int M,int Z, fftw_complex *mem)
+static void print(int N,int M,int Z, fftw_complex *mem)
 {
   int i,j;
   FILE* fout_real;

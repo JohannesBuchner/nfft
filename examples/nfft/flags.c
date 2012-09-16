@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: flags.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: flags.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /*! \file flags.c
  *
@@ -26,14 +26,19 @@
  *
  * References: Time and Memory Requirements of the Nonequispaced FFT
  */
+#include "config.h"
+
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 #ifdef GAUSSIAN
   unsigned test_fg=1;
@@ -53,7 +58,7 @@
   unsigned test=0;
 #endif
 
-void flags_cp(nfft_plan *dst, nfft_plan *src)
+static void flags_cp(nfft_plan *dst, nfft_plan *src)
 {
   dst->x=src->x;
   dst->f_hat=src->f_hat;
@@ -64,12 +69,13 @@ void flags_cp(nfft_plan *dst, nfft_plan *src)
   dst->my_fftw_plan2=src->my_fftw_plan2;
 }
 
-void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
+static void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
                    unsigned test_pre_full_psi)
 {
   int r, NN[d], nn[d];
   double t_ndft, t, e;
-  double _Complex *swapndft;
+  double _Complex *swapndft = NULL;
+  ticks t0, t1;
 
   nfft_plan p;
   nfft_plan p_pre_phi_hut;
@@ -145,9 +151,10 @@ void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
       while(t_ndft<0.01)
         {
           r++;
-          t=nfft_second();
-          ndft_trafo(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_trafo_direct(&p);
+          t1 = getticks();
+          t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -179,7 +186,7 @@ void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
     p.MEASURE_TIME_t[1]=nan("");
 
   if(test_ndft)
-    e=nfft_error_l_2_complex(swapndft, p.f, p.M_total);
+    e=X(error_l_2_complex)(swapndft, p.f, p.M_total);
   else
     e=nan("");
 
@@ -217,7 +224,7 @@ void time_accuracy(int d, int N, int M, int n, int m, unsigned test_ndft,
     nfft_free(swapndft);
 }
 
-void accuracy_pre_lin_psi(int d, int N, int M, int n, int m, int K)
+static void accuracy_pre_lin_psi(int d, int N, int M, int n, int m, int K)
 {
   int r, NN[d], nn[d];
   double e;
@@ -256,12 +263,12 @@ void accuracy_pre_lin_psi(int d, int N, int M, int n, int m, int K)
 
   /** compute exact result */
   NFFT_SWAP_complex(p.f,swapndft);
-  ndft_trafo(&p);
+  nfft_trafo_direct(&p);
   NFFT_SWAP_complex(p.f,swapndft);
 
   /** NFFT */
   nfft_trafo(&p);
-  e=nfft_error_l_2_complex(swapndft, p.f, p.M_total);
+  e=X(error_l_2_complex)(swapndft, p.f, p.M_total);
 
   //  printf("%d\t%d\t%d\t%d\t%.2e\n",d,N,m,K,e);
   printf("$%.1e$&\t",e);

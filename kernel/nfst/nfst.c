@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfst.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: nfst.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 /**
  * Library.
@@ -122,16 +122,16 @@ int nfst_fftw_2N_rev( int n)
 
 
 /** direct computation of non equispaced sine transforms
- *  ndst_trafo,  ndst_adjoint_
+ *  nfst_trafo_direct,  nfst_adjoint_direct_
  *  require O(M N^d) arithemtical operations
  *
- * direct computation of the ndst_trafo, formula (1.1)
- * ndst_trafo:
+ * direct computation of the nfst_trafo_direct, formula (1.1)
+ * nfst_trafo_direct:
  * for j=0,...,M-1
  *  f[j] = sum_{k in I_N^d} f_hat[k] * sin(2 (pi) k x[j])
  *
- * direct computation of the ndft_adjoint, formula (1.2)
- * ndst_adjoint:
+ * direct computation of the nfft_adjoint_direct, formula (1.2)
+ * nfst_adjoint_direct:
  * for k in I_N^d
  *  f_hat[k] = sum_{j=0}^{M-1} f[j] * sin(2 (pi) k x[j])
  */
@@ -212,7 +212,7 @@ int nfst_fftw_2N_rev( int n)
 
 /* slow (trafo) transform */
 #define MACRO_ndst( which_one)                                                  \
-  void ndst_ ## which_one ( nfst_plan *ths)                                     \
+  void nfst_ ## which_one ## _direct ( nfst_plan *ths)                                     \
   {                                                                             \
     int j, k, t, i;                                                             \
     int ka[ths->d];                                                             \
@@ -247,7 +247,7 @@ int nfst_fftw_2N_rev( int n)
         }                                                                       \
       else                                                                      \
       {                                                                         \
-        /* fast ndst_trafo */                                                   \
+        /* fast nfst_trafo_direct */                                                   \
         MACRO_ndst_malloc__sin_vec;                                             \
                                                                                 \
         for( j = 0; j < ths->M_total; j++)                                      \
@@ -944,11 +944,14 @@ void nfst_init( nfst_plan *ths, int d, int *N, int M_total)
   ths->n      = (int*)nfft_malloc( ths->d * sizeof( int));
 
   for( t = 0; t < d; t++)
-    ths->n[t] = 2 * nfft_next_power_of_2( ths->N[t]) - 1;
+    ths->n[t] = 2 * X(next_power_of_2)( ths->N[t]) - 1;
 
   ths->M_total = M_total;
 
+/* Was soll dieser Ausdruck machen? Es handelt sich um eine Ganzzahl!
+
   WINDOW_HELP_ESTIMATE_m;
+*/  
 
   ths->nfst_flags = NFST_DEFAULT_FLAGS;
   ths->fftw_flags = FFTW_DEFAULT_FLAGS;
@@ -962,7 +965,7 @@ void nfst_init_m( nfst_plan *ths, int d, int *N, int M_total, int m)
   int t, n[d];
 
   for( t = 0; t < d; t++)
-    n[t] = nfst_fftw_2N( nfft_next_power_of_2( N[t]));
+    n[t] = nfst_fftw_2N( X(next_power_of_2)( N[t]));
 
   nfst_init_guru( ths, d, N, M_total, n, m, NFST_DEFAULT_FLAGS, FFTW_DEFAULT_FLAGS);
 }

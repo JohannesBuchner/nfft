@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
 
 #include <stdio.h>
 #include <math.h>
@@ -26,7 +26,7 @@
 #include "nfft3util.h"
 #include "nfft3.h"
 
-void simple_test_nfst_1d(void)
+static void simple_test_nfst_1d(void)
 {
   int j,k;
   nfst_plan p;
@@ -52,7 +52,7 @@ void simple_test_nfst_1d(void)
   nfft_vpr_double(p.f_hat,p.N_total,"given Fourier coefficients, vector f_hat");
 
   /** direct trafo and show the result */
-  ndst_trafo(&p);
+  nfst_trafo_direct(&p);
   nfft_vpr_double(p.f,p.M_total,"ndst, vector f");
 
   /** approx. trafo and show the result */
@@ -60,7 +60,7 @@ void simple_test_nfst_1d(void)
   nfft_vpr_double(p.f,p.M_total,"nfst, vector f");
 
   /** approx. adjoint and show the result */
-  ndst_adjoint(&p);
+  nfst_adjoint_direct(&p);
   nfft_vpr_double(p.f_hat,p.N_total,"adjoint ndst, vector f_hat");
 
   /** approx. adjoint and show the result */

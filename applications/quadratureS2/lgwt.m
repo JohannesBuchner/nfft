@@ -1,5 +1,18 @@
+function [x,w]=lgwt(N,a,b)
+%LGWT - Legendre Gauss Quadrature
 %
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+%   This script is for computing definite integrals using Legendre-Gauss
+%   Quadrature. Computes the Legendre-Gauss nodes and weights  on an interval
+%   [a,b] with truncation order N
+%
+%   Suppose you have a continuous function f(x) which is defined on [a,b]
+%   which you can evaluate at any x in [a,b]. Simply evaluate it at all of
+%   the values contained in the x vector to obtain a vector f. Then compute
+%   the definite integral using sum(f.*w);
+%
+%   Written by Greg von Winckel - 02/25/2004
+
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -15,21 +28,8 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: lgwt.m 3100 2009-03-12 08:42:48Z keiner $
-function [x,w]=lgwt(N,a,b)
+% $Id: lgwt.m 3784 2012-06-06 20:30:39Z keiner $
 
-% lgwt.m
-%
-% This script is for computing definite integrals using Legendre-Gauss
-% Quadrature. Computes the Legendre-Gauss nodes and weights  on an interval
-% [a,b] with truncation order N
-%
-% Suppose you have a continuous function f(x) which is defined on [a,b]
-% which you can evaluate at any x in [a,b]. Simply evaluate it at all of
-% the values contained in the x vector to obtain a vector f. Then compute
-% the definite integral using sum(f.*w);
-%
-% Written by Greg von Winckel - 02/25/2004
 N=N-1;
 N1=N+1; N2=N+2;
 

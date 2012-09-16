@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,11 +16,14 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: reconstruct_data_gridding.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: reconstruct_data_gridding.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdlib.h>
 #include <math.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
@@ -34,7 +37,7 @@
 /**
  * reconstruct makes a 2d-adjoint-nfft
  */
-void reconstruct(char* filename, int N, int M, int weight)
+static void reconstruct(char* filename, int N, int M, int weight)
 {
   int j;                   /* some variables  */
   double weights;          /* store one weight temporary */

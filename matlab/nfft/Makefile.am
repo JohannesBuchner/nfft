@@ -1,25 +1,32 @@
-# $Id: Makefile.am 3407 2009-12-15 10:15:46Z keiner $
+# $Id: Makefile.am 3774 2012-06-01 07:41:57Z tovo $
 
 # compiler flags
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/matlab $(matlab_CPPFLAGS)
 
-# application directory
-applicationdir = $(pkgdatadir)/matlab/nfft
+# matlab wrapper directory
+nfftmatlabdir = $(datadir)/nfft/matlab/nfft
 
 # library
-application_LTLIBRARIES = libnfft.la
+lib_LTLIBRARIES = libnfft.la
 libnfft_la_SOURCES = nfftmex.c
-libnfft_la_LIBADD = $(top_builddir)/libnfft3.la $(top_builddir)/matlab/libmatlab.la $(matlab_LIBS)
-libnfft_la_LDFLAGS = -module -shared -shrext $(matlab_mexext) -avoid-version $(matlab_LDFLAGS)
 
-EXTRA_DIST = FFT_OUT_OF_PLACE.m FFTW_ESTIMATE.m FFTW_MEASURE.m FG_PSI.m Contents.m ndft_adjoint.m ndft_trafo.m \
-             nfft_adjoint.m nfft_finalize.m nfft_get_f.m nfft_get_f_hat.m nfft_get_x.m nfft_init_1d.m nfft_init_2d.m \
-             nfft_init_3d.m nfft_init_guru.m nfft_precompute_psi.m nfft_set_f.m nfft_set_f_hat.m nfft_set_x.m nfft_trafo.m \
-             nfftmex.m PRE_FG_PSI.m PRE_FULL_PSI.m PRE_LIN_PSI.m PRE_PHI_HUT.m PRE_PSI.m simple_test.m
+libnfft_la_LIBADD = $(top_builddir)/libnfft3_matlab.la @matlab_fftw3_LIBS@ $(top_builddir)/matlab/libmatlab.la $(matlab_LIBS)
 
-application_DATA = $(EXTRA_DIST)
+libnfft_la_LDFLAGS = -no-undefined -module -shared -shrext $(matlab_mexext) -avoid-version @matlab_fftw3_LDFLAGS@ $(matlab_LDFLAGS)
 
-nfftmex@matlab_mexext@: .libs/libnfft@matlab_mexext@
+if HAVE_MATLAB_THREADS
+libnfft_la_CFLAGS = $(OPENMP_CFLAGS)
+endif
+
+
+dist_nfftmatlab_DATA = FFT_OUT_OF_PLACE.m FFTW_ESTIMATE.m FFTW_MEASURE.m FG_PSI.m Contents.m ndft_adjoint.m ndft_trafo.m \
+	nfft_adjoint.m nfft_finalize.m nfft_get_f.m nfft_get_f_hat.m nfft_get_x.m nfft_init_1d.m nfft_init_2d.m \
+        nfft_init_3d.m nfft_init_guru.m nfft_precompute_psi.m nfft_set_f.m nfft_set_f_hat.m nfft_set_x.m nfft_trafo.m \
+        PRE_FG_PSI.m PRE_FULL_PSI.m PRE_LIN_PSI.m PRE_PHI_HUT.m PRE_PSI.m simple_test.m \
+	nfft_get_num_threads.m
+
+# target all-am builds .libs/libnfft@matlab_mexext@
+nfftmex@matlab_mexext@: all-am
 	rm -f ./nfftmex@matlab_mexext@
 	$(LN_S) .libs/libnfft@matlab_mexext@ ./nfftmex@matlab_mexext@
 
@@ -29,4 +36,9 @@ clean: clean-am
 	rm -f ./nfftmex@matlab_mexext@
 
 install-exec-hook:
-	$(LN_S) $(applicationdir)/libnfft@matlab_mexext@ $(applicationdir)/nfftmex@matlab_mexext@
+	rm -f $(libdir)/nfftmex@matlab_mexext@
+	$(LN_S) $(libdir)/libnfft@matlab_mexext@ $(libdir)/nfftmex@matlab_mexext@
+
+uninstall-hook:
+	rm -f $(libdir)/nfftmex@matlab_mexext@
+

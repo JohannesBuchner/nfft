@@ -1,6 +1,6 @@
 /* include/config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define to enable B-spline window function. */
+/* Define to enable Dirac delta window function. */
 #undef B_SPLINE
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
@@ -10,9 +10,6 @@
 
 /* Define to 1 if using `alloca.c'. */
 #undef C_ALLOCA
-
-/* Define to enable dirac delta window function. */
-#undef DIRAC_DELTA
 
 /* Define to enable Gaussian window function. */
 #undef GAUSSIAN
@@ -26,6 +23,15 @@
 /* Define to 1 if you have the `acosf' function. */
 #undef HAVE_ACOSF
 
+/* Define to 1 if you have the `acosh' function. */
+#undef HAVE_ACOSH
+
+/* Define to 1 if you have the `acoshf' function. */
+#undef HAVE_ACOSHF
+
+/* Define to 1 if you have the `acoshl' function. */
+#undef HAVE_ACOSHL
+
 /* Define to 1 if you have the `acosl' function. */
 #undef HAVE_ACOSL
 
@@ -36,11 +42,200 @@
    */
 #undef HAVE_ALLOCA_H
 
-/* Define to 1 if you have the `BSDgettimeofday' function. */
-#undef HAVE_BSDGETTIMEOFDAY
+/* Define to 1 if you have the `asin' function. */
+#undef HAVE_ASIN
+
+/* Define to 1 if you have the `asinf' function. */
+#undef HAVE_ASINF
+
+/* Define to 1 if you have the `asinh' function. */
+#undef HAVE_ASINH
+
+/* Define to 1 if you have the `asinhf' function. */
+#undef HAVE_ASINHF
+
+/* Define to 1 if you have the `asinhl' function. */
+#undef HAVE_ASINHL
+
+/* Define to 1 if you have the `asinl' function. */
+#undef HAVE_ASINL
+
+/* Define to 1 if you have the `atan' function. */
+#undef HAVE_ATAN
+
+/* Define to 1 if you have the `atan2' function. */
+#undef HAVE_ATAN2
+
+/* Define to 1 if you have the `atan2f' function. */
+#undef HAVE_ATAN2F
+
+/* Define to 1 if you have the `atan2l' function. */
+#undef HAVE_ATAN2L
+
+/* Define to 1 if you have the `atanf' function. */
+#undef HAVE_ATANF
+
+/* Define to 1 if you have the `atanh' function. */
+#undef HAVE_ATANH
+
+/* Define to 1 if you have the `atanhf' function. */
+#undef HAVE_ATANHF
+
+/* Define to 1 if you have the `atanhl' function. */
+#undef HAVE_ATANHL
+
+/* Define to 1 if you have the `atanl' function. */
+#undef HAVE_ATANL
+
+/* Define to 1 if you have the `cabs' function. */
+#undef HAVE_CABS
+
+/* Define to 1 if you have the `cabsf' function. */
+#undef HAVE_CABSF
+
+/* Define to 1 if you have the `cabsl' function. */
+#undef HAVE_CABSL
+
+/* Define to 1 if you have the `cacos' function. */
+#undef HAVE_CACOS
+
+/* Define to 1 if you have the `cacosf' function. */
+#undef HAVE_CACOSF
+
+/* Define to 1 if you have the `cacosh' function. */
+#undef HAVE_CACOSH
+
+/* Define to 1 if you have the `cacoshf' function. */
+#undef HAVE_CACOSHF
+
+/* Define to 1 if you have the `cacoshl' function. */
+#undef HAVE_CACOSHL
+
+/* Define to 1 if you have the `cacosl' function. */
+#undef HAVE_CACOSL
+
+/* Define to 1 if you have the `carg' function. */
+#undef HAVE_CARG
+
+/* Define to 1 if you have the `cargf' function. */
+#undef HAVE_CARGF
+
+/* Define to 1 if you have the `cargl' function. */
+#undef HAVE_CARGL
+
+/* Define to 1 if you have the `casin' function. */
+#undef HAVE_CASIN
+
+/* Define to 1 if you have the `casinf' function. */
+#undef HAVE_CASINF
+
+/* Define to 1 if you have the `casinh' function. */
+#undef HAVE_CASINH
+
+/* Define to 1 if you have the `casinhf' function. */
+#undef HAVE_CASINHF
+
+/* Define to 1 if you have the `casinhl' function. */
+#undef HAVE_CASINHL
+
+/* Define to 1 if you have the `casinl' function. */
+#undef HAVE_CASINL
+
+/* Define to 1 if you have the `catan' function. */
+#undef HAVE_CATAN
+
+/* Define to 1 if you have the `catanf' function. */
+#undef HAVE_CATANF
+
+/* Define to 1 if you have the `catanh' function. */
+#undef HAVE_CATANH
+
+/* Define to 1 if you have the `catanhf' function. */
+#undef HAVE_CATANHF
+
+/* Define to 1 if you have the `catanhl' function. */
+#undef HAVE_CATANHL
+
+/* Define to 1 if you have the `catanl' function. */
+#undef HAVE_CATANL
+
+/* Define to 1 if you have the `cbrt' function. */
+#undef HAVE_CBRT
+
+/* Define to 1 if you have the `cbrtf' function. */
+#undef HAVE_CBRTF
+
+/* Define to 1 if you have the `cbrtl' function. */
+#undef HAVE_CBRTL
+
+/* Define to 1 if you have the `ccos' function. */
+#undef HAVE_CCOS
+
+/* Define to 1 if you have the `ccosf' function. */
+#undef HAVE_CCOSF
+
+/* Define to 1 if you have the `ccosh' function. */
+#undef HAVE_CCOSH
+
+/* Define to 1 if you have the `ccoshf' function. */
+#undef HAVE_CCOSHF
+
+/* Define to 1 if you have the `ccoshl' function. */
+#undef HAVE_CCOSHL
+
+/* Define to 1 if you have the `ccosl' function. */
+#undef HAVE_CCOSL
+
+/* Define to 1 if you have the `ceil' function. */
+#undef HAVE_CEIL
+
+/* Define to 1 if you have the `ceilf' function. */
+#undef HAVE_CEILF
+
+/* Define to 1 if you have the `ceill' function. */
+#undef HAVE_CEILL
+
+/* Define to 1 if you have the `cexp' function. */
+#undef HAVE_CEXP
+
+/* Define to 1 if you have the `cexpf' function. */
+#undef HAVE_CEXPF
+
+/* Define to 1 if you have the `cexpl' function. */
+#undef HAVE_CEXPL
+
+/* Define to 1 if you have the `cimag' function. */
+#undef HAVE_CIMAG
+
+/* Define to 1 if you have the `cimagf' function. */
+#undef HAVE_CIMAGF
+
+/* Define to 1 if you have the `cimagl' function. */
+#undef HAVE_CIMAGL
 
 /* Define to 1 if you have the `clock_gettime' function. */
 #undef HAVE_CLOCK_GETTIME
+
+/* Define to 1 if you have the `clog' function. */
+#undef HAVE_CLOG
+
+/* Define to 1 if you have the `clogf' function. */
+#undef HAVE_CLOGF
+
+/* Define to 1 if you have the `clogl' function. */
+#undef HAVE_CLOGL
+
+/* Define to 1 if you have the <complex.h> header file. */
+#undef HAVE_COMPLEX_H
+
+/* Define to 1 if you have the `conj' function. */
+#undef HAVE_CONJ
+
+/* Define to 1 if you have the `conjf' function. */
+#undef HAVE_CONJF
+
+/* Define to 1 if you have the `conjl' function. */
+#undef HAVE_CONJL
 
 /* Define to 1 if you have the `copysign' function. */
 #undef HAVE_COPYSIGN
@@ -57,8 +252,89 @@
 /* Define to 1 if you have the `cosf' function. */
 #undef HAVE_COSF
 
+/* Define to 1 if you have the `cosh' function. */
+#undef HAVE_COSH
+
+/* Define to 1 if you have the `coshf' function. */
+#undef HAVE_COSHF
+
+/* Define to 1 if you have the `coshl' function. */
+#undef HAVE_COSHL
+
 /* Define to 1 if you have the `cosl' function. */
 #undef HAVE_COSL
+
+/* Define to 1 if you have the `cpow' function. */
+#undef HAVE_CPOW
+
+/* Define to 1 if you have the `cpowf' function. */
+#undef HAVE_CPOWF
+
+/* Define to 1 if you have the `cpowl' function. */
+#undef HAVE_CPOWL
+
+/* Define to 1 if you have the `cproj' function. */
+#undef HAVE_CPROJ
+
+/* Define to 1 if you have the `cprojf' function. */
+#undef HAVE_CPROJF
+
+/* Define to 1 if you have the `cprojl' function. */
+#undef HAVE_CPROJL
+
+/* Define to 1 if you have the `creal' function. */
+#undef HAVE_CREAL
+
+/* Define to 1 if you have the `crealf' function. */
+#undef HAVE_CREALF
+
+/* Define to 1 if you have the `creall' function. */
+#undef HAVE_CREALL
+
+/* Define to 1 if you have the `csin' function. */
+#undef HAVE_CSIN
+
+/* Define to 1 if you have the `csinf' function. */
+#undef HAVE_CSINF
+
+/* Define to 1 if you have the `csinh' function. */
+#undef HAVE_CSINH
+
+/* Define to 1 if you have the `csinhf' function. */
+#undef HAVE_CSINHF
+
+/* Define to 1 if you have the `csinhl' function. */
+#undef HAVE_CSINHL
+
+/* Define to 1 if you have the `csinl' function. */
+#undef HAVE_CSINL
+
+/* Define to 1 if you have the `csqrt' function. */
+#undef HAVE_CSQRT
+
+/* Define to 1 if you have the `csqrtf' function. */
+#undef HAVE_CSQRTF
+
+/* Define to 1 if you have the `csqrtl' function. */
+#undef HAVE_CSQRTL
+
+/* Define to 1 if you have the `ctan' function. */
+#undef HAVE_CTAN
+
+/* Define to 1 if you have the `ctanf' function. */
+#undef HAVE_CTANF
+
+/* Define to 1 if you have the `ctanh' function. */
+#undef HAVE_CTANH
+
+/* Define to 1 if you have the `ctanhf' function. */
+#undef HAVE_CTANHF
+
+/* Define to 1 if you have the `ctanhl' function. */
+#undef HAVE_CTANHL
+
+/* Define to 1 if you have the `ctanl' function. */
+#undef HAVE_CTANL
 
 /* Define to 1 if you have the <c_asm.h> header file. */
 #undef HAVE_C_ASM_H
@@ -71,9 +347,269 @@
    */
 #undef HAVE_DECL_ACOSF
 
+/* Define to 1 if you have the declaration of `acosh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ACOSH
+
+/* Define to 1 if you have the declaration of `acoshf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ACOSHF
+
+/* Define to 1 if you have the declaration of `acoshl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ACOSHL
+
 /* Define to 1 if you have the declaration of `acosl', and to 0 if you don't.
    */
 #undef HAVE_DECL_ACOSL
+
+/* Define to 1 if you have the declaration of `asin', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ASIN
+
+/* Define to 1 if you have the declaration of `asinf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ASINF
+
+/* Define to 1 if you have the declaration of `asinh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ASINH
+
+/* Define to 1 if you have the declaration of `asinhf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ASINHF
+
+/* Define to 1 if you have the declaration of `asinhl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ASINHL
+
+/* Define to 1 if you have the declaration of `asinl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ASINL
+
+/* Define to 1 if you have the declaration of `atan', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATAN
+
+/* Define to 1 if you have the declaration of `atan2', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATAN2
+
+/* Define to 1 if you have the declaration of `atan2f', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATAN2F
+
+/* Define to 1 if you have the declaration of `atan2l', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATAN2L
+
+/* Define to 1 if you have the declaration of `atanf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATANF
+
+/* Define to 1 if you have the declaration of `atanh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATANH
+
+/* Define to 1 if you have the declaration of `atanhf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATANHF
+
+/* Define to 1 if you have the declaration of `atanhl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATANHL
+
+/* Define to 1 if you have the declaration of `atanl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ATANL
+
+/* Define to 1 if you have the declaration of `cabs', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CABS
+
+/* Define to 1 if you have the declaration of `cabsl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CABSL
+
+/* Define to 1 if you have the declaration of `cacos', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CACOS
+
+/* Define to 1 if you have the declaration of `cacosf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CACOSF
+
+/* Define to 1 if you have the declaration of `cacosh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CACOSH
+
+/* Define to 1 if you have the declaration of `cacoshf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_CACOSHF
+
+/* Define to 1 if you have the declaration of `cacoshl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_CACOSHL
+
+/* Define to 1 if you have the declaration of `cacosl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CACOSL
+
+/* Define to 1 if you have the declaration of `carg', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CARG
+
+/* Define to 1 if you have the declaration of `cargf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CARGF
+
+/* Define to 1 if you have the declaration of `cargl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CARGL
+
+/* Define to 1 if you have the declaration of `casin', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CASIN
+
+/* Define to 1 if you have the declaration of `casinf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CASINF
+
+/* Define to 1 if you have the declaration of `casinh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CASINH
+
+/* Define to 1 if you have the declaration of `casinhf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_CASINHF
+
+/* Define to 1 if you have the declaration of `casinhl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_CASINHL
+
+/* Define to 1 if you have the declaration of `casinl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CASINL
+
+/* Define to 1 if you have the declaration of `catan', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CATAN
+
+/* Define to 1 if you have the declaration of `catanf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CATANF
+
+/* Define to 1 if you have the declaration of `catanh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CATANH
+
+/* Define to 1 if you have the declaration of `catanhf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_CATANHF
+
+/* Define to 1 if you have the declaration of `catanhl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_CATANHL
+
+/* Define to 1 if you have the declaration of `catanl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CATANL
+
+/* Define to 1 if you have the declaration of `cbrt', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CBRT
+
+/* Define to 1 if you have the declaration of `cbrtf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CBRTF
+
+/* Define to 1 if you have the declaration of `cbrtl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CBRTL
+
+/* Define to 1 if you have the declaration of `ccos', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CCOS
+
+/* Define to 1 if you have the declaration of `ccosf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CCOSF
+
+/* Define to 1 if you have the declaration of `ccosh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CCOSH
+
+/* Define to 1 if you have the declaration of `ccoshf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CCOSHF
+
+/* Define to 1 if you have the declaration of `ccoshl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CCOSHL
+
+/* Define to 1 if you have the declaration of `ccosl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CCOSL
+
+/* Define to 1 if you have the declaration of `ceil', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CEIL
+
+/* Define to 1 if you have the declaration of `ceilf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CEILF
+
+/* Define to 1 if you have the declaration of `ceill', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CEILL
+
+/* Define to 1 if you have the declaration of `cexp', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CEXP
+
+/* Define to 1 if you have the declaration of `cexpf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CEXPF
+
+/* Define to 1 if you have the declaration of `cexpl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CEXPL
+
+/* Define to 1 if you have the declaration of `cimag', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CIMAG
+
+/* Define to 1 if you have the declaration of `cimagf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CIMAGF
+
+/* Define to 1 if you have the declaration of `cimagl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CIMAGL
+
+/* Define to 1 if you have the declaration of `clog', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CLOG
+
+/* Define to 1 if you have the declaration of `clogf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CLOGF
+
+/* Define to 1 if you have the declaration of `clogl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CLOGL
+
+/* Define to 1 if you have the declaration of `conj', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CONJ
+
+/* Define to 1 if you have the declaration of `conjf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CONJF
+
+/* Define to 1 if you have the declaration of `conjl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CONJL
 
 /* Define to 1 if you have the declaration of `copysign', and to 0 if you
    don't. */
@@ -94,16 +630,159 @@
    */
 #undef HAVE_DECL_COSF
 
+/* Define to 1 if you have the declaration of `cosh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_COSH
+
+/* Define to 1 if you have the declaration of `coshf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_COSHF
+
+/* Define to 1 if you have the declaration of `coshl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_COSHL
+
 /* Define to 1 if you have the declaration of `cosl', and to 0 if you don't.
    */
 #undef HAVE_DECL_COSL
+
+/* Define to 1 if you have the declaration of `cpow', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CPOW
+
+/* Define to 1 if you have the declaration of `cpowf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CPOWF
+
+/* Define to 1 if you have the declaration of `cpowl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CPOWL
+
+/* Define to 1 if you have the declaration of `cproj', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CPROJ
+
+/* Define to 1 if you have the declaration of `cprojf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CPROJF
+
+/* Define to 1 if you have the declaration of `cprojl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CPROJL
+
+/* Define to 1 if you have the declaration of `creal', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CREAL
+
+/* Define to 1 if you have the declaration of `crealf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CREALF
+
+/* Define to 1 if you have the declaration of `creall', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CREALL
+
+/* Define to 1 if you have the declaration of `csin', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSIN
+
+/* Define to 1 if you have the declaration of `csinf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSINF
+
+/* Define to 1 if you have the declaration of `csinh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSINH
+
+/* Define to 1 if you have the declaration of `csinhf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSINHF
+
+/* Define to 1 if you have the declaration of `csinhl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSINHL
+
+/* Define to 1 if you have the declaration of `csinl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSINL
+
+/* Define to 1 if you have the declaration of `csqrt', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSQRT
+
+/* Define to 1 if you have the declaration of `csqrtf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSQRTF
+
+/* Define to 1 if you have the declaration of `csqrtl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CSQRTL
+
+/* Define to 1 if you have the declaration of `ctan', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CTAN
+
+/* Define to 1 if you have the declaration of `ctanf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CTANF
+
+/* Define to 1 if you have the declaration of `ctanh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CTANH
+
+/* Define to 1 if you have the declaration of `ctanhf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CTANHF
+
+/* Define to 1 if you have the declaration of `ctanhl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CTANHL
+
+/* Define to 1 if you have the declaration of `ctanl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_CTANL
 
 /* Define to 1 if you have the declaration of `drand48', and to 0 if you
    don't. */
 #undef HAVE_DECL_DRAND48
 
+/* Define to 1 if you have the declaration of `erf', and to 0 if you don't. */
+#undef HAVE_DECL_ERF
+
+/* Define to 1 if you have the declaration of `erfc', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ERFC
+
+/* Define to 1 if you have the declaration of `erfcf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ERFCF
+
+/* Define to 1 if you have the declaration of `erfcl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ERFCL
+
+/* Define to 1 if you have the declaration of `erff', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ERFF
+
+/* Define to 1 if you have the declaration of `erfl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ERFL
+
 /* Define to 1 if you have the declaration of `exp', and to 0 if you don't. */
 #undef HAVE_DECL_EXP
+
+/* Define to 1 if you have the declaration of `exp2', and to 0 if you don't.
+   */
+#undef HAVE_DECL_EXP2
+
+/* Define to 1 if you have the declaration of `exp2f', and to 0 if you don't.
+   */
+#undef HAVE_DECL_EXP2F
+
+/* Define to 1 if you have the declaration of `exp2l', and to 0 if you don't.
+   */
+#undef HAVE_DECL_EXP2L
 
 /* Define to 1 if you have the declaration of `expf', and to 0 if you don't.
    */
@@ -112,6 +791,65 @@
 /* Define to 1 if you have the declaration of `expl', and to 0 if you don't.
    */
 #undef HAVE_DECL_EXPL
+
+/* Define to 1 if you have the declaration of `expm1', and to 0 if you don't.
+   */
+#undef HAVE_DECL_EXPM1
+
+/* Define to 1 if you have the declaration of `expm1f', and to 0 if you don't.
+   */
+#undef HAVE_DECL_EXPM1F
+
+/* Define to 1 if you have the declaration of `expm1l', and to 0 if you don't.
+   */
+#undef HAVE_DECL_EXPM1L
+
+/* Define to 1 if you have the declaration of `fabs', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FABS
+
+/* Define to 1 if you have the declaration of `fabsf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FABSF
+
+/* Define to 1 if you have the declaration of `fabsl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FABSL
+
+/* Define to 1 if you have the declaration of `fdim', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FDIM
+
+/* Define to 1 if you have the declaration of `fdimf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FDIMF
+
+/* Define to 1 if you have the declaration of `fdiml', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FDIML
+
+/* Define to 1 if you have the declaration of `floor', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FLOOR
+
+/* Define to 1 if you have the declaration of `floorf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FLOORF
+
+/* Define to 1 if you have the declaration of `floorl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FLOORL
+
+/* Define to 1 if you have the declaration of `fma', and to 0 if you don't. */
+#undef HAVE_DECL_FMA
+
+/* Define to 1 if you have the declaration of `fmaf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMAF
+
+/* Define to 1 if you have the declaration of `fmal', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMAL
 
 /* Define to 1 if you have the declaration of `fmax', and to 0 if you don't.
    */
@@ -125,6 +863,105 @@
    */
 #undef HAVE_DECL_FMAXL
 
+/* Define to 1 if you have the declaration of `fmin', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMIN
+
+/* Define to 1 if you have the declaration of `fminf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMINF
+
+/* Define to 1 if you have the declaration of `fminl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMINL
+
+/* Define to 1 if you have the declaration of `fmod', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMOD
+
+/* Define to 1 if you have the declaration of `fmodf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMODF
+
+/* Define to 1 if you have the declaration of `fmodl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FMODL
+
+/* Define to 1 if you have the declaration of `frexp', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FREXP
+
+/* Define to 1 if you have the declaration of `frexpf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FREXPF
+
+/* Define to 1 if you have the declaration of `frexpl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_FREXPL
+
+/* Define to 1 if you have the declaration of `hypot', and to 0 if you don't.
+   */
+#undef HAVE_DECL_HYPOT
+
+/* Define to 1 if you have the declaration of `hypotf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_HYPOTF
+
+/* Define to 1 if you have the declaration of `hypotl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_HYPOTL
+
+/* Define to 1 if you have the declaration of `ilogb', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ILOGB
+
+/* Define to 1 if you have the declaration of `ilogbf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ILOGBF
+
+/* Define to 1 if you have the declaration of `ilogbl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ILOGBL
+
+/* Define to 1 if you have the declaration of `j0', and to 0 if you don't. */
+#undef HAVE_DECL_J0
+
+/* Define to 1 if you have the declaration of `j0f', and to 0 if you don't. */
+#undef HAVE_DECL_J0F
+
+/* Define to 1 if you have the declaration of `j0l', and to 0 if you don't. */
+#undef HAVE_DECL_J0L
+
+/* Define to 1 if you have the declaration of `j1', and to 0 if you don't. */
+#undef HAVE_DECL_J1
+
+/* Define to 1 if you have the declaration of `j1f', and to 0 if you don't. */
+#undef HAVE_DECL_J1F
+
+/* Define to 1 if you have the declaration of `j1l', and to 0 if you don't. */
+#undef HAVE_DECL_J1L
+
+/* Define to 1 if you have the declaration of `jn', and to 0 if you don't. */
+#undef HAVE_DECL_JN
+
+/* Define to 1 if you have the declaration of `jnf', and to 0 if you don't. */
+#undef HAVE_DECL_JNF
+
+/* Define to 1 if you have the declaration of `jnl', and to 0 if you don't. */
+#undef HAVE_DECL_JNL
+
+/* Define to 1 if you have the declaration of `ldexp', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LDEXP
+
+/* Define to 1 if you have the declaration of `ldexpf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LDEXPF
+
+/* Define to 1 if you have the declaration of `ldexpl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LDEXPL
+
 /* Define to 1 if you have the declaration of `lgamma', and to 0 if you don't.
    */
 #undef HAVE_DECL_LGAMMA
@@ -136,6 +973,30 @@
 /* Define to 1 if you have the declaration of `lgammal', and to 0 if you
    don't. */
 #undef HAVE_DECL_LGAMMAL
+
+/* Define to 1 if you have the declaration of `llrint', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LLRINT
+
+/* Define to 1 if you have the declaration of `llrintf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_LLRINTF
+
+/* Define to 1 if you have the declaration of `llrintl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_LLRINTL
+
+/* Define to 1 if you have the declaration of `llround', and to 0 if you
+   don't. */
+#undef HAVE_DECL_LLROUND
+
+/* Define to 1 if you have the declaration of `llroundf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_LLROUNDF
+
+/* Define to 1 if you have the declaration of `llroundl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_LLROUNDL
 
 /* Define to 1 if you have the declaration of `log', and to 0 if you don't. */
 #undef HAVE_DECL_LOG
@@ -176,6 +1037,18 @@
    */
 #undef HAVE_DECL_LOG2L
 
+/* Define to 1 if you have the declaration of `logb', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LOGB
+
+/* Define to 1 if you have the declaration of `logbf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LOGBF
+
+/* Define to 1 if you have the declaration of `logbl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LOGBL
+
 /* Define to 1 if you have the declaration of `logf', and to 0 if you don't.
    */
 #undef HAVE_DECL_LOGF
@@ -196,13 +1069,72 @@
    */
 #undef HAVE_DECL_LRINTL
 
+/* Define to 1 if you have the declaration of `lround', and to 0 if you don't.
+   */
+#undef HAVE_DECL_LROUND
+
+/* Define to 1 if you have the declaration of `lroundf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_LROUNDF
+
+/* Define to 1 if you have the declaration of `lroundl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_LROUNDL
+
 /* Define to 1 if you have the declaration of `memalign', and to 0 if you
    don't. */
 #undef HAVE_DECL_MEMALIGN
 
+/* Define to 1 if you have the declaration of `modf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_MODF
+
+/* Define to 1 if you have the declaration of `modff', and to 0 if you don't.
+   */
+#undef HAVE_DECL_MODFF
+
+/* Define to 1 if you have the declaration of `modfl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_MODFL
+
+/* Define to 1 if you have the declaration of `nan', and to 0 if you don't. */
+#undef HAVE_DECL_NAN
+
+/* Define to 1 if you have the declaration of `nanf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_NANF
+
+/* Define to 1 if you have the declaration of `nanl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_NANL
+
 /* Define to 1 if you have the declaration of `nanosleep', and to 0 if you
    don't. */
 #undef HAVE_DECL_NANOSLEEP
+
+/* Define to 1 if you have the declaration of `nearbyint', and to 0 if you
+   don't. */
+#undef HAVE_DECL_NEARBYINT
+
+/* Define to 1 if you have the declaration of `nearbyintf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_NEARBYINTF
+
+/* Define to 1 if you have the declaration of `nearbyintl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_NEARBYINTL
+
+/* Define to 1 if you have the declaration of `nextafter', and to 0 if you
+   don't. */
+#undef HAVE_DECL_NEXTAFTER
+
+/* Define to 1 if you have the declaration of `nextafterf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_NEXTAFTERF
+
+/* Define to 1 if you have the declaration of `nextafterl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_NEXTAFTERL
 
 /* Define to 1 if you have the declaration of `posix_memalign', and to 0 if
    you don't. */
@@ -219,12 +1151,96 @@
    */
 #undef HAVE_DECL_POWL
 
+/* Define to 1 if you have the declaration of `remainder', and to 0 if you
+   don't. */
+#undef HAVE_DECL_REMAINDER
+
+/* Define to 1 if you have the declaration of `remainderf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_REMAINDERF
+
+/* Define to 1 if you have the declaration of `remainderl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_REMAINDERL
+
+/* Define to 1 if you have the declaration of `remquo', and to 0 if you don't.
+   */
+#undef HAVE_DECL_REMQUO
+
+/* Define to 1 if you have the declaration of `remquof', and to 0 if you
+   don't. */
+#undef HAVE_DECL_REMQUOF
+
+/* Define to 1 if you have the declaration of `remquol', and to 0 if you
+   don't. */
+#undef HAVE_DECL_REMQUOL
+
+/* Define to 1 if you have the declaration of `rint', and to 0 if you don't.
+   */
+#undef HAVE_DECL_RINT
+
+/* Define to 1 if you have the declaration of `rintf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_RINTF
+
+/* Define to 1 if you have the declaration of `rintl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_RINTL
+
+/* Define to 1 if you have the declaration of `round', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ROUND
+
+/* Define to 1 if you have the declaration of `roundf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ROUNDF
+
+/* Define to 1 if you have the declaration of `roundl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ROUNDL
+
+/* Define to 1 if you have the declaration of `scalbln', and to 0 if you
+   don't. */
+#undef HAVE_DECL_SCALBLN
+
+/* Define to 1 if you have the declaration of `scalblnf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_SCALBLNF
+
+/* Define to 1 if you have the declaration of `scalblnl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_SCALBLNL
+
+/* Define to 1 if you have the declaration of `scalbn', and to 0 if you don't.
+   */
+#undef HAVE_DECL_SCALBN
+
+/* Define to 1 if you have the declaration of `scalbnf', and to 0 if you
+   don't. */
+#undef HAVE_DECL_SCALBNF
+
+/* Define to 1 if you have the declaration of `scalbnl', and to 0 if you
+   don't. */
+#undef HAVE_DECL_SCALBNL
+
 /* Define to 1 if you have the declaration of `sin', and to 0 if you don't. */
 #undef HAVE_DECL_SIN
 
 /* Define to 1 if you have the declaration of `sinf', and to 0 if you don't.
    */
 #undef HAVE_DECL_SINF
+
+/* Define to 1 if you have the declaration of `sinh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_SINH
+
+/* Define to 1 if you have the declaration of `sinhf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_SINHF
+
+/* Define to 1 if you have the declaration of `sinhl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_SINHL
 
 /* Define to 1 if you have the declaration of `sinl', and to 0 if you don't.
    */
@@ -250,6 +1266,29 @@
    don't. */
 #undef HAVE_DECL_SRAND48
 
+/* Define to 1 if you have the declaration of `tan', and to 0 if you don't. */
+#undef HAVE_DECL_TAN
+
+/* Define to 1 if you have the declaration of `tanf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TANF
+
+/* Define to 1 if you have the declaration of `tanh', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TANH
+
+/* Define to 1 if you have the declaration of `tanhf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TANHF
+
+/* Define to 1 if you have the declaration of `tanhl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TANHL
+
+/* Define to 1 if you have the declaration of `tanl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TANL
+
 /* Define to 1 if you have the declaration of `tgamma', and to 0 if you don't.
    */
 #undef HAVE_DECL_TGAMMA
@@ -262,8 +1301,44 @@
    don't. */
 #undef HAVE_DECL_TGAMMAL
 
-/* Define to 1 if you have the <dispatch/dispatch.h> header file. */
-#undef HAVE_DISPATCH_DISPATCH_H
+/* Define to 1 if you have the declaration of `trunc', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TRUNC
+
+/* Define to 1 if you have the declaration of `truncf', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TRUNCF
+
+/* Define to 1 if you have the declaration of `truncl', and to 0 if you don't.
+   */
+#undef HAVE_DECL_TRUNCL
+
+/* Define to 1 if you have the declaration of `y0', and to 0 if you don't. */
+#undef HAVE_DECL_Y0
+
+/* Define to 1 if you have the declaration of `y0f', and to 0 if you don't. */
+#undef HAVE_DECL_Y0F
+
+/* Define to 1 if you have the declaration of `y0l', and to 0 if you don't. */
+#undef HAVE_DECL_Y0L
+
+/* Define to 1 if you have the declaration of `y1', and to 0 if you don't. */
+#undef HAVE_DECL_Y1
+
+/* Define to 1 if you have the declaration of `y1f', and to 0 if you don't. */
+#undef HAVE_DECL_Y1F
+
+/* Define to 1 if you have the declaration of `y1l', and to 0 if you don't. */
+#undef HAVE_DECL_Y1L
+
+/* Define to 1 if you have the declaration of `yn', and to 0 if you don't. */
+#undef HAVE_DECL_YN
+
+/* Define to 1 if you have the declaration of `ynf', and to 0 if you don't. */
+#undef HAVE_DECL_YNF
+
+/* Define to 1 if you have the declaration of `ynl', and to 0 if you don't. */
+#undef HAVE_DECL_YNL
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
@@ -274,14 +1349,89 @@
 /* Define to 1 if you have the `drand48' function. */
 #undef HAVE_DRAND48
 
+/* Define to 1 if you have the `erf' function. */
+#undef HAVE_ERF
+
+/* Define to 1 if you have the `erfc' function. */
+#undef HAVE_ERFC
+
+/* Define to 1 if you have the `erfcf' function. */
+#undef HAVE_ERFCF
+
+/* Define to 1 if you have the `erfcl' function. */
+#undef HAVE_ERFCL
+
+/* Define to 1 if you have the `erff' function. */
+#undef HAVE_ERFF
+
+/* Define to 1 if you have the `erfl' function. */
+#undef HAVE_ERFL
+
 /* Define to 1 if you have the `exp' function. */
 #undef HAVE_EXP
+
+/* Define to 1 if you have the `exp2' function. */
+#undef HAVE_EXP2
+
+/* Define to 1 if you have the `exp2f' function. */
+#undef HAVE_EXP2F
+
+/* Define to 1 if you have the `exp2l' function. */
+#undef HAVE_EXP2L
 
 /* Define to 1 if you have the `expf' function. */
 #undef HAVE_EXPF
 
 /* Define to 1 if you have the `expl' function. */
 #undef HAVE_EXPL
+
+/* Define to 1 if you have the `expm1' function. */
+#undef HAVE_EXPM1
+
+/* Define to 1 if you have the `expm1f' function. */
+#undef HAVE_EXPM1F
+
+/* Define to 1 if you have the `expm1l' function. */
+#undef HAVE_EXPM1L
+
+/* Define to 1 if you have the `fabs' function. */
+#undef HAVE_FABS
+
+/* Define to 1 if you have the `fabsf' function. */
+#undef HAVE_FABSF
+
+/* Define to 1 if you have the `fabsl' function. */
+#undef HAVE_FABSL
+
+/* Define to 1 if you have the `fdim' function. */
+#undef HAVE_FDIM
+
+/* Define to 1 if you have the `fdimf' function. */
+#undef HAVE_FDIMF
+
+/* Define to 1 if you have the `fdiml' function. */
+#undef HAVE_FDIML
+
+/* Define to 1 if you have the <float.h> header file. */
+#undef HAVE_FLOAT_H
+
+/* Define to 1 if you have the `floor' function. */
+#undef HAVE_FLOOR
+
+/* Define to 1 if you have the `floorf' function. */
+#undef HAVE_FLOORF
+
+/* Define to 1 if you have the `floorl' function. */
+#undef HAVE_FLOORL
+
+/* Define to 1 if you have the `fma' function. */
+#undef HAVE_FMA
+
+/* Define to 1 if you have the `fmaf' function. */
+#undef HAVE_FMAF
+
+/* Define to 1 if you have the `fmal' function. */
+#undef HAVE_FMAL
 
 /* Define to 1 if you have the `fmax' function. */
 #undef HAVE_FMAX
@@ -292,20 +1442,98 @@
 /* Define to 1 if you have the `fmaxl' function. */
 #undef HAVE_FMAXL
 
+/* Define to 1 if you have the `fmin' function. */
+#undef HAVE_FMIN
+
+/* Define to 1 if you have the `fminf' function. */
+#undef HAVE_FMINF
+
+/* Define to 1 if you have the `fminl' function. */
+#undef HAVE_FMINL
+
+/* Define to 1 if you have the `fmod' function. */
+#undef HAVE_FMOD
+
+/* Define to 1 if you have the `fmodf' function. */
+#undef HAVE_FMODF
+
+/* Define to 1 if you have the `fmodl' function. */
+#undef HAVE_FMODL
+
+/* Define to 1 if you have the `frexp' function. */
+#undef HAVE_FREXP
+
+/* Define to 1 if you have the `frexpf' function. */
+#undef HAVE_FREXPF
+
+/* Define to 1 if you have the `frexpl' function. */
+#undef HAVE_FREXPL
+
 /* Define to 1 if you have the `gethrtime' function. */
 #undef HAVE_GETHRTIME
 
-/* Define to 1 if you have the `gettimeofday' function. */
-#undef HAVE_GETTIMEOFDAY
-
 /* Define to 1 if hrtime_t is defined in <sys/time.h> */
 #undef HAVE_HRTIME_T
+
+/* Define to 1 if you have the `hypot' function. */
+#undef HAVE_HYPOT
+
+/* Define to 1 if you have the `hypotf' function. */
+#undef HAVE_HYPOTF
+
+/* Define to 1 if you have the `hypotl' function. */
+#undef HAVE_HYPOTL
+
+/* Define to 1 if you have the `ilogb' function. */
+#undef HAVE_ILOGB
+
+/* Define to 1 if you have the `ilogbf' function. */
+#undef HAVE_ILOGBF
+
+/* Define to 1 if you have the `ilogbl' function. */
+#undef HAVE_ILOGBL
 
 /* Define to 1 if you have the <intrinsics.h> header file. */
 #undef HAVE_INTRINSICS_H
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `j0' function. */
+#undef HAVE_J0
+
+/* Define to 1 if you have the `j0f' function. */
+#undef HAVE_J0F
+
+/* Define to 1 if you have the `j0l' function. */
+#undef HAVE_J0L
+
+/* Define to 1 if you have the `j1' function. */
+#undef HAVE_J1
+
+/* Define to 1 if you have the `j1f' function. */
+#undef HAVE_J1F
+
+/* Define to 1 if you have the `j1l' function. */
+#undef HAVE_J1L
+
+/* Define to 1 if you have the `jn' function. */
+#undef HAVE_JN
+
+/* Define to 1 if you have the `jnf' function. */
+#undef HAVE_JNF
+
+/* Define to 1 if you have the `jnl' function. */
+#undef HAVE_JNL
+
+/* Define to 1 if you have the `ldexp' function. */
+#undef HAVE_LDEXP
+
+/* Define to 1 if you have the `ldexpf' function. */
+#undef HAVE_LDEXPF
+
+/* Define to 1 if you have the `ldexpl' function. */
+#undef HAVE_LDEXPL
 
 /* Define to 1 if you have the `lgamma' function. */
 #undef HAVE_LGAMMA
@@ -316,20 +1544,32 @@
 /* Define to 1 if you have the `lgammal' function. */
 #undef HAVE_LGAMMAL
 
-/* Define to enable code that uses libdispatch. */
-#undef HAVE_LIBDISPATCH
-
 /* Define to 1 if you have the `fftw3' library (-lfftw3). */
 #undef HAVE_LIBFFTW3
-
-/* Define to 1 if you have the <libintl.h> header file. */
-#undef HAVE_LIBINTL_H
 
 /* Define to 1 if you have the `m' library (-lm). */
 #undef HAVE_LIBM
 
 /* Define to 1 if you have the <limits.h> header file. */
 #undef HAVE_LIMITS_H
+
+/* Define to 1 if you have the `llrint' function. */
+#undef HAVE_LLRINT
+
+/* Define to 1 if you have the `llrintf' function. */
+#undef HAVE_LLRINTF
+
+/* Define to 1 if you have the `llrintl' function. */
+#undef HAVE_LLRINTL
+
+/* Define to 1 if you have the `llround' function. */
+#undef HAVE_LLROUND
+
+/* Define to 1 if you have the `llroundf' function. */
+#undef HAVE_LLROUNDF
+
+/* Define to 1 if you have the `llroundl' function. */
+#undef HAVE_LLROUNDL
 
 /* Define to 1 if you have the `log' function. */
 #undef HAVE_LOG
@@ -361,13 +1601,22 @@
 /* Define to 1 if you have the `log2l' function. */
 #undef HAVE_LOG2L
 
+/* Define to 1 if you have the `logb' function. */
+#undef HAVE_LOGB
+
+/* Define to 1 if you have the `logbf' function. */
+#undef HAVE_LOGBF
+
+/* Define to 1 if you have the `logbl' function. */
+#undef HAVE_LOGBL
+
 /* Define to 1 if you have the `logf' function. */
 #undef HAVE_LOGF
 
 /* Define to 1 if you have the `logl' function. */
 #undef HAVE_LOGL
 
-/* Define to 1 if the compiler supports `long double' */
+/* Define to 1 if the compiler supports 'long double' */
 #undef HAVE_LONG_DOUBLE
 
 /* Define to 1 if you have the `lrint' function. */
@@ -379,6 +1628,15 @@
 /* Define to 1 if you have the `lrintl' function. */
 #undef HAVE_LRINTL
 
+/* Define to 1 if you have the `lround' function. */
+#undef HAVE_LROUND
+
+/* Define to 1 if you have the `lroundf' function. */
+#undef HAVE_LROUNDF
+
+/* Define to 1 if you have the `lroundl' function. */
+#undef HAVE_LROUNDL
+
 /* Define to 1 if you have the `mach_absolute_time' function. */
 #undef HAVE_MACH_ABSOLUTE_TIME
 
@@ -387,6 +1645,9 @@
 
 /* Define to 1 if you have the <malloc.h> header file. */
 #undef HAVE_MALLOC_H
+
+/* Define to 1 if you have the <math.h> header file. */
+#undef HAVE_MATH_H
 
 /* Define to 1 if you have the `memalign' function. */
 #undef HAVE_MEMALIGN
@@ -400,8 +1661,50 @@
 /* Define to have the file mexversion.c */
 #undef HAVE_MEXVERSION_C
 
+/* Define to enable use of MIPS ZBus cycle-counter. */
+#undef HAVE_MIPS_ZBUS_TIMER
+
+/* Define to 1 if you have the `modf' function. */
+#undef HAVE_MODF
+
+/* Define to 1 if you have the `modff' function. */
+#undef HAVE_MODFF
+
+/* Define to 1 if you have the `modfl' function. */
+#undef HAVE_MODFL
+
+/* Define to 1 if you have the `nan' function. */
+#undef HAVE_NAN
+
+/* Define to 1 if you have the `nanf' function. */
+#undef HAVE_NANF
+
+/* Define to 1 if you have the `nanl' function. */
+#undef HAVE_NANL
+
 /* Define to 1 if you have the `nanosleep' function. */
 #undef HAVE_NANOSLEEP
+
+/* Define to 1 if you have the `nearbyint' function. */
+#undef HAVE_NEARBYINT
+
+/* Define to 1 if you have the `nearbyintf' function. */
+#undef HAVE_NEARBYINTF
+
+/* Define to 1 if you have the `nearbyintl' function. */
+#undef HAVE_NEARBYINTL
+
+/* Define to 1 if you have the `nextafter' function. */
+#undef HAVE_NEXTAFTER
+
+/* Define to 1 if you have the `nextafterf' function. */
+#undef HAVE_NEXTAFTERF
+
+/* Define to 1 if you have the `nextafterl' function. */
+#undef HAVE_NEXTAFTERL
+
+/* Define if OpenMP is enabled */
+#undef HAVE_OPENMP
 
 /* Define to 1 if you have the `posix_memalign' function. */
 #undef HAVE_POSIX_MEMALIGN
@@ -418,11 +1721,74 @@
 /* Define to 1 if you have the `read_real_time' function. */
 #undef HAVE_READ_REAL_TIME
 
+/* Define to 1 if you have the `remainder' function. */
+#undef HAVE_REMAINDER
+
+/* Define to 1 if you have the `remainderf' function. */
+#undef HAVE_REMAINDERF
+
+/* Define to 1 if you have the `remainderl' function. */
+#undef HAVE_REMAINDERL
+
+/* Define to 1 if you have the `remquo' function. */
+#undef HAVE_REMQUO
+
+/* Define to 1 if you have the `remquof' function. */
+#undef HAVE_REMQUOF
+
+/* Define to 1 if you have the `remquol' function. */
+#undef HAVE_REMQUOL
+
+/* Define to 1 if you have the `rint' function. */
+#undef HAVE_RINT
+
+/* Define to 1 if you have the `rintf' function. */
+#undef HAVE_RINTF
+
+/* Define to 1 if you have the `rintl' function. */
+#undef HAVE_RINTL
+
+/* Define to 1 if you have the `round' function. */
+#undef HAVE_ROUND
+
+/* Define to 1 if you have the `roundf' function. */
+#undef HAVE_ROUNDF
+
+/* Define to 1 if you have the `roundl' function. */
+#undef HAVE_ROUNDL
+
+/* Define to 1 if you have the `scalbln' function. */
+#undef HAVE_SCALBLN
+
+/* Define to 1 if you have the `scalblnf' function. */
+#undef HAVE_SCALBLNF
+
+/* Define to 1 if you have the `scalblnl' function. */
+#undef HAVE_SCALBLNL
+
+/* Define to 1 if you have the `scalbn' function. */
+#undef HAVE_SCALBN
+
+/* Define to 1 if you have the `scalbnf' function. */
+#undef HAVE_SCALBNF
+
+/* Define to 1 if you have the `scalbnl' function. */
+#undef HAVE_SCALBNL
+
 /* Define to 1 if you have the `sin' function. */
 #undef HAVE_SIN
 
 /* Define to 1 if you have the `sinf' function. */
 #undef HAVE_SINF
+
+/* Define to 1 if you have the `sinh' function. */
+#undef HAVE_SINH
+
+/* Define to 1 if you have the `sinhf' function. */
+#undef HAVE_SINHF
+
+/* Define to 1 if you have the `sinhl' function. */
+#undef HAVE_SINHL
 
 /* Define to 1 if you have the `sinl' function. */
 #undef HAVE_SINL
@@ -445,6 +1811,9 @@
 /* Define to 1 if you have the `srand48' function. */
 #undef HAVE_SRAND48
 
+/* Define to 1 if you have the <stdarg.h> header file. */
+#undef HAVE_STDARG_H
+
 /* Define to 1 if you have the <stdbool.h> header file. */
 #undef HAVE_STDBOOL_H
 
@@ -453,6 +1822,9 @@
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdio.h> header file. */
+#undef HAVE_STDIO_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
@@ -469,17 +1841,29 @@
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #undef HAVE_SYS_STAT_H
 
-/* Define to 1 if you have the <sys/sysctl> header file. */
-#undef HAVE_SYS_SYSCTL
-
-/* Define to 1 if you have the <sys/sysctl.h> header file. */
-#undef HAVE_SYS_SYSCTL_H
-
 /* Define to 1 if you have the <sys/time.h> header file. */
 #undef HAVE_SYS_TIME_H
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the `tan' function. */
+#undef HAVE_TAN
+
+/* Define to 1 if you have the `tanf' function. */
+#undef HAVE_TANF
+
+/* Define to 1 if you have the `tanh' function. */
+#undef HAVE_TANH
+
+/* Define to 1 if you have the `tanhf' function. */
+#undef HAVE_TANHF
+
+/* Define to 1 if you have the `tanhl' function. */
+#undef HAVE_TANHL
+
+/* Define to 1 if you have the `tanl' function. */
+#undef HAVE_TANL
 
 /* Define to 1 if you have the `tgamma' function. */
 #undef HAVE_TGAMMA
@@ -493,20 +1877,65 @@
 /* Define to 1 if you have the `time_base_to_time' function. */
 #undef HAVE_TIME_BASE_TO_TIME
 
+/* Define to 1 if you have the <time.h> header file. */
+#undef HAVE_TIME_H
+
+/* Define to 1 if you have the `trunc' function. */
+#undef HAVE_TRUNC
+
+/* Define to 1 if you have the `truncf' function. */
+#undef HAVE_TRUNCF
+
+/* Define to 1 if you have the `truncl' function. */
+#undef HAVE_TRUNCL
+
 /* Define to 1 if the system has the type `uintptr_t'. */
 #undef HAVE_UINTPTR_T
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Define to 1 if you have the `usleep' function. */
+#undef HAVE_USLEEP
+
 /* Define to 1 if you have the `vprintf' function. */
 #undef HAVE_VPRINTF
+
+/* Define to 1 if you have the `y0' function. */
+#undef HAVE_Y0
+
+/* Define to 1 if you have the `y0f' function. */
+#undef HAVE_Y0F
+
+/* Define to 1 if you have the `y0l' function. */
+#undef HAVE_Y0L
+
+/* Define to 1 if you have the `y1' function. */
+#undef HAVE_Y1
+
+/* Define to 1 if you have the `y1f' function. */
+#undef HAVE_Y1F
+
+/* Define to 1 if you have the `y1l' function. */
+#undef HAVE_Y1L
+
+/* Define to 1 if you have the `yn' function. */
+#undef HAVE_YN
+
+/* Define to 1 if you have the `ynf' function. */
+#undef HAVE_YNF
+
+/* Define to 1 if you have the `ynl' function. */
+#undef HAVE_YNL
 
 /* Define to 1 if you have the `_mm_free' function. */
 #undef HAVE__MM_FREE
 
 /* Define to 1 if you have the `_mm_malloc' function. */
 #undef HAVE__MM_MALLOC
+
+/* Define if you have the UNICOS _rtc() intrinsic. */
+#undef HAVE__RTC
 
 /* Define to enable Kaiser-Bessel window function. */
 #undef KAISER_BESSEL
@@ -524,8 +1953,11 @@
 /* Define to enable time measurements for FFTW transforms. */
 #undef MEASURE_TIME_FFTW
 
-/* Define to enable extra NFFT debugging code. */
+/* Define to enable extra debugging code. */
 #undef NFFT_DEBUG
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+#undef NO_MINUS_C_MINUS_O
 
 /* Name of package */
 #undef PACKAGE
@@ -541,6 +1973,9 @@
 
 /* Define to the one symbol short name of this package. */
 #undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
@@ -614,13 +2049,14 @@
    nothing if this is not supported.  Do not define if restrict is
    supported directly.  */
 #undef restrict
-/* Work around a bug in Sun C++: it does not support _Restrict, even
-   though the corresponding Sun C compiler does, which causes
-   "#define restrict _Restrict" in the previous line.  Perhaps some future
-   version of Sun C++ will work with _Restrict; if so, it'll probably
-   define __RESTRICT, just as Sun C does.  */
+/* Work around a bug in Sun C++: it does not support _Restrict or
+   __restrict__, even though the corresponding Sun C compiler ends up with
+   "#define restrict _Restrict" or "#define restrict __restrict__" in the
+   previous line.  Perhaps some future version of Sun C++ will work with
+   restrict; if so, hopefully it defines __RESTRICT like Sun C does.  */
 #if defined __SUNPRO_CC && !defined __RESTRICT
 # define _Restrict
+# define __restrict__
 #endif
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */

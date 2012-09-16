@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastsum.h 3298 2009-08-14 12:32:31Z keiner $ */
+/* $Id: fastsum.h 3775 2012-06-02 16:39:48Z keiner $ */
 
 /*! \file fastsum.h
  *  \brief Header file for the fast NFFT-based summation algorithm.
@@ -38,12 +38,25 @@
 #ifndef fastsum_h_inc
 #define fastsum_h_inc
 
+#include "config.h"
+
 /** Include header for C99 complex datatype. */
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 /** Include header for utils from NFFT3 library. */
 #include "nfft3util.h"
 /** Include header for NFFT3 library. */
 #include "nfft3.h"
+
+#if !(defined(NF_LIN) || defined(NF_QUADR) || defined(NF_KUB))
+  #define NF_KUB
+#endif
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif /* __cplusplus */
 
 typedef double _Complex (*kernel)(double , int , const double *);
 
@@ -51,6 +64,8 @@ typedef double _Complex (*kernel)(double , int , const double *);
  * Constant symbols
  */
 #define EXACT_NEARFIELD  (1U<< 0)
+
+#define NEARFIELD_BOXES (1U<< 1)
 
 /** plan for fast summation algorithm */
 typedef struct fastsum_plan_
@@ -95,6 +110,14 @@ typedef struct fastsum_plan_
 
   /* things for computing *b - are they used only once?? */
   fftw_plan fft_plan;
+
+  int box_count;
+  int box_count_per_dim;
+  int *box_offset;
+  double *box_x;
+  double _Complex *box_alpha;
+
+  double MEASURE_TIME_t[8]; /**< Measured time for each step if MEASURE_TIME is set */
 } fastsum_plan;
 
 /** initialize fast summation plan
@@ -145,6 +168,10 @@ double _Complex regkern(kernel k, double xx, int p, const double *param, double 
 /** cubic spline interpolation in near field with even kernels */
 double _Complex kubintkern(const double x, const double _Complex *Add,
   const int Ad, const double a);
+
+#ifdef __cplusplus
+}  /* extern "C" */
+#endif /* __cplusplus */
 
 #endif
 /* fastsum.h */

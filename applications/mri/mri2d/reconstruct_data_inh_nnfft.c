@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,15 +16,19 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: reconstruct_data_inh_nnfft.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: reconstruct_data_inh_nnfft.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 /**
  * \defgroup applications_mri2d_construct_data_inh_nnfft construct_data_inh_nnfft
@@ -35,7 +39,7 @@
 /**
  * reconstruct
  */
-void reconstruct(char* filename,int N,int M,int iteration, int weight)
+static void reconstruct(char* filename,int N,int M,int iteration, int weight)
 {
   int j,k,l;                    /* some variables  */
   nnfft_plan my_plan;            /* plan for the two dimensional nfft  */
@@ -46,6 +50,7 @@ void reconstruct(char* filename,int N,int M,int iteration, int weight)
   FILE* fout_real;              /* output file                        */
   FILE* fout_imag;              /* output file                        */
   int my_N[3],my_n[3];          /* to init the nfft */
+  ticks t0, t1;
   double t,epsilon=0.0000003;     /* epsilon is a the break criterium for
                                    the iteration */
   unsigned infft_flags = CGNR | PRECOMPUTE_DAMP; /* flags for the infft*/
@@ -112,7 +117,7 @@ void reconstruct(char* filename,int N,int M,int iteration, int weight)
     infft_flags = infft_flags | PRECOMPUTE_WEIGHT;
 
   /* initialise my_iplan, advanced */
-  solver_init_advanced_complex(&my_iplan,(mv_plan_complex*)(&my_plan), infft_flags );
+  solver_init_advanced_complex(&my_iplan,(nfft_mv_plan_complex*)(&my_plan), infft_flags );
 
   /* get the weights */
   if(my_iplan.flags & PRECOMPUTE_WEIGHT)
@@ -180,7 +185,7 @@ void reconstruct(char* filename,int N,int M,int iteration, int weight)
     my_iplan.f_hat_iter[k]=0.0;
   }
 
-  t=nfft_second();
+  t0 = getticks();
 
   /* inverse trafo */
   solver_before_loop_complex(&my_iplan);
@@ -194,12 +199,8 @@ void reconstruct(char* filename,int N,int M,int iteration, int weight)
     solver_loop_one_step_complex(&my_iplan);
   }
 
-  t=nfft_second()-t;
-#ifdef HAVE_TOTAL_USED_MEMORY
-fprintf(stderr,"time: %e seconds mem: %i \n",t,nfft_total_used_memory());
-#else
-fprintf(stderr,"time: %e seconds mem: mallinfo not available\n",t);
-#endif
+  t1 = getticks();
+  t = nfft_elapsed_seconds(t1,t0);
 
   fout_real=fopen("output_real.dat","w");
   fout_imag=fopen("output_imag.dat","w");

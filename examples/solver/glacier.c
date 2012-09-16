@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,16 +16,20 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: glacier.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: glacier.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 /**
  * \defgroup examples_solver_glacier Reconstruction of a glacier from \
@@ -35,13 +39,13 @@
  */
 
 /** Generalised Sobolev weight */
-double my_weight(double z,double a,double b,double c)
+static double my_weight(double z,double a,double b,double c)
 {
     return pow(0.25-z*z,b)/(c+pow(fabs(z),2*a));
 }
 
 /** Reconstruction routine */
-void glacier(int N,int M)
+static void glacier(int N,int M)
 {
   int j,k,k0,k1,l,my_N[2],my_n[2];
   double tmp_y;
@@ -50,8 +54,8 @@ void glacier(int N,int M)
   FILE* fp;
 
   /* initialise p */
-  my_N[0]=N; my_n[0]=nfft_next_power_of_2(N);
-  my_N[1]=N; my_n[1]=nfft_next_power_of_2(N);
+  my_N[0]=N; my_n[0]=X(next_power_of_2)(N);
+  my_N[1]=N; my_n[1]=X(next_power_of_2)(N);
   nfft_init_guru(&p, 2, my_N, M, my_n, 6,
 		 PRE_PHI_HUT| PRE_FULL_PSI|
 		 MALLOC_X| MALLOC_F_HAT| MALLOC_F|
@@ -59,7 +63,7 @@ void glacier(int N,int M)
 		 FFTW_MEASURE| FFTW_DESTROY_INPUT);
 
   /* initialise ip, specific */
-  solver_init_advanced_complex(&ip,(mv_plan_complex*)(&p), CGNE| PRECOMPUTE_DAMP);
+  solver_init_advanced_complex(&ip,(nfft_mv_plan_complex*)(&p), CGNE| PRECOMPUTE_DAMP);
   fprintf(stderr,"Using the generic solver!");
 
   /* init nodes */
@@ -103,7 +107,7 @@ void glacier(int N,int M)
 }
 
 /** Reconstruction routine with cross validation */
-void glacier_cv(int N,int M,int M_cv,unsigned solver_flags)
+static void glacier_cv(int N,int M,int M_cv,unsigned solver_flags)
 {
   int j,k,k0,k1,l,my_N[2],my_n[2];
   double tmp_y,r;
@@ -114,8 +118,8 @@ void glacier_cv(int N,int M,int M_cv,unsigned solver_flags)
   int M_re=M-M_cv;
 
   /* initialise p for reconstruction */
-  my_N[0]=N; my_n[0]=nfft_next_power_of_2(N);
-  my_N[1]=N; my_n[1]=nfft_next_power_of_2(N);
+  my_N[0]=N; my_n[0]=X(next_power_of_2)(N);
+  my_N[1]=N; my_n[1]=X(next_power_of_2)(N);
   nfft_init_guru(&p, 2, my_N, M_re, my_n, 6,
 		 PRE_PHI_HUT| PRE_FULL_PSI|
 		 MALLOC_X| MALLOC_F_HAT| MALLOC_F|
@@ -124,7 +128,7 @@ void glacier_cv(int N,int M,int M_cv,unsigned solver_flags)
 
 
   /* initialise ip, specific */
-  solver_init_advanced_complex(&ip,(mv_plan_complex*)(&p), solver_flags);
+  solver_init_advanced_complex(&ip,(nfft_mv_plan_complex*)(&p), solver_flags);
 
   /* initialise cp for validation */
   cp_y = (double _Complex*) nfft_malloc(M*sizeof(double _Complex));

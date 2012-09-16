@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,16 +16,20 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft_times.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: nfft_times.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
+#include "infft.h"
 
 int global_n;
 int global_d;
@@ -85,13 +89,12 @@ static int comp3(const void *x,const void *y)
 
 void measure_time_nfft(int d, int N, unsigned test_ndft)
 {
-  int r, M, NN[d], nn[d],j;
+  int r, M, NN[d], nn[d];
   double t, t_fft, t_ndft, t_nfft;
+  ticks t0, t1;
 
   nfft_plan p;
   fftw_plan p_fft;
-
-  double auxC=pow(2,29);
 
   printf("\\verb+%d+&\t",(int)(log(N)/log(2)*d+0.5));
 
@@ -133,9 +136,10 @@ void measure_time_nfft(int d, int N, unsigned test_ndft)
   while(t_fft<1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       fftw_execute(p_fft);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_fft+=t;
     }
   t_fft/=r;
@@ -151,9 +155,10 @@ void measure_time_nfft(int d, int N, unsigned test_ndft)
       while(t_ndft<1)
         {
           r++;
-          t=nfft_second();
-          ndft_trafo(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_trafo_direct(&p);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -170,7 +175,7 @@ void measure_time_nfft(int d, int N, unsigned test_ndft)
   while(t_nfft<1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       switch(d)
 	{
 	  case 1: { nfft_trafo_1d(&p); break; }
@@ -178,7 +183,8 @@ void measure_time_nfft(int d, int N, unsigned test_ndft)
 	  case 3: { nfft_trafo_3d(&p); break; }
           default: nfft_trafo(&p);
 	}
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
@@ -194,6 +200,7 @@ void measure_time_nfft_XXX2(int d, int N, unsigned test_ndft)
 {
   int r, M, NN[d], nn[d];
   double t, t_fft, t_ndft, t_nfft;
+  ticks t0, t1;
 
   nfft_plan p;
   fftw_plan p_fft;
@@ -235,9 +242,10 @@ void measure_time_nfft_XXX2(int d, int N, unsigned test_ndft)
   while(t_fft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       fftw_execute(p_fft);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_fft+=t;
     }
   t_fft/=r;
@@ -253,9 +261,10 @@ void measure_time_nfft_XXX2(int d, int N, unsigned test_ndft)
       while(t_ndft<0.1)
         {
           r++;
-          t=nfft_second();
-          ndft_trafo(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_trafo_direct(&p);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -271,15 +280,16 @@ void measure_time_nfft_XXX2(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f, p.M_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f, p.M_total));
 
   /** NFFT_1d */
   t_nfft=0;
@@ -287,15 +297,16 @@ void measure_time_nfft_XXX2(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo_1d(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f, p.M_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f, p.M_total));
 
   printf("\n");
 
@@ -308,6 +319,7 @@ void measure_time_nfft_XXX3(int d, int N, unsigned test_ndft)
 {
   int r, M, NN[d], nn[d];
   double t, t_fft, t_ndft, t_nfft;
+  ticks t0, t1;
 
   nfft_plan p;
   fftw_plan p_fft;
@@ -349,9 +361,10 @@ void measure_time_nfft_XXX3(int d, int N, unsigned test_ndft)
   while(t_fft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       fftw_execute(p_fft);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_fft+=t;
     }
   t_fft/=r;
@@ -367,9 +380,10 @@ void measure_time_nfft_XXX3(int d, int N, unsigned test_ndft)
       while(t_ndft<0.1)
         {
           r++;
-          t=nfft_second();
-          ndft_adjoint(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_adjoint_direct(&p);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -385,15 +399,16 @@ void measure_time_nfft_XXX3(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_adjoint(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f_hat, p.N_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f_hat, p.N_total));
 
   /** NFFT_1d */
   t_nfft=0;
@@ -401,15 +416,16 @@ void measure_time_nfft_XXX3(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_adjoint_1d(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f_hat, p.N_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f_hat, p.N_total));
 
   printf("\n");
 
@@ -423,8 +439,9 @@ void measure_time_nfft_XXX3(int d, int N, unsigned test_ndft)
 
 void measure_time_nfft_XXX4(int d, int N, unsigned test_ndft)
 {
-  int j,r, M, NN[d], nn[d];
+  int r, M, NN[d], nn[d];
   double t, t_fft, t_ndft, t_nfft;
+  ticks t0, t1;
 
   nfft_plan p;
   fftw_plan p_fft;
@@ -469,9 +486,10 @@ void measure_time_nfft_XXX4(int d, int N, unsigned test_ndft)
   while(t_fft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       fftw_execute(p_fft);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_fft+=t;
     }
   t_fft/=r;
@@ -490,9 +508,10 @@ void measure_time_nfft_XXX4(int d, int N, unsigned test_ndft)
       while(t_ndft<0.1)
         {
           r++;
-          t=nfft_second();
-          ndft_trafo(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_trafo_direct(&p);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -511,15 +530,16 @@ void measure_time_nfft_XXX4(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f, p.M_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f, p.M_total));
 
   //printf("f=%e+i%e\t",creal(p.f[0]),cimag(p.f[0]));
 
@@ -529,15 +549,16 @@ void measure_time_nfft_XXX4(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo_2d(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f, p.M_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f, p.M_total));
 
   //printf("f=%e+i%e\t",creal(p.f[0]),cimag(p.f[0]));
 
@@ -551,8 +572,9 @@ void measure_time_nfft_XXX4(int d, int N, unsigned test_ndft)
 
 void measure_time_nfft_XXX5(int d, int N, unsigned test_ndft)
 {
-  int j,r, M, NN[d], nn[d];
+  int r, M, NN[d], nn[d];
   double t, t_fft, t_ndft, t_nfft;
+  ticks t0, t1;
 
   nfft_plan p;
   fftw_plan p_fft;
@@ -593,9 +615,10 @@ void measure_time_nfft_XXX5(int d, int N, unsigned test_ndft)
   while(t_fft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       fftw_execute(p_fft);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_fft+=t;
     }
   t_fft/=r;
@@ -614,9 +637,10 @@ void measure_time_nfft_XXX5(int d, int N, unsigned test_ndft)
       while(t_ndft<0.1)
         {
           r++;
-          t=nfft_second();
-          ndft_adjoint(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_adjoint_direct(&p);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -635,15 +659,16 @@ void measure_time_nfft_XXX5(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_adjoint(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f_hat, p.N_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f_hat, p.N_total));
 
   //printf("\nf_hat=%e+i%e\t",creal(p.f_hat[0]),cimag(p.f_hat[0]));
 
@@ -653,15 +678,16 @@ void measure_time_nfft_XXX5(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_adjoint_2d(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f_hat, p.N_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f_hat, p.N_total));
 
   //printf("\nf_hat=%e+i%e\t",creal(p.f_hat[0]),cimag(p.f_hat[0]));
 
@@ -675,8 +701,9 @@ void measure_time_nfft_XXX5(int d, int N, unsigned test_ndft)
 
 void measure_time_nfft_XXX6(int d, int N, unsigned test_ndft)
 {
-  int j,r, M, NN[d], nn[d];
+  int r, M, NN[d], nn[d];
   double t, t_fft, t_ndft, t_nfft;
+  ticks t0, t1;
 
   nfft_plan p;
   fftw_plan p_fft;
@@ -718,9 +745,10 @@ void measure_time_nfft_XXX6(int d, int N, unsigned test_ndft)
   while(t_fft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       fftw_execute(p_fft);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_fft+=t;
     }
   t_fft/=r;
@@ -739,9 +767,10 @@ void measure_time_nfft_XXX6(int d, int N, unsigned test_ndft)
       while(t_ndft<0.1)
         {
           r++;
-          t=nfft_second();
-          ndft_trafo(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_trafo_direct(&p);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -760,15 +789,16 @@ void measure_time_nfft_XXX6(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f, p.M_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f, p.M_total));
 
   //printf("f=%e+i%e\t",creal(p.f[0]),cimag(p.f[0]));
 
@@ -778,15 +808,16 @@ void measure_time_nfft_XXX6(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_trafo_3d(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f, p.M_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f, p.M_total));
 
   //printf("f=%e+i%e\t",creal(p.f[0]),cimag(p.f[0]));
 
@@ -800,8 +831,9 @@ void measure_time_nfft_XXX6(int d, int N, unsigned test_ndft)
 
 void measure_time_nfft_XXX7(int d, int N, unsigned test_ndft)
 {
-  int j,r, M, NN[d], nn[d];
+  int r, M, NN[d], nn[d];
   double t, t_fft, t_ndft, t_nfft;
+  ticks t0, t1;
 
   nfft_plan p;
   fftw_plan p_fft;
@@ -842,9 +874,10 @@ void measure_time_nfft_XXX7(int d, int N, unsigned test_ndft)
   while(t_fft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       fftw_execute(p_fft);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_fft+=t;
     }
   t_fft/=r;
@@ -863,9 +896,10 @@ void measure_time_nfft_XXX7(int d, int N, unsigned test_ndft)
       while(t_ndft<0.1)
         {
           r++;
-          t=nfft_second();
-          ndft_adjoint(&p);
-          t=nfft_second()-t;
+          t0 = getticks();
+          nfft_adjoint_direct(&p);
+          t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
           t_ndft+=t;
         }
       t_ndft/=r;
@@ -884,15 +918,16 @@ void measure_time_nfft_XXX7(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_adjoint(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f_hat, p.N_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f_hat, p.N_total));
 
   //printf("\nf_hat=%e+i%e\t",creal(p.f_hat[0]),cimag(p.f_hat[0]));
 
@@ -902,15 +937,16 @@ void measure_time_nfft_XXX7(int d, int N, unsigned test_ndft)
   while(t_nfft<0.1)
     {
       r++;
-      t=nfft_second();
+      t0 = getticks();
       nfft_adjoint_3d(&p);
-      t=nfft_second()-t;
+      t1 = getticks();
+t = nfft_elapsed_seconds(t1,t0);
       t_nfft+=t;
     }
   t_nfft/=r;
   printf("%.1e\t",t_nfft);
   if(test_ndft)
-    printf("(%.1e)\t",nfft_error_l_2_complex(swapndft, p.f_hat, p.N_total));
+    printf("(%.1e)\t",X(error_l_2_complex)(swapndft, p.f_hat, p.N_total));
 
   //printf("\nf_hat=%e+i%e\t",creal(p.f_hat[0]),cimag(p.f_hat[0]));
 
@@ -978,12 +1014,6 @@ int main2(void)
     }
 
   exit(-1);
-}
-
-int XXX(void)
-{
-  int l,d,logIN;
-
 }
 
 int main(void)

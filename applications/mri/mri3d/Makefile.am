@@ -1,17 +1,15 @@
-# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
+# $Id: Makefile.am 3639 2011-10-05 20:20:30Z keiner $
 
 AM_CPPFLAGS = -I$(top_srcdir)/include
 
-applicationdir = $(pkgdatadir)/applications/mri/mri3d
-
-application_PROGRAMS = \
+noinst_PROGRAMS = \
   construct_data_2d1d \
   construct_data_3d \
   reconstruct_data_gridding \
   reconstruct_data_2d1d \
   reconstruct_data_3d
 
-construct_data_2d1d_SOURCES = construct_data_2d1d.c
+construct_data_2d1d_SOURCES = construct_data_2d1d.c doxygen.h
 construct_data_2d1d_LDADD = $(top_builddir)/libnfft3.la @fftw3_LDFLAGS@ @fftw3_LIBS@
 
 construct_data_3d_SOURCES = construct_data_3d.c
@@ -37,5 +35,3 @@ EXTRA_DIST = mri.m \
 			rms.m \
 			visualize_data.m \
 			README
-
-application_DATA = $(EXTRA_DIST)

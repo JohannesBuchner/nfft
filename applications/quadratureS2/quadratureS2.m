@@ -1,5 +1,9 @@
+function quadratureS2()
+%QUADRATURES2
 %
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+%   Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
+
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -15,7 +19,7 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: quadratureS2.m 3100 2009-03-12 08:42:48Z keiner $
+% $Id: quadratureS2.m 3784 2012-06-06 20:30:39Z keiner $
 
 % The name of the input file
 infilename = 'data.in';

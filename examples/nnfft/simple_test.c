@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,15 +16,18 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: simple_test.c 3775 2012-06-02 16:39:48Z keiner $ */
+#include "config.h"
 
 #include <stdlib.h>
 #include <math.h>
+#ifdef HAVE_COMPLEX_H
 #include <complex.h>
+#endif
 
 #include "nfft3util.h"
 #include "nfft3.h"
-
+#include "infft.h"
 
 void simple_test_nnfft_1d(void)
 {
@@ -69,7 +72,7 @@ void simple_test_nnfft_1d(void)
   nfft_vpr_complex(my_plan.f_hat,my_plan.N_total,"given Fourier coefficients, vector f_hat");
 
   /** direct trafo and show the result */
-  nndft_trafo(&my_plan);
+  nnfft_trafo_direct(&my_plan);
   nfft_vpr_complex(my_plan.f,my_plan.M_total,"nndft, vector f");
 
   /** approx. trafo and show the result */
@@ -80,9 +83,9 @@ void simple_test_nnfft_1d(void)
   nnfft_finalize(&my_plan);
 }
 
-void simple_test_adjoint_nnfft_1d(void)
+static void simple_test_adjoint_nnfft_1d(void)
 {
-  int j,k;                              /**< index for nodes and freqencies   */
+  int j;                                 /**< index for nodes and freqencies   */
   nnfft_plan my_plan;                    /**< plan for the nfft                */
 
   int N[1];
@@ -123,7 +126,7 @@ void simple_test_adjoint_nnfft_1d(void)
   nfft_vpr_complex(my_plan.f,my_plan.M_total,"given Samples, vector f");
 
   /** direct trafo and show the result */
-  nndft_adjoint(&my_plan);
+  nnfft_adjoint_direct(&my_plan);
   nfft_vpr_complex(my_plan.f_hat,my_plan.N_total,"adjoint nndft, vector f_hat");
 
   /** approx. trafo and show the result */
@@ -134,7 +137,7 @@ void simple_test_adjoint_nnfft_1d(void)
   nnfft_finalize(&my_plan);
 }
 
-void simple_test_nnfft_2d(void)
+static void simple_test_nnfft_2d(void)
 {
   int j,k;                              /**< index for nodes and freqencies   */
   nnfft_plan my_plan;                    /**< plan for the nfft                */
@@ -182,7 +185,7 @@ void simple_test_nnfft_2d(void)
         "given Fourier coefficients, vector f_hat (first 12 entries)");
 
   /** direct trafo and show the result */
-  nndft_trafo(&my_plan);
+  nnfft_trafo_direct(&my_plan);
   nfft_vpr_complex(my_plan.f,my_plan.M_total,"ndft, vector f");
 
   /** approx. trafo and show the result */
@@ -193,7 +196,7 @@ void simple_test_nnfft_2d(void)
   nnfft_finalize(&my_plan);
 }
 
-void simple_test_innfft_1d(void)
+static void simple_test_innfft_1d(void)
 {
   int j,k,l,N=8;                        /**< index for nodes, freqencies, iter*/
   nnfft_plan my_plan;                   /**< plan for the nnfft               */
@@ -203,7 +206,7 @@ void simple_test_innfft_1d(void)
   nnfft_init(&my_plan,1 ,8 ,8 ,&N);
 
   /** initialise my_iplan */
-  solver_init_advanced_complex(&my_iplan,(mv_plan_complex*)(&my_plan),CGNR);
+  solver_init_advanced_complex(&my_iplan,(nfft_mv_plan_complex*)(&my_plan),CGNR);
 
   /** init pseudo random nodes */
   for(j=0;j<my_plan.M_total;j++)
@@ -257,12 +260,13 @@ void simple_test_innfft_1d(void)
   nnfft_finalize(&my_plan);
 }
 
-void measure_time_nnfft_1d(void)
+static void measure_time_nnfft_1d(void)
 {
   int j,k;                              /**< index for nodes and freqencies   */
   nnfft_plan my_plan;                    /**< plan for the nfft                */
   int my_N,N=4;
   double t;
+  ticks t0, t1;
 
   for(my_N=16; my_N<=16384; my_N*=2)
   {
@@ -286,14 +290,16 @@ void measure_time_nnfft_1d(void)
     for(k=0;k<my_plan.N_total;k++)
       my_plan.f_hat[k] = ((double)rand())/((double)RAND_MAX) + _Complex_I*((double)rand())/((double)RAND_MAX);
 
-    t=nfft_second();
-    nndft_trafo(&my_plan);
-    t=nfft_second()-t;
+    t0 = getticks();
+    nnfft_trafo_direct(&my_plan);
+    t1 = getticks();
+    t = nfft_elapsed_seconds(t1,t0);
     printf("t_nndft=%e,\t",t);
 
-    t=nfft_second();
+    t0 = getticks();
     nnfft_trafo(&my_plan);
-    t=nfft_second()-t;
+    t1 = getticks();
+    t = nfft_elapsed_seconds(t1,t0);
     printf("t_nnfft=%e\t",t);
 
     printf("(N=M=%d)\n",my_N);

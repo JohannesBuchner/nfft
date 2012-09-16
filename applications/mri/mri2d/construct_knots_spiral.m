@@ -1,5 +1,4 @@
-%
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -15,7 +14,7 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: construct_knots_spiral.m 3100 2009-03-12 08:42:48Z keiner $
+% $Id: construct_knots_spiral.m 3776 2012-06-03 13:29:25Z keiner $
 function [M] = construct_knots_spiral ( N,arms )
 M=N^2;
 file = zeros(M,2);

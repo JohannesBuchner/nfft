@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+ * Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft3util.h 3198 2009-05-27 14:16:50Z keiner $ */
+/* $Id: nfft3util.h 3795 2012-06-12 08:40:27Z tovo $ */
 
 /*! \file nfft3util.h
  *  \brief Header file for utility functions used by the nfft3 library.
@@ -26,6 +26,11 @@
 
 /** Include header for FFTW3 library for its complex type. */
 #include <fftw3.h>
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif /* __cplusplus */
 
 /*###########################################################################*/
 /*###########################################################################*/
@@ -41,46 +46,6 @@
  * computation of weights for the inverse transforms.
  *
  */
-
-/** Timing, method works since the inaccurate timer is updated mostly in the
- *  measured function. For small times not every call of the measured function
- *  will also produce a 'unit' time step.
- *  Measuring the fftw might cause a wrong output vector due to the repeated
- *  ffts.
- */
-#ifdef MEASURE_TIME
- int MEASURE_TIME_r;
- double MEASURE_TIME_tt;
-
-#define TIC(a)                                                                \
-  ths->MEASURE_TIME_t[(a)]=0;                                                 \
-  MEASURE_TIME_r=0;                                                           \
-  while(ths->MEASURE_TIME_t[(a)]<0.01)                                        \
-    {                                                                         \
-      MEASURE_TIME_r++;                                                       \
-      MEASURE_TIME_tt=nfft_second();                                          \
-
-/* THE MEASURED FUNCTION IS CALLED REPEATEDLY */
-
-#define TOC(a)                                                                \
-      MEASURE_TIME_tt=nfft_second()-MEASURE_TIME_tt;                          \
-      ths->MEASURE_TIME_t[(a)]+=MEASURE_TIME_tt;                              \
-    }                                                                         \
-  ths->MEASURE_TIME_t[(a)]/=MEASURE_TIME_r;                                   \
-
-#else
-#define TIC(a)
-#define TOC(a)
-#endif
-
-#ifdef MEASURE_TIME_FFTW
-#define TIC_FFTW(a) TIC(a)
-#define TOC_FFTW(a) TOC(a)
-#else
-#define TIC_FFTW(a)
-#define TOC_FFTW(a)
-#endif
-
 
 /** Swapping of two vectors.
  */
@@ -107,40 +72,8 @@
 #define NFFT_MIN(a,b) ((a)<(b)? (a) : (b))
 
 /* ######################################################################### */
-/* ########## Little helpers ############################################### */
-/* ######################################################################### */
-
-/** Actual used CPU time in seconds; calls getrusage, limited accuracy.
- */
-double nfft_second(void);
-
-/** Actual used memory in bytes; calls mallinfo if define HAVE_MALLOC_H.
- */
-int nfft_total_used_memory(void);
-
-/** Integer logarithm of 2.
- */
-int nfft_ld(int m);
-
-/** Integer power of 2.
- */
-int nfft_int_2_pow(int a);
-
-/** Computes \f$n\ge N\f$ such that \f$n=2^j,\, j\in\mathbb{N}_0\f$.
- */
-int nfft_next_power_of_2(int N);
-
-/** Computes ?
- */
-void nfft_next_power_of_2_exp(int N, int *N2, int *t);
-
-/* ######################################################################### */
 /* ########## Window function related ###################################### */
 /* ######################################################################### */
-
-/** Computes the sinus cardinalis \f$\frac{sin\left(x\right)}{x}\f$.
- */
-double nfft_sinc(double x);
 
 /** To test the new one
  */
@@ -151,11 +84,6 @@ double nfft_bspline_old(int k,double x,double *A);
  */
 double nfft_bspline(int k, double x, double *scratch);
 
-/** Modified Bessel function of order zero;
-    adapted from Stephen Moshier's Cephes Math Library Release 2.8
- */
-double nfft_i0(double x);
-
 /* ######################################################################### */
 /* ########## Vector routines ############################################## */
 /* ######################################################################### */
@@ -163,10 +91,6 @@ double nfft_i0(double x);
 /** Computes integer \f$\prod_{t=0}^{d-1} v_t\f$.
  */
 int nfft_prod_int(int *vec, int d);
-
-/** Computes integer \f$\prod_{t=0}^{d-1} v_t\f$.
- */
-int nfct_prod_int(int *vec, int d);
 
 /** Computes integer \f$\prod_{t=0}^{d-1} v_t-a\f$.
  */
@@ -217,6 +141,10 @@ void nfft_cp_double( double*  x, double*  y, int n);
 /** Copies \f$x \leftarrow a y\f$.
  */
 void nfft_cp_a_complex(fftw_complex* x, double a, fftw_complex* y, int n);
+
+/** Copies \f$x \leftarrow a y\f$.
+ */
+void nfft_cp_a_double(double *x, double a, double *y, int n);
 
 /** Copies \f$x \leftarrow w\odot y\f$.
  */
@@ -269,32 +197,6 @@ void nfft_upd_axpwy_double( double*  x, double a, double* w, double*  y, int n);
 /** Swaps each half over N[d]/2.
  */
 void nfft_fftshift_complex(fftw_complex *x, int d, int* N);
-
-/** Computes \f$\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} \f$
- */
-double nfft_error_l_infty_complex(fftw_complex *x, fftw_complex *y, int n);
-
-/** Computes \f$\frac{\|x-y\|_{\infty}}{\|x\|_{\infty}} \f$
- */
-double nfft_error_l_infty_double(double *x, double *y, int n);
-
-/** Computes \f$\frac{\|x-y\|_{\infty}}{\|z\|_1} \f$
- */
-double nfft_error_l_infty_1_complex(fftw_complex *x, fftw_complex *y, int n, fftw_complex *z,
-                               int m);
-
-/** Computes \f$\frac{\|x-y\|_{\infty}}{\|z\|_1} \f$
- */
-double nfft_error_l_infty_1_double(double *x, double *y, int n, double *z,
-			      int m);
-
-/** Computes \f$\frac{\|x-y\|_2}{\|x\|_2} \f$
- */
-double nfft_error_l_2_complex(fftw_complex *x, fftw_complex *y, int n);
-
-/** Computes \f$\frac{\|x-y\|_2}{\|x\|_2} \f$
- */
-double  nfft_error_l_2_double(double *x, double *y, int n);
 
 /** Prints a vector of integer numbers.
  */
@@ -350,18 +252,27 @@ double nfft_modified_multiquadric(double mu,double c,int kk);
 int nfft_smbi(const double x, const double alpha, const int nb, const int ize,
   double *b);
 
-/**
- * Computes the function
- *   \f$\Lambda(z,\epsilon) = \frac{\Gamma(z+\epsilon)}{\Gamma(z+1)}\f$,
- * with \f$ z + \epsilon > 0\f$.
- *
- * This method uses the Lanczos approximation to compute the result; see
- * Glendon Ralph Pugh. An Analysis of The Lanczos Gamma Approximation. PhD
- * Thesis, The University of British Columbia, 2004.
- */
-double nfft_lambda(const double z, const double eps);
+double nfft_drand48(void);
 
-double nfft_lambda2(const double mu, const double nu);
+void nfft_srand48(long int seed);
+
+/** Radix sort for node indices.
+ */
+void nfft_sort_node_indices_radix_lsdf(int n, int *keys0, int *keys1, int rhigh);
+
+/** Radix sort for node indices.
+ */
+void nfft_sort_node_indices_radix_msdf(int n, int *keys0, int *keys1, int rhigh);
+
+int nfft_get_num_threads(void);
+
+#ifdef _OPENMP
+int nfft_get_omp_num_threads(void);
+#endif
+
+#ifdef __cplusplus
+}  /* extern "C" */
+#endif /* __cplusplus */
 
 /** @}
  */

@@ -1,7 +1,8 @@
 %PROJECTION Example program: Project a function onto spherical harmonics.
-%   Copyright (c) 2006, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+%
+%   Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 
-% Copyright (c) 2002, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
+% Copyright (c) 2002, 2012 Jens Keiner, Stefan Kunis, Daniel Potts
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -17,8 +18,9 @@
 % this program; if not, write to the Free Software Foundation, Inc., 51
 % Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %
-% $Id: projection.m 3108 2009-03-13 12:57:05Z keiner $
+% $Id: projection.m 3776 2012-06-03 13:29:25Z keiner $
 function err = projection()
+disp(sprintf('Number of threads: %d\n', nfsft_get_num_threads()));
 % threshold
 kappa = 1000;
 % polynomial degrees

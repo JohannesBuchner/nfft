@@ -1,10 +1,8 @@
-# $Id: Makefile.am 3086 2009-03-11 07:36:56Z keiner $
+# $Id: Makefile.am 3639 2011-10-05 20:20:30Z keiner $
 
 AM_CPPFLAGS = -I$(top_srcdir)/include
 
-applicationdir = $(pkgdatadir)/applications/mri/mri2d
-
-application_PROGRAMS = \
+noinst_PROGRAMS = \
   construct_data_2d \
   construct_data_inh_2d1d \
   construct_data_inh_3d \
@@ -14,7 +12,7 @@ application_PROGRAMS = \
   reconstruct_data_inh_2d1d \
   reconstruct_data_inh_nnfft
 
-construct_data_2d_SOURCES = construct_data_2d.c
+construct_data_2d_SOURCES = construct_data_2d.c doxygen.h
 construct_data_2d_LDADD = $(top_builddir)/libnfft3.la
 
 construct_data_inh_2d1d_SOURCES = construct_data_inh_2d1d.c
@@ -51,5 +49,3 @@ EXTRA_DIST = 	construct_inh.m \
 		construct_knots_spiral.m \
 		phantom.m \
 		README
-
-application_DATA = $(EXTRA_DIST)
