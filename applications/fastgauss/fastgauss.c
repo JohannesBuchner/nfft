@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastgauss.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: fastgauss.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /**
  * \defgroup applications_fastgauss Fast Gauss transfrom with complex parameter
@@ -32,7 +32,7 @@
 #include <complex.h>
 
 #include "nfft3.h"
-#include "util.h"
+#include "nfft3util.h"
 
 /**
  * If this flag is set, the whole matrix is precomputed and stored for the

@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: solver.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: solver.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /*! \file solver.c
  *  \brief Implementation file for the solver module
@@ -25,7 +25,7 @@
 
 #include <complex.h>
 
-#include "util.h"
+#include "nfft3util.h"
 #include "nfft3.h"
 
 void solver_init_advanced_complex(solver_plan_complex* ths, mv_plan_complex *mv, unsigned flags)

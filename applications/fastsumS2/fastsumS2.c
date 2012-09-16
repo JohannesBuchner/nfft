@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastsumS2.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: fastsumS2.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /**
  * \defgroup applications_fastsumS2_test fastsumS2_matlab
@@ -35,7 +35,7 @@
 #include "nfft3.h"
 
 /* NFFT3 utilities */
-#include "util.h"
+#include "nfft3util.h"
 
 /* Fourier-Legendre coefficients for Abel-Poisson kernel */
 #define SYMBOL_ABEL_POISSON(k,h) (pow(h,k))

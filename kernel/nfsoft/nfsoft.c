@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfsoft.c 3119 2009-03-16 21:30:59Z vollrath $ */
+/* $Id: nfsoft.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <stdio.h>
 #include <math.h>
@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <complex.h>
 #include "nfft3.h"
-#include "util.h"
+#include "nfft3util.h"
 #include "infft.h"
 #include "wigner.h"
 
@@ -76,24 +76,21 @@ void nfsoft_init_guru(nfsoft_plan *plan, int B, int M,
   if (plan->flags & NFSOFT_MALLOC_F_HAT)
   {
     plan->f_hat = (C*) nfft_malloc((B + 1) * (4* (B +1)*(B+1)-1)/3*sizeof(C));
+    if (plan->f_hat == NULL ) printf("Allocation failed!\n");
   }
-
-  if (plan->f_hat == NULL ) printf("Allocation failed!\n");
 
   if (plan->flags & NFSOFT_MALLOC_X)
   {
     plan->x = (R*) nfft_malloc(plan->M_total*3*sizeof(R));
+    if (plan->x == NULL ) printf("Allocation failed!\n");
   }
   if (plan->flags & NFSOFT_MALLOC_F)
   {
     plan->f = (C*) nfft_malloc(plan->M_total*sizeof(C));
+      if (plan->f == NULL ) printf("Allocation failed!\n");
   }
 
-  if (plan->x == NULL ) printf("Allocation failed!\n");
-  if (plan->f == NULL ) printf("Allocation failed!\n");
-
   plan->wig_coeffs = (C*) nfft_malloc((nfft_next_power_of_2(B)+1)*sizeof(C));
-
   plan->cheby = (C*) nfft_malloc((2*B+2)*sizeof(C));
   plan->aux = (C*) nfft_malloc((2*B+4)*sizeof(C));
 
@@ -103,6 +100,8 @@ void nfsoft_init_guru(nfsoft_plan *plan, int B, int M,
 
   plan->mv_trafo = (void (*) (void* ))nfsoft_trafo;
   plan->mv_adjoint = (void (*) (void* ))nfsoft_adjoint;
+
+  plan->fpt_set = 0;
 }
 
 static void c2e(nfsoft_plan *my_plan, int even)
@@ -142,6 +141,7 @@ static void c2e(nfsoft_plan *my_plan, int even)
   free(aux);
   aux = NULL;
 }
+
 
 static fpt_set SO3_fpt_init(int l, fpt_set set, unsigned int flags, int kappa)
 {
@@ -211,6 +211,69 @@ static fpt_set SO3_fpt_init(int l, fpt_set set, unsigned int flags, int kappa)
   return set;
 }
 
+fpt_set SO3_single_fpt_init(int l, int k, int m, unsigned int flags, int kappa)
+{
+  int N, t, k_start, k_end;
+  R *alpha, *beta, *gamma;
+  fpt_set set = 0;
+
+  /** Read in transfrom length. */
+  if (flags & NFSOFT_USE_DPT)
+  {
+    if (l < 2)
+      N = 2;
+    else
+      N = l;
+
+    t = (int) log2(nfft_next_power_of_2(N));
+
+  }
+  else
+  {
+    /** workaround to compute polynomials of degree less than 2*/
+    if (l < 2)
+      N = 2;
+    else
+      N = nfft_next_power_of_2(l);
+
+    t = (int) log2(N);
+  }
+
+  /**memory for the recurrence coefficients*/
+  alpha = (R*) nfft_malloc((N + 2) * sizeof(R));
+  beta = (R*) nfft_malloc((N + 2) * sizeof(R));
+  gamma = (R*) nfft_malloc((N + 2) * sizeof(R));
+
+  /** Initialize DPT. */
+  if (flags & NFSOFT_NO_STABILIZATION)
+  {
+    set = fpt_init(1, t, 0U | FPT_NO_STABILIZATION);
+  }
+  else
+  {
+    set = fpt_init(1, t, 0U);
+  }
+
+  /** Read in start and end indices */
+  k_start = (ABS(k) >= ABS(m)) ? ABS(k) : ABS(m);
+  k_end = N;
+
+  SO3_alpha_row(alpha, N, k, m);
+  SO3_beta_row(beta, N, k, m);
+  SO3_gamma_row(gamma, N, k, m);
+
+  fpt_precompute(set, 0, alpha, beta, gamma, k_start, kappa);
+
+  free(alpha);
+  free(beta);
+  free(gamma);
+  alpha = NULL;
+  beta = NULL;
+  gamma = NULL;
+
+  return set;
+}
+
 void SO3_fpt(C *coeffs, fpt_set set, int l, int k, int m, unsigned int flags)
 {
   int N;
@@ -246,10 +309,9 @@ void SO3_fpt(C *coeffs, fpt_set set, int l, int k, int m, unsigned int flags)
   /** Read in Wigner coefficients. */
   x = (C*) nfft_malloc((k_end + 1) * sizeof(C));
 
-  //for (j = 0; j <= k_end-k_start; j++)
-  //{
-  // x[j+k_start] = coeffs[j];
-  //}
+  for (j = 0; j <= k_end; j++)
+   x[j] = K(0.0);
+
 
   for (j = 0; j <= l - k_start; j++)
   {
@@ -390,6 +452,7 @@ void nfsoft_precompute(nfsoft_plan *plan3D)
   plan3D->fpt_set = SO3_fpt_init(N, plan3D->fpt_set, plan3D->flags,
       plan3D->fpt_kappa);
 
+  if ((plan3D->nfft_plan).nfft_flags & MALLOC_F_HAT)
   for (j = 0; j < plan3D->nfft_plan.N_total; j++)
     plan3D->nfft_plan.f_hat[j] = 0.0;
 

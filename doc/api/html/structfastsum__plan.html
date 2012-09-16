@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.0 API Reference - NFFT: fastsum_plan Struct Reference
+      NFFT 3.1.1 API Reference - NFFT: fastsum_plan Struct Reference
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.0 API Reference</H1nc>
+          <H1nc>3.1.1 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -72,8 +72,8 @@ double *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 double *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfastsum__plan.html#79615d0f0d38b754742c3ff445b6c733">y</a></td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">target knots in d-ball with radius 1/4-eps_b/2 <br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="910b9b7bc966ca0241ccf8093405668d"></a><!-- doxytag: member="fastsum_plan::kernel" ref="910b9b7bc966ca0241ccf8093405668d" args=")(double, int, const double *)" -->
-double _Complex(*&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfastsum__plan.html#910b9b7bc966ca0241ccf8093405668d">kernel</a> )(double, int, const double *)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="d4b45ea52967233dcda5dc26f8b530e4"></a><!-- doxytag: member="fastsum_plan::k" ref="d4b45ea52967233dcda5dc26f8b530e4" args="" -->
+<a class="el" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6">kernel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfastsum__plan.html#d4b45ea52967233dcda5dc26f8b530e4">k</a></td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">kernel function <br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="e494d11cd336be135f7a93d112a16852"></a><!-- doxytag: member="fastsum_plan::kernel_param" ref="e494d11cd336be135f7a93d112a16852" args="" -->
@@ -116,8 +116,8 @@ double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfastsum__plan.html#d0217e28060b4f3992de52511b6b8a04">Ad</a></td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">near field  <a href="#d0217e28060b4f3992de52511b6b8a04"></a><br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="49a55958ef74d27bf8e7a825e61474f4"></a><!-- doxytag: member="fastsum_plan::Add" ref="49a55958ef74d27bf8e7a825e61474f4" args="" -->
-double *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfastsum__plan.html#49a55958ef74d27bf8e7a825e61474f4">Add</a></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="cc2829808e91847449790147ee775943"></a><!-- doxytag: member="fastsum_plan::Add" ref="cc2829808e91847449790147ee775943" args="" -->
+double _Complex *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfastsum__plan.html#cc2829808e91847449790147ee775943">Add</a></td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">spline values <br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="f3298ee265bc5738cad179cf8e38f7ac"></a><!-- doxytag: member="fastsum_plan::fft_plan" ref="f3298ee265bc5738cad179cf8e38f7ac" args="" -->
@@ -126,7 +126,7 @@ fftw_plan&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 plan for fast summation algorithm 
-<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00054">54</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
+<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00056">56</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
 <hr><h2>Field Documentation</h2>
 <a class="anchor" name="8c32876370be14f7e88337d979c93382"></a><!-- doxytag: member="fastsum_plan::d" ref="8c32876370be14f7e88337d979c93382" args="" -->
 <div class="memitem">
@@ -143,9 +143,9 @@ plan for fast summation algorithm
 api 
 <p>
 number of dimensions 
-<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00058">58</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
+<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00060">60</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
 
-<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00474">fastsum_exact()</a>, <a class="el" href="fastsum_8c-source.html#l00390">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00500">fastsum_precompute()</a>, and <a class="el" href="fastsum_8c-source.html#l00583">fastsum_trafo()</a>.</p>
+<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00481">fastsum_exact()</a>, <a class="el" href="fastsum_8c-source.html#l00397">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00507">fastsum_precompute()</a>, and <a class="el" href="fastsum_8c-source.html#l00590">fastsum_trafo()</a>.</p>
 
 </div>
 </div><p>
@@ -164,9 +164,9 @@ number of dimensions
 flags precomp. 
 <p>
 and approx.type 
-<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00072">72</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
+<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00074">74</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
 
-<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00456">fastsum_finalize()</a>, <a class="el" href="fastsum_8c-source.html#l00390">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00500">fastsum_precompute()</a>, <a class="el" href="fastsum_8c-source.html#l00583">fastsum_trafo()</a>, and <a class="el" href="fields__fastsum_8c-source.html#l00185">fields_fastsum_trafo()</a>.</p>
+<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00463">fastsum_finalize()</a>, <a class="el" href="fastsum_8c-source.html#l00397">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00507">fastsum_precompute()</a>, <a class="el" href="fastsum_8c-source.html#l00590">fastsum_trafo()</a>, and <a class="el" href="fields__fastsum_8c-source.html#l00185">fields_fastsum_trafo()</a>.</p>
 
 </div>
 </div><p>
@@ -185,7 +185,7 @@ and approx.type
 internal 
 <p>
 DS_PRE - direct summation precomputed K(x_j-y_l) 
-<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00077">77</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
+<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00079">79</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
 
 </div>
 </div><p>
@@ -204,9 +204,9 @@ DS_PRE - direct summation precomputed K(x_j-y_l)
 FS__ - fast summation. 
 <p>
 expansion degree 
-<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00080">80</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
+<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00082">82</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
 
-<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00390">fastsum_init_guru()</a>, and <a class="el" href="fastsum_8c-source.html#l00500">fastsum_precompute()</a>.</p>
+<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00397">fastsum_init_guru()</a>, and <a class="el" href="fastsum_8c-source.html#l00507">fastsum_precompute()</a>.</p>
 
 </div>
 </div><p>
@@ -225,15 +225,15 @@ expansion degree
 near field 
 <p>
 number of spline knots for nearfield computation of regularized kernel 
-<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00091">91</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
+<p>Definition at line <a class="el" href="fastsum_8h-source.html#l00093">93</a> of file <a class="el" href="fastsum_8h-source.html">fastsum.h</a>.</p>
 
-<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00390">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00500">fastsum_precompute()</a>, <a class="el" href="fastsum_8c-source.html#l00583">fastsum_trafo()</a>, and <a class="el" href="fields__fastsum_8c-source.html#l00185">fields_fastsum_trafo()</a>.</p>
+<p>Referenced by <a class="el" href="fastsum_8c-source.html#l00397">fastsum_init_guru()</a>, <a class="el" href="fastsum_8c-source.html#l00507">fastsum_precompute()</a>, <a class="el" href="fastsum_8c-source.html#l00590">fastsum_trafo()</a>, and <a class="el" href="fields__fastsum_8c-source.html#l00185">fields_fastsum_trafo()</a>.</p>
 
 </div>
 </div><p>
 <hr>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="fastsum_8h-source.html">fastsum.h</a></ul>
     <hr size="1"/>
-    Generated on 19 Mar 2009 by Doxygen 1.5.3
+    Generated on 17 Aug 2009 by Doxygen 1.5.3
   </body>
 </html>

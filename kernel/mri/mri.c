@@ -16,14 +16,14 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: mri.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: mri.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <string.h>
 #include <math.h>
 
 #include <complex.h>
 
-#include "util.h"
+#include "nfft3util.h"
 #include "nfft3.h"
 
 /**

@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: construct_data_inh_2d1d.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: construct_data_inh_2d1d.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <stdlib.h>
 #include <math.h>
@@ -24,7 +24,7 @@
 #include <complex.h>
 
 #include "nfft3.h"
-#include "util.h"
+#include "nfft3util.h"
 
 /**
  * \defgroup applications_mri2d_construct_data_inh_2d1d construct_data__inh_2d1d

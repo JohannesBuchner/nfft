@@ -16,14 +16,14 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfftmex.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: nfftmex.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <complex.h>
 #include <string.h>
 #include <stdio.h>
 #include "nfft3.h"
 #include "infft.h"
-#include "util.h"
+#include "nfft3util.h"
 #include "imex.h"
 
 #ifndef HAVE_MEXVERSION_C

@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.0 API Reference - NFFT: fastsum.h Source File
+      NFFT 3.1.1 API Reference - NFFT: fastsum.h Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.0 API Reference</H1nc>
+          <H1nc>3.1.1 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -45,62 +45,65 @@
 <a name="l00016"></a>00016 <span class="comment"> * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/* $Id: fastsum.h 3100 2009-03-12 08:42:48Z keiner $ */</span>
+<a name="l00019"></a>00019 <span class="comment">/* $Id: fastsum.h 3298 2009-08-14 12:32:31Z keiner $ */</span>
 <a name="l00020"></a>00020 
 <a name="l00038"></a>00038 <span class="preprocessor">#ifndef fastsum_h_inc</span>
 <a name="l00039"></a>00039 <span class="preprocessor"></span><span class="preprocessor">#define fastsum_h_inc</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &lt;complex.h&gt;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include "<a class="code" href="util_8h.html" title="Header file for utility functions used by the nfft3 library.">util.h</a>"</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include "<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>"</span>
 <a name="l00046"></a>00046 <span class="preprocessor">#include "<a class="code" href="nfft3_8h.html" title="Header file for the nfft3 library.">nfft3.h</a>"</span>
 <a name="l00047"></a>00047 
-<a name="l00051"></a><a class="code" href="group__applications__fastsum.html#gc22376cb30edef9131c592a355d1030d">00051</a> <span class="preprocessor">#define EXACT_NEARFIELD  (1U&lt;&lt; 0)</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span>
-<a name="l00054"></a><a class="code" href="structfastsum__plan.html">00054</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>fastsum_plan_
-<a name="l00055"></a>00055 {
-<a name="l00058"></a><a class="code" href="structfastsum__plan.html#8c32876370be14f7e88337d979c93382">00058</a>   <span class="keywordtype">int</span> d;                                
-<a name="l00060"></a><a class="code" href="structfastsum__plan.html#45fd4a73ba0f2b5795364d6d3a239a85">00060</a>   <span class="keywordtype">int</span> N_total;                          
-<a name="l00061"></a><a class="code" href="structfastsum__plan.html#7c55ef5f14439f86f01b4e06281aa01d">00061</a>   <span class="keywordtype">int</span> M_total;                          
-<a name="l00063"></a><a class="code" href="structfastsum__plan.html#f36c72276fd20ef9c8c1b484f6cbf834">00063</a>   <span class="keywordtype">double</span> _Complex *alpha;                       
-<a name="l00064"></a><a class="code" href="structfastsum__plan.html#3bb9a1eea981916a97336ac6eb19d292">00064</a>   <span class="keywordtype">double</span> _Complex *f;                           
-<a name="l00066"></a><a class="code" href="structfastsum__plan.html#590dd3d6fd12f3e8cbd72b8a83905760">00066</a>   <span class="keywordtype">double</span> *x;                            
-<a name="l00067"></a><a class="code" href="structfastsum__plan.html#79615d0f0d38b754742c3ff445b6c733">00067</a>   <span class="keywordtype">double</span> *y;                            
-<a name="l00069"></a>00069   <span class="keywordtype">double</span> _Complex (*kernel)(double , int , <span class="keyword">const</span> <span class="keywordtype">double</span> *);  
-<a name="l00070"></a><a class="code" href="structfastsum__plan.html#e494d11cd336be135f7a93d112a16852">00070</a>   <span class="keywordtype">double</span> *kernel_param;                 
-<a name="l00072"></a><a class="code" href="structfastsum__plan.html#3d264dc33ae01a71908311ac9b7eadc2">00072</a>   <span class="keywordtype">unsigned</span> flags;                       
-<a name="l00077"></a><a class="code" href="structfastsum__plan.html#8dbf6da034fa65b1c2c2d35883a59367">00077</a>   <span class="keywordtype">double</span> _Complex *pre_K;                       
-<a name="l00080"></a><a class="code" href="structfastsum__plan.html#5615cf980018c32de59c9aba950bdfb2">00080</a>   <span class="keywordtype">int</span> n;                                
-<a name="l00081"></a><a class="code" href="structfastsum__plan.html#f8e5c612c9a1bb2a1a8ad30d37fba10c">00081</a>   fftw_complex *b;                      
-<a name="l00083"></a><a class="code" href="structfastsum__plan.html#50bdfe4efb1b7df3556347cc7cffe945">00083</a>   <span class="keywordtype">int</span> p;                                
-<a name="l00084"></a><a class="code" href="structfastsum__plan.html#02e7e2f5e7b0f5713331bd129aad8192">00084</a>   <span class="keywordtype">double</span> eps_I;                           <span class="comment">/* fixed to p/n so far  */</span>
-<a name="l00085"></a><a class="code" href="structfastsum__plan.html#8ff877981769fb215912d9d440071cc4">00085</a>   <span class="keywordtype">double</span> eps_B;                           <span class="comment">/* fixed to 1/16 so far */</span>
-<a name="l00086"></a>00086 
-<a name="l00087"></a><a class="code" href="structfastsum__plan.html#41da99ba24cced38e30e886ccc9d46b5">00087</a>   <a class="code" href="structnfft__plan.html" title="Structure for a NFFT plan.">nfft_plan</a> mv1;                        
-<a name="l00088"></a><a class="code" href="structfastsum__plan.html#4e16f1a797a3217e54bbd5b4fe057dcb">00088</a>   <a class="code" href="structnfft__plan.html" title="Structure for a NFFT plan.">nfft_plan</a> mv2;                        
-<a name="l00091"></a><a class="code" href="structfastsum__plan.html#d0217e28060b4f3992de52511b6b8a04">00091</a>   <span class="keywordtype">int</span> Ad;                               
-<a name="l00092"></a><a class="code" href="structfastsum__plan.html#49a55958ef74d27bf8e7a825e61474f4">00092</a>   <span class="keywordtype">double</span> *Add;                          
-<a name="l00094"></a>00094   <span class="comment">/* things for computing *b - are they used only once?? */</span>
-<a name="l00095"></a><a class="code" href="structfastsum__plan.html#f3298ee265bc5738cad179cf8e38f7ac">00095</a>   fftw_plan fft_plan;
-<a name="l00096"></a>00096 } <a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a>;
-<a name="l00097"></a>00097 
-<a name="l00114"></a>00114 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#gc9d2c1acc65b11636c1080e1dd9169ad" title="initialization of fastsum plan">fastsum_init_guru</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths, <span class="keywordtype">int</span> d, <span class="keywordtype">int</span> N_total, <span class="keywordtype">int</span> M_total, <span class="keywordtype">double</span> _Complex (*kernel)(), <span class="keywordtype">double</span> *param, <span class="keywordtype">unsigned</span> flags, <span class="keywordtype">int</span> nn, <span class="keywordtype">int</span> m, <span class="keywordtype">int</span> p, <span class="keywordtype">double</span> eps_I, <span class="keywordtype">double</span> eps_B);
-<a name="l00115"></a>00115 
-<a name="l00120"></a>00120 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#gb989ea4659fe681bd4c025e82756f769" title="finalization of fastsum plan">fastsum_finalize</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
-<a name="l00121"></a>00121 
-<a name="l00126"></a>00126 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#gaee3dd954ffc99e4330fabe16ccad0fd" title="direct computation of sums">fastsum_exact</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
-<a name="l00127"></a>00127 
-<a name="l00132"></a>00132 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#g197c16fcec7935886fc97d140f2b20ff" title="precomputation for fastsum">fastsum_precompute</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
-<a name="l00133"></a>00133 
-<a name="l00138"></a>00138 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#gab2cc691ba59064c18d439c9fd2185e8" title="fast NFFT-based summation">fastsum_trafo</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
-<a name="l00139"></a>00139 <span class="comment">/* \} */</span>
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141 <span class="keywordtype">double</span> <a class="code" href="group__applications__fastsum.html#g42189eaf1638274b8080ef9ad2c9bd26" title="regularized kernel with K_I arbitrary and K_B smooth to zero">regkern</a>(<span class="keywordtype">double</span> _Complex (*kernel)(), <span class="keywordtype">double</span> xx, <span class="keywordtype">int</span> p, <span class="keyword">const</span> <span class="keywordtype">double</span> *param, <span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b);
+<a name="l00048"></a><a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6">00048</a> <span class="keyword">typedef</span> <span class="keywordtype">double</span> _Complex (*<a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a>)(double , int , <span class="keyword">const</span> <span class="keywordtype">double</span> *);
+<a name="l00049"></a>00049 
+<a name="l00053"></a><a class="code" href="group__applications__fastsum.html#gc22376cb30edef9131c592a355d1030d">00053</a> <span class="preprocessor">#define EXACT_NEARFIELD  (1U&lt;&lt; 0)</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span>
+<a name="l00056"></a><a class="code" href="structfastsum__plan.html">00056</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>fastsum_plan_
+<a name="l00057"></a>00057 {
+<a name="l00060"></a><a class="code" href="structfastsum__plan.html#8c32876370be14f7e88337d979c93382">00060</a>   <span class="keywordtype">int</span> d;                                
+<a name="l00062"></a><a class="code" href="structfastsum__plan.html#45fd4a73ba0f2b5795364d6d3a239a85">00062</a>   <span class="keywordtype">int</span> N_total;                          
+<a name="l00063"></a><a class="code" href="structfastsum__plan.html#7c55ef5f14439f86f01b4e06281aa01d">00063</a>   <span class="keywordtype">int</span> M_total;                          
+<a name="l00065"></a><a class="code" href="structfastsum__plan.html#f36c72276fd20ef9c8c1b484f6cbf834">00065</a>   <span class="keywordtype">double</span> _Complex *alpha;                       
+<a name="l00066"></a><a class="code" href="structfastsum__plan.html#3bb9a1eea981916a97336ac6eb19d292">00066</a>   <span class="keywordtype">double</span> _Complex *f;                           
+<a name="l00068"></a><a class="code" href="structfastsum__plan.html#590dd3d6fd12f3e8cbd72b8a83905760">00068</a>   <span class="keywordtype">double</span> *x;                            
+<a name="l00069"></a><a class="code" href="structfastsum__plan.html#79615d0f0d38b754742c3ff445b6c733">00069</a>   <span class="keywordtype">double</span> *y;                            
+<a name="l00071"></a><a class="code" href="structfastsum__plan.html#d4b45ea52967233dcda5dc26f8b530e4">00071</a>   <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> k;  
+<a name="l00072"></a><a class="code" href="structfastsum__plan.html#e494d11cd336be135f7a93d112a16852">00072</a>   <span class="keywordtype">double</span> *kernel_param;                 
+<a name="l00074"></a><a class="code" href="structfastsum__plan.html#3d264dc33ae01a71908311ac9b7eadc2">00074</a>   <span class="keywordtype">unsigned</span> flags;                       
+<a name="l00079"></a><a class="code" href="structfastsum__plan.html#8dbf6da034fa65b1c2c2d35883a59367">00079</a>   <span class="keywordtype">double</span> _Complex *pre_K;                       
+<a name="l00082"></a><a class="code" href="structfastsum__plan.html#5615cf980018c32de59c9aba950bdfb2">00082</a>   <span class="keywordtype">int</span> n;                                
+<a name="l00083"></a><a class="code" href="structfastsum__plan.html#f8e5c612c9a1bb2a1a8ad30d37fba10c">00083</a>   fftw_complex *b;                      
+<a name="l00085"></a><a class="code" href="structfastsum__plan.html#50bdfe4efb1b7df3556347cc7cffe945">00085</a>   <span class="keywordtype">int</span> p;                                
+<a name="l00086"></a><a class="code" href="structfastsum__plan.html#02e7e2f5e7b0f5713331bd129aad8192">00086</a>   <span class="keywordtype">double</span> eps_I;                           <span class="comment">/* fixed to p/n so far  */</span>
+<a name="l00087"></a><a class="code" href="structfastsum__plan.html#8ff877981769fb215912d9d440071cc4">00087</a>   <span class="keywordtype">double</span> eps_B;                           <span class="comment">/* fixed to 1/16 so far */</span>
+<a name="l00088"></a>00088 
+<a name="l00089"></a><a class="code" href="structfastsum__plan.html#41da99ba24cced38e30e886ccc9d46b5">00089</a>   <a class="code" href="structnfft__plan.html" title="Structure for a NFFT plan.">nfft_plan</a> mv1;                        
+<a name="l00090"></a><a class="code" href="structfastsum__plan.html#4e16f1a797a3217e54bbd5b4fe057dcb">00090</a>   <a class="code" href="structnfft__plan.html" title="Structure for a NFFT plan.">nfft_plan</a> mv2;                        
+<a name="l00093"></a><a class="code" href="structfastsum__plan.html#d0217e28060b4f3992de52511b6b8a04">00093</a>   <span class="keywordtype">int</span> Ad;                               
+<a name="l00094"></a><a class="code" href="structfastsum__plan.html#cc2829808e91847449790147ee775943">00094</a>   <span class="keywordtype">double</span> _Complex *Add;                 
+<a name="l00096"></a>00096   <span class="comment">/* things for computing *b - are they used only once?? */</span>
+<a name="l00097"></a><a class="code" href="structfastsum__plan.html#f3298ee265bc5738cad179cf8e38f7ac">00097</a>   fftw_plan fft_plan;
+<a name="l00098"></a>00098 } <a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a>;
+<a name="l00099"></a>00099 
+<a name="l00116"></a>00116 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#g9a053d513b2eb19c5f1c70f16e0ae149" title="initialization of fastsum plan">fastsum_init_guru</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths, <span class="keywordtype">int</span> d, <span class="keywordtype">int</span> N_total, <span class="keywordtype">int</span> M_total, <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> k, <span class="keywordtype">double</span> *param, <span class="keywordtype">unsigned</span> flags, <span class="keywordtype">int</span> nn, <span class="keywordtype">int</span> m, <span class="keywordtype">int</span> p, <span class="keywordtype">double</span> eps_I, <span class="keywordtype">double</span> eps_B);
+<a name="l00117"></a>00117 
+<a name="l00122"></a>00122 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#gb989ea4659fe681bd4c025e82756f769" title="finalization of fastsum plan">fastsum_finalize</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
+<a name="l00123"></a>00123 
+<a name="l00128"></a>00128 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#gaee3dd954ffc99e4330fabe16ccad0fd" title="direct computation of sums">fastsum_exact</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
+<a name="l00129"></a>00129 
+<a name="l00134"></a>00134 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#g197c16fcec7935886fc97d140f2b20ff" title="precomputation for fastsum">fastsum_precompute</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
+<a name="l00135"></a>00135 
+<a name="l00140"></a>00140 <span class="keywordtype">void</span> <a class="code" href="group__applications__fastsum.html#gab2cc691ba59064c18d439c9fd2185e8" title="fast NFFT-based summation">fastsum_trafo</a>(<a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> *ths);
+<a name="l00141"></a>00141 <span class="comment">/* \} */</span>
 <a name="l00142"></a>00142 
-<a name="l00144"></a>00144 <span class="keywordtype">double</span> <a class="code" href="group__applications__fastsum.html#gb7c93097f39ef84cbe6f7f7f715590aa" title="cubic spline interpolation in near field with even kernels">kubintkern</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> *Add, <span class="keywordtype">int</span> Ad, <span class="keywordtype">double</span> a);
-<a name="l00145"></a>00145 
-<a name="l00146"></a>00146 <span class="preprocessor">#endif</span>
-<a name="l00147"></a>00147 <span class="preprocessor"></span><span class="comment">/* fastsum.h */</span>
+<a name="l00143"></a>00143 <span class="keywordtype">double</span> _Complex <a class="code" href="group__applications__fastsum.html#g247527ab67657107225fa69882f0208c" title="regularized kernel with K_I arbitrary and K_B smooth to zero">regkern</a>(<a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> k, <span class="keywordtype">double</span> xx, <span class="keywordtype">int</span> p, <span class="keyword">const</span> <span class="keywordtype">double</span> *param, <span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b);
+<a name="l00144"></a>00144 
+<a name="l00146"></a>00146 <span class="keywordtype">double</span> _Complex <a class="code" href="group__applications__fastsum.html#g67103860c05f7296f7c302e7f0dbfe79" title="cubic spline interpolation in near field with even kernels">kubintkern</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> x, <span class="keyword">const</span> <span class="keywordtype">double</span> _Complex *Add,
+<a name="l00147"></a>00147   <span class="keyword">const</span> <span class="keywordtype">int</span> Ad, <span class="keyword">const</span> <span class="keywordtype">double</span> a);
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149 <span class="preprocessor">#endif</span>
+<a name="l00150"></a>00150 <span class="preprocessor"></span><span class="comment">/* fastsum.h */</span>
 </pre></div>    <hr size="1"/>
-    Generated on 19 Mar 2009 by Doxygen 1.5.3
+    Generated on 17 Aug 2009 by Doxygen 1.5.3
   </body>
 </html>

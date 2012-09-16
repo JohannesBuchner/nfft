@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfct.c 3110 2009-03-13 16:32:18Z keiner $ */
+/* $Id: nfct.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /**
  * Library.
@@ -29,7 +29,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "util.h"
+#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 

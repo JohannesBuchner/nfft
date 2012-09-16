@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3113 2009-03-13 19:51:55Z keiner $ */
+/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /* standard headers */
 #include <stdio.h>
@@ -27,7 +27,7 @@
 #include <complex.h>
 
 #include "nfft3.h" /* NFFT3 header */
-#include "util.h" /* NFFT3 utilities header*/
+#include "nfft3util.h" /* NFFT3 utilities header*/
 #include "infft.h" /* NFFT3 internal header */
 
 static void simple_test_nfsft(void)

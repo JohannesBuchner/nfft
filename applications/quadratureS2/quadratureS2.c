@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: quadratureS2.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: quadratureS2.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /**
  * \defgroup applications_quadratureS2_test quadratureS2_test
@@ -35,7 +35,7 @@
 #include <complex.h>
 
 /* Include NFFT 3 utilities headers. */
-#include "util.h"
+#include "nfft3util.h"
 
 /* Include NFFT 3 library header. */
 #include "nfft3.h"

@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.0 API Reference - NFFT: util.c Source File
+      NFFT 3.1.1 API Reference - NFFT: util.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.0 API Reference</H1nc>
+          <H1nc>3.1.1 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -45,7 +45,7 @@
 <a name="l00016"></a>00016 <span class="comment"> * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/* $Id: util.c 3133 2009-03-19 10:46:24Z keiner $ */</span>
+<a name="l00019"></a>00019 <span class="comment">/* $Id: util.c 3198 2009-05-27 14:16:50Z keiner $ */</span>
 <a name="l00020"></a>00020 
 <a name="l00026"></a>00026 <span class="preprocessor">#include "infft.h"</span>
 <a name="l00027"></a>00027 
@@ -59,7 +59,7 @@
 <a name="l00035"></a>00035 
 <a name="l00036"></a>00036 <span class="preprocessor">#include &lt;complex.h&gt;</span>
 <a name="l00037"></a>00037 <span class="preprocessor">#include "<a class="code" href="nfft3_8h.html" title="Header file for the nfft3 library.">nfft3.h</a>"</span>
-<a name="l00038"></a>00038 <span class="preprocessor">#include "<a class="code" href="util_8h.html" title="Header file for utility functions used by the nfft3 library.">util.h</a>"</span>
+<a name="l00038"></a>00038 <span class="preprocessor">#include "<a class="code" href="nfft3util_8h.html" title="Header file for utility functions used by the nfft3 library.">nfft3util.h</a>"</span>
 <a name="l00039"></a>00039 
 <a name="l00043"></a><a class="code" href="group__nfftutil.html#gae7e89f8691419d4a5bc972db7a3abd7">00043</a> <span class="keywordtype">double</span> <a class="code" href="group__nfftutil.html#gae7e89f8691419d4a5bc972db7a3abd7" title="Actual used CPU time in seconds; calls getrusage, limited accuracy.">nfft_second</a>(<span class="keywordtype">void</span>)
 <a name="l00044"></a>00044 {
@@ -2014,31 +2014,73 @@
 <a name="l02134"></a>02134   K(5.6096232232009359480838882000975403703116221325714e-9),
 <a name="l02135"></a>02135   K(-1.6133242708801833407734306938668413119166269573061e-9),
 <a name="l02136"></a>02136   K(2.191097792670207503670965523347118763341507005123e-10)};
-<a name="l02137"></a>02137   <span class="keyword">static</span> <span class="keyword">const</span> R g = K(6.0246800407767295837402343750000000000000000000000);
-<a name="l02138"></a>02138 <span class="preprocessor">#endif</span>
-<a name="l02139"></a>02139 <span class="preprocessor"></span>
-<a name="l02140"></a>02140 <span class="comment">/* Computes the partial fractions sum in Lanzcos' approximation. */</span>
-<a name="l02141"></a>02141 <span class="keyword">static</span> <span class="keyword">inline</span> R csum(<span class="keyword">const</span> R z)
-<a name="l02142"></a>02142 {
-<a name="l02143"></a>02143   <span class="keyword">const</span> <span class="keywordtype">short</span> n = <span class="keyword">sizeof</span>(lanzcos)/<span class="keyword">sizeof</span>(lanzcos[0]);
-<a name="l02144"></a>02144   R r = K(0.0), y = z + (R)(n-1);
-<a name="l02145"></a>02145   <span class="keywordtype">short</span> i;
-<a name="l02146"></a>02146   <span class="keywordflow">for</span> (i = n-1; i &gt;= 1; i--, y -= K(1.0))
-<a name="l02147"></a>02147     r += lanzcos[i]/y;
-<a name="l02148"></a>02148   r += lanzcos[0];
-<a name="l02149"></a>02149   <span class="keywordflow">return</span> r;
-<a name="l02150"></a>02150 }
-<a name="l02151"></a>02151 
-<a name="l02152"></a>02152 <span class="comment">/* Euler's number */</span>
-<a name="l02153"></a>02153 <span class="keyword">static</span> DK(KE,2.7182818284590452353602874713526624977572470937000);
-<a name="l02154"></a>02154 
-<a name="l02155"></a><a class="code" href="group__nfftutil.html#g8b29244516d573dca1d0fe134a97b9a6">02155</a> R <a class="code" href="group__nfftutil.html#g8b29244516d573dca1d0fe134a97b9a6" title="Computes the function , with .">nfft_lambda</a>(<span class="keyword">const</span> R z, <span class="keyword">const</span> R eps)
-<a name="l02156"></a>02156 {
-<a name="l02157"></a>02157   R d = K(1.0) - eps, zpg = z + g, emh = eps - K(0.5);
-<a name="l02158"></a>02158   <span class="keywordflow">return</span> EXP(-LOG1P(d/(zpg+emh))*(z+emh)) * POW(KE/(zpg+K(0.5)),d)
-<a name="l02159"></a>02159     * (csum(z-d)/csum(z));
-<a name="l02160"></a>02160 }
+<a name="l02137"></a>02137   <span class="keyword">static</span> <span class="keyword">const</span> R lanzcosp[12] = {
+<a name="l02138"></a>02138   K(3.0627152859269464002981250710810845422307962730128e8),
+<a name="l02139"></a>02139   K(4.775603155294306744694136459666282665368397175884e8),
+<a name="l02140"></a>02140   K(3.3795733209388037978795882754036968577436873787256e8),
+<a name="l02141"></a>02141   K(1.4313371466803237581908862806209047500008516090763e8),
+<a name="l02142"></a>02142   K(4.026600756736916571780374444713775549949468190092e7),
+<a name="l02143"></a>02143   K(7.8910786118305655779880429845306886138919766854132e6),
+<a name="l02144"></a>02144   K(1.0980346455035079893427073585191634273991944222518e6),
+<a name="l02145"></a>02145   K(108372.57068540043287489056427702756001287882054205),
+<a name="l02146"></a>02146   K(7427.8953058166394494408791055208785413418341223703),
+<a name="l02147"></a>02147   K(336.44978500306352175687290720400758052504709702257),
+<a name="l02148"></a>02148   K(9.0582421437926674355635744116038966456459610306128),
+<a name="l02149"></a>02149   K(0.10976007071323978811079010281977761670657790941656)};
+<a name="l02150"></a>02150   <span class="keyword">static</span> <span class="keyword">const</span> R g = K(6.0246800407767295837402343750000000000000000000000);
+<a name="l02151"></a>02151 <span class="preprocessor">#endif</span>
+<a name="l02152"></a>02152 <span class="preprocessor"></span>
+<a name="l02153"></a>02153 <span class="comment">/* Computes the partial fractions sum in Lanzcos' approximation. */</span>
+<a name="l02154"></a>02154 <span class="keyword">static</span> <span class="keyword">inline</span> R csum(<span class="keyword">const</span> R z)
+<a name="l02155"></a>02155 {
+<a name="l02156"></a>02156   <span class="keyword">const</span> <span class="keywordtype">short</span> n = <span class="keyword">sizeof</span>(lanzcos)/<span class="keyword">sizeof</span>(lanzcos[0]);
+<a name="l02157"></a>02157   R r = K(0.0), y = z + (R)(n-1);
+<a name="l02158"></a>02158   <span class="keywordtype">short</span> i;
+<a name="l02159"></a>02159   <span class="keywordflow">for</span> (i = n-1; i &gt;= 1; i--, y -= K(1.0))
+<a name="l02160"></a>02160     r += lanzcos[i]/y;
+<a name="l02161"></a>02161   r += lanzcos[0];
+<a name="l02162"></a>02162   <span class="keywordflow">return</span> r;
+<a name="l02163"></a>02163 }
+<a name="l02164"></a>02164 
+<a name="l02165"></a>02165 <span class="keyword">static</span> <span class="keyword">inline</span> R csump(<span class="keyword">const</span> R z)
+<a name="l02166"></a>02166 {
+<a name="l02167"></a>02167   <span class="keyword">const</span> <span class="keywordtype">short</span> n = <span class="keyword">sizeof</span>(lanzcos)/<span class="keyword">sizeof</span>(lanzcos[0]);
+<a name="l02168"></a>02168   R num = K(0.0), denom = K(1.0);
+<a name="l02169"></a>02169   <span class="keywordtype">short</span> i;
+<a name="l02170"></a>02170   <span class="keywordflow">for</span> (i = n-1; i &gt;= 1; i--)
+<a name="l02171"></a>02171   {
+<a name="l02172"></a>02172     num = z * num + lanzcosp[i-1];
+<a name="l02173"></a>02173     denom *= z + (R)(i);
+<a name="l02174"></a>02174   }
+<a name="l02175"></a>02175   <span class="keywordflow">return</span> lanzcos[0] + (num/denom);
+<a name="l02176"></a>02176 }
+<a name="l02177"></a>02177 
+<a name="l02178"></a>02178 <span class="comment">/* Euler's number */</span>
+<a name="l02179"></a>02179 <span class="keyword">static</span> DK(KE,2.7182818284590452353602874713526624977572470937000);
+<a name="l02180"></a>02180 
+<a name="l02181"></a><a class="code" href="group__nfftutil.html#g8b29244516d573dca1d0fe134a97b9a6">02181</a> R <a class="code" href="group__nfftutil.html#g8b29244516d573dca1d0fe134a97b9a6" title="Computes the function , with .">nfft_lambda</a>(<span class="keyword">const</span> R z, <span class="keyword">const</span> R eps)
+<a name="l02182"></a>02182 {
+<a name="l02183"></a>02183   R d = K(1.0) - eps, zpg = z + g, emh = eps - K(0.5);
+<a name="l02184"></a>02184   <span class="keywordflow">return</span> EXP(-LOG1P(d/(zpg+emh))*(z+emh)) * POW(KE/(zpg+K(0.5)),d)
+<a name="l02185"></a>02185     * (csump(z-d)/csump(z));
+<a name="l02186"></a>02186 }
+<a name="l02187"></a>02187 
+<a name="l02188"></a>02188 <span class="comment">/* Computes lambda2(mu, nu) = Sqrt(2^(mu+nu)Gamma(mu+nu+1)/(Gamma(mu+1)Gamma(nu+1)))</span>
+<a name="l02189"></a>02189 <span class="comment"> * using Lanczos' approximation. */</span>
+<a name="l02190"></a><a class="code" href="group__nfftutil.html#g7830c877f31b8b72751cadec3ed4481a">02190</a> R <a class="code" href="group__nfftutil.html#g7830c877f31b8b72751cadec3ed4481a">nfft_lambda2</a>(<span class="keyword">const</span> R mu, <span class="keyword">const</span> R nu)
+<a name="l02191"></a>02191 {
+<a name="l02192"></a>02192   <span class="keywordflow">if</span> (mu == K(0.0) || nu == K(0.0))
+<a name="l02193"></a>02193     <span class="keywordflow">return</span> K(1.0);
+<a name="l02194"></a>02194   <span class="keywordflow">else</span>
+<a name="l02195"></a>02195     <span class="keywordflow">return</span>
+<a name="l02196"></a>02196       SQRT(
+<a name="l02197"></a>02197         POW((mu+nu+g+K(0.5))/(K(1.0)*(mu+g+K(0.5))),mu)
+<a name="l02198"></a>02198       * POW((mu+nu+g+K(0.5))/(K(1.0)*(nu+g+K(0.5))),nu)
+<a name="l02199"></a>02199       * SQRT(KE*(mu+nu+g+K(0.5))/((mu+g+K(0.5))*(nu+g+K(0.5))))
+<a name="l02200"></a>02200       * (csum(mu+nu)/(csum(mu)*csum(nu)))
+<a name="l02201"></a>02201       );
+<a name="l02202"></a>02202 }
 </pre></div>    <hr size="1"/>
-    Generated on 19 Mar 2009 by Doxygen 1.5.3
+    Generated on 17 Aug 2009 by Doxygen 1.5.3
   </body>
 </html>

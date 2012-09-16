@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.0 API Reference - NFFT: Util - Auxilliary functions
+      NFFT 3.1.1 API Reference - NFFT: Util - Auxilliary functions
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.0 API Reference</H1nc>
+          <H1nc>3.1.1 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -291,12 +291,15 @@ double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 <tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfftutil.html#g8b29244516d573dca1d0fe134a97b9a6">nfft_lambda</a> (const double z, const double eps)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Computes the function <img class="formulaInl" alt="$\Lambda(z,\epsilon) = \frac{\Gamma(z+\epsilon)}{\Gamma(z+1)}$" src="form_197.png">, with <img class="formulaInl" alt="$ z + \epsilon > 0$" src="form_198.png">.  <a href="#g8b29244516d573dca1d0fe134a97b9a6"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="g7830c877f31b8b72751cadec3ed4481a"></a><!-- doxytag: member="nfftutil::nfft_lambda2" ref="g7830c877f31b8b72751cadec3ed4481a" args="(const double mu, const double nu)" -->
+double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfftutil.html#g7830c877f31b8b72751cadec3ed4481a">nfft_lambda2</a> (const double mu, const double nu)</td></tr>
+
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 Include header for FFTW3 library for its complex type. 
 <p>
 This module implements frequently used utility functions. In particular, this includes simple measurement of resources, evaluation of window functions, vector routines for basic linear algebra tasks, and computation of weights for the inverse transforms. <hr><h2>Define Documentation</h2>
-<a class="anchor" name="g05909fc22b7177d1bd50119f40fbb1ec"></a><!-- doxytag: member="util.h::TIC" ref="g05909fc22b7177d1bd50119f40fbb1ec" args="(a)" -->
+<a class="anchor" name="g05909fc22b7177d1bd50119f40fbb1ec"></a><!-- doxytag: member="nfft3util.h::TIC" ref="g05909fc22b7177d1bd50119f40fbb1ec" args="(a)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -316,13 +319,13 @@ This module implements frequently used utility functions. In particular, this in
 Timing, method works since the inaccurate timer is updated mostly in the measured function. 
 <p>
 For small times not every call of the measured function will also produce a 'unit' time step. Measuring the fftw might cause a wrong output vector due to the repeated ffts. 
-<p>Definition at line <a class="el" href="util_8h-source.html#l00072">72</a> of file <a class="el" href="util_8h-source.html">util.h</a>.</p>
+<p>Definition at line <a class="el" href="nfft3util_8h-source.html#l00072">72</a> of file <a class="el" href="nfft3util_8h-source.html">nfft3util.h</a>.</p>
 
 <p>Referenced by <a class="el" href="nfct_8c-source.html#l00782">nfct_adjoint()</a>, <a class="el" href="nfct_8c-source.html#l00728">nfct_trafo()</a>, <a class="el" href="nfft_8c-source.html#l02807">nfft_adjoint()</a>, <a class="el" href="nfft_8c-source.html#l00935">nfft_adjoint_1d()</a>, <a class="el" href="nfft_8c-source.html#l01552">nfft_adjoint_2d()</a>, <a class="el" href="nfft_8c-source.html#l02652">nfft_adjoint_3d()</a>, <a class="el" href="nfft_8c-source.html#l02771">nfft_trafo()</a>, <a class="el" href="nfft_8c-source.html#l00888">nfft_trafo_1d()</a>, <a class="el" href="nfft_8c-source.html#l01471">nfft_trafo_2d()</a>, <a class="el" href="nfft_8c-source.html#l02534">nfft_trafo_3d()</a>, <a class="el" href="nfst_8c-source.html#l00692">nfst_adjoint()</a>, and <a class="el" href="nfst_8c-source.html#l00647">nfst_trafo()</a>.</p>
 
 </div>
 </div><p>
-<a class="anchor" name="g4df074728562efbb458f6662e649d1d5"></a><!-- doxytag: member="util.h::NFFT_SWAP_complex" ref="g4df074728562efbb458f6662e649d1d5" args="(x, y)" -->
+<a class="anchor" name="g4df074728562efbb458f6662e649d1d5"></a><!-- doxytag: member="nfft3util.h::NFFT_SWAP_complex" ref="g4df074728562efbb458f6662e649d1d5" args="(x, y)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -347,13 +350,13 @@ For small times not every call of the measured function will also produce a 'uni
 </pre></div>Swapping of two vectors. 
 <p>
 
-<p>Definition at line <a class="el" href="util_8h-source.html#l00087">87</a> of file <a class="el" href="util_8h-source.html">util.h</a>.</p>
+<p>Definition at line <a class="el" href="nfft3util_8h-source.html#l00087">87</a> of file <a class="el" href="nfft3util_8h-source.html">nfft3util.h</a>.</p>
 
 <p>Referenced by <a class="el" href="flags_8c-source.html#l00220">accuracy_pre_lin_psi()</a>, <a class="el" href="fastgauss_8c-source.html#l00410">fgt_test_andersson()</a>, <a class="el" href="fastgauss_8c-source.html#l00481">fgt_test_error()</a>, <a class="el" href="fastgauss_8c-source.html#l00532">fgt_test_error_p()</a>, <a class="el" href="fastgauss_8c-source.html#l00375">fgt_test_simple()</a>, <a class="el" href="glacier_8c-source.html#l00106">glacier_cv()</a>, <a class="el" href="iterS2_8c-source.html#l00055">main()</a>, <a class="el" href="solver_8c-source.html#l00071">solver_before_loop_complex()</a>, <a class="el" href="solver_8c-source.html#l00222">solver_loop_one_step_cgnr_complex()</a>, <a class="el" href="solver_8c-source.html#l00118">solver_loop_one_step_landweber_complex()</a>, <a class="el" href="solver_8c-source.html#l00167">solver_loop_one_step_steepest_descent_complex()</a>, <a class="el" href="taylor__nfft_8c-source.html#l00174">taylor_time_accuracy()</a>, and <a class="el" href="flags_8c-source.html#l00067">time_accuracy()</a>.</p>
 
 </div>
 </div><p>
-<a class="anchor" name="g4d8733560ed5e4cc3ff7ecadac62e83e"></a><!-- doxytag: member="util.h::NFFT_SWAP_double" ref="g4d8733560ed5e4cc3ff7ecadac62e83e" args="(x, y)" -->
+<a class="anchor" name="g4d8733560ed5e4cc3ff7ecadac62e83e"></a><!-- doxytag: member="nfft3util.h::NFFT_SWAP_double" ref="g4d8733560ed5e4cc3ff7ecadac62e83e" args="(x, y)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -378,14 +381,14 @@ For small times not every call of the measured function will also produce a 'uni
 </pre></div>Swapping of two vectors. 
 <p>
 
-<p>Definition at line <a class="el" href="util_8h-source.html#l00092">92</a> of file <a class="el" href="util_8h-source.html">util.h</a>.</p>
+<p>Definition at line <a class="el" href="nfft3util_8h-source.html#l00092">92</a> of file <a class="el" href="nfft3util_8h-source.html">nfft3util.h</a>.</p>
 
 <p>Referenced by <a class="el" href="solver_8c-source.html#l00422">solver_before_loop_double()</a>, <a class="el" href="solver_8c-source.html#l00573">solver_loop_one_step_cgnr_double()</a>, <a class="el" href="solver_8c-source.html#l00469">solver_loop_one_step_landweber_double()</a>, and <a class="el" href="solver_8c-source.html#l00518">solver_loop_one_step_steepest_descent_double()</a>.</p>
 
 </div>
 </div><p>
 <hr><h2>Function Documentation</h2>
-<a class="anchor" name="gae7e89f8691419d4a5bc972db7a3abd7"></a><!-- doxytag: member="util.h::nfft_second" ref="gae7e89f8691419d4a5bc972db7a3abd7" args="(void)" -->
+<a class="anchor" name="gae7e89f8691419d4a5bc972db7a3abd7"></a><!-- doxytag: member="nfft3util.h::nfft_second" ref="gae7e89f8691419d4a5bc972db7a3abd7" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -412,7 +415,7 @@ functions for vectors, window functions, ... (c) if not stated otherwise: Daniel
 
 </div>
 </div><p>
-<a class="anchor" name="g5d6e8d0901b95c0c48f719e517733e5b"></a><!-- doxytag: member="util.h::nfft_i0" ref="g5d6e8d0901b95c0c48f719e517733e5b" args="(double x)" -->
+<a class="anchor" name="g5d6e8d0901b95c0c48f719e517733e5b"></a><!-- doxytag: member="nfft3util.h::nfft_i0" ref="g5d6e8d0901b95c0c48f719e517733e5b" args="(double x)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -437,7 +440,7 @@ Cephes Math Library Release 2.8: June, 2000 Copyright 1984, 1987, 2000 by Stephe
 
 </div>
 </div><p>
-<a class="anchor" name="g26a4ed487a23e99e01f111113be9f994"></a><!-- doxytag: member="util.h::nfft_voronoi_weights_S2" ref="g26a4ed487a23e99e01f111113be9f994" args="(double *w, double *xi, int M)" -->
+<a class="anchor" name="g26a4ed487a23e99e01f111113be9f994"></a><!-- doxytag: member="nfft3util.h::nfft_voronoi_weights_S2" ref="g26a4ed487a23e99e01f111113be9f994" args="(double *w, double *xi, int M)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -478,7 +481,7 @@ Computes voronoi weights for nodes on the sphere S^2.
 
 </div>
 </div><p>
-<a class="anchor" name="g2decee6fe50d50797a82737ba82cf97a"></a><!-- doxytag: member="util.h::nfft_smbi" ref="g2decee6fe50d50797a82737ba82cf97a" args="(const double x, const double alpha, const int nb, const int ize, double *b)" -->
+<a class="anchor" name="g2decee6fe50d50797a82737ba82cf97a"></a><!-- doxytag: member="nfft3util.h::nfft_smbi" ref="g2decee6fe50d50797a82737ba82cf97a" args="(const double x, const double alpha, const int nb, const int ize, double *b)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -544,7 +547,7 @@ Modified by Jens Keiner, Institute of Mathematics, University of Lübeck, 23560 
 
 </div>
 </div><p>
-<a class="anchor" name="g8b29244516d573dca1d0fe134a97b9a6"></a><!-- doxytag: member="util.h::nfft_lambda" ref="g8b29244516d573dca1d0fe134a97b9a6" args="(const double z, const double eps)" -->
+<a class="anchor" name="g8b29244516d573dca1d0fe134a97b9a6"></a><!-- doxytag: member="nfft3util.h::nfft_lambda" ref="g8b29244516d573dca1d0fe134a97b9a6" args="(const double z, const double eps)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -573,11 +576,11 @@ Modified by Jens Keiner, Institute of Mathematics, University of Lübeck, 23560 
 Computes the function <img class="formulaInl" alt="$\Lambda(z,\epsilon) = \frac{\Gamma(z+\epsilon)}{\Gamma(z+1)}$" src="form_197.png">, with <img class="formulaInl" alt="$ z + \epsilon > 0$" src="form_198.png">. 
 <p>
 This method uses the Lanczos approximation to compute the result; see Glendon Ralph Pugh. An Analysis of The Lanczos Gamma Approximation. PhD Thesis, The University of British Columbia, 2004. 
-<p>Definition at line <a class="el" href="util_8c-source.html#l02155">2155</a> of file <a class="el" href="util_8c-source.html">util.c</a>.</p>
+<p>Definition at line <a class="el" href="util_8c-source.html#l02181">2181</a> of file <a class="el" href="util_8c-source.html">util.c</a>.</p>
 
 </div>
 </div><p>
     <hr size="1"/>
-    Generated on 19 Mar 2009 by Doxygen 1.5.3
+    Generated on 17 Aug 2009 by Doxygen 1.5.3
   </body>
 </html>

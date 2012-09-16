@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft.c 3124 2009-03-18 13:44:27Z kunis $ */
+/* $Id: nfft.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /**
  * Simple and fast computation of the NDFT.
@@ -30,7 +30,7 @@
 
 #include <complex.h>
 
-#include "util.h"
+#include "nfft3util.h"
 #include "nfft3.h"
 #include "infft.h"
 

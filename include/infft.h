@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: infft.h 3110 2009-03-13 16:32:18Z keiner $ */
+/* $Id: infft.h 3189 2009-05-13 14:16:32Z keiner $ */
 
 /* NFFT internal header file */
 #ifndef __INFFT_H__
@@ -78,11 +78,17 @@ typedef ptrdiff_t INT;
 #define MAX(a,b) (((a)>(b))?(a):(b))
 #define ABS(x) (((x)>K(0.0))?(x):(-(x)))
 #define SIGN(a) (((a)>=0)?1:-1)
+#define SIGN(a) (((a)>=0)?1:-1)
+#define SIGNF(a) IF((a)<K(0.0),K(-1.0),K(1.0))
 
 #if defined(NFFT_LDOUBLE)
 #define LOG1P log1pl
 #if HAVE_DECL_LOG1PL == 0
 extern long double log1pl(const long double);
+#endif
+#define LOG10 log10l
+#if HAVE_DECL_LOG10L == 0
+extern long double log10l(const long double);
 #endif
 #define SQRT sqrtl
 #if HAVE_DECL_SQRTL == 0
@@ -137,6 +143,10 @@ extern long int lrintl(const long double);
 #if HAVE_DECL_LOG1PF == 0
 extern float log1pf(const float);
 #endif
+#define LOG10 log10f
+#if HAVE_DECL_LOG10F == 0
+extern float log10f(const float);
+#endif
 #define SQRT sqrtf
 #if HAVE_DECL_SQRTF == 0
 extern float sqrtf(const float);
@@ -189,6 +199,10 @@ extern long int lrintf(const float);
 #define LOG1P log1p
 #if HAVE_DECL_LOG1P == 0
 extern double log1p(const double);
+#endif
+#define LOG10 log10
+#if HAVE_DECL_LOG10 == 0
+extern double log10(const double);
 #endif
 #define SQRT sqrt
 #if HAVE_DECL_SQRT == 0

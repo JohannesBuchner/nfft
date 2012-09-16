@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.0 API Reference - NFFT: NFSOFT - Nonequispaced fast SO(3) Fourier transform
+      NFFT 3.1.1 API Reference - NFFT: NFSOFT - Nonequispaced fast SO(3) Fourier transform
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.0 API Reference</H1nc>
+          <H1nc>3.1.1 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -109,9 +109,12 @@ int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfsoft.html#g123df5d17a0d43fe5e061ac0fb8c1d23">nfsoft_precompute</a> (<a class="el" href="structnfsoft__plan.html">nfsoft_plan</a> *plan)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Functions for NFSOFT plans.  <a href="#g123df5d17a0d43fe5e061ac0fb8c1d23"></a><br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfsoft.html#gfdc0cc0432918bfa8643c7a5f42d7ea5">SO3_fpt</a> (fftw_complex *coeffs, <a class="el" href="group__fpt.html#g73d630ac21d6474ba0693f124d465e15">fpt_set</a> set, int l, int k, int m, unsigned int nfsoft_flags)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="group__fpt.html#g73d630ac21d6474ba0693f124d465e15">fpt_set</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nfsoft.html#gd2748faee8621b8e431bb380f0ab86e8">SO3_single_fpt_init</a> (int l, int k, int m, unsigned int flags, int kappa)</td></tr>
 
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Computes the FPT transform.  <a href="#gfdc0cc0432918bfa8643c7a5f42d7ea5"></a><br></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Computes the FPT transform.  <a href="#gd2748faee8621b8e431bb380f0ab86e8"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="gfdc0cc0432918bfa8643c7a5f42d7ea5"></a><!-- doxytag: member="nfsoft::SO3_fpt" ref="gfdc0cc0432918bfa8643c7a5f42d7ea5" args="(fftw_complex *coeffs, fpt_set set, int l, int k, int m, unsigned int nfsoft_flags)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SO3_fpt</b> (fftw_complex *coeffs, <a class="el" href="group__fpt.html#g73d630ac21d6474ba0693f124d465e15">fpt_set</a> set, int l, int k, int m, unsigned int nfsoft_flags)</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="g9cfa0279bc0f6ad32d69cb17dbd206a8"></a><!-- doxytag: member="nfsoft::SO3_fpt_transposed" ref="g9cfa0279bc0f6ad32d69cb17dbd206a8" args="(fftw_complex *coeffs, fpt_set set, int l, int k, int m, unsigned int nfsoft_flags)" -->
 void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SO3_fpt_transposed</b> (fftw_complex *coeffs, <a class="el" href="group__fpt.html#g73d630ac21d6474ba0693f124d465e15">fpt_set</a> set, int l, int k, int m, unsigned int nfsoft_flags)</td></tr>
 
@@ -163,7 +166,7 @@ By default, all computations are performed with respect to the unnormalized basi
 
 <p>Definition at line <a class="el" href="nfft3_8h-source.html#l02384">2384</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
 
-<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00523">nfsoft_adjoint()</a>, and <a class="el" href="nfsoft_8c-source.html#l00398">nfsoft_trafo()</a>.</p>
+<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00586">nfsoft_adjoint()</a>, and <a class="el" href="nfsoft_8c-source.html#l00461">nfsoft_trafo()</a>.</p>
 
 </div>
 </div><p>
@@ -188,7 +191,7 @@ If this flag is set, the fast NFSOFT algorithms (see <a class="el" href="group__
 
 <p>Definition at line <a class="el" href="nfft3_8h-source.html#l02396">2396</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
 
-<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00523">nfsoft_adjoint()</a>, and <a class="el" href="nfsoft_8c-source.html#l00398">nfsoft_trafo()</a>.</p>
+<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00586">nfsoft_adjoint()</a>, and <a class="el" href="nfsoft_8c-source.html#l00461">nfsoft_trafo()</a>.</p>
 
 </div>
 </div><p>
@@ -237,7 +240,7 @@ Otherwise, you have to assure by yourself that <code>x</code> points to an array
 
 <p>Definition at line <a class="el" href="nfft3_8h-source.html#l02423">2423</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
 
-<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00612">nfsoft_finalize()</a>, <a class="el" href="nfsoft_8c-source.html#l00034">nfsoft_init()</a>, and <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
+<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00675">nfsoft_finalize()</a>, <a class="el" href="nfsoft_8c-source.html#l00034">nfsoft_init()</a>, and <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
 
 </div>
 </div><p>
@@ -259,7 +262,7 @@ If this flag is set, the Wigner-D functions will be normed such that they satisf
 
 <p>Definition at line <a class="el" href="nfft3_8h-source.html#l02432">2432</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
 
-<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00523">nfsoft_adjoint()</a>, and <a class="el" href="nfsoft_8c-source.html#l00398">nfsoft_trafo()</a>.</p>
+<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00586">nfsoft_adjoint()</a>, and <a class="el" href="nfsoft_8c-source.html#l00461">nfsoft_trafo()</a>.</p>
 
 </div>
 </div><p>
@@ -285,7 +288,7 @@ Otherwise, you have to assure by yourself that <code>f_hat</code> points to an a
 
 <p>Definition at line <a class="el" href="nfft3_8h-source.html#l02448">2448</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
 
-<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00612">nfsoft_finalize()</a>, <a class="el" href="nfsoft_8c-source.html#l00034">nfsoft_init()</a>, and <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
+<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00675">nfsoft_finalize()</a>, <a class="el" href="nfsoft_8c-source.html#l00034">nfsoft_init()</a>, and <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
 
 </div>
 </div><p>
@@ -311,7 +314,7 @@ Otherwise, you have to assure by yourself that <code>f</code> points to an array
 
 <p>Definition at line <a class="el" href="nfft3_8h-source.html#l02463">2463</a> of file <a class="el" href="nfft3_8h-source.html">nfft3.h</a>.</p>
 
-<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00612">nfsoft_finalize()</a>, <a class="el" href="nfsoft_8c-source.html#l00034">nfsoft_init()</a>, and <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
+<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00675">nfsoft_finalize()</a>, <a class="el" href="nfsoft_8c-source.html#l00034">nfsoft_init()</a>, and <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
 
 </div>
 </div><p>
@@ -563,29 +566,17 @@ Does all node-dependent and node-independent precomputations needed for the NFSO
 <li>plan a pointer to a <a class="el" href="structnfsoft__plan.html">nfsoft_plan</a> structure </li>
 </ul>
 
-<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00360">360</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
+<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00422">422</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
 
 </div>
 </div><p>
-<a class="anchor" name="gfdc0cc0432918bfa8643c7a5f42d7ea5"></a><!-- doxytag: member="nfft3.h::SO3_fpt" ref="gfdc0cc0432918bfa8643c7a5f42d7ea5" args="(fftw_complex *coeffs, fpt_set set, int l, int k, int m, unsigned int nfsoft_flags)" -->
+<a class="anchor" name="gd2748faee8621b8e431bb380f0ab86e8"></a><!-- doxytag: member="nfft3.h::SO3_single_fpt_init" ref="gd2748faee8621b8e431bb380f0ab86e8" args="(int l, int k, int m, unsigned int flags, int kappa)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SO3_fpt           </td>
+          <td class="memname"><a class="el" href="group__fpt.html#g73d630ac21d6474ba0693f124d465e15">fpt_set</a> SO3_single_fpt_init           </td>
           <td>(</td>
-          <td class="paramtype">fftw_complex *&nbsp;</td>
-          <td class="paramname"> <em>coeffs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__fpt.html#g73d630ac21d6474ba0693f124d465e15">fpt_set</a>&nbsp;</td>
-          <td class="paramname"> <em>set</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&nbsp;</td>
           <td class="paramname"> <em>l</em>, </td>
         </tr>
@@ -605,7 +596,13 @@ Does all node-dependent and node-independent precomputations needed for the NFSO
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned int&nbsp;</td>
-          <td class="paramname"> <em>nfsoft_flags</em></td><td>&nbsp;</td>
+          <td class="paramname"> <em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>kappa</em></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -628,7 +625,7 @@ Computes the FPT transform.
 <li>nfsoft_flags </li>
 </ul>
 
-<p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00398">nfsoft_trafo()</a>.</p>
+<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00214">214</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
 
 </div>
 </div><p>
@@ -834,7 +831,7 @@ computes for <img class="formulaInl" alt="$m = 0,\ldots,M-1$" src="form_136.png"
 </ul>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Antje Vollrath </dd></dl>
 
-<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00398">398</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
+<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00461">461</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
 
 <p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
 
@@ -868,7 +865,7 @@ computes for <img class="formulaInl" alt="$l=0,\ldots,B; m,n=-l,\ldots,l$" src="
 </ul>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Antje Vollrath </dd></dl>
 
-<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00523">523</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
+<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00586">586</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
 
 <p>Referenced by <a class="el" href="nfsoft_8c-source.html#l00048">nfsoft_init_guru()</a>.</p>
 
@@ -898,11 +895,11 @@ Destroys a plan.
 </ul>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Antje Vollrath </dd></dl>
 
-<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00612">612</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
+<p>Definition at line <a class="el" href="nfsoft_8c-source.html#l00675">675</a> of file <a class="el" href="nfsoft_8c-source.html">nfsoft.c</a>.</p>
 
 </div>
 </div><p>
     <hr size="1"/>
-    Generated on 19 Mar 2009 by Doxygen 1.5.3
+    Generated on 17 Aug 2009 by Doxygen 1.5.3
   </body>
 </html>

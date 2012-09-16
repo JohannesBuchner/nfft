@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
     <title>
-      NFFT 3.1.0 API Reference - NFFT: fastsum_test.c Source File
+      NFFT 3.1.1 API Reference - NFFT: fastsum_test.c Source File
     </title>
     <link href="doxygen.css" rel="stylesheet" type="text/css"/>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
           <img src="images/logo.png" alt="NFFT Logo">
         </td>
         <td align="left" valign="bottom" width="100%">
-          <H1nc>3.1.0 API Reference</H1nc>
+          <H1nc>3.1.1 API Reference</H1nc>
         </td>
       </tr>
     </table>  
@@ -66,7 +66,7 @@
 <a name="l00050"></a>00050   <span class="keywordtype">int</span> m;                                             
 <a name="l00051"></a>00051   <span class="keywordtype">int</span> p;                                             
 <a name="l00052"></a>00052   <span class="keywordtype">char</span> *s;                                           
-<a name="l00053"></a>00053   <span class="keywordtype">double</span> _Complex (*kernel)(double , int , <span class="keyword">const</span> <span class="keywordtype">double</span> *);  
+<a name="l00053"></a>00053   <span class="keywordtype">double</span> _Complex (*<a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a>)(double , int , <span class="keyword">const</span> <span class="keywordtype">double</span> *);  
 <a name="l00054"></a>00054   <span class="keywordtype">double</span> c;                                          
 <a name="l00055"></a>00055   <a class="code" href="structfastsum__plan.html" title="plan for fast summation algorithm">fastsum_plan</a> my_fastsum_plan;                      
 <a name="l00056"></a>00056   <span class="keywordtype">double</span> _Complex *direct;                                   
@@ -102,38 +102,38 @@
 <a name="l00087"></a>00087     eps_I=atof(argv[9]);
 <a name="l00088"></a>00088     eps_B=atof(argv[10]);
 <a name="l00089"></a>00089     <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"gaussian"</span>)==0)
-<a name="l00090"></a>00090       kernel = <a class="code" href="group__applications__fastsum.html#g81bf029788afe857325a760743f9fdd3">gaussian</a>;
+<a name="l00090"></a>00090       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g81bf029788afe857325a760743f9fdd3">gaussian</a>;
 <a name="l00091"></a>00091     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"multiquadric"</span>)==0)
-<a name="l00092"></a>00092       kernel = <a class="code" href="group__applications__fastsum.html#g44a58143a1f5c79b45c538134117e091">multiquadric</a>;
+<a name="l00092"></a>00092       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g44a58143a1f5c79b45c538134117e091">multiquadric</a>;
 <a name="l00093"></a>00093     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"inverse_multiquadric"</span>)==0)
-<a name="l00094"></a>00094       kernel = <a class="code" href="group__applications__fastsum.html#g889c2a1791e42bb8fa5a594588d68a5c">inverse_multiquadric</a>;
+<a name="l00094"></a>00094       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g889c2a1791e42bb8fa5a594588d68a5c">inverse_multiquadric</a>;
 <a name="l00095"></a>00095     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"logarithm"</span>)==0)
-<a name="l00096"></a>00096       kernel = <a class="code" href="group__applications__fastsum.html#g91be4b7bcc7d3a415e6b9b6ccaec39a7">logarithm</a>;
+<a name="l00096"></a>00096       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g91be4b7bcc7d3a415e6b9b6ccaec39a7">logarithm</a>;
 <a name="l00097"></a>00097     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"thinplate_spline"</span>)==0)
-<a name="l00098"></a>00098       kernel = <a class="code" href="group__applications__fastsum.html#g7723414bb26fd9b1cc76686aeca57425">thinplate_spline</a>;
+<a name="l00098"></a>00098       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g7723414bb26fd9b1cc76686aeca57425">thinplate_spline</a>;
 <a name="l00099"></a>00099     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"one_over_square"</span>)==0)
-<a name="l00100"></a>00100       kernel = <a class="code" href="group__applications__fastsum.html#ged5f8559b7b7a24674318cb58856602b">one_over_square</a>;
+<a name="l00100"></a>00100       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#ged5f8559b7b7a24674318cb58856602b">one_over_square</a>;
 <a name="l00101"></a>00101     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"one_over_modulus"</span>)==0)
-<a name="l00102"></a>00102       kernel = <a class="code" href="group__applications__fastsum.html#g635ef40090e33b4917a20ab62913ef05">one_over_modulus</a>;
+<a name="l00102"></a>00102       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g635ef40090e33b4917a20ab62913ef05">one_over_modulus</a>;
 <a name="l00103"></a>00103     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"one_over_x"</span>)==0)
-<a name="l00104"></a>00104       kernel = <a class="code" href="group__applications__fastsum.html#g6a6096569616d5cf9604c514f925581b">one_over_x</a>;
+<a name="l00104"></a>00104       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g6a6096569616d5cf9604c514f925581b">one_over_x</a>;
 <a name="l00105"></a>00105     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"inverse_multiquadric3"</span>)==0)
-<a name="l00106"></a>00106       kernel = <a class="code" href="group__applications__fastsum.html#g221604ef3a42dc2de4f1ce68831e7524">inverse_multiquadric3</a>;
+<a name="l00106"></a>00106       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g221604ef3a42dc2de4f1ce68831e7524">inverse_multiquadric3</a>;
 <a name="l00107"></a>00107     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"sinc_kernel"</span>)==0)
-<a name="l00108"></a>00108       kernel = <a class="code" href="group__applications__fastsum.html#g8946fd3f992262c24477b56cba844873">sinc_kernel</a>;
+<a name="l00108"></a>00108       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g8946fd3f992262c24477b56cba844873">sinc_kernel</a>;
 <a name="l00109"></a>00109     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"cosc"</span>)==0)
-<a name="l00110"></a>00110       kernel = <a class="code" href="group__applications__fastsum.html#gb7b7015bc5f2946583e7adbecb2cf630">cosc</a>;
+<a name="l00110"></a>00110       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#gb7b7015bc5f2946583e7adbecb2cf630">cosc</a>;
 <a name="l00111"></a>00111     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(s,<span class="stringliteral">"cot"</span>)==0)
-<a name="l00112"></a>00112       kernel = <a class="code" href="group__applications__fastsum.html#gc693b76a84e9435efc06c1ef26fc7435">kcot</a>;
+<a name="l00112"></a>00112       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#gc693b76a84e9435efc06c1ef26fc7435">kcot</a>;
 <a name="l00113"></a>00113     <span class="keywordflow">else</span>
 <a name="l00114"></a>00114     {
 <a name="l00115"></a>00115       s=<span class="stringliteral">"multiquadric"</span>;
-<a name="l00116"></a>00116       kernel = <a class="code" href="group__applications__fastsum.html#g44a58143a1f5c79b45c538134117e091">multiquadric</a>;
+<a name="l00116"></a>00116       <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a> = <a class="code" href="group__applications__fastsum.html#g44a58143a1f5c79b45c538134117e091">multiquadric</a>;
 <a name="l00117"></a>00117     }
 <a name="l00118"></a>00118   }
 <a name="l00119"></a>00119   printf(<span class="stringliteral">"d=%d, N=%d, M=%d, n=%d, m=%d, p=%d, kernel=%s, c=%g, eps_I=%g, eps_B=%g \n"</span>,d,N,M,n,m,p,s,c,eps_I,eps_B);
 <a name="l00120"></a>00120 
-<a name="l00122"></a>00122   <a class="code" href="group__applications__fastsum.html#gc9d2c1acc65b11636c1080e1dd9169ad" title="initialization of fastsum plan">fastsum_init_guru</a>(&amp;my_fastsum_plan, d, N, M, kernel, &amp;c, 0, n, m, p, eps_I, eps_B);
+<a name="l00122"></a>00122   <a class="code" href="group__applications__fastsum.html#g9a053d513b2eb19c5f1c70f16e0ae149" title="initialization of fastsum plan">fastsum_init_guru</a>(&amp;my_fastsum_plan, d, N, M, <a class="code" href="group__applications__fastsum.html#g9227ba3791b3360dc4a0d6fbf82034c6" title="Include header for C99 complex datatype.">kernel</a>, &amp;c, 0, n, m, p, eps_I, eps_B);
 <a name="l00123"></a>00123   <span class="comment">/*fastsum_init_guru(&amp;my_fastsum_plan, d, N, M, kernel, &amp;c, EXACT_NEARFIELD, n, m, p);*/</span>
 <a name="l00124"></a>00124 
 <a name="l00126"></a>00126   <span class="keywordflow">for</span> (k=0; k&lt;N; k++)
@@ -206,6 +206,6 @@
 <a name="l00200"></a>00200 }
 <a name="l00201"></a>00201 <span class="comment">/* \} */</span>
 </pre></div>    <hr size="1"/>
-    Generated on 19 Mar 2009 by Doxygen 1.5.3
+    Generated on 17 Aug 2009 by Doxygen 1.5.3
   </body>
 </html>

@@ -16,14 +16,14 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: reconstruct_data_inh_nnfft.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: reconstruct_data_inh_nnfft.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
 #include <complex.h>
 
-#include "util.h"
+#include "nfft3util.h"
 #include "nfft3.h"
 
 /**

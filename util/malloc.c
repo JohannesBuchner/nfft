@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: malloc.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: malloc.c 3169 2009-04-15 14:22:15Z keiner $ */
 
 #include "nfft3.h"
 #include <stdio.h>
@@ -36,9 +36,6 @@ void *nfft_malloc(size_t n)
   if (n == 0)
     n = 1;
 
-  if (n == 0)
-    n = 1;
-
   p = fftw_malloc(n);
 
   if (!p)
@@ -54,12 +51,11 @@ void nfft_free(void *p)
 {
   if (p)
   {
-        if (nfft_free_hook)
-          {
+    if (nfft_free_hook)
+    {
       nfft_free_hook(p);
       return;
-          }
-
+    }
     fftw_free(p);
   }
 }

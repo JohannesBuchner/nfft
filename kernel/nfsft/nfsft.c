@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfsft.c 3110 2009-03-13 16:32:18Z keiner $ */
+/* $Id: nfsft.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /**
  * \file nfsft.c
@@ -31,7 +31,7 @@
 #include <complex.h>
 
 /* Include NFFT3 utilities header. */
-#include "util.h"
+#include "nfft3util.h"
 
 /* Include NFFT3 library header. */
 #include "nfft3.h"

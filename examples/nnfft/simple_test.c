@@ -16,13 +16,13 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: simple_test.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: simple_test.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <stdlib.h>
 #include <math.h>
 #include <complex.h>
 
-#include "util.h"
+#include "nfft3util.h"
 #include "nfft3.h"
 
 
@@ -35,17 +35,17 @@ void simple_test_nnfft_1d(void)
   N[0]=12;
 
   /** init an one dimensional plan */
-  nnfft_init(&my_plan, 1, 12, 19, N);
+  nnfft_init(&my_plan, 1, 3, 19, N);
 
   /** init pseudo random nodes */
   for(j=0;j<my_plan.M_total;j++)
   {
-    my_plan.x[j]=((double)rand())/RAND_MAX-0.5;
+    my_plan.x[j]=((double)rand())/((double)RAND_MAX)-0.5;
   }
   /** init pseudo random nodes */
   for(j=0;j<my_plan.N_total;j++)
   {
-    my_plan.v[j]=((double)rand())/RAND_MAX-0.5;
+    my_plan.v[j]=((double)rand())/((double)RAND_MAX)-0.5;
   }
 
   /** precompute psi, the entries of the matrix B */
@@ -64,7 +64,7 @@ void simple_test_nnfft_1d(void)
 
   /** init pseudo random Fourier coefficients and show them */
   for(k=0;k<my_plan.N_total;k++)
-    my_plan.f_hat[k] = ((double)rand())/RAND_MAX + _Complex_I*((double)rand())/RAND_MAX;
+    my_plan.f_hat[k] = ((double)rand())/((double)RAND_MAX) + _Complex_I*((double)rand())/((double)RAND_MAX);
 
   nfft_vpr_complex(my_plan.f_hat,my_plan.N_total,"given Fourier coefficients, vector f_hat");
 
@@ -75,6 +75,60 @@ void simple_test_nnfft_1d(void)
   /** approx. trafo and show the result */
   nnfft_trafo(&my_plan);
   nfft_vpr_complex(my_plan.f,my_plan.M_total,"nnfft, vector f");
+
+  /** finalise the one dimensional plan */
+  nnfft_finalize(&my_plan);
+}
+
+void simple_test_adjoint_nnfft_1d(void)
+{
+  int j,k;                              /**< index for nodes and freqencies   */
+  nnfft_plan my_plan;                    /**< plan for the nfft                */
+
+  int N[1];
+  N[0]=12;
+
+  /** init an one dimensional plan */
+  nnfft_init(&my_plan, 1, 20, 33, N);
+
+  /** init pseudo random nodes */
+  for(j=0;j<my_plan.M_total;j++)
+  {
+    my_plan.x[j]=((double)rand())/((double)RAND_MAX)-0.5;
+  }
+  /** init pseudo random nodes */
+  for(j=0;j<my_plan.N_total;j++)
+  {
+    my_plan.v[j]=((double)rand())/((double)RAND_MAX)-0.5;
+  }
+
+  /** precompute psi, the entries of the matrix B */
+  if(my_plan.nnfft_flags & PRE_PSI)
+    nnfft_precompute_psi(&my_plan);
+
+  if(my_plan.nnfft_flags & PRE_FULL_PSI)
+    nnfft_precompute_full_psi(&my_plan);
+
+  if(my_plan.nnfft_flags & PRE_LIN_PSI)
+    nnfft_precompute_lin_psi(&my_plan);
+
+  /** precompute phi_hut, the entries of the matrix D */
+  if(my_plan.nnfft_flags & PRE_PHI_HUT)
+    nnfft_precompute_phi_hut(&my_plan);
+
+  /** init pseudo random Fourier coefficients and show them */
+  for(j=0;j<my_plan.M_total;j++)
+    my_plan.f[j] = ((double)rand())/((double)RAND_MAX) + _Complex_I*((double)rand())/((double)RAND_MAX);
+
+  nfft_vpr_complex(my_plan.f,my_plan.M_total,"given Samples, vector f");
+
+  /** direct trafo and show the result */
+  nndft_adjoint(&my_plan);
+  nfft_vpr_complex(my_plan.f_hat,my_plan.N_total,"adjoint nndft, vector f_hat");
+
+  /** approx. trafo and show the result */
+  nnfft_adjoint(&my_plan);
+  nfft_vpr_complex(my_plan.f_hat,my_plan.N_total,"adjoint nnfft, vector f_hat");
 
   /** finalise the one dimensional plan */
   nnfft_finalize(&my_plan);
@@ -95,15 +149,15 @@ void simple_test_nnfft_2d(void)
   /** init pseudo random nodes */
   for(j=0;j<my_plan.M_total;j++)
   {
-    my_plan.x[2*j]=((double)rand())/RAND_MAX-0.5;
-    my_plan.x[2*j+1]=((double)rand())/RAND_MAX-0.5;
+    my_plan.x[2*j]=((double)rand())/((double)RAND_MAX)-0.5;
+    my_plan.x[2*j+1]=((double)rand())/((double)RAND_MAX)-0.5;
   }
 
   /** init pseudo random nodes */
   for(j=0;j<my_plan.N_total;j++)
   {
-    my_plan.v[2*j]=((double)rand())/RAND_MAX-0.5;
-    my_plan.v[2*j+1]=((double)rand())/RAND_MAX-0.5;
+    my_plan.v[2*j]=((double)rand())/((double)RAND_MAX)-0.5;
+    my_plan.v[2*j+1]=((double)rand())/((double)RAND_MAX)-0.5;
   }
 
   /** precompute psi, the entries of the matrix B */
@@ -122,7 +176,7 @@ void simple_test_nnfft_2d(void)
 
   /** init pseudo random Fourier coefficients and show them */
   for(k=0;k<my_plan.N_total;k++)
-    my_plan.f_hat[k] = ((double)rand())/RAND_MAX + _Complex_I*((double)rand())/RAND_MAX;
+    my_plan.f_hat[k] = ((double)rand())/((double)RAND_MAX) + _Complex_I*((double)rand())/((double)RAND_MAX);
 
   nfft_vpr_complex(my_plan.f_hat,12,
         "given Fourier coefficients, vector f_hat (first 12 entries)");
@@ -153,11 +207,11 @@ void simple_test_innfft_1d(void)
 
   /** init pseudo random nodes */
   for(j=0;j<my_plan.M_total;j++)
-    my_plan.x[j]=((double)rand())/RAND_MAX-0.5;
+    my_plan.x[j]=((double)rand())/((double)RAND_MAX)-0.5;
 
   /** init pseudo random nodes */
-  for(j=0;j<my_plan.N_total;j++)
-    my_plan.v[j]=((double)rand())/RAND_MAX-0.5;
+  for(k=0;k<my_plan.N_total;k++)
+    my_plan.v[k]=((double)rand())/((double)RAND_MAX)-0.5;
 
   /** precompute psi, the entries of the matrix B */
   if(my_plan.nnfft_flags & PRE_PSI)
@@ -172,7 +226,7 @@ void simple_test_innfft_1d(void)
 
   /** init pseudo random samples (real) and show them */
   for(j=0;j<my_plan.M_total;j++)
-    my_iplan.y[j] = ((double)rand())/RAND_MAX;
+    my_iplan.y[j] = ((double)rand())/((double)RAND_MAX);
 
   nfft_vpr_complex(my_iplan.y,my_plan.M_total,"given data, vector given_f");
 
@@ -185,6 +239,7 @@ void simple_test_innfft_1d(void)
 
   /** solve the system */
   solver_before_loop_complex(&my_iplan);
+
   for(l=0;l<8;l++)
   {
     printf("iteration l=%d\n",l);
@@ -214,10 +269,10 @@ void measure_time_nnfft_1d(void)
     nnfft_init(&my_plan,1,my_N,my_N,&N);
 
     for(j=0;j<my_plan.M_total;j++)
-      my_plan.x[j]=((double)rand())/RAND_MAX-0.5;
+      my_plan.x[j]=((double)rand())/((double)RAND_MAX)-0.5;
 
     for(j=0;j<my_plan.N_total;j++)
-      my_plan.v[j]=((double)rand())/RAND_MAX-0.5;
+      my_plan.v[j]=((double)rand())/((double)RAND_MAX)-0.5;
 
     if(my_plan.nnfft_flags & PRE_PSI)
       nnfft_precompute_psi(&my_plan);
@@ -229,7 +284,7 @@ void measure_time_nnfft_1d(void)
       nnfft_precompute_phi_hut(&my_plan);
 
     for(k=0;k<my_plan.N_total;k++)
-      my_plan.f_hat[k] = ((double)rand())/RAND_MAX + _Complex_I*((double)rand())/RAND_MAX;
+      my_plan.f_hat[k] = ((double)rand())/((double)RAND_MAX) + _Complex_I*((double)rand())/((double)RAND_MAX);
 
     t=nfft_second();
     nndft_trafo(&my_plan);
@@ -250,8 +305,14 @@ void measure_time_nnfft_1d(void)
 int main(void)
 {
   system("clear");
-  printf("1) computing an one dimensional nndft, nnfft\n\n");
+  printf("1) computing a one dimensional nndft, nnfft\n\n");
   simple_test_nnfft_1d();
+
+  getc(stdin);
+
+  system("clear");
+  printf("1a) computing a one dimensional adjoint nndft, nnfft\n\n");
+  simple_test_adjoint_nnfft_1d();
 
   getc(stdin);
 
@@ -262,7 +323,7 @@ int main(void)
   getc(stdin);
 
   system("clear");
-  printf("3) computing an one dimensional innfft\n\n");
+  printf("3) computing a one dimensional innfft\n\n");
   simple_test_innfft_1d();
 
   getc(stdin);

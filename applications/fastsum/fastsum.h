@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: fastsum.h 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: fastsum.h 3298 2009-08-14 12:32:31Z keiner $ */
 
 /*! \file fastsum.h
  *  \brief Header file for the fast NFFT-based summation algorithm.
@@ -41,9 +41,11 @@
 /** Include header for C99 complex datatype. */
 #include <complex.h>
 /** Include header for utils from NFFT3 library. */
-#include "util.h"
+#include "nfft3util.h"
 /** Include header for NFFT3 library. */
 #include "nfft3.h"
+
+typedef double _Complex (*kernel)(double , int , const double *);
 
 /**
  * Constant symbols
@@ -66,7 +68,7 @@ typedef struct fastsum_plan_
   double *x;                            /**< source knots in d-ball with radius 1/4-eps_b/2 */
   double *y;                            /**< target knots in d-ball with radius 1/4-eps_b/2 */
 
-  double _Complex (*kernel)(double , int , const double *);  /**< kernel function    */
+  kernel k;  /**< kernel function    */
   double *kernel_param;                 /**< parameters for kernel function  */
 
   unsigned flags;                       /**< flags precomp. and approx.type  */
@@ -89,7 +91,7 @@ typedef struct fastsum_plan_
 
   /** near field */
   int Ad;                               /**< number of spline knots for nearfield computation of regularized kernel */
-  double *Add;                          /**< spline values */
+  double _Complex *Add;                 /**< spline values */
 
   /* things for computing *b - are they used only once?? */
   fftw_plan fft_plan;
@@ -111,7 +113,7 @@ typedef struct fastsum_plan_
  * \param eps_B the outer boundary.
  *
  */
-void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, double _Complex (*kernel)(), double *param, unsigned flags, int nn, int m, int p, double eps_I, double eps_B);
+void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, kernel k, double *param, unsigned flags, int nn, int m, int p, double eps_I, double eps_B);
 
 /** finalize plan
  *
@@ -138,10 +140,11 @@ void fastsum_precompute(fastsum_plan *ths);
 void fastsum_trafo(fastsum_plan *ths);
 /* \} */
 
-double regkern(double _Complex (*kernel)(), double xx, int p, const double *param, double a, double b);
+double _Complex regkern(kernel k, double xx, int p, const double *param, double a, double b);
 
 /** cubic spline interpolation in near field with even kernels */
-double kubintkern(double x, double *Add, int Ad, double a);
+double _Complex kubintkern(const double x, const double _Complex *Add,
+  const int Ad, const double a);
 
 #endif
 /* fastsum.h */

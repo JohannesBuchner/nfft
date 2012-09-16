@@ -1,4 +1,4 @@
-# $Id: configure.ac 3110 2009-03-13 16:32:18Z keiner $
+# $Id: configure.ac 3258 2009-07-05 09:50:06Z keiner $
 #
 # Copyright (c) 2005, 2009 Jens Keiner, Stefan Kunis, Daniel Potts
 #
@@ -21,7 +21,7 @@
 ################################################################################
 
 # initialize autoconf
-AC_INIT([NFFT],[3.1.0],[potts@mathematik.tu-chemnitz.de])
+AC_INIT([NFFT],[3.1.1],[potts@mathematik.tu-chemnitz.de])
 
 # m4 macros
 AC_CONFIG_MACRO_DIR([m4])
@@ -41,7 +41,7 @@ LT_INIT([win32-dll])
 AC_SUBST([LIBTOOL_DEPS])
 
 # revision number
-AC_REVISION([$Id: configure.ac 3110 2009-03-13 16:32:18Z keiner $])
+AC_REVISION([$Id: configure.ac 3258 2009-07-05 09:50:06Z keiner $])
 
 # Version information for library file
 SHARED_VERSION_INFO="0:0:0"
@@ -270,17 +270,16 @@ AC_SUBST(matlab_mexext)
 
 # Try to choose good compiler options.
 if test "x$ac_test_CFLAGS" != "xset"; then
+  saved_CPPFLAGS="$CPPFLAGS"
   saved_LDFLAGS="$LDFLAGS"
   saved_LIBS="$LIBS"
-  LIBS="$LIBS $fftw3_LIBS" #$matlab_LIBADD
-  LDFLAGS="$LDFLAGS $fftw3_LDFLAGS" #$matlab_LDFLAGS
+  CPPFLAGS="$CPPFLAGS $fftw3_CPPFLAGS"
+  LIBS="$LIBS $fftw3_LIBS"
+  LDFLAGS="$LDFLAGS $fftw3_LDFLAGS"
   AX_CC_MAXOPT
+  CPPFLAGS="$saved_CPPFLAGS"
   LDFLAGS="$saved_LDFLAGS"
   LIBS="$saved_LIBS"
-fi
-
-if test "x$ax_lib_fftw3_libtool" = "xyes"; then
-  fftw3_LIBS="$fftw3_lib_dir/libfftw3.la"
 fi
 
 AC_SUBST(fftw3_LIBS)
@@ -291,6 +290,9 @@ CPPFLAGS="$CPPFLAGS $fftw3_CPPFLAGS"
 # override CFLAGS selection when debugging
 if test "x${enable_debug}" = "xyes"; then
   CFLAGS="-g3"
+  if test "x$ax_cv_c_compiler_vendor" = "xapple"; then
+    CFLAGS="$CFLAGS $ax_cv_apple_gcc_archflag"
+  fi
 fi
 
 # add gcc warnings, in debug/maintainer mode only
@@ -359,15 +361,15 @@ AC_CHECK_FUNCS([BSDgettimeofday gettimeofday gethrtime read_real_time])
 AC_CHECK_FUNCS([time_base_to_time drand48 memset posix_memalign memalign])
 AC_CHECK_FUNCS([_mm_malloc _mm_free clock_gettime mach_absolute_time sysctl])
 AC_CHECK_FUNCS([abort snprintf sqrt tgamma lgamma log sin cos acos pow exp])
-AC_CHECK_FUNCS([log2 log1p sqrt tgamma lgamma log sin cos acos pow exp copysign lrint])
-AC_CHECK_FUNCS([log2f log1pf sqrtf tgammaf lgammaf logf sinf cosf acosf powf expf copysignf lrintf])
-AC_CHECK_FUNCS([log2l log1pl sqrtl tgammal lgammal logl sinl cosl acosl powl expl copysignl lrintl])
+AC_CHECK_FUNCS([log2 log10 log1p sqrt tgamma lgamma log sin cos acos pow exp copysign lrint])
+AC_CHECK_FUNCS([log2f log10f log1pf sqrtf tgammaf lgammaf logf sinf cosf acosf powf expf copysignf lrintf])
+AC_CHECK_FUNCS([log2l log10l log1pl sqrtl tgammal lgammal logl sinl cosl acosl powl expl copysignl lrintl])
 AC_CHECK_FUNCS([nanosleep sleep drand48 srand48])
 
 AC_CHECK_DECLS([memalign, posix_memalign])
-AC_CHECK_DECLS([log2, log1p, sqrt, tgamma, lgamma, log, sin, cos, acos, pow, exp, copysign, lrint],[],[],[#include <math.h>])
-AC_CHECK_DECLS([log2f, log1pf, sqrtf, tgammaf, lgammaf, logf, sinf, cosf, acosf, powf, expf, copysignf, lrintf],[],[],[#include <math.h>])
-AC_CHECK_DECLS([log2l, log1pl, sqrtl, tgammal, lgammal, logl, sinl, cosl, acosl, powl, expl, copysignl, lrintl],[],[],[#include <math.h>])
+AC_CHECK_DECLS([log2, log10, log1p, sqrt, tgamma, lgamma, log, sin, cos, acos, pow, exp, copysign, lrint],[],[],[#include <math.h>])
+AC_CHECK_DECLS([log2f, log10f, log1pf, sqrtf, tgammaf, lgammaf, logf, sinf, cosf, acosf, powf, expf, copysignf, lrintf],[],[],[#include <math.h>])
+AC_CHECK_DECLS([log2l, log10l, log1pl, sqrtl, tgammal, lgammal, logl, sinl, cosl, acosl, powl, expl, copysignl, lrintl],[],[],[#include <math.h>])
 AC_CHECK_DECLS([nanosleep],[],[],[#include <time.h>])
 AC_CHECK_DECLS([drand48],[],[],[#include <stdlib.h>])
 AC_CHECK_DECLS([srand48],[],[],[#include <stdlib.h>])
@@ -376,7 +378,7 @@ AC_CHECK_DECLS([sleep],[],[],[#include <unistd.h>])
 # The output files to be generated
 AC_OUTPUT(Makefile \
           include/Makefile \
-          include/nfftconf.h \
+          include/nfft3conf.h \
           3rdparty/Makefile \
           3rdparty/cstripack/Makefile \
           util/Makefile \
@@ -414,7 +416,7 @@ AC_OUTPUT(Makefile \
           applications/radon/Makefile \
           matlab/Makefile \
           matlab/nfsft/Makefile
-	  matlab/nfft/Makefile
+          matlab/nfft/Makefile
           matlab/nfsft/@f_hat/Makefile
 )
 

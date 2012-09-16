@@ -16,134 +16,73 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: wigner.c 3114 2009-03-15 15:23:32Z vollrath $ */
+/* $Id: wigner.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <math.h>
 #include <stdio.h>
 #include "infft.h"
 #include "wigner.h"
+#include "nfft3util.h"
 
-double SO3_gamma(int m1, int m2, int j)
+double SO3_alpha(const int m1, const int m2, const int j)
 {
-  double dj, dm1, dm2, M, mini;
-  static int i;
-  static double result;
+  const int M = MAX(ABS(m1),ABS(m2)), mini = MIN(ABS(m1),ABS(m2));
 
-  dj = (double) j;
-  dm1 = (double) m1;
-  dm2 = (double) m2;
-  M = (double) (ABS(m1) > ABS(m2) ? ABS(m1) : ABS(m2));
-  mini = (double) (ABS(m1) < ABS(m2) ? ABS(m1) : ABS(m2));
-
-  if (j == -1)
-  {
-    /* Constant is ((2n)!)^(1/2) / (2^n n!). */
-    result = 1.0;
-    for (i = 1; i <= M - mini; i++)
-    {
-
-      result *= (M + mini + i) / (4.0 * i);
-    }
-
-    if (m1 < m2 && (ABS(m1) + ABS(m2)) % 2 == 1)
-      result = -(1 / POW(2, mini) * SQRT(result));
-    else
-      result = (1 / POW(2, mini) * SQRT(result));
-
-    return result;
-
-  }
-  else if (j <= M)
-  {
-    return (0.0);
-  }
-  else
-  {
-    return (
-    //SQRT( (2.*dj + 3.)/(2.*dj - 1.) ) *
-    -(dj + 1.) / SQRT(((dj + 1.) * (dj + 1.) - dm1 * dm1) * ((dj + 1.) * (dj
-        + 1.) - dm2 * dm2)) * SQRT((dj * dj - dm1 * dm1)
-        * (dj * dj - dm2 * dm2)) / dj);
-  }
-}
-
-inline double SO3_alpha(int m1, int m2, int j)
-{
-  double dj, dm1, dm2, M, mini, neg;
-  dj = (double) j;
-  dm1 = (double) m1;
-  dm2 = (double) m2;
-  M = (double) (ABS(m1) > ABS(m2) ? ABS(m1) : ABS(m2));
-  mini = (double) (ABS(m1) < ABS(m2) ? ABS(m1) : ABS(m2));
-
-  /**(-1) - Faktor der für k xor m negativ gebraucht wird */
-
-  if ((dm1 < 0 && dm2 >= 0) || (dm2 < 0 && dm1 >= 0))
-  {
-    neg = -1.0;
-  }
-  else
-  {
-    neg = 1.0;
-  }
-
-  if (j == -1)
-  {
-    return (0.0);
-  }
+  if (j < 0)
+    return K(0.0);
   else if (j == 0)
   {
-    if (dm1 == dm2)
-    {
-      return 1.0;
-    }
+    if (m1 == 0 && m2 == 0)
+      return K(1.0);
+    if (m1 == m2)
+      return K(0.5);
     else
-    {
-      return (int) (dm1 + dm2) % 2 == 0 ? -1.0 : 0.0;
-    }
+      return IF((m1+m2)%2,K(0.0),K(-0.5));
   }
   else if (j < M - mini)
-  {
-    return j % 2 == 0 ? -1.0 : 1.0;
-  }
+    return IF(j%2,K(0.5),K(-0.5));
   else if (j < M)
-  {
-    return 1.0 * neg;
-  }
+    return K(0.5) * SIGNF((R)m1)*SIGNF((R)m2);
+  else
+    return
+      SQRT(((R)(j+1))/((R)(j+1-m1)))
+      * SQRT(((R)(2*j+1))/((R)(j+1+m1)))
+      * SQRT(((R)(j+1))/((R)(j+1-m2)))
+      * SQRT(((R)(2*j+1))/((R)(j+1+m2)));
+}
+
+double SO3_beta(const int m1, const int m2, const int j)
+{
+  if (j < 0)
+    return K(0.0);
+  else if (j < MAX(ABS(m1),ABS(m2)))
+    return K(0.5);
+  else if (m1 == 0 || m2 == 0)
+    return K(0.0);
   else
   {
-    return (
-
-    //SQRT( (2.*dj + 3.)/(2.*dj + 1.) ) *
-    (dj + 1.) * (2. * dj + 1.) / SQRT(((dj + 1.) * (dj + 1.) - dm1 * dm1)
-        * ((dj + 1.) * (dj + 1.) - dm2 * dm2)));
+    const R m1a = FABS((R)m1), m2a = FABS((R)m2);
+    return -COPYSIGN(
+      ((SQRT(m1a)*SQRT(m2a))/((R)j))
+      * SQRT(m1a/((R)(j+1-m1)))
+      * SQRT(((R)(2*j+1))/((R)(j+1+m1)))
+      * SQRT(m2a/((R)(j+1-m2)))
+      * SQRT(((R)(2*j+1))/((R)(j+1+m2))),
+      SIGNF((R)m1)*SIGNF((R)m2));
   }
 }
 
-double SO3_beta(int m1, int m2, int j)
+double SO3_gamma(const int m1, const int m2, const int j)
 {
-  double dj, dm1, dm2, M, mini;
-
-  dj = (double) j;
-  dm1 = (double) m1;
-  dm2 = (double) m2;
-  M = (double) (ABS(m1) > ABS(m2) ? ABS(m1) : ABS(m2));
-  mini = (double) (ABS(m1) < ABS(m2) ? ABS(m1) : ABS(m2));
-
-  if (0 <= j && j < M)
-  {
-    return (1.0);
-
-  }
+  if (MAX(ABS(m1),ABS(m2)) < j)
+    return -(((R)(j+1))/((R)j)) * SQRT((((R)(j-m1))/((R)(j+1-m1)))
+        *(((R)(j+m1))/((R)(j+1+m1)))*(((R)(j-m2))/((R)(j+1-m2)))
+        *(((R)(j+m2))/((R)(j+1+m2))));
+  else if (j == -1)
+    return IF(m1 > m2 || !((m1 + m2) % 2), K(1.0), K(-1.0))
+      * nfft_lambda2((R)ABS(m2 - m1),(R)ABS(m2 + m1));
   else
-  {
-    if (dm1 == 0. || dm2 == 0.)
-      return (0.0);
-    else
-      return ((-dm1 * dm2 * (2. * dj + 1.) / dj) / SQRT(((dj + 1.) * (dj + 1.)
-          - dm1 * dm1) * ((dj + 1.) * (dj + 1.) - dm2 * dm2)));
-  }
-
+    return K(0.0);
 }
 
 /*compute the coefficients for all degrees*/
@@ -153,10 +92,7 @@ inline void SO3_alpha_row(double *alpha, int N, int k, int m)
   int j;
   double *alpha_act = alpha;
   for (j = -1; j <= N; j++)
-  {
-    *alpha_act = SO3_alpha(k, m, j);
-    alpha_act++;
-  }
+    *alpha_act++ = SO3_alpha(k, m, j);
 }
 
 inline void SO3_beta_row(double *beta, int N, int k, int m)
@@ -164,10 +100,7 @@ inline void SO3_beta_row(double *beta, int N, int k, int m)
   int j;
   double *beta_act = beta;
   for (j = -1; j <= N; j++)
-  {
-    *beta_act = SO3_beta(k, m, j);
-    beta_act++;
-  }
+    *beta_act++ = SO3_beta(k, m, j);
 }
 
 inline void SO3_gamma_row(double *gamma, int N, int k, int m)
@@ -175,10 +108,7 @@ inline void SO3_gamma_row(double *gamma, int N, int k, int m)
   int j;
   double *gamma_act = gamma;
   for (j = -1; j <= N; j++)
-  {
-    *gamma_act = SO3_gamma(k, m, j);
-    gamma_act++;
-  }
+    *gamma_act++ = SO3_gamma(k, m, j);
 }
 
 /*compute for all degrees l and orders k*/

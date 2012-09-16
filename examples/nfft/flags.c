@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: flags.c 3100 2009-03-12 08:42:48Z keiner $ */
+/* $Id: flags.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 /*! \file flags.c
  *
@@ -32,7 +32,7 @@
 #include <stdlib.h>
 #include <complex.h>
 
-#include "util.h"
+#include "nfft3util.h"
 #include "nfft3.h"
 
 #ifdef GAUSSIAN
@@ -286,7 +286,7 @@ int main(int argc,char **argv)
 
   if((test==0)&&(atoi(argv[1])<2))
     {
-      fprintf(stderr,"MEASURE_TIME in util.h not set\n");
+      fprintf(stderr,"MEASURE_TIME in nfft3util.h not set\n");
       return -1;
     }
 

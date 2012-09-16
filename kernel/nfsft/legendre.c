@@ -16,12 +16,12 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: legendre.c 3113 2009-03-13 19:51:55Z keiner $ */
+/* $Id: legendre.c 3198 2009-05-27 14:16:50Z keiner $ */
 
 #include <math.h>
 #include <stdio.h>
 #include "infft.h"
-#include "util.h"
+#include "nfft3util.h"
 #include "legendre.h"
 
 /* One over sqrt(pi) */
@@ -34,7 +34,7 @@ static inline R alpha_al(const int k, const int n)
     if (k < n)
       return IF(k%2,K(1.0),K(-1.0));
     else
-      return SQRT(((R)(2*k+1))/((R)(k-n+1))*((R)(2*k+1))/((R)(k+n+1)));
+      return SQRT(((R)(2*k+1))/((R)(k-n+1)))*SQRT((((R)(2*k+1))/((R)(k+n+1))));
   }
   else if (k == 0)
   {
@@ -57,13 +57,7 @@ static inline R beta_al(const int k, const int n)
 static inline R gamma_al(const int k, const int n)
 {
   if (k == -1)
-  {
-    /* The constant is
-     *     ((2n)!)^(1/2) / (2^n n!)
-     *   = sqrt((gamma(n+1/2))/(sqrt(pi)*gamma(n+1))).
-     */
     return SQRT(KSQRTPII*nfft_lambda((R)(n),K(0.5)));
-  }
   else if (k <= n)
     return K(0.0);
   else

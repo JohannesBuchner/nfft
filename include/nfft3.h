@@ -16,7 +16,7 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* $Id: nfft3.h 3115 2009-03-15 17:04:56Z vollrath $ */
+/* $Id: nfft3.h 3198 2009-05-27 14:16:50Z keiner $ */
 
 /*! \file nfft3.h
  *  \brief Header file for the nfft3 library.
@@ -28,7 +28,7 @@
 #include <fftw3.h>
 
 /* config header */
-#include "nfftconf.h"
+#include "nfft3conf.h"
 
 /* Malloc and free functions */
 extern void *nfft_malloc(size_t n);
@@ -2605,6 +2605,7 @@ void nfsoft_precompute(nfsoft_plan *plan);
  * \arg m the second order
  * \arg nfsoft_flags
  */
+fpt_set SO3_single_fpt_init(int l, int k, int m, unsigned int flags, int kappa);
 void SO3_fpt(fftw_complex *coeffs, fpt_set set, int l, int k, int m, unsigned int nfsoft_flags);
 void SO3_fpt_transposed(fftw_complex *coeffs,fpt_set set,int l, int k, int m,unsigned int nfsoft_flags);
 
